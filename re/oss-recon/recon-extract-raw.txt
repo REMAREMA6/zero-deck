@@ -1,0 +1,161 @@
+=== HEADINGS COUNT: 0 ===
+=== TABLES COUNT: 7 ===
+
+--- TABLE 1 (1 rows x 1 cols) ---
+P  R  I  O  R     A  R  T     D  I  S  S  E  C  T  I  O  N/ Open-Source / Reconnaissance Report / Prior-art analysis and adopt / adapt / build decisions for the Android Security Scanner MVP / Prepared by: Reverse-engineering agent (static-analysis pass) / Date: 24 November 2026 / Scope: file scanning, link checking, quarantine, admin panel / Status: v1.0 working draft for build planning /  / Security Scanner MVP Project                                        24 November 2026
+
+--- TABLE 2 (13 rows x 5 cols) ---
+Project | License | Language | Maintenance | Verdict
+MaintainTeam/Hypatia (Android AV app) | AGPL-3.0 | Kotlin | Active fork of the discontinued DivestOS original | Adapt (engine)
+MaintainTeam/HypatiaDatabases (signature packs) | AGPL-3.0 | Java CI | Generated on GitHub and Codeberg CI | Adapt or regenerate
+Google Safe Browsing v4 Lookup API | Free service, key required | REST | Google-operated | Adopt (backend)
+google/safebrowsing Go client | Apache-2.0 | Go | Stable, aging (54 commits) | Adopt (sbserver pattern)
+muety/safe-browse-url-lookup | MIT | Node.js | Small wrapper, stable | Reference
+URLhaus community API (abuse.ch) | Free non-commercial | REST | Feeds refreshed continuously | Supplement (terms apply)
+projectmatris/antimalwareapp (LibreAV) | GPL-3.0 | Kotlin | Early-stage project, educational | Reference
+Cisco-Talos/clamav | GPL-2.0 | C/C++ | Actively maintained (11,600 commits) | Signature format reference
+virustotal/yara | BSD-3-Clause | C | Maintenance mode; successor YARA-X is stable | Reference (later)
+quark-engine | GPL-3.0 | Python | Active; current malware families tracked | Later release (server-side)
+androguard | Apache-2.0 | Python | Active v5 rewrite | Later release (server-side)
+MobSF | GPL-3.0 | Python | Active, 22.3k stars | Reference only
+
+--- TABLE 3 (6 rows x 3 cols) ---
+File | Size | Purpose
+hypatia-md5-bloom.bin | 22.8 MB | MD5 hash Bloom filter (largest pack)
+hypatia-sha1-bloom.bin | 0.3 MB | SHA-1 hash Bloom filter
+hypatia-sha256-bloom.bin | 6.6 MB | SHA-256 hash Bloom filter
+hypatia-domains-bloom.bin | 13.5 MB | Domain blocklist Bloom filter for the link scanner
+GPG key + .sig files | Small | Detached signatures verifying each database at download
+
+--- TABLE 4 (8 rows x 3 cols) ---
+Feed | What it contributes | Commercial-use caution
+ESET malware-ioc | Indicators for many malware families | Repo terms to review before shipping
+ThreatView | Malicious file and URL indicators | Check current terms
+ThreatFox (abuse.ch) | Hashes and URLs shared by the community | abuse.ch fair-use, non-commercial bias
+MalwareBazaar (abuse.ch) | Malware sample hashes | abuse.ch fair-use, non-commercial bias
+CyberCure | IP, URL and hash feeds | Attribution required
+SaneSecurity | Supplementary ClamAV-style signatures | Permissive, verify per pack
+DCG DNS blocklists | Domains for the link scanner | Public blocklist, attribution friendly
+
+--- TABLE 5 (5 rows x 4 cols) ---
+Service | Auth / quota | Output | Commercial use
+GSB v4 Lookup API | API key; daily quota (see pricing guide) | Per-URL malware / phishing verdict, up to 500 URLs per call | Permitted within quota and terms
+URLhaus community API | Free auth key; fair use, refresh 5 min | URL dumps, plain list, ClamAV pack, IDS rules | Non-commercial free; commercial may need paid tier
+PhishTank | Free registration | Phishing URL feed and lookup | Non-commercial terms
+OpenPhish community | No auth for community feed | Phishing URL feed | Attribution and terms to confirm
+
+--- TABLE 6 (11 rows x 3 cols) ---
+MVP component | Verdict | Basis
+File-scanning engine (hash + signature lookup) | Adapt | Hypatia pattern: one-pass MD5/SHA-1/SHA-256, Bloom filters, GPG-verified packs
+Signature database packs | Adapt or regenerate | Hypatia packs usable if AGPL accepted; otherwise clone generator over the same public feeds
+Link checking (verdicts) | Adopt | GSB v4 Lookup API from our backend via Apache-2.0 client pattern
+Link checking (offline pre-check) | Adapt | Hypatia domain Bloom filter approach, on-device
+Quarantine (encrypt, isolate, restore-after-rescan) | Build | No Android OSS quarantine found; our policy requires it
+Scan history and scan records | Build | Thin app-side database plus backend store; trivial to own
+Admin panel and dashboards | Build | Standard web stack; prior art is reference only
+Threat information management | Adapt | Sync from public feeds and our verdict service into our own records
+Help content management | Adapt | Sanity CMS already named in our design document
+Real-time protection (later release) | Adapt (later) | Hypatia RecursiveFileObserver + foreground service pattern
+
+--- TABLE 7 (8 rows x 3 cols) ---
+Risk | Trigger | Mitigation
+AGPL-3.0 contagion | Copying Hypatia code or generator into our app | Release our app AGPL-3.0, or keep Hypatia as reference only (Option B)
+GPL-2.0 / GPL-3.0 engine linkage | Embedding ClamAV, LibreAV, quark or MobSF code | Keep GPL engines as separate server-side processes or avoid embedding
+abuse.ch fair-use terms | Using ThreatFox, MalwareBazaar or URLhaus in a commercial product | Budget for the paid commercial tier or drop the feed before launch
+GSB data flow | Checked URLs are sent to Google | Disclose in privacy screens; never attach user identity to clientId
+GSB quotas | Volume link checks at scale | Confirm quota in Cloud Console; add backend caching and rate limiting
+Feed attribution | ESET, CyberCure and SaneSecurity indicators | Track per-feed license terms in the database-generation CI
+False positives | Bloom-filter probabilistic matches | Rescan flow plus VirusTotal-style lookup hand-off in UI copy
+
+=== PARAGRAPHS ===
+Table of Contents
+Note: This Table of Contents is generated via field codes. To ensure page number accuracy after editing, please right-click the TOC and select "Update Field."
+
+[Heading 1] 1. Executive Summary
+This report answers one question: for the Android Security Scanner MVP defined in the product design decisions document, which parts should we adopt from existing open-source projects, which should we adapt, and which must we build ourselves. It is the output of a reconnaissance and static-dissection pass over candidate repositories, run in the style of a reverse-engineering triage: shortlist by feature area, verify licenses and maintenance status, read the actual source, and write a plain decision report. No candidate code was executed and no system was tested.
+The headline verdict is positive: roughly half of the MVP can be grounded in proven open-source work, and the single most valuable prior art is Hypatia, the free and open-source Android malware scanner now maintained by the MaintainTeam community. Hypatia is licensed under the GNU Affero General Public License v3.0 (AGPL-3.0), and its detection pipeline is compact enough to audit: it hashes each file once into MD5, SHA-1 and SHA-256, then checks those hashes against Bloom-filter signature databases that it downloads and GPG-verifies at runtime. The same project publishes a domain-blocklist Bloom filter that powers a on-screen link checker, and a signature-database repository that compiles public indicator feeds from ESET, ThreatView, ThreatFox, MalwareBazaar, CyberCure, SaneSecurity and others.
+For link checking, the strongest MVP building block is the Google Safe Browsing v4 Lookup API, which accepts up to 500 URLs per request and returns malware and social-engineering verdicts; free Apache-2.0-licensed reference clients exist. Community URL feeds (URLhaus and friends) are useful supplements, but their terms restrict commercial use. Two features have no credible open-source prior art on Android and are therefore build items: the encrypted quarantine with scan-before-restore policy, and the admin panel with threat-record management. Section 8 gives the full decision matrix, Section 9 the license risks, and Section 10 the recommended architecture.
+
+[Heading 1] 2. Background, Objectives and Scope
+
+[Heading 2] 2.1 The product we are building
+The product is an Android security scanner built with Expo and React Native (development build), paired with an admin web panel. The design work is complete: eighteen screens are fully specified and prototyped, including welcome and onboarding, home dashboard, file selection, scan progress, scan result, website-link checker, link scan result, quarantine list and details, scan history, settings, and help, plus admin sign-in, admin dashboard, user management, threat-information management, help content management and audit logs. The product decisions document fixes several binding policies: an Intelligent Hybrid Quarantine (confirmed malware auto-quarantined, suspicious files presented for review, clean files untouched), restore only after a fresh scan and user confirmation, files stay on the phone by default, and a strict honest-results doctrine in which the app never claims a site or file is 100 percent safe and always offers a third verdict, Could not decide.
+
+[Heading 2] 2.2 What this report decides
+The design document leaves four implementation questions explicitly open: which scanning engine or detection method will check files; which method or service will check website links; where link checking runs (device, backend, or a mix); and which scan details are stored in the backend database. This report narrows those questions with named, license-verified, source-verified options, and states a recommended verdict for each MVP component: adopt, adapt, or build. Where a decision depends on a business choice we have not made yet, most importantly whether the released app will itself be open-source, the dependency is stated so the choice can be made consciously.
+
+[Heading 2] 2.3 Scope boundaries
+This report covers open-source prior art for the MVP feature set. It does not cover: dynamic analysis of any candidate (no candidate binary was run; that work, if needed, belongs to a later isolated-lab phase); backend hosting or cost planning; and the later-release features from the design document, real-time background protection and browser-extension scanning, which are referenced only where prior art makes them cheaper later. All statements about licenses, quotas and terms were checked against the sources listed in Appendix A on the report date; the Google Safe Browsing daily quota figure is documented by Google in separate pricing and usage-limits guides and should be confirmed in our Cloud Console before launch.
+
+[Heading 1] 3. Method and Sources
+The reconnaissance followed a three-step pipeline. Step one, triage: per MVP feature (file-scanning engine, link checking, quarantine, complete Android anti-malware apps, and APK analysis frameworks), open-source candidates were searched for on the public web and GitHub. Step two, verification: each serious candidate had its license, maintenance status and language confirmed from the repository itself. Because the unauthenticated GitHub API rate limit was exhausted during the session, verification used repository pages and direct source downloads instead of the REST API; the conclusions are unaffected. Step three, static dissection: for the four most relevant projects, the repository snapshots (tarballs) were downloaded, extracted and read, including the license file, README documentation, build configuration and the detection-related source files.
+Repos actually dissected from source in this pass: MaintainTeam/Hypatia (branch stable, 16 Kotlin source files totalling 3,012 lines plus a small GPG verifier, AGPL-3.0), its signature repository MaintainTeam/HypatiaDatabases (branch main, AGPL-3.0 generator), projectmatris/antimalwareapp (LibreAV, GPL-3.0), and muety/safe-browse-url-lookup (MIT). Candidates verified from repository pages without full download: google/safebrowsing, quark-engine, androguard, MobSF, Cisco-Talos/clamav, virustotal/yara. No candidate code was compiled, executed or tested against malware samples in this phase. All sources consulted are listed in Appendix A.
+
+[Heading 1] 4. The Shortlist
+Table 1 summarises every candidate that survived triage, with its verified license and the verdict carried into Section 8. Full justification follows in Sections 5 to 7.
+Table 1: Candidate projects, verified licenses and verdicts
+The pattern in the table is worth stating plainly. There is exactly one mature, privacy-respecting, on-device file-scanning design we can learn from on Android (Hypatia), and one credible cloud verdict service for links (Google Safe Browsing). Everything else in the shortlist either serves a later release, works only server-side, or serves as reference for approach and licence boundaries.
+
+[Heading 1] 5. Deep Dive: Hypatia
+
+[Heading 2] 5.1 Detection pipeline, as read from source
+Hypatia is deliberately small: the fork we dissected is 16 Kotlin source files totalling 3,012 lines, plus one small Java GPG-verification class, which makes a full manual audit feasible. The scan flow in MalwareScanner.kt is a two-phase design. Phase one walks the file list and computes all three digests, MD5, SHA-1 and SHA-256, for every file in a single pass, storing them in three hash maps. Phase two calls checkSignature once per algorithm, testing each hash against three loaded Bloom filters held in memory (Database.signaturesMD5, signaturesSHA1 and signaturesSHA256). A Bloom filter answers the membership question with a compact probabilistic structure, so the check is constant-time and the memory footprint stays under roughly 120 megabytes for the default databases; the trade-off, documented by the project itself, is occasional false positives, which the app handles by rescanning.
+Signature databases are downloaded from a set of hardcoded mirrors (the project GitHub Pages, a Codeberg mirror, a raw GitHub branch, and a third-party mirror), with HTTP conditional requests so unchanged databases are not redownloaded. Downloads are verified with a GPG detached signature before use, and the code supports routing the update traffic through Orbot (Tor) when the user prefers. Database files themselves are serialised Guava BloomFilter objects. Scanning performance claimed by the project is near-zero battery impact, under 20 milliseconds for a 1 MB file and about 1 second for 40 MB, and it is fully offline for files: only signature updates touch the network, which matches our privacy rule that files never leave the phone.
+Table 2: Signature database files published by MaintainTeam/HypatiaDatabases (branch main)
+
+[Heading 2] 5.2 Signature sources and generation pipeline
+The HypatiaDatabases repository does not invent its own intelligence; it aggregates public indicator feeds and compiles them into the Bloom filters on continuous integration. Its documented general sources are the ESET malware indicator-of-compromise repository, ThreatView, ThreatFox (abuse.ch), MalwareBazaar (abuse.ch), CyberCure, SaneSecurity and the Neo23x0 signature-base. Stalkerware indicators and Avast COVID-themed indicators are included as specific sources, and the domain filter is built from the Divested Computing Group DNS blocklists. The generation job downloads raw feeds, extracts and deduplicates hashes, combines them with malware names in ClamAV-style hash:name format, and emits the Bloom filters; an unsigned branch is then signed by a self-hosted CI and published to GitHub Pages. This pipeline matters to us because it is exactly what we would clone to produce our own packs under our own signing key, using the same public sources, whether or not we reuse Hypatia code.
+Table 3: Public indicator feeds compiled by the HypatiaDatabases generator
+
+[Heading 2] 5.3 The link scanner design
+Hypatia checks links without sending them anywhere: LinkScannerService.kt is an AccessibilityService that observes text on screen, extracts candidate domains with a regular expression, keeps a per-session cache of already-checked domains, and tests each new domain against the 13.5 MB hypatia-domains-bloom.bin with the same mightContain call as the file engine. On a match it raises a warning notification. This is a blocklist-only design: it cannot rate a domain as clean, cannot judge a URL on a domain that is not in the pack, and has no cloud component. For our product that makes it a strong offline pre-check and teaching example, but not a complete answer, because our design promises three verdicts including No known threat found, which a pure blocklist cannot honestly give. Pairing it with a backend verdict service resolves that gap.
+
+[Heading 2] 5.4 Strengths, limitations and the license question
+Strengths: proven on F-Droid and IzzyOnDroid for years, tiny auditable codebase, fully offline scanning, GPG-verified updates, honest product copy, and a documented permission list (including MANAGE_EXTERNAL_STORAGE for reading and deleting files, QUERY_ALL_PACKAGES for scanning installed apps, and the AccessibilityService for the link scanner). Limitations: Bloom filters yield occasional false positives; extended databases are documented to need about 8 GB of RAM, so we must ship the default packs and treat extended ones as opt-in; detection is hash-based, so it misses structurally new malware, meaning our Could not decide verdict is not just honest but necessary; and there is no quarantine feature at all, only alerting and deletion. The license question is central: Hypatia and its database generator are AGPL-3.0. If we copy the code into our app, our app inherits AGPL-3.0 obligations; if we instead treat the repositories as reference, implement the Bloom-filter pipeline ourselves and compile our own packs from the same public feeds, the approach, being general technique plus public data, does not bring the license with it. That fork in the road is recorded in Section 8.
+
+[Heading 1] 6. Link Checking Options
+
+[Heading 2] 6.1 Google Safe Browsing Lookup API
+The Safe Browsing v4 Lookup API is the strongest verdict service for our link checker. The interface is one POST call, threatMatches:find, authenticated with an API key, that takes up to 500 URLs per request and returns matches for threat types we request (MALWARE and SOCIAL_ENGINEERING cover our case); no matches come back as an empty object, and each match carries a cacheDuration telling us how long the verdict holds. The API is free to use within per-day quotas that Google documents in its usage-limits and pricing guides, which should be confirmed in the Cloud Console before we commit to volume. Two privacy facts matter to our design: checked URLs are transmitted to Google servers, which we must disclose in our privacy screens; and the clientId and clientVersion fields must identify the app, not the user, because Google logs them server-side. For our honest-results doctrine the API fits naturally: it returns a blocklist verdict only, so No known threat found and Could not decide remain our own, cautious output states.
+
+[Heading 2] 6.2 Reference clients and community feeds
+Two open-source clients prove the integration effort is small. google/safebrowsing is Googles own Apache-2.0 Go client, which ships sbserver, a local proxy exposing a JSON threat-check endpoint; that is a ready-made pattern for running the verdict service behind our own backend with our own caching and rate limiting. muety/safe-browse-url-lookup is an MIT Node.js wrapper implementing the same lookup, single and batch, which we can adapt inside our Next.js backend if we prefer zero extra services. On the feed side, URLhaus (abuse.ch, operated with Spamhaus) offers a community API free of charge under fair use: database dumps refreshed every five minutes, a plain URL blocklist with a low false-positive rate, and even a ClamAV-format signature file refreshed once per minute; an auth key, free via the abuse.ch portal, is required, and commercial or for-profit use may require a paid subscription. PhishTank and OpenPhish provide complementary phishing lists with their own registration and non-commercial terms. Table 4 summarises the terms; the recommendation is to treat feeds as secondary intelligence layered behind Safe Browsing, never as the sole source.
+Table 4: Link-checking services and feed terms at a glance
+
+[Heading 1] 7. Engine Alternatives and Later-Release Prior Art
+LibreAV (projectmatris/antimalwareapp, GPL-3.0) is the other complete free Android anti-malware app on F-Droid. Instead of signatures it applies an on-device machine-learning model to the permissions and intent filters of installed applications, bucketing the score into Goodware, Risky, Malware and Unknown. The project itself warns prominently that it is early-stage, educational and prone to false positives. Its technique is interesting as a later-release heuristic layer for app scanning, but it inspects apps rather than arbitrary files, so it does not solve our MVP, and GPL-3.0 plus educational maturity make embedding unattractive for a first ship.
+For engines behind the signature packs: Cisco-Talos/clamav remains the reference open-source engine, actively maintained under GPL-2.0; the practical integration pattern it supports is scanning via a clamd socket, which avoids linking and keeps our app clean, but also means hosting an engine server-side rather than on-device. virustotal/yara is BSD-3-Clause pattern matching in C, ideal for rule-based server-side triage, but the classic engine is in maintenance mode and its successor, the Rust-based YARA-X, is the one to watch before we commit. For APK-level behavioural analysis, later-release candidates are quark-engine (GPL-3.0, actively updated, tracks current Android malware families such as NGate and ToxicPanda through its rule database) and androguard (Apache-2.0, the standard Python toolkit for opening APKs and DEX, mid-way through an active v5 rewrite); both run as analysis services, which conveniently sits outside our app binary. MobSF (GPL-3.0, 22.3k stars) is a full mobile pen-test platform: heavy, reference-only. None of these changes the MVP verdicts; they are the bench for the Threat Information screen and any future APK deep-scan feature.
+
+[Heading 1] 8. Adopt, Adapt, Build: Decision Matrix
+Table 5 gives the component-by-component verdict for the MVP, followed by the reasoning that drove the harder calls. Adopt means use the existing artifact as-is; adapt means build our own on the pattern and, where lawful, the data of the prior art; build means no credible prior art exists and the component is ours.
+Table 5: MVP component decisions
+The two decisions that deserve explicit reasoning are the engine and its license. Option A: reuse Hypatia code and packs directly, release our app source under AGPL-3.0. We get the fastest path to a working scanner, guaranteed updates from the community pipeline, and an open-source product story; the price is that our entire app source must be AGPL-compatible, which constrains any future proprietary distribution.
+Option B: implement our own Kotlin Bloom-filter module and compile our own packs from the same public feeds. The Bloom-filter approach is a general technique, the feeds are public indicator data, and nothing in our app would be a derivative of Hypatia; we keep licensing freedom. The price is operating our own generation and signing pipeline (the HypatiaDatabases CI shows it is a manageable job) and standing up our own update server. Option B is the recommendation for a product that may not want to be bound to AGPL; Option A is legitimate and cheaper if open-source release is acceptable or desired. The report does not resolve this alone: it is a business call to make with the license table of Section 9 in hand.
+
+[Heading 1] 9. License and Compliance Risk Register
+Table 6 collects the obligations and terms that must be respected in either option, each tied to the component that triggers it.
+Table 6: Risks and required mitigations
+
+[Heading 1] 10. Recommended MVP Architecture
+The recommended shape keeps the privacy promises of the design document while leaning on prior art. On the device: the Expo app stays as designed; a Kotlin native module (the development build already supports native modules) implements the scan pipeline, hashing files in one pass, testing MD5, SHA-1 and SHA-256 against Bloom-filter packs, and downloading packs with GPG verification from our update server or, initially, the HypatiaDatabases mirrors; the same module owns the quarantine store, an app-private, Keystore-encrypted location managed through the storage access framework, with restore gated on a fresh scan result and explicit confirmation; the domain Bloom filter provides the offline link pre-check. No file content leaves the device, exactly as promised on the welcome screen.
+In the backend: a small Next.js service, which our workspace already scaffolds, exposes three endpoints: link verdicts (GSB Lookup API with caching and rate limiting, optionally wrapped by the MIT Node.js client), scan-record storage (file hash, timestamp, verdict state, without the file itself), and threat-record management for the admin panel, synchronised from public feeds and verdict history. The admin panel ships in the same Next.js app with the screens already designed. Help content is served from Sanity as the design document already assumes. Data flow is therefore: device hashes and quarantines locally, reports only hashes and verdict states upward; links go to Google for the verdict, which is disclosed; the admin plane watches aggregate health, never user file content. This keeps the honest-results verdict set (Threat found, Needs your review, No known threat found, Could not decide) implemented as a deliberate combination of blocklist hit, no match, and service failure.
+
+[Heading 1] 11. Conclusions and Next Steps
+The reconnaissance confirms the build is realistic. The file-scanning MVP stands on the Hypatia pattern, one-pass hashing against GPG-verified Bloom-filter packs, with a clean license decision to make between full reuse under AGPL-3.0 and a self-built pipeline over the same public indicator feeds. The link checker is solved by the Safe Browsing Lookup API plus an on-device domain Bloom filter for offline honesty. Quarantine and the admin panel are ours to build, both well specified already by our design documents. Nothing in the shortlist contradicts the privacy promises or the honest-results doctrine; the third verdict survives as the correct response to hash-based detection limits and service unavailability.
+Next steps, in order: first, decide the distribution model, open-source AGPL release versus proprietary, because it selects between engine Option A and Option B; second, prototype the Kotlin scan module inside an Expo development build against the current HypatiaDatabases packs, measuring memory and scan latency on a real device; third, stand up the backend link-verdict endpoint with a Cloud Console key and the Safe Browsing quota confirmed; fourth, implement the quarantine store against Android 13+ scoped storage rules; fifth, wire the finished screens to these modules and validate the four-verdict flows end to end; sixth, if real malware behaviour must ever be tested, do it only inside an isolated lab environment, never on a host, mirroring the dynamic-analysis rules in our workflow. Each step keeps the recognisable screens from the prototype intact; the work in this report is the layer underneath them.
+
+[Heading 1] 12. Appendix A: Verified Sources
+All of the following were opened and read on 23-24 November 2026. Repository claims were taken from the listed branch or the repository page; service terms from the service pages themselves.
+[1] https://github.com/MaintainTeam/Hypatia (branch stable): README.md, LICENSE (AGPL-3.0), app source.
+[2] https://github.com/MaintainTeam/HypatiaDatabases (branch main): README.md, LICENSE, pack files and GPG signatures.
+[3] https://github.com/projectmatris/antimalwareapp: README.md, LICENSE (GPL-3.0).
+[4] https://github.com/muety/safe-browse-url-lookup: README.md, LICENSE (MIT).
+[5] https://github.com/google/safebrowsing: repository page (Apache-2.0).
+[6] https://github.com/quark-engine/quark-engine: repository page (GPL-3.0).
+[7] https://github.com/androguard/androguard: repository page (Apache-2.0).
+[8] https://github.com/MobSF/Mobile-Security-Framework-MobSF: repository page (GPL-3.0).
+[9] https://github.com/Cisco-Talos/clamav: repository page (GPL-2.0).
+[10] https://github.com/virustotal/yara: repository page (BSD-3-Clause).
+[11] https://developers.google.com/safe-browsing/v4/lookup-api: Lookup API reference.
+[12] https://developers.google.com/safe-browsing/v4/get-started: setup requirements; quotas live in the separate pricing and usage-limits guides.
+[13] https://urlhaus.abuse.ch/api/: URLhaus community API page, datasets and fair-use terms.
