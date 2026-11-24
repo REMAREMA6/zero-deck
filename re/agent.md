@@ -95,7 +95,8 @@ Two sentences to keep straight:
   ask the owner to confirm the right and record the answer.
 
 What you can always do on a server the owner administers: read the owner's configuration, logs, and
-that is not the same as decompiling the vendor's binary.
+data; observe how the service behaves as a user; check the owner's deployment and hardening. That is
+not the same as decompiling the vendor's binary.
 
 If the right is unclear, **stop and ask**. Do not fill the gap with a guess.
 
