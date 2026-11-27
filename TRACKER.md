@@ -11,7 +11,7 @@
 **Phase 4 extraction blob:** 7cc66f225f82a23a2b94bc53c3364c200f990f64  
 **Phase 4 facet audit blob:** 3b32ea7b60d90c30b1511a2e878a411cacc3a648  
 **Phase 4 plan closeout blob:** 71c734f9283e03d32263f75cbc9e46014e1e7e03  
-**Current phase:** Phase 6 — Completeness and conformance (not started)  
+**Current phase:** Phase 6 — Completeness and conformance (in progress)  
 **Overall status:** Phases 0–4 are complete. The owner-approved MVP is manual file security analysis, quarantine/file disposition, and Pro-gated website/link checking (disabled until owner activation when paid revenue can fund costs). IP address tracking/investigation is a future candidate and excluded from MVP.
 
 > This is the persistent progress and handoff record. Update it whenever work starts, changes status, becomes blocked, or is completed. A new chat must be able to resume from this file and the linked repository records without depending on private chat history.
@@ -26,11 +26,11 @@
 
 ## Current position
 
-- **Current phase:** Phase 6 — Completeness and conformance (not started)
-- **Current task:** Independently assess the Phase 5 synthesis against the declared MVP replication scope: inspect every required property for omissions, evidence sufficiency, facet applicability, unresolved conflicts/unknowns and the need for runtime capture. Do not infer completeness from schema validity.
-- **Completed:** Phases 0–5 complete. Phase 5 produced 6 owner rules, 27 provisional product-material rules, 7 scenarios, 15 facets, 757 property entries (45 capability/facet applicability + 712 scenario/facet/dimension entries), 12 evidence records and individual rule-to-evidence traceability. All 15 governing semantic facet payloads are mapped. Governing Draft 2020-12 schema validation, governing completeness tests, governing cross-record integrity tests and ZeroDeck-specific reference validation passed in [CI run #45997192513](https://github.com/REMAREMA6/zero-deck/actions/runs/45997192513). See `software-rules/PHASE-5-SYNTHESIS-AUDIT.md`.
+- **Current phase:** Phase 6 — Completeness and conformance (in progress)
+- **Current task:** Continue the independent Phase 6 completeness review. The first audit found and corrected a missing Configuration facet in quarantine scenario coverage; scenario-definition, interface-source capture, conditional-facet applicability and runtime evidence gaps remain under review. Do not infer completeness from schema validity.
+- **Completed:** Phases 0–5 complete; Phase 6 is in progress. Phase 5 produced 6 owner rules, 27 provisional product-material rules, 7 scenarios, 15 facets, 757 property entries (45 capability/facet applicability + 712 scenario/facet/dimension entries), 12 evidence records and individual rule-to-evidence traceability. All 15 governing semantic facet payloads are mapped. Governing Draft 2020-12 schema validation, governing completeness tests, governing cross-record integrity tests and ZeroDeck-specific reference validation passed in [CI run #45997192513](https://github.com/REMAREMA6/zero-deck/actions/runs/45997192513). See `software-rules/PHASE-5-SYNTHESIS-AUDIT.md`.
 - **Blockers / unresolved product properties:** No deployed ZeroDeck runtime target/build is available. File scan formats/engine/verdict criteria/data locality; quarantine storage/atomicity/recovery/retention/uninstall; URL parsing/disclosure/provider/authentication/entitlement lifecycle/quotas; interface runtime states; error/recovery mappings; actual integrations, configuration and performance targets remain unresolved. Preserve all open items; do not fabricate answers.
-- **Next action:** Begin Phase 6 completeness and conformance review against every scenario and property dimension. Keep IP investigation outside MVP.
+- **Next action:** Finish the independent scenario/property/facet audit, inspect MVP screen-source details, run fresh CI against the corrected 775-entry inventory, and produce the bounded Phase 6 exit disposition. Keep IP investigation outside MVP.
 
 ## Phase tracking
 
@@ -42,7 +42,7 @@
 | 3 | Prior-art discovery and selection | [x] Complete | Exit gate satisfied. Selected Phase 4 references and provenance recorded; unresolved technical/commercial/privacy gaps handed forward. Link checking is Pro-gated and owner-activation-gated. See PHASE-3-PRIOR-ART-REGISTER.md. |
 | 4 | Source-level rule extraction | [x] Complete | 31 source-derived rules, 28 platform/provider contract rules, 5 owner-declared link-gating rules, and a 15-facet audit across all three approved MVP capabilities. No ZeroDeck runtime behaviour or replication sufficiency is claimed. See `re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md` and `re/zerodek-product-re/2026-11-27/PHASE-4-15-FACET-COVERAGE-AUDIT.md`. |
 | 5 | Software Rules synthesis | [x] Complete | Synthesis exit gate satisfied. Includes 6 owner rules, 27 provisional product-material rules, 3 declared contracts, 12 evidence records, 7 scenarios, 15 facets and 757 property entries. All 15 semantic payload mappings, individual rule/evidence traceability, Draft 2020-12 schema validation, governing completeness/integrity suites and ZeroDeck cross-reference checks passed. Capture remains explicitly incomplete and not replication-sufficient. See `software-rules/PHASE-5-SYNTHESIS-AUDIT.md`. |
-| 6 | Completeness and conformance | [ ] Not started | Validate coverage, traceability, schemas, and replication completeness. |
+| 6 | Completeness and conformance | [~] In progress | Independent audit underway. Corrected missing Configuration coverage for quarantine scenarios; 775 property entries now planned/recorded. Scenario-model, interface-source and runtime/conformance gaps remain. See `software-rules/PHASE-6-COMPLETENESS-AUDIT.md`. |
 
 ## Phase 0 — Governance and handoff
 
@@ -101,7 +101,7 @@ This closes synthesis only. The machine capture has no runtime executions, obser
 
 ## Phase 6 — Completeness and conformance
 
-Not started.
+[~] In progress — independent review underway. See `software-rules/PHASE-6-COMPLETENESS-AUDIT.md`.
 
 Assess completeness against the explicit declared replication scope and required-property inventory. A valid schema or matching subset is not sufficient to claim faithful replication.
 
