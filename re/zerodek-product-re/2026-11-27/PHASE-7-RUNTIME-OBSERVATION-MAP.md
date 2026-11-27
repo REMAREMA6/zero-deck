@@ -146,3 +146,67 @@ The scenario definitions below are from `software-rules/SCENARIOS.md`. This tabl
 - Actor/principal, target/build/environment, initial state, exact inputs, ordered actions, expected-outcome oracle and settling/stop criteria remain unknown where no actual ZeroDeck target exists. They are not fabricated to make a test appear executable.
 
 **Scenario disposition conclusion:** all seven ZeroDeck MVP scenarios now have an explicit evidence-or-skip disposition. None has been executed against a deployed ZeroDeck target. The prior-art CI evidence improves reference understanding only; it does not close the product's runtime property gaps.
+
+## Renewed Phase 7 — owner-authorized GitHub Actions executions
+
+These additional executions were initiated by this investigation using the explicit owner authorization recorded in `OWNER-AUTHORIZATION-PHASE-7-OPEN-SOURCE-TESTING.md`. They use the exact Phase 3 pinned revisions and GitHub-hosted Ubuntu 24.04 runners. They are reference-project runtime/build/test evidence only; they do not constitute ZeroDeck runtime observations.
+
+### RT-HYP-002 — Hypatia pinned Android build and lint
+
+- Repository: https://github.com/MaintainTeam/Hypatia
+- Revision: `c0f98977be935e58849726313635a2459cac3892`
+- Investigation run: https://github.com/REMAREMA6/zero-deck/actions/runs/46029241394
+- Command: `./gradlew --no-daemon --stacktrace lint testDebugUnitTest assembleDebug`; Temurin JDK 17, Gradle 8.13, Android SDK platform 36/build tools 36.0.0.
+- **Observed:** Gradle reported `BUILD SUCCESSFUL`; 46 actionable tasks executed. A debug APK was produced (version 3.18, version code 318, min SDK 21).
+- **Important test limit:** `testDebugUnitTest` was explicitly `NO-SOURCE`; no unit tests were run. No emulator launch, file scan or quarantine action was performed.
+- The lint report was retained and inspected. It contains one Error-severity `MissingSuperCall` finding at `NotificationPromptActivity.kt:158`, plus warnings including inconsistent localized array lengths, implicit default-locale conversions, target SDK 34 and older Gradle/Android plugin recommendations. The Gradle task exited successfully because the project sets `abortOnError false`; the lint finding remains.
+- The run also recorded a direct HTTP download of the Kotlin Android plugin marker POM with SHA-256 `9d841037c59644dc5bbe814e792ed8774eb48646f0b3a779604ee5c1b307f969`, differing from the value `61ffa87244c72230adcfc32279d4a1cc41712c2bc5eb50971b630ed880de485f` in the pinned verification metadata. The actual Gradle build nevertheless completed successfully. The direct-fetch mismatch is unresolved; it is not proof of compromise or of a Gradle verification bypass. No checksum was changed and verification was not disabled.
+- Artifact `phase7-hypatia-build-evidence` (ID `15213297838`) was downloaded and inspected; it contains APK, metadata and lint reports, but no unit-test result files.
+- **Disposition:** successful build/package and lint-task execution, with a reported lint error and no unit-test sources. No scanner runtime behaviour inferred.
+
+### RT-HDB-004 — HypatiaDatabases fixture-driven generator execution
+
+- Repository: https://github.com/MaintainTeam/HypatiaDatabases
+- Revision: `3c35f52e1a847caed46d8e1ad34968bfa3c8b10a`
+- Investigation run: https://github.com/REMAREMA6/zero-deck/actions/runs/46029241394
+- Maven command: `mvn --batch-mode --no-transfer-progress clean test package`; package succeeded. Maven reported no test sources, so no Maven unit-test suite ran.
+- The actual generator `org.maintainteam.hypatiadatabases.App` was invoked using deterministic harmless fixtures containing one MD5, one SHA-1, one SHA-256 and one domain.
+- **Observed generator output:** 3 valid lines, 0 invalid; read and added counts MD5 1, SHA-1 1, SHA-256 1, domains 1. Four non-empty Bloom-filter files (domain, MD5, SHA-1, SHA-256) were verified.
+- An earlier fixture attempt had incorrectly emitted literal backslash-n characters and was correctly rejected as three invalid hash lines. The fixture was fixed; the successful result above is from the corrected execution.
+- No external feed downloads, signing, publishing or branch pushes occurred.
+- **Disposition:** bounded generator parsing/counting/output creation is runtime-observed for this pinned reference project. Feed correctness, threat accuracy, false-positive/negative rates, signature trust and production publication are not established.
+
+### RT-CLAM-003 — ClamAV pinned CMake build and test suite
+
+- Repository: https://github.com/Cisco-Talos/clamav
+- Revision: `cad7b18a3e6505195fe08db1412449a18fc9f012`
+- Investigation run: https://github.com/REMAREMA6/zero-deck/actions/runs/46028645716
+- GitHub-hosted Ubuntu 24.04 runner; CMake/Ninja/GCC, Rust/Cargo and required development dependencies.
+- **Observed:** CMake configure and build succeeded. CTest reported **9/9 test targets passed, 0 failed**, total test time 64.89 seconds.
+- Retained CTest `LastTest.log` reports: clamscan 170 passed/1 skipped; clamd 15 passed; freshclam 10 passed/1 skipped; sigtool 6 passed. Aggregate: **201 passed, 2 skipped**.
+- Named test coverage includes scan callback branches, CVD verification success/failure, signature signing/verification and diff operations, update failure cases, archive limits, and quarantine copy/move/remove TOCTOU cases.
+- Artifact `phase7-clamav-build-test-evidence` (ID `15213342485`) was downloaded and inspected; its `LastTest.log` contains the detailed output.
+- **Limits:** these are ClamAV's own tests, not ZeroDeck tests. No malware sample was executed by this investigation; no controlled performance benchmark was run.
+- **Disposition:** broad pinned reference build/test evidence for ClamAV scanner, updater, signature-tool and quarantine-related test paths. Do not transfer these results into ZeroDeck requirements without explicit traceability.
+
+### Renewed evidence effect on the 15 facets
+
+| Facet | Additional reference evidence | Boundary |
+|---|---|---|
+| Behaviour | Hypatia build only; HypatiaDatabases generator; ClamAV scanner/update/signature tests | No ZeroDeck runtime behaviour. |
+| Business rules | HypatiaDatabases accepts hash/domain fixture inputs; ClamAV tests exercise explicit test branches | Reference implementation only; no ZeroDeck verdict or quarantine policy. |
+| Data | Four Bloom-filter outputs from deterministic fixture | Does not validate real feed accuracy or ZeroDeck data model. |
+| Persistence | HypatiaDatabases writes generated Bloom-filter files | Local generator output only; no ZeroDeck persistence contract. |
+| Security controls | ClamAV CVD verification and signing tests; Hypatia dependency-verification attempt and lint report | No ZeroDeck enforcement, trust-root or key policy established. |
+| Background processing | No new ZeroDeck evidence; CI build/test jobs only | Not evidence of ZeroDeck background job semantics. |
+| Errors and recovery | ClamAV updater/parser/quarantine test cases | Reference test branches only; no ZeroDeck recovery semantics. |
+| Integrations | No new live provider integration; fixture-only generator path | No ZeroDeck API/provider integration. |
+| Configuration | Generator input paths and domain list; build SDK/toolchain settings | Reference CLI/CI configuration only. |
+| Performance and resource behaviour | CTest duration and test counts | Not a controlled or transferable benchmark. |
+| Interface, API, Messaging, Identity/authentication, Authorization/permissions | No new relevant runtime evidence | Remain unobserved for ZeroDeck. |
+
+### Updated execution disposition
+
+The earlier statement that no third-party project code or fixture was executed applies to the original local-container pass only. In this renewed pass, ordinary project builds/tests and harmless deterministic fixtures were executed on GitHub-hosted runners under explicit owner authorization. No such code or fixture was run in the local ChatGPT container. No malware samples, live attacks, provider calls, external threat-feed ingestion or upstream publication were performed.
+
+The renewed executions improve reference-runtime evidence but do not alter the original scenario conclusion: none of the seven MVP scenarios has been executed against a deployed ZeroDeck target. The machine capture's ZeroDeck runtime-observation count remains zero.
