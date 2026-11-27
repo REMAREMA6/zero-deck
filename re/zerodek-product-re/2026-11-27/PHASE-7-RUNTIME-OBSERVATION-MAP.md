@@ -122,3 +122,27 @@ Additional runtime observations have been extracted and mapped to the 15 facets 
 The remaining unobserved items are not being retried in this pass because their blockers are explicit: unavailable local toolchains, no verified isolated lab, expired Hypatia logs, missing provider credentials/approval, or non-executable documentation. Continue only if new accessible evidence or a suitable authorized environment becomes available.
 
 **Phase 7 remains in progress. ZeroDeck's Software Rules capture remains incomplete and not replication-sufficient.**
+
+
+## MVP scenario-by-scenario runtime disposition
+
+The scenario definitions below are from `software-rules/SCENARIOS.md`. This table closes the Phase 7 evidence disposition for each defined scenario: it identifies what the reference CI evidence contributes and what remains untested. A reference test is not treated as a ZeroDeck scenario execution.
+
+| Scenario | Relevant available reference evidence | Runtime disposition for the ZeroDeck scenario |
+|---|---|---|
+| MVP-FILE-001 — select supported file and request manual scan | Hypatia exact-revision CI job succeeded (RT-HYP-001); ClamAV CI built and tested engine components (RT-CLAM-001). | **Not executed against ZeroDeck.** Hypatia job logs expired; no Android device/emulator or verified lab. CI build success does not prove file selection, permission grants, scan start/progress or terminal state. |
+| MVP-FILE-002 — separate file result branches | ClamAV scan-callback examples passed for basic scan, one match, alert, ignore-alert and ZIP abort (RT-CLAM-002). Hypatia CI job succeeded but detailed tests are unavailable. | **Reference branches partially exercised; ZeroDeck branches not executed.** Confirmed/suspicious/no-known-threat/inconclusive/unsupported/inaccessible/interruption/engine-failure outcomes remain unobserved for ZeroDeck. No malware samples were run. |
+| MVP-QUAR-001 — quarantine confirmed threat | Android storage/SAF documentation only; no selected executable reference supplies a verified ZeroDeck quarantine path. | **Not executed; no runtime reference behaviour to transfer.** Eligibility, move/copy, integrity and partial-failure behaviour remain unknown. |
+| MVP-QUAR-002 — suspicious or inconclusive review | Android platform contracts and product-material rules only. | **Not executed.** Review/rescan choices, destructive-action prevention and state transitions remain unobserved. |
+| MVP-QUAR-003 — restore or permanently delete | Android storage/SAF/Keystore documentation only. | **Not executed.** Restore and delete are separate untested paths; no runtime evidence establishes fresh-scan enforcement, integrity, deletion guarantees or recovery. |
+| MVP-LINK-001 — submit URL for checking | Google Web Risk Lookup contract only; no live provider request. | **Not executed.** No credentials/project or separate authorization to disclose submitted URLs or incur provider costs. Input parsing, Pro gate, owner switch, request and disclosure enforcement remain unobserved. |
+| MVP-LINK-002 — separate link result branches | Web Risk response and caching documentation only. | **Not executed.** Dangerous/no-match/inconclusive/invalid/redirect/timeout/provider-unavailable branches and cache expiry remain unobserved at runtime. |
+
+### Scenario-branch completeness disposition
+
+- MVP-FILE-002's seven defined branches are each explicitly unobserved against ZeroDeck; ClamAV's example tests provide only bounded reference evidence for some scan-callback branches.
+- MVP-LINK-002's seven defined branches are each unobserved at runtime; live provider testing is skipped.
+- MVP-QUAR-003 restore and permanent deletion are separately unobserved.
+- Actor/principal, target/build/environment, initial state, exact inputs, ordered actions, expected-outcome oracle and settling/stop criteria remain unknown where no actual ZeroDeck target exists. They are not fabricated to make a test appear executable.
+
+**Scenario disposition conclusion:** all seven ZeroDeck MVP scenarios now have an explicit evidence-or-skip disposition. None has been executed against a deployed ZeroDeck target. The prior-art CI evidence improves reference understanding only; it does not close the product's runtime property gaps.
