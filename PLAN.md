@@ -172,3 +172,14 @@ The repository is the persistent project record. A new chat must read, in order:
 5. The active-task files and the corresponding Software Rules documents named in the tracker.
 
 If chat history conflicts with repository records, inspect the repository and resolve the discrepancy explicitly. The tracker is the operational source of truth for progress; the plan is the source of truth for intended scope and sequence.
+
+
+## 9. GitHub Actions execution procedure and renewed Phase 7
+
+The owner approved GitHub Actions hosted runners as the remote execution path whenever the ChatGPT sandbox lacks required tools, operating systems, browsers, emulators, services, or test capabilities. Follow `re/zerodek-product-re/2026-11-27/GITHUB-ACTIONS-EXECUTION-PROCEDURE.md`.
+
+Use the sandbox when suitable; otherwise create a pinned, reproducible GitHub Actions workflow, inspect its logs and artifacts, fix and rerun as necessary, and record exact evidence and limitations. Playwright is the browser UI path for browser-rendered targets (including screenshot comparison, traces and video); native mobile UI requires an appropriate emulator/device automation path. Use Actions for API, database, persistence, integration, build, and other supported tests.
+
+The owner may supply integration secrets through GitHub Actions Secrets for authorized Supabase, Sanity, and provider testing. Use least privilege, dedicated test environments, no secret logging, and explicit approval for live calls, costs, data disclosure, destructive effects, and deployments. Deployment workflows must be explicit and environment-controlled. Hosted runners are configurable but not unrestricted, and do not automatically satisfy the isolated-lab requirement for suspicious samples.
+
+**Renewed Phase 7:** the earlier bounded investigation and its closeout remain historical records of what was actually done. Phase 7 is reopened for a second pass focused on previously skipped execution paths that can now reasonably be tested through GitHub Actions. Reassess each skipped path individually, continue when another path is blocked, and preserve provenance. Do not treat reference-project evidence as ZeroDeck requirements. Do not claim ZeroDeck runtime conformance until the actual ZeroDeck target exists and is tested.
