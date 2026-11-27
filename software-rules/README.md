@@ -4,7 +4,7 @@
 **Governing specification:** Software Rules 0.3.0 Draft  
 **Governing schema:** 0.2.0 Draft (JSON Schema 2020-12; reserved v1 namespace)  
 **Declared scope:** ZeroDeck first MVP — exactly three capabilities  
-**Status:** In progress; not replication-sufficient
+**Status:** Phase 5 synthesis complete; capture incomplete and not replication-sufficient
 
 ## Purpose
 
@@ -51,4 +51,6 @@ This deliverable follows the governing core model's separation of scenarios, exe
 
 ## Phase 5 status
 
-The initial product scope and owner rules are being synthesized. Scenario definitions and the facet/property inventory are being mapped to the governing schema. Phase 6 will independently audit completeness and conformance; this directory currently makes no claim of completeness.
+Phase 5 synthesis is complete. The deliverable includes 6 owner rules, 27 provisional product-material rules, 7 scenarios, all 15 semantic facet payload mappings, 757 property inventory entries, 12 evidence records and individual rule/evidence traceability. The machine capture passed the governing Draft 2020-12 schema validator, governing completeness tests, cross-record integrity tests and ZeroDeck-specific reference checks. See [Phase 5 synthesis exit audit](PHASE-5-SYNTHESIS-AUDIT.md).
+
+**Important:** Phase 5 completion is not product completeness. No ZeroDeck runtime target or observations exist; the capture remains explicitly incomplete and not replication-sufficient. Phase 6 independently reviews completeness, applicability, evidence sufficiency and unresolved properties.
