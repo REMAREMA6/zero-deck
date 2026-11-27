@@ -125,7 +125,7 @@ Review closed 2026-11-27 under the plan's incomplete-deliverable exit branch. Th
 - [x] Map reference findings to all 15 facets and seven MVP scenarios with explicit evidence boundaries; no reference behaviour promoted to ZeroDeck rules.
 - [x] Record Web Risk live-call, live feed, publication, emulator/device and malware-sample skips with reasons; continue all independent safe paths.
 - [x] Register EVD-RT-REF-001/002 as supporting-context evidence in `capture.json`, align `EVIDENCE.md`, and retain zero ZeroDeck executions, observations and runtime rules.
-- [x] Validate the reconciled machine capture and evidence cross-references; successful validation: [run #46034634801](https://github.com/REMAREMA6/zero-deck/actions/runs/46034634801). A later validation is running for the final evidence revision.
+- [x] Validate the reconciled machine capture and evidence cross-references; final evidence validation passed: [run #46035518643](https://github.com/REMAREMA6/zero-deck/actions/runs/46035518643).
 - [x] Close the renewed Phase 7 audit and reconcile plan/tracker status.
 
 **Phase 7 exit gate:** satisfied for the bounded reference-runtime investigation. This does not claim that the ZeroDeck-specific Software Rules are complete. The remaining required product properties and owner decisions are listed in `software-rules/OPEN-PROPERTIES.md`; they remain visible and unresolved. A first-party ZeroDeck runtime is not required for this reverse-engineering specification, and no first-party runtime behaviour is claimed.
