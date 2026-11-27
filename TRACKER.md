@@ -27,10 +27,10 @@
 ## Current position
 
 - **Current phase:** Phase 5 — Software Rules synthesis (ready to start)
-- **Current task:** Build the ZeroDeck-specific Software Rules deliverable using the current governing 0.3.0 Draft / schema 0.2.0 Draft model. First synthesis pass: define scope, owner-declared contracts, capability scenarios, 15-facet property inventory, evidence classes, and unresolved properties; validate structure and traceability.
-- **Completed:** Phase 4 exit gate satisfied 2026-11-27. Extracted 31 source-derived Hypatia/HypatiaDatabases rules, 28 Android/Web Risk documented-contract rules, and 5 owner-declared link-gating rules. Audited all 15 facets across all three approved MVP capabilities. No ZeroDeck runtime behaviour or replication sufficiency is claimed.
+- **Current task:** Complete the machine-readable and human-readable rule synthesis: refine the property inventory at scenario/dimension level, trace every adopted rule to owner/product-material/platform/provider evidence, cross-check typed payload mappings, and validate capture.json against the governing 0.2.0 Draft schemas.
+- **Completed:** Phase 4 exit gate satisfied. Phase 5 started: re-read governing Software Rules 0.3.0 Draft and schema 0.2.0 Draft; created `software-rules/` scope, owner rules, product-material workflow rules, seven-scenario catalogue, 15-facet map, typed payload map, evidence register, open-property register and initial machine-readable capture. Capture has 15 facets, 7 scenarios, 45 capability/facet inventory entries, 2 owner-declared contracts, and explicitly no runtime observations/rules. Basic structural/reference checks passed; full JSON Schema validation and Phase 5 traceability review remain.
 - **Blockers:** No Phase 5 start blocker. Carry forward unresolved properties: file scan coverage/data rights/locality and verdict policy; quarantine isolation/integrity/atomicity/retention/recovery; URL disclosure/consent, provider procurement/authentication, error mapping, Pro entitlement lifecycle, quotas and owner activation controls; runtime interface and performance evidence.
-- **Next action:** Complete the initial machine-readable capture and facet-specific rule documents; cross-check each property against Phase 2 scope and Phase 4 evidence; then perform Phase 5 exit review. Keep IP tracking outside MVP.
+- **Next action:** Expand the coarse 45-entry inventory into scenario/property-level traceable requirements; verify every product-material rule and owner decision against its source; run full schema validation if available; then perform Phase 5 exit review. Keep IP tracking outside MVP.
 
 ## Phase tracking
 
@@ -41,7 +41,7 @@
 | 2 | Capability and facet mapping | [x] Complete | Owner selected manual file security analysis, quarantine/file disposition, and website/link checking. IP tracking is recorded as a future candidate and excluded from MVP. Scope decision, scenarios, exclusions and 15-facet map recorded. |
 | 3 | Prior-art discovery and selection | [x] Complete | Exit gate satisfied. Selected Phase 4 references and provenance recorded; unresolved technical/commercial/privacy gaps handed forward. Link checking is Pro-gated and owner-activation-gated. See PHASE-3-PRIOR-ART-REGISTER.md. |
 | 4 | Source-level rule extraction | [x] Complete | 31 source-derived rules, 28 platform/provider contract rules, 5 owner-declared link-gating rules, and a 15-facet audit across all three approved MVP capabilities. No ZeroDeck runtime behaviour or replication sufficiency is claimed. See `re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md` and `re/zerodek-product-re/2026-11-27/PHASE-4-15-FACET-COVERAGE-AUDIT.md`. |
-| 5 | Software Rules synthesis | [~] In progress | Create separate product-specific `software-rules/` deliverable using current governing model, schemas, evidence classes and facet specifications. |
+| 5 | Software Rules synthesis | [~] In progress | Initial deliverable and machine-readable capture created. Scope, owner rules, product-material rules, seven scenarios, 15-facet map, typed payload map, evidence register and open-property register are present. Full rule traceability, schema validation and exit review remain. |
 | 6 | Completeness and conformance | [ ] Not started | Validate coverage, traceability, schemas, and replication completeness. |
 
 ## Phase 0 — Governance and handoff
@@ -95,7 +95,7 @@ Extracted 31 source-derived rules from pinned Hypatia/HypatiaDatabases reference
 
 ## Phase 5 — Software Rules synthesis
 
-[~] In progress — governing specification and schemas re-read; ZeroDeck deliverable structure and first-pass capture are being synthesized.
+[~] In progress — governing specification and schemas re-read; initial ZeroDeck deliverable and machine-readable capture created. The capture is explicitly incomplete and contains no fabricated runtime observations. See `software-rules/README.md` and linked artifacts. Full traceability, detailed property inventory and schema validation remain.
 
 The deliverable belongs in the separately designated `software-rules/` folder and must follow the current governing Software Rules format/schema version. Preserve source-derived, documented-contract, owner-declared and unknown evidence classes. Do not copy the governing specification wholesale or alter its source repository.
 
