@@ -5,7 +5,7 @@
 **Started:** 2026-11-27  
 **Method:** CIRCLES — seven steps, followed by supporting product-definition work  
 **Overall status:** [~] CIRCLES completed provisionally; blueprint, architecture follow-up and validation remain open; PM-authored product-rules workstream has started  
-**Current position:** PM contract profile design (Phase 1); authentication is the first feature area  
+**Current position:** PM-authored rules Phase 1 complete; Phase 2 (authentication requirements) is next  
 **Last reconciled:** 2026-11-27
 
 > Operational source of truth. Update this tracker whenever work starts, changes status, becomes blocked, or completes. A new session must resume from this file and linked records without relying on chat history.
@@ -26,7 +26,7 @@ During that work, the owner added a distinct requirement: the Product Management
 
 That work is now recorded as a separate workstream. It does not restart CIRCLES or change the three-capability MVP.
 
-**Active task:** complete the PM-authored contract profile (Phase 1), then research and draft authentication/account requirements (Phase 2).
+**Completed most recently:** PM-authored contract profile (Phase 1). **Next task:** research and draft authentication/account requirements (Phase 2).
 
 ### Current product authority
 
@@ -74,7 +74,7 @@ That work is now recorded as a separate workstream. It does not restart CIRCLES 
 
 **Workstream:** [11-PM-AUTHORED-PRODUCT-RULES.md](2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md)  
 **Author:** ZeroDeck Product Management Agent  
-**Status:** Phase 0 complete; Phase 1 in progress  
+**Status:** Phases 0–1 complete; Phase 2 next  
 **Purpose:** create implementation-ready, technology-independent product requirements aligned with Software Rules.
 
 The current Software Rules 0.3.0 Draft includes a `declaredContract` record and `declared-contract` evidence class. PM requirements describe what ZeroDeck must do; they are not runtime observations or source-derived rules. We will use this existing class, identify the PM issuer explicitly, and avoid changing the separate Software Rules core without an approved proposal.
@@ -84,7 +84,7 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 | Phase | Work | Status | Exit condition |
 |---|---|---|---|
 | 0 | Establish baseline, boundaries and authorship | [x] | Software Rules model inspected; product scope and PM identity recorded. |
-| 1 | Design PM contract profile | [~] | Map to declaredContract; settle IDs, extension metadata and validation without unauthorized core changes. |
+| 1 | Design PM contract profile | [x] | Exact mapping, author identity, ID/version rules, complete-record and extension schemas, and validation procedure documented and checked. |
 | 2 | Research and author authentication requirements | [ ] | Stack-agnostic account/auth contract with sources, acceptance criteria and unknowns. |
 | 3 | Validate authentication coverage | [ ] | Cross-facet assessment and negative/failure/recovery tests. |
 | 4 | Author manual file-analysis requirements | [ ] | File selection, input scope, verdicts, limitations, privacy and failure semantics. |
@@ -120,11 +120,10 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 
 ## 6. Immediate next actions
 
-1. Finish Phase 1: define the PM contract profile and exact mapping to the current Software Rules schema.
-2. Start Phase 2: research and draft authentication/account requirements.
-3. Keep architecture follow-up and blueprint gaps visible; do not mark them complete without evidence.
-4. Update this tracker at each phase transition and link every deliverable.
-5. Ask the owner only for decisions that evidence and PM deliberation cannot settle.
+1. Start Phase 2: research and draft authentication/account requirements using the completed PM contract profile.
+2. Keep architecture follow-up and blueprint gaps visible; do not mark them complete without evidence.
+3. Update this tracker at each phase transition and link every deliverable.
+4. Ask the owner only for decisions that evidence and PM deliberation cannot settle.
 
 ## 7. Session log
 
@@ -135,7 +134,7 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 | 2026-11-27 | Owner selected everyday non-technical users and web + Android. | Target and platforms recorded as owner decisions. |
 | 2026-11-27 | Completed initial platform/integration assessment; owner directed Neon and first-party auth/backend. | Recommendation updated; native proof, auth threat model, hosting and approval remain open. |
 | 2026-11-27 | Owner requested PM-authored product rules aligned to Software Rules with explicit authorship. | New workstream opened. |
-| 2026-11-27 | Inspected Software Rules README, declared-contract schema, identity/authentication facet and Phase 6 property inventory. | Phase 0 complete; declared-contract is the current fit; Phase 1 active. |
+| 2026-11-27 | Inspected Software Rules README, declared-contract schema, identity/authentication facet and Phase 6 property inventory. | Phase 0 complete; declared-contract is the current fit. |\n| 2026-11-27 | Completed PM contract profile, PM extension schema, full declared-contract schema, templates and format fixture; ran structural/semantic and negative checks. | Phase 1 complete; Phase 2 is next. No ZeroDeck feature requirement has yet been authored or owner-approved. |
 
 ## 8. Authority and repository boundaries
 
