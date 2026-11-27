@@ -1,7 +1,7 @@
 # Phase 7 Renewal — Target and Test Matrix
 
 **Date:** 2026-11-27  
-**Status:** Execution in progress  
+**Status:** Target builds and bounded tests executed; follow-up runtime exploration in progress  
 **Execution model:** ChatGPT sandbox where suitable; GitHub Actions hosted runners when the sandbox lacks the required toolchain  
 **Authorization:** See [Owner Authorization Record](OWNER-AUTHORIZATION-PHASE-7-OPEN-SOURCE-TESTING.md)
 
@@ -21,8 +21,8 @@ The exact scope and limits are recorded in the authorization record. Licences st
 
 | Target / path | Planned execution | Status and limits |
 |---|---|---|
-| SRC-01 Hypatia | Checkout exact SHA on GitHub-hosted Ubuntu; install JDK 17 and Android SDK; run Gradle lint, unit tests and debug APK build; retain reports/APK. | **Authorized; renewed run pending.** No malware samples; build/test evidence only unless emulator scenarios are separately added. |
-| SRC-02 HypatiaDatabases | Checkout exact SHA; install JDK 17/Maven and required safe tooling; run bounded Maven compile/test and deterministic fixture-based generator path if inputs can be isolated. Inspect generated outputs locally as CI artifacts only. | **Authorized; renewed run pending.** Do not run the original publishing workflow, push branches, sign/publish packs, or ingest live feeds by default. |
+| SRC-01 Hypatia | Checkout exact SHA on GitHub-hosted Ubuntu; install JDK 17 and Android SDK; run Gradle lint, unit tests and debug APK build; retain reports/APK. | **Executed:** run #46029241394 succeeded. Gradle lint/build and debug APK packaging passed; unit test task was NO-SOURCE. Lint report has one Error-severity finding plus warnings. No malware samples or emulator launch yet. |
+| SRC-02 HypatiaDatabases | Checkout exact SHA; install JDK 17/Maven and required safe tooling; run bounded Maven compile/test and deterministic fixture-based generator path if inputs can be isolated. Inspect generated outputs locally as CI artifacts only. | **Executed:** run #46029241394 succeeded. Maven package and deterministic generator fixture passed (3 valid hashes + 1 domain; 4 Bloom-filter outputs). No test sources. No live feeds, signing or publication. |
 | SRC-06 ClamAV | Checkout exact SHA; install Ubuntu build dependencies; configure/build with CMake; run CTest and harmless example tests; retain logs/reports. | **Authorized; renewed run pending.** No malware samples or live threat-feed operations. |
 | SRC-04 Google Web Risk Lookup | Mock/contract tests can be performed without credentials; live API test requires dedicated owner-provided project/key and explicit approval for URL disclosure, call volume and possible cost. | **Live call not authorized/provisioned.** Keep as documented contract; no live provider calls. |
 | SRC-07 Android storage / SAF / Keystore | Documentation-derived constraints only; later test against first-party ZeroDeck app. | Not an executable prior-art target. |
@@ -30,7 +30,7 @@ The exact scope and limits are recorded in the authorization record. Licences st
 | Actual `REMAREMA6/zero-deck` product implementation | Native React/TypeScript app runtime, persistence, API and UI conformance. | Not yet available as a product runtime target. Reassess when implementation/build exists. |
 | Supabase / Sanity | Integration tests only if these services are approved as MVP scope and dedicated test credentials/configuration are provided. | Not established as in-scope MVP integrations. Do not invent requirements. |
 
-## 3. Execution order
+See [PHASE-7-RENEWED-ACTIONS-RESULTS.md](PHASE-7-RENEWED-ACTIONS-RESULTS.md) for exact runner/toolchain details, lint findings, test names, artifact IDs and limitations.\n\n## 3. Execution order
 
 1. Hypatia exact-revision Android lint, unit tests and debug build.
 2. ClamAV exact-revision configure/build and harmless test suite.
