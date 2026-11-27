@@ -41,7 +41,7 @@ for (const rule of [...ownerRules.matchAll(/ZD-OWNER-\d{3}/g), ...productRules.m
   assert(traceability.includes(rule[0]), `Rule ${rule[0]} is missing from the traceability register.`);
 }
 for (const id of evidenceIds) assert(evidenceRegister.includes(id), `Capture evidence ${id} is missing from EVIDENCE.md.`);
-for (const id of evidenceRegister.matchAll(/\|\s*(EVD-[A-Z0-9-]+)\\s*\\|/g)) assert(evidenceIds.has(id[1]), `Evidence register ID ${id[1]} is missing from capture.json.`);
+for (const id of evidenceRegister.matchAll(/\|\s*(EVD-[A-Z0-9-]+)\s*\|/g)) assert(evidenceIds.has(id[1]), `Evidence register ID ${id[1]} is missing from capture.json.`);
 
 if (fail.length) {
   console.error(fail.map((message) => `FAIL: ${message}`).join("\n"));
