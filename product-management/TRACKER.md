@@ -75,7 +75,9 @@ That work is now recorded as a separate workstream. It does not restart CIRCLES 
 **Workstream:** [11-PM-AUTHORED-PRODUCT-RULES.md](2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md)  
 **Author:** ZeroDeck Product Management Agent  
 **Status:** Phases 0–1 complete; Phase 2 next  
-**Purpose:** create implementation-ready, technology-independent product requirements aligned with Software Rules.\n\n**Profile:** [product-rules/PROFILE.md](product-rules/PROFILE.md) — Phase 1 complete. **Contract index:** [product-rules/README.md](product-rules/README.md).
+**Purpose:** create implementation-ready, technology-independent product requirements aligned with Software Rules.
+
+**Profile:** [product-rules/PROFILE.md](product-rules/PROFILE.md) — Phase 1 complete. **Contract index:** [product-rules/README.md](product-rules/README.md). **Validation:** [product-rules/VALIDATION-REPORT.md](product-rules/VALIDATION-REPORT.md).
 
 The current Software Rules 0.3.0 Draft includes a `declaredContract` record and `declared-contract` evidence class. PM requirements describe what ZeroDeck must do; they are not runtime observations or source-derived rules. We will use this existing class, identify the PM issuer explicitly, and avoid changing the separate Software Rules core without an approved proposal.
 
@@ -135,7 +137,7 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 | 2026-11-27 | Completed initial platform/integration assessment; owner directed Neon and first-party auth/backend. | Recommendation updated; native proof, auth threat model, hosting and approval remain open. |
 | 2026-11-27 | Owner requested PM-authored product rules aligned to Software Rules with explicit authorship. | New workstream opened. |
 | 2026-11-27 | Inspected Software Rules README, declared-contract schema, identity/authentication facet and Phase 6 property inventory. | Phase 0 complete; declared-contract is the current fit. |
-| 2026-11-27 | Completed PM contract profile, PM extension schema, full declared-contract schema, templates and format fixture; ran structural/semantic and negative checks. | Phase 1 complete; Phase 2 is next. No ZeroDeck feature requirement has yet been authored or owner-approved. |
+| 2026-11-27 | Completed PM contract profile, PM extension schema, full declared-contract schema, templates and format fixture; ran structural/semantic and negative checks, recorded in `product-rules/VALIDATION-REPORT.md`. | Phase 1 complete; Phase 2 is next. No ZeroDeck feature requirement has yet been authored or owner-approved. |
 
 ## 8. Authority and repository boundaries
 
