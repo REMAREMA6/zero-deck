@@ -44,8 +44,8 @@ All paths below are from the pinned revision above.
 ### UI-SRC-002 — Screen-to-shell transitions are expressed through optional callbacks
 
 - **Rule:** Reusable screen components expose explicit callback props for navigation and workflow handoff rather than owning the complete application router.
-- **Evidence:** File selection exposes onNavigate through its sidebar and scan-related handoff is presented separately; scan progress exposes onCancel, onBackHome and onScanComplete; website link checking exposes onBackHome and onCheckLink(url); result screens expose action callbacks.
-- **Source:** SecurityScannerScanProgressScreen.tsx (lines 13–22); WebsiteLinkScreen.tsx (lines 15–19); SecurityScannerResultScreen.tsx (Props near lines 10–20).
+- **Evidence:** Scan progress exposes onCancel, onBackHome and onScanComplete; website link checking exposes onBackHome and onCheckLink(url); file-result screens expose onBackHome, onViewQuarantine, onDeletePermanently and onScanAnother. Other screens use local handlers or optional callbacks.
+- **Source:** SecurityScannerScanProgressScreen.tsx (lines 13–22); WebsiteLinkScreen.tsx (lines 15–19); SecurityScannerResultScreen.tsx (lines 10–24).
 - **Evidence class:** Source-derived.
 - **Limit:** Optional callbacks can leave controls inert when the parent does not supply them. The app shell must wire every required transition.
 
