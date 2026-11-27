@@ -144,3 +144,26 @@ These applicability labels define what must be investigated; they do not assert 
 **Phase 2 exit gate: satisfied.** The owner has selected and bounded the first ZeroDeck MVP to manual file security analysis, quarantine/file disposition, and website/link checking. IP address tracking/investigation is recorded as a future candidate and explicitly excluded from MVP. The three MVP workflows, exclusions, all 15 facet perspectives, scenario branches, cross-facet dependencies, and required-property questions are documented.
 
 This is a scope-and-investigation milestone only. No rules are asserted as runtime-verified, and the selected MVP is not yet replication-sufficient. Phase 3 must select and audit relevant prior-art/source material against these three capabilities; Phases 4–6 must establish and validate the required properties.
+
+
+## 6. Owner-declared availability amendment — Pro-gated link checking
+
+**Decision authority:** PRO-GATED-LINK-CHECK-DECISION.md (ZD-DEC-2026-11-27-02).
+
+MVP-03 remains in scope, but the capability has two separate gates:
+1. The requesting user must hold the Pro entitlement.
+2. The owner-controlled feature activation setting must be enabled after paid revenue can fund operating/API costs.
+
+The API/provider must not be called when either gate fails. Pro status alone does not imply unlimited usage or guarantee provider availability. No free-tier link-check API usage is authorized. The owner has not yet specified Pro price, allowance, paid entitlement lifecycle, activation threshold or feature launch date.
+
+This declared intent adds/clarifies required-property questions across the 15 facets:
+- **Behaviour:** locked/disabled states and transition to available state when both gates are satisfied.
+- **Business rules:** entitlement predicate, owner activation predicate, billing/cost guard and any usage allowance.
+- **Interface:** explain locked status and the condition for access without implying that a check was performed.
+- **API / Integrations:** reject or short-circuit before provider invocation when unavailable; provider errors remain distinct from access denial.
+- **Identity and authentication / Authorization and permissions:** establish trustworthy Pro entitlement and enforce it server-side, not solely in a client UI.
+- **Configuration:** owner-controlled feature switch, budget/quota controls and safe disabled default.
+- **Errors and recovery:** handle entitlement lookup failure and provider budget/availability failure without reporting a false check result.
+- **Performance and resource behaviour:** bound paid API calls, cache according to provider expiry and prevent duplicate/unbounded calls.
+
+These are required investigation questions, not a complete implementation specification. The owner decision is declared intent; no runtime entitlement or billing system has been observed.
