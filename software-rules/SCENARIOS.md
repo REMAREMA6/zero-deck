@@ -18,6 +18,12 @@ The IDs and workflow boundaries follow the owner-approved scope and Phase 2 capa
 
 Each scenario's governing facet dimensions are enumerated in [PROPERTY-INVENTORY.md](PROPERTY-INVENTORY.md), with the semantic payload mapping in [PAYLOAD-MAPPING.md](PAYLOAD-MAPPING.md).
 
+## Conditional facet applicability
+
+- API and Integrations remain conditional in MVP-LINK-001 and MVP-LINK-002 until the actual checking architecture establishes whether a synchronous provider/API exchange or external provider relationship exists.
+- Integrations remains conditional in MVP-QUAR-001 until the actual quarantine storage/provider boundary establishes whether an external-system integration is present.
+- Keep the related observable questions, but do not treat conditional dimensions as mandatory implementation properties or as evidence that an API/provider exists. If the runtime shows the facet applies, promote the relevant dimensions to required and capture them.
+
 ## Cross-scenario requirements
 
 - Each branch in MVP-FILE-002 and MVP-LINK-002 is a separate scenario execution; do not collapse distinct outcomes into one average result.
