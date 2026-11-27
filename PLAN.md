@@ -68,11 +68,12 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 **Exit gate: satisfied.** The owner explicitly selected manual file security analysis, quarantine/file disposition, and website/link checking as the first ZeroDeck MVP. IP address tracking/investigation is recorded as future candidate CAP-13 and explicitly excluded. The bounded workflow set, scenario branches, exclusions, cross-facet dependencies and 15-facet required-property questions are recorded in `MVP-SCOPE-DECISION.md`, `CAPABILITY-INVENTORY.md`, and `CAPABILITY-FACET-MAPPING.md`. This closes scope definition only; it does not claim that the MVP has been fully reverse-engineered or is replication-sufficient.
 
 ### Phase 3 — Prior-art discovery and selection
-- [ ] Audit existing reconnaissance records for relevance to the three selected MVP capabilities only.
-- [ ] Search for open-source implementations of manual file security analysis, quarantine/file disposition, and website/link checking, including only dependencies established as relevant.
-- [ ] Verify candidate repositories, immutable source revisions, licences, maintenance, security posture, and feature fit.
-- [ ] Record adopt/adapt/reference/reject decisions with reasons; keep IP tracking and all other deferred candidates out of MVP source selection.
-**Exit gate:** every selected source has a documented capability mapping and provenance; gaps are visible.
+- [x] Audit existing reconnaissance records for relevance to the three selected MVP capabilities only.
+- [x] Search for and screen prior-art implementations and official platform/provider documentation for manual file security analysis, quarantine/file disposition, and website/link checking.
+- [x] Verify selected candidate repositories, immutable source revisions, licences, maintenance signals, security posture, and feature fit to the extent documented in the register.
+- [x] Record select/reference/reject decisions with reasons; keep IP tracking and all other deferred candidates out of MVP source selection.
+- [x] Record owner-approved Pro entitlement and owner-activation gate for link checking; map its cross-facet implications.
+**Exit gate: satisfied 2026-11-27.** Every selected Phase 4 reference has a documented capability mapping and provenance. Commercial, privacy, technical and runtime gaps are explicitly handed to Phase 4; no direct third-party dependency adoption or runtime verification is implied. See `PHASE-3-PRIOR-ART-REGISTER.md` and `PRO-GATED-LINK-CHECK-DECISION.md`.
 
 ### Phase 4 — Source-level rule extraction
 - [ ] Inspect relevant source files and trace each selected capability through its implementation.
