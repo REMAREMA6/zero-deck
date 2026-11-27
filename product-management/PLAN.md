@@ -145,6 +145,8 @@ Research is supporting evidence within CIRCLES, not an eighth CIRCLES step. Rese
 - Distinguish product requirements from implementation choices; do not select a technology stack during CIRCLES unless a verified constraint makes it necessary.
 
 ### H. Platform and integration architecture (supporting work after CIRCLES)
+
+**Current assessment:** `2026-11-27/10-PLATFORM-INTEGRATION-ARCHITECTURE.md` records the initial security-first recommendation. It remains a recommendation for owner review, not an approved implementation architecture.
 - Design the same product across web and Android without assuming identical capabilities.
 - Compare client frameworks, backend/auth/database, private storage, hosting, media/content services, payments/entitlements and operational tooling.
 - For security-sensitive files, assess local-only, remote and hybrid handling; specify trust boundaries, encryption/key management, retention, deletion, backups, access control and breach impact.
