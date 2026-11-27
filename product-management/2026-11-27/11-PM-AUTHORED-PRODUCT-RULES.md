@@ -62,7 +62,7 @@ Every requirement must:
 | 8 | Cross-facet completeness and consistency review | Traceability complete; contradictions, missing states and untestable claims resolved or explicitly open | [ ] |
 | 9 | Owner review and release | Owner decisions recorded; versioned contract package ready for engineering handoff | [ ] |
 
-Phases 0–2 are complete. The authentication/account contract is authored as a draft with 21 PM-proposed requirements and 8 unresolved owner questions. It is not owner-approved. Phase 3 is next. Other feature requirement sets have not yet been authored.
+Phases 0–2 are complete. Phase 2 includes the canonical draft contract with 21 PM-proposed requirements, 46 concrete acceptance criteria, 8 unresolved owner questions, a schema-checked structured projection, retained evidence, and the seven-step CIRCLES analysis/recommendation in 2026-11-27/13-PHASE-2-CIRCLES-AUTHENTICATION.md. No requirement is owner-approved. Phase 3 is next. Other feature requirement sets have not yet been authored.
 
 ## Feature order
 
@@ -107,7 +107,8 @@ These are architecture directions, not a complete authentication contract. Do no
 - `product-rules/contracts/IDENTITY-AUTHENTICATION.md` — Phase 2 canonical draft.
 - `product-rules/contracts/IDENTITY-AUTHENTICATION.declared-contract.json` — structured Software Rules projection.
 - `product-rules/evidence/identity-authentication-contract.evidence.json` — retained declared-contract evidence.
-- `product-rules/PHASE-2-VALIDATION.md` — targeted Phase 2 checks and limitations.
+- `product-rules/PHASE-2-VALIDATION.md` — Phase 2 structural/semantic validation, corrections, negative tests and limitations.
+- `2026-11-27/13-PHASE-2-CIRCLES-AUTHENTICATION.md` — the seven-step CIRCLES analysis, alternatives, trade-offs and PM recommendation.
 - `product-rules/contracts/MANUAL-FILE-ANALYSIS.md`
 - `product-rules/contracts/QUARANTINE-DISPOSITION.md`
 - `product-rules/contracts/WEBSITE-LINK-CHECKING.md`
@@ -118,7 +119,11 @@ These remain ZeroDeck PM artifacts mapped to Software Rules declared contracts. 
 
 ## Phase 2 completion record
 
-Phase 2 is complete. The authentication/account contract contains 21 stable PM-proposed requirements, each with observable acceptance criteria, basis/provenance and Software Rules facet references. A structured declared-contract projection and retained declared-contract evidence record were added. Eight decisions remain open for owner review; no requirement is marked owner-approved. Targeted checks verified JSON parsing, 21-to-21 statement/metadata parity, unique IDs, facet references, profile enumerations, conditional requirement conditions, platform scope, evidence linkage and the canonical Markdown SHA-256 digest. This was not a full Draft 2020-12 validator or upstream CI run. Phase 3 will assess cross-facet completeness; it is not implied by Phase 2 completion.
+Phase 2 is complete. The canonical authentication/account contract contains 21 stable PM-proposed requirements and 46 concrete Given/When/Then acceptance criteria. The structured declared-contract projection contains 21 matching metadata records, valid provenance enums, exact Markdown statement parity, valid facet/platform values and four explicitly conditional requirements. Eight product decisions remain open and every requirement remains PM-proposed.
+
+The seven-step CIRCLES analysis records the chosen user cohort, inferred needs, prioritization cut, three materially different approaches, evaluation trade-offs, and one PM recommendation with a testable pilot metric. The recommendation is not an owner decision.
+
+Validation is recorded in product-rules/PHASE-2-VALIDATION.md. The PM contract schema and extension schema were checked together with the pinned upstream Software Rules declared-contract definition; the retained evidence record was checked against the upstream evidence definition. Five malformed-record negative tests were detected. The exact canonical Markdown SHA-256 digest, artifact revision, evidence URI and evidence revision match. The validator is targeted to the relevant schema definitions; it is not a general-purpose Draft 2020-12 engine, full capture validation, upstream CI or runtime conformance test. Phase 3 will assess cross-facet completeness; it is not implied by Phase 2 completion.
 
 ## Phase 1 completion record
 
