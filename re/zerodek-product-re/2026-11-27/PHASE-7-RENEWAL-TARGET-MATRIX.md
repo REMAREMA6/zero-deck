@@ -1,7 +1,7 @@
 # Phase 7 Renewal — Target and Test Matrix
 
 **Date:** 2026-11-27  
-**Status:** Bounded renewed Phase 7 pass complete; see PHASE-7-RENEWED-CLOSEOUT-AUDIT.md  
+**Status:** Final bounded Phase 7 reference-runtime investigation complete; see PHASE-7-RENEWED-CLOSEOUT-AUDIT.md  
 **Execution model:** ChatGPT sandbox where suitable; GitHub Actions hosted runners when the sandbox lacks the required toolchain  
 **Authorization:** See [Owner Authorization Record](OWNER-AUTHORIZATION-PHASE-7-OPEN-SOURCE-TESTING.md)
 
@@ -21,9 +21,9 @@ The exact scope and limits are recorded in the authorization record. Licences st
 
 | Target / path | Planned execution | Status and limits |
 |---|---|---|
-| SRC-01 Hypatia | Checkout exact SHA on GitHub-hosted Ubuntu; install JDK 17 and Android SDK; run Gradle lint, unit tests and debug APK build; retain reports/APK. | **Executed:** run #46029241394 succeeded. Gradle lint/build and debug APK packaging passed; unit test task was NO-SOURCE. Lint report has one Error-severity finding plus warnings. No malware samples or emulator launch yet. |
-| SRC-02 HypatiaDatabases | Checkout exact SHA; install JDK 17/Maven and required safe tooling; run bounded Maven compile/test and deterministic fixture-based generator path if inputs can be isolated. Inspect generated outputs locally as CI artifacts only. | **Executed:** run #46029241394 succeeded. Maven package and deterministic generator fixture passed (3 valid hashes + 1 domain; 4 Bloom-filter outputs). No test sources. No live feeds, signing or publication. |
-| SRC-06 ClamAV | Checkout exact SHA; install Ubuntu build dependencies; configure/build with CMake; run CTest and harmless example tests; retain logs/reports. | **Executed:** run #46028645716 succeeded. CMake configure/build passed; CTest 9/9 and 201 Python tests passed, 2 skipped. No malware samples or live threat-feed operations. |
+| SRC-01 Hypatia | Checkout exact SHA on GitHub-hosted Ubuntu; install JDK 17 and Android SDK; run Gradle lint, unit tests and debug APK build; retain reports/APK. | **Executed:** run #46034540816 succeeded. Gradle lint/build and debug APK packaging passed; unit test task was NO-SOURCE and a full pinned-tree audit found no test sources. Lint report has one Error-severity finding plus warnings. No emulator launch or malware samples. |
+| SRC-02 HypatiaDatabases | Checkout exact SHA; install JDK 17/Maven and required safe tooling; run bounded Maven compile/test and deterministic fixture-based generator path if inputs can be isolated. Inspect generated outputs locally as CI artifacts only. | **Executed:** run #46034540816 succeeded. Maven package and valid, malformed-hash and exclusion fixture branches passed; the valid fixture produced four Bloom-filter outputs. No upstream test sources. No live feeds, signing or publication. |
+| SRC-06 ClamAV | Checkout exact SHA; install Ubuntu build dependencies; configure/build with CMake; run CTest and harmless example tests; retain logs/reports. | **Executed:** run #46029241394 succeeded. CMake configure/build passed; CTest 15/15 targets passed, 0 failed; retained logs report 416 passed and 2 skipped across standard and Valgrind pytest invocations (not 416 unique cases). No malware samples or live threat-feed operations. |
 | SRC-04 Google Web Risk Lookup | Mock/contract tests can be performed without credentials; live API test requires dedicated owner-provided project/key and explicit approval for URL disclosure, call volume and possible cost. | **Live call not authorized/provisioned.** Keep as documented contract; no live provider calls. |
 | SRC-07 Android storage / SAF / Keystore | Documentation-derived constraints only; later test against first-party ZeroDeck app. | Not an executable prior-art target. |
 | `lordwhitefire/Zerodek` mockup fork | UI source capture is already sufficient for this phase. | **Out of renewed Phase 7 runtime scope.** Do not spend time browser-testing it. |
@@ -37,7 +37,7 @@ See [PHASE-7-RENEWED-ACTIONS-RESULTS.md](PHASE-7-RENEWED-ACTIONS-RESULTS.md) for
 3. HypatiaDatabases bounded compile/test and deterministic generator fixture path, without external feed publication.
 4. Any remaining independent test paths that can be safely completed without additional credentials or owner decisions.
 
-Execution and evidence reconciliation are complete for this bounded pass. A failure or unavailable dependency on one target did not stop work on the others.
+Execution and evidence reconciliation are complete for this bounded pass. Hypatia and HypatiaDatabases have no upstream test source suites at their pinned revisions; the available deterministic generator branches were exercised through investigation-owned fixtures. A failure or unavailable dependency on one target did not stop work on the others.
 
 See [PHASE-7-RENEWED-ACTIONS-RESULTS.md](PHASE-7-RENEWED-ACTIONS-RESULTS.md) and [PHASE-7-RENEWED-CLOSEOUT-AUDIT.md](PHASE-7-RENEWED-CLOSEOUT-AUDIT.md) for exact evidence, artifacts, limits and closeout.\n\n## 4. Evidence handling
 
@@ -62,9 +62,9 @@ The first-party Playwright runner smoke workflow passed three times:
 
 It verified the GitHub-hosted runner, Playwright, screenshot/video/trace capture and artifact upload using a first-party fixture only. It did not test ZeroDeck or the prior-art targets.
 
-## 6. Continuing limitations
+## 6. Final limitations and exit boundary
 
 - GitHub-hosted runners are ephemeral VMs, not a guarantee of a dedicated malware-analysis lab. Do not execute malware or suspicious samples.
 - Live Web Risk calls remain separately gated by credentials and explicit approval.
-- No first-party ZeroDeck runtime exists yet; product replication sufficiency remains unproven.
-- Do not claim completion until the renewed target runs have been inspected and their results mapped with explicit evidence limits.
+- The ZeroDeck-specific Software Rules capture remains incomplete because required product properties and owner decisions remain open in `software-rules/OPEN-PROPERTIES.md`. A first-party ZeroDeck runtime is not required to complete this reverse-engineering specification.
+- Phase 7 is complete for its bounded reference-runtime scope. Do not treat reference-project evidence as ZeroDeck behaviour or claim the ZeroDeck-specific capture is complete while required properties remain unresolved.
