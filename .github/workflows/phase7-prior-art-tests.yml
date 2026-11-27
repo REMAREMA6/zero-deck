@@ -115,6 +115,8 @@ jobs:
           java -Xmx1g -cp "target/classes:$(cat target/classpath.txt)" org.maintainteam.hypatiadatabases.App "fixture/input/" "fixture/domains.txt" | tee fixture/generator.log
           grep -F "Lines read: valid: 3, invalid: 0" fixture/generator.log
           grep -F "Read count: md5: 1, sha1: 1, sha256: 1, domains: 1" fixture/generator.log
+          grep -F "Added count: md5: 1, sha1: 1, sha256: 1, domains: 1" fixture/generator.log
+          grep -F "Read count: md5: 1, sha1: 1, sha256: 1, domains: 1" fixture/generator.log
           test -s fixture/input/hypatia-md5-bloom.bin
           test -s fixture/input/hypatia-sha1-bloom.bin
           test -s fixture/input/hypatia-sha256-bloom.bin
