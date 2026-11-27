@@ -4,8 +4,8 @@
 **Workspace:** `product-management/`  
 **Started:** 2026-11-27  
 **Method:** CIRCLES — seven steps  
-**Overall status:** [~] CIRCLES complete; product blueprint and primary validation work remain open  
-**Current step:** Primary validation and blueprint review (post-CIRCLES supporting work; not an eighth CIRCLES step)
+**Overall status:** [~] CIRCLES complete; platform/integration assessment and blueprint review are in progress; validation remains open  
+**Current step:** Platform and integration architecture assessment (post-CIRCLES supporting work; not an eighth CIRCLES step)
 
 > This tracker is the operational source of truth for product-planning progress. Update it whenever work starts, changes status, becomes blocked, or completes. A new session must be able to resume from this file and the linked records without relying on chat history.
 
@@ -22,7 +22,7 @@
 - **Owner authorization:** [x] Owner explicitly instructed: document the plan, add a tracker, and start the product planning/research.
 - **Plan:** [x] `PLAN.md` created and committed.
 - **Tracker:** [x] Created.
-- **Current step:** Post-CIRCLES blueprint synthesis (supporting work; not an eighth CIRCLES step).
+- **Current step:** Platform/integration assessment and blueprint synthesis (supporting work; not an eighth CIRCLES step).
 - **Current product scope authority:** Owner-approved three-capability MVP (manual file security analysis; quarantine/file disposition; website/link checking subject to Pro entitlement AND owner activation).
 - **Current product evidence status:** ZeroDeck-specific Software Rules remains Draft, incomplete and not replication-sufficient. Product planning must preserve unknowns.
 - **Primary business outcome:** Build a simple, inexpensive first product/proof for everyday non-technical users, then learn from showing it to people and expand to technical users/businesses as the product matures. The owner selected everyday non-technical users as the first target audience on 2026-11-27. Formal large-scale interviews/recruitment are not feasible at this stage; use a tangible demonstrable product to elicit grounded reactions.
@@ -34,12 +34,21 @@
 | Step | Name | Status | Deliverable | Exit condition |
 |---|---|---|---|---|
 | C | Comprehend the situation | [x] Completed | `2026-11-27/01-C-COMPREHEND.md` | Goal, success-measure approach, constraints, context, assumptions and scope reconciled. Exact metric threshold is deferred to I/R after customer discovery. |
-| I | Identify the customer | [x] Completed | `2026-11-27/02-I-IDENTIFY.md` | Three behavior/context-based segments assessed; one provisional cohort recommended and defended; stakeholders/other sides acknowledged. Owner has not approved a final target market. |
+| I | Identify the customer | [x] Completed | `2026-11-27/02-I-IDENTIFY.md` | Three behavior/context-based segments assessed; everyday non-technical users subsequently selected by owner as the first target audience; technical users and businesses are later expansion audiences. |
 | R | Report customer needs | [x] Completed* | `2026-11-27/03-R-NEEDS.md` | Secondary research synthesised needs/jobs; reported vs inferred distinguished; alternatives and gaps linked. *Primary customer validation remains outstanding. |
 | C | Cut through prioritization | [x] Completed* | `2026-11-27/04-C-PRIORITIZATION.md` | Ranked on frequency, acuteness and goal alignment; prerequisites, dependencies, cuts and deferrals recorded. *Provisional pending primary validation. |
 | L | List solutions | [x] Completed | `2026-11-27/05-L-SOLUTION-OPTIONS.md` | Three materially different approaches span quick win, core bet and longer horizon; no option selected. |
 | E | Evaluate solutions | [x] Completed | `2026-11-27/06-E-EVALUATION.md` | Axes fixed before comparison; all options weighed on common criteria; drawbacks and risks recorded. No option selected. |
 | S | Summarize recommendation | [x] Completed* | `2026-11-27/07-S-RECOMMENDATION.md` | One recommendation, repeat-use metric, trade-off, goal link, objections and owner decisions recorded. *Recommendation awaits owner decision and primary validation. |
+
+## Current architecture assessment
+
+- [x] Initial security-first platform/integration recommendation documented: [`2026-11-27/10-PLATFORM-INTEGRATION-ARCHITECTURE.md`](2026-11-27/10-PLATFORM-INTEGRATION-ARCHITECTURE.md).
+- [~] Validate native Android file handling, encrypted quarantine and Keystore integration with a working prototype.
+- [~] Validate browser-side file-analysis feasibility and define exact web capability boundary.
+- [~] Compare Supabase against a minimal standalone API + Neon using current limits, backup/recovery, deployment region and projected cost.
+- [~] Verify payment-provider onboarding/settlement eligibility before implementing Pro billing.
+- [ ] Complete total-cost, threat-model, retention/deletion and incident-response review before architecture approval.
 
 ## Research workstreams
 
@@ -122,4 +131,5 @@ These are supporting research streams within CIRCLES, not additional method step
 | 2026-11-27 | Created `PRODUCT-BLUEPRINT-DRAFT.md` with scope, owner decisions, customer needs, workflows, state/failure branches, trust requirements, possible system boundaries, conceptual data, metrics, risk register and a 15-facet crosswalk. | Blueprint is a structured draft, not an approved PRD or architecture. Primary validation, owner decisions, full property traceability and independent review remain open. |
 | 2026-11-27 | Added OWASP MASTG practitioner-methodology evidence to the Identify and technical research records. Independent review found an important launch-sequencing dependency: MVP-03 cannot be tested while the owner switch remains off pending paid-user revenue. Updated prioritization, recommendation and blueprint to make the link-check test conditional and added PM-OPEN-011. | No provider gate was bypassed. If MVP-03 remains locked at initial launch, a separate enabled MVP workflow must be selected for initial demand validation; disabled usage cannot be interpreted as lack of demand. |
 | 2026-11-27 | Added a dated, self-selected Reddit discussion as a low-confidence lead about modified/sideloaded APK scanning; updated R and the blueprint with explicit limitations. Prepared `2026-11-27/09-PRIMARY-RESEARCH-PROTOCOL.md`. | No participants recruited or interviewed. Formal recruitment is not the immediate validation path. |
-| 2026-11-27 | Owner selected everyday non-technical users as the first target audience, confirmed both web and Android platforms, and set the working relationship: product manager researches, deliberates and recommends first; owner then gives an opinion and retains final authority. Owner prioritises a simple, inexpensive tangible proof/demo over costly formal research. | Updated target audience, platform scope and working agreement. Platform/integration assessment is now the next supporting workstream. |
+| 2026-11-27 | Owner selected everyday non-technical users as the first target audience, confirmed both web and Android platforms, and set the working relationship: product manager researches, deliberates and recommends first; owner then gives an opinion and retains final authority. Owner prioritises a simple, inexpensive tangible proof/demo over costly formal research. | Updated target audience, platform scope and working agreement. |
+| 2026-11-27 | Completed initial security-first platform/integration assessment. Recommended local-only Android quarantine, no suspicious-file cloud upload, distinct web/Android capability boundaries, Expo/React Native + separate React/Next web, and Supabase as the leading backend candidate. | Recommendation documented for owner review; native proof, stack/cost comparison and final owner approval remain outstanding. |
