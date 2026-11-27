@@ -3,7 +3,7 @@
 **Product:** ZeroDeck  
 **Author:** ZeroDeck Product Management Agent  
 **Profile:** [Product Requirements Contract Profile](PROFILE.md)  
-**Status:** PM contract profile complete; identity/authentication contract drafted and targeted-validated; later capability contracts remain to be authored.
+**Status:** PM contract profile and Phase 2 identity/authentication contract are complete as PM-proposed drafts; owner review and later capability contracts remain open.
 
 ## Contracts
 
@@ -19,7 +19,8 @@
 
 - The canonical profile is in [PROFILE.md](PROFILE.md).
 - Validate each complete PM declared contract with [the PM record schema](schemas/zero-deck-pm-declared-contract.schema.json), and validate its nested metadata with [the PM extension schema](schemas/zero-deck-pm-requirements-extension.schema.json).
-- See the [Phase 1 validation report](VALIDATION-REPORT.md) for profile-fixture checks and the [Phase 2 validation report](PHASE-2-VALIDATION.md) for the authentication contract checks and limitations.
+- See the [Phase 1 validation report](VALIDATION-REPORT.md) for profile-fixture checks and the [Phase 2 validation report](PHASE-2-VALIDATION.md) for authentication contract checks, corrections and limitations.
+- The seven-step [Phase 2 CIRCLES analysis](../2026-11-27/13-PHASE-2-CIRCLES-AUTHENTICATION.md) records the customer need, options, trade-offs and PM recommendation.
 - The structured projection and retained evidence record for authentication are in `contracts/IDENTITY-AUTHENTICATION.declared-contract.json` and `evidence/identity-authentication-contract.evidence.json`.
 - Use [the declared-contract template](templates/declared-contract.template.json), [the evidence template](templates/declared-contract-evidence.template.json), and [the format-only example](examples/declared-contract-format-example.json).
 - Requirements are represented as Software Rules declared contracts, not runtime rules or source-derived rules.
