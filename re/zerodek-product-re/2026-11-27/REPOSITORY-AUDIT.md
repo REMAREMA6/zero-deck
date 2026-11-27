@@ -5,7 +5,7 @@
 **Reference repository:** https://github.com/lordwhitefire/Zerodek  
 **Branch:** `main`  
 **Inspected tree revision:** `86908bff1aa1bbf85a231ba0d47b8fe9fff148c6`  
-**Status:** Preliminary inventory; product identity requires owner confirmation before treating these materials as Zerodek evidence.
+**Status:** Preliminary inventory; owner clarification received. Scanner materials are treated as one capability area within ZeroDeck, not as the startup definition or automatic MVP scope.
 
 ## 1. Repository-level facts
 
@@ -53,7 +53,7 @@ The product-decision document describes Expo + React Native, manual file scannin
 
 The repository metadata description is only “guard”. The inspected evidence does not explain the relationship between the Security Scanner materials and the Zerodek product identity.
 
-**Disposition:** Do not silently merge the Security Scanner requirements into the Zerodek investigation. Confirm whether the Security Scanner is in fact the product Felix calls Zerodek, or whether the wrong repository/branch/material has been designated.
+**Owner clarification and disposition (2026-11-27):** ZeroDeck is the startup: a tool/platform for ethical hacking and penetration testing. The founder is a penetration tester. Security scanning is one service/capability area ZeroDeck may offer, not the definition of the startup. The current materials are therefore relevant as candidate capability evidence. They do not, by themselves, establish the MVP boundary or prove that every depicted scanner capability is selected for launch. Continue inspecting them while classifying each capability as MVP, later candidate, or unresolved.
 
 ## 4. Technical baseline observed from source files
 
@@ -103,3 +103,8 @@ These observations indicate multiple implementation and handoff layers in one re
 - `upload/18.md`
 - Gitlink commit `cb481d5172a40ac7350a3e800fa4356dc4669a35`
 
+
+
+## 8. Product framing and scope clarification
+
+See the owner clarification in `ENGAGEMENT-UNDERSTANDING.md`, section 11. The product is the broader ZeroDeck startup, not a standalone Android Security Scanner. This audit remains a repository-content audit: it does not establish that the current repository is the complete product vision, that all its features belong in the MVP, or that any implementation is runtime-verified.
