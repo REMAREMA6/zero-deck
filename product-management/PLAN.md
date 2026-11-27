@@ -5,7 +5,7 @@
 **Workspace:** `product-management/`  
 **Plan date:** 2026-11-27  
 **Method:** Product Management Agent CIRCLES (exactly seven steps)  
-**Status:** All seven CIRCLES steps completed as a provisional secondary-research recommendation on 2026-11-27. A first `PRODUCT-BLUEPRINT-DRAFT.md` and supporting research have been created. Owner has since selected everyday non-technical users as the first target audience and confirmed web + Android platforms. Platform/integration architecture assessment, independent review, validation and remaining owner decisions remain open. See TRACKER.md for current status.
+**Status:** All seven CIRCLES steps completed as a provisional secondary-research recommendation on 2026-11-27. A first `PRODUCT-BLUEPRINT-DRAFT.md` and supporting research have been created. Owner has since selected everyday non-technical users as the first target audience and confirmed web + Android platforms. Platform/integration follow-up, independent review, validation and remaining owner decisions remain open. A PM-authored Product Requirements Contract workstream has also started; it uses Software Rules declared contracts with explicit PM authorship. See TRACKER.md for current status.
 
 ## 1. Assignment
 
@@ -153,7 +153,7 @@ Research is supporting evidence within CIRCLES, not an eighth CIRCLES step. Rese
 - Reject integrations that add cost or expose sensitive data without a demonstrated MVP need. Distinguish public content/media from private user files and quarantine artifacts.
 - Produce a recommended minimum architecture with explicit trade-offs, alternatives, pricing evidence, platform limitations and unresolved decisions. This is a product/technical recommendation for owner review, not an implementation order.
 
-## 6. Product blueprint expected at completion
+### I. Product Manager-authored product rules (supporting work after CIRCLES)\n\nA dedicated workstream is recorded in [2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md](2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md). The Product Management Agent will author technology-independent product requirements for ZeroDeck. These are normative declared product contracts, not runtime observations or source-derived rules. The current Software Rules 0.3.0 Draft provides a `declaredContract` record and `declared-contract` evidence class; use that existing model unless a separate, justified extension is approved. The PM author/issuer must be explicit.\n\nThe workstream covers authentication as supporting infrastructure, then manual file analysis, quarantine/disposition, website/link checking and cross-cutting system requirements. It must map requirements to relevant Software Rules facets, preserve unknowns, and define observable acceptance criteria. It does not modify the Software Rules repository or approve implementation architecture.\n\n## 6. Product blueprint expected at completion
 
 The final recommendation should be detailed enough to hand to later design and engineering work. Subject to evidence and owner approval, it should cover:
 
