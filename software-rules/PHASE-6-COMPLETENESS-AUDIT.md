@@ -178,7 +178,7 @@ No unknown has been converted to a default or marked not-applicable without evid
 
 ## 9. Phase 6 exit disposition
 
-<badge>Exit gate satisfied — bounded assessment only</badge>
+**Exit gate satisfied — bounded assessment only.**
 
 Phase 6 review is complete as a bounded completeness/conformance assessment. The exit gate is satisfied under the plan's explicit incomplete-deliverable branch:
 - All 15 facets and their semantic dimension sets were reviewed against the declared three-capability MVP.
