@@ -4,8 +4,9 @@
 **Repository:** REMAREMA6/zero-deck  
 **Last updated:** 2026-11-27
 **Phase 1 inventory commit:** 5bd7ca93c4c300a2f72b26d324758c542c668957
-**Phase 2 candidate inventory commit:** 1be6140cf7a892dc5577c603086edc6a625eabac
-**Phase 2 facet mapping commit:** 93448290f9c0bf1d7ae47867a26035bc2671c8dc
+**Phase 2 candidate inventory (scope-finalized) commit:** 2bdfe18b5f6568b366fb702600cce4eddf1b3d6a
+**Phase 2 facet mapping (scope-finalized) commit:** d0a8e834b36da917ab26b8781d234c31e7a00c29
+**Phase 2 owner decision commit:** 281eae0327d772f8b2c787edb9eda38ab0131c89
 **Repository audit closeout commit:** a9ef68819d2793f524bea752f2ccd0ac541981f9  
 **Current phase:** Phase 3 — Prior-art discovery and selection (ready to start)  
 **Overall status:** Phases 0–2 are complete. The owner-approved MVP is manual file security analysis, quarantine/file disposition, and website/link checking. IP address tracking/investigation is recorded as a future candidate and excluded from MVP.
