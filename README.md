@@ -25,6 +25,7 @@ Agent definitions (identities, skills, frameworks, and mental models) are intent
   - [Phase 3 prior-art audit and source-selection register](re/zerodek-product-re/2026-11-27/PHASE-3-PRIOR-ART-REGISTER.md).
   - [Phase 4 source-level rule extraction](re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md).
   - [Reference repository audit](re/zerodek-product-re/2026-11-27/REPOSITORY-AUDIT.md).
+- [ZeroDeck-specific Software Rules draft](software-rules/README.md) — Phase 5 synthesis output; currently incomplete and not replication-sufficient.
 - `re/oss-recon/` — earlier reconnaissance records. These were created for a separate Android Security Scanner engagement and must be audited before any content is reused for ZeroDeck.
 - `product-management/` — product-management agent workspace and its own records.
 
@@ -32,7 +33,7 @@ Agent definitions (identities, skills, frameworks, and mental models) are intent
 
 - Product/reference repository: https://github.com/lordwhitefire/Zerodek
 - Governing Software Rules specification: https://github.com/REMAREMA6/software-rules
-- Final ZeroDeck-specific rules will be maintained separately in this repository's `software-rules/` folder when produced.
+- The ZeroDeck-specific Software Rules draft is maintained separately in this repository's `software-rules/` folder; see its README for maturity and completeness status.
 
 ## Resuming work
 
