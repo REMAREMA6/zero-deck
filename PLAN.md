@@ -59,6 +59,8 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 - [x] Record source paths, route/preview/component mappings, asset dispositions, and stable screen evidence IDs.
 **Exit gate: satisfied for the 17-screen baseline.** All 17 screens are inventoried and mapped; Screen 18 and two additional routes are separately recorded. Scanner-draft MVP/later/open labels were distinguished from ZeroDeck's startup MVP selection; the owner later approved a bounded three-capability MVP in Phase 2. See re/zerodek-product-re/2026-11-27/SCREEN-INVENTORY.md. This completes inventory only, not capability-level reverse engineering.
 
+**Supplemental UI source review (2026-11-27):** extracted 12 bounded source-derived UI rules from the pinned Expo/React Native screen source in `re/zerodek-product-re/2026-11-27/UI-SOURCE-DERIVED-RULES.md`. These are source findings, not runtime observations or a complete UI specification.
+
 ### Phase 2 — Capability and facet mapping
 - [x] Derive the evidence-backed candidate capabilities and workflows from the complete screen inventory; preserve the broader startup direction separately. See CAPABILITY-INVENTORY.md and MVP-SCOPE-DECISION.md. The owner-approved MVP is frozen.
 - [x] Map candidate capabilities and required properties to all 15 Software Rules facets. See CAPABILITY-FACET-MAPPING.md.
@@ -66,8 +68,6 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 - [x] Freeze the owner-selected MVP, included workflows, deferred candidates and exclusions in `MVP-SCOPE-DECISION.md`.
 - [x] Finalize the required-property investigation map against the selected MVP across all 15 Software Rules facets.
 **Exit gate: satisfied.** The owner explicitly selected manual file security analysis, quarantine/file disposition, and website/link checking as the first ZeroDeck MVP. IP address tracking/investigation is recorded as future candidate CAP-13 and explicitly excluded. The bounded workflow set, scenario branches, exclusions, cross-facet dependencies and 15-facet required-property questions are recorded in `MVP-SCOPE-DECISION.md`, `CAPABILITY-INVENTORY.md`, and `CAPABILITY-FACET-MAPPING.md`. This closes scope definition only; it does not claim that the MVP has been fully reverse-engineered or is replication-sufficient.
-
-**Supplemental UI source review (2026-11-27):** extracted 11 bounded source-derived UI rules from the pinned Expo/React Native screen source in `re/zerodek-product-re/2026-11-27/UI-SOURCE-DERIVED-RULES.md`. These are source findings, not runtime observations or a complete UI specification.
 
 ### Phase 3 — Prior-art discovery and selection
 - [x] Audit existing reconnaissance records for relevance to the three selected MVP capabilities only.
