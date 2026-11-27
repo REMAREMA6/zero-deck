@@ -1,0 +1,110 @@
+name: Phase 7 Runner Capability Smoke Test
+
+on:
+  push:
+    paths:
+      - ".github/workflows/phase7-runner-smoke.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phase7-runner-smoke-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  playwright-smoke:
+    name: Headless browser, screenshot, video and trace
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Record runner environment
+        run: |
+          uname -a
+          node --version
+          npm --version
+
+      - name: Install Playwright
+        run: |
+          npm init -y
+          npm install --no-save playwright
+          npx playwright install --with-deps chromium
+
+      - name: Create first-party HTML fixture
+        run: |
+          mkdir -p fixture artifacts/screenshots artifacts/videos artifacts/traces
+          cat > fixture/index.html <<'HTML'
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1">
+              <title>ZeroDeck CI Browser Smoke Test</title>
+            </head>
+            <body>
+              <main>
+                <h1>Headless browser is working</h1>
+                <p id="status">Fixture rendered successfully.</p>
+                <button id="check" type="button">Verify interaction</button>
+                <output id="result" aria-live="polite"></output>
+              </main>
+              <script>
+                document.querySelector("#check").addEventListener("click", () => {
+                  document.querySelector("#result").textContent = "Interaction passed";
+                });
+              </script>
+            </body>
+          </html>
+          HTML
+
+      - name: Run Playwright assertions and capture artifacts
+        run: |
+          cat > playwright-smoke.cjs <<'NODE'
+          const assert = require("node:assert/strict");
+          const path = require("node:path");
+          const { pathToFileURL } = require("node:url");
+          const { chromium } = require("playwright");
+
+          (async () => {
+            const browser = await chromium.launch({ headless: true });
+            const context = await browser.newContext({
+              viewport: { width: 1280, height: 720 },
+              recordVideo: { dir: "artifacts/videos", size: { width: 1280, height: 720 } }
+            });
+            await context.tracing.start({ screenshots: true, snapshots: true, sources: true });
+            const page = await context.newPage();
+
+            try {
+              await page.goto(pathToFileURL(path.resolve("fixture/index.html")).href);
+              assert.equal(await page.title(), "ZeroDeck CI Browser Smoke Test");
+              await page.getByRole("heading", { name: "Headless browser is working" }).waitFor();
+              await page.getByRole("button", { name: "Verify interaction" }).click();
+              await page.getByText("Interaction passed").waitFor();
+              await page.screenshot({ path: "artifacts/screenshots/runner-smoke.png", fullPage: true });
+              console.log("PASS: title, heading, click interaction and screenshot");
+            } finally {
+              await context.tracing.stop({ path: "artifacts/traces/runner-smoke-trace.zip" });
+              await context.close();
+              await browser.close();
+            }
+          })().catch(error => {
+            console.error(error);
+            process.exitCode = 1;
+          });
+          NODE
+          node playwright-smoke.cjs
+
+      - name: List captured evidence
+        if: always()
+        run: find artifacts -type f -maxdepth 4 -print || true
+
+      - name: Upload screenshot, video and trace
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase7-playwright-runner-evidence
+          path: artifacts/
+          if-no-files-found: warn
+          retention-days: 14
