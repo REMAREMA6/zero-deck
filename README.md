@@ -25,7 +25,7 @@ Agent definitions (identities, skills, frameworks, and mental models) are intent
   - [Phase 3 prior-art audit and source-selection register](re/zerodek-product-re/2026-11-27/PHASE-3-PRIOR-ART-REGISTER.md).
   - [Phase 4 source-level rule extraction](re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md).
   - [Reference repository audit](re/zerodek-product-re/2026-11-27/REPOSITORY-AUDIT.md).
-- [ZeroDeck-specific Software Rules](software-rules/README.md) — Phase 5 synthesis complete; Phase 6 completeness/conformance review is in progress.
+- [ZeroDeck-specific Software Rules](software-rules/README.md) — Phase 5 synthesis and Phase 6 bounded completeness/conformance review complete; the product capture remains incomplete and not replication-sufficient.
   - [Phase 6 completeness audit](software-rules/PHASE-6-COMPLETENESS-AUDIT.md).
   - [Phase 6 MVP interface source review](re/zerodek-product-re/2026-11-27/PHASE-6-INTERFACE-SOURCE-REVIEW.md).
 - `re/oss-recon/` — earlier reconnaissance records. These were created for a separate Android Security Scanner engagement and must be audited before any content is reused for ZeroDeck.
