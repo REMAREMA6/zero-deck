@@ -19,11 +19,12 @@
 
 - The canonical profile is in [PROFILE.md](PROFILE.md).
 - Validate complete declared contracts with [the PM record schema](schemas/zero-deck-pm-declared-contract.schema.json) and the nested metadata with [the PM extension schema](schemas/zero-deck-pm-requirements-extension.schema.json).
-- Validate each full PM declared contract with [the complete PM record schema](schemas/zero-deck-pm-declared-contract.schema.json) and its extension with [the extension schema](schemas/zero-deck-pm-requirements-extension.schema.json).\n- Use [the declared-contract template](templates/declared-contract.template.json), [the evidence template](templates/declared-contract-evidence.template.json), and [the format-only example](examples/declared-contract-format-example.json).
+- Validate each full PM declared contract with [the complete PM record schema](schemas/zero-deck-pm-declared-contract.schema.json) and its extension with [the extension schema](schemas/zero-deck-pm-requirements-extension.schema.json).
+- Use [the declared-contract template](templates/declared-contract.template.json), [the evidence template](templates/declared-contract-evidence.template.json), and [the format-only example](examples/declared-contract-format-example.json).
 - Requirements are represented as Software Rules declared contracts, not runtime rules or source-derived rules.
 - Every contract explicitly identifies **ZeroDeck Product Management Agent** as issuer/author.
 - Owner approval is recorded separately and is never inferred.
 
-## Current phase
+## Format example\n\nThe example under `examples/` is only a schema/format fixture. It is not a ZeroDeck product decision, an approved requirement, or evidence of implemented behaviour.\n\n## Current phase
 
 Phase 1 — PM contract profile design: **complete**. Next: Phase 2 — research and author authentication/account requirements.
