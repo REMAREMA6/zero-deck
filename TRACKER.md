@@ -2,7 +2,9 @@
 
 **Project:** Zerodek reverse engineering  
 **Repository:** REMAREMA6/zero-deck  
-**Last updated:** 2026-11-27  
+**Last updated:** 2026-11-27
+**Phase 1 inventory commit:** 5bd7ca93c4c300a2f72b26d324758c542c668957
+**Repository audit closeout commit:** a9ef68819d2793f524bea752f2ccd0ac541981f9  
 **Current phase:** Phase 2 — Capability and facet mapping (next)  
 **Overall status:** Phase 0 governance and Phase 1 screen inventory are complete. ZeroDeck is the broader ethical-hacking and penetration-testing startup; Security Scanning is one candidate capability, not the startup definition or automatic launch scope.
 
@@ -19,7 +21,7 @@
 ## Current position
 
 - **Current phase:** Phase 2 — Capability and facet mapping
-- **Current task:** Derive ZeroDeck's candidate capability inventory from the screen inventory and owner context; distinguish the startup direction, candidate service areas, declared MVP selection, later candidates, and unresolved scope before mapping properties to the 15 Software Rules facets.
+- **Current task:** Begin Phase 2 by deriving ZeroDeck's candidate capability inventory from the screen inventory and owner context; distinguish the startup direction, candidate service areas, declared MVP selection, later candidates, and unresolved scope before mapping properties to the 15 Software Rules facets.
 - **Completed:** Phase 1 screen inventory committed at `re/zerodek-product-re/2026-11-27/SCREEN-INVENTORY.md`; all 17 baseline screens mapped to route/preview/source handoffs and assigned stable IDs. Screen 18 and two additional routes are separately recorded. Uploaded images were inspected and classified. Product scope labels are bounded to the scanner working draft; ZeroDeck's actual MVP selection remains open.
 - **Blockers:** ZeroDeck's actual MVP capability boundary is not yet explicitly selected. Do not infer it from the scanner screens or assume every ethical-hacking/penetration-testing capability is in scope.
 - **Next action:** Begin Phase 2 by building the startup-wide candidate capability inventory and recording which capabilities are confirmed for MVP, later candidates, or unresolved.
@@ -54,7 +56,7 @@
 
 ## Phase 1 — Mockup inventory
 
-[x] Complete — 17-screen baseline inventory, route/source mapping, asset review, scope labels, and limitations recorded.
+[x] Complete — 17-screen baseline inventory, route/source mapping, asset review, scope labels, source/design divergences, missing handoffs, and limitations recorded. Inventory commit: 5bd7ca93c4c300a2f72b26d324758c542c668957.
 
 Audit: `re/zerodek-product-re/2026-11-27/REPOSITORY-AUDIT.md`. Inventory: `re/zerodek-product-re/2026-11-27/SCREEN-INVENTORY.md`.
 
