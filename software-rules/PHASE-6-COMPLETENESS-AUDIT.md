@@ -59,7 +59,7 @@ The other optional capability-level facets (for example API, Persistence, Integr
 
 ## 4. Scenario-definition completeness
 
-The seven scenario records currently identify scenario ID, title, purpose, subject, trigger, facet IDs and observable questions. The governing conceptual scenario model additionally expects actor/initiator, initial state, preconditions, ordered actions, inputs, target/build/environment, expected-outcome provenance and stopping/settling criteria.
+The seven scenario records currently identify scenario ID, title, purpose, subject, trigger, facet IDs and observable questions. The governing conceptual scenario model additionally expects actor/initiator, initial state, preconditions, ordered actions, inputs, target/build/environment, expected-outcome provenance and stopping/settling criteria. These missing fields are now recorded in `SCENARIOS.md` and `OPEN-PROPERTIES.md` as explicit preparation gaps.
 
 Those fields are not fully represented in the current scenario records. The scenario catalogue now records this as an explicit execution-preparation gap. Do not infer missing actions, test values or expected results. Capture them from an authorized target and approved product contracts, or explicitly record them as unknown/unavailable.
 
@@ -78,7 +78,7 @@ The Phase 1 inventory records the 17-screen design/source baseline. The approved
 - Link checking: SCR-02 dashboard entry, SCR-06 URL input, SCR-07 link result.
 - SCR-01 onboarding is a product-entry design reference; its inclusion in the exact MVP reproduction boundary is not independently established.
 
-The interface facet's 13 semantic dimensions are present in the property inventory, but actual ZeroDeck runtime values are not. A Phase 6 source review now maps the MVP workflows to SCR-02–SCR-09 and pins the selected source artifacts, including their Git blob hashes. It confirms local demo/sample behaviour and extracts a few source-declared layout values, but it is not a complete screen-by-screen source-rule extraction or runtime observation. See `re/zerodek-product-re/2026-11-27/PHASE-6-INTERFACE-SOURCE-REVIEW.md`. The screen inventory and source files do not provide a complete runtime hierarchy, resolved computed styles, exact rendered geometry, complete responsive states, accessibility tree, asset loading state or all interactive UI states.
+The interface facet's 13 semantic dimensions are present in the property inventory, but actual ZeroDeck runtime values are not. A Phase 6 source review now maps the MVP workflows to SCR-02–SCR-09 and pins the selected source artifacts, including their Git blob hashes. Four source-path pairs were confirmed byte-identical by matching Git blob SHA; this is recorded only for those pairs. It confirms local demo/sample behaviour and extracts a few source-declared layout values, but it is not a complete screen-by-screen source-rule extraction or runtime observation. See `re/zerodek-product-re/2026-11-27/PHASE-6-INTERFACE-SOURCE-REVIEW.md`. The screen inventory and source files do not provide a complete runtime hierarchy, resolved computed styles, exact rendered geometry, complete responsive states, accessibility tree, asset loading state or all interactive UI states.
 
 Therefore, exact visual/interface replication is **not established**. A screen list or screenshot alone cannot close the interface facet. The target design source must be inspected at the pinned revision and its concrete visual properties recorded as design/source evidence, while runtime-only properties remain explicitly unobserved.
 
@@ -137,7 +137,7 @@ No unknown has been converted to a default or marked not-applicable without evid
 
 ## 8. Conformance determination
 
-**Structural validation:** Phase 5 CI run #45997192513 passed the governing Draft 2020-12 schema validation, governing completeness/integrity tests and ZeroDeck cross-reference validation at that time. The Phase 6 inventory correction must be revalidated by a fresh CI run before it is treated as structurally conformant.
+**Structural validation:** Phase 5 CI run #45997192513 passed the governing Draft 2020-12 schema validation, governing completeness/integrity tests and ZeroDeck cross-reference validation. After the Phase 6 Configuration coverage correction and 775-entry inventory update, fresh CI run [#45999813143](https://github.com/REMAREMA6/zero-deck/actions/runs/45999813143) also passed all of those steps. The run head commit is `ca12a31b828e7c7beac0a2d2fbd857ab3d716ba5`; it contains the corrected capture and inventory. This establishes structural and cross-record validity only.
 
 **Product conformance:** Not testable from available evidence. No deployed ZeroDeck target/build, executable scenario, runtime observation, independent implementation, equivalent probe set, comparison report or mutation test exists. A green schema run cannot substitute for these.
 
