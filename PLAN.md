@@ -122,7 +122,7 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 - [x] Record additional observations in `PHASE-7-RUNTIME-OBSERVATION-MAP.md` and map evidence to all 15 facets and seven MVP scenarios with explicit boundaries.
 - [x] Record unavailable paths and reasons: Web Risk live calls require configured credentials/project plus separate approval for URL disclosure/costs; Android storage/SAF/Keystore are documentation; mockup UI runtime is out of scope; no malware/suspicious samples or external feed/publication operations were performed.
 - [x] Reconcile `EVIDENCE.md`, `RULE-TRACEABILITY.md` and `capture.json`. Register reference-runtime reports as supporting context only; keep ZeroDeck executions, observations and runtime rules at zero.
-- [x] Validate the machine capture and cross-references after adding EVD-RT-REF-001/002. [Validation run #46034634801](https://github.com/REMAREMA6/zero-deck/actions/runs/46034634801) passed; the latest evidence revision is being revalidated.
+- [x] Validate the machine capture and cross-references after adding EVD-RT-REF-001/002. [Final validation run #46035518643](https://github.com/REMAREMA6/zero-deck/actions/runs/46035518643) passed after EVD-RT-REF-001/002 were added to the machine capture.
 - [x] Complete the renewed closeout audit and reconcile the tracker.
 
 **Phase 7 exit gate: satisfied for the bounded reference-runtime investigation.** All three authorized executable reference targets have exact-pinned build/test evidence; the 15 facets and seven ZeroDeck MVP scenarios have explicit evidence-or-skip dispositions; provenance classes remain separate; evidence registers and machine capture are reconciled; and unavailable paths have reasons. See `PHASE-7-RENEWED-CLOSEOUT-AUDIT.md`.
