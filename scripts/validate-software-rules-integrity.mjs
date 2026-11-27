@@ -37,14 +37,14 @@ for (const item of capture.replicationScope.propertyInventory) {
 for (const contract of capture.declaredContracts) {
   for (const ref of contract.evidenceRefs ?? []) assert(evidenceIds.has(ref), `Contract ${contract.contractId} has unresolved evidence ref ${ref}.`);
 }
-for (const rule of [...ownerRules.matchAll(/ZD-OWNER-\\d{3}/g), ...productRules.matchAll(/PM-(?:FILE|QUAR|LINK)-\\d{3}/g)]) {
+for (const rule of [...ownerRules.matchAll(/ZD-OWNER-\d{3}/g), ...productRules.matchAll(/PM-(?:FILE|QUAR|LINK)-\d{3}/g)]) {
   assert(traceability.includes(rule[0]), `Rule ${rule[0]} is missing from the traceability register.`);
 }
 for (const id of evidenceIds) assert(evidenceRegister.includes(id), `Capture evidence ${id} is missing from EVIDENCE.md.`);
-for (const id of evidenceRegister.matchAll(/\\|\\s*(EVD-[A-Z0-9-]+)\\s*\\|/g)) assert(evidenceIds.has(id[1]), `Evidence register ID ${id[1]} is missing from capture.json.`);
+for (const id of evidenceRegister.matchAll(/\|\s*(EVD-[A-Z0-9-]+)\\s*\\|/g)) assert(evidenceIds.has(id[1]), `Evidence register ID ${id[1]} is missing from capture.json.`);
 
 if (fail.length) {
-  console.error(fail.map((message) => `FAIL: ${message}`).join("\\n"));
+  console.error(fail.map((message) => `FAIL: ${message}`).join("\n"));
   process.exit(1);
 }
 console.log(`PASS: ${capture.scenarios.length} scenarios, ${facets.size} facets, ${propertyIds.size} property entries, ${evidenceIds.size} evidence records, declared-contract and rule/evidence references consistent.`);
