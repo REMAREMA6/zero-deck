@@ -103,10 +103,10 @@ jobs:
           printf '%s\\n' "example.invalid" > fixture/domains.txt
           mvn --batch-mode --no-transfer-progress dependency:build-classpath -Dmdep.outputFile=target/classpath.txt
           java -Xmx1g -cp "target/classes:$(cat target/classpath.txt)" org.maintainteam.hypatiadatabases.App "fixture/input/" "fixture/domains.txt"
-          test -s hypatia-md5-bloom.bin
-          test -s hypatia-sha1-bloom.bin
-          test -s hypatia-sha256-bloom.bin
-          test -s hypatia-domains-bloom.bin
+          test -s fixture/input/hypatia-md5-bloom.bin
+          test -s fixture/input/hypatia-sha1-bloom.bin
+          test -s fixture/input/hypatia-sha256-bloom.bin
+          test -s fixture/input/hypatia-domains-bloom.bin
       - name: Upload Maven reports and package
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
