@@ -26,8 +26,9 @@ The owner deliberately made the RE-agent ownership rule absolute as a consult-fi
 | Logs/artifacts inspected, not just green statuses | Satisfied | `PHASE-7-RENEWED-ACTIONS-RESULTS.md` |
 | All 15 facets mapped with evidence limits | Satisfied | Updated `PHASE-7-RUNTIME-OBSERVATION-MAP.md` |
 | All seven ZeroDeck MVP scenarios retain explicit evidence/skip dispositions | Satisfied | Scenario table in runtime observation map |
-| Reference evidence not promoted to ZeroDeck runtime rules | Satisfied | Evidence register, traceability and unchanged capture |
+| Reference evidence not promoted to ZeroDeck runtime rules | Satisfied | EVD-RT-REF-001/002 are supporting-context evidence only; executions/observations/runtimeRules remain empty |
 | Unavailable paths and reasons recorded | Satisfied | Sections 3–5 below and results report |
+| Machine evidence IDs and evidence-register cross-references validated | Satisfied | [CI run #46035518643](https://github.com/REMAREMA6/zero-deck/actions/runs/46035518643) passed after EVD-RT-REF-001/002 were added to the machine capture |
 
 ## 3. Target execution conclusions
 
