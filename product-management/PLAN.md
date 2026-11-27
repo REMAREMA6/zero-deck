@@ -157,7 +157,7 @@ Research is supporting evidence within CIRCLES, not an eighth CIRCLES step. Rese
 
 A dedicated workstream is recorded in [2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md](2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md). The Product Management Agent authors technology-independent product requirements for ZeroDeck. These are normative declared product contracts, not runtime observations or source-derived rules.
 
-The PM contract profile is complete and maintained in [product-rules/PROFILE.md](product-rules/PROFILE.md). It maps requirements to the existing Software Rules `declaredContracts[]` record, identifies the issuer explicitly, and supplies a PM-specific extension schema plus a complete declared-contract profile schema. It does not introduce a new evidence class or modify the Software Rules repository.
+The PM contract profile is complete and maintained in [product-rules/PROFILE.md](product-rules/PROFILE.md); its fixture checks are recorded in [product-rules/VALIDATION-REPORT.md](product-rules/VALIDATION-REPORT.md). It maps requirements to the existing Software Rules `declaredContracts[]` record, identifies the issuer explicitly, and supplies a PM-specific extension schema plus a complete declared-contract profile schema. It does not introduce a new evidence class or modify the Software Rules repository.
 
 The workstream covers authentication as supporting infrastructure, then manual file analysis, quarantine/disposition, website/link checking and cross-cutting system requirements. It maps requirements to relevant Software Rules facets, preserves unknowns, and defines observable acceptance criteria. Phase 1 is complete; Phase 2 (authentication requirements) is next. This work does not approve implementation architecture.
 
