@@ -61,14 +61,14 @@ The owner deliberately made the RE-agent ownership rule absolute as a consult-fi
 - **Google Web Risk live API:** no configured credentials/project or separate authorization for URL disclosure/provider costs. Contract documentation remains the evidence.
 - **Android storage/SAF/Keystore:** documentation, not executable reference software.
 - **Mockup fork UI runtime:** excluded by owner clarification; source-level UI capture is already sufficient.
-- **Actual ZeroDeck runtime:** no first-party deployed native app exists to test.
+- **Actual ZeroDeck runtime:** not a Phase 7 reference target and not required to complete the reverse-engineering specification. No ZeroDeck runtime behaviour is claimed.
 - **Local sandbox execution:** not used for third-party runtime tests because the available container lacked the required toolchains and a verified isolated lab. GitHub-hosted Actions was used for the authorized ordinary builds/tests.
 
 ## 5. Facet and scenario boundary
 
 All 15 Software Rules facets have explicit evidence/unknown/conditional dispositions in the runtime map. All seven MVP scenarios have explicit evidence-or-skip dispositions. The new reference-project test evidence may inform future questions about scanner callbacks, signature verification, generator data handling, error paths and quarantine race conditions. It does not establish ZeroDeck policy, implementation or behaviour.
 
-No ZeroDeck runtime observations were added. `capture.json` remains unchanged; its ZeroDeck runtime-observation count remains zero. No prior-art rule was promoted to an owner-declared ZeroDeck rule. The seven ZeroDeck scenarios remain unexecuted against ZeroDeck itself.
+No ZeroDeck runtime observations were added. `capture.json` now includes EVD-RT-REF-001/002 as supporting-context evidence so it agrees with `EVIDENCE.md`; its executions, observations and runtimeRules arrays remain empty. The ZeroDeck runtime-observation count remains zero. No prior-art rule was promoted to an owner-declared ZeroDeck rule. The seven ZeroDeck scenarios remain unexecuted against ZeroDeck itself, which is not required for this RE specification.
 
 ## 6. Final assessment
 
