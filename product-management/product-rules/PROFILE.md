@@ -118,7 +118,7 @@ The extension contains:
 
 ### 4.1 Requirement metadata
 
-Every extension requirement entry must match exactly one `statements[].statementId`. Every statement must have exactly one extension entry. The two sets must be identical.
+Every extension requirement entry must match exactly one `statements[].statementId`. Every statement must have exactly one extension entry. The two sets must be identical. Each requirement must also contain at least one `basis` item so a recommendation cannot appear evidence-backed when it is only PM inference.
 
 | Field | Meaning |
 |---|---|
@@ -134,6 +134,7 @@ Every extension requirement entry must match exactly one `statements[].statement
 | `preconditions`, `inputs`, `outcomes` | Relevant scenario context and externally meaningful results. |
 | `forbiddenBehaviors` | Specific prohibited outcomes/actions where useful. |
 | `rationale` | Why the requirement exists; does not alter its normative force. |
+| `basis` | One or more explicitly classified bases: owner decision, external research, platform contract, source evidence, user research, PM inference, or other. PM inference must be labelled as such. |
 | `acceptanceCriteria` | One or more Given/When/Then criteria with a verification method. |
 | `dependencies` | Other requirement IDs that must be satisfied first or together. |
 | `assumptions`, `constraints` | Explicit assumptions and product/platform boundaries. |
@@ -242,6 +243,7 @@ The profile also does not change the Software Rules specification or claim that 
 - [x] Defined normative language, priority, owner-approval status and versioning semantics.
 - [x] Defined official facet mapping and technology-independence rules.
 - [x] Defined structural, extension, integrity, semantic and owner-authority validation layers.
+- [x] Added explicit basis classification so owner decisions, external research, platform contracts, source evidence, user research and PM inference cannot be silently conflated.
 - [x] Created a declared-contract template and retained-evidence template.
 - [x] Kept all changes inside ZeroDeck `product-management/`; no Software Rules core files changed.
 
