@@ -64,7 +64,7 @@ This is behaviour/context-based, not a demographic definition. It is not an owne
 
 ### 3.2 Competing cohort
 
-Independent security practitioners and penetration testers who need to triage suspicious artifacts, preserve sample confidentiality and understand evidence/analysis limits. Their needs may exceed the current MVP because the scope does not promise dynamic sandboxing, reverse engineering, IOC extraction, analyst reports or lab workflows.
+Independent security practitioners and penetration testers who need to triage suspicious artifacts, preserve sample confidentiality and understand evidence/analysis limits. Their needs may exceed the current MVP because the scope does not promise dynamic sandboxing, reverse engineering, IOC extraction, analyst reports or lab workflows. OWASP's Mobile Application Security Testing Guide describes mobile app testing as static and dynamic analysis within a broader client-server/API assessment, with human validation of automated tool output; this is adjacent methodology evidence, not proof about every penetration-testing role or ZeroDeck demand. Sources: https://mas.owasp.org/MASTG/0x04b-Mobile-App-Security-Testing/ and https://mas.owasp.org/MASTG/tools/.
 
 ### 3.3 Customer jobs and candidate needs
 
