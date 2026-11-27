@@ -100,6 +100,20 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 - [x] Produce the bounded completeness/conformance assessment and state exactly what is and is not replication-sufficient in `software-rules/PHASE-6-COMPLETENESS-AUDIT.md`.
 **Exit gate: SATISFIED 2026-11-27 for the bounded completeness/conformance review.** The deliverable is explicitly **incomplete and not replication-sufficient**, with all known unresolved properties and evidence gaps retained. This is not approval of product completeness or faithful replication.
 
+### Phase 7 — Local runtime investigation and verification
+
+- [ ] Record the owner-approved runtime-investigation decision in `re/zerodek-product-re/2026-11-27/RUNTIME-INVESTIGATION-DECISION.md`.
+- [ ] Complete RE triage scope and establish the ownership/permission basis for the exact target and revision before execution.
+- [ ] Verify a genuinely suitable execution environment and its isolation properties; do not invent a lab or treat an ordinary folder/container/process as isolated.
+- [ ] Pin the reference repository commit, preserve the original, inspect scripts/dependencies/lifecycle hooks/entry points, and assess execution risk before running anything.
+- [ ] Run only locally executable, authorized components; browser/UI inspection, replacement implementation, external provider traffic, new paid services, and new external account provisioning are excluded.
+- [ ] Capture reproducible scenario-level runtime evidence from commands, tests, local API exchanges, logs, and local state where available; record exact inputs, initial state, ordered actions, outputs, and stop criteria.
+- [ ] Reconcile runtime evidence against the ZeroDeck Software Rules capture across all 15 facets; distinguish reference-runtime observations from production ZeroDeck behaviour.
+- [ ] Update rules, evidence, property inventory, traceability, open properties, and the Phase 7 report only where supported by evidence; rerun applicable validation.
+**Exit gate:** authorization and environment gates have explicit dispositions; every safely executable in-scope scenario has reproducible evidence or a precise blocker; all 15 facets have evidence-backed dispositions; records and validation are reconciled; replication sufficiency is explicitly assessed without treating a local run or green CI as sufficient by itself.
+
+**Current status:** preflight pending; no runtime execution has started. See `RUNTIME-INVESTIGATION-DECISION.md`.
+
 ## 6. Target project structure
 
 ```text
