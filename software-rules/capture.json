@@ -120,7 +120,8 @@
         "security-controls",
         "errors-recovery",
         "integrations",
-        "performance-resource-behaviour"
+        "performance-resource-behaviour",
+        "configuration"
       ],
       "subject": "quarantine",
       "trigger": "A scan result is classified as a confirmed threat and an isolation operation is requested or triggered.",
@@ -165,7 +166,8 @@
         "authorization-permissions",
         "security-controls",
         "errors-recovery",
-        "performance-resource-behaviour"
+        "performance-resource-behaviour",
+        "configuration"
       ],
       "subject": "quarantined-item-disposition",
       "trigger": "User requests restore or permanent deletion.",
@@ -7555,6 +7557,168 @@
         "requirement": "required",
         "status": "not-observed",
         "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+      },
+      {
+        "propertyId": "MVP-QUAR-001:configuration:configuration-key-semantic-identity",
+        "facet": "configuration",
+        "subject": "MVP-QUAR-001",
+        "dimension": "Configuration key/semantic identity",
+        "requirement": "required",
+        "status": "not-observed",
+        "rationale": "Configuration is required by the capability-level applicability assessment for quarantine/file disposition. This scenario exercises quarantine or file disposition configuration, but no ZeroDeck runtime execution establishes its concrete value or effect."
+      },
+      {
+        "propertyId": "MVP-QUAR-001:configuration:effective-value-or-redacted-marker",
+        "facet": "configuration",
+        "subject": "MVP-QUAR-001",
+        "dimension": "Effective value or redacted marker",
+        "requirement": "required",
+        "status": "not-observed",
+        "rationale": "Configuration is required by the capability-level applicability assessment for quarantine/file disposition. This scenario exercises quarantine or file disposition configuration, but no ZeroDeck runtime execution establishes its concrete value or effect."
+      },
+      {
+        "propertyId": "MVP-QUAR-001:configuration:type-unit",
+        "facet": "configuration",
+        "subject": "MVP-QUAR-001",
+        "dimension": "Type/unit",
+        "requirement": "required",
+        "status": "not-observed",
+        "rationale": "Configuration is required by the capability-level applicability assessment for quarantine/file disposition. This scenario exercises quarantine or file disposition configuration, but no ZeroDeck runtime execution establishes its concrete value or effect."
+      },
+      {
+        "propertyId": "MVP-QUAR-001:configuration:source-origin-if-exposed",
+        "facet": "configuration",
+        "subject": "MVP-QUAR-001",
+        "dimension": "Source/origin if exposed",
+        "requirement": "required",
+        "status": "not-observed",
+        "rationale": "Configuration is required by the capability-level applicability assessment for quarantine/file disposition. This scenario exercises quarantine or file disposition configuration, but no ZeroDeck runtime execution establishes its concrete value or effect."
+      },
+      {
+        "propertyId": "MVP-QUAR-001:configuration:scope-precedence",
+        "facet": "configuration",
+        "subject": "MVP-QUAR-001",
+        "dimension": "Scope/precedence",
+        "requirement": "required",
+        "status": "not-observed",
+        "rationale": "Configuration is required by the capability-level applicability assessment for quarantine/file disposition. This scenario exercises quarantine or file disposition configuration, but no ZeroDeck runtime execution establishes its concrete value or effect."
+      },
+      {
+        "propertyId": "MVP-QUAR-001:configuration:activation-time",
+        "facet": "configuration",
+        "subject": "MVP-QUAR-001",
+        "dimension": "Activation time",
+        "requirement": "required",
+        "status": "not-observed",
+        "rationale": "Configuration is required by the capability-level applicability assessment for quarantine/file disposition. This scenario exercises quarantine or file disposition configuration, but no ZeroDeck runtime execution establishes its concrete value or effect."
+      },
+      {
+        "propertyId": "MVP-QUAR-001:configuration:mutability-reload-behaviour",
+        "facet": "configuration",
+        "subject": "MVP-QUAR-001",
+        "dimension": "Mutability/reload behaviour",
+        "requirement": "required",
+        "status": "not-observed",
+        "rationale": "Configuration is required by the capability-level applicability assessment for quarantine/file disposition. This scenario exercises quarantine or file disposition configuration, but no ZeroDeck runtime execution establishes its concrete value or effect."
+      },
+      {
+        "propertyId": "MVP-QUAR-001:configuration:target-build-environment",
+        "facet": "configuration",
+        "subject": "MVP-QUAR-001",
+        "dimension": "Target/build/environment",
+        "requirement": "required",
+        "status": "not-observed",
+        "rationale": "Configuration is required by the capability-level applicability assessment for quarantine/file disposition. This scenario exercises quarantine or file disposition configuration, but no ZeroDeck runtime execution establishes its concrete value or effect."
+      },
+      {
+        "propertyId": "MVP-QUAR-001:configuration:observed-behavioural-effect-link",
+        "facet": "configuration",
+        "subject": "MVP-QUAR-001",
+        "dimension": "Observed behavioural effect link",
+        "requirement": "required",
+        "status": "not-observed",
+        "rationale": "Configuration is required by the capability-level applicability assessment for quarantine/file disposition. This scenario exercises quarantine or file disposition configuration, but no ZeroDeck runtime execution establishes its concrete value or effect."
+      },
+      {
+        "propertyId": "MVP-QUAR-003:configuration:configuration-key-semantic-identity",
+        "facet": "configuration",
+        "subject": "MVP-QUAR-003",
+        "dimension": "Configuration key/semantic identity",
+        "requirement": "required",
+        "status": "not-observed",
+        "rationale": "Configuration is required by the capability-level applicability assessment for quarantine/file disposition. This scenario exercises quarantine or file disposition configuration, but no ZeroDeck runtime execution establishes its concrete value or effect."
+      },
+      {
+        "propertyId": "MVP-QUAR-003:configuration:effective-value-or-redacted-marker",
+        "facet": "configuration",
+        "subject": "MVP-QUAR-003",
+        "dimension": "Effective value or redacted marker",
+        "requirement": "required",
+        "status": "not-observed",
+        "rationale": "Configuration is required by the capability-level applicability assessment for quarantine/file disposition. This scenario exercises quarantine or file disposition configuration, but no ZeroDeck runtime execution establishes its concrete value or effect."
+      },
+      {
+        "propertyId": "MVP-QUAR-003:configuration:type-unit",
+        "facet": "configuration",
+        "subject": "MVP-QUAR-003",
+        "dimension": "Type/unit",
+        "requirement": "required",
+        "status": "not-observed",
+        "rationale": "Configuration is required by the capability-level applicability assessment for quarantine/file disposition. This scenario exercises quarantine or file disposition configuration, but no ZeroDeck runtime execution establishes its concrete value or effect."
+      },
+      {
+        "propertyId": "MVP-QUAR-003:configuration:source-origin-if-exposed",
+        "facet": "configuration",
+        "subject": "MVP-QUAR-003",
+        "dimension": "Source/origin if exposed",
+        "requirement": "required",
+        "status": "not-observed",
+        "rationale": "Configuration is required by the capability-level applicability assessment for quarantine/file disposition. This scenario exercises quarantine or file disposition configuration, but no ZeroDeck runtime execution establishes its concrete value or effect."
+      },
+      {
+        "propertyId": "MVP-QUAR-003:configuration:scope-precedence",
+        "facet": "configuration",
+        "subject": "MVP-QUAR-003",
+        "dimension": "Scope/precedence",
+        "requirement": "required",
+        "status": "not-observed",
+        "rationale": "Configuration is required by the capability-level applicability assessment for quarantine/file disposition. This scenario exercises quarantine or file disposition configuration, but no ZeroDeck runtime execution establishes its concrete value or effect."
+      },
+      {
+        "propertyId": "MVP-QUAR-003:configuration:activation-time",
+        "facet": "configuration",
+        "subject": "MVP-QUAR-003",
+        "dimension": "Activation time",
+        "requirement": "required",
+        "status": "not-observed",
+        "rationale": "Configuration is required by the capability-level applicability assessment for quarantine/file disposition. This scenario exercises quarantine or file disposition configuration, but no ZeroDeck runtime execution establishes its concrete value or effect."
+      },
+      {
+        "propertyId": "MVP-QUAR-003:configuration:mutability-reload-behaviour",
+        "facet": "configuration",
+        "subject": "MVP-QUAR-003",
+        "dimension": "Mutability/reload behaviour",
+        "requirement": "required",
+        "status": "not-observed",
+        "rationale": "Configuration is required by the capability-level applicability assessment for quarantine/file disposition. This scenario exercises quarantine or file disposition configuration, but no ZeroDeck runtime execution establishes its concrete value or effect."
+      },
+      {
+        "propertyId": "MVP-QUAR-003:configuration:target-build-environment",
+        "facet": "configuration",
+        "subject": "MVP-QUAR-003",
+        "dimension": "Target/build/environment",
+        "requirement": "required",
+        "status": "not-observed",
+        "rationale": "Configuration is required by the capability-level applicability assessment for quarantine/file disposition. This scenario exercises quarantine or file disposition configuration, but no ZeroDeck runtime execution establishes its concrete value or effect."
+      },
+      {
+        "propertyId": "MVP-QUAR-003:configuration:observed-behavioural-effect-link",
+        "facet": "configuration",
+        "subject": "MVP-QUAR-003",
+        "dimension": "Observed behavioural effect link",
+        "requirement": "required",
+        "status": "not-observed",
+        "rationale": "Configuration is required by the capability-level applicability assessment for quarantine/file disposition. This scenario exercises quarantine or file disposition configuration, but no ZeroDeck runtime execution establishes its concrete value or effect."
       }
     ],
     "completeness": {
