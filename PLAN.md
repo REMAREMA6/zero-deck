@@ -118,7 +118,7 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 - [x] SRC-04 Web Risk remains a remote provider contract. Live calls were skipped because no configured credentials/project or separate approval for URL disclosure and provider costs was available; live behaviour remains unverified.
 - [x] SRC-07 Android storage/SAF/Keystore are platform documents, not executable repositories; retained as documented constraints, not runtime targets.
 - [x] No malware samples or suspicious files were run. No local third-party test fixtures were executed because the required named, verified isolated lab is unavailable.
-- [ ] Reconcile the Software Rules capture, evidence, property inventory, traceability and open-property register only where supported; rerun governing validation and assess replication sufficiency.
+- [x] Reconcile the Software Rules evidence register and rule traceability without transferring prior-art behaviour into ZeroDeck requirements; preserve all unresolved properties and keep the machine capture's runtime-observation count at zero. Assess replication sufficiency in `PHASE-7-CLOSEOUT-AUDIT.md`.
 
 **Runtime evidence reports:** `re/zerodek-product-re/2026-11-27/PHASE-7-AVAILABLE-RUNTIME-EVIDENCE.md` records exact pinned revisions and run outcomes. `PHASE-7-RUNTIME-OBSERVATION-MAP.md` records the additional generator counts, generated/published artifacts, named ClamAV test cases, facet dispositions, and skipped paths.
 
