@@ -81,3 +81,12 @@ All rows below derive from the pinned working-draft document EVD-SRC-PRODUCT-001
 ## 5. Traceability rule for future edits
 
 Every new ZeroDeck rule must identify an owner decision, product-material artifact, runtime observation, source-derived inference about ZeroDeck source, or external declared contract. Every prior-art fact remains attributed to its originating project/provider. Unsupported propositions remain proposed or unknown.
+
+
+### 3.1 Phase 7 reference-runtime observations — contextual only
+
+| Evidence ID | Evidence reference | Source class | Traceability disposition |
+|---|---|---|---|
+| EVD-RT-REF-001 | `re/zerodek-product-re/2026-11-27/PHASE-7-RUNTIME-OBSERVATION-MAP.md` | Runtime-observed behaviour of pinned reference projects in upstream CI | Contextual evidence only. It records Hypatia CI completion, HypatiaDatabases generation/feed/publication outcomes, and ClamAV verification/signature/callback tests. No ZeroDeck rule is traced to this record because the executions were not ZeroDeck runtime and no owner decision adopts those reference behaviours. |
+
+The Phase 7 evidence does not change the adopted owner-declared or product-material rule rows above. The ZeroDeck capture therefore retains zero runtime observations and zero runtime-derived ZeroDeck rules. The reference evidence remains in the RE workspace; this register points to it without copying raw logs or promoting reference implementation details into requirements.
