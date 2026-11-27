@@ -4,7 +4,7 @@
 **Governing specification:** Software Rules 0.3.0 Draft  
 **Governing schema:** 0.2.0 Draft (JSON Schema 2020-12; reserved v1 namespace)  
 **Declared scope:** ZeroDeck first MVP — exactly three capabilities  
-**Status:** Phase 5 synthesis and Phase 6 bounded completeness/conformance review complete; capture remains incomplete and not replication-sufficient
+**Status:** Phase 5 synthesis and Phase 6 bounded completeness/conformance review complete; Phase 7 reference evidence reconciled; capture remains incomplete and not replication-sufficient
 
 ## Purpose
 
@@ -14,7 +14,11 @@ The specification describes the properties that an independent implementation mu
 
 ## Phase 6 review
 
-The bounded completeness/conformance review is complete. See [Phase 6 completeness audit](PHASE-6-COMPLETENESS-AUDIT.md). The capture remains incomplete and not replication-sufficient; no deployed runtime target or independent replica was available.
+The bounded completeness/conformance review is complete. See [Phase 6 completeness audit](PHASE-6-COMPLETENESS-AUDIT.md). The capture remains incomplete and not replication-sufficient because required product properties and owner decisions remain open.
+
+## Phase 7 reference evidence
+
+The final planned reverse-engineering phase completed its bounded reference-runtime investigation against the exact-pinned Hypatia, HypatiaDatabases and ClamAV projects. The resulting reports are recorded in the RE workspace. Their evidence is registered as supporting context only; it does not create ZeroDeck runtime observations or automatically become ZeroDeck requirements. The machine capture currently contains 14 evidence records, zero executions, zero observations and zero runtime rules. A first-party ZeroDeck runtime is not required to complete the reverse-engineering specification.
 
 ## Start here
 
