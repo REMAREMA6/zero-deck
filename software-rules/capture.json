@@ -351,6 +351,26 @@
       ]
     },
     {
+      "evidenceId": "EVD-ZD-CAP-001",
+      "evidenceClass": "supporting-context",
+      "evidenceType": "capability-inventory",
+      "mediaType": "text/markdown",
+      "origin": {
+        "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/CAPABILITY-INVENTORY.md",
+        "sourceRevision": "fef4184fdf32ecf68fd5f2df76c8bc3f2f1e4695",
+        "location": "re/zerodek-product-re/2026-11-27/CAPABILITY-INVENTORY.md"
+      },
+      "capturedAt": "2026-11-27T11:40:00.892Z",
+      "locator": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/CAPABILITY-INVENTORY.md",
+      "retention": {
+        "status": "external",
+        "access": "Public GitHub repository; immutable blob revision recorded."
+      },
+      "limitations": [
+        "Product-material workflow synthesis and candidate mapping; not runtime evidence or independent owner approval of unspecified implementation details."
+      ]
+    },
+    {
       "evidenceId": "EVD-ZD-MAP-001",
       "evidenceClass": "supporting-context",
       "evidenceType": "capability-facet-mapping",
