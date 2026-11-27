@@ -8,7 +8,7 @@
 **Phase 2 facet mapping (scope-finalized) commit:** d0a8e834b36da917ab26b8781d234c31e7a00c29
 **Phase 2 owner decision commit:** 281eae0327d772f8b2c787edb9eda38ab0131c89
 **Repository audit closeout commit:** a9ef68819d2793f524bea752f2ccd0ac541981f9  
-**Current phase:** Phase 3 — Prior-art discovery and selection (ready to start)  
+**Current phase:** Phase 3 — Prior-art discovery and selection (in progress)  
 **Overall status:** Phases 0–2 are complete. The owner-approved MVP is manual file security analysis, quarantine/file disposition, and website/link checking. IP address tracking/investigation is recorded as a future candidate and excluded from MVP.
 
 > This is the persistent progress and handoff record. Update it whenever work starts, changes status, becomes blocked, or is completed. A new chat must be able to resume from this file and the linked repository records without depending on private chat history.
@@ -24,10 +24,10 @@
 ## Current position
 
 - **Current phase:** Phase 3 — Prior-art discovery and selection
-- **Current task:** Audit existing reconnaissance records and discover/verify suitable prior-art implementations for the three selected MVP capabilities only.
-- **Completed:** Phase 1 screen inventory complete. Phase 2 candidate capability inventory and owner-approved MVP scope decision recorded in `re/zerodek-product-re/2026-11-27/MVP-SCOPE-DECISION.md`; candidate inventory in `CAPABILITY-INVENTORY.md`; 15-facet mapping and required-property investigation map in `CAPABILITY-FACET-MAPPING.md`.
-- **Blockers:** None for Phase 3 start. Technical choices and detailed rules remain unknown and must be investigated rather than assumed.
-- **Next action:** Audit `re/oss-recon/` for relevance to manual file scanning, quarantine and website/link checking. Do not reuse Android Security Scanner findings without checking capability fit, provenance, revision, licence and security relevance. Keep IP tracking outside MVP research.
+- **Current task:** Complete the prior-art source-selection audit for manual file security analysis, quarantine/file disposition, and website/link checking. See `re/zerodek-product-re/2026-11-27/PHASE-3-PRIOR-ART-REGISTER.md`.
+- **Completed:** Phase 1 and Phase 2. Phase 3 initial audit of `re/oss-recon/`, source screening, and pinned-source verification recorded in `PHASE-3-PRIOR-ART-REGISTER.md` (commit `164246d7a96636cb7c8a6599ecc66ac7cd2bac48`).
+- **Blockers:** No execution blocker. Phase 3 has open verification gates: Web Risk contract/privacy/terms; threat-feed rights; file-engine choice and data rights; Android quarantine feasibility and source selection.
+- **Next action:** Verify the Web Risk Lookup API contract, commercial terms, privacy, quotas and response semantics; then finish feed-rights and file-engine/quarantine candidate checks. Keep IP tracking outside MVP research.
 
 ## Phase tracking
 
@@ -36,7 +36,7 @@
 | 0 | Governance and handoff | [x] Complete | Project plan, persistent tracker, contribution guide, README navigation, and resumption pattern established and verified. |
 | 1 | Repository and screen inventory | [x] Complete | 17-screen baseline inventory and route/source mapping committed; Screen 18 and extra routes/assets recorded separately. See SCREEN-INVENTORY.md. |
 | 2 | Capability and facet mapping | [x] Complete | Owner selected manual file security analysis, quarantine/file disposition, and website/link checking. IP tracking is recorded as a future candidate and excluded from MVP. Scope decision, scenarios, exclusions and 15-facet map recorded. |
-| 3 | Prior-art discovery and selection | [ ] Not started | Audit prior work; identify and verify relevant open-source sources. |
+| 3 | Prior-art discovery and selection | [~] In progress | Initial audit and candidate screening recorded; commercial URL provider, data rights, engine choice and quarantine feasibility remain open. See PHASE-3-PRIOR-ART-REGISTER.md. |
 | 4 | Source-level rule extraction | [ ] Not started | Inspect source code and record auditable source-derived rules. |
 | 5 | Software Rules synthesis | [ ] Not started | Create separate product-specific `software-rules/` deliverable. |
 | 6 | Completeness and conformance | [ ] Not started | Validate coverage, traceability, schemas, and replication completeness. |
@@ -80,9 +80,9 @@ Use the 15 Software Rules facets as the investigation taxonomy. The six labels U
 
 ## Phase 3 — Prior-art discovery and selection
 
-Not started.
+[~] In progress — initial audit and candidate screening recorded in `re/zerodek-product-re/2026-11-27/PHASE-3-PRIOR-ART-REGISTER.md`.
 
-Existing `re/oss-recon/` records are from a separate Android Security Scanner engagement. Audit their relevance; do not count them as Zerodek research without evidence that a specific source/capability is applicable.
+The prior `re/oss-recon/` records are from a separate Android Security Scanner engagement. Relevant leads were independently re-opened and pinned; unrelated admin/later-release work was excluded. No source is yet approved for direct code adoption. Web Risk commercial contract/API verification, indicator-feed rights, file-engine selection, and Android quarantine feasibility remain open. The Phase 3 exit gate has not been met.
 
 ## Phase 4 — Source-level rule extraction
 
