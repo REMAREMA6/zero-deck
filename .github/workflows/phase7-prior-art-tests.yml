@@ -48,6 +48,15 @@ jobs:
           test -x "$SDKMANAGER"
           yes | "$SDKMANAGER" --licenses >/dev/null || true
           "$SDKMANAGER" "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+      - name: Diagnose pinned Kotlin plugin marker checksum
+        run: |
+          set -eu
+          url="https://plugins.gradle.org/m2/org/jetbrains/kotlin/android/org.jetbrains.kotlin.android.gradle.plugin/2.0.21/org.jetbrains.kotlin.android.gradle.plugin-2.0.21.pom"
+          curl --fail --silent --show-error --location "$url" --output /tmp/kotlin-plugin-marker.pom
+          echo "Pinned expected SHA-256 from Hypatia verification-metadata.xml:"
+          echo "61ffa87244c72230adcfc32279d4a1cc41712c2bc5eb50971b630ed880de485f"
+          echo "Downloaded artifact SHA-256:"
+          sha256sum /tmp/kotlin-plugin-marker.pom
       - name: Run lint, unit tests and debug APK build
         working-directory: targets/Hypatia
         run: |
@@ -62,6 +71,7 @@ jobs:
             targets/Hypatia/app/build/reports/
             targets/Hypatia/app/build/test-results/
             targets/Hypatia/app/build/outputs/apk/debug/
+            targets/Hypatia/build/reports/dependency-verification/
           if-no-files-found: warn
           retention-days: 14
 
