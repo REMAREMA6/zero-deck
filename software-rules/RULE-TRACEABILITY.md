@@ -9,9 +9,9 @@
 |---|---|---|---|
 | ZD-OWNER-001–002 | Owner-declared | EVD-ZD-SCOPE-001 | The three-capability MVP and IP exclusion are explicit owner decisions. |
 | ZD-OWNER-003–006 | Owner-declared | EVD-ZD-PRO-001 | Pro entitlement, separate owner activation, no-call conditions and need for usage/budget controls are explicit owner decisions. |
-| PM-FILE-001–004 | Product-material-derived | EVD-ZD-CAP-001; EVD-ZD-MAP-001 | Manual file selection, result branches and truthful non-success outcomes are described by the product-material workflow inventory and scenario map. Detailed thresholds/implementation remain unknown. |
-| PM-QUAR-001–005 | Product-material-derived | EVD-ZD-CAP-001; EVD-ZD-MAP-001; EVD-ZD-P4-001 | Confirmed-threat quarantine, non-destructive suspicious/inconclusive review, restore preconditions and truthful disposition outcomes are workflow-level material. Android constraints inform feasibility but do not select an implementation. |
-| PM-LINK-001–005 | Product-material-derived | EVD-ZD-CAP-001; EVD-ZD-MAP-001; EVD-ZD-P4-001 | User-submitted URL and bounded result/failure branches are product-material workflow requirements. Web Risk informs one possible provider contract only. |
+| PM-FILE-001–008 | Product-material-derived | EVD-SRC-PRODUCT-001; EVD-ZD-CAP-001; EVD-ZD-MAP-001 | Manual file selection, result branches, on-device default, no silent cloud upload, consent boundary and SHA-256 planned direction are described in the pinned working draft. Engine, supported formats and thresholds remain open. |
+| PM-QUAR-001–013 | Product-material-derived | EVD-SRC-PRODUCT-001; EVD-ZD-CAP-001; EVD-ZD-MAP-001; EVD-ZD-P4-001 | Quarantine policy, encrypted app-private storage baseline, proposed 30-day retention, fresh-scan/confirmation, hash verification, auditability, no execution, Keystore, no overwrite and uninstall disclosure are recorded with their draft/proposed maturity preserved. Android constraints inform feasibility but do not prove implementation. |
+| PM-LINK-001–006 | Product-material-derived | EVD-SRC-PRODUCT-001; EVD-ZD-CAP-001; EVD-ZD-MAP-001; EVD-ZD-P4-001 | User-submitted URL, bounded result categories, no safety guarantee, no whole-site claim and unresolved input/provider/execution choices are recorded from the working draft. Web Risk informs one possible provider contract only. |
 
 ## 2. Prior-art and platform/provider rule families
 
@@ -29,7 +29,7 @@
 - No ZeroDeck runtime observation, execution, API trace, persisted record, background job, authentication event, authorization decision, security-control test or performance measurement exists in this engagement.
 - The product mockup/source repository does not establish runtime screen equivalence.
 - The actual ZeroDeck build, target environment and deployed system boundary remain unidentified.
-- The owner decisions establish intended scope/policy, not that the implementation enforces them.
+- The owner decisions establish intended scope/policy, not that the implementation enforces them. The pinned scanner product document is a Working draft; proposed retention and open design choices are not promoted to settled requirements.
 
 ## 4. Traceability rule for subsequent edits
 
