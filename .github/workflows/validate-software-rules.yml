@@ -45,8 +45,9 @@ jobs:
         run: npm run test:completeness --prefix software-rules-spec/conformance/validation
 
       - name: Run governing cross-record integrity tests
-        run: node software-rules-spec/conformance/integrity/test.mjs
+        run: node conformance/integrity/test.mjs
+        working-directory: software-rules-spec
 
       - name: Validate ZeroDeck-specific cross references
-        run: node zero-deck/scripts/validate-software-rules-integrity.mjs
-        working-directory: .
+        run: node scripts/validate-software-rules-integrity.mjs
+        working-directory: zero-deck
