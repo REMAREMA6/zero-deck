@@ -1,11 +1,10 @@
-# Zerodek — Android security scanner
+# ZeroDeck — ethical-hacking and penetration-testing platform
 
-The Zerodek project: turning the original 17-screen security scanner mockup app
-(source project by LordWhitefire) into real software.
+ZeroDeck is a startup building a tool/platform for people involved in ethical hacking and penetration testing. This repository is the project record and agent working environment for reverse-engineering its declared product scope.
 
-This repository is the project record and agent working environment. Agent
-definitions (identities, skills, frameworks, and mental models) are intentionally
-kept outside this repository and provided to agents at runtime.
+The current reference repository contains Security Scanner materials. Security scanning is one candidate service/capability area within ZeroDeck; it does not define the whole startup or automatically determine the launch MVP. The product scope is intentionally constrained for an MVP and should expand based on market observation.
+
+Agent definitions (identities, skills, frameworks, and mental models) are intentionally kept outside this repository and provided to agents at runtime.
 
 ## Project navigation
 
@@ -16,16 +15,18 @@ kept outside this repository and provided to agents at runtime.
 
 ## Workspaces
 
-- `re/zerodek-product-re/` — Zerodek reverse-engineering engagement records.
+- `re/zerodek-product-re/` — ZeroDeck reverse-engineering engagement records.
   - [Engagement understanding](re/zerodek-product-re/2026-11-27/ENGAGEMENT-UNDERSTANDING.md).
-- `re/oss-recon/` — earlier reconnaissance records. These were created for a separate Android Security Scanner engagement and must be audited before any content is reused for Zerodek.
+  - [Phase 1 screen inventory](re/zerodek-product-re/2026-11-27/SCREEN-INVENTORY.md).
+  - [Reference repository audit](re/zerodek-product-re/2026-11-27/REPOSITORY-AUDIT.md).
+- `re/oss-recon/` — earlier reconnaissance records. These were created for a separate Android Security Scanner engagement and must be audited before any content is reused for ZeroDeck.
 - `product-management/` — product-management agent workspace and its own records.
 
 ## Product and specification references
 
-- Original product mockup: https://github.com/lordwhitefire/Zerodek
+- Product/reference repository: https://github.com/lordwhitefire/Zerodek
 - Governing Software Rules specification: https://github.com/REMAREMA6/software-rules
-- Final Zerodek-specific rules will be maintained separately in this repository's `software-rules/` folder when produced.
+- Final ZeroDeck-specific rules will be maintained separately in this repository's `software-rules/` folder when produced.
 
 ## Resuming work
 
