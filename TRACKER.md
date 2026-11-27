@@ -12,8 +12,8 @@
 **Phase 4 facet audit blob:** 3b32ea7b60d90c30b1511a2e878a411cacc3a648  
 **Phase 4 plan closeout blob:** 71c734f9283e03d32263f75cbc9e46014e1e7e03  
 **Phase 7 corrected decision commit:** 6cc99584682becef61dbb7d728d604c24d884b1b  
-**Current phase:** Phase 7 — COMPLETE (bounded non-UI runtime investigation; ZeroDeck remains not replication-sufficient)  
-**Overall status:** Phases 0–7 are complete as bounded investigation/review phases. Phase 7 collected and mapped all accessible exact-pinned upstream CI evidence, assigned explicit evidence-or-skip dispositions to all seven MVP scenarios and all 15 facets, and recorded unavailable paths. ZeroDeck's product-specific Software Rules capture remains incomplete and not replication-sufficient; actual ZeroDeck runtime capture must occur after the native app exists. The owner-approved MVP is manual file security analysis, quarantine/file disposition, and Pro-gated website/link checking (disabled until owner activation when paid revenue can fund costs). IP address tracking/investigation is a future candidate and excluded from MVP.
+**Current phase:** Phase 7 — REOPENED (renewed GitHub Actions-enabled investigation)  
+**Overall status:** Phases 0–6 remain complete as bounded review phases. The first Phase 7 pass is preserved as a completed historical bounded investigation. The owner has approved a renewed Phase 7 pass using GitHub Actions hosted runners for previously skipped paths where feasible. ZeroDeck's product-specific Software Rules capture remains incomplete and not replication-sufficient. The owner-approved MVP is manual file security analysis, quarantine/file disposition, and Pro-gated website/link checking (disabled until owner activation when paid revenue can fund costs). IP address tracking/investigation is a future candidate and excluded from MVP.
 
 > This is the persistent progress and handoff record. Update it whenever work starts, changes status, becomes blocked, or is completed. A new chat must be able to resume from this file and the linked repository records without depending on private chat history.
 
@@ -27,12 +27,13 @@
 
 ## Current position
 
-- **Current phase:** Phase 7 — complete bounded runtime investigation.
-- **Current task:** None remains in Phase 7. All accessible reference CI evidence has been inspected and mapped; unavailable paths are explicitly skipped. Future runtime capture is deferred until the actual ZeroDeck native app exists.
-- **Completed:** Phases 0–6 review tasks complete. Phase 6 reviewed all 15 facets, reconciled 775 property entries (700 required; 75 optional), and passed validation in [CI run #46000308895](https://github.com/REMAREMA6/zero-deck/actions/runs/46000308895). Phase 7 scope correction committed. Supplemental UI source review extracted 12 source-derived rules. Exact-pinned upstream CI runtime evidence collected for Hypatia, HypatiaDatabases and ClamAV. Further log inspection extracted HypatiaDatabases generator counts and unsigned publication behaviour, and ClamAV's named CVD verification, signature-tool and scan-callback cases; see `PHASE-7-RUNTIME-OBSERVATION-MAP.md`.
-- **Skipped local paths:** Available container lacks Android SDK/ADB/Gradle, Maven and ClamAV, and a suitable isolated lab is not verified. Do not spend excessive time forcing local execution where exact-pinned upstream CI evidence is available. Record each skipped path and continue with other eligible evidence.
-- **Out of scope:** UI runtime inspection, mockup runtime claims, external provider calls/secrets/paid services, malware samples, replacement implementation and IP investigation.
-- **Next action:** No further Phase 7 retries. When the actual ZeroDeck native app is available, execute the seven MVP scenarios and capture runtime behaviour across the 15 facets. Until then, preserve open properties and do not claim replication sufficiency.
+- **Current phase:** Phase 7 — renewed GitHub Actions-enabled investigation (in progress; no renewed runs executed yet).
+- **Current task:** Reassess the previously skipped Phase 7 paths and design/run suitable GitHub Actions workflows. Start with pinned target/toolchain preflight, then execute feasible targets one by one.
+- **Completed:** The first bounded Phase 7 pass remains recorded, including exact-pinned upstream CI evidence for Hypatia, HypatiaDatabases and ClamAV, UI source-derived rules, seven-scenario/15-facet evidence-or-skip mapping, and explicit limitations. GitHub Actions remote execution procedure recorded at `re/zerodek-product-re/2026-11-27/GITHUB-ACTIONS-EXECUTION-PROCEDURE.md`.
+- **Previously skipped paths to reassess:** Hypatia Android build/tests; HypatiaDatabases local generator workflow; ClamAV build/tests; browser-rendered reference UI capture with Playwright; live Web Risk or other integrations only if owner supplies credentials and explicitly authorizes URL disclosure/costs; any additional facet/scenario tests supported by the pinned targets.
+- **Execution rule:** Use the ChatGPT sandbox where suitable. If a required tool/environment is unavailable there, use GitHub Actions rather than dropping the test. Inspect logs/artifacts, fix and rerun. Record any remaining blocker and continue with other targets. Hosted runners are not unrestricted and do not automatically qualify as isolated malware labs.
+- **Out of scope:** Treating reference-project behaviour as ZeroDeck requirements; claiming actual ZeroDeck runtime conformance before a ZeroDeck build exists; unapproved production changes, provider charges/data disclosure, or unsafe sample execution.
+- **Next action:** Read the new execution procedure and prior Phase 7 records, then build the renewed target-by-target test matrix and first GitHub Actions workflow.
 
 ## Phase tracking
 
@@ -45,7 +46,7 @@
 | 4 | Source-level rule extraction | [x] Complete | 31 source-derived rules, 28 platform/provider contract rules, 5 owner-declared link-gating rules, and a 15-facet audit across all three approved MVP capabilities. No ZeroDeck runtime behaviour or replication sufficiency is claimed. See `re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md` and `re/zerodek-product-re/2026-11-27/PHASE-4-15-FACET-COVERAGE-AUDIT.md`. |
 | 5 | Software Rules synthesis | [x] Complete | Synthesis exit gate satisfied. Includes 6 owner rules, 27 provisional product-material rules, 3 declared contracts, 12 evidence records, 7 scenarios, 15 facets and 757 property entries. All 15 semantic payload mappings, individual rule/evidence traceability, Draft 2020-12 schema validation, governing completeness/integrity suites and ZeroDeck cross-reference checks passed. Capture remains explicitly incomplete and not replication-sufficient. See `software-rules/PHASE-5-SYNTHESIS-AUDIT.md`. |
 | 6 | Completeness and conformance | [x] Complete — bounded review | Exit gate satisfied for an explicitly incomplete product deliverable. All 15 facets reviewed; inventory omissions/applicability inconsistencies corrected; 775 entries reconciled (700 required, 75 optional); CI #46000308895 passed. Product remains not replication-sufficient. See `software-rules/PHASE-6-COMPLETENESS-AUDIT.md`. |
-| 7 | Non-UI runtime investigation of selected prior-art implementations | [x] Complete — bounded investigation | Exact-pinned CI evidence is mapped to all 15 facets and all seven MVP scenarios. Hypatia job succeeded but detailed logs expired; HypatiaDatabases generator counts/artifacts/unsigned publication and current ThreatFox HTTP 410 failure are recorded; ClamAV passed 17/17 Ubuntu CTest tests with named example/signature-tool cases. Every ZeroDeck scenario has an explicit evidence-or-skip disposition; none was executed against a deployed ZeroDeck target. Local execution and provider calls are skipped with precise blockers. Product runtime conformance and required properties remain incomplete. See `PHASE-7-AVAILABLE-RUNTIME-EVIDENCE.md` and `PHASE-7-RUNTIME-OBSERVATION-MAP.md`. |
+| 7 | Renewed GitHub Actions-enabled runtime investigation | [~] Reopened | First bounded pass is preserved as historical evidence. Re-run previously skipped targets/scenarios in GitHub Actions where feasible; add Playwright browser capture for relevant browser-rendered UI and use appropriate native tooling for native UI. See `GITHUB-ACTIONS-EXECUTION-PROCEDURE.md`. ZeroDeck runtime conformance remains unproven. |
 
 ## Phase 0 — Governance and handoff
 
@@ -108,9 +109,9 @@ This closes synthesis only. The machine capture has no runtime executions, obser
 
 Review closed 2026-11-27 under the plan's incomplete-deliverable exit branch. The capture remains incomplete and not replication-sufficient; obtain an authorized runtime target/build and resolve the open product decisions before any conformance claim.
 
-## Phase 7 — Non-UI runtime investigation of selected prior-art implementations
+## Phase 7 — Renewed GitHub Actions-enabled runtime investigation
 
-[x] Complete — bounded investigation with explicit skips. The initial decision's target designation was incorrect and is superseded by the corrected decision. The actual targets were the selected Phase 3 implementations, not the ZeroDeck mockup fork.
+[~] Reopened by owner on 2026-11-27. The earlier bounded pass and closeout remain historical records; they are not being retroactively rewritten. The initial decision's target designation was incorrect and is superseded by the corrected decision. The actual targets were the selected Phase 3 implementations, not the ZeroDeck mockup fork.
 
 - [x] Correct the Phase 7 scope: Hypatia, HypatiaDatabases and ClamAV (comparison only) are the runtime candidates; Web Risk is documented-only unless separately approved; Android platform docs are not executable targets.
 - [x] Exclude UI runtime inspection from Phase 7 and record that the actual ZeroDeck UI runtime rules may be captured later by the developer agent.
@@ -124,7 +125,7 @@ Review closed 2026-11-27 under the plan's incomplete-deliverable exit branch. Th
 - [x] Reconcile the evidence register and rule traceability without transferring prior-art behaviour into ZeroDeck requirements; keep the machine capture's runtime-observation count at zero and preserve all open properties.
 - [x] Assess replication sufficiency: ZeroDeck remains incomplete and not replication-sufficient. See `PHASE-7-CLOSEOUT-AUDIT.md`.
 
-**Phase 7 closeout:** the bounded investigation exit gate is satisfied. All accessible evidence has been mapped, all seven scenarios and 15 facets have evidence-or-skip dispositions, and skipped paths have explicit reasons. The ZeroDeck product capture remains incomplete and not replication-sufficient. See `PHASE-7-CLOSEOUT-AUDIT.md`.
+**Previous Phase 7 closeout:** the first bounded investigation exit gate was satisfied under its original constraints. That report remains valid for the work actually performed. The owner has now reopened Phase 7 for a renewed pass using GitHub Actions. The renewed pass must not erase or overstate the first pass. Follow `GITHUB-ACTIONS-EXECUTION-PROCEDURE.md`. ZeroDeck remains incomplete and not replication-sufficient.
 
 ## Handoff protocol
 
@@ -143,3 +144,17 @@ At the end of every work session:
 3. Record new evidence paths and relevant source revisions.
 4. Update the plan only if the agreed scope or sequence changed.
 5. Verify the committed files and record the commit SHA.
+
+
+## Renewed Phase 7 — GitHub Actions execution
+
+- [x] Record the owner-approved GitHub Actions execution procedure in `re/zerodek-product-re/2026-11-27/GITHUB-ACTIONS-EXECUTION-PROCEDURE.md`.
+- [ ] Re-read prior Phase 7 evidence, target pins, and safety constraints; build a target-by-target matrix of previously skipped paths.
+- [ ] Create and run GitHub Actions workflows for feasible pinned targets; capture logs and artifacts.
+- [ ] Reassess browser UI capture using Playwright for the reference Next.js preview; keep it separate from native-app runtime claims.
+- [ ] Reassess native build/test paths using suitable runner/emulator tooling.
+- [ ] Run authorized integration/provider tests only with owner-configured secrets, dedicated test environments, and explicit approval for live data disclosure/costs.
+- [ ] Reconcile new evidence to the seven MVP scenarios and all 15 facets without promoting reference behaviour into ZeroDeck rules.
+- [ ] Record remaining skips and blockers; reassess replication sufficiency.
+
+**Current status:** procedure recorded; renewed execution has not started.
