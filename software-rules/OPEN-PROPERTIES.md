@@ -58,6 +58,9 @@ The product working draft already states several requirements. They remain unver
 
 ## Cross-cutting properties
 
+- **Scenario-definition completeness:** the current seven scenario records do not yet fully establish actor/principal, target/build/environment, initial state/preconditions, concrete inputs, ordered actions, expected-outcome provenance, or stopping/settling criteria. Populate these from authorized target evidence or preserve them as unknown/unavailable; do not invent test values. Branches in MVP-FILE-002 and MVP-LINK-002, and restore versus delete in MVP-QUAR-003, require separate executions.
+- **Interface source-rule extraction:** MVP screen references are mapped in `re/zerodek-product-re/2026-11-27/PHASE-6-INTERFACE-SOURCE-REVIEW.md`, but the full source-level hierarchy, text, style, asset, responsive and interaction-state properties have not yet been extracted into technology-independent rules. Runtime interface properties remain unobserved.
+
 - Actual product boundary, supported platforms/OS versions, build/release identity and environment. The scanner draft describes an Android app; it does not prove that all of ZeroDeck is Android-only.
 - Complete runtime interface hierarchy, visual properties, geometry, assets, accessibility and states for the seven MVP scenarios.
 - Effective configuration defaults, precedence, scope and change behaviour.
