@@ -1,7 +1,7 @@
 # Phase 7 — Runtime Observation Map
 
 **Date:** 2026-11-27  
-**Status:** Additional upstream CI evidence inspected and mapped  
+**Status:** Bounded investigation-initiated and upstream reference-runtime evidence inspected and mapped  
 **Scope:** Non-UI behaviour of selected Phase 3 prior-art references only. These observations do not describe ZeroDeck runtime behaviour and are not automatically ZeroDeck requirements.
 
 ## Evidence records
@@ -161,7 +161,7 @@ These additional executions were initiated by this investigation using the expli
 - **Important test limit:** `testDebugUnitTest` was explicitly `NO-SOURCE`; no unit tests were run. No emulator launch, file scan or quarantine action was performed.
 - The lint report was retained and inspected. It contains one Error-severity `MissingSuperCall` finding at `NotificationPromptActivity.kt:158`, plus warnings including inconsistent localized array lengths, implicit default-locale conversions, target SDK 34 and older Gradle/Android plugin recommendations. The Gradle task exited successfully because the project sets `abortOnError false`; the lint finding remains.
 - The run also recorded a direct HTTP download of the Kotlin Android plugin marker POM with SHA-256 `9d841037c59644dc5bbe814e792ed8774eb48646f0b3a779604ee5c1b307f969`, differing from the value `61ffa87244c72230adcfc32279d4a1cc41712c2bc5eb50971b630ed880de485f` in the pinned verification metadata. The actual Gradle build nevertheless completed successfully. The direct-fetch mismatch is unresolved; it is not proof of compromise or of a Gradle verification bypass. No checksum was changed and verification was not disabled.
-- Artifact `phase7-hypatia-build-evidence` (ID `15213297838`) was downloaded and inspected; it contains APK, metadata and lint reports, but no unit-test result files.
+- The follow-up artifact `phase7-hypatia-build-evidence` (ID `15216296601`, SHA-256 `13b14fbec9f61d33ef567899356dca178ab3ab38f7a2d7010a446024d3cb7714`) contains APK, metadata and lint reports, but no unit-test result files. The earlier artifact `15213297838` was also inspected.
 - **Disposition:** successful build/package and lint-task execution, with a reported lint error and no unit-test sources. No scanner runtime behaviour inferred.
 
 ### RT-HDB-004 — HypatiaDatabases fixture-driven generator execution
@@ -205,13 +205,13 @@ These additional executions were initiated by this investigation using the expli
 
 | Facet | Additional reference evidence | Boundary |
 |---|---|---|
-| Behaviour | Hypatia build only; HypatiaDatabases generator; ClamAV scanner/update/signature tests | No ZeroDeck runtime behaviour. |
-| Business rules | HypatiaDatabases accepts hash/domain fixture inputs; ClamAV tests exercise explicit test branches | Reference implementation only; no ZeroDeck verdict or quarantine policy. |
+| Behaviour | Hypatia build only; HypatiaDatabases valid, malformed and exclusion fixture branches; ClamAV scanner/update/signature tests | Reference implementations only; no ZeroDeck runtime behaviour. |
+| Business rules | HypatiaDatabases accepts valid hash/domain fixtures, rejects malformed hashes and skips excluded hashes; ClamAV tests exercise explicit test branches | Reference implementation only; no ZeroDeck verdict or quarantine policy. |
 | Data | Four Bloom-filter outputs from deterministic fixture | Does not validate real feed accuracy or ZeroDeck data model. |
 | Persistence | HypatiaDatabases writes generated Bloom-filter files | Local generator output only; no ZeroDeck persistence contract. |
 | Security controls | ClamAV CVD verification and signing tests; Hypatia dependency-verification attempt and lint report | No ZeroDeck enforcement, trust-root or key policy established. |
 | Background processing | No new ZeroDeck evidence; CI build/test jobs only | Not evidence of ZeroDeck background job semantics. |
-| Errors and recovery | ClamAV updater/parser/quarantine test cases | Reference test branches only; no ZeroDeck recovery semantics. |
+| Errors and recovery | HypatiaDatabases malformed-hash rejection; ClamAV updater/parser/quarantine test cases | Reference test branches only; no ZeroDeck recovery semantics. |
 | Integrations | No new live provider integration; fixture-only generator path | No ZeroDeck API/provider integration. |
 | Configuration | Generator input paths and domain list; build SDK/toolchain settings | Reference CLI/CI configuration only. |
 | Performance and resource behaviour | CTest duration and test counts | Not a controlled or transferable benchmark. |
