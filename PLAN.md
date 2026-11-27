@@ -88,9 +88,9 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 ### Phase 5 — Software Rules synthesis
 - [x] Re-read and apply the current Software Rules 0.3.0 Draft core model, terminology, principles, evidence/provenance, source-derived-rule requirements, 15 facet specifications, schema 0.2.0 Draft and versioning policy.
 - [x] Create the separate `software-rules/` deliverable with scope, owner rules, product-material workflow rules, scenarios, evidence register, open-property register and typed payload map.
-- [~] Express the three MVP capabilities in technology-independent terms using the common record model and typed facet payloads. Initial machine-readable capture created; full traceability and validation review remain.
-- [~] Include scope, seven scenarios, 15-facet coverage, evidence/provenance, unknowns, exclusions and cross-facet links. First pass exists; detailed property inventory and cross-reference audit remain.
-**Exit gate:** not yet satisfied. Complete rule/evidence traceability, schema validation and cross-facet consistency review before closing Phase 5.
+- [x] Express the three MVP capabilities in technology-independent terms using the common record model and typed facet payloads. The capture contains three declared contracts and remains explicitly incomplete.
+- [x] Include scope, seven scenarios, all 15 facets and their semantic payload dimensions, 757 property entries, 12 evidence records, individual rule traceability, unknowns, exclusions and cross-facet links.
+**Exit gate: SATISFIED 2026-11-27 for synthesis readiness.** Individual rule/evidence traceability, scenario-level property inventory, all 15 semantic facet mappings, cross-facet consistency, governing Draft 2020-12 schema validation, governing completeness/integrity suites and ZeroDeck-specific reference checks passed. See `software-rules/PHASE-5-SYNTHESIS-AUDIT.md` and [CI run #45997192513](https://github.com/REMAREMA6/zero-deck/actions/runs/45997192513). This closes synthesis only: the capture remains incomplete and is not replication-sufficient; Phase 6 must independently assess completeness and conformance.
 
 ### Phase 6 — Completeness and conformance
 - [ ] Review every facet applicable to the declared Zerodek scope.
