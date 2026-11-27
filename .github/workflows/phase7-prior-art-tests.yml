@@ -127,6 +127,7 @@ jobs:
           path: |
             targets/HypatiaDatabases/target/surefire-reports/
             targets/HypatiaDatabases/target/*.jar
+            targets/HypatiaDatabases/fixture/
           if-no-files-found: warn
           retention-days: 14
 
