@@ -115,8 +115,8 @@ At the inspected revision, each canonical screen has a Next.js preview route. Th
 | SCR-13 | src/app/admin-sign-in/page.tsx | src/components/adminsignin/AdminSignInPreview.tsx | src/components/adminsignin/AdminSignInScreen.tsx; download/security-scanner-expo/AdminSignInScreen.tsx; upload/13.md |
 | SCR-14 | src/app/admin-dashboard/page.tsx | src/components/admindashboard/AdminDashboardPreview.tsx | src/components/admindashboard/AdminDashboardScreen.tsx; download/security-scanner-expo/AdminDashboardScreen.tsx; upload/14.md |
 | SCR-15 | src/app/user-management/page.tsx | src/components/usermanagement/UserManagementPreview.tsx | src/components/usermanagement/UserManagementScreen.tsx; download/security-scanner-expo/UserManagementScreen.tsx; upload/15.md |
-| SCR-16 | src/app/threat-information/page.tsx | src/components/threatinformation/ThreatInformationPreview.tsx | src/components/threatinformation/ThreatInformationScreen.tsx; download/security-scanner-expo/ThreatInformationScreen.tsx; Screen 16 brief in upload/android_security_scanner_product_decisions.txt |
-| SCR-17 | src/app/help-content/page.tsx | src/components/helpcontent/HelpContentPreview.tsx | src/components/helpcontent/HelpContentScreen.tsx; download/security-scanner-expo/HelpContentScreen.tsx; Screen 17 brief in upload/android_security_scanner_product_decisions.txt |
+| SCR-16 | src/app/threat-information/page.tsx | src/components/threatinformation/ThreatInformationPreview.tsx | src/components/threatinformation/ThreatInformationScreen.tsx; download/security-scanner-expo/ThreatInformationScreen.tsx; Screen 16 brief in upload/android_security_scanner_product_decisions.txt; preview comment references missing upload/16.md |
+| SCR-17 | src/app/help-content/page.tsx | src/components/helpcontent/HelpContentPreview.tsx | src/components/helpcontent/HelpContentScreen.tsx; download/security-scanner-expo/HelpContentScreen.tsx; Screen 17 brief in upload/android_security_scanner_product_decisions.txt; preview comment references missing upload/17.md |
 | SCR-18 | src/app/system-health/page.tsx | src/components/systemhealth/SystemHealthPreview.tsx | src/components/systemhealth/SystemHealthScreen.tsx; download/security-scanner-expo/SystemHealthScreen.tsx; upload/18.md |
 
 Additional route mappings:
@@ -146,7 +146,7 @@ The next phase must establish ZeroDeck's actual declared MVP boundary rather tha
 - [x] All 17 baseline screens are individually identified and assigned stable evidence IDs.
 - [x] Each screen is mapped to its route, preview component and available screen/code handoff.
 - [x] Visible content, controls, stated interactions, sample/local states and responsive clues are recorded at the level supported by source material.
-- [x] Missing screen-specific briefs for Screens 16 and 17 are identified; the product-decision descriptions and source components are used, with the limitation retained.
+- [x] Screen-specific handoffs upload/16.md and upload/17.md are referenced by the preview source comments but are absent from the inspected tree. The product-decision descriptions and source components are used for Screens 16 and 17, with the missing handoffs retained as an evidence gap.
 - [x] Screen 18 and two extra routes are recorded separately rather than silently merged into the 17-screen baseline.
 - [x] Uploaded image assets are inspected and classified; unrelated/context images are excluded from product evidence.
 - [x] Scanner-draft scope labels are kept separate from the unconfirmed ZeroDeck startup MVP decision.
