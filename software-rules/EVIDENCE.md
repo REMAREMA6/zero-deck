@@ -11,7 +11,7 @@
 | Product-material | Supplied product decision/material; supports only the content actually documented. |
 | Source-derived prior art | Inspected source implementation; describes that source, not ZeroDeck. |
 | Platform/provider contract | Official documentation; defines a platform/provider contract or constraint, not ZeroDeck implementation. |
-| Runtime-observed | No ZeroDeck runtime evidence currently exists. |
+| Runtime-observed (ZeroDeck) | No deployed ZeroDeck runtime evidence currently exists. |\n| Runtime-observed (reference project) | Directly observed behaviour in an upstream CI execution of a pinned prior-art project; applies only to that project and run. |
 | Unknown | Not established; cannot be treated as false, absent, safe, or not applicable. |
 
 ## Primary ZeroDeck decision and product-material records
@@ -43,7 +43,15 @@
 
 ## Runtime evidence status
 
-No runtime evidence from a deployed ZeroDeck build was available in Phases 1–4. The product reference repository is a mock-screen/source-material repository, not a verified running target. The machine-readable capture therefore contains no runtime observations or runtime rules. It records declared scope and explicitly incomplete coverage.
+No runtime evidence from a deployed ZeroDeck build is available. The product reference repository is a mock-screen/source-material repository, not a verified running target. The machine-readable capture therefore contains no ZeroDeck runtime observations or runtime rules. It records declared scope and explicitly incomplete coverage.
+
+### Reference-project runtime evidence (not ZeroDeck runtime)
+
+| Evidence ID | Artifact | Execution provenance | Permitted use |
+|---|---|---|---|
+| EVD-RT-REF-001 | `re/zerodek-product-re/2026-11-27/PHASE-7-RUNTIME-OBSERVATION-MAP.md` | Exact-pinned upstream CI runs: Hypatia `26000483662` at `c0f98977be935e58849726313635a2459cac3892`; HypatiaDatabases `37898012266` at `3c35f52e1a847caed46d8e1ad34968bfa3c8b10a` and current failure `45974623484`; ClamAV `45055471772` at `cad7b18a3e6505195fe08db1412449a18fc9f012`. | Contextual reference-runtime observations only: generator feed counts and unsigned publication, ClamAV CVD/signature/callback tests, and bounded CI completion. Not ZeroDeck behaviour, not automatic product requirements, and not dependency approval. Raw logs and scenario/facet mapping remain in the RE workspace. |
+
+The Phase 7 investigation did not execute ZeroDeck or transfer reference-project behaviour into the ZeroDeck capture. All seven ZeroDeck MVP scenarios have an evidence-or-skip disposition; none was run against a deployed ZeroDeck target. The capture's runtime-observation count remains zero by design.
 
 ## Provenance constraints
 
