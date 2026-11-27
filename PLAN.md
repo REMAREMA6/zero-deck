@@ -47,9 +47,9 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 
 ### Phase 0 — Governance and handoff
 - [x] Read the Software Rules contribution workflow and adopt its plan/tracker/resumption pattern.
-- [ ] Establish this project plan, tracker, and contribution guide.
-- [ ] Link governance documents from the project README.
-- [ ] Record the current engagement understanding and active task.
+- [x] Establish this project plan, tracker, and contribution guide.
+- [x] Link governance documents from the project README.
+- [x] Record the current engagement understanding and active task.
 **Exit gate:** a new chat can resume from repository records alone, without relying on private chat history.
 
 ### Phase 1 — Mockup inventory
