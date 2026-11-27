@@ -1,0 +1,39 @@
+# ZeroDeck MVP — 15-Facet Rule and Property Map
+
+**Maturity:** Draft  
+**Facet authority:** Software Rules 0.3.0 Draft catalogue and facet-specific specifications.  
+**Status:** First synthesis map; required properties remain unresolved.
+
+Facets are observation perspectives, not implementation modules. One operation may create linked observations in several facets. The 15 facets below are retained exactly as defined by the governing specification.
+
+| # | Facet | MVP applicability | Current ZeroDeck rule/evidence position | Required capture dimensions |
+|---:|---|---|---|---|
+| 1 | Interface | Applicable to all user-facing workflows | Screen inventory is design/source evidence only; no runtime observation. | Full rendered hierarchy; content/text; computed presentation; geometry/coordinate system; positioning/clipping/stacking/visibility; accessibility semantics/focus; affordances; assets/loading; route and every relevant UI state/viewport/platform. |
+| 2 | Behaviour | Applicable to all workflows | Seven MVP scenarios defined; no execution/transition captured at runtime. | Trigger, actor, preconditions, ordered actions, before/after state, transitions, outputs, side effects/events, timing/settling, cancellation and terminal result. |
+| 3 | Business rules | Applicable to scan classification, quarantine eligibility/disposition and link results/gating | Owner gates known; classification thresholds, verdict policy and result mapping unknown. | Inputs/provenance, decision conditions/criteria, branches, calculations/units/rounding where relevant, output, actor/context and effective period. |
+| 4 | Data | Applicable to file identity/results, quarantine artefacts, submitted URLs and link results | No ZeroDeck runtime schema established. | Subject/schema, field paths, values/types, null vs missing, units/formats, relationships, constraints, transformations, validation, serialization, redaction and completeness. |
+| 5 | Persistence | Conditional, but must be resolved for quarantine lifecycle and any durable records actually present | Android storage constraints documented; ZeroDeck store, durability and retention unknown. | Store identity; read/write/update/delete; selectors; before/after; transaction/commit/rollback; consistency/ordering; durability; concurrency; retention/expiry and uninstall/backup consequences. |
+| 6 | API | Conditional on actual backend/provider exchanges | Web Risk is reference contract only; no ZeroDeck API or production exchange established. | Protocol/version; endpoint/method; request path/query/headers/body/auth context; response status/headers/body; timing; redirects/retries/errors; correlation and side effects. |
+| 7 | Messaging | Conditional; no broker/event architecture assumed | No messaging evidence for ZeroDeck MVP. | Channel; message ID/correlation/causation; envelope/payload; producer/consumer; publish/accept; delivery attempts/order; acknowledgement; redelivery/dead-letter; processing result. |
+| 8 | Identity and authentication | Conditional; Pro gate makes entitlement principal/lifecycle a required question, not proof of a particular login system | Pro requirement is owner-declared; principal and entitlement verification mechanism unknown. | Privacy-safe principal; mechanism/protocol; credential type (never secret); issuer/audience; session/token lifecycle; challenge; success/failure; expiry/refresh/revocation. |
+| 9 | Authorization and permissions | Applicable to file access and Pro-gated link checking; exact enforcement model unknown | Android SAF grants/provider capabilities documented; owner Pro gate declared; ZeroDeck enforcement unobserved. | Principal/auth context; action/resource; context attributes; policy evidence; permit/deny/indeterminate; enforcement point; response and reason. |
+| 10 | Security controls | Applicable to security scanning, quarantine, and link checking | Hypatia, Android Keystore and Web Risk provide reference constraints; ZeroDeck threat model/control outcomes unverified. | Test objective and authorized scope; control; stimulus; environment; detected/blocked/allowed/contained/inconclusive result; response; telemetry/impact; safety constraints. |
+| 11 | Background processing | Conditional; manual scan does not establish background job architecture | Hypatia prior-art async/cancellation is not ZeroDeck evidence; no ZeroDeck worker/queue established. | Job identity/trigger/schedule; enqueue; worker; lifecycle; attempts; start/end; inputs/output; side effects; timeout/cancel/retry; terminal result/correlation. |
+| 12 | Errors and recovery | Applicable to file access, scan engine, quarantine operations and link/provider failures | Reference error cases identified; ZeroDeck error taxonomy/recovery unobserved. | Trigger/operation; error category/code/message; origin/propagation; retry/fallback/compensation; recovery state; terminal outcome; timing/impact; expected rejection vs fault. |
+| 13 | Integrations | Conditional on actual detection/provider/platform integrations | Web Risk and Android are reference contracts, not selected production integrations. | Provider/system identity; boundary/direction/operation/protocol; request/response refs; redacted credentials context; resilience; mapping; dependency outcome/correlation. |
+| 14 | Configuration | Applicable to Pro/activation gates and material scan/quarantine/link limits/settings | Owner switch exists as declared policy; effective configuration source/default/precedence not established. | Key/value/type/unit; origin/scope/precedence; activation time; mutability/reload; target context; redaction; linked effect observations. |
+| 15 | Performance and resource behaviour | Applicable to manual scanning and link-check operation; no targets/benchmarks established | Prior-art parameters are not ZeroDeck performance results. | Metric/definition/value/unit/statistic; measurement boundary/time; workload/concurrency/sample count; cold/warm state; hardware/runtime; resource scope; collection method/sampling/uncertainty. |
+
+## Cross-facet links that must be preserved
+
+- File selection/access → authorization/permissions, behaviour, errors/recovery and security controls.
+- Scan classification → business rules, data, security controls, interface and behaviour.
+- Confirmed threat → quarantine eligibility, persistence, data integrity, permissions, errors/recovery and interface.
+- Restore/delete → business rules, behaviour, persistence, integrity/security controls and errors/recovery.
+- Link submission → interface, data validation, business rules, API/integrations if a provider is actually called, privacy/security, errors/recovery and performance.
+- Pro and activation gates → identity/authentication, authorization, business rules, configuration, behaviour and integrations.
+- Any measured latency/resource use → link the performance observation to the operation/workload and its primary facet; do not duplicate the operation as a free-standing metric.
+
+## Applicability discipline
+
+Conditional does not mean absent. Do not mark a conditional facet not-applicable until the target's actual boundary and behaviour establish that it is irrelevant to the declared MVP. The current inventory therefore remains incomplete.
