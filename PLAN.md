@@ -106,29 +106,27 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 
 **Corrected scope (owner clarification, 2026-11-27):** Phase 7 does not run the ZeroDeck mockup repository. lordwhitefire/Zerodek is the owner's fork of Felix's product-intent repository. It is used for screen/design intent and source-level UI inspection only. REMAREMA6/zero-deck is the actual ZeroDeck product repository being built. The selected prior-art implementations from Phase 3 are the runtime-investigation targets.
 
-- [ ] Complete target-specific RE triage and record the permission/licence basis before any execution.
-- [x] Inventory the available environment and assess it against the dynamic-lab requirements; no genuine named isolated lab is available, so runtime execution is blocked. See `PHASE-7-TARGET-PREFLIGHT.md`.
+**Owner execution instruction (2026-11-27):** Do the runtime investigation that can reasonably be completed. If one target or scenario cannot be run, record why, skip it and continue with the others. Do not stop the entire investigation because one path is blocked, and do not waste excessive time forcing unavailable paths. Prefer exact-revision, reproducible upstream CI runtime/build/test evidence when local execution is unavailable. Clearly label upstream CI evidence; never claim it was executed locally by this investigation.
+
+- [x] Inventory the available environment and inspect the target build/test paths and prerequisites. See `PHASE-7-TARGET-PREFLIGHT.md`.
 - [x] Extract the mockup UI source-derived rules separately from runtime investigation; 12 bounded rules are recorded in `UI-SOURCE-DERIVED-RULES.md`.
-- [ ] Pin each selected implementation to its Phase 3 immutable revision and inspect entry points, build scripts, dependencies, install hooks, tests and runtime prerequisites before execution.
-- [ ] Investigate only non-UI behaviour relevant to the approved MVP and 15 facets: file scanning/verdicts, threat-data generation and integrity, quarantine-relevant file/storage semantics where implemented, errors/recovery, security controls, resource behaviour, and documented API/provider contracts.
-- [ ] Runtime targets: SRC-01 Hypatia (Android file scanner), SRC-02 HypatiaDatabases (database-generation pipeline), and SRC-06 ClamAV (comparison engine only; not an adopted dependency).
-- [ ] Do not perform runtime UI inspection or derive UI rules from runtime. UI is handled from the existing mockup/screens and source code; its eventual runtime rules are a later implementation-stage task for the developer agent.
-- [ ] SRC-04 Web Risk is a remote provider contract. Do not make external provider calls, create accounts, obtain secrets, or incur costs; record its runtime behaviour as unverified unless the owner separately approves a properly scoped integration test.
+- [x] Check upstream CI runtime/build/test evidence for each selected executable target at its exact Phase 3 pinned revision; record run IDs, outcomes and accessible logs in `PHASE-7-AVAILABLE-RUNTIME-EVIDENCE.md`.
+- [x] Runtime evidence found for SRC-01 Hypatia (successful CI build workflow), SRC-02 HypatiaDatabases (successful full database-generation workflow), and SRC-06 ClamAV (successful cross-platform build; Ubuntu CTest 17/17 passed).
+- [~] Map the collected runtime observations to ZeroDeck-relevant scenarios and the 15 facets while retaining provenance and evidence class. Reference-project observations are not ZeroDeck production behaviour or automatic product requirements.
+- [ ] Investigate any additional non-invasive runtime scenarios that are actually feasible in the current environment; skip paths requiring unavailable local infrastructure.
+- [ ] Record precise blockers for skipped local/device/provider scenarios and continue with other eligible evidence.
+- [ ] SRC-04 Web Risk remains a remote provider contract. Do not make external provider calls, create accounts, obtain secrets or incur costs without separate owner approval; record live provider behaviour as unverified.
 - [ ] SRC-07 Android storage/SAF/Keystore are platform documents, not executable repositories; use them as documented constraints, not runtime targets.
-- [ ] Do not run malware samples or suspicious files. Use only benign, controlled test fixtures where execution is authorized and a suitable lab exists.
-- [ ] Capture reproducible scenario-level evidence: exact revision, environment, commands, initial state, inputs, ordered actions, outputs, logs, resulting state, and stop criteria.
-- [ ] Map each observation to relevant ZeroDeck scenarios/facets while preserving evidence class. Reference-project runtime observations are never described as ZeroDeck production behaviour.
-- [ ] Update the capture, evidence, property inventory, traceability and open-property register only where supported; rerun governing validation.
+- [ ] Do not run malware samples or suspicious files. Use only benign, controlled fixtures where execution is appropriate and a suitable environment exists.
+- [ ] Reconcile the Software Rules capture, evidence, property inventory, traceability and open-property register only where supported; rerun governing validation and assess replication sufficiency.
 
-**Preflight record:** `re/zerodek-product-re/2026-11-27/PHASE-7-TARGET-PREFLIGHT.md` records target build paths, dependencies, external-feed/API constraints, licence/permission gaps and the environment check.
+**Runtime evidence report:** `re/zerodek-product-re/2026-11-27/PHASE-7-AVAILABLE-RUNTIME-EVIDENCE.md` records exact pinned revisions, CI run IDs, verified outcomes, accessible job-log details, the current HypatiaDatabases ThreatFox HTTP 410 failure, and skipped paths.
 
-**Execution gate:** no target code is run until both target-specific authorization/permission and a genuinely suitable named isolated environment are established. A normal container, folder, process or user account is not sufficient. If either gate fails, continue with safe source/document analysis and record runtime as blocked/unverified.
+**Local execution disposition:** the current container lacks the Android SDK/ADB/Gradle, Maven and ClamAV dependencies, and a suitable isolated lab is not verified. The investigation therefore uses the available exact-revision upstream CI evidence and skips the corresponding local execution paths rather than blocking all Phase 7 work. Any further local execution must have an appropriate execution basis and environment; this does not invalidate or erase the CI evidence already collected.
 
-**Environment preflight (2026-11-27):** the available container runs as root; Docker, Podman, Android Debug Bridge, Gradle and ClamAV executables were not found. No named isolated lab or its no-host-share/no-bridged-network/snapshot-and-destroy properties have been verified. Runtime execution is therefore **blocked at preflight**; this is not a completed runtime investigation.
+**UI source work is separate:** source-derived UI rules from the owner's mockup fork are not runtime observations. Later, when the actual ZeroDeck React/TypeScript native app is implemented, the developer agent may capture UI runtime rules and complete the UI evidence.
 
-**UI source work is separate:** extract source-derived UI rules from the owner's mockup fork and screen source without calling them runtime observations. Later, when the actual ZeroDeck React/TypeScript native app is implemented, the developer agent may capture UI runtime rules and complete the UI evidence.
-
-**Exit gate:** every eligible non-UI runtime scenario has reproducible evidence or a precise authorization/environment/integration blocker; all 15 facets have evidence-backed dispositions; source/runtime/intent evidence remain distinct; capture and validation are reconciled; replication sufficiency is explicitly assessed. A blocked runtime gate does not count as runtime completion.
+**Exit gate:** every eligible non-UI runtime scenario has reproducible evidence or a precise recorded reason for skipping; all 15 facets have evidence-backed dispositions; source/runtime/intent evidence remain distinct; capture and validation are reconciled; replication sufficiency is explicitly assessed. A skipped scenario remains unverified and must not be described as runtime-complete.
 
 ## 6. Target project structure
 
