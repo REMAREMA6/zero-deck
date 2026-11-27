@@ -3,8 +3,8 @@
 **Date:** 2026-11-27  
 **Governing taxonomy:** Software Rules 0.3.0 Draft; schema 0.2.0 Draft.  
 **Facet authority:** `REMAREMA6/software-rules/facets/README.md`, `FACET-BOUNDARIES.md`, and the 15 facet specifications.  
-**Target evidence:** ZeroDeck owner clarification and the scanner candidate inventory in `CAPABILITY-INVENTORY.md`.  
-**Status:** Candidate mapping complete. It is not a declared replication scope because the ZeroDeck launch MVP has not been selected.
+**Target evidence:** ZeroDeck owner MVP decision recorded in `MVP-SCOPE-DECISION.md`; candidate inventory in `CAPABILITY-INVENTORY.md`.  
+**Status:** Phase 2 mapping and MVP scope freeze complete. This is a declared bounded replication scope, not a claim that the required properties have already been fully captured.
 
 ## 1. Mapping rules
 
@@ -104,10 +104,43 @@ At minimum, later investigation must resolve:
 - performance/resource constraints under representative workloads;
 - complete interface states, responsive/platform variants and accessibility properties.
 
-## 7. Phase 2 disposition
+## 7. Owner-selected MVP scope and facet applicability
 
-**Facet mapping work is complete for the evidence-backed candidate capabilities.** The 15 facets have been considered, applicable and conditional perspectives are identified, scenario definitions are listed, cross-facet dependencies are recorded, and unknowns are explicit.
+The declared Phase 2 replication scope is limited to three capabilities:
 
-**The Phase 2 exit gate is not yet satisfied.** The ZeroDeck launch MVP is not explicitly selected in the owner-approved record. The scanner working draft proposes its own Android scanner MVP, but the owner instructed that ZeroDeck's MVP must not be inferred from repository contents. A replication scope, exclusions and required-property inventory cannot be finalized until the owner selects the first capability/service and its workflows.
+- **MVP-01 — Manual file security analysis:** select a permitted file, initiate a manual scan, observe progress/termination and receive a bounded classification/result.
+- **MVP-02 — Quarantine and file disposition:** isolate a confirmed threat when permitted; handle suspicious/inconclusive cases without unsafe automatic destruction; support the documented restore/delete lifecycle and truthful operation outcomes.
+- **MVP-03 — Website and link checking:** submit a URL, validate/normalize it as required, perform the check, and return a bounded risk result with explicit limitations.
 
-No rules are asserted as runtime-verified. This document is a scope and investigation map, not the final Software Rules deliverable.
+**IP address tracking/investigation is CAP-13, a future candidate explicitly outside this MVP.** Its meaning and workflow are not sufficiently defined to create MVP scenarios or requirements. It is recorded for later discovery only.
+
+The MVP includes the cross-cutting properties necessary to reproduce these three capabilities, including relevant interface states, business decisions, data, security controls, errors/recovery, configuration, integrations and performance. A facet is not excluded merely because the implementation architecture is unknown. Conversely, conditional facets (such as persistence, API, messaging, authentication, background processing) become required only where the selected target's actual behaviour establishes their relevance. Do not invent a backend or provider architecture.
+
+### 7.1 MVP scenario set
+
+| Scenario ID | MVP workflow | Required outcome dimensions |
+|---|---|---|
+| MVP-FILE-001 | Select a supported file and initiate manual scan | Input acceptance/rejection; permissions/access; scan lifecycle; progress; terminal result; side effects; truthful user-facing state. |
+| MVP-FILE-002 | File scan result branches | Confirmed threat, suspicious, no known threat, inconclusive, unsupported/inaccessible file, interruption and engine failure; each branch's state, wording and permitted next action. |
+| MVP-QUAR-001 | Quarantine a confirmed threat | Eligibility decision; user/system trigger; isolation attempt/result; artifact identity/integrity; notification; failure state. |
+| MVP-QUAR-002 | Handle suspicious or inconclusive file | Review/rescan path; no unsupported destructive action; state transitions and confirmation requirements. |
+| MVP-QUAR-003 | Restore or permanently delete quarantined file | Confirmation; restore preconditions/fresh scan where specified; integrity; actual outcome; audit/history side effects if present; failure consistency. |
+| MVP-LINK-001 | Submit a website URL/link for checking | Input route; validation/normalization; execution; result; scope/limitations; timeout/offline/provider failure. |
+| MVP-LINK-002 | Link-check result branches | Likely dangerous, no known threat, inconclusive, invalid URL, redirect, timeout and unavailable source/provider; truthful bounded result, no guarantee of safety. |
+
+The earlier candidate scenarios for history, optional remote file upload, admin sign-in, indicator management, CMS publishing and service health remain outside this MVP unless a selected MVP workflow demonstrably depends on a specific cross-cutting property. They are not independent MVP capabilities.
+
+### 7.2 Required-property inventory disposition across 15 facets
+
+The 15-facet inventory in §3 is now interpreted against MVP-01 through MVP-03, not the entire candidate list. Its status is:
+
+- **Directly applicable to the MVP:** Interface, Behaviour, Business Rules, Data, Security Controls, Errors and Recovery, Configuration, and Performance and Resource Behaviour.
+- **Conditional on observed/approved architecture or workflow:** Persistence, API, Messaging, Identity and Authentication, Authorization and Permissions, Background Processing, and Integrations. Security-critical permissions and access controls remain in scope wherever the platform or operation requires them, even if no user account exists.
+
+These applicability labels define what must be investigated; they do not assert that a mechanism exists. Each property question in §3 remains open until supported by runtime evidence or explicitly labelled source-derived evidence. Any relevant unresolved property prevents a completeness claim under the governing Replication Completeness Rule.
+
+## 8. Phase 2 disposition
+
+**Phase 2 exit gate: satisfied.** The owner has selected and bounded the first ZeroDeck MVP to manual file security analysis, quarantine/file disposition, and website/link checking. IP address tracking/investigation is recorded as a future candidate and explicitly excluded from MVP. The three MVP workflows, exclusions, all 15 facet perspectives, scenario branches, cross-facet dependencies, and required-property questions are documented.
+
+This is a scope-and-investigation milestone only. No rules are asserted as runtime-verified, and the selected MVP is not yet replication-sufficient. Phase 3 must select and audit relevant prior-art/source material against these three capabilities; Phases 4–6 must establish and validate the required properties.
