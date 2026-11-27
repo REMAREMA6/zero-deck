@@ -13,7 +13,7 @@
 **Phase 4 plan closeout blob:** 71c734f9283e03d32263f75cbc9e46014e1e7e03  
 **Phase 7 corrected decision commit:** 6cc99584682becef61dbb7d728d604c24d884b1b  
 **Current phase:** Phase 7 — Non-UI runtime investigation of selected prior-art implementations  
-**Overall status:** Phases 0–6 are complete as project/review phases. Phase 7 has started; runtime execution is blocked at preflight because no genuine isolated lab has been verified. The ZeroDeck product-specific Software Rules capture remains incomplete and not replication-sufficient. The owner-approved MVP is manual file security analysis, quarantine/file disposition, and Pro-gated website/link checking (disabled until owner activation when paid revenue can fund costs). IP address tracking/investigation is a future candidate and excluded from MVP.
+**Overall status:** Phases 0–6 are complete as project/review phases. Phase 7 has partial runtime evidence from successful upstream CI runs for all three selected executable references; local execution paths that cannot be completed in this environment are skipped and recorded. Phase 7 remains in progress. The ZeroDeck product-specific Software Rules capture remains incomplete and not replication-sufficient. The owner-approved MVP is manual file security analysis, quarantine/file disposition, and Pro-gated website/link checking (disabled until owner activation when paid revenue can fund costs). IP address tracking/investigation is a future candidate and excluded from MVP.
 
 > This is the persistent progress and handoff record. Update it whenever work starts, changes status, becomes blocked, or is completed. A new chat must be able to resume from this file and the linked repository records without depending on private chat history.
 
@@ -29,10 +29,10 @@
 
 - **Current phase:** Phase 7 — Non-UI runtime investigation of selected prior-art implementations.
 - **Current task:** Corrected scope is recorded in PLAN.md and RUNTIME-INVESTIGATION-DECISION.md. Investigate Hypatia, HypatiaDatabases and ClamAV only for non-UI runtime behaviour relevant to the approved MVP. ZeroDeck's mockup fork is a product-intent/UI-source reference, not a runtime target.
-- **Completed:** Phases 0–6 review tasks complete. Phase 6 reviewed all 15 facets, reconciled 775 property entries (700 required; 75 optional), and passed validation in [CI run #46000308895](https://github.com/REMAREMA6/zero-deck/actions/runs/46000308895). Phase 7 scope correction committed. Supplemental UI source review extracted 12 source-derived rules at `re/zerodek-product-re/2026-11-27/UI-SOURCE-DERIVED-RULES.md`.
-- **Preflight blocker:** Available container is root-run; Docker, Podman, ADB, Gradle and ClamAV binaries are absent. No named isolated lab or no-host-share/no-bridged-network/snapshot/teardown properties have been verified. Do not execute reference code here.
+- **Completed:** Phases 0–6 review tasks complete. Phase 6 reviewed all 15 facets, reconciled 775 property entries (700 required; 75 optional), and passed validation in [CI run #46000308895](https://github.com/REMAREMA6/zero-deck/actions/runs/46000308895). Phase 7 scope correction committed. Supplemental UI source review extracted 12 source-derived rules. Exact-pinned upstream CI runtime evidence collected for Hypatia, HypatiaDatabases and ClamAV; see `re/zerodek-product-re/2026-11-27/PHASE-7-AVAILABLE-RUNTIME-EVIDENCE.md`.
+- **Skipped local paths:** Available container lacks Android SDK/ADB/Gradle, Maven and ClamAV, and a suitable isolated lab is not verified. Do not spend excessive time forcing local execution where exact-pinned upstream CI evidence is available. Record each skipped path and continue with other eligible evidence.
 - **Out of scope:** UI runtime inspection, mockup runtime claims, external provider calls/secrets/paid services, malware samples, replacement implementation and IP investigation.
-- **Next action:** Resolve target-specific permission and whether a genuine isolated lab can be supplied; continue only non-executing source inspection until both execution gates pass. Record external integration blockers rather than attempting provider calls.
+- **Next action:** Continue extracting and mapping the available upstream runtime evidence to the relevant scenarios/facets; investigate any additional locally feasible non-invasive tests. Skip blocked targets/scenarios and continue. Do not call paid/external providers or run malware samples.
 
 ## Phase tracking
 
@@ -45,7 +45,7 @@
 | 4 | Source-level rule extraction | [x] Complete | 31 source-derived rules, 28 platform/provider contract rules, 5 owner-declared link-gating rules, and a 15-facet audit across all three approved MVP capabilities. No ZeroDeck runtime behaviour or replication sufficiency is claimed. See `re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md` and `re/zerodek-product-re/2026-11-27/PHASE-4-15-FACET-COVERAGE-AUDIT.md`. |
 | 5 | Software Rules synthesis | [x] Complete | Synthesis exit gate satisfied. Includes 6 owner rules, 27 provisional product-material rules, 3 declared contracts, 12 evidence records, 7 scenarios, 15 facets and 757 property entries. All 15 semantic payload mappings, individual rule/evidence traceability, Draft 2020-12 schema validation, governing completeness/integrity suites and ZeroDeck cross-reference checks passed. Capture remains explicitly incomplete and not replication-sufficient. See `software-rules/PHASE-5-SYNTHESIS-AUDIT.md`. |
 | 6 | Completeness and conformance | [x] Complete — bounded review | Exit gate satisfied for an explicitly incomplete product deliverable. All 15 facets reviewed; inventory omissions/applicability inconsistencies corrected; 775 entries reconciled (700 required, 75 optional); CI #46000308895 passed. Product remains not replication-sufficient. See `software-rules/PHASE-6-COMPLETENESS-AUDIT.md`. |
-| 7 | Non-UI runtime investigation of selected prior-art implementations | [~] Started; runtime blocked at preflight | Corrected target list: Hypatia, HypatiaDatabases and ClamAV (comparison only). UI runtime is excluded; UI source rules are a separate source-analysis task. No runtime execution until target-specific permission and a genuine isolated lab are verified. See RUNTIME-INVESTIGATION-DECISION.md and PHASE-7-TARGET-PREFLIGHT.md. |
+| 7 | Non-UI runtime investigation of selected prior-art implementations | [~] In progress; partial runtime evidence collected | Successful exact-pinned upstream CI evidence: Hypatia build/CI, HypatiaDatabases full generation pipeline, ClamAV build and 17/17 Ubuntu tests. Local execution paths unavailable here are skipped; latest HypatiaDatabases run also has a ThreatFox HTTP 410 blocker. Continue with feasible evidence and record/skip individual blockers rather than stopping the phase. See `PHASE-7-AVAILABLE-RUNTIME-EVIDENCE.md`. |
 
 ## Phase 0 — Governance and handoff
 
@@ -116,14 +116,14 @@ Review closed 2026-11-27 under the plan's incomplete-deliverable exit branch. Th
 - [x] Exclude UI runtime inspection from Phase 7 and record that the actual ZeroDeck UI runtime rules may be captured later by the developer agent.
 - [x] Complete target and environment preflight for Hypatia, HypatiaDatabases and ClamAV; exact build paths, dependencies, external feed/API constraints, tool availability, licence/permission gaps and isolation blocker recorded in `PHASE-7-TARGET-PREFLIGHT.md`.
 - [x] Extract 12 bounded UI source-derived rules separately from the pinned lordwhitefire/Zerodek screen source. See `re/zerodek-product-re/2026-11-27/UI-SOURCE-DERIVED-RULES.md`.
-- [ ] Complete target-specific RE triage and document the permitted execution basis for each third-party implementation.
-- [ ] Establish a genuine named isolated lab with no host shares, no bridged network, snapshot rollback and teardown.
-- [~] Inspect target entry points, build scripts, lifecycle hooks, dependencies, fixtures and tests without executing them; initial workflow/build-path inspection is recorded, detailed source mapping remains.
-- [ ] Execute only approved, locally runnable non-UI scenarios after both gates pass; skip provider calls requiring credentials/secrets or paid services.
-- [ ] Record reproducible runtime evidence and assess all 15 facets.
+- [x] Check available upstream CI evidence for each selected executable target at its exact Phase 3 pinned revision; record run IDs, outcomes and accessible log evidence.
+- [x] Record the owner's execution instruction: complete what is feasible; skip a target/scenario that cannot reasonably be run; continue with the others; do not waste time forcing blocked paths.
+- [~] Map upstream runtime/build/test observations to ZeroDeck-relevant scenarios and facets, preserving their evidence class and limitations.
+- [ ] Investigate any additional non-invasive runtime scenarios that are actually feasible in the current environment.
+- [ ] Record precise blockers for skipped local/device/provider scenarios; do not let one blocker stop other targets.
 - [ ] Reconcile the Software Rules capture, open properties, traceability and validation; assess replication sufficiency.
 
-**Current disposition:** runtime execution is blocked. Do not run repository code until target-specific permission and a genuine isolated lab are documented as passed.
+**Current disposition:** partial upstream runtime evidence is available for all three selected executable references. Local Android/device, full feed-pipeline and ClamAV execution paths are skipped in this environment. Continue with the evidence that can be obtained; record and move past unavailable paths.
 
 ## Handoff protocol
 
