@@ -4,10 +4,10 @@
   "title": "ZeroDeck Identity and Authentication Product Requirements",
   "issuer": "ZeroDeck Product Management Agent",
   "artifact": {
-    "uri": "https://github.com/REMAREMA6/zero-deck/blob/8c8a06e7188297b92d71a400bc85fd911fbcde54/product-management/product-rules/contracts/IDENTITY-AUTHENTICATION.md",
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/db93a19fcbd4d7197be852a0cadd395c9af5a977/product-management/product-rules/contracts/IDENTITY-AUTHENTICATION.md",
     "version": "0.1.0-draft",
-    "revision": "8c8a06e7188297b92d71a400bc85fd911fbcde54",
-    "digest": "sha256:743e6155049f2b1b1537e87009708851724fd627e0240c667be999ee55967316",
+    "revision": "db93a19fcbd4d7197be852a0cadd395c9af5a977",
+    "digest": "sha256:9f6759de0dd81f4d7d3a5e9af0b2c5ee148cfb895ebc3492770f1ce698a679a2",
     "mediaType": "text/markdown"
   },
   "scope": "Identity and account lifecycle requirements for ZeroDeck; supporting infrastructure for web and Android, not a fourth user-facing MVP capability.",
@@ -39,7 +39,7 @@
     },
     {
       "statementId": "ZD-AUTH-006",
-      "text": "If password authentication is offered, the system MUST accept long passphrases and permitted Unicode/whitespace characters within a documented safe input limit, MUST NOT silently truncate a password, MUST NOT impose arbitrary character-composition rules, and MUST screen new passwords against a suitable blocklist of commonly used or compromised passwords.",
+      "text": "If password authentication is offered, the system MUST require a minimum of 15 characters for a password used as a single-factor authenticator and a minimum of 8 characters when the password is used only as part of multi-factor authentication; MUST permit passwords of at least 64 characters; MUST accept Unicode and whitespace; MUST NOT silently truncate passwords or impose other character-composition rules; MUST compare new or changed passwords against a blocklist of commonly used, expected or compromised passwords; and MUST NOT require periodic password changes unless there is evidence of compromise.",
       "location": "## Requirement ZD-AUTH-006"
     },
     {
@@ -356,9 +356,8 @@
           "basis": [
             {
               "basisType": "Given a password within the documented maximum, when permitted Unicode or whitespace is used, then it is accepted for evaluation; oversized input is explicitly rejected and never truncated.",
-              "description": "external-research",
+              "description": "NIST SP 800-63B-4 Section 3.1.1.2 specifies 15 characters for single-factor passwords, permits a lower minimum only when the password is used as part of MFA with an 8-character floor, recommends a maximum length of at least 64, prohibits composition rules, requires blocklist checks and prohibits periodic changes absent compromise.",
               "refs": [
-                "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html",
                 "https://pages.nist.gov/800-63-4/sp800-63b.html",
                 "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html"
               ]
@@ -367,9 +366,9 @@
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-006-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Password controls should follow current guidance without arbitrary complexity rules.",
+              "given": "Password authentication is offered.",
+              "when": "A password is submitted for creation or change.",
+              "then": "The service enforces the 15-character single-factor minimum or 8-character MFA minimum, accepts at least 64 characters, permits Unicode and whitespace, rejects blocklisted values, does not silently truncate or impose composition rules, and does not require periodic changes absent compromise.",
               "verificationMethod": "automated-test"
             }
           ],
