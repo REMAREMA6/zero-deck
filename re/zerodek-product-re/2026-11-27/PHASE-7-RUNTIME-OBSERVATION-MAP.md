@@ -121,7 +121,7 @@ Additional runtime observations have been extracted and mapped to the 15 facets 
 
 The remaining unobserved items are not being retried in this pass because their blockers are explicit: unavailable local toolchains, no verified isolated lab, expired Hypatia logs, missing provider credentials/approval, or non-executable documentation. Continue only if new accessible evidence or a suitable authorized environment becomes available.
 
-**Phase 7 remains in progress. ZeroDeck's Software Rules capture remains incomplete and not replication-sufficient.**
+**Phase 7 bounded investigation is complete. The ZeroDeck Software Rules capture remains incomplete and not replication-sufficient.**
 
 
 ## MVP scenario-by-scenario runtime disposition
