@@ -27,7 +27,7 @@
 
 ## Current position
 
-- **Current phase:** Phase 7 — renewed GitHub Actions-enabled investigation (in progress).
+- **Current phase:** Phase 7 — bounded renewed reference-runtime investigation complete (2026-11-27).
 - **Owner authorization:** The owner explicitly authorized ordinary inspection/build/test work for the three exact-pinned open-source targets. Rationale and scope are recorded in `re/zerodek-product-re/2026-11-27/OWNER-AUTHORIZATION-PHASE-7-OPEN-SOURCE-TESTING.md`. This is a scoped exception; the absolute consult-first default remains for all unlisted targets/actions.
 - **Runner smoke:** First-party Playwright smoke passed three times: [#46026033625](https://github.com/REMAREMA6/zero-deck/actions/runs/46026033625), [#46026203672](https://github.com/REMAREMA6/zero-deck/actions/runs/46026203672), [#46026419660](https://github.com/REMAREMA6/zero-deck/actions/runs/46026419660).
 - **Hypatia:** [Run #46029241394](https://github.com/REMAREMA6/zero-deck/actions/runs/46029241394) successfully completed Gradle lint/build and produced a debug APK at the pinned SHA. The unit-test task was `NO-SOURCE`. Lint report includes one Error-severity finding and warnings; see `PHASE-7-RENEWED-ACTIONS-RESULTS.md`.
@@ -36,7 +36,7 @@
 - **Initial failures and corrections:** First attempt exposed runner setup errors and a malformed escaped-newline fixture; corrected. Hypatia's first attempt failed dependency verification; subsequent Gradle build succeeded. A separate direct POM fetch returned a digest different from pinned metadata; unresolved, but Gradle's actual build succeeded and verification was not disabled.
 - **Artifacts inspected:** Hypatia APK/lint report, HypatiaDatabases fixture output, and ClamAV detailed CTest/Python logs. Details, exact revisions, commands, artifacts and limitations: `re/zerodek-product-re/2026-11-27/PHASE-7-RENEWED-ACTIONS-RESULTS.md`.
 - **Excluded / conditional:** Do not spend Phase 7 runtime effort on the mockup fork; UI source capture is sufficient. Web Risk live calls remain separately gated by credentials and explicit URL-disclosure/cost approval. No actual ZeroDeck app runtime exists yet.
-- **Next action:** Continue non-UI runtime investigation where useful and safe, especially Hypatia's executable behaviour beyond its build-only test path; inspect whether ClamAV's repeat CTest run finishes; then reconcile evidence into the runtime map and facet traceability. Keep ZeroDeck capture marked incomplete and not replication-sufficient.
+- **Closeout:** The bounded renewed Phase 7 pass is complete. See `re/zerodek-product-re/2026-11-27/PHASE-7-RENEWED-CLOSEOUT-AUDIT.md`. All three selected executable prior-art targets have exact-revision Actions build/test evidence; all 15 facets and seven MVP scenarios retain evidence/skip dispositions. The actual ZeroDeck product remains incomplete and NOT replication-sufficient. Next substantive runtime capture depends on a first-party ZeroDeck build becoming available.
 
 ## Phase tracking
 
@@ -49,7 +49,7 @@
 | 4 | Source-level rule extraction | [x] Complete | 31 source-derived rules, 28 platform/provider contract rules, 5 owner-declared link-gating rules, and a 15-facet audit across all three approved MVP capabilities. No ZeroDeck runtime behaviour or replication sufficiency is claimed. See `re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md` and `re/zerodek-product-re/2026-11-27/PHASE-4-15-FACET-COVERAGE-AUDIT.md`. |
 | 5 | Software Rules synthesis | [x] Complete | Synthesis exit gate satisfied. Includes 6 owner rules, 27 provisional product-material rules, 3 declared contracts, 12 evidence records, 7 scenarios, 15 facets and 757 property entries. All 15 semantic payload mappings, individual rule/evidence traceability, Draft 2020-12 schema validation, governing completeness/integrity suites and ZeroDeck cross-reference checks passed. Capture remains explicitly incomplete and not replication-sufficient. See `software-rules/PHASE-5-SYNTHESIS-AUDIT.md`. |
 | 6 | Completeness and conformance | [x] Complete — bounded review | Exit gate satisfied for an explicitly incomplete product deliverable. All 15 facets reviewed; inventory omissions/applicability inconsistencies corrected; 775 entries reconciled (700 required, 75 optional); CI #46000308895 passed. Product remains not replication-sufficient. See `software-rules/PHASE-6-COMPLETENESS-AUDIT.md`. |
-| 7 | Renewed GitHub Actions-enabled runtime investigation | [~] Reopened | First bounded pass is preserved as historical evidence. Re-run previously skipped targets/scenarios in GitHub Actions where feasible; add Playwright browser capture for relevant browser-rendered UI and use appropriate native tooling for native UI. See `GITHUB-ACTIONS-EXECUTION-PROCEDURE.md`. ZeroDeck runtime conformance remains unproven. |
+| 7 | Renewed GitHub Actions-enabled runtime investigation | [x] Complete (bounded pass) | Owner-scoped authorization recorded; Hypatia build/lint/APK, HypatiaDatabases fixture generator, and ClamAV CMake/CTest/Python tests executed at exact pinned revisions. Logs/artifacts inspected; 15 facets and seven MVP scenarios reconciled with explicit limits. See `PHASE-7-RENEWED-CLOSEOUT-AUDIT.md`. ZeroDeck runtime conformance remains unproven and the product is not replication-sufficient. |
 
 ## Phase 0 — Governance and handoff
 
