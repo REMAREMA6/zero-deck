@@ -4,13 +4,17 @@
 **Governing specification:** Software Rules 0.3.0 Draft  
 **Governing schema:** 0.2.0 Draft (JSON Schema 2020-12; reserved v1 namespace)  
 **Declared scope:** ZeroDeck first MVP — exactly three capabilities  
-**Status:** Phase 5 synthesis complete; capture incomplete and not replication-sufficient
+**Status:** Phase 5 synthesis and Phase 6 bounded completeness/conformance review complete; capture remains incomplete and not replication-sufficient
 
 ## Purpose
 
 This directory contains the product-specific, technology-independent rule specification for the owner-approved ZeroDeck MVP. It is a separate deliverable from the reverse-engineering evidence workspace.
 
 The specification describes the properties that an independent implementation must reproduce. It does not prescribe a programming language, framework, database, deployment model, or vendor unless an owner-approved decision or adequate evidence requires it.
+
+## Phase 6 review
+
+The bounded completeness/conformance review is complete. See [Phase 6 completeness audit](PHASE-6-COMPLETENESS-AUDIT.md). The capture remains incomplete and not replication-sufficient; no deployed runtime target or independent replica was available.
 
 ## Start here
 
