@@ -98,6 +98,16 @@ Source: https://docs.virustotal.com/docs/difference-public-private
 
 **What it does not support:** whether ZeroDeck should use VirusTotal or whether its users would accept any particular provider.
 
+### E8 — Qualitative community discussion of Android scanning
+
+A 2022 discussion in r/fossdroid asked whether Android antivirus was useful and what situations justified it. One participant described testing modified apps from multiple sources and wanting protection despite using a work profile. The developer of Hypatia explained that the app primarily detected known malicious files in user-accessible directories, not comprehensive device-wide malware, and recommended keeping the OS/apps updated and using well-maintained sources. A later comment in the thread cautioned that an early-stage scanner could produce false positives and should not be treated as authoritative.
+
+Source: https://www.reddit.com/r/fossdroid/comments/tsdlma/best_open_source_antivirus_for_android/
+
+**What it supports:** there is at least an anecdotal niche of Android users who deliberately test or install modified/sideloaded apps and seek additional scanning; it also illustrates that users may misunderstand the scope of a manual scanner and that false positives can undermine trust.
+
+**What it does not support:** prevalence, market size, current product quality, broad consumer demand, or representative user behaviour. The thread is from 2022, is self-selected and includes a product developer's own explanation. Treat it as a qualitative lead for interviews, not a ranking input or market proof.
+
 ## 3. Customer situations and underlying jobs
 
 ### Segment B — Individuals with recurring unfamiliar-file/link exposure
