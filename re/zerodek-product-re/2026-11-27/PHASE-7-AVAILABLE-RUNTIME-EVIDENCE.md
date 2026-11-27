@@ -117,3 +117,17 @@ Runtime evidence is partial, not complete. The upstream CI runs exercise project
 Continue with any further non-invasive, available evidence extraction and scenario mapping. If a specific execution requires unavailable infrastructure, credentials, external service access or an unverified lab, record the exact blocker and move on to the next eligible target. Do not hold up the entire investigation for a skipped item.
 
 **Phase 7 is not complete. The ZeroDeck Software Rules capture remains incomplete and not replication-sufficient.**
+
+
+## 6. Supplemental runtime observations mapped (2026-11-27)
+
+A further inspection of retained upstream job logs extracted generator input/output counts and publication behaviour from HypatiaDatabases, plus named CVD verification, signature-tool and scan-callback test cases from ClamAV. The current container prerequisites and isolation facts were rechecked. Full evidence IDs, exact counts, test names, 15-facet dispositions and skipped-path reasons are recorded in [`PHASE-7-RUNTIME-OBSERVATION-MAP.md`](PHASE-7-RUNTIME-OBSERVATION-MAP.md).
+
+Key additions:
+- HypatiaDatabases reported 1,757,956 valid lines and 1 invalid line, generated four Bloom-filter artifact classes, and successfully force-published the unsigned branch in the October 9 pinned-revision run.
+- The same pipeline's November 27 run stopped at ThreatFox HTTP 410 before generation.
+- ClamAV's exact-pinned Ubuntu CI run passed 17/17 CTest tests; nine named example cases and signature-tool test cases are recorded in the map.
+- Hypatia's exact-pinned CI job succeeded, but its historical job log returned HTTP 410 and the run had no artifacts; no detailed scanner runtime behaviour is claimed.
+- No local execution was attempted after confirming that the container remains root-run, required toolchains are absent, DNS lookup fails, and the uploaded dynamic-lab isolation requirements cannot be verified.
+
+These additions remain upstream reference-runtime evidence. They do not establish ZeroDeck runtime behaviour or automatically become ZeroDeck rules.
