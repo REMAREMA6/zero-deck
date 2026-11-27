@@ -67,6 +67,8 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 - [x] Finalize the required-property investigation map against the selected MVP across all 15 Software Rules facets.
 **Exit gate: satisfied.** The owner explicitly selected manual file security analysis, quarantine/file disposition, and website/link checking as the first ZeroDeck MVP. IP address tracking/investigation is recorded as future candidate CAP-13 and explicitly excluded. The bounded workflow set, scenario branches, exclusions, cross-facet dependencies and 15-facet required-property questions are recorded in `MVP-SCOPE-DECISION.md`, `CAPABILITY-INVENTORY.md`, and `CAPABILITY-FACET-MAPPING.md`. This closes scope definition only; it does not claim that the MVP has been fully reverse-engineered or is replication-sufficient.
 
+**Supplemental UI source review (2026-11-27):** extracted 11 bounded source-derived UI rules from the pinned Expo/React Native screen source in `re/zerodek-product-re/2026-11-27/UI-SOURCE-DERIVED-RULES.md`. These are source findings, not runtime observations or a complete UI specification.
+
 ### Phase 3 — Prior-art discovery and selection
 - [x] Audit existing reconnaissance records for relevance to the three selected MVP capabilities only.
 - [x] Search for and screen prior-art implementations and official platform/provider documentation for manual file security analysis, quarantine/file disposition, and website/link checking.
