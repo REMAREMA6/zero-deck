@@ -98,6 +98,7 @@ These are architecture directions, not a complete authentication contract. Do no
 
 - `2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md` — this workstream plan.
 - `product-rules/README.md` — contract index, version, scope and status.
+- `product-rules/VALIDATION-REPORT.md` — Phase 1 fixture checks, negative tests and validation limitations.
 - `product-rules/PROFILE.md` — completed PM authoring profile and validation rules.
 - `product-rules/schemas/zero-deck-pm-declared-contract.schema.json` — complete PM declared-contract profile schema.
 - `product-rules/schemas/zero-deck-pm-requirements-extension.schema.json` — PM extension schema.
