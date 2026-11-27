@@ -47,7 +47,7 @@ These are supporting research streams within CIRCLES, not additional method step
 
 | Workstream | Status | Key questions | Evidence location |
 |---|---|---|---|
-| Customer, market and alternatives | [~] In progress | Which customer has the strongest need? Direct competitors/substitutes? Existing workflows, pricing, adoption friction? | `2026-11-27/02-I-IDENTIFY.md`; `2026-11-27/03-R-NEEDS.md` |
+| Customer, market and alternatives | [~] In progress | Which customer has the strongest need? Direct competitors/substitutes? Existing workflows, pricing, adoption friction? | `2026-11-27/02-I-IDENTIFY.md`; `2026-11-27/03-R-NEEDS.md`; `2026-11-27/09-PRIMARY-RESEARCH-PROTOCOL.md` |
 | File analysis and detection | [~] In progress | Detection approaches, engine choices, coverage limits, privacy, false positives/negatives, licensing and cost. | `2026-11-27/08-RESEARCH-FILE-QUARANTINE-LINK.md`; Phase 3 prior-art register |
 | Quarantine and file disposition | [~] In progress | Android/platform constraints, isolation, integrity, restore, deletion, retention, recovery and key lifecycle. | `2026-11-27/08-RESEARCH-FILE-QUARANTINE-LINK.md`; `software-rules/OPEN-PROPERTIES.md` |
 | Website/link checking | [~] In progress | Provider contracts, commercial rights, costs, freshness, quotas, URL handling, privacy and failure semantics. | `2026-11-27/08-RESEARCH-FILE-QUARANTINE-LINK.md`; Phase 3 prior-art register |
@@ -69,7 +69,7 @@ These are supporting research streams within CIRCLES, not additional method step
 | Commercial viability | [~] | Provider pricing/terms and Pro gates researched; willingness-to-pay and cost model unvalidated |
 | Evidence integrity | [~] | Claims classified and source-linked |
 | Decision readiness | [~] | Trade-offs, unknowns and owner decisions explicit |
-| Validation readiness | [~] | Testable metric and validation criteria |
+| Validation readiness | [~] | Link-check metric is conditional on activation; interview/experiment protocol drafted; primary evidence and justified thresholds outstanding |
 | Independent review | [ ] | Contradiction/gap review recorded |
 
 ## Owner decisions and unresolved items
@@ -112,3 +112,4 @@ These are supporting research streams within CIRCLES, not additional method step
 | 2026-11-27 | Researched file-analysis limits and prior art, Android SAF/storage/Keystore constraints, quarantine lifecycle risks, Web Risk pricing, URLhaus commercial terms, VirusTotal API/private-scanning distinctions and ClamAV licensing/platform limits. Created `2026-11-27/08-RESEARCH-FILE-QUARANTINE-LINK.md`. | First secondary-research pass recorded for the three MVP capabilities. No engine/provider/architecture selected; platform, retention, supported formats, detection criteria and customer needs remain open. |
 | 2026-11-27 | Created `PRODUCT-BLUEPRINT-DRAFT.md` with scope, owner decisions, customer needs, workflows, state/failure branches, trust requirements, possible system boundaries, conceptual data, metrics, risk register and a 15-facet crosswalk. | Blueprint is a structured draft, not an approved PRD or architecture. Primary validation, owner decisions, full property traceability and independent review remain open. |
 | 2026-11-27 | Added OWASP MASTG practitioner-methodology evidence to the Identify and technical research records. Independent review found an important launch-sequencing dependency: MVP-03 cannot be tested while the owner switch remains off pending paid-user revenue. Updated prioritization, recommendation and blueprint to make the link-check test conditional and added PM-OPEN-011. | No provider gate was bypassed. If MVP-03 remains locked at initial launch, a separate enabled MVP workflow must be selected for initial demand validation; disabled usage cannot be interpreted as lack of demand. |
+| 2026-11-27 | Prepared `2026-11-27/09-PRIMARY-RESEARCH-PROTOCOL.md` with segment screeners, behavioural interview guide, evidence-capture template, analysis rules and validation guardrails. | Ready for owner review. No participants recruited or interviewed; cohort and geography remain unselected. |
