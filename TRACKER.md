@@ -32,7 +32,7 @@
 - **Completed:** Phases 0–6 review tasks complete. Phase 6 reviewed all 15 facets, reconciled 775 property entries (700 required; 75 optional), and passed validation in [CI run #46000308895](https://github.com/REMAREMA6/zero-deck/actions/runs/46000308895). Phase 7 scope correction committed. Supplemental UI source review extracted 12 source-derived rules at `re/zerodek-product-re/2026-11-27/UI-SOURCE-DERIVED-RULES.md`.
 - **Preflight blocker:** Available container is root-run; Docker, Podman, ADB, Gradle and ClamAV binaries are absent. No named isolated lab or no-host-share/no-bridged-network/snapshot/teardown properties have been verified. Do not execute reference code here.
 - **Out of scope:** UI runtime inspection, mockup runtime claims, external provider calls/secrets/paid services, malware samples, replacement implementation and IP investigation.
-- **Next action:** Continue Phase 7 preflight/source inspection for the three selected prior-art implementations, determine exact permitted execution scope, and identify whether a genuine isolated lab can be supplied. Runtime execution remains blocked until target-specific permission and a genuine lab are documented. Record external integration blockers rather than attempting provider calls.
+- **Next action:** Resolve target-specific permission and whether a genuine isolated lab can be supplied; continue only non-executing source inspection until both execution gates pass. Record external integration blockers rather than attempting provider calls.
 
 ## Phase tracking
 
@@ -45,7 +45,7 @@
 | 4 | Source-level rule extraction | [x] Complete | 31 source-derived rules, 28 platform/provider contract rules, 5 owner-declared link-gating rules, and a 15-facet audit across all three approved MVP capabilities. No ZeroDeck runtime behaviour or replication sufficiency is claimed. See `re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md` and `re/zerodek-product-re/2026-11-27/PHASE-4-15-FACET-COVERAGE-AUDIT.md`. |
 | 5 | Software Rules synthesis | [x] Complete | Synthesis exit gate satisfied. Includes 6 owner rules, 27 provisional product-material rules, 3 declared contracts, 12 evidence records, 7 scenarios, 15 facets and 757 property entries. All 15 semantic payload mappings, individual rule/evidence traceability, Draft 2020-12 schema validation, governing completeness/integrity suites and ZeroDeck cross-reference checks passed. Capture remains explicitly incomplete and not replication-sufficient. See `software-rules/PHASE-5-SYNTHESIS-AUDIT.md`. |
 | 6 | Completeness and conformance | [x] Complete — bounded review | Exit gate satisfied for an explicitly incomplete product deliverable. All 15 facets reviewed; inventory omissions/applicability inconsistencies corrected; 775 entries reconciled (700 required, 75 optional); CI #46000308895 passed. Product remains not replication-sufficient. See `software-rules/PHASE-6-COMPLETENESS-AUDIT.md`. |
-| 7 | Non-UI runtime investigation of selected prior-art implementations | [~] Started; runtime blocked at preflight | Corrected target list: Hypatia, HypatiaDatabases and ClamAV (comparison only). UI runtime is excluded; UI source rules are a separate source-analysis task. No runtime execution until target-specific permission and a genuine isolated lab are verified. See RUNTIME-INVESTIGATION-DECISION.md. |
+| 7 | Non-UI runtime investigation of selected prior-art implementations | [~] Started; runtime blocked at preflight | Corrected target list: Hypatia, HypatiaDatabases and ClamAV (comparison only). UI runtime is excluded; UI source rules are a separate source-analysis task. No runtime execution until target-specific permission and a genuine isolated lab are verified. See RUNTIME-INVESTIGATION-DECISION.md and PHASE-7-TARGET-PREFLIGHT.md. |
 
 ## Phase 0 — Governance and handoff
 
@@ -114,11 +114,11 @@ Review closed 2026-11-27 under the plan's incomplete-deliverable exit branch. Th
 
 - [x] Correct the Phase 7 scope: Hypatia, HypatiaDatabases and ClamAV (comparison only) are the runtime candidates; Web Risk is documented-only unless separately approved; Android platform docs are not executable targets.
 - [x] Exclude UI runtime inspection from Phase 7 and record that the actual ZeroDeck UI runtime rules may be captured later by the developer agent.
-- [x] Complete initial environment inventory: root-run container; Docker, Podman, ADB, Gradle and ClamAV executables absent; no genuine isolated lab verified.
+- [x] Complete target and environment preflight for Hypatia, HypatiaDatabases and ClamAV; exact build paths, dependencies, external feed/API constraints, tool availability, licence/permission gaps and isolation blocker recorded in `PHASE-7-TARGET-PREFLIGHT.md`.
 - [x] Extract 12 bounded UI source-derived rules separately from the pinned lordwhitefire/Zerodek screen source. See `re/zerodek-product-re/2026-11-27/UI-SOURCE-DERIVED-RULES.md`.
 - [ ] Complete target-specific RE triage and document the permitted execution basis for each third-party implementation.
 - [ ] Establish a genuine named isolated lab with no host shares, no bridged network, snapshot rollback and teardown.
-- [ ] Inspect target entry points, build scripts, lifecycle hooks, dependencies, fixtures and tests without executing them.
+- [~] Inspect target entry points, build scripts, lifecycle hooks, dependencies, fixtures and tests without executing them; initial workflow/build-path inspection is recorded, detailed source mapping remains.
 - [ ] Execute only approved, locally runnable non-UI scenarios after both gates pass; skip provider calls requiring credentials/secrets or paid services.
 - [ ] Record reproducible runtime evidence and assess all 15 facets.
 - [ ] Reconcile the Software Rules capture, open properties, traceability and validation; assess replication sufficiency.
