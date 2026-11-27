@@ -63,14 +63,15 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 - [x] Derive the evidence-backed candidate capabilities and workflows from the complete screen inventory; preserve the broader startup direction separately. See CAPABILITY-INVENTORY.md. The ZeroDeck MVP selection remains an owner decision.
 - [x] Map candidate capabilities and required properties to all 15 Software Rules facets. See CAPABILITY-FACET-MAPPING.md.
 - [x] Identify cross-facet relationships, dependencies, scenario branches, and missing information. See CAPABILITY-FACET-MAPPING.md.
-- [?] Draft candidate scenarios, exclusions and required-property inventory; final declared replication scope remains blocked until the owner selects the ZeroDeck launch MVP and included workflows.
-**Exit gate: pending owner decision.** Startup direction, evidence-backed candidates, and the unselected MVP are kept distinct. Candidate scenarios and facet/property inventories are documented, but the declared replication scope cannot be finalized until the owner selects the first ZeroDeck launch capability/service and its included workflows. Do not mark Phase 2 complete or start scope-specific source selection as if this decision were settled.
+- [x] Freeze the owner-selected MVP, included workflows, deferred candidates and exclusions in `MVP-SCOPE-DECISION.md`.
+- [x] Finalize the required-property investigation map against the selected MVP across all 15 Software Rules facets.
+**Exit gate: satisfied.** The owner explicitly selected manual file security analysis, quarantine/file disposition, and website/link checking as the first ZeroDeck MVP. IP address tracking/investigation is recorded as future candidate CAP-13 and explicitly excluded. The bounded workflow set, scenario branches, exclusions, cross-facet dependencies and 15-facet required-property questions are recorded in `MVP-SCOPE-DECISION.md`, `CAPABILITY-INVENTORY.md`, and `CAPABILITY-FACET-MAPPING.md`. This closes scope definition only; it does not claim that the MVP has been fully reverse-engineered or is replication-sufficient.
 
 ### Phase 3 — Prior-art discovery and selection
-- [ ] Audit existing reconnaissance records for relevance to Zerodek.
-- [ ] Search for open-source implementations of the inventoried capabilities.
-- [ ] Verify candidate repositories, source revisions, licences, maintenance, and feature fit.
-- [ ] Record adopt/adapt/reference/reject decisions with reasons.
+- [ ] Audit existing reconnaissance records for relevance to the three selected MVP capabilities only.
+- [ ] Search for open-source implementations of manual file security analysis, quarantine/file disposition, and website/link checking, including only dependencies established as relevant.
+- [ ] Verify candidate repositories, immutable source revisions, licences, maintenance, security posture, and feature fit.
+- [ ] Record adopt/adapt/reference/reject decisions with reasons; keep IP tracking and all other deferred candidates out of MVP source selection.
 **Exit gate:** every selected source has a documented capability mapping and provenance; gaps are visible.
 
 ### Phase 4 — Source-level rule extraction
