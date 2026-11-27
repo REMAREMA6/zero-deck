@@ -28,12 +28,13 @@
 ## Current position
 
 - **Current phase:** Phase 7 — renewed GitHub Actions-enabled investigation (in progress; no renewed runs executed yet).
-- **Current task:** Reassess the previously skipped Phase 7 paths and design/run suitable GitHub Actions workflows. Start with pinned target/toolchain preflight, then execute feasible targets one by one.
-- **Completed:** The first bounded Phase 7 pass remains recorded, including exact-pinned upstream CI evidence for Hypatia, HypatiaDatabases and ClamAV, UI source-derived rules, seven-scenario/15-facet evidence-or-skip mapping, and explicit limitations. GitHub Actions remote execution procedure recorded at `re/zerodek-product-re/2026-11-27/GITHUB-ACTIONS-EXECUTION-PROCEDURE.md`.
-- **Previously skipped paths to reassess:** Hypatia Android build/tests; HypatiaDatabases local generator workflow; ClamAV build/tests; browser-rendered reference UI capture with Playwright; live Web Risk or other integrations only if owner supplies credentials and explicitly authorizes URL disclosure/costs; any additional facet/scenario tests supported by the pinned targets.
-- **Execution rule:** Use the ChatGPT sandbox where suitable. If a required tool/environment is unavailable there, use GitHub Actions rather than dropping the test. Inspect logs/artifacts, fix and rerun. Record any remaining blocker and continue with other targets. Hosted runners are not unrestricted and do not automatically qualify as isolated malware labs.
-- **Out of scope:** Treating reference-project behaviour as ZeroDeck requirements; claiming actual ZeroDeck runtime conformance before a ZeroDeck build exists; unapproved production changes, provider charges/data disclosure, or unsafe sample execution.
-- **Next action:** Read the new execution procedure and prior Phase 7 records, then build the renewed target-by-target test matrix and first GitHub Actions workflow.
+- **Current task:** Renewed Phase 7 is in progress. The GitHub-hosted runner/Playwright artifact smoke test passed twice. Remaining prior-art execution is gated by the uploaded RE-agent ownership rule: no written permission from the selected third-party source owners is recorded.
+- **Completed:** First bounded Phase 7 pass preserved. GitHub Actions execution procedure, renewed target/eligibility matrix, and runner smoke report recorded. Workflow `.github/workflows/phase7-runner-smoke.yml` passed twice: [run #46026033625](https://github.com/REMAREMA6/zero-deck/actions/runs/46026033625) and [run #46026203672](https://github.com/REMAREMA6/zero-deck/actions/runs/46026203672). It installed Playwright/Chromium, passed first-party page assertions, captured screenshot/video/trace, and uploaded artifacts.
+- **Blocked pending written permission:** New execution/analysis of Hypatia, HypatiaDatabases, ClamAV, and the Felix-derived reference fork. Public source, open-source licence, fork status, repository access, and owner's verbal instruction do not replace written permission under the uploaded RE-agent instructions. Do not execute these targets until permission is recorded.
+- **Conditional:** Web Risk live API test requires a dedicated owner-provided project/key and explicit approval for URL disclosure, inputs, call volume and potential cost. Supabase/Sanity tests are not currently established as approved MVP integrations; do not invent scope or use production credentials.
+- **Not yet available:** Actual ZeroDeck app runtime target. The current `REMAREMA6/zero-deck` tree contains governance, product/research records and Software Rules capture, but no app source/build. Actual product runtime and native UI capture must wait for the first-party app implementation.
+- **Execution rule:** Use the ChatGPT sandbox where suitable. If it lacks a required environment, use GitHub Actions. Inspect logs/artifacts, fix and rerun. Record exact evidence and limits. Hosted runners are not unrestricted and do not automatically qualify as isolated malware labs.
+- **Next action:** Continue only with eligible first-party automation/infrastructure work. For selected third-party references, wait for written permission; for Web Risk, wait for credentials and explicit live-call approval. Keep ZeroDeck's capture marked incomplete.
 
 ## Phase tracking
 
@@ -149,12 +150,14 @@ At the end of every work session:
 ## Renewed Phase 7 — GitHub Actions execution
 
 - [x] Record the owner-approved GitHub Actions execution procedure in `re/zerodek-product-re/2026-11-27/GITHUB-ACTIONS-EXECUTION-PROCEDURE.md`.
-- [ ] Re-read prior Phase 7 evidence, target pins, and safety constraints; build a target-by-target matrix of previously skipped paths.
-- [ ] Create and run GitHub Actions workflows for feasible pinned targets; capture logs and artifacts.
-- [ ] Reassess browser UI capture using Playwright for the reference Next.js preview; keep it separate from native-app runtime claims.
-- [ ] Reassess native build/test paths using suitable runner/emulator tooling.
-- [ ] Run authorized integration/provider tests only with owner-configured secrets, dedicated test environments, and explicit approval for live data disclosure/costs.
-- [ ] Reconcile new evidence to the seven MVP scenarios and all 15 facets without promoting reference behaviour into ZeroDeck rules.
-- [ ] Record remaining skips and blockers; reassess replication sufficiency.
+- [x] Re-read prior Phase 7 evidence, target pins, and the uploaded RE-agent ownership/safety constraints.
+- [x] Build the target-by-target eligibility matrix in `PHASE-7-RENEWAL-TARGET-MATRIX.md`.
+- [x] Build and run a first-party GitHub Actions + Playwright runner smoke test twice; screenshot/video/trace artifact upload succeeded. See `PHASE-7-RUNNER-SMOKE-REPORT.md`.
+- [ ] Execute additional selected third-party prior-art targets only after written permission from each relevant owner is recorded.
+- [ ] Reassess browser UI capture of the reference fork only after the ownership gate is satisfied; keep it separate from native-app runtime claims.
+- [ ] Reassess native build/test paths for actual ZeroDeck when first-party app source/build exists.
+- [ ] Run authorized integration/provider tests only with owner-configured test secrets, dedicated test environments, and explicit approval for live data disclosure/costs.
+- [ ] Reconcile eligible new evidence to the seven MVP scenarios and all 15 facets without promoting reference behaviour into ZeroDeck rules.
+- [x] Record current skips/blockers and reassess the present replication-sufficiency status: still NOT SUFFICIENT.
 
-**Current status:** procedure recorded; renewed execution has not started.
+**Current status:** runner capability verified; target-specific renewed runtime execution remains blocked or conditional as detailed in the matrix.
