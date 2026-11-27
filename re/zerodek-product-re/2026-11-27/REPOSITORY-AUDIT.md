@@ -27,18 +27,18 @@ The repository root does not contain a `.gitmodules` file, so the target and URL
 
 | Area | Count | Evidence |
 |---|---:|---|
-| Next.js route page files | 19 | `src/app/**/page.tsx` |
+| Next.js route page files | 20 | `src/app/**/page.tsx` (19 named subroutes plus root welcome route) |
 | Named screen component files | 19 | `src/components/**/*Screen.tsx` |
 | Uploaded Markdown/text/screenshot assets | 22 | `upload/` |
 | Script files | 13 | `scripts/` |
 | Prisma schema files | 1 | `prisma/schema.prisma` |
 | Downloaded Expo project files | 31 | `download/security-scanner-expo/` |
 
-The 19 route pages and 19 screen components cover these labels: welcome, dashboard, file selection, scan progress, scan result, scan history, link scan result, website link, quarantine, quarantine details, settings, privacy audit, real-time protection, help/about, admin sign-in, admin dashboard, user management, threat information, and system health.
+The complete tree contains 20 Next.js page files: the root welcome page plus 19 named subroutes. The 19 named Screen.tsx component files cover admin dashboard, admin sign-in, file selection, help/about, help content, link scan result, privacy audit, quarantine, quarantine details, real-time protection, scan history, scan progress, scan result, settings, system health, threat information, user management, website link, and welcome. Dashboard is represented by DashboardPreview and a separate Expo SecurityScannerDashboard handoff. There are 20 Preview components. The canonical first 17 numbered screens and their mapping are detailed in SCREEN-INVENTORY.md.
 
 This is a path inventory only. It does not establish that every route is complete, that all controls work, or that the application is deployed.
 
-## 3. Product identity discrepancy
+## 3. Product identity and scope clarification
 
 The repository's internal handoff materials repeatedly identify the product as **Security Scanner**, not Zerodek:
 
@@ -77,15 +77,9 @@ These observations indicate multiple implementation and handoff layers in one re
 | Downloaded Expo project | React Native screen files | A second implementation/handoff source exists |
 | Runtime observations | None in this audit | No runtime claims yet |
 
-## 6. Phase 1 work still required
+## 6. Phase 1 disposition
 
-1. Resolve the product identity discrepancy.
-2. Establish the canonical set of 17 screens and map each to its reference asset, handoff document, route, preview component, and implementation component where present.
-3. Inspect each screen's actual reference image and corresponding source/specification.
-4. Record visible text, controls, layout, visual states, navigation clues, and responsive behaviour.
-5. Mark every inferred interaction and unknown explicitly.
-6. Inspect relevant application code to classify each control as static, local demo state, route-connected, API-connected, or persistence-backed. Verify by source trace; do not infer functionality from labels alone.
-7. Update the screen inventory and tracker with stable evidence IDs.
+Phase 1 is complete for the 17-screen baseline. The screen-by-screen inventory, evidence IDs, routes, Preview components, source handoffs, reference-asset dispositions, scanner-draft scope labels, and limitations are recorded in SCREEN-INVENTORY.md. Screen 18 and the two additional routes are separately inventoried. No live runtime behaviour or backend connectivity is claimed.
 
 ## 7. Sources inspected
 
@@ -108,3 +102,8 @@ These observations indicate multiple implementation and handoff layers in one re
 ## 8. Product framing and scope clarification
 
 See the owner clarification in `ENGAGEMENT-UNDERSTANDING.md`, section 11. The product is the broader ZeroDeck startup, not a standalone Android Security Scanner. This audit remains a repository-content audit: it does not establish that the current repository is the complete product vision, that all its features belong in the MVP, or that any implementation is runtime-verified.
+
+
+## 9. Phase 1 inventory link
+
+See [SCREEN-INVENTORY.md](SCREEN-INVENTORY.md) for the completed 17-screen baseline and separate records for Screen 18, Real-Time Protection, and Privacy Audit. The inventory also corrects the route-page count to 20 including the root welcome route.
