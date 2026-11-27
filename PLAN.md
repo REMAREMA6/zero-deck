@@ -107,6 +107,8 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 **Corrected scope (owner clarification, 2026-11-27):** Phase 7 does not run the ZeroDeck mockup repository. lordwhitefire/Zerodek is the owner's fork of Felix's product-intent repository. It is used for screen/design intent and source-level UI inspection only. REMAREMA6/zero-deck is the actual ZeroDeck product repository being built. The selected prior-art implementations from Phase 3 are the runtime-investigation targets.
 
 - [ ] Complete target-specific RE triage and record the permission/licence basis before any execution.
+- [x] Inventory the available environment and assess it against the dynamic-lab requirements; no genuine named isolated lab is available, so runtime execution is blocked. See `PHASE-7-TARGET-PREFLIGHT.md`.
+- [x] Extract the mockup UI source-derived rules separately from runtime investigation; 12 bounded rules are recorded in `UI-SOURCE-DERIVED-RULES.md`.
 - [ ] Pin each selected implementation to its Phase 3 immutable revision and inspect entry points, build scripts, dependencies, install hooks, tests and runtime prerequisites before execution.
 - [ ] Investigate only non-UI behaviour relevant to the approved MVP and 15 facets: file scanning/verdicts, threat-data generation and integrity, quarantine-relevant file/storage semantics where implemented, errors/recovery, security controls, resource behaviour, and documented API/provider contracts.
 - [ ] Runtime targets: SRC-01 Hypatia (Android file scanner), SRC-02 HypatiaDatabases (database-generation pipeline), and SRC-06 ClamAV (comparison engine only; not an adopted dependency).
