@@ -2,7 +2,7 @@
 
 **Maturity:** Draft  
 **Facet authority:** Software Rules 0.3.0 Draft catalogue and facet-specific specifications.  
-**Status:** First synthesis map; required properties remain unresolved.
+**Status:** 15-facet synthesis map complete; required runtime properties remain unresolved. Scenario/dimension-level inventory is linked below.
 
 Facets are observation perspectives, not implementation modules. One operation may create linked observations in several facets. The 15 facets below are retained exactly as defined by the governing specification.
 
