@@ -64,6 +64,6 @@ The first eligible task has passed. A first-party Playwright runner smoke workfl
 - Run [#46026203672](https://github.com/REMAREMA6/zero-deck/actions/runs/46026203672), commit `9e05176b52c312ccb2124d4bac5279c38a34e598`, with the artifact upload action pinned to v4.6.2's immutable commit.
 - Run [#46026419660](https://github.com/REMAREMA6/zero-deck/actions/runs/46026419660), commit `d6b0f1ee7680eedd343dc9ecb6c435082bfe5b6f`, with `ubuntu-26.04`, Playwright `1.65.1`, and the artifact upload action pinned.
 
-Both runs installed Playwright/Chromium, rendered a first-party HTML fixture, passed title/heading/click assertions, captured a screenshot, recorded a video and trace, and uploaded all three artifacts. Run A's downloaded screenshot/video/trace files were inspected. See `PHASE-7-RUNNER-SMOKE-REPORT.md` for exact environment, run IDs, artifact IDs, hashes, and limitations.
+All three runs installed Playwright/Chromium, rendered a first-party HTML fixture, passed title/heading/click assertions, captured a screenshot, recorded a video and trace, and uploaded all three artifacts. Run A's downloaded screenshot/video/trace files were inspected. See `PHASE-7-RUNNER-SMOKE-REPORT.md` for exact environment, run IDs, artifact IDs, hashes, and limitations.
 
 This proves the runner/artifact mechanism only. It is not a ZeroDeck UI observation or a test of the third-party prior-art targets. Full details and artifact hashes are in `PHASE-7-RUNNER-SMOKE-REPORT.md`.
