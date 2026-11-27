@@ -1,0 +1,16 @@
+{
+  "evidenceId": "ZD-EV-CONTRACT-AUTH-001",
+  "evidenceClass": "declared-contract",
+  "evidenceType": "product-requirements-contract",
+  "origin": {
+    "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/8c8a06e7188297b92d71a400bc85fd911fbcde54/product-management/product-rules/contracts/IDENTITY-AUTHENTICATION.md",
+    "sourceRevision": "8c8a06e7188297b92d71a400bc85fd911fbcde54",
+    "location": "product-management/product-rules/contracts/IDENTITY-AUTHENTICATION.md"
+  },
+  "capturedAt": "2026-11-27T00:00:00Z",
+  "locator": "product-management/product-rules/contracts/IDENTITY-AUTHENTICATION.md",
+  "retention": {
+    "status": "retained",
+    "access": "Version-controlled ZeroDeck repository; access follows repository permissions."
+  }
+}
