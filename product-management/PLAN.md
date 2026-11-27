@@ -5,7 +5,7 @@
 **Workspace:** `product-management/`  
 **Plan date:** 2026-11-27  
 **Method:** Product Management Agent CIRCLES (exactly seven steps)  
-**Status:** All seven CIRCLES steps completed as a provisional secondary-research recommendation on 2026-11-27. A first `PRODUCT-BLUEPRINT-DRAFT.md` and supporting research have been created. Owner has since selected everyday non-technical users as the first target audience and confirmed web + Android platforms. Platform/integration follow-up, independent review, validation and remaining owner decisions remain open. A PM-authored Product Requirements Contract workstream has also started; it uses Software Rules declared contracts with explicit PM authorship. See TRACKER.md for current status.
+**Status:** All seven CIRCLES steps completed as a provisional secondary-research recommendation on 2026-11-27. A first `PRODUCT-BLUEPRINT-DRAFT.md` and supporting research have been created. Owner has since selected everyday non-technical users as the first target audience and confirmed web + Android platforms. Platform/integration follow-up, independent review, validation and remaining owner decisions remain open. A PM-authored Product Requirements Contract workstream has also started; Phase 2 authentication/account requirements and its seven-step CIRCLES analysis are complete as PM-proposed drafts, with structural/semantic validation recorded. The eight owner decisions remain open. See TRACKER.md and product-management/2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md for current status.
 
 ## 1. Assignment
 
