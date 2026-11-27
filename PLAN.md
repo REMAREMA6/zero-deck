@@ -190,3 +190,12 @@ Use the sandbox when suitable; otherwise create a pinned, reproducible GitHub Ac
 - Detailed commands, artifacts, digests, findings and limits are recorded in `PHASE-7-RENEWED-ACTIONS-RESULTS.md`; contextual evidence is mapped in `PHASE-7-RUNTIME-OBSERVATION-MAP.md`.
 
 These are reference-project observations, not ZeroDeck runtime observations or automatic ZeroDeck requirements. The renewed Phase 7 investigation is complete within the authorized scope; see `PHASE-7-RENEWED-CLOSEOUT-AUDIT.md`. The machine capture registers EVD-RT-REF-001/002 as supporting context and retains zero ZeroDeck executions, observations and runtime rules. The ZeroDeck-specific capture remains incomplete because the open required properties and owner decisions in `software-rules/OPEN-PROPERTIES.md` are unresolved. A first-party ZeroDeck runtime is not required to complete this reverse-engineering specification. Phase 7 is the final planned phase; no Phase 8 is defined.
+
+
+## Final agent closeout and successor handoff (2026-11-27)
+
+The outgoing reverse-engineering agent's assignment is **closed**. All phases in this plan (0–7) are complete, and Phase 7 was the final planned phase. No Phase 8 is defined.
+
+This closeout records completion of the outgoing agent's assigned work; it does **not** change the evidence-based maturity assessment of the Software Rules deliverable. The capture remains incomplete and not replication-sufficient while required properties and owner decisions remain open in software-rules/OPEN-PROPERTIES.md. These are handed to the successor agent, which must continue from the existing repository evidence under a separately defined assignment. Do not invent owner decisions or claim replication sufficiency without evidence.
+
+See re/zerodek-product-re/2026-11-27/RE-AGENT-FINAL-CLOSEOUT.md for the final status and start-here handoff.
