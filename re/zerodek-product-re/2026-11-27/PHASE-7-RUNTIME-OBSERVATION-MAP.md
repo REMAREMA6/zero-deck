@@ -155,7 +155,7 @@ These additional executions were initiated by this investigation using the expli
 
 - Repository: https://github.com/MaintainTeam/Hypatia
 - Revision: `c0f98977be935e58849726313635a2459cac3892`
-- Investigation run: https://github.com/REMAREMA6/zero-deck/actions/runs/46029241394
+- Investigation run: https://github.com/REMAREMA6/zero-deck/actions/runs/46034540816 (follow-up repeat; initial successful run #46029241394)
 - Command: `./gradlew --no-daemon --stacktrace lint testDebugUnitTest assembleDebug`; Temurin JDK 17, Gradle 8.13, Android SDK platform 36/build tools 36.0.0.
 - **Observed:** Gradle reported `BUILD SUCCESSFUL`; 46 actionable tasks executed. A debug APK was produced (version 3.18, version code 318, min SDK 21).
 - **Important test limit:** `testDebugUnitTest` was explicitly `NO-SOURCE`; no unit tests were run. No emulator launch, file scan or quarantine action was performed.
@@ -176,16 +176,28 @@ These additional executions were initiated by this investigation using the expli
 - No external feed downloads, signing, publishing or branch pushes occurred.
 - **Disposition:** bounded generator parsing/counting/output creation is runtime-observed for this pinned reference project. Feed correctness, threat accuracy, false-positive/negative rates, signature trust and production publication are not established.
 
+### RT-HDB-005 — HypatiaDatabases malformed-input and exclusion branches
+
+- Repository: https://github.com/MaintainTeam/HypatiaDatabases
+- Revision: `3c35f52e1a847caed46d8e1ad34968bfa3c8b10a`
+- Investigation run: https://github.com/REMAREMA6/zero-deck/actions/runs/46034540816
+- The Maven build/package succeeded; Maven reported no test sources. A full 36-entry source-tree audit found no `src/test` directory or test source files.
+- The investigation harness ran two additional deterministic harmless fixture branches through the actual `org.maintainteam.hypatiadatabases.App` generator:
+  - **Malformed hashes:** `not-a-hash` and `abcd` were both rejected; output was 0 valid / 2 invalid, with zero hashes read or added.
+  - **Excluded hash:** a valid MD5 also present in the exclusions directory was skipped; output was 0 valid / 0 invalid, with zero hashes read or added.
+- Both branches passed their output assertions. Their detailed logs are retained in the Actions job log for run #46034540816; the uploaded artifact retains the primary valid-fixture output only.
+- **Disposition:** bounded runtime evidence for malformed-hash rejection and exclusion filtering in this pinned reference generator. This is not a ZeroDeck policy or requirement and does not establish real-feed accuracy.
+
 ### RT-CLAM-003 — ClamAV pinned CMake build and test suite
 
 - Repository: https://github.com/Cisco-Talos/clamav
 - Revision: `cad7b18a3e6505195fe08db1412449a18fc9f012`
-- Investigation run: https://github.com/REMAREMA6/zero-deck/actions/runs/46028645716
+- Investigation run: https://github.com/REMAREMA6/zero-deck/actions/runs/46029241394
 - GitHub-hosted Ubuntu 24.04 runner; CMake/Ninja/GCC, Rust/Cargo and required development dependencies.
-- **Observed:** CMake configure and build succeeded. CTest reported **9/9 test targets passed, 0 failed**, total test time 64.89 seconds.
-- Retained CTest `LastTest.log` reports: clamscan 170 passed/1 skipped; clamd 15 passed; freshclam 10 passed/1 skipped; sigtool 6 passed. Aggregate: **201 passed, 2 skipped**.
+- **Observed:** CMake configure and build succeeded. CTest reported **15/15 test targets passed, 0 failed**, total test time 781.68 seconds. The suite includes Valgrind variants for core library, scan, daemon, updater and signature-tool paths.
+- Retained CTest `LastTest.log` reports **416 passed and 2 skipped** across 11 pytest invocations (including Valgrind reruns); these are not 416 unique cases. Standard groups include clamscan 170 passed/1 skipped, clamd 15 passed, freshclam 10 passed/1 skipped, and sigtool 6 passed.
 - Named test coverage includes scan callback branches, CVD verification success/failure, signature signing/verification and diff operations, update failure cases, archive limits, and quarantine copy/move/remove TOCTOU cases.
-- Artifact `phase7-clamav-build-test-evidence` (ID `15213342485`) was downloaded and inspected; its `LastTest.log` contains the detailed output.
+- Artifact `phase7-clamav-build-test-evidence` (ID `15214502404`, SHA-256 `861109e76bc61ddb4ff3f4e6baaadc3ad6d8158f985661e2a36f41f33b92c944`) was downloaded and inspected; its `LastTest.log` contains the detailed output.
 - **Limits:** these are ClamAV's own tests, not ZeroDeck tests. No malware sample was executed by this investigation; no controlled performance benchmark was run.
 - **Disposition:** broad pinned reference build/test evidence for ClamAV scanner, updater, signature-tool and quarantine-related test paths. Do not transfer these results into ZeroDeck requirements without explicit traceability.
 
