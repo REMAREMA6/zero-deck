@@ -1,69 +1,70 @@
 # Phase 7 Renewal — Target and Test Matrix
 
 **Date:** 2026-11-27  
-**Status:** Preflight / eligibility assessment  
-**Execution model:** GitHub Actions for tests that the ChatGPT sandbox cannot support  
-**Governing constraints:** `RULES.md`, the uploaded reverse-engineering-agent instructions, and `GITHUB-ACTIONS-EXECUTION-PROCEDURE.md`
+**Status:** Execution in progress  
+**Execution model:** ChatGPT sandbox where suitable; GitHub Actions hosted runners when the sandbox lacks the required toolchain  
+**Authorization:** See [Owner Authorization Record](OWNER-AUTHORIZATION-PHASE-7-OPEN-SOURCE-TESTING.md)
 
-## 1. Important ownership gate
+## 1. Authorization and scope
 
-The uploaded reverse-engineering-agent instructions allow analysis only of software the owner wrote/owns or software covered by written permission from its owner. Public availability, an open-source licence, a fork, repository access, or the owner's verbal instruction is not a substitute for written permission.
+The owner deliberately made the uploaded RE-agent ownership restriction absolute as a protective default: agents must not infer intent or take liberties. Actions covered by a stop/consult rule require the agent to stop and ask. The owner—not the agent—decides whether to authorize a scoped exception.
 
-The selected Phase 3 reference projects are third-party projects. No written permission from their respective owners is recorded in this engagement. Therefore, **we must not execute or continue analysing those third-party targets** unless the required written permission is provided and recorded. GitHub Actions does not override this restriction.
+On 2026-11-27, the owner explicitly authorized this renewed Phase 7 investigation to inspect, build, run ordinary project tests, and study the following three pinned open-source prior-art targets. This is a specific owner override of the uploaded written-permission default for these repositories and this investigation; it does not weaken the default globally or authorize unrelated targets or higher-risk actions.
 
-This gate does not prevent us from testing first-party code in `REMAREMA6/zero-deck` that the owner controls, or from using a third-party service as an authorized customer within its terms. It does prevent treating a customer account as permission to reverse-engineer or test the provider's internal software/infrastructure.
+- SRC-01 Hypatia: `c0f98977be935e58849726313635a2459cac3892`
+- SRC-02 HypatiaDatabases: `3c35f52e1a847caed46d8e1ad34968bfa3c8b10a`
+- SRC-06 ClamAV: `cad7b18a3e6505195fe08db1412449a18fc9f012`
+
+The exact scope and limits are recorded in the authorization record. Licences still govern code use and redistribution. No malware samples, live attacks, upstream publication, or unapproved provider calls are authorized.
 
 ## 2. Target matrix
 
-| Target / previously skipped path | What GitHub Actions could technically support | Current eligibility | Disposition / unblock |
-|---|---|---|---|
-| SRC-01 Hypatia Android build, lint and unit tests | Ubuntu runner, JDK 17, Android SDK, Gradle wrapper, emulator if needed; retain APK/test reports | **Blocked — third-party source; no written permission recorded** | Existing exact-pinned upstream CI success remains usable as historical evidence. Do not create a new workflow that checks out/runs this source until written permission is recorded. |
-| SRC-02 HypatiaDatabases generator | Java/Maven, ClamAV service, deterministic fixture feeds, generator tests and artifact inspection | **Blocked — third-party source; no written permission recorded.** Original workflow also downloads multiple live feeds and publishes an unsigned branch. | Existing upstream run evidence remains historical. Written permission plus a safe, non-publishing test plan is required before any new execution. Do not trigger the original workflow or reproduce its external feed/publication side effects. |
-| SRC-06 ClamAV comparison engine | CMake toolchain, build dependencies, CTest and approved example fixtures | **Blocked — third-party source; no written permission recorded** | Existing exact-pinned upstream CI evidence remains historical. Written permission and a separately reviewed safe test plan are required before new execution. No suspicious samples. |
-| SRC-04 Google Web Risk Lookup | HTTP integration test with a dedicated project/key stored as Actions secrets; controlled test URLs; request/response capture with sensitive URL redaction | **Conditionally eligible as an authorized customer API test; no credentials/project or live-call approval currently recorded** | Owner must provide a dedicated test project/key and explicitly approve URL disclosure, potential billing, test inputs and call volume. Do not call until then. Test the public API contract, not Google's internal software. |
-| SRC-07 Android storage / SAF / Keystore | Android SDK/emulator tests against first-party ZeroDeck code once implemented | **Not a runnable prior-art target** | Documentation remains source-derived platform evidence. Test actual ZeroDeck implementation later. |
-| `lordwhitefire/Zerodek` reference fork / Next.js preview | Playwright browser render, interaction, screenshots, traces and video | **Blocked for further RE capture — forked third-party source; no written permission from upstream owner recorded** | Existing source-derived UI notes remain historical. Do not run new source-level/runtime capture against this fork until permission is recorded. Once eligible, keep preview evidence distinct from the native Expo UI and from actual ZeroDeck behaviour. |
-| Actual `REMAREMA6/zero-deck` product implementation | Playwright for browser surfaces; Android emulator/native automation for native app; API/database/integration tests | **Not yet available as a product runtime target** | Reassess when first-party application code and a reproducible build exist. This is the target that can ultimately establish ZeroDeck runtime rules. |
-| Supabase / Sanity integrations | Actions secrets, dedicated test projects, API/SDK integration tests, disposable data and cleanup | **Not currently established as in-scope ZeroDeck MVP integrations; no test credentials/configuration supplied** | Do not invent an integration requirement. Add tests only after the owner approves the integration as in-scope and supplies dedicated test credentials/configuration. |
+| Target / path | Planned execution | Status and limits |
+|---|---|---|
+| SRC-01 Hypatia | Checkout exact SHA on GitHub-hosted Ubuntu; install JDK 17 and Android SDK; run Gradle lint, unit tests and debug APK build; retain reports/APK. | **Authorized; renewed run pending.** No malware samples; build/test evidence only unless emulator scenarios are separately added. |
+| SRC-02 HypatiaDatabases | Checkout exact SHA; install JDK 17/Maven and required safe tooling; run bounded Maven compile/test and deterministic fixture-based generator path if inputs can be isolated. Inspect generated outputs locally as CI artifacts only. | **Authorized; renewed run pending.** Do not run the original publishing workflow, push branches, sign/publish packs, or ingest live feeds by default. |
+| SRC-06 ClamAV | Checkout exact SHA; install Ubuntu build dependencies; configure/build with CMake; run CTest and harmless example tests; retain logs/reports. | **Authorized; renewed run pending.** No malware samples or live threat-feed operations. |
+| SRC-04 Google Web Risk Lookup | Mock/contract tests can be performed without credentials; live API test requires dedicated owner-provided project/key and explicit approval for URL disclosure, call volume and possible cost. | **Live call not authorized/provisioned.** Keep as documented contract; no live provider calls. |
+| SRC-07 Android storage / SAF / Keystore | Documentation-derived constraints only; later test against first-party ZeroDeck app. | Not an executable prior-art target. |
+| `lordwhitefire/Zerodek` mockup fork | UI source capture is already sufficient for this phase. | **Out of renewed Phase 7 runtime scope.** Do not spend time browser-testing it. |
+| Actual `REMAREMA6/zero-deck` product implementation | Native React/TypeScript app runtime, persistence, API and UI conformance. | Not yet available as a product runtime target. Reassess when implementation/build exists. |
+| Supabase / Sanity | Integration tests only if these services are approved as MVP scope and dedicated test credentials/configuration are provided. | Not established as in-scope MVP integrations. Do not invent requirements. |
 
-## 3. First eligible task — runner capability smoke test
+## 3. Execution order
 
-Before any target investigation, validate the remote execution mechanism using a tiny first-party HTML fixture generated inside this repository's GitHub Actions job.
+1. Hypatia exact-revision Android lint, unit tests and debug build.
+2. ClamAV exact-revision configure/build and harmless test suite.
+3. HypatiaDatabases bounded compile/test and deterministic generator fixture path, without external feed publication.
+4. Any remaining independent test paths that can be safely completed without additional credentials or owner decisions.
 
-The smoke workflow should:
-- run on a GitHub-hosted Ubuntu runner;
-- install Node dependencies and Playwright Chromium;
-- open a locally generated static HTML fixture in headless Chromium;
-- assert a known title and visible heading;
-- capture a screenshot;
-- record a short browser video and Playwright trace;
-- upload those artifacts even if the test fails;
-- contain no external target, credentials, provider calls, malware, or production side effects.
+The order may change to make best use of runner constraints. A failure or unavailable dependency on one target must not stop work on the others.
 
-This proves the runner/tool/artifact path only. It does not count as a ZeroDeck UI observation or Phase 7 reference-project runtime evidence.
+## 4. Evidence handling
 
-## 4. Phase 7 evidence handling
+For each run record repository, exact target SHA, workflow commit, runner image, tool versions, commands, test names, result, logs/reports/artifacts, side effects, cleanup, and limitations.
 
-- Keep the original Phase 7 closeout and upstream CI evidence unchanged as historical records.
-- Record each new GitHub Actions run separately with workflow revision, target revision (if any), runner image, tool versions, commands, scenarios, results, logs and artifact references.
-- Distinguish first-party runner smoke evidence, third-party upstream CI evidence, authorized live API observations, source-derived rules, owner-declared intent and unknowns.
-- Do not promote reference-project observations to ZeroDeck requirements automatically.
-- Reconcile only supported findings to the seven MVP scenarios and 15 facets.
-- If permission, secrets, a target build, hardware, or a safe test fixture is missing, record the blocker and continue with another eligible first-party task.
+Keep evidence classes distinct:
+- newly initiated GitHub Actions execution of a pinned reference project;
+- historical upstream CI execution;
+- source-derived rules;
+- documented external contracts;
+- owner-declared product intent;
+- inference and unknowns.
 
-## 5. Current result
+Reference-project results are contextual evidence, not automatic ZeroDeck requirements. Reconcile only supported findings to the seven MVP scenarios and 15 facets. Do not populate ZeroDeck runtime observations from reference-project runs.
 
-The renewed Phase 7 is reopened. The runner smoke test is the first eligible execution task. New execution against Hypatia, HypatiaDatabases, ClamAV or the reference fork is currently blocked by the uploaded RE-agent ownership rule, not by the ChatGPT sandbox. Web Risk and future first-party integrations are conditional on owner-provided test access and explicit approval. Actual ZeroDeck runtime capture remains pending implementation.
+## 5. Existing runner smoke evidence
 
+The first-party Playwright runner smoke workflow passed three times:
+- [Run #46026033625](https://github.com/REMAREMA6/zero-deck/actions/runs/46026033625)
+- [Run #46026203672](https://github.com/REMAREMA6/zero-deck/actions/runs/46026203672)
+- [Run #46026419660](https://github.com/REMAREMA6/zero-deck/actions/runs/46026419660)
 
-## 6. Runner smoke test result
+It verified the GitHub-hosted runner, Playwright, screenshot/video/trace capture and artifact upload using a first-party fixture only. It did not test ZeroDeck or the prior-art targets.
 
-The first eligible task has passed. A first-party Playwright runner smoke workflow completed successfully three times:
+## 6. Continuing limitations
 
-- Run [#46026033625](https://github.com/REMAREMA6/zero-deck/actions/runs/46026033625), commit `3a1a0ff6d13da1df607f7ff50588a409d9a8c2dd`.
-- Run [#46026203672](https://github.com/REMAREMA6/zero-deck/actions/runs/46026203672), commit `9e05176b52c312ccb2124d4bac5279c38a34e598`, with the artifact upload action pinned to v4.6.2's immutable commit.
-- Run [#46026419660](https://github.com/REMAREMA6/zero-deck/actions/runs/46026419660), commit `d6b0f1ee7680eedd343dc9ecb6c435082bfe5b6f`, with `ubuntu-26.04`, Playwright `1.65.1`, and the artifact upload action pinned.
-
-All three runs installed Playwright/Chromium, rendered a first-party HTML fixture, passed title/heading/click assertions, captured a screenshot, recorded a video and trace, and uploaded all three artifacts. Run A's downloaded screenshot/video/trace files were inspected. See `PHASE-7-RUNNER-SMOKE-REPORT.md` for exact environment, run IDs, artifact IDs, hashes, and limitations.
-
-This proves the runner/artifact mechanism only. It is not a ZeroDeck UI observation or a test of the third-party prior-art targets. Full details and artifact hashes are in `PHASE-7-RUNNER-SMOKE-REPORT.md`.
+- GitHub-hosted runners are ephemeral VMs, not a guarantee of a dedicated malware-analysis lab. Do not execute malware or suspicious samples.
+- Live Web Risk calls remain separately gated by credentials and explicit approval.
+- No first-party ZeroDeck runtime exists yet; product replication sufficiency remains unproven.
+- Do not claim completion until the renewed target runs have been inspected and their results mapped with explicit evidence limits.
