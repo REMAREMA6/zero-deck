@@ -15,107 +15,107 @@
     {
       "statementId": "ZD-AUTH-001",
       "text": "When an account is successfully created, the system MUST establish one stable, unique account principal that remains the identity reference for that account across supported platforms and subsequent authentication sessions.",
-      "location": "## Requirement ZD-AUTH-001"
+      "location": "#### Requirement ZD-AUTH-001 — Establish a stable account principal"
     },
     {
       "statementId": "ZD-AUTH-002",
       "text": "When an account identifier is used as a unique sign-in or recovery identifier, the system MUST enforce uniqueness according to one documented canonicalization policy and MUST NOT create two accounts that resolve to the same canonical identifier.",
-      "location": "## Requirement ZD-AUTH-002"
+      "location": "#### Requirement ZD-AUTH-002 — Prevent duplicate account identifiers"
     },
     {
       "statementId": "ZD-AUTH-003",
       "text": "The system MUST keep the account principal distinct from the credential or authenticator used to prove control of that account, so that changing or replacing an authenticator does not silently create a different account.",
-      "location": "## Requirement ZD-AUTH-003"
+      "location": "#### Requirement ZD-AUTH-003 — Keep account identity separate from credentials"
     },
     {
       "statementId": "ZD-AUTH-004",
       "text": "When a user attempts to authenticate, the system MUST verify the presented authenticator through a trusted service-side process before establishing an authenticated session or granting access to protected account data.",
-      "location": "## Requirement ZD-AUTH-004"
+      "location": "#### Requirement ZD-AUTH-004 — Verify credentials at the trusted service boundary"
     },
     {
       "statementId": "ZD-AUTH-005",
       "text": "If the system stores a password or other reusable authenticator secret, it MUST store only a verifier representation produced by a currently accepted, purpose-appropriate password/authenticator storage mechanism and MUST NOT store or log the recoverable plaintext secret.",
-      "location": "## Requirement ZD-AUTH-005"
+      "location": "#### Requirement ZD-AUTH-005 — Protect stored authentication secrets"
     },
     {
       "statementId": "ZD-AUTH-006",
       "text": "If password authentication is offered, the system MUST require a minimum of 15 characters for a password used as a single-factor authenticator and a minimum of 8 characters when the password is used only as part of multi-factor authentication; MUST permit passwords of at least 64 characters; MUST accept Unicode and whitespace; MUST NOT silently truncate passwords or impose other character-composition rules; MUST compare new or changed passwords against a blocklist of commonly used, expected or compromised passwords; and MUST NOT require periodic password changes unless there is evidence of compromise.",
-      "location": "## Requirement ZD-AUTH-006"
+      "location": "#### Requirement ZD-AUTH-006 — Apply safe password acceptance rules if passwords are supported"
     },
     {
       "statementId": "ZD-AUTH-007",
       "text": "The system MUST limit repeated failed authentication and recovery attempts using server-enforced controls that consider the account and relevant request context, and MUST provide a bounded, user-recoverable response to throttling.",
-      "location": "## Requirement ZD-AUTH-007"
+      "location": "#### Requirement ZD-AUTH-007 — Resist automated authentication abuse"
     },
     {
       "statementId": "ZD-AUTH-008",
       "text": "The system MUST NOT reveal through authentication, registration or recovery responses whether an arbitrary account identifier exists, except where disclosure is necessary after the requester has established sufficient authority to access that account.",
-      "location": "## Requirement ZD-AUTH-008"
+      "location": "#### Requirement ZD-AUTH-008 — Avoid account enumeration"
     },
     {
       "statementId": "ZD-AUTH-009",
       "text": "When credential verification succeeds, the system MUST establish an authenticated session bound to the verified principal using an unguessable session credential and a trusted server-side session state or equivalent revocable server-controlled mechanism.",
-      "location": "## Requirement ZD-AUTH-009"
+      "location": "#### Requirement ZD-AUTH-009 — Issue protected authenticated sessions"
     },
     {
       "statementId": "ZD-AUTH-010",
       "text": "The system MUST replace the active session credential when authentication is established and when a security-sensitive re-authentication or privilege transition requires a new session boundary, and MUST prevent the superseded credential from continuing to authorize the session.",
-      "location": "## Requirement ZD-AUTH-010"
+      "location": "#### Requirement ZD-AUTH-010 — Rotate session credentials at trust-boundary changes"
     },
     {
       "statementId": "ZD-AUTH-011",
       "text": "The system MUST enforce both an inactivity-based expiry policy and an absolute maximum session lifetime, and MUST reject an expired session even if the client continues presenting its former credential.",
-      "location": "## Requirement ZD-AUTH-011"
+      "location": "#### Requirement ZD-AUTH-011 — Enforce session expiry"
     },
     {
       "statementId": "ZD-AUTH-012",
       "text": "The system MUST provide a trusted mechanism to revoke an individual session and all sessions associated with an account, and MUST ensure revoked credentials cannot authorize subsequent protected requests.",
-      "location": "## Requirement ZD-AUTH-012"
+      "location": "#### Requirement ZD-AUTH-012 — Revoke sessions"
     },
     {
       "statementId": "ZD-AUTH-013",
       "text": "When a user logs out, the system MUST invalidate the current session at the trusted service boundary and clear or discard the corresponding client-held session credential.",
-      "location": "## Requirement ZD-AUTH-013"
+      "location": "#### Requirement ZD-AUTH-013 — End the current session on logout"
     },
     {
       "statementId": "ZD-AUTH-014",
       "text": "When web authentication uses browser-managed sessions, the system MUST transmit session credentials only over secure transport, MUST prevent access to session cookies from ordinary client scripts, MUST apply an explicit cross-site cookie policy, and MUST protect state-changing requests against cross-site request forgery.",
-      "location": "## Requirement ZD-AUTH-014"
+      "location": "#### Requirement ZD-AUTH-014 — Protect web session credentials"
     },
     {
       "statementId": "ZD-AUTH-015",
       "text": "When Android must retain a session credential between requests, the application MUST store it using platform-appropriate protected storage, MUST NOT store it in ordinary shared preferences or unprotected application files, and MUST NOT expose it through logs, backups or exported interfaces.",
-      "location": "## Requirement ZD-AUTH-015"
+      "location": "#### Requirement ZD-AUTH-015 — Protect Android-held session credentials"
     },
     {
       "statementId": "ZD-AUTH-016",
       "text": "For every protected operation, the trusted service MUST determine the principal and evaluate the principal's current authorization from trusted state; it MUST NOT accept client-supplied role, permission, Pro status or activation status as authoritative.",
-      "location": "## Requirement ZD-AUTH-016"
+      "location": "#### Requirement ZD-AUTH-016 — Enforce authorization independently of client identity state"
     },
     {
       "statementId": "ZD-AUTH-017",
       "text": "When the same account is authenticated on web and Android, the system MUST resolve both sessions to the same account principal and apply the same account-level authorization and entitlement state, while allowing platform-specific session credentials and security controls.",
-      "location": "## Requirement ZD-AUTH-017"
+      "location": "#### Requirement ZD-AUTH-017 — Preserve one account identity across web and Android"
     },
     {
       "statementId": "ZD-AUTH-018",
       "text": "When a required authentication, session or account-state dependency is unavailable or returns an invalid response, the system MUST fail closed for protected operations, MUST NOT create an authenticated session from an unverified result, and MUST provide a recoverable error outcome without exposing secrets or internal security details.",
-      "location": "## Requirement ZD-AUTH-018"
+      "location": "#### Requirement ZD-AUTH-018 — Handle authentication dependency failures safely"
     },
     {
       "statementId": "ZD-AUTH-019",
       "text": "The system MUST request only the credential information required for the current authentication or recovery action, MUST NOT place secrets in URLs, and MUST NOT expose passwords, one-time codes, session credentials or recovery secrets in logs, analytics, crash reports or user-visible error details.",
-      "location": "## Requirement ZD-AUTH-019"
+      "location": "#### Requirement ZD-AUTH-019 — Avoid unnecessary credential exposure"
     },
     {
       "statementId": "ZD-AUTH-020",
       "text": "The system MUST provide a documented recovery process for users who lose access to a supported authenticator, and MUST verify recovery authority using a one-time, time-bounded challenge or an equivalently secure recovery mechanism before changing authenticators or restoring account access.",
-      "location": "## Requirement ZD-AUTH-020"
+      "location": "#### Requirement ZD-AUTH-020 — Provide a secure authenticator recovery path"
     },
     {
       "statementId": "ZD-AUTH-021",
       "text": "When an authenticator is reset, replaced, or confirmed compromised through an authorized security process, the system MUST revoke sessions that are no longer trusted and MUST require fresh authentication before protected access resumes.",
-      "location": "## Requirement ZD-AUTH-021"
+      "location": "#### Requirement ZD-AUTH-021 — Invalidate affected sessions after credential recovery or replacement"
     }
   ],
   "evidenceRefs": [
@@ -160,17 +160,26 @@
           "rationale": "Account creation establishes one persistent identity reference.",
           "basis": [
             {
-              "basisType": "Given a successfully created account, when it is retrieved through authenticated sessions on either supported platform, then the same principal is returned.",
-              "description": "owner-decision",
-              "refs": []
+              "basisType": "pm-inference",
+              "description": "PM inference: a stable principal is needed so account identity is not coupled to a mutable sign-in identifier, authenticator or session.",
+              "refs": [
+                "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-001-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Account creation establishes one persistent identity reference.",
+              "given": "a successful account creation",
+              "when": "the account is retrieved through an authenticated session",
+              "then": "the same stable principal is returned.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-001-AC-02",
+              "given": "two distinct accounts",
+              "when": "their principal references are compared",
+              "then": "they are distinct.",
               "verificationMethod": "automated-test"
             }
           ],
@@ -198,17 +207,26 @@
           "rationale": "Identifier collisions must not resolve authentication or recovery to the wrong principal.",
           "basis": [
             {
-              "basisType": "Given an existing identifier, when an equivalent canonical identifier is claimed, then the second claim is rejected without modifying the first account.",
-              "description": "pm-inference",
-              "refs": []
+              "basisType": "pm-inference",
+              "description": "PM inference: duplicate canonical identifiers could route sign-in or recovery to the wrong account; the exact canonicalization policy depends on the identifier selected by the owner.",
+              "refs": [
+                "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-002-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Identifier collisions must not resolve authentication or recovery to the wrong principal.",
+              "given": "an existing account identifier",
+              "when": "another account attempts to claim an identifier that canonicalizes to the same value",
+              "then": "the second claim is rejected without changing the first account.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-002-AC-02",
+              "given": "identifiers that differ only in forms the documented canonicalization treats as equivalent",
+              "when": "submitted",
+              "then": "the uniqueness check treats them consistently.",
               "verificationMethod": "automated-test"
             }
           ],
@@ -235,8 +253,8 @@
           "rationale": "Account identity must survive credential replacement.",
           "basis": [
             {
-              "basisType": "Given an existing account, when its authenticator is replaced, then its principal remains unchanged.",
-              "description": "external-research",
+              "basisType": "external-research",
+              "description": "NIST treats authenticators as bound to a subscriber account and specifies lifecycle processes for binding, replacement and invalidation.",
               "refs": [
                 "https://pages.nist.gov/800-63-4/sp800-63b.html"
               ]
@@ -245,9 +263,9 @@
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-003-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Account identity must survive credential replacement.",
+              "given": "an account with an existing principal",
+              "when": "its supported authenticator is changed",
+              "then": "the principal remains unchanged.",
               "verificationMethod": "automated-test"
             }
           ],
@@ -275,17 +293,27 @@
           "rationale": "Client-controlled state cannot establish trusted identity.",
           "basis": [
             {
-              "basisType": "Given fabricated client-side authentication state without valid server-verifiable proof, when a protected operation is requested, then access is denied.",
-              "description": "owner-decision",
-              "refs": []
+              "basisType": "pm-inference",
+              "description": "PM inference from the owner direction to operate first-party authentication and backend services: authentication must be verified at a trusted service boundary rather than accepted from client-controlled state.",
+              "refs": [
+                "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html",
+                "https://pages.nist.gov/800-63-4/sp800-63b.html"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-004-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Client-controlled state cannot establish trusted identity.",
+              "given": "an unauthenticated client",
+              "when": "it submits fabricated client-side authentication state without valid server-verifiable proof",
+              "then": "protected operations are denied.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-004-AC-02",
+              "given": "valid credentials",
+              "when": "the trusted verifier accepts them",
+              "then": "an authenticated session may be established for the corresponding principal.",
               "verificationMethod": "automated-test"
             }
           ],
@@ -296,7 +324,7 @@
         {
           "statementId": "ZD-AUTH-005",
           "requirementType": "security",
-          "normativeKind": "required",
+          "normativeKind": "conditional",
           "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
@@ -313,8 +341,8 @@
           "rationale": "Reusable secrets must not be recoverable from persisted records or logs.",
           "basis": [
             {
-              "basisType": "Given a registered password, when persisted records and logs are inspected, then plaintext is absent and only an approved verifier representation exists.",
-              "description": "external-research",
+              "basisType": "external-research",
+              "description": "Given a registered password, when persisted records and logs are inspected, then plaintext is absent and only an approved verifier representation exists.",
               "refs": [
                 "https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html",
                 "https://pages.nist.gov/800-63-4/sp800-63b.html",
@@ -325,14 +353,24 @@
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-005-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Reusable secrets must not be recoverable from persisted records or logs.",
+              "given": "a newly registered password",
+              "when": "persisted records and application logs are inspected",
+              "then": "the plaintext password is absent and only the approved verifier representation is present.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-005-AC-02",
+              "given": "a credential verification request",
+              "when": "the verifier checks the credential",
+              "then": "it does not need to retrieve a plaintext password.",
               "verificationMethod": "automated-test"
             }
           ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-AUTH-001"
+          ],
+          "conditions": [
+            "A supported authentication method stores a reusable authenticator secret."
           ]
         },
         {
@@ -355,8 +393,8 @@
           "rationale": "Password controls should follow current guidance without arbitrary complexity rules.",
           "basis": [
             {
-              "basisType": "Given a password within the documented maximum, when permitted Unicode or whitespace is used, then it is accepted for evaluation; oversized input is explicitly rejected and never truncated.",
-              "description": "NIST SP 800-63B-4 Section 3.1.1.2 specifies 15 characters for single-factor passwords, permits a lower minimum only when the password is used as part of MFA with an 8-character floor, recommends a maximum length of at least 64, prohibits composition rules, requires blocklist checks and prohibits periodic changes absent compromise.",
+              "basisType": "external-research",
+              "description": "NIST SP 800-63B-4 §3.1.1.2 specifies a 15-character minimum for single-factor passwords, an 8-character floor when passwords are used only as part of MFA, a maximum length of at least 64, no composition rules, blocklist checks and no periodic changes absent compromise.",
               "refs": [
                 "https://pages.nist.gov/800-63-4/sp800-63b.html",
                 "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html"
@@ -366,9 +404,37 @@
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-006-AC-01",
-              "given": "Password authentication is offered.",
-              "when": "A password is submitted for creation or change.",
-              "then": "The service enforces the 15-character single-factor minimum or 8-character MFA minimum, accepts at least 64 characters, permits Unicode and whitespace, rejects blocklisted values, does not silently truncate or impose composition rules, and does not require periodic changes absent compromise.",
+              "given": "password authentication is offered without MFA",
+              "when": "a password shorter than 15 characters is submitted",
+              "then": "it is rejected; when a password of at least 15 characters is submitted, it is eligible for further checks.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-006-AC-02",
+              "given": "password authentication is offered only as one factor in MFA",
+              "when": "a password shorter than 8 characters is submitted",
+              "then": "it is rejected.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-006-AC-03",
+              "given": "a password of at least 64 characters containing Unicode or whitespace",
+              "when": "submitted within the product's documented input limit",
+              "then": "it is accepted for evaluation and is not silently truncated.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-006-AC-04",
+              "given": "a password on the blocklist",
+              "when": "submitted for creation or change",
+              "then": "it is rejected with an actionable reason.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-006-AC-05",
+              "given": "no evidence of compromise",
+              "when": "the account remains in good standing",
+              "then": "the system does not force a periodic password change.",
               "verificationMethod": "automated-test"
             }
           ],
@@ -400,8 +466,8 @@
           "rationale": "Rate limits mitigate guessing and automated abuse while avoiding permanent lockout denial of service.",
           "basis": [
             {
-              "basisType": "Given repeated failed attempts against one account, when the configured threshold is reached, then further attempts are delayed or rejected and a legitimate user has a documented recovery path.",
-              "description": "external-research",
+              "basisType": "external-research",
+              "description": "Given repeated failed attempts against one account, when the configured threshold is reached, then further attempts are delayed or rejected and a legitimate user has a documented recovery path.",
               "refs": [
                 "https://pages.nist.gov/800-63-4/sp800-63b.html",
                 "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html"
@@ -411,9 +477,23 @@
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-007-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Rate limits mitigate guessing and automated abuse while avoiding permanent lockout denial of service.",
+              "given": "repeated failed attempts against one account",
+              "when": "the configured threshold is reached",
+              "then": "further attempts are delayed or rejected according to the documented policy.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-007-AC-02",
+              "given": "throttling is active",
+              "when": "a legitimate user attempts authentication",
+              "then": "the response communicates the restriction without revealing whether another person's account exists.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-007-AC-03",
+              "given": "a distributed attempt pattern",
+              "when": "requests originate from multiple clients",
+              "then": "per-account protection remains effective.",
               "verificationMethod": "automated-test"
             }
           ],
@@ -442,8 +522,8 @@
           "rationale": "Account enumeration enables targeted attacks.",
           "basis": [
             {
-              "basisType": "Given an existing and a nonexistent identifier, when equivalent unauthenticated sign-in or recovery requests are submitted, then responses do not disclose account existence.",
-              "description": "external-research",
+              "basisType": "external-research",
+              "description": "Given an existing and a nonexistent identifier, when equivalent unauthenticated sign-in or recovery requests are submitted, then responses do not disclose account existence.",
               "refs": [
                 "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html",
                 "https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html"
@@ -453,9 +533,9 @@
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-008-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Account enumeration enables targeted attacks.",
+              "given": "an identifier that exists and one that does not",
+              "when": "equivalent unauthenticated sign-in or recovery requests are submitted",
+              "then": "externally observable responses do not disclose account existence through message content or materially distinguishable response behaviour.",
               "verificationMethod": "automated-test"
             }
           ],
@@ -483,8 +563,8 @@
           "rationale": "Authenticated state must be bound to the principal and revocable by the trusted service.",
           "basis": [
             {
-              "basisType": "Given successful authentication, when the issued credential is presented, then the service resolves it to the verified principal; fabricated credentials are rejected.",
-              "description": "external-research",
+              "basisType": "external-research",
+              "description": "Given successful authentication, when the issued credential is presented, then the service resolves it to the verified principal; fabricated credentials are rejected.",
               "refs": [
                 "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html",
                 "https://pages.nist.gov/800-63-4/sp800-63b.html"
@@ -494,9 +574,16 @@
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-009-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Authenticated state must be bound to the principal and revocable by the trusted service.",
+              "given": "successful authentication",
+              "when": "the client accesses a protected operation with the issued session credential",
+              "then": "the server resolves it to the authenticated principal.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-009-AC-02",
+              "given": "a random or fabricated session credential",
+              "when": "presented",
+              "then": "it does not resolve to an authenticated principal.",
               "verificationMethod": "automated-test"
             }
           ],
@@ -524,8 +611,8 @@
           "rationale": "Session rotation prevents fixation and reuse across trust-boundary changes.",
           "basis": [
             {
-              "basisType": "Given an unauthenticated session, when authentication succeeds, then the former credential is rejected; replay after a later rotation is also rejected.",
-              "description": "external-research",
+              "basisType": "external-research",
+              "description": "Given an unauthenticated session, when authentication succeeds, then the former credential is rejected; replay after a later rotation is also rejected.",
               "refs": [
                 "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html",
                 "https://pages.nist.gov/800-63-4/sp800-63b.html"
@@ -535,9 +622,16 @@
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-010-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Session rotation prevents fixation and reuse across trust-boundary changes.",
+              "given": "an unauthenticated session",
+              "when": "authentication succeeds",
+              "then": "the prior unauthenticated session credential cannot be used as the authenticated session.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-010-AC-02",
+              "given": "a session is rotated",
+              "when": "the superseded credential is replayed",
+              "then": "it is rejected.",
               "verificationMethod": "automated-test"
             }
           ],
@@ -565,8 +659,8 @@
           "rationale": "Sessions must have explicit finite lifetimes.",
           "basis": [
             {
-              "basisType": "Given a session exceeds either configured idle or absolute lifetime, when its credential is presented, then protected access is denied.",
-              "description": "external-research",
+              "basisType": "external-research",
+              "description": "Given a session exceeds either configured idle or absolute lifetime, when its credential is presented, then protected access is denied.",
               "refs": [
                 "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html",
                 "https://pages.nist.gov/800-63-4/sp800-63b.html"
@@ -576,9 +670,16 @@
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-011-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Sessions must have explicit finite lifetimes.",
+              "given": "a session exceeds its configured inactivity limit",
+              "when": "its credential is presented",
+              "then": "protected access is denied.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-011-AC-02",
+              "given": "a session exceeds its configured absolute lifetime despite continued activity",
+              "when": "its credential is presented",
+              "then": "protected access is denied.",
               "verificationMethod": "automated-test"
             }
           ],
@@ -607,8 +708,8 @@
           "rationale": "Compromised or unwanted sessions must be revocable.",
           "basis": [
             {
-              "basisType": "Given a session or all account sessions are revoked, when each former credential is replayed, then every revoked credential is rejected.",
-              "description": "external-research",
+              "basisType": "external-research",
+              "description": "Given a session or all account sessions are revoked, when each former credential is replayed, then every revoked credential is rejected.",
               "refs": [
                 "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html",
                 "https://pages.nist.gov/800-63-4/sp800-63b.html"
@@ -618,9 +719,16 @@
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-012-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Compromised or unwanted sessions must be revocable.",
+              "given": "a session is revoked",
+              "when": "its credential is replayed",
+              "then": "the request is denied.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-012-AC-02",
+              "given": "all sessions for an account are revoked",
+              "when": "any previously issued session credential for that account is replayed",
+              "then": "each is denied.",
               "verificationMethod": "automated-test"
             }
           ],
@@ -648,8 +756,8 @@
           "rationale": "Logout must invalidate server authority, not merely hide the signed-in UI.",
           "basis": [
             {
-              "basisType": "Given an authenticated session, when logout completes, then replaying its former credential does not authorize a protected request.",
-              "description": "external-research",
+              "basisType": "external-research",
+              "description": "Given an authenticated session, when logout completes, then replaying its former credential does not authorize a protected request.",
               "refs": [
                 "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html",
                 "https://pages.nist.gov/800-63-4/sp800-63b.html"
@@ -659,9 +767,16 @@
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-013-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Logout must invalidate server authority, not merely hide the signed-in UI.",
+              "given": "an authenticated session",
+              "when": "logout completes",
+              "then": "replaying its former credential does not authorize a protected request.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-013-AC-02",
+              "given": "logout is repeated or the session has already expired",
+              "when": "the request is processed",
+              "then": "the operation completes safely without restoring the session.",
               "verificationMethod": "automated-test"
             }
           ],
@@ -672,7 +787,7 @@
         {
           "statementId": "ZD-AUTH-014",
           "requirementType": "security",
-          "normativeKind": "required",
+          "normativeKind": "conditional",
           "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
@@ -688,8 +803,8 @@
           "rationale": "Web session protections must cover cookie handling and CSRF.",
           "basis": [
             {
-              "basisType": "Given a production web session, when cookie attributes and state-changing request protections are inspected, then secure transport, script-access restriction, explicit cross-site policy and CSRF defence are present.",
-              "description": "external-research",
+              "basisType": "external-research",
+              "description": "Given a production web session, when cookie attributes and state-changing request protections are inspected, then secure transport, script-access restriction, explicit cross-site policy and CSRF defence are present.",
               "refs": [
                 "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html",
                 "https://pages.nist.gov/800-63-4/sp800-63b.html"
@@ -699,20 +814,30 @@
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-014-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Web session protections must cover cookie handling and CSRF.",
+              "given": "a production web session",
+              "when": "its cookie attributes are inspected",
+              "then": "secure transport and script-access restrictions are applied and the cross-site policy is explicit.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-014-AC-02",
+              "given": "a cross-site forged state-changing request without the required anti-CSRF proof",
+              "when": "it reaches the service",
+              "then": "it is rejected.",
               "verificationMethod": "automated-test"
             }
           ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-AUTH-001"
+          ],
+          "conditions": [
+            "Web authentication uses browser-managed sessions."
           ]
         },
         {
           "statementId": "ZD-AUTH-015",
           "requirementType": "security",
-          "normativeKind": "required",
+          "normativeKind": "conditional",
           "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
@@ -728,8 +853,8 @@
           "rationale": "Android credentials require platform-appropriate protected storage and safe failure on key loss.",
           "basis": [
             {
-              "basisType": "Given an authenticated Android client, when a session credential is persisted and logs/storage are inspected, then raw credentials are not exposed in ordinary app storage or diagnostics.",
-              "description": "platform-contract",
+              "basisType": "platform-contract",
+              "description": "Given an authenticated Android client, when a session credential is persisted and logs/storage are inspected, then raw credentials are not exposed in ordinary app storage or diagnostics.",
               "refs": [
                 "https://developer.android.com/privacy-and-security/security-tips",
                 "https://developer.android.com/privacy-and-security/keystore"
@@ -739,14 +864,31 @@
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-015-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Android credentials require platform-appropriate protected storage and safe failure on key loss.",
+              "given": "an Android user has authenticated",
+              "when": "the app persists the credential",
+              "then": "it is stored using a protected mechanism appropriate to the supported Android versions.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-015-AC-02",
+              "given": "ordinary application data or logs are inspected",
+              "when": "the credential is at rest or after an error",
+              "then": "the raw credential is not exposed there.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-015-AC-03",
+              "given": "protected storage becomes unavailable or its key is invalidated",
+              "when": "the app attempts to use the credential",
+              "then": "it fails closed and requires a safe re-authentication or recovery path.",
               "verificationMethod": "automated-test"
             }
           ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-AUTH-001"
+          ],
+          "conditions": [
+            "The Android application retains a session credential between requests."
           ]
         },
         {
@@ -770,17 +912,24 @@
           "rationale": "Authentication is distinct from authorization and entitlement.",
           "basis": [
             {
-              "basisType": "Given a client alters a local role, Pro flag or activation flag, when it requests a protected operation, then the trusted service applies current server-side state and denies unauthorized actions.",
-              "description": "owner-decision",
+              "basisType": "owner-decision",
+              "description": "Given a client alters a local role, Pro flag or activation flag, when it requests a protected operation, then the trusted service applies current server-side state and denies unauthorized actions.",
               "refs": []
             }
           ],
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-016-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Authentication is distinct from authorization and entitlement.",
+              "given": "a client alters a local role, Pro flag or activation flag",
+              "when": "it requests a protected operation",
+              "then": "the trusted service applies the server-side state and denies any unauthorized action.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-016-AC-02",
+              "given": "a user's entitlement or permission is revoked",
+              "when": "an existing session requests a protected operation",
+              "then": "the latest applicable authorization state is enforced within the documented propagation bound.",
               "verificationMethod": "automated-test"
             }
           ],
@@ -808,17 +957,24 @@
           "rationale": "The product has one account identity across two platforms, not identical session implementations.",
           "basis": [
             {
-              "basisType": "Given one account authenticates on web and Android, when account-scoped resources are accessed, then both sessions resolve to the same principal and current account policy.",
-              "description": "owner-decision",
+              "basisType": "owner-decision",
+              "description": "Given one account authenticates on web and Android, when account-scoped resources are accessed, then both sessions resolve to the same principal and current account policy.",
               "refs": []
             }
           ],
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-017-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "The product has one account identity across two platforms, not identical session implementations.",
+              "given": "one account authenticates on both platforms",
+              "when": "each session accesses account-scoped resources",
+              "then": "both resolve to the same principal.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-017-AC-02",
+              "given": "account-level authorization or entitlement changes",
+              "when": "either platform next performs a protected operation",
+              "then": "the same current policy is applied.",
               "verificationMethod": "automated-test"
             }
           ],
@@ -847,17 +1003,24 @@
           "rationale": "Authentication dependency failures must not become implicit access grants.",
           "basis": [
             {
-              "basisType": "Given trusted authentication state cannot be verified, when a protected request is processed, then access is denied and a safe recoverable error is returned.",
-              "description": "pm-inference",
+              "basisType": "pm-inference",
+              "description": "Given trusted authentication state cannot be verified, when a protected request is processed, then access is denied and a safe recoverable error is returned.",
               "refs": []
             }
           ],
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-018-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Authentication dependency failures must not become implicit access grants.",
+              "given": "the trusted authentication state cannot be verified",
+              "when": "a protected request is processed",
+              "then": "access is denied rather than granted from stale client state.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-018-AC-02",
+              "given": "an authentication dependency fails",
+              "when": "the user receives the result",
+              "then": "it explains that authentication is temporarily unavailable and does not expose tokens, credentials or internal stack details.",
               "verificationMethod": "automated-test"
             }
           ],
@@ -885,17 +1048,28 @@
           "rationale": "Minimize credential exposure across collection, transport and diagnostics.",
           "basis": [
             {
-              "basisType": "Given authentication and recovery flows are instrumented, when logs, URLs and diagnostics are inspected, then credential and session secrets are absent.",
-              "description": "external-research",
-              "refs": []
+              "basisType": "external-research",
+              "description": "OWASP authentication and session guidance treats credential and session identifiers as sensitive secrets; recovery guidance requires careful handling of reset tokens and codes.",
+              "refs": [
+                "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html",
+                "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html",
+                "https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-019-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Minimize credential exposure across collection, transport and diagnostics.",
+              "given": "authentication and recovery flows are exercised with instrumented logs",
+              "when": "records are inspected",
+              "then": "credential and session secrets are absent.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-019-AC-02",
+              "given": "a secret-bearing request is generated",
+              "when": "its URL and diagnostic output are inspected",
+              "then": "the secret is not included.",
               "verificationMethod": "automated-test"
             }
           ],
@@ -924,8 +1098,8 @@
           "rationale": "Recovery must resist replay, enumeration and unauthorized account takeover.",
           "basis": [
             {
-              "basisType": "Given a valid recovery challenge, when used successfully, then it cannot be reused; expired, invalid or altered challenges do not change account security state.",
-              "description": "external-research",
+              "basisType": "external-research",
+              "description": "Given a valid recovery challenge, when used successfully, then it cannot be reused; expired, invalid or altered challenges do not change account security state.",
               "refs": [
                 "https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html",
                 "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html"
@@ -935,9 +1109,23 @@
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-020-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Recovery must resist replay, enumeration and unauthorized account takeover.",
+              "given": "a valid recovery challenge",
+              "when": "it is successfully used",
+              "then": "it cannot be used again.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-020-AC-02",
+              "given": "an expired, invalid, already-used or altered recovery challenge",
+              "when": "submitted",
+              "then": "no authenticator or account security state is changed.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-020-AC-03",
+              "given": "a recovery attempt for an identifier",
+              "when": "the requester is unauthenticated",
+              "then": "the response does not reveal whether the account exists.",
               "verificationMethod": "automated-test"
             }
           ],
@@ -965,8 +1153,8 @@
           "rationale": "Credential recovery must not leave compromised sessions active.",
           "basis": [
             {
-              "basisType": "Given an authenticator is reset, when the documented revocation policy applies, then affected former sessions are denied on replay.",
-              "description": "external-research",
+              "basisType": "external-research",
+              "description": "Given an authenticator is reset, when the documented revocation policy applies, then affected former sessions are denied on replay.",
               "refs": [
                 "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html",
                 "https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html"
@@ -976,9 +1164,16 @@
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-021-AC-01",
-              "given": "The requirement's stated preconditions hold.",
-              "when": "The relevant authentication, session or recovery event occurs.",
-              "then": "Credential recovery must not leave compromised sessions active.",
+              "given": "a password or authenticator is reset",
+              "when": "the reset completes",
+              "then": "sessions selected by the documented revocation policy no longer authorize protected operations.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-021-AC-02",
+              "given": "The relevant prior state is established.",
+              "when": "Given a former session is replayed after required revocation",
+              "then": "access is denied.",
               "verificationMethod": "automated-test"
             }
           ],
