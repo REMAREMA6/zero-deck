@@ -110,7 +110,7 @@ This closes synthesis only. The machine capture has no runtime executions, obser
 
 [x] Complete 2026-11-27 — bounded completeness/conformance review. Exit gate satisfied only because the product-specific deliverable is explicitly marked incomplete with unresolved gaps. See `software-rules/PHASE-6-COMPLETENESS-AUDIT.md`. No runtime conformance or replication sufficiency is claimed.
 
-Review closed 2026-11-27 under the plan's incomplete-deliverable exit branch. The capture remains incomplete and not replication-sufficient; obtain an authorized runtime target/build and resolve the open product decisions before any conformance claim.
+Review closed 2026-11-27 under the plan's incomplete-deliverable exit branch. The capture remains incomplete and not replication-sufficient; resolve the open product decisions and required properties before a completeness claim. A first-party ZeroDeck runtime is not required to complete this reverse-engineering specification.
 
 ## Phase 7 — Final planned phase: reference-runtime investigation and evidence reconciliation
 
@@ -151,17 +151,16 @@ At the end of every work session:
 5. Verify the committed files and record the commit SHA.
 
 
-## Renewed Phase 7 — GitHub Actions execution
+## Phase 7 execution details — completed
 
 - [x] Record the owner-approved GitHub Actions execution procedure in `re/zerodek-product-re/2026-11-27/GITHUB-ACTIONS-EXECUTION-PROCEDURE.md`.
-- [x] Re-read prior Phase 7 evidence, target pins, and the uploaded RE-agent ownership/safety constraints.
-- [x] Build the target-by-target eligibility matrix in `PHASE-7-RENEWAL-TARGET-MATRIX.md`.
-- [x] Build and run a first-party GitHub Actions + Playwright runner smoke test three times; screenshot/video/trace artifact upload succeeded. Final run pins runner label, Playwright and upload action. See `PHASE-7-RUNNER-SMOKE-REPORT.md`.
-- [x] Execute the three owner-authorized, exact-pinned prior-art targets using GitHub Actions; record outcomes and skips in `PHASE-7-RENEWED-CLOSEOUT-AUDIT.md`.
-- [x] Keep the mockup fork out of runtime testing; UI source capture remains separate from native-app runtime claims.
-- [ ] Reassess native build/test paths for actual ZeroDeck when first-party app source/build exists.
-- [ ] Run authorized integration/provider tests only with owner-configured test secrets, dedicated test environments, and explicit approval for live data disclosure/costs.
-- [ ] Reconcile eligible new evidence to the seven MVP scenarios and all 15 facets without promoting reference behaviour into ZeroDeck rules.
-- [x] Record current skips/blockers and reassess the present replication-sufficiency status: still NOT SUFFICIENT.
+- [x] Re-read prior Phase 7 evidence, target pins and uploaded RE-agent ownership/safety constraints.
+- [x] Build the target eligibility matrix in `PHASE-7-RENEWAL-TARGET-MATRIX.md`.
+- [x] Run the first-party Playwright runner smoke test three times; screenshot/video/trace artifact upload succeeded.
+- [x] Execute and inspect the three authorized exact-pinned prior-art targets; Hypatia/HypatiaDatabases follow-up fixture work and ClamAV 15/15 CTest evidence are recorded in `PHASE-7-RENEWED-ACTIONS-RESULTS.md`.
+- [x] Keep the mockup fork out of runtime testing; UI source-derived rules remain separate.
+- [x] Reconcile evidence to all 15 facets and seven MVP scenarios without promoting reference behaviour into ZeroDeck rules.
+- [x] Reconcile `EVIDENCE.md`, `RULE-TRACEABILITY.md` and `capture.json`; retain zero ZeroDeck runtime observations/rules.
+- [x] Record all unavailable paths and reasons, and complete the renewed closeout audit.
 
-**Current status:** runner capability verified; target-specific renewed runtime execution remains blocked or conditional as detailed in the matrix.
+**Current status:** Phase 7 is complete for its bounded reference-runtime scope. The ZeroDeck-specific Software Rules capture remains incomplete because required product properties and owner decisions remain open. First-party ZeroDeck runtime capture and live provider calls are not Phase 7 prerequisites.
