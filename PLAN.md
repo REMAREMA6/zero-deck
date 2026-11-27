@@ -126,7 +126,7 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 
 **UI source work is separate:** source-derived UI rules from the owner's mockup fork are not runtime observations. Later, when the actual ZeroDeck React/TypeScript native app is implemented, the developer agent may capture UI runtime rules and complete the UI evidence.
 
-**Exit gate:** every eligible non-UI runtime scenario has reproducible evidence or a precise recorded reason for skipping; all 15 facets have evidence-backed dispositions; source/runtime/intent evidence remain distinct; capture and validation are reconciled; replication sufficiency is explicitly assessed. A skipped scenario remains unverified and must not be described as runtime-complete.
+**Exit gate: SATISFIED 2026-11-27 for the bounded runtime investigation.** All accessible exact-pinned upstream CI evidence was extracted; all seven MVP scenarios and all 15 facets have explicit evidence-or-skip dispositions; evidence classes remain distinct; the evidence register and traceability are reconciled without unsupported rule promotion; and replication sufficiency is explicitly assessed as **NOT SUFFICIENT**. See `PHASE-7-CLOSEOUT-AUDIT.md`. Skipped scenarios remain unverified and must not be described as runtime-complete. Future runtime capture against the actual ZeroDeck app is a later implementation-time task.
 
 ## 6. Target project structure
 
