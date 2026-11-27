@@ -226,9 +226,9 @@ This document maps the complete semantic dimension inventory of the governing So
 
 - **MVP-FILE-001:** interface, behavior, data, authorization-permissions, security-controls, errors-recovery, configuration, performance-resource-behaviour.
 - **MVP-FILE-002:** interface, behavior, business-rules, data, security-controls, errors-recovery.
-- **MVP-QUAR-001:** interface, behavior, business-rules, data, persistence, authorization-permissions, security-controls, errors-recovery, integrations, performance-resource-behaviour.
+- **MVP-QUAR-001:** interface, behavior, business-rules, data, persistence, authorization-permissions, security-controls, errors-recovery, integrations, configuration, performance-resource-behaviour.
 - **MVP-QUAR-002:** interface, behavior, business-rules, data, authorization-permissions, security-controls, errors-recovery.
-- **MVP-QUAR-003:** interface, behavior, business-rules, data, persistence, authorization-permissions, security-controls, errors-recovery, performance-resource-behaviour.
+- **MVP-QUAR-003:** interface, behavior, business-rules, data, persistence, authorization-permissions, security-controls, errors-recovery, configuration, performance-resource-behaviour.
 - **MVP-LINK-001:** interface, behavior, business-rules, data, api, identity-authentication, authorization-permissions, security-controls, errors-recovery, integrations, configuration, performance-resource-behaviour.
 - **MVP-LINK-002:** interface, behavior, business-rules, data, api, security-controls, errors-recovery, integrations, configuration, performance-resource-behaviour.
 
