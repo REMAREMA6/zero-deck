@@ -31,9 +31,9 @@ Agent definitions (identities, skills, frameworks, and mental models) are intent
   - [UI source-derived rules](re/zerodek-product-re/2026-11-27/UI-SOURCE-DERIVED-RULES.md) — 12 bounded rules extracted from pinned mockup screen source; not runtime evidence.
   - [Phase 7 target preflight](re/zerodek-product-re/2026-11-27/PHASE-7-TARGET-PREFLIGHT.md) — original environment, target pins and execution blockers.
   - [GitHub Actions execution procedure](re/zerodek-product-re/2026-11-27/GITHUB-ACTIONS-EXECUTION-PROCEDURE.md) — remote runner process, Playwright, integrations, secrets, deployment and safety gates.
-  - [Phase 7 renewal target matrix](re/zerodek-product-re/2026-11-27/PHASE-7-RENEWAL-TARGET-MATRIX.md) — previously skipped targets, eligibility and current blockers.
+  - [Phase 7 renewal target matrix](re/zerodek-product-re/2026-11-27/PHASE-7-RENEWAL-TARGET-MATRIX.md) — final target outcomes, test coverage and explicit skip dispositions.
   - [Phase 7 runner smoke report](re/zerodek-product-re/2026-11-27/PHASE-7-RUNNER-SMOKE-REPORT.md) — three successful first-party GitHub Actions + Playwright runs with screenshot/video/trace artifacts.
-  - [Phase 7 original closeout](re/zerodek-product-re/2026-11-27/PHASE-7-CLOSEOUT-AUDIT.md) — historical record of the first bounded investigation; Phase 7 has since been reopened.
+  - [Phase 7 original closeout](re/zerodek-product-re/2026-11-27/PHASE-7-CLOSEOUT-AUDIT.md) — historical record of the initial bounded pass; use the renewed closeout below for final Phase 7 status.
   - [Phase 7 renewed execution results](re/zerodek-product-re/2026-11-27/PHASE-7-RENEWED-ACTIONS-RESULTS.md) — final exact-pinned builds/tests, fixture branches, artifacts and limitations.
   - [Phase 7 renewed closeout audit](re/zerodek-product-re/2026-11-27/PHASE-7-RENEWED-CLOSEOUT-AUDIT.md) — final bounded investigation assessment and skip dispositions.
 - `re/oss-recon/` — earlier reconnaissance records. These were created for a separate Android Security Scanner engagement and must be audited before any content is reused for ZeroDeck.
