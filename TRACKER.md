@@ -13,7 +13,7 @@
 **Phase 4 plan closeout blob:** 71c734f9283e03d32263f75cbc9e46014e1e7e03  
 **Phase 7 corrected decision commit:** 6cc99584682becef61dbb7d728d604c24d884b1b  
 **Current phase:** Phase 7 — COMPLETE (bounded non-UI runtime investigation; ZeroDeck remains not replication-sufficient)  
-**Overall status:** Phases 0–7 are complete as bounded investigation/review phases. Phase 7 collected and mapped all accessible exact-pinned upstream CI evidence, assigned explicit evidence-or-skip dispositions to all seven MVP scenarios and all 15 facets, and recorded unavailable paths. ZeroDeck's product-specific Software Rules capture remains incomplete and not replication-sufficient; actual ZeroDeck runtime capture must occur after the native app exists. The ZeroDeck product-specific Software Rules capture remains incomplete and not replication-sufficient. The owner-approved MVP is manual file security analysis, quarantine/file disposition, and Pro-gated website/link checking (disabled until owner activation when paid revenue can fund costs). IP address tracking/investigation is a future candidate and excluded from MVP.
+**Overall status:** Phases 0–7 are complete as bounded investigation/review phases. Phase 7 collected and mapped all accessible exact-pinned upstream CI evidence, assigned explicit evidence-or-skip dispositions to all seven MVP scenarios and all 15 facets, and recorded unavailable paths. ZeroDeck's product-specific Software Rules capture remains incomplete and not replication-sufficient; actual ZeroDeck runtime capture must occur after the native app exists. The owner-approved MVP is manual file security analysis, quarantine/file disposition, and Pro-gated website/link checking (disabled until owner activation when paid revenue can fund costs). IP address tracking/investigation is a future candidate and excluded from MVP.
 
 > This is the persistent progress and handoff record. Update it whenever work starts, changes status, becomes blocked, or is completed. A new chat must be able to resume from this file and the linked repository records without depending on private chat history.
 
@@ -110,7 +110,7 @@ Review closed 2026-11-27 under the plan's incomplete-deliverable exit branch. Th
 
 ## Phase 7 — Non-UI runtime investigation of selected prior-art implementations
 
-[~] Started; runtime execution blocked at preflight. The initial decision's target designation was incorrect and is superseded by the corrected decision. The actual targets are selected Phase 3 implementations, not the ZeroDeck mockup fork.
+[x] Complete — bounded investigation with explicit skips. The initial decision's target designation was incorrect and is superseded by the corrected decision. The actual targets were the selected Phase 3 implementations, not the ZeroDeck mockup fork.
 
 - [x] Correct the Phase 7 scope: Hypatia, HypatiaDatabases and ClamAV (comparison only) are the runtime candidates; Web Risk is documented-only unless separately approved; Android platform docs are not executable targets.
 - [x] Exclude UI runtime inspection from Phase 7 and record that the actual ZeroDeck UI runtime rules may be captured later by the developer agent.
