@@ -20,7 +20,8 @@
 |---|---|---|---|
 | EVD-ZD-SCOPE-001 | `re/zerodek-product-re/2026-11-27/MVP-SCOPE-DECISION.md` | `7666e50f29f47913724e1321f9edb006ed885283` | Owner-approved three-capability MVP, exclusions and IP future-candidate boundary. |
 | EVD-ZD-PRO-001 | `re/zerodek-product-re/2026-11-27/PRO-GATED-LINK-CHECK-DECISION.md` | `8887085dfc323c3f304ef29a74bfecb1a361f751` | Pro entitlement and separate owner activation gate, no-call conditions, usage/budget-control requirement. |
-| EVD-ZD-MAP-001 | `re/zerodek-product-re/2026-11-27/CAPABILITY-FACET-MAPPING.md` | `436be0bd1348447f3888aa8a9ee5e1ec791ad144` | Seven MVP scenarios, 15-facet applicability and required-property questions. |
+| EVD-ZD-CAP-001 | `re/zerodek-product-re/2026-11-27/CAPABILITY-INVENTORY.md` | `fef4184fdf32ecf68fd5f2df76c8bc3f2f1e4695` | Evidence-backed capability workflows and provisional product-material requirements; traces back to the inspected scanner product-decision source. |
+| EVD-ZD-MAP-001 | `re/zerdek-product-re/2026-11-27/CAPABILITY-FACET-MAPPING.md` | `436be0bd1348447f3888aa8a9ee5e1ec791ad144` | Seven MVP scenarios, 15-facet applicability and required-property questions. |
 | EVD-ZD-P4-001 | `re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md` | `7cc66f225f82a23a2b94bc53c3364c200f990f64` | Source-derived prior-art rules and official Android/Web Risk contracts with provenance. |
 | EVD-ZD-P4-002 | `re/zerodek-product-re/2026-11-27/PHASE-4-15-FACET-COVERAGE-AUDIT.md` | `3b32ea7b60d90c30b1511a2e878a411cacc3a648` | 15-facet evidence/gap audit across the three MVP capabilities. |
 
