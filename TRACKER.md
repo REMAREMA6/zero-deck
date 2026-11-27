@@ -11,8 +11,8 @@
 **Phase 4 extraction blob:** 7cc66f225f82a23a2b94bc53c3364c200f990f64  
 **Phase 4 facet audit blob:** 3b32ea7b60d90c30b1511a2e878a411cacc3a648  
 **Phase 4 plan closeout blob:** 71c734f9283e03d32263f75cbc9e46014e1e7e03  
-**Current phase:** Phase 6 — Completeness and conformance (complete; bounded review only)  
-**Overall status:** Phases 0–6 are complete as project/review phases; the ZeroDeck product-specific Software Rules capture remains incomplete and not replication-sufficient. The owner-approved MVP is manual file security analysis, quarantine/file disposition, and Pro-gated website/link checking (disabled until owner activation when paid revenue can fund costs). IP address tracking/investigation is a future candidate and excluded from MVP.
+**Current phase:** Phase 7 — Local runtime investigation and verification (preflight pending)  
+**Overall status:** Phases 0–6 are complete as project/review phases. Phase 7 is approved and in preflight; no runtime execution has started. The ZeroDeck product-specific Software Rules capture remains incomplete and not replication-sufficient. The owner-approved MVP is manual file security analysis, quarantine/file disposition, and Pro-gated website/link checking (disabled until owner activation when paid revenue can fund costs). IP address tracking/investigation is a future candidate and excluded from MVP.
 
 > This is the persistent progress and handoff record. Update it whenever work starts, changes status, becomes blocked, or is completed. A new chat must be able to resume from this file and the linked repository records without depending on private chat history.
 
@@ -26,11 +26,11 @@
 
 ## Current position
 
-- **Current phase:** Phase 6 — Complete (bounded completeness/conformance review; product capture remains incomplete)
-- **Current task:** Phase 6 review is complete under the explicit incomplete-deliverable exit branch. The 15-facet audit, property inventory reconciliation, schema/reference checks and bounded product-completeness disposition are recorded in `software-rules/PHASE-6-COMPLETENESS-AUDIT.md`.
-- **Completed:** Phases 0–6 review tasks complete. The Phase 6 audit reviewed all 15 facets, corrected the quarantine Configuration omission and conditional API/Integrations applicability, and reconciled the inventory to 775 entries (700 required; 75 optional). The corrected capture passed governing schema, completeness, cross-record integrity and ZeroDeck cross-reference validation in [CI run #46000308895](https://github.com/REMAREMA6/zero-deck/actions/runs/46000308895). See `software-rules/PHASE-6-COMPLETENESS-AUDIT.md` and `re/zerodek-product-re/2026-11-27/PHASE-6-INTERFACE-SOURCE-REVIEW.md`.
-- **Blockers / unresolved product properties:** No deployed ZeroDeck runtime target/build is available. File scan formats/engine/verdict criteria/data locality; quarantine storage/atomicity/recovery/retention/uninstall; URL parsing/disclosure/provider/authentication/entitlement lifecycle/quotas; interface runtime states; error/recovery mappings; actual integrations, configuration and performance targets remain unresolved. Preserve all open items; do not fabricate answers.
-- **Next action:** Obtain an authorized running ZeroDeck target/build and resolve the open owner/product decisions before attempting runtime conformance. No Phase 7 is defined in this project plan. Keep IP investigation outside MVP.
+- **Current phase:** Phase 7 — Local runtime investigation and verification (preflight pending; no execution started).
+- **Current task:** Carry out the approved Phase 7 preflight: establish the exact target's ownership/permission basis, pin the reference revision, inspect executable surfaces, and verify that a suitable execution environment genuinely exists. Decision: `re/zerodek-product-re/2026-11-27/RUNTIME-INVESTIGATION-DECISION.md`.
+- **Completed:** Phases 0–6 review tasks complete. Phase 6 reviewed all 15 facets, reconciled 775 property entries (700 required; 75 optional), and passed validation in [CI run #46000308895](https://github.com/REMAREMA6/zero-deck/actions/runs/46000308895). Phase 7 approach has been owner-approved and recorded; this is not evidence that runtime execution has begun.
+- **Blockers / unresolved product properties:** Runtime execution is gated on a documented ownership/permission basis and a verified suitable environment. No runtime execution has started. Product properties listed in `software-rules/OPEN-PROPERTIES.md` remain unresolved unless new evidence is recorded. Keep external provider traffic, browser/UI inspection, paid-service provisioning, and replacement implementation out of scope.
+- **Next action:** Complete Phase 7 ownership/permission and environment preflight; only then pin, inspect, and decide whether local components can safely be executed. Keep IP investigation outside MVP.
 
 ## Phase tracking
 
@@ -43,6 +43,7 @@
 | 4 | Source-level rule extraction | [x] Complete | 31 source-derived rules, 28 platform/provider contract rules, 5 owner-declared link-gating rules, and a 15-facet audit across all three approved MVP capabilities. No ZeroDeck runtime behaviour or replication sufficiency is claimed. See `re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md` and `re/zerodek-product-re/2026-11-27/PHASE-4-15-FACET-COVERAGE-AUDIT.md`. |
 | 5 | Software Rules synthesis | [x] Complete | Synthesis exit gate satisfied. Includes 6 owner rules, 27 provisional product-material rules, 3 declared contracts, 12 evidence records, 7 scenarios, 15 facets and 757 property entries. All 15 semantic payload mappings, individual rule/evidence traceability, Draft 2020-12 schema validation, governing completeness/integrity suites and ZeroDeck cross-reference checks passed. Capture remains explicitly incomplete and not replication-sufficient. See `software-rules/PHASE-5-SYNTHESIS-AUDIT.md`. |
 | 6 | Completeness and conformance | [x] Complete — bounded review | Exit gate satisfied for an explicitly incomplete product deliverable. All 15 facets reviewed; inventory omissions/applicability inconsistencies corrected; 775 entries reconciled (700 required, 75 optional); CI #46000308895 passed. Product remains not replication-sufficient. See `software-rules/PHASE-6-COMPLETENESS-AUDIT.md`. |
+| 7 | Local runtime investigation and verification | [~] Preflight pending | Owner-approved approach recorded. No runtime execution has started. Complete authorization, target pinning, code inspection, and genuine environment/isolation checks before execution. See `re/zerodek-product-re/2026-11-27/RUNTIME-INVESTIGATION-DECISION.md`. |
 
 ## Phase 0 — Governance and handoff
 
@@ -104,6 +105,20 @@ This closes synthesis only. The machine capture has no runtime executions, obser
 [x] Complete 2026-11-27 — bounded completeness/conformance review. Exit gate satisfied only because the product-specific deliverable is explicitly marked incomplete with unresolved gaps. See `software-rules/PHASE-6-COMPLETENESS-AUDIT.md`. No runtime conformance or replication sufficiency is claimed.
 
 Review closed 2026-11-27 under the plan's incomplete-deliverable exit branch. The capture remains incomplete and not replication-sufficient; obtain an authorized runtime target/build and resolve the open product decisions before any conformance claim.
+
+## Phase 7 — Local runtime investigation and verification
+
+[~] Preflight pending — owner-approved approach recorded in `re/zerodek-product-re/2026-11-27/RUNTIME-INVESTIGATION-DECISION.md`. No runtime execution has started.
+
+- [x] Record the owner's decision to proceed from source-level review to scoped local runtime investigation.
+- [ ] Complete target ownership/permission and RE triage scope record.
+- [ ] Verify the actual execution environment and required isolation properties.
+- [ ] Pin the target revision and inspect scripts, lifecycle hooks, dependencies, configuration and entry points before execution.
+- [ ] Execute only authorized, locally runnable components after all gates pass; preserve browser/UI inspection and external provider traffic as out of scope.
+- [ ] Record reproducible scenario-level evidence and assess all 15 facets.
+- [ ] Reconcile the Software Rules capture, open properties, traceability and validation; assess replication sufficiency.
+
+**Current disposition:** preflight only. Do not run repository code until the authorization and environment gates are documented as passed.
 
 ## Handoff protocol
 
