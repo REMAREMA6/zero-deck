@@ -32,7 +32,7 @@
 - **Completed:** Phases 0–6 review tasks complete. Phase 6 reviewed all 15 facets, reconciled 775 property entries (700 required; 75 optional), and passed validation in [CI run #46000308895](https://github.com/REMAREMA6/zero-deck/actions/runs/46000308895). Phase 7 scope correction committed. Supplemental UI source review extracted 12 source-derived rules. Exact-pinned upstream CI runtime evidence collected for Hypatia, HypatiaDatabases and ClamAV. Further log inspection extracted HypatiaDatabases generator counts and unsigned publication behaviour, and ClamAV's named CVD verification, signature-tool and scan-callback cases; see `PHASE-7-RUNTIME-OBSERVATION-MAP.md`.
 - **Skipped local paths:** Available container lacks Android SDK/ADB/Gradle, Maven and ClamAV, and a suitable isolated lab is not verified. Do not spend excessive time forcing local execution where exact-pinned upstream CI evidence is available. Record each skipped path and continue with other eligible evidence.
 - **Out of scope:** UI runtime inspection, mockup runtime claims, external provider calls/secrets/paid services, malware samples, replacement implementation and IP investigation.
-- **Next action:** Continue extracting and mapping the available upstream runtime evidence to the relevant scenarios/facets; investigate any additional locally feasible non-invasive tests. Skip blocked targets/scenarios and continue. Do not call paid/external providers or run malware samples.
+- **Next action:** No further Phase 7 retries. When the actual ZeroDeck native app is available, execute the seven MVP scenarios and capture runtime behaviour across the 15 facets. Until then, preserve open properties and do not claim replication sufficiency.
 
 ## Phase tracking
 
