@@ -43,3 +43,14 @@ The following are not independent MVP capabilities: scan history as a standalone
 - Phase 2 may exit with the bounded MVP scope, exclusions and 15-facet investigation map recorded.
 - Phase 3 selects prior art only for the three MVP capabilities and their evidenced dependencies.
 - Phases 4–6 must resolve the required property inventory and evidence gaps. The MVP cannot be called replication-sufficient while relevant required properties remain unresolved.
+
+
+## Subsequent owner decision — Pro-gated link checking
+
+**Related decision:** [ZD-DEC-2026-11-27-02](PRO-GATED-LINK-CHECK-DECISION.md).
+
+Website and link checking remains in MVP-03, but access is restricted to users with the Pro entitlement. The owner will keep the feature locked/disabled until paid-user revenue can fund its operating and API costs, then explicitly activate it. Do not make link-check API calls for non-Pro users or while the owner-controlled feature switch is off. The Pro entitlement and feature activation switch are separate conditions.
+
+This changes the capability's availability and commercial activation conditions; it does not remove website/link checking from the MVP scope. Pro pricing, entitlement lifecycle, usage allowance, activation threshold and final provider procurement remain unspecified.
+
+This is owner-declared product intent, not observed runtime behaviour. See the Phase 3 prior-art register for the selected Web Risk Lookup API reference and its cost/privacy constraints.
