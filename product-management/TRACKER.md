@@ -5,7 +5,7 @@
 **Started:** 2026-11-27  
 **Method:** CIRCLES — seven steps  
 **Overall status:** [~] In progress  
-**Current step:** R — Report customer needs
+**Current step:** C — Cut through prioritization
 
 > This tracker is the operational source of truth for product-planning progress. Update it whenever work starts, changes status, becomes blocked, or completes. A new session must be able to resume from this file and the linked records without relying on chat history.
 
@@ -27,7 +27,7 @@
 - **Current product evidence status:** ZeroDeck-specific Software Rules remains Draft, incomplete and not replication-sufficient. Product planning must preserve unknowns.
 - **Primary business outcome:** Validate real market demand, per the owner's clarification on 2026-11-27. No final owner-approved target cohort has been selected. Segment B is provisionally recommended for needs discovery; practitioner and business/licensed segments remain alternatives.
 - **I — Identify result:** Three candidate segments were compared. Segment B (non-technical individuals who regularly receive/download unfamiliar files and links) is recommended as a provisional cohort for needs discovery, not an owner-approved target market. Segment A (security practitioners) and Segment C (businesses/licensed organisations) remain alternatives.
-- **Next action:** Begin R — Report customer needs. Validate the provisional cohort's actual situations, current workarounds, pain, consequences and need for quarantine; compare practitioner evidence where it could overturn the cohort recommendation. Define the demand-validation metric and threshold after needs are established.
+- **Next action:** Begin R is complete as a secondary-research needs synthesis in `2026-11-27/03-R-NEEDS.md`. C — Cut through prioritization is next. Primary customer interviews remain outstanding; no direct ZeroDeck customer need or demand claim is validated.
 
 ## CIRCLES progress
 
@@ -35,7 +35,7 @@
 |---|---|---|---|---|
 | C | Comprehend the situation | [x] Completed | `2026-11-27/01-C-COMPREHEND.md` | Goal, success-measure approach, constraints, context, assumptions and scope reconciled. Exact metric threshold is deferred to I/R after customer discovery. |
 | I | Identify the customer | [x] Completed | `2026-11-27/02-I-IDENTIFY.md` | Three behavior/context-based segments assessed; one provisional cohort recommended and defended; stakeholders/other sides acknowledged. Owner has not approved a final target market. |
-| R | Report customer needs | [ ] Not started | `2026-11-27/03-R-NEEDS.md` | Needs/jobs stated; reported vs inferred distinguished; evidence and current alternatives linked. |
+| R | Report customer needs | [x] Completed* | `2026-11-27/03-R-NEEDS.md` | Secondary research synthesised needs/jobs; reported vs inferred distinguished; alternatives and gaps linked. *Primary customer validation remains outstanding. |
 | C | Cut through prioritization | [ ] Not started | `2026-11-27/04-C-PRIORITIZATION.md` | Needs prioritized on explicit criteria; MVP necessities, dependencies, cuts and deferrals justified. |
 | L | List solutions | [ ] Not started | `2026-11-27/05-L-SOLUTION-OPTIONS.md` | 2–3 materially different approaches address the selected need. |
 | E | Evaluate solutions | [ ] Not started | `2026-11-27/06-E-EVALUATION.md` | Axes fixed before scoring; options and drawbacks compared; risks and trade-offs explicit. |
@@ -102,4 +102,4 @@ These are supporting research streams within CIRCLES, not additional method step
 | 2026-11-27 | Reviewed ZeroDeck README, scope decision, capability inventory, Software Rules scope/scenarios/open properties, and prior PM artifacts. | Confirmed three-capability MVP; identified stale 2026-11-24 assumptions requiring reconciliation. |
 | 2026-11-27 | Created current product-planning plan and tracker. | Planning authorized; C — Comprehend started. |
 | 2026-11-27 | Recorded owner's clarification that the first launch goal is to validate real market demand; no customer cohort is preselected. | C completed. I — Identify is next; practitioner, non-technical and business/licensed segments remain candidates. |
-| 2026-11-27 | Compared practitioner, non-technical individual and business/licensed segments using workflow context, MVP fit and current alternatives. | I completed. Segment B recommended provisionally for needs discovery; no final owner-approved target market or validated demand claim. R is next. |
+| 2026-11-27 | Compared practitioner, non-technical individual and business/licensed segments using workflow context, MVP fit and current alternatives. | I completed. Segment B recommended provisionally for needs discovery; no final owner-approved target market or validated demand claim. |\n| 2026-11-27 | Researched mobile messaging/link behaviour, device-context phishing behaviour, Android permission comprehension, Play Protect protections/data flows, usable-security fatigue, SOC alert validation and VirusTotal API constraints. Created `2026-11-27/03-R-NEEDS.md`. | R completed as a secondary-research synthesis. Primary customer interviews and demand validation remain open. C — Cut through prioritization is next. |
