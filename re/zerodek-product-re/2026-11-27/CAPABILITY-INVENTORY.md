@@ -57,22 +57,22 @@ Likewise, no claim is made that ZeroDeck is exclusively an Android app or that e
 | CAP-11 Background protection | Android platform capabilities/limits; battery/resource budgets; permissions; scheduling/event triggers; supported browser/device targets. |
 | CAP-12 Privacy audit | Platform APIs available; meaning of permission state; user consent and safe revocation; supported Android versions. |
 
-## 5. Candidate MVP decision status
+## 5. Owner-approved MVP decision status
 
-**No ZeroDeck launch-MVP capability is confirmed in the available owner-approved record.**
+**The ZeroDeck launch MVP is approved** and consists of:
 
-The scanner document's own proposed MVP comprises manual selected-file scanning, quarantine and website/link checking. This is a useful coherent candidate slice, but its scope belongs to the Android Security Scanner working draft. The owner explicitly instructed that the MVP must not be inferred solely from current repository contents. Therefore this inventory preserves it as a candidate proposal, not an adopted ZeroDeck decision.
+1. Manual file security analysis (MVP-01).
+2. Quarantine and file disposition (MVP-02).
+3. Website and link checking (MVP-03), gated behind Pro and kept disabled until the owner activates it when paid-user revenue can fund operating/API costs.
 
-The remaining candidates are either unresolved, conditional on the scanner's architecture, or explicitly later-release in the scanner document.
+The source of authority is `MVP-SCOPE-DECISION.md` plus `PRO-GATED-LINK-CHECK-DECISION.md`. The Pro entitlement and owner-controlled activation switch are distinct conditions. The user must not be charged API cost for a free-tier link-check action; link checking must not run while disabled.
+
+The remaining candidates are unresolved, conditional, deferred or excluded as indicated in the candidate register.
 
 ## 6. Phase 2 scope consequence
 
 The evidence-backed candidate inventory is complete relative to the inspected product materials. A startup-wide exhaustive capability inventory is **not** established because the current materials do not describe the broader ethical-hacking/penetration-testing platform beyond the scanner service area.
 
-Before a replication scope can be frozen, the owner must designate:
-- which candidate service/capability is the first ZeroDeck launch MVP;
-- which workflows within that capability are in;
-- which capabilities are explicitly later or out of scope; and
-- whether the current scanner design draft is approved as the source of requirements for that first service.
+The owner has designated the first MVP and its three capabilities. Future capability expansion still requires product discovery and owner approval.
 
 Until then, Phase 2 can provide a complete candidate/facet map, but cannot honestly pass its MVP-scope exit gate.
