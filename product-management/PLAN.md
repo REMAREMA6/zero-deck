@@ -5,7 +5,7 @@
 **Workspace:** `product-management/`  
 **Plan date:** 2026-11-27  
 **Method:** Product Management Agent CIRCLES (exactly seven steps)  
-**Status:** All seven CIRCLES steps completed as a provisional secondary-research recommendation on 2026-11-27. A first `PRODUCT-BLUEPRINT-DRAFT.md` and supporting file/quarantine/link research have been created. Independent review, primary customer validation, remaining research streams and owner decisions remain open. See TRACKER.md for current status.
+**Status:** All seven CIRCLES steps completed as a provisional secondary-research recommendation on 2026-11-27. A first `PRODUCT-BLUEPRINT-DRAFT.md` and supporting research have been created. Owner has since selected everyday non-technical users as the first target audience and confirmed web + Android platforms. Platform/integration architecture assessment, independent review, validation and remaining owner decisions remain open. See TRACKER.md for current status.
 
 ## 1. Assignment
 
@@ -144,6 +144,13 @@ Research is supporting evidence within CIRCLES, not an eighth CIRCLES step. Rese
 - For each proposed integration, record purpose, required data, data recipient, trigger, failure behaviour, cost model, privacy/security implications, alternatives, replaceability and whether it is required for MVP.
 - Distinguish product requirements from implementation choices; do not select a technology stack during CIRCLES unless a verified constraint makes it necessary.
 
+### H. Platform and integration architecture (supporting work after CIRCLES)
+- Design the same product across web and Android without assuming identical capabilities.
+- Compare client frameworks, backend/auth/database, private storage, hosting, media/content services, payments/entitlements and operational tooling.
+- For security-sensitive files, assess local-only, remote and hybrid handling; specify trust boundaries, encryption/key management, retention, deletion, backups, access control and breach impact.
+- Reject integrations that add cost or expose sensitive data without a demonstrated MVP need. Distinguish public content/media from private user files and quarantine artifacts.
+- Produce a recommended minimum architecture with explicit trade-offs, alternatives, pricing evidence, platform limitations and unresolved decisions. This is a product/technical recommendation for owner review, not an implementation order.
+
 ## 6. Product blueprint expected at completion
 
 The final recommendation should be detailed enough to hand to later design and engineering work. Subject to evidence and owner approval, it should cover:
@@ -191,10 +198,12 @@ A gate may be marked complete only with a cited artifact or evidence record. Unk
 - Read the relevant source records before relying on them; record exact paths and revisions.
 - Do not change the Software Rules repository or reverse-engineering records.
 - Do not build, ship, change product configuration, create tickets, or execute integrations.
-- Do not silently decide on behalf of the owner. Recommendations and proposed decisions must be labelled as such.
+- The product manager must lead deliberation: research options, compare trade-offs, and present a reasoned recommendation before asking the owner for an opinion. Do not make the owner supply technical answers they are not equipped to research.
+- The owner retains final authority. Recommendations and proposed decisions must be labelled as such.
 - Never invent customer research, competitor capabilities, costs, performance figures or platform guarantees.
 - If evidence is unavailable, state the gap and its effect on the recommendation.
 - Update `TRACKER.md` whenever a step starts, changes status, becomes blocked, or completes.
+- Ask the owner only for decisions that genuinely require owner authority or cannot be resolved through evidence. Prefer one focused decision at a time over long questionnaires.
 
 ## 9. Historical-work reconciliation
 
