@@ -182,7 +182,7 @@ One statement expresses one independently testable obligation. Split compound st
 
 ### Question IDs
 - Pattern: `ZD-Q-<CAPABILITY>-<NNN>`.
-- A question is not silently converted into a requirement. Resolve it, defer it with consequence, or keep it open.
+- A question is not silently converted into a requirement. Resolve it with a recorded decision, defer it with a recorded decision and consequence, or keep it open.
 
 ### Versioning
 Use `MAJOR.MINOR.PATCH-draft` while the contract is not owner-approved:
