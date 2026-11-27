@@ -25,7 +25,7 @@ Agent definitions (identities, skills, frameworks, and mental models) are intent
   - [Phase 3 prior-art audit and source-selection register](re/zerodek-product-re/2026-11-27/PHASE-3-PRIOR-ART-REGISTER.md).
   - [Phase 4 source-level rule extraction](re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md).
   - [Reference repository audit](re/zerodek-product-re/2026-11-27/REPOSITORY-AUDIT.md).
-- [ZeroDeck-specific Software Rules](software-rules/README.md) — Phase 5 synthesis and Phase 6 bounded completeness/conformance review complete; the product capture remains incomplete and not replication-sufficient.
+- [ZeroDeck-specific Software Rules](software-rules/README.md) — Phase 5 synthesis and Phase 6 bounded completeness/conformance review complete; Phase 7 reference evidence is reconciled; the product capture remains incomplete and not replication-sufficient.
   - [Phase 6 completeness audit](software-rules/PHASE-6-COMPLETENESS-AUDIT.md).
   - [Phase 6 MVP interface source review](re/zerodek-product-re/2026-11-27/PHASE-6-INTERFACE-SOURCE-REVIEW.md).
   - [UI source-derived rules](re/zerodek-product-re/2026-11-27/UI-SOURCE-DERIVED-RULES.md) — 12 bounded rules extracted from pinned mockup screen source; not runtime evidence.
@@ -34,6 +34,8 @@ Agent definitions (identities, skills, frameworks, and mental models) are intent
   - [Phase 7 renewal target matrix](re/zerodek-product-re/2026-11-27/PHASE-7-RENEWAL-TARGET-MATRIX.md) — previously skipped targets, eligibility and current blockers.
   - [Phase 7 runner smoke report](re/zerodek-product-re/2026-11-27/PHASE-7-RUNNER-SMOKE-REPORT.md) — three successful first-party GitHub Actions + Playwright runs with screenshot/video/trace artifacts.
   - [Phase 7 original closeout](re/zerodek-product-re/2026-11-27/PHASE-7-CLOSEOUT-AUDIT.md) — historical record of the first bounded investigation; Phase 7 has since been reopened.
+  - [Phase 7 renewed execution results](re/zerodek-product-re/2026-11-27/PHASE-7-RENEWED-ACTIONS-RESULTS.md) — final exact-pinned builds/tests, fixture branches, artifacts and limitations.
+  - [Phase 7 renewed closeout audit](re/zerodek-product-re/2026-11-27/PHASE-7-RENEWED-CLOSEOUT-AUDIT.md) — final bounded investigation assessment and skip dispositions.
 - `re/oss-recon/` — earlier reconnaissance records. These were created for a separate Android Security Scanner engagement and must be audited before any content is reused for ZeroDeck.
 - `product-management/` — product-management agent workspace and its own records.
 
