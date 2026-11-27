@@ -6,6 +6,10 @@ The current reference repository contains Security Scanner materials. Security s
 
 Agent definitions (identities, skills, frameworks, and mental models) are intentionally kept outside this repository and provided to agents at runtime.
 
+## Project status
+
+**Outgoing reverse-engineering agent: CLOSED (2026-11-27).** Phases 0–7 are complete; Phase 7 was the final planned phase. The Software Rules capture itself remains incomplete and is handed to the successor agent. See the [final agent closeout and successor handoff](re/zerodek-product-re/2026-11-27/RE-AGENT-FINAL-CLOSEOUT.md).
+
 ## Project navigation
 
 - [Project plan](PLAN.md) — mission, phases, deliverables, and exit gates.
@@ -25,7 +29,7 @@ Agent definitions (identities, skills, frameworks, and mental models) are intent
   - [Phase 3 prior-art audit and source-selection register](re/zerodek-product-re/2026-11-27/PHASE-3-PRIOR-ART-REGISTER.md).
   - [Phase 4 source-level rule extraction](re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md).
   - [Reference repository audit](re/zerodek-product-re/2026-11-27/REPOSITORY-AUDIT.md).
-- [ZeroDeck-specific Software Rules](software-rules/README.md) — Phase 5 synthesis and Phase 6 bounded completeness/conformance review complete; Phase 7 reference evidence is reconciled; the product capture remains incomplete and not replication-sufficient.
+- [ZeroDeck-specific Software Rules](software-rules/README.md) — Phase 5 synthesis and Phase 6 bounded completeness/conformance review complete; Phase 7 reference evidence is reconciled; the product capture remains incomplete and not replication-sufficient, with remaining required properties handed to the successor agent.
   - [Phase 6 completeness audit](software-rules/PHASE-6-COMPLETENESS-AUDIT.md).
   - [Phase 6 MVP interface source review](re/zerodek-product-re/2026-11-27/PHASE-6-INTERFACE-SOURCE-REVIEW.md).
   - [UI source-derived rules](re/zerodek-product-re/2026-11-27/UI-SOURCE-DERIVED-RULES.md) — 12 bounded rules extracted from pinned mockup screen source; not runtime evidence.
