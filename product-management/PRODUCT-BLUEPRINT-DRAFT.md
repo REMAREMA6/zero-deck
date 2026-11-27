@@ -16,7 +16,7 @@ ZeroDeck is the broader startup/product direction for ethical-hacking and penetr
 
 The first launch goal declared by the owner is to build and launch, then validate real market demand/adoption. No final customer cohort, launch geography, platform boundary, pricing model, technology stack, backend or provider has been approved.
 
-The product-management recommendation is to validate non-technical individuals who regularly encounter unfamiliar files and links first, using a user-initiated link check from the point of sharing. This recommendation is provisional and awaits owner decision and direct customer validation. Security practitioners remain a competing cohort hypothesis.
+The product-management recommendation is to use non-technical individuals who regularly encounter unfamiliar files and links as the first provisional discovery cohort, and to validate their unfamiliar-link need using a user-initiated link check from the point of sharing once MVP-03 is legitimately activated. This recommendation is provisional and awaits owner decision and direct customer validation. Security practitioners remain a competing cohort hypothesis. The owner-controlled activation condition may prevent this link-check experiment from running at initial launch; if the switch remains off, zero usage is not evidence of absent demand, and a separate enabled MVP workflow must be selected for initial validation.
 
 The Software Rules capture remains Draft, incomplete and not replication-sufficient. This document does not close any Software Rules open property or claim runtime equivalence.
 
@@ -323,7 +323,7 @@ Validate real market demand/adoption after launch. This is the owner's stated go
 
 **30-day qualified repeat link-check rate:** among recruited users in the provisional cohort who encounter unfamiliar links and are legitimately eligible for link checking under both gates, measure the percentage who voluntarily check at least two distinct real-world links on separate days within 30 days.
 
-Compare the point-of-sharing workflow against a manual destination-check baseline under the same eligibility and recruitment conditions.
+Compare the point-of-sharing workflow against a manual destination-check baseline under the same eligibility and recruitment conditions. This metric is unavailable while the owner switch is off; it must not be run by bypassing the gate or by counting disabled users as non-users.
 
 No numeric threshold is set because there is no baseline, validated exposure frequency or justified sample-size estimate. Define the threshold before the experiment begins.
 
