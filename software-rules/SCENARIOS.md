@@ -15,6 +15,9 @@ The IDs and workflow boundaries follow the owner-approved scope and Phase 2 capa
 | MVP-LINK-001 | MVP-03 | User submits a URL/link for checking. | Input path; accepted schemes; parsing/normalization; independent Pro and owner-switch gate results; whether a provider request occurs; request/response; disclosure; bounded result. |
 | MVP-LINK-002 | MVP-03 | Execute separate likely-dangerous, no-known-threat, inconclusive, invalid URL, redirect, timeout, and provider-unavailable cases. | Result taxonomy and evidence; requested threat coverage; cache/expiry; exact wording; no guarantee of safety; no claim of whole-site inspection from a URL-only lookup; failure state. |
 
+
+Each scenario's governing facet dimensions are enumerated in [PROPERTY-INVENTORY.md](PROPERTY-INVENTORY.md), with the semantic payload mapping in [PAYLOAD-MAPPING.md](PAYLOAD-MAPPING.md).
+
 ## Cross-scenario requirements
 
 - Each branch in MVP-FILE-002 and MVP-LINK-002 is a separate scenario execution; do not collapse distinct outcomes into one average result.
