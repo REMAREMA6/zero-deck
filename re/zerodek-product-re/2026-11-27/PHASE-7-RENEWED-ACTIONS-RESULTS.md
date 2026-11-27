@@ -13,7 +13,7 @@ The owner explicitly authorized ordinary inspection, build and test work for the
 | Target | Exact source revision | GitHub Actions run | Result |
 |---|---|---|---|
 | Hypatia | `c0f98977be935e58849726313635a2459cac3892` | [#46029241394](https://github.com/REMAREMA6/zero-deck/actions/runs/46029241394) | Gradle build, lint task and debug APK packaging completed successfully; unit-test task was `NO-SOURCE`. |
-| HypatiaDatabases | `3c35f52e1a847caed46d8e1ad34968bfa3c8b10a` | [#46029241394](https://github.com/REMAREMA6/zero-deck/actions/runs/46029241394) | Maven package succeeded; deterministic generator fixture processed 3 valid hashes + 1 domain and produced four Bloom-filter files. |
+| HypatiaDatabases | `3c35f52e1a847caed46d8e1ad34968bfa3c8b10a` | [#46034540816](https://github.com/REMAREMA6/zero-deck/actions/runs/46034540816) | Maven package and three deterministic fixture branches succeeded: valid hashes/domain, malformed hash rejection, and excluded-hash filtering. |
 | ClamAV | `cad7b18a3e6505195fe08db1412449a18fc9f012` | [#46028645716](https://github.com/REMAREMA6/zero-deck/actions/runs/46028645716) | CMake configure/build succeeded; CTest 9/9 passed. The retained CTest log reports 201 Python tests passed and 2 skipped across its test groups. |
 
 A further run, [#46029241394](https://github.com/REMAREMA6/zero-deck/actions/runs/46029241394), also completed Hypatia and HypatiaDatabases successfully and rebuilt ClamAV; its ClamAV CTest job was still running at the time of this report. The earlier completed ClamAV run is the source for the 9/9 CTest result.
@@ -29,7 +29,7 @@ A further run, [#46029241394](https://github.com/REMAREMA6/zero-deck/actions/run
 - `testDebugUnitTest` reported `NO-SOURCE`; do not describe this as unit tests passing.
 - Lint task completed, but the retained lint report contains one severity-Error finding (`MissingSuperCall` in `NotificationPromptActivity.kt:158`) and warnings including inconsistent translated array lengths, implicit default-locale conversion, target SDK 34 and outdated Gradle/Android plugin recommendations. The successful Gradle exit does not erase those reported findings.
 - A diagnostic direct HTTP fetch of the Kotlin Android plugin marker POM produced SHA-256 `9d841037c59644dc5bbe814e792ed8774eb48646f0b3a779604ee5c1b307f969`, while the pinned verification metadata lists `61ffa87244c72230adcfc32279d4a1cc41712c2bc5eb50971b630ed880de485f`. In the same run, Gradle's actual dependency resolution and build succeeded. The direct-fetch discrepancy is unresolved and is not proof of compromise or proof that Gradle accepted a mismatched artifact. Do not alter or disable the target's dependency-verification metadata; investigate the repository/redirect/content path if this becomes material.
-- Artifact `phase7-hypatia-build-evidence` (ID `15213297838`) was downloaded and inspected. It contains the debug APK, output metadata and lint reports; no unit-test result files were present.
+- Artifact `phase7-hypatia-build-evidence` from the final repeat (ID `15216296601`, SHA-256 `13b14fbec9f61d33ef567899356dca178ab3ab38f7a2d7010a446024d3cb7714`) contains the debug APK, output metadata and lint reports; no unit-test result files were present. The earlier artifact `15213297838` was also inspected.
 - This is build/static-analysis evidence, not emulator/device execution, real file scanning, quarantine testing or performance evidence.
 
 ## 4. HypatiaDatabases — deterministic generator execution
@@ -43,7 +43,7 @@ A further run, [#46029241394](https://github.com/REMAREMA6/zero-deck/actions/run
 - Four non-empty Bloom-filter files were verified: domain, MD5, SHA-1 and SHA-256.
 - This validates the bounded fixture path and output generation at the pinned revision. It does not validate real feed accuracy, threat classification quality, false-positive/negative rates, scheduled workflow reliability, signing, key custody or publication.
 - No live feeds were downloaded; no branch was pushed; no signing or deployment occurred.
-- Artifact `phase7-hypatiadatabases-maven-evidence` (ID `15213137830`) includes the Maven package and fixture output/logs.
+- Artifact `phase7-hypatiadatabases-maven-evidence` (ID `15216505853`, SHA-256 `f903678afc226cb39e92383c65c4ddc917c932cd642595eb37df6c8c2b0d988e`) includes the Maven package and primary valid-fixture outputs. The malformed-input and exclusion branch logs are retained in the same run's job log, not in the artifact.
 
 ## 5. ClamAV — build and test evidence
 
