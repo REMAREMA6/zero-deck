@@ -95,14 +95,16 @@ If the system stores a password or other reusable authenticator secret, it MUST 
 
 #### Requirement ZD-AUTH-006 — Apply safe password acceptance rules if passwords are supported
 
-If password authentication is offered, the system MUST accept long passphrases and permitted Unicode/whitespace characters within a documented safe input limit, MUST NOT silently truncate a password, MUST NOT impose arbitrary character-composition rules, and MUST screen new passwords against a suitable blocklist of commonly used or compromised passwords.
+If password authentication is offered, the system MUST require a minimum of 15 characters for a password used as a single-factor authenticator and a minimum of 8 characters when the password is used only as part of multi-factor authentication; MUST permit passwords of at least 64 characters; MUST accept Unicode and whitespace; MUST NOT silently truncate passwords or impose other character-composition rules; MUST compare new or changed passwords against a blocklist of commonly used, expected or compromised passwords; and MUST NOT require periodic password changes unless there is evidence of compromise.
 
 - Priority: P1
 - Facets: identity-authentication, interface, security-controls, errors-recovery
 - Acceptance:
-  - Given a password within the documented maximum, when it contains permitted Unicode or whitespace characters, then it is accepted for evaluation rather than rejected by an arbitrary composition rule.
-  - Given an input exceeding the documented maximum, when submitted, then it is rejected explicitly and is not silently truncated.
-  - Given a password on the configured blocklist, when submitted for creation or change, then it is rejected with an actionable explanation that does not disclose the blocklist contents.
+  - Given password authentication is offered without MFA, when a password shorter than 15 characters is submitted, then it is rejected; when a password of at least 15 characters is submitted, it is eligible for further checks.
+  - Given password authentication is offered only as one factor in MFA, when a password shorter than 8 characters is submitted, then it is rejected.
+  - Given a password of at least 64 characters containing Unicode or whitespace, when submitted within the product's documented input limit, then it is accepted for evaluation and is not silently truncated.
+  - Given a password on the blocklist, when submitted for creation or change, then it is rejected with an actionable reason.
+  - Given no evidence of compromise, when the account remains in good standing, then the system does not force a periodic password change.
 - Basis: external research; NIST SP 800-63B-4 and OWASP Authentication Cheat Sheet.
 - Open dependency: the sign-in method is not yet selected. If passwords are not supported, this requirement is not applicable with a recorded rationale.
 
@@ -327,7 +329,7 @@ These are tracked as open questions, not implicit permission to choose defaults 
 
 ### External sources
 
-- **NIST SP 800-63B-4 (final, 2025):** authenticator and verifier requirements, password rules, rate limiting, authenticator lifecycle, recovery and session management. https://pages.nist.gov/800-63-4/sp800-63b.html
+- **NIST SP 800-63B-4 (final, 2025):** authenticator and verifier requirements, password rules (Section 3.1.1.2: 15-character single-factor minimum, 8-character minimum when used only as part of MFA, at least 64-character maximum-length recommendation, no composition rules, blocklist checks and no periodic changes absent compromise), rate limiting, authenticator lifecycle, recovery and session management. https://pages.nist.gov/800-63-4/sp800-63b.html
 - **OWASP Authentication Cheat Sheet:** identifier handling, password controls, account-enumeration resistance, recovery and re-authentication. https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
 - **OWASP Password Storage Cheat Sheet:** safe password verifier storage and implementation guidance. https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
 - **OWASP Session Management Cheat Sheet:** session identifiers, rotation, expiry, revocation, cookie protections and client-side storage risks. https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
