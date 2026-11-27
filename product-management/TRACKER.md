@@ -3,11 +3,12 @@
 **Plan:** [PLAN.md](PLAN.md)  
 **Workspace:** `product-management/`  
 **Started:** 2026-11-27  
-**Method:** CIRCLES — seven steps  
-**Overall status:** [~] CIRCLES complete; platform/integration assessment and blueprint review are in progress; validation remains open  
-**Current step:** Platform and integration architecture assessment (post-CIRCLES supporting work; not an eighth CIRCLES step)
+**Method:** CIRCLES — seven steps, followed by supporting product-definition work  
+**Overall status:** [~] CIRCLES completed provisionally; blueprint, architecture follow-up and validation remain open; PM-authored product-rules workstream has started  
+**Current position:** PM contract profile design (Phase 1); authentication is the first feature area  
+**Last reconciled:** 2026-11-27
 
-> This tracker is the operational source of truth for product-planning progress. Update it whenever work starts, changes status, becomes blocked, or completes. A new session must be able to resume from this file and the linked records without relying on chat history.
+> Operational source of truth. Update this tracker whenever work starts, changes status, becomes blocked, or completes. A new session must resume from this file and linked records without relying on chat history.
 
 ## Status key
 
@@ -17,121 +18,130 @@
 - [!] Blocked
 - [?] Needs owner decision or verification
 
-## Current position
+## 1. Where we are
 
-- **Owner authorization:** [x] Owner explicitly instructed: document the plan, add a tracker, and start the product planning/research.
-- **Plan:** [x] `PLAN.md` created and committed.
-- **Tracker:** [x] Created.
-- **Current step:** Platform/integration assessment and blueprint synthesis (supporting work; not an eighth CIRCLES step).
-- **Current product scope authority:** Owner-approved three-capability MVP (manual file security analysis; quarantine/file disposition; website/link checking subject to Pro entitlement AND owner activation).
-- **Current product evidence status:** ZeroDeck-specific Software Rules remains Draft, incomplete and not replication-sufficient. Product planning must preserve unknowns.
-- **Primary business outcome:** Build a simple, inexpensive first product/proof for everyday non-technical users, then learn from showing it to people and expand to technical users/businesses as the product matures. The owner selected everyday non-technical users as the first target audience on 2026-11-27. Formal large-scale interviews/recruitment are not feasible at this stage; use a tangible demonstrable product to elicit grounded reactions.
-- **I — Identify result:** Three candidate segments were compared. Everyday non-technical users are now the owner-selected first target audience. Technical users and businesses remain later expansion audiences, not the initial target.
-- **Next action:** Complete a security-first platform/integration assessment for web + Android, compare the minimum viable stack and data-storage boundaries, then present recommendations and trade-offs to the owner. Do not ask the owner to research technical choices. MVP-03 remains subject to Pro entitlement AND owner activation; no provider call if either gate is false.
+The original seven CIRCLES deliverables are complete as a **provisional secondary-research recommendation**. We then moved into platform/integration assessment and blueprint synthesis.
 
-## CIRCLES progress
+During that work, the owner added a distinct requirement: the Product Management Agent must author ZeroDeck's product/software requirements, following the separate Software Rules specification and explicitly identifying the PM as author.
 
-| Step | Name | Status | Deliverable | Exit condition |
+That work is now recorded as a separate workstream. It does not restart CIRCLES or change the three-capability MVP.
+
+**Active task:** complete the PM-authored contract profile (Phase 1), then research and draft authentication/account requirements (Phase 2).
+
+### Current product authority
+
+- [x] MVP: manual file security analysis; quarantine/file disposition; website/link checking.
+- [x] MVP-03 requires BOTH active Pro entitlement and owner-controlled activation. No provider call if either gate is false.
+- [x] First target audience: everyday non-technical users.
+- [x] Platforms: web + Android; platform-specific capability differences are allowed.
+- [x] Neon is the preferred managed database.
+- [x] Owner direction: first-party authentication and backend, using mature security libraries rather than custom cryptography.
+- [x] Authentication is supporting infrastructure, not a fourth user-facing MVP capability.
+- [x] PM researches and recommends; owner retains final authority.
+- [x] Prefer a simple, inexpensive tangible proof/demo over costly formal recruitment.
+- [ ] Launch geography, pricing/packaging, link provider, file-analysis engine, retention policy, hosting/runtime and final architecture approval remain open.
+
+## 2. CIRCLES progress
+
+| Step | Name | Status | Deliverable | Qualification |
 |---|---|---|---|---|
-| C | Comprehend the situation | [x] Completed | `2026-11-27/01-C-COMPREHEND.md` | Goal, success-measure approach, constraints, context, assumptions and scope reconciled. Exact metric threshold is deferred to I/R after customer discovery. |
-| I | Identify the customer | [x] Completed | `2026-11-27/02-I-IDENTIFY.md` | Three behavior/context-based segments assessed; everyday non-technical users subsequently selected by owner as the first target audience; technical users and businesses are later expansion audiences. |
-| R | Report customer needs | [x] Completed* | `2026-11-27/03-R-NEEDS.md` | Secondary research synthesised needs/jobs; reported vs inferred distinguished; alternatives and gaps linked. *Primary customer validation remains outstanding. |
-| C | Cut through prioritization | [x] Completed* | `2026-11-27/04-C-PRIORITIZATION.md` | Ranked on frequency, acuteness and goal alignment; prerequisites, dependencies, cuts and deferrals recorded. *Provisional pending primary validation. |
-| L | List solutions | [x] Completed | `2026-11-27/05-L-SOLUTION-OPTIONS.md` | Three materially different approaches span quick win, core bet and longer horizon; no option selected. |
-| E | Evaluate solutions | [x] Completed | `2026-11-27/06-E-EVALUATION.md` | Axes fixed before comparison; all options weighed on common criteria; drawbacks and risks recorded. No option selected. |
-| S | Summarize recommendation | [x] Completed* | `2026-11-27/07-S-RECOMMENDATION.md` | One recommendation, repeat-use metric, trade-off, goal link, objections and owner decisions recorded. *Recommendation awaits owner decision and primary validation. |
+| C | Comprehend the situation | [x] | `2026-11-27/01-C-COMPREHEND.md` | Goal, constraints, context and scope reconciled. |
+| I | Identify the customer | [x] | `2026-11-27/02-I-IDENTIFY.md` | Owner selected everyday non-technical users; technical users/businesses are later audiences. |
+| R | Report customer needs | [x] | `2026-11-27/03-R-NEEDS.md` | Secondary research complete; primary validation remains open. |
+| C | Cut through prioritization | [x] | `2026-11-27/04-C-PRIORITIZATION.md` | Provisional prioritization; depends on validation. |
+| L | List solutions | [x] | `2026-11-27/05-L-SOLUTION-OPTIONS.md` | Three materially different options documented. |
+| E | Evaluate solutions | [x] | `2026-11-27/06-E-EVALUATION.md` | Common axes and trade-offs documented. |
+| S | Summarize recommendation | [x] | `2026-11-27/07-S-RECOMMENDATION.md` | Provisional recommendation; owner review and validation remain open. |
 
-## Current architecture assessment
+**CIRCLES exit:** all seven deliverables exist. Product planning is not finished: blueprint, platform/integration follow-up, validation, independent review and owner decisions remain.
 
-- [x] Initial security-first platform/integration recommendation documented: [`2026-11-27/10-PLATFORM-INTEGRATION-ARCHITECTURE.md`](2026-11-27/10-PLATFORM-INTEGRATION-ARCHITECTURE.md).
-- [~] Validate native Android file handling, encrypted quarantine and Keystore integration with a working prototype.
-- [~] Validate browser-side file-analysis feasibility and define exact web capability boundary.
-- [~] Compare Supabase against a minimal standalone API + Neon using current limits, backup/recovery, deployment region and projected cost.
-- [~] Verify payment-provider onboarding/settlement eligibility before implementing Pro billing.
-- [ ] Complete total-cost, threat-model, retention/deletion and incident-response review before architecture approval.
+## 3. Platform/integration assessment — post-CIRCLES
 
-## Research workstreams
+**Document:** [10-PLATFORM-INTEGRATION-ARCHITECTURE.md](2026-11-27/10-PLATFORM-INTEGRATION-ARCHITECTURE.md)
 
-These are supporting research streams within CIRCLES, not additional method steps.
-
-| Workstream | Status | Key questions | Evidence location |
-|---|---|---|---|
-| Customer, market and alternatives | [~] In progress | Which customer has the strongest need? Direct competitors/substitutes? Existing workflows, pricing, adoption friction? | `2026-11-27/02-I-IDENTIFY.md`; `2026-11-27/03-R-NEEDS.md` (includes dated Reddit anecdote as a low-confidence lead); `2026-11-27/09-PRIMARY-RESEARCH-PROTOCOL.md` |
-| File analysis and detection | [~] In progress | Detection approaches, engine choices, coverage limits, privacy, false positives/negatives, licensing and cost. | `2026-11-27/08-RESEARCH-FILE-QUARANTINE-LINK.md`; Phase 3 prior-art register |
-| Quarantine and file disposition | [~] In progress | Android/platform constraints, isolation, integrity, restore, deletion, retention, recovery and key lifecycle. | `2026-11-27/08-RESEARCH-FILE-QUARANTINE-LINK.md`; `software-rules/OPEN-PROPERTIES.md` |
-| Website/link checking | [~] In progress | Provider contracts, commercial rights, costs, freshness, quotas, URL handling, privacy and failure semantics. | `2026-11-27/08-RESEARCH-FILE-QUARANTINE-LINK.md`; Phase 3 prior-art register |
-| Product experience and trust | [~] In progress | End-to-end journeys, verdict states, permissions, safety language, accessibility, reversibility and errors. | `2026-11-27/03-R-NEEDS.md`; `2026-11-27/08-RESEARCH-FILE-QUARANTINE-LINK.md`; open-properties register |
-| Commercial, operational and regulatory | [~] In progress | Monetization, cost-to-serve, app distribution/policy, privacy obligations, support and operations. | `2026-11-27/08-RESEARCH-FILE-QUARANTINE-LINK.md`; provider terms/pricing sources |
-| Product/system boundaries | [~] In progress | Whether accounts, backend, data store, billing, workers, telemetry, admin tools or integrations are actually required. | `PRODUCT-BLUEPRINT-DRAFT.md`; `software-rules/FACET-MAP.md`; actual components remain unassumed |
-
-## Quality-gate tracking
-
-| Gate | Status | Evidence required |
+| Task | Status | Exit condition |
 |---|---|---|
-| Scope consistency | [x] | Explicit reconciliation with owner decisions and exclusions |
-| Customer clarity | [?] | Provisional cohort recommended; owner selection and direct validation outstanding |
-| Need traceability | [~] | Need-to-evidence mapping; hypotheses labelled |
-| Workflow completeness | [~] | Draft journeys and failure/recovery branches documented; exact rules and runtime evidence remain open |
-| Cross-facet coverage | [~] | Draft 15-facet crosswalk in PRODUCT-BLUEPRINT-DRAFT.md; Software Rules capture itself remains incomplete |
-| Integration clarity | [~] | Candidate boundaries/data flows and provider constraints recorded; final integrations not selected |
-| Trust and safety | [~] | Candidate product guardrails and failure consequences documented; test evidence outstanding |
-| Commercial viability | [~] | Provider pricing/terms and Pro gates researched; willingness-to-pay and cost model unvalidated |
-| Evidence integrity | [~] | Claims classified and source-linked |
-| Decision readiness | [~] | Trade-offs, unknowns and owner decisions explicit |
-| Validation readiness | [~] | Link-check metric is conditional on activation; interview/experiment protocol drafted; primary evidence and justified thresholds outstanding |
-| Independent review | [ ] | Contradiction/gap review recorded |
+| Initial security-first architecture recommendation | [x] | Recommendation documented; not final architecture approval. |
+| Android file access, encrypted quarantine and Keystore proof | [ ] | Working lifecycle prototype and supported-device/version tests. |
+| Browser file-analysis feasibility | [ ] | Validate browser-compatible engine and exact web boundary. |
+| Neon capacity, region, pricing, backups and hosting comparison | [ ] | Current plan/cost/deployment evidence. |
+| First-party authentication threat model and test plan | [ ] | Account lifecycle, credentials, verification decision, sessions, recovery, authorization and abuse controls. |
+| Payment provider eligibility | [ ] | Verify actual business onboarding and settlement before selection. |
+| Retention, deletion, telemetry, privacy and incident response | [ ] | Document policy and operational consequences. |
+| Independent review and owner architecture decision | [ ] | Resolve trade-offs; owner explicitly approves/revises. |
 
-## Owner decisions and unresolved items
+## 4. New workstream — PM-authored product rules
 
-| ID | Question / decision | Current status | Consequence |
+**Workstream:** [11-PM-AUTHORED-PRODUCT-RULES.md](2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md)  
+**Author:** ZeroDeck Product Management Agent  
+**Status:** Phase 0 complete; Phase 1 in progress  
+**Purpose:** create implementation-ready, technology-independent product requirements aligned with Software Rules.
+
+The current Software Rules 0.3.0 Draft includes a `declaredContract` record and `declared-contract` evidence class. PM requirements describe what ZeroDeck must do; they are not runtime observations or source-derived rules. We will use this existing class, identify the PM issuer explicitly, and avoid changing the separate Software Rules core without an approved proposal.
+
+### PM-authored rules phases
+
+| Phase | Work | Status | Exit condition |
 |---|---|---|---|
-| PM-OPEN-001 | Primary business outcome for first MVP | [x] Resolved: validate real market demand, per owner's stated view | Success-measure approach is recorded; exact metric/threshold follows I/R |
-| PM-OPEN-002 | Primary customer cohort for initial release | [x] Resolved: everyday non-technical users first; technical users/businesses are later expansion audiences | Product experience and positioning should optimise for non-technical comprehension and low friction first |
-| PM-OPEN-003 | Launch geography/distribution market | [ ] Unknown | Affects customer evidence, legal/app-store research and go-to-market |
-| PM-OPEN-004 | Product platform | [x] Resolved: web application + Android application; same product, platform-specific capability differences allowed | Define platform-specific capabilities honestly; browser limitations must not be represented as native Android parity |
-| PM-OPEN-005 | Commercial model details beyond Pro-gated link checking | [ ] Unknown | Affects packaging, entitlements, cost and activation policy |
-| PM-OPEN-006 | Final link intelligence provider and activation economics | [ ] Unknown | Blocks activation of paid API checking, not MVP planning |
-| PM-OPEN-007 | File-analysis engine/licensing and final detection approach | [ ] Unknown | Affects coverage, offline operation, privacy and costs |
-| PM-OPEN-008 | Whether optional remote analysis is ever permitted | [ ] Unknown | Affects privacy promise, architecture boundary and cost |
-| PM-OPEN-009 | Product accounts/backend/data persistence needs | [~] Partially resolved: owner prefers Neon PostgreSQL and first-party authentication/backend; hosting/runtime and exact account requirements remain open | Design the smallest secure first-party identity/session service; do not introduce hosted auth by default |
-| PM-OPEN-010 | Retention and quarantine lifecycle policy | [ ] Unknown | Affects trust, recovery, storage and support obligations |
-| PM-OPEN-011 | Initial launch validation workflow if MVP-03 remains locked pending revenue funding | [?] Needs owner decision | Link-check demand cannot be measured while the owner activation switch is off; a separate enabled MVP workflow must be chosen for the first launch test. |
+| 0 | Establish baseline, boundaries and authorship | [x] | Software Rules model inspected; product scope and PM identity recorded. |
+| 1 | Design PM contract profile | [~] | Map to declaredContract; settle IDs, extension metadata and validation without unauthorized core changes. |
+| 2 | Research and author authentication requirements | [ ] | Stack-agnostic account/auth contract with sources, acceptance criteria and unknowns. |
+| 3 | Validate authentication coverage | [ ] | Cross-facet assessment and negative/failure/recovery tests. |
+| 4 | Author manual file-analysis requirements | [ ] | File selection, input scope, verdicts, limitations, privacy and failure semantics. |
+| 5 | Author quarantine/disposition requirements | [ ] | Quarantine, integrity, restore, deletion, retention and recovery. |
+| 6 | Author website/link-check requirements | [ ] | URL semantics, provider failure, privacy, Pro + activation gates, quotas and budget controls. |
+| 7 | Author cross-cutting system requirements | [ ] | Accounts, entitlement, configuration, platform differences, data lifecycle, security and operations. |
+| 8 | Cross-facet completeness/consistency review | [ ] | Traceability complete; contradictions and missing states resolved or explicitly open. |
+| 9 | Owner review and release | [ ] | Owner decisions recorded; versioned contract package ready for engineering handoff. |
 
-## Working agreement: recommendation-led product management
+### Feature authoring order
 
-- The product manager leads research and deliberation, makes a reasoned recommendation, explains trade-offs in plain language, and then invites the owner's opinion.
-- Do not expect the owner to know technical/product-management terminology or to research infrastructure choices independently.
-- Ask only for genuine owner decisions; do not use long questionnaires to transfer the analysis burden to the owner.
-- The owner has final authority and may accept, reject or revise recommendations.
-- Keep the first version simple and inexpensive. The owner prefers a tangible proof/demo that can be shown to people over expensive formal research and recruitment at this stage.
-- For security-sensitive decisions, explicitly analyse data exposure, permissions, encryption, key management, retention, deletion, failure modes and operating burden before recommending a service.
+1. Authentication/account infrastructure (supporting capability).
+2. MVP-01 manual file security analysis.
+3. MVP-02 quarantine and file disposition.
+4. MVP-03 website and link checking.
+5. Cross-cutting system requirements.
 
-## Historical records and authority notes
+**Important:** No ZeroDeck PM-authored requirement set has yet been completed. The Software Rules identity/authentication facet is Draft and not exhaustive. Existing JWT and Express-session cases cover bounded behaviour only. Uncovered properties are a checklist, not proof that ZeroDeck needs every mechanism; each must be classified as required, not applicable, deferred or unresolved.
 
-- `plan-2026-11-24.md` and `circles-2026-11-24.md` are preserved historical work. Revalidate before reuse.
-- The 2026-11-24 CIRCLES record assumed scan history, admin panel, help content, an 18-screen design and an Android-first consumer cohort as MVP design facts. The later 2026-11-27 owner-approved scope and Software Rules scope do not support treating those as current MVP requirements.
-- Current scope authority: `re/zerodek-product-re/2026-11-27/MVP-SCOPE-DECISION.md`, `PRO-GATED-LINK-CHECK-DECISION.md`, and `software-rules/SCOPE.md`.
-- Current uncertainty register: `software-rules/OPEN-PROPERTIES.md`.
-- Product planning does not close Software Rules open properties or change the Software Rules capture.
+## 5. Remaining product-planning work outside the rules workstream
 
-## Session log
+| Work | Status | Completion condition |
+|---|---|---|
+| Finish product blueprint | [~] | Reconcile owner decisions, requirements, workflows, data, system boundaries, metrics and risks. |
+| Customer/market validation | [ ] | Show an inexpensive tangible proof and record actual reactions; do not invent demand evidence. |
+| Choose initial validation workflow | [?] | Decide which capability can be demonstrated while MVP-03 remains gated off. |
+| Resolve launch geography/distribution | [?] | Owner decision informed by research. |
+| Resolve pricing/Pro packaging and activation economics | [ ] | Costed options and owner decision. |
+| Select file-analysis approach/provider | [ ] | Compare coverage, privacy, licence, false positives/negatives, cost and operations. |
+| Define retention/quarantine policy | [ ] | Owner-reviewed policy with recovery and data-loss consequences. |
+| Independent blueprint/requirements review | [ ] | Contradiction, omission, security, trust, commercial and cross-facet review. |
+| Final owner review and handoff | [ ] | Coherent approved product definition; implementation remains separately authorized. |
+
+## 6. Immediate next actions
+
+1. Finish Phase 1: define the PM contract profile and exact mapping to the current Software Rules schema.
+2. Start Phase 2: research and draft authentication/account requirements.
+3. Keep architecture follow-up and blueprint gaps visible; do not mark them complete without evidence.
+4. Update this tracker at each phase transition and link every deliverable.
+5. Ask the owner only for decisions that evidence and PM deliberation cannot settle.
+
+## 7. Session log
 
 | Date | Work | Result |
 |---|---|---|
-| 2026-11-27 | Reviewed ZeroDeck README, scope decision, capability inventory, Software Rules scope/scenarios/open properties, and prior PM artifacts. | Confirmed three-capability MVP; identified stale 2026-11-24 assumptions requiring reconciliation. |
-| 2026-11-27 | Created current product-planning plan and tracker. | Planning authorized; C — Comprehend started. |
-| 2026-11-27 | Recorded owner's clarification that the first launch goal is to validate real market demand; no customer cohort is preselected. | C completed. I — Identify is next; practitioner, non-technical and business/licensed segments remain candidates. |
-| 2026-11-27 | Compared practitioner, non-technical individual and business/licensed segments using workflow context, MVP fit and current alternatives. | I completed. Segment B recommended provisionally for needs discovery; no final owner-approved target market or validated demand claim. |
-| 2026-11-27 | Researched mobile messaging/link behaviour, device-context phishing behaviour, Android permission comprehension, Play Protect protections/data flows, usable-security fatigue, SOC alert validation and VirusTotal API constraints. Created `2026-11-27/03-R-NEEDS.md`. | R completed as a secondary-research synthesis. Primary customer interviews and demand validation remain open. |
-| 2026-11-27 | Applied the CIRCLES three-axis prioritization scaffold (frequency, acuteness, business-goal alignment) to candidate needs; recorded safety prerequisites, dependencies and cuts in `2026-11-27/04-C-PRIORITIZATION.md`. | C completed provisionally. B-N1 ranks first for Segment B discovery; B-N2 second. |
-| 2026-11-27 | Created three materially different link-check approaches in `2026-11-27/05-L-SOLUTION-OPTIONS.md`: manual destination check, point-of-sharing check, and cross-context link decision layer. | L completed without selecting an option. |
-| 2026-11-27 | Evaluated all three options in `2026-11-27/06-E-EVALUATION.md` after fixing common axes: need fit, workflow fit, viability, trust/privacy/safety, cost, feasibility and strategic learning. | E completed. Option 1 is lowest-cost for learning; Option 2 has strongest hypothesised workflow fit; Option 3 remains a horizon concept. |
-| 2026-11-27 | Completed `2026-11-27/07-S-RECOMMENDATION.md` with one provisional recommendation (Segment B + point-of-sharing link check), one qualified repeat-use metric, explicit trade-off, owner questions and limitations. | All seven CIRCLES deliverables exist. CIRCLES is complete as a provisional secondary-research recommendation. Product blueprint, primary customer validation and owner decisions remain open. |
-| 2026-11-27 | Researched file-analysis limits and prior art, Android SAF/storage/Keystore constraints, quarantine lifecycle risks, Web Risk pricing, URLhaus commercial terms, VirusTotal API/private-scanning distinctions and ClamAV licensing/platform limits. Created `2026-11-27/08-RESEARCH-FILE-QUARANTINE-LINK.md`. | First secondary-research pass recorded for the three MVP capabilities. No engine/provider/architecture selected; platform, retention, supported formats, detection criteria and customer needs remain open. |
-| 2026-11-27 | Created `PRODUCT-BLUEPRINT-DRAFT.md` with scope, owner decisions, customer needs, workflows, state/failure branches, trust requirements, possible system boundaries, conceptual data, metrics, risk register and a 15-facet crosswalk. | Blueprint is a structured draft, not an approved PRD or architecture. Primary validation, owner decisions, full property traceability and independent review remain open. |
-| 2026-11-27 | Added OWASP MASTG practitioner-methodology evidence to the Identify and technical research records. Independent review found an important launch-sequencing dependency: MVP-03 cannot be tested while the owner switch remains off pending paid-user revenue. Updated prioritization, recommendation and blueprint to make the link-check test conditional and added PM-OPEN-011. | No provider gate was bypassed. If MVP-03 remains locked at initial launch, a separate enabled MVP workflow must be selected for initial demand validation; disabled usage cannot be interpreted as lack of demand. |
-| 2026-11-27 | Added a dated, self-selected Reddit discussion as a low-confidence lead about modified/sideloaded APK scanning; updated R and the blueprint with explicit limitations. Prepared `2026-11-27/09-PRIMARY-RESEARCH-PROTOCOL.md`. | No participants recruited or interviewed. Formal recruitment is not the immediate validation path. |
-| 2026-11-27 | Owner selected everyday non-technical users as the first target audience, confirmed both web and Android platforms, and set the working relationship: product manager researches, deliberates and recommends first; owner then gives an opinion and retains final authority. Owner prioritises a simple, inexpensive tangible proof/demo over costly formal research. | Updated target audience, platform scope and working agreement. |
-| 2026-11-27 | Completed initial security-first platform/integration assessment. Recommended local-only Android quarantine, no suspicious-file cloud upload, distinct web/Android capability boundaries, Expo/React Native + separate React/Next web, Neon PostgreSQL and first-party authentication/backend. | Recommendation documented for owner review; native proof, auth threat model/test plan, hosting/runtime and Neon cost/capacity review remain outstanding. |
+| 2026-11-27 | Completed seven CIRCLES deliverables and initial recommendation. | CIRCLES complete provisionally; validation and owner review remain open. |
+| 2026-11-27 | Created file/quarantine/link research and product blueprint draft. | Initial product definition exists; gaps remain. |
+| 2026-11-27 | Owner selected everyday non-technical users and web + Android. | Target and platforms recorded as owner decisions. |
+| 2026-11-27 | Completed initial platform/integration assessment; owner directed Neon and first-party auth/backend. | Recommendation updated; native proof, auth threat model, hosting and approval remain open. |
+| 2026-11-27 | Owner requested PM-authored product rules aligned to Software Rules with explicit authorship. | New workstream opened. |
+| 2026-11-27 | Inspected Software Rules README, declared-contract schema, identity/authentication facet and Phase 6 property inventory. | Phase 0 complete; declared-contract is the current fit; Phase 1 active. |
 
-| 2026-11-27 | Owner clarified that Neon is preferred as a database-only service because the Supabase two-project-per-account limit has already been reached and the owner wants fewer opaque third-party dependencies. Owner wants ZeroDeck to implement and test its own authentication and backend. Prior context confirms reusable test-account testing was discussed, but does not establish that first-party auth was previously recorded as an approved standalone feature. | Architecture assessment revised to Neon + first-party auth/backend. Authentication is treated as supporting security infrastructure for accounts/entitlements, not an additional fourth MVP capability. OWASP-aligned design and tests are required; use standard security libraries, not custom cryptography. |
+## 8. Authority and repository boundaries
+
+- ZeroDeck PM work stays inside `REMAREMA6/zero-deck/product-management/`.
+- Software Rules is a specification dependency; do not modify its repository during ordinary ZeroDeck PM authoring.
+- Do not modify reverse-engineering evidence or implementation files.
+- PM-authored contracts are requirements, not runtime proof.
+- Recommendations are not owner approvals.
+- Product planning does not authorize implementation or deployment.
