@@ -73,4 +73,4 @@ No ZeroDeck runtime observations were added. `capture.json` remains unchanged; i
 
 **The bounded renewed Phase 7 reference-runtime investigation is complete.** The three selected executable prior-art targets were exercised through reproducible GitHub Actions builds/tests at their exact pinned revisions, and all remaining paths have explicit skip reasons.
 
-**ZeroDeck remains incomplete and NOT replication-sufficient.** This closeout only completes the bounded reference investigation. Actual product runtime conformance, all unresolved required properties, and implementation-time native UI capture remain future work.
+**The bounded Phase 7 reference-runtime investigation is complete.** The separate ZeroDeck-specific Software Rules capture remains incomplete and NOT replication-sufficient because `software-rules/OPEN-PROPERTIES.md` still contains unresolved required product decisions and properties. This is not a requirement to build or deploy ZeroDeck first: reference evidence, owner-declared intent and source-derived product rules can be synthesized without a first-party runtime. No ZeroDeck runtime behaviour is claimed.
