@@ -2,7 +2,7 @@
 
 **CIRCLES step:** C — Comprehend the situation  
 **Date:** 2026-11-27  
-**Status:** In progress — one owner clarification is required before C can close.  
+**Status:** Completed — the owner clarified the first-launch business outcome. Customer selection and metric thresholds continue in the subsequent CIRCLES steps.  
 **Plan:** [../PLAN.md](../PLAN.md)  
 **Tracker:** [../TRACKER.md](../TRACKER.md)
 
@@ -60,15 +60,17 @@ The existing `product-management/circles-2026-11-24.md` and `product-management/
 
 Historical artifacts must not be deleted or rewritten. Reuse only after reconciliation with current owner decisions and evidence.
 
-## 4. Goal and success metric — not yet established
+## 4. Goal and success measure
 
-The 2026-11-24 CIRCLES recommendation proposed earning and keeping user trust through honest verdicts and safe next actions. That is a plausible product value hypothesis and aligns with the owner-declared requirement that results be bounded and not promise safety. However:
+**Owner clarification (2026-11-27):** From the owner's perspective, the first launch is primarily intended to validate whether there is real market demand for ZeroDeck's initial tool. The owner wants to build and launch the tool, observe the market response and learn what demand exists before committing to a longer-term direction. Immediate revenue is not the goal, and there is no already-established target-user group whose trust or adoption the launch is specifically intended to establish.
 
-- the business outcome the first launch is meant to achieve has not been explicitly fixed in current owner decisions;
-- the historical 14-day return-scan metric was not approved and may be unsuitable if the chosen customer is a security practitioner rather than a general Android user;
-- the Pro-gated link-checking decision shows a commercial-cost concern, but does not by itself establish that immediate revenue is the primary launch goal.
+The owner described the potential audience as still open. The original product direction was tools for penetration testers and people involved in ethical hacking. During product exploration, the possible audience broadened to include non-technical individuals and businesses/organisations that may use licensed access. These are candidate segments, not selected customers. The owner also distinguished their current view from the other person's potentially different view; this record captures the owner's stated direction and does not imply agreement from that other stakeholder.
 
-**No success metric is selected at this stage.** It must follow the owner's goal and the customer choice, not be inherited from an old document.
+**Primary business outcome:** validate real market demand.
+
+**Success-measure approach:** evaluate evidence that one or more clearly defined customer segments have a meaningful problem addressed by the MVP, currently use alternatives or workarounds, and demonstrate credible willingness to try or adopt the tool. The exact measurable metric, threshold and validation method must be defined after the customer and needs work in I and R. Do not substitute downloads, general awareness, revenue, or an inherited 14-day return-scan rate as proof of demand without justification.
+
+Trust, safe handling and honest verdicts remain important product-quality requirements, but they are not the stated primary business outcome. Revenue and commercial packaging remain future considerations; the Pro entitlement and owner-controlled activation gates for link checking remain binding product constraints, not evidence that immediate revenue is the launch goal.
 
 ## 5. Constraints and dependencies already visible
 
@@ -144,22 +146,21 @@ Source: [ZeroDeck Phase 3 Prior-Art Register](../../re/zerodek-product-re/2026-1
 |---|---|---|---|
 | A-C-01 | The three-capability MVP remains the launch scope during this planning exercise. | Owner-declared scope; change only by owner decision | Bounds product design. |
 | A-C-02 | Trustworthy, bounded results and safe handling are important product qualities. | Supported product principle; relative business priority unknown | Affects verdicts, messaging, recovery and validation. |
-| A-C-03 | A consumer Android user may be a plausible cohort. | Historical inference only | Must be compared with practitioner cohorts in I. |
-| A-C-04 | Ethical hackers and penetration testers may be a plausible cohort because of the startup's stated direction. | Owner-declared market direction; exact initial cohort unknown | Could change the product framing and competitive set. |
+| A-C-03 | A consumer/non-technical user may be a plausible cohort. | Candidate segment raised by the owner; not selected | Must be compared with practitioner and business cohorts in I. |
+| A-C-04 | Ethical hackers and penetration testers may be a plausible cohort because of the startup's original direction. | Owner-declared market direction; exact initial cohort unknown | Could change product framing and competitive set. |
+| A-C-05 | Businesses/organisations using licensed access may be a plausible segment. | Candidate segment raised by the owner; not selected | Requires separate buyer, user and licensing research in I. |
 | U-C-01 | Primary business outcome for the first MVP. | Unknown; owner clarification required | Determines the success metric and evaluation weights. |
 | U-C-02 | Initial launch geography/distribution market. | Unknown | Affects customer research, distribution and applicable legal/policy review. |
 | U-C-03 | Available budget, build capacity and launch timing. | Unknown | Bounds feasible operating and integration choices. |
-| U-C-04 | Primary customer cohort. | Unknown; resolved in I | Determines who the product is designed around. |
-| U-C-05 | Whether the product will be positioned as consumer mobile security or as a practitioner tool within ZeroDeck. | Unknown | Changes positioning, customer alternatives and product experience. |
+| U-C-04 | Primary customer cohort. | Unknown; evaluated in I | Determines who the product is designed around. |
+| U-C-05 | Whether the product will be positioned as a practitioner tool, a broader consumer tool, a business product, or a staged combination. | Unknown | Changes positioning, alternatives and product experience. |
 
-## 8. One owner clarification needed to close C
+## 8. Owner clarification recorded
 
-**What is the primary business outcome you want the first ZeroDeck MVP to achieve?**
+The owner clarified that the first launch is intended to test real market demand. The product should be launched and its response observed; there is no preselected target audience at this point. Penetration testers/ethical hackers are the original audience direction, while non-technical individuals and licensed business users are additional candidate segments to investigate. The owner is not asserting that the other stakeholder has the same view.
 
-Please answer in your own words. For example, is the first priority to validate real demand and adoption, establish trust and credibility with a target user group, generate revenue, or achieve another outcome?
-
-This answer changes the success metric and how we evaluate the product options. I will not substitute the historical 14-day return-scan recommendation for your answer.
+No further clarification is required to establish the goal. The exact customer cohort, customer needs, metric threshold and validation design are deliberately deferred to I and R rather than guessed now.
 
 ## 9. C exit status
 
-C remains open until the primary business outcome is clarified or the owner explicitly asks that it be carried as an assumption. The customer cohort, customer needs, prioritization and solution options belong to the following CIRCLES steps and have not been decided here.
+C is complete for the current planning scope: the business goal, current MVP scope, maturity, constraints and major unknowns are recorded. A precise demand-validation metric is deferred until the customer and needs are researched in I and R. No customer segment has been selected.
