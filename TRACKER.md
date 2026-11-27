@@ -34,7 +34,7 @@
 - **Conditional:** Web Risk live API test requires a dedicated owner-provided project/key and explicit approval for URL disclosure, inputs, call volume and potential cost. Supabase/Sanity tests are not currently established as approved MVP integrations; do not invent scope or use production credentials.
 - **Not yet available:** Actual ZeroDeck app runtime target. The current `REMAREMA6/zero-deck` tree contains governance, product/research records and Software Rules capture, but no app source/build. Actual product runtime and native UI capture must wait for the first-party app implementation.
 - **Execution rule:** Use the ChatGPT sandbox where suitable. If it lacks a required environment, use GitHub Actions. Inspect logs/artifacts, fix and rerun. Record exact evidence and limits. Hosted runners are not unrestricted and do not automatically qualify as isolated malware labs.
-- **Next action:** Run `.github/workflows/phase7-prior-art-tests.yml`; inspect each job's logs and artifacts; diagnose/retry failures; then extend HypatiaDatabases beyond the bounded Maven lifecycle only if its generator inputs can be safely isolated. Keep ZeroDeck's capture marked incomplete.
+- **Next action:** Inspect run #46028542224 job results, logs and artifacts; diagnose/retry failures; then extend HypatiaDatabases beyond the bounded Maven lifecycle only if its generator inputs can be safely isolated. Keep ZeroDeck's capture marked incomplete.
 
 ## Phase tracking
 
