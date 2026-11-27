@@ -979,9 +979,9 @@
         "facet": "identity-authentication",
         "subject": "website-link-checking",
         "dimension": "identity-authentication-required-properties",
-        "requirement": "optional",
+        "requirement": "required",
         "status": "unknown",
-        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+        "rationale": "MVP-03 requires Pro entitlement. The entitlement subject/principal and how it is established must be represented and verified; the authentication mechanism and lifecycle remain unknown."
       },
       {
         "propertyId": "MVP-03-AUTHORIZATION_PERMISSIONS",
