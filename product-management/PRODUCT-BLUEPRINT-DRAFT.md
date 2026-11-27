@@ -62,6 +62,8 @@ Non-technical individuals who regularly receive or download unfamiliar files/app
 
 This is behaviour/context-based, not a demographic definition. It is not an owner-approved target market.
 
+**Qualitative community lead:** a 2022 r/fossdroid discussion included a user who deliberately tested modified apps from multiple sources and wanted additional protection; the Hypatia developer described a narrow known-malware scanner for user-accessible files. This is a self-selected, dated anecdote, not prevalence or demand evidence. It supports interviewing people who sideload or test modified APKs as a distinct context rather than assuming all non-technical users share the same need. Source: https://www.reddit.com/r/fossdroid/comments/tsdlma/best_open_source_antivirus-for-android/.
+
 ### 3.2 Competing cohort
 
 Independent security practitioners and penetration testers who need to triage suspicious artifacts, preserve sample confidentiality and understand evidence/analysis limits. Their needs may exceed the current MVP because the scope does not promise dynamic sandboxing, reverse engineering, IOC extraction, analyst reports or lab workflows. OWASP's Mobile Application Security Testing Guide describes mobile app testing as static and dynamic analysis within a broader client-server/API assessment, with human validation of automated tool output; this is adjacent methodology evidence, not proof about every penetration-testing role or ZeroDeck demand. Sources: https://mas.owasp.org/MASTG/0x04b-Mobile-App-Security-Testing/ and https://mas.owasp.org/MASTG/tools/.
