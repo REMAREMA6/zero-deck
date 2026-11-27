@@ -153,7 +153,15 @@ Research is supporting evidence within CIRCLES, not an eighth CIRCLES step. Rese
 - Reject integrations that add cost or expose sensitive data without a demonstrated MVP need. Distinguish public content/media from private user files and quarantine artifacts.
 - Produce a recommended minimum architecture with explicit trade-offs, alternatives, pricing evidence, platform limitations and unresolved decisions. This is a product/technical recommendation for owner review, not an implementation order.
 
-### I. Product Manager-authored product rules (supporting work after CIRCLES)\n\nA dedicated workstream is recorded in [2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md](2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md). The Product Management Agent will author technology-independent product requirements for ZeroDeck. These are normative declared product contracts, not runtime observations or source-derived rules. The current Software Rules 0.3.0 Draft provides a `declaredContract` record and `declared-contract` evidence class; use that existing model unless a separate, justified extension is approved. The PM author/issuer must be explicit.\n\nThe workstream covers authentication as supporting infrastructure, then manual file analysis, quarantine/disposition, website/link checking and cross-cutting system requirements. It must map requirements to relevant Software Rules facets, preserve unknowns, and define observable acceptance criteria. It does not modify the Software Rules repository or approve implementation architecture.\n\n## 6. Product blueprint expected at completion
+### I. Product Manager-authored product rules (supporting work after CIRCLES)
+
+A dedicated workstream is recorded in [2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md](2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md). The Product Management Agent authors technology-independent product requirements for ZeroDeck. These are normative declared product contracts, not runtime observations or source-derived rules.
+
+The PM contract profile is complete and maintained in [product-rules/PROFILE.md](product-rules/PROFILE.md). It maps requirements to the existing Software Rules `declaredContracts[]` record, identifies the issuer explicitly, and supplies a PM-specific extension schema plus a complete declared-contract profile schema. It does not introduce a new evidence class or modify the Software Rules repository.
+
+The workstream covers authentication as supporting infrastructure, then manual file analysis, quarantine/disposition, website/link checking and cross-cutting system requirements. It maps requirements to relevant Software Rules facets, preserves unknowns, and defines observable acceptance criteria. Phase 1 is complete; Phase 2 (authentication requirements) is next. This work does not approve implementation architecture.
+
+## 6. Product blueprint expected at completion
 
 The final recommendation should be detailed enough to hand to later design and engineering work. Subject to evidence and owner approval, it should cover:
 
