@@ -23,7 +23,7 @@ The exact scope and limits are recorded in the authorization record. Licences st
 |---|---|---|
 | SRC-01 Hypatia | Checkout exact SHA on GitHub-hosted Ubuntu; install JDK 17 and Android SDK; run Gradle lint, unit tests and debug APK build; retain reports/APK. | **Executed:** run #46029241394 succeeded. Gradle lint/build and debug APK packaging passed; unit test task was NO-SOURCE. Lint report has one Error-severity finding plus warnings. No malware samples or emulator launch yet. |
 | SRC-02 HypatiaDatabases | Checkout exact SHA; install JDK 17/Maven and required safe tooling; run bounded Maven compile/test and deterministic fixture-based generator path if inputs can be isolated. Inspect generated outputs locally as CI artifacts only. | **Executed:** run #46029241394 succeeded. Maven package and deterministic generator fixture passed (3 valid hashes + 1 domain; 4 Bloom-filter outputs). No test sources. No live feeds, signing or publication. |
-| SRC-06 ClamAV | Checkout exact SHA; install Ubuntu build dependencies; configure/build with CMake; run CTest and harmless example tests; retain logs/reports. | **Authorized; renewed run pending.** No malware samples or live threat-feed operations. |
+| SRC-06 ClamAV | Checkout exact SHA; install Ubuntu build dependencies; configure/build with CMake; run CTest and harmless example tests; retain logs/reports. | **Executed:** run #46028645716 succeeded. CMake configure/build passed; CTest 9/9 and 201 Python tests passed, 2 skipped. No malware samples or live threat-feed operations. |
 | SRC-04 Google Web Risk Lookup | Mock/contract tests can be performed without credentials; live API test requires dedicated owner-provided project/key and explicit approval for URL disclosure, call volume and possible cost. | **Live call not authorized/provisioned.** Keep as documented contract; no live provider calls. |
 | SRC-07 Android storage / SAF / Keystore | Documentation-derived constraints only; later test against first-party ZeroDeck app. | Not an executable prior-art target. |
 | `lordwhitefire/Zerodek` mockup fork | UI source capture is already sufficient for this phase. | **Out of renewed Phase 7 runtime scope.** Do not spend time browser-testing it. |
@@ -39,7 +39,7 @@ See [PHASE-7-RENEWED-ACTIONS-RESULTS.md](PHASE-7-RENEWED-ACTIONS-RESULTS.md) for
 
 Execution and evidence reconciliation are complete for this bounded pass. A failure or unavailable dependency on one target did not stop work on the others.
 
-## 4. Evidence handling
+See [PHASE-7-RENEWED-ACTIONS-RESULTS.md](PHASE-7-RENEWED-ACTIONS-RESULTS.md) and [PHASE-7-RENEWED-CLOSEOUT-AUDIT.md](PHASE-7-RENEWED-CLOSEOUT-AUDIT.md) for exact evidence, artifacts, limits and closeout.\n\n## 4. Evidence handling
 
 For each run record repository, exact target SHA, workflow commit, runner image, tool versions, commands, test names, result, logs/reports/artifacts, side effects, cleanup, and limitations.
 
