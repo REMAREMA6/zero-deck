@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/REMAREMA6/zero-deck/blob/main/product-management/product-rules/schemas/zero-deck-pm-requirements-extension.schema.json",
+  "$id": "urn:zero-deck:product-requirements:extension:1.0.0-draft",
   "title": "ZeroDeck PM Product Requirements Contract extension",
   "description": "Validates the ZeroDeck Product Management profile stored under declaredContract.extensions.zeroDeckProductRequirements. Validate the containing capture separately against the pinned Software Rules schemas.",
   "type": "object",
