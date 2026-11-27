@@ -46,7 +46,7 @@ jobs:
           set -euxo pipefail
           SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
           test -x "$SDKMANAGER"
-          yes | "$SDKMANAGER" --licenses >/dev/null
+          yes | "$SDKMANAGER" --licenses >/dev/null || true
           "$SDKMANAGER" "platform-tools" "platforms;android-36" "build-tools;36.0.0"
       - name: Run lint, unit tests and debug APK build
         working-directory: targets/Hypatia
@@ -92,6 +92,21 @@ jobs:
           git rev-parse HEAD
           java -version
           mvn --batch-mode --no-transfer-progress clean test package
+      - name: Run generator against deterministic harmless fixtures
+        working-directory: targets/HypatiaDatabases
+        run: |
+          set -euxo pipefail
+          mkdir -p fixture/input fixture/exclusions fixture/extras fixture/production
+          printf '%s\\n' "0123456789abcdef0123456789abcdef" > fixture/input/fixture.md5
+          printf '%s\\n' "0123456789abcdef0123456789abcdef01234567" > fixture/input/fixture.sha1
+          printf '%s\\n' "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef" > fixture/input/fixture.sha256
+          printf '%s\\n' "example.invalid" > fixture/domains.txt
+          mvn --batch-mode --no-transfer-progress dependency:build-classpath -Dmdep.outputFile=target/classpath.txt
+          java -Xmx1g -cp "target/classes:$(cat target/classpath.txt)" org.maintainteam.hypatiadatabases.App "fixture/input/" "fixture/domains.txt"
+          test -s hypatia-md5-bloom.bin
+          test -s hypatia-sha1-bloom.bin
+          test -s hypatia-sha256-bloom.bin
+          test -s hypatia-domains-bloom.bin
       - name: Upload Maven reports and package
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
@@ -125,7 +140,7 @@ jobs:
             build-essential cmake ninja-build rustc cargo \
             libbz2-dev zlib1g-dev libxml2-dev libpcre2-dev libssl-dev \
             libjson-c-dev libcurl4-openssl-dev libmspack-dev libncurses-dev \
-            libcheck-dev libsystemd-dev
+            check libsystemd-dev
       - name: Record target and toolchain
         working-directory: targets/clamav
         run: |
