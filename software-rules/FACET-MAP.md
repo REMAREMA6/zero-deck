@@ -24,6 +24,10 @@ Facets are observation perspectives, not implementation modules. One operation m
 | 14 | Configuration | Applicable to Pro/activation gates and material scan/quarantine/link limits/settings | Owner switch exists as declared policy; 30-day quarantine retention is proposed/user-configurable in the working draft; effective configuration source/default/precedence not established. | Key/value/type/unit; origin/scope/precedence; activation time; mutability/reload; target context; redaction; linked effect observations. |
 | 15 | Performance and resource behaviour | Applicable to manual scanning and link-check operation; no targets/benchmarks established | Prior-art parameters are not ZeroDeck performance results. | Metric/definition/value/unit/statistic; measurement boundary/time; workload/concurrency/sample count; cold/warm state; hardware/runtime; resource scope; collection method/sampling/uncertainty. |
 
+
+
+The scenario-specific, facet-dimension inventory is enumerated in [PROPERTY-INVENTORY.md](PROPERTY-INVENTORY.md); the complete semantic dimension mapping is in [PAYLOAD-MAPPING.md](PAYLOAD-MAPPING.md).
+
 ## Cross-facet links that must be preserved
 
 - File selection/access → authorization/permissions, behaviour, errors/recovery and security controls.
