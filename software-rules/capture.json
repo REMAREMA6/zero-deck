@@ -1,0 +1,932 @@
+{
+  "schemaVersion": "0.2.0",
+  "captureId": "zerodeck-mvp-synthesis-001",
+  "createdAt": "2026-11-27T11:40:00.892Z",
+  "purpose": "Initial declared-scope and evidence inventory for the owner-approved ZeroDeck MVP. This is not a runtime capture and is explicitly incomplete.",
+  "target": {
+    "targetId": "zerodeck-mvp-target-unobserved",
+    "systemName": "ZeroDeck",
+    "boundary": {
+      "description": "The owner-approved first MVP comprising manual file security analysis, quarantine/file disposition, and Pro-gated website/link checking. The deployed implementation boundary and build are not yet identified.",
+      "included": [
+        "MVP-01 manual file security analysis",
+        "MVP-02 quarantine and file disposition",
+        "MVP-03 website and link checking subject to Pro entitlement and owner activation"
+      ],
+      "excluded": [
+        "IP address tracking/investigation (CAP-13)",
+        "Standalone scan history",
+        "Standalone user/admin account management and public admin portal",
+        "Threat-indicator administration",
+        "Help-content CMS",
+        "Service health/audit dashboard",
+        "Automatic/background protection",
+        "Browser extension",
+        "Device privacy audit"
+      ]
+    }
+  },
+  "scope": {
+    "description": "Declared product scope and required-property inventory for the first ZeroDeck MVP; no deployed runtime target has been observed.",
+    "facetIds": [
+      "interface",
+      "behavior",
+      "business-rules",
+      "data",
+      "persistence",
+      "api",
+      "messaging",
+      "identity-authentication",
+      "authorization-permissions",
+      "security-controls",
+      "background-processing",
+      "errors-recovery",
+      "integrations",
+      "configuration",
+      "performance-resource-behaviour"
+    ],
+    "scenarioIds": [
+      "MVP-FILE-001",
+      "MVP-FILE-002",
+      "MVP-QUAR-001",
+      "MVP-QUAR-002",
+      "MVP-QUAR-003",
+      "MVP-LINK-001",
+      "MVP-LINK-002"
+    ]
+  },
+  "collector": {
+    "name": "ZeroDeck Phase 5 Software Rules synthesis",
+    "version": "0.1.0",
+    "methodDescription": "Repository-backed synthesis of owner decisions, product materials, source-derived prior art and official platform/provider documentation. No ZeroDeck runtime interaction was performed."
+  },
+  "scenarios": [
+    {
+      "scenarioId": "MVP-FILE-001",
+      "title": "Select a file and initiate manual scan",
+      "purpose": "Capture the full manual file-analysis workflow.",
+      "facetIds": [
+        "interface",
+        "behavior",
+        "data",
+        "authorization-permissions",
+        "security-controls",
+        "errors-recovery",
+        "configuration",
+        "performance-resource-behaviour"
+      ],
+      "subject": "manual-file-analysis",
+      "trigger": "User selects a supported file and requests a manual scan.",
+      "observableQuestions": [
+        "Which files and sizes are accepted?",
+        "How is access granted and revoked?",
+        "What lifecycle/progress and terminal states are exposed?",
+        "What data is read, emitted, stored or transmitted?",
+        "What result and limitations are presented?"
+      ]
+    },
+    {
+      "scenarioId": "MVP-FILE-002",
+      "title": "Capture file-analysis result and failure branches",
+      "purpose": "Capture each distinct scan classification and operational failure.",
+      "facetIds": [
+        "interface",
+        "behavior",
+        "business-rules",
+        "data",
+        "security-controls",
+        "errors-recovery"
+      ],
+      "subject": "manual-file-analysis-result",
+      "trigger": "A scan reaches a result or failure branch.",
+      "observableQuestions": [
+        "What distinguishes confirmed, suspicious, no-known-threat and inconclusive?",
+        "What evidence and confidence are exposed?",
+        "What next action is allowed?",
+        "How are unsupported, inaccessible, interrupted and engine-failure states represented?"
+      ]
+    },
+    {
+      "scenarioId": "MVP-QUAR-001",
+      "title": "Quarantine a confirmed threat",
+      "purpose": "Capture eligibility, isolation and integrity outcomes.",
+      "facetIds": [
+        "interface",
+        "behavior",
+        "business-rules",
+        "data",
+        "persistence",
+        "authorization-permissions",
+        "security-controls",
+        "errors-recovery",
+        "integrations",
+        "performance-resource-behaviour"
+      ],
+      "subject": "quarantine",
+      "trigger": "A scan result is classified as a confirmed threat and an isolation operation is requested or triggered.",
+      "observableQuestions": [
+        "What qualifies as confirmed?",
+        "Which storage/provider operations are supported?",
+        "Is isolation atomic and integrity-verified?",
+        "What happens when write/delete/access is unavailable?"
+      ]
+    },
+    {
+      "scenarioId": "MVP-QUAR-002",
+      "title": "Review a suspicious or inconclusive file",
+      "purpose": "Capture non-destructive review and rescan paths.",
+      "facetIds": [
+        "interface",
+        "behavior",
+        "business-rules",
+        "data",
+        "authorization-permissions",
+        "security-controls",
+        "errors-recovery"
+      ],
+      "subject": "quarantine-review",
+      "trigger": "A scan returns suspicious or inconclusive.",
+      "observableQuestions": [
+        "Which review/rescan options are available?",
+        "Is destructive action prevented?",
+        "Which confirmations and state transitions occur?"
+      ]
+    },
+    {
+      "scenarioId": "MVP-QUAR-003",
+      "title": "Restore or permanently delete a quarantined item",
+      "purpose": "Capture restore/delete preconditions, effects and recovery.",
+      "facetIds": [
+        "interface",
+        "behavior",
+        "business-rules",
+        "data",
+        "persistence",
+        "authorization-permissions",
+        "security-controls",
+        "errors-recovery",
+        "performance-resource-behaviour"
+      ],
+      "subject": "quarantined-item-disposition",
+      "trigger": "User requests restore or permanent deletion.",
+      "observableQuestions": [
+        "Is confirmation required?",
+        "Is a fresh scan required before restore?",
+        "How are integrity and destination conflicts handled?",
+        "What exactly constitutes successful deletion?",
+        "What state remains after partial failure or interruption?"
+      ]
+    },
+    {
+      "scenarioId": "MVP-LINK-001",
+      "title": "Submit a website URL for checking",
+      "purpose": "Capture validation, independent gates, provider exchange and bounded result.",
+      "facetIds": [
+        "interface",
+        "behavior",
+        "business-rules",
+        "data",
+        "api",
+        "identity-authentication",
+        "authorization-permissions",
+        "security-controls",
+        "errors-recovery",
+        "integrations",
+        "configuration",
+        "performance-resource-behaviour"
+      ],
+      "subject": "website-link-check",
+      "trigger": "User submits a URL/link for a security or reputation check.",
+      "observableQuestions": [
+        "What input is accepted and normalized?",
+        "Are Pro entitlement and owner switch independently checked before any provider call?",
+        "What URL data leaves the device and to whom?",
+        "What provider and request contract are actually used?",
+        "What result scope and limitations are reported?"
+      ]
+    },
+    {
+      "scenarioId": "MVP-LINK-002",
+      "title": "Capture link-check result and failure branches",
+      "purpose": "Capture threat, no-match, inconclusive and operational failure outcomes.",
+      "facetIds": [
+        "interface",
+        "behavior",
+        "business-rules",
+        "data",
+        "api",
+        "security-controls",
+        "errors-recovery",
+        "integrations",
+        "configuration",
+        "performance-resource-behaviour"
+      ],
+      "subject": "website-link-check-result",
+      "trigger": "A URL check returns a provider result or a failure/blocked state.",
+      "observableQuestions": [
+        "Which threat categories are requested and returned?",
+        "How are redirects treated?",
+        "How are expiry/cache and no-match semantics represented?",
+        "How are invalid input, timeout, offline, provider outage and quota exhaustion handled?",
+        "Does wording avoid guaranteeing safety or implying whole-site inspection?"
+      ]
+    }
+  ],
+  "executions": [],
+  "observations": [],
+  "runtimeRules": [],
+  "sourceRules": [],
+  "declaredContracts": [
+    {
+      "contractId": "ZD-SCOPE-001",
+      "contractType": "owner-decision",
+      "title": "Owner-approved first ZeroDeck MVP scope",
+      "issuer": "ZeroDeck product owner",
+      "artifact": {
+        "uri": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/MVP-SCOPE-DECISION.md",
+        "revision": "7666e50f29f47913724e1321f9edb006ed885283",
+        "mediaType": "text/markdown"
+      },
+      "scope": "The first ZeroDeck MVP only.",
+      "statements": [
+        {
+          "statementId": "ZD-SCOPE-001-S1",
+          "text": "The first MVP contains exactly manual file security analysis, quarantine and file disposition, and website/link checking.",
+          "location": "Decision section"
+        },
+        {
+          "statementId": "ZD-SCOPE-001-S2",
+          "text": "IP address tracking/investigation is a future candidate explicitly excluded from MVP requirements, scenarios, implementation and completeness obligations.",
+          "location": "Deferred candidate: IP address tracking"
+        },
+        {
+          "statementId": "ZD-SCOPE-001-S3",
+          "text": "Do not infer unspecified thresholds, engines, providers, persistence, APIs, data fields, security mechanisms, configuration values or performance targets.",
+          "location": "Scope interpretation and evidence limits"
+        }
+      ],
+      "retrievedAt": "2026-11-27T11:40:00.892Z",
+      "evidenceRefs": [
+        "EVD-ZD-SCOPE-001"
+      ]
+    },
+    {
+      "contractId": "ZD-LINK-GATE-001",
+      "contractType": "owner-decision",
+      "title": "Pro entitlement and owner-controlled activation gates for link checking",
+      "issuer": "ZeroDeck product owner",
+      "artifact": {
+        "uri": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/PRO-GATED-LINK-CHECK-DECISION.md",
+        "revision": "8887085dfc323c3f304ef29a74bfecb1a361f751",
+        "mediaType": "text/markdown"
+      },
+      "scope": "MVP-03 website and link checking.",
+      "statements": [
+        {
+          "statementId": "ZD-LINK-GATE-001-S1",
+          "text": "Link checking requires Pro entitlement.",
+          "location": "Owner decision"
+        },
+        {
+          "statementId": "ZD-LINK-GATE-001-S2",
+          "text": "The owner-controlled feature switch remains disabled until the owner explicitly activates it when paid-user revenue can fund operating/API costs.",
+          "location": "Owner decision"
+        },
+        {
+          "statementId": "ZD-LINK-GATE-001-S3",
+          "text": "No provider/API lookup may occur for a non-Pro user or while the owner-controlled feature switch is disabled.",
+          "location": "Owner decision"
+        },
+        {
+          "statementId": "ZD-LINK-GATE-001-S4",
+          "text": "Pro entitlement does not imply unlimited checks; usage limits/quotas and budget controls are required, but exact values remain unspecified.",
+          "location": "Owner decision"
+        }
+      ],
+      "retrievedAt": "2026-11-27T11:40:00.892Z",
+      "evidenceRefs": [
+        "EVD-ZD-PRO-001"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidenceId": "EVD-ZD-SCOPE-001",
+      "evidenceClass": "declared-contract",
+      "evidenceType": "owner-decision-record",
+      "mediaType": "text/markdown",
+      "origin": {
+        "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/MVP-SCOPE-DECISION.md",
+        "sourceRevision": "7666e50f29f47913724e1321f9edb006ed885283",
+        "location": "re/zerodek-product-re/2026-11-27/MVP-SCOPE-DECISION.md"
+      },
+      "capturedAt": "2026-11-27T11:40:00.892Z",
+      "locator": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/MVP-SCOPE-DECISION.md",
+      "retention": {
+        "status": "external",
+        "access": "Public GitHub repository; immutable blob revision recorded."
+      },
+      "limitations": [
+        "Owner-declared intent only; does not prove runtime implementation or enforcement."
+      ]
+    },
+    {
+      "evidenceId": "EVD-ZD-PRO-001",
+      "evidenceClass": "declared-contract",
+      "evidenceType": "owner-decision-record",
+      "mediaType": "text/markdown",
+      "origin": {
+        "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/PRO-GATED-LINK-CHECK-DECISION.md",
+        "sourceRevision": "8887085dfc323c3f304ef29a74bfecb1a361f751",
+        "location": "re/zerodek-product-re/2026-11-27/PRO-GATED-LINK-CHECK-DECISION.md"
+      },
+      "capturedAt": "2026-11-27T11:40:00.892Z",
+      "locator": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/PRO-GATED-LINK-CHECK-DECISION.md",
+      "retention": {
+        "status": "external",
+        "access": "Public GitHub repository; immutable blob revision recorded."
+      },
+      "limitations": [
+        "Owner-declared intent only; entitlement enforcement, feature-switch behaviour and no-call guarantees have not been runtime-tested."
+      ]
+    },
+    {
+      "evidenceId": "EVD-ZD-MAP-001",
+      "evidenceClass": "supporting-context",
+      "evidenceType": "capability-facet-mapping",
+      "mediaType": "text/markdown",
+      "origin": {
+        "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/CAPABILITY-FACET-MAPPING.md",
+        "sourceRevision": "436be0bd1348447f3888aa8a9ee5e1ec791ad144",
+        "location": "re/zerodek-product-re/2026-11-27/CAPABILITY-FACET-MAPPING.md"
+      },
+      "capturedAt": "2026-11-27T11:40:00.892Z",
+      "locator": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/CAPABILITY-FACET-MAPPING.md",
+      "retention": {
+        "status": "external",
+        "access": "Public GitHub repository; immutable blob revision recorded."
+      },
+      "limitations": [
+        "Scenario definitions and investigation questions; not executed runtime outcomes."
+      ]
+    },
+    {
+      "evidenceId": "EVD-ZD-P4-001",
+      "evidenceClass": "supporting-context",
+      "evidenceType": "source-extraction-report",
+      "mediaType": "text/markdown",
+      "origin": {
+        "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md",
+        "sourceRevision": "7cc66f225f82a23a2b94bc53c3364c200f990f64",
+        "location": "re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md"
+      },
+      "capturedAt": "2026-11-27T11:40:00.892Z",
+      "locator": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md",
+      "retention": {
+        "status": "external",
+        "access": "Public GitHub repository; immutable blob revision recorded."
+      },
+      "limitations": [
+        "Contains prior-art source rules and platform/provider contracts; these are not automatically ZeroDeck requirements."
+      ]
+    },
+    {
+      "evidenceId": "EVD-ZD-P4-002",
+      "evidenceClass": "supporting-context",
+      "evidenceType": "facet-coverage-audit",
+      "mediaType": "text/markdown",
+      "origin": {
+        "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/PHASE-4-15-FACET-COVERAGE-AUDIT.md",
+        "sourceRevision": "3b32ea7b60d90c30b1511a2e878a411cacc3a648",
+        "location": "re/zerodek-product-re/2026-11-27/PHASE-4-15-FACET-COVERAGE-AUDIT.md"
+      },
+      "capturedAt": "2026-11-27T11:40:00.892Z",
+      "locator": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/PHASE-4-15-FACET-COVERAGE-AUDIT.md",
+      "retention": {
+        "status": "external",
+        "access": "Public GitHub repository; immutable blob revision recorded."
+      },
+      "limitations": [
+        "Evidence/gap audit only; not runtime observation or completeness approval."
+      ]
+    }
+  ],
+  "coverage": [
+    {
+      "facet": "interface",
+      "status": "not-observed",
+      "reason": "No deployed ZeroDeck target/runtime capture is available. This facet has an investigation/property map, but no runtime observations."
+    },
+    {
+      "facet": "behavior",
+      "status": "not-observed",
+      "reason": "No deployed ZeroDeck target/runtime capture is available. This facet has an investigation/property map, but no runtime observations."
+    },
+    {
+      "facet": "business-rules",
+      "status": "not-observed",
+      "reason": "No deployed ZeroDeck target/runtime capture is available. This facet has an investigation/property map, but no runtime observations."
+    },
+    {
+      "facet": "data",
+      "status": "not-observed",
+      "reason": "No deployed ZeroDeck target/runtime capture is available. This facet has an investigation/property map, but no runtime observations."
+    },
+    {
+      "facet": "persistence",
+      "status": "not-observed",
+      "reason": "No deployed ZeroDeck target/runtime capture is available. This facet has an investigation/property map, but no runtime observations."
+    },
+    {
+      "facet": "api",
+      "status": "not-observed",
+      "reason": "No deployed ZeroDeck target/runtime capture is available. This facet has an investigation/property map, but no runtime observations."
+    },
+    {
+      "facet": "messaging",
+      "status": "not-observed",
+      "reason": "No deployed ZeroDeck target/runtime capture is available. This facet has an investigation/property map, but no runtime observations."
+    },
+    {
+      "facet": "identity-authentication",
+      "status": "not-observed",
+      "reason": "No deployed ZeroDeck target/runtime capture is available. This facet has an investigation/property map, but no runtime observations."
+    },
+    {
+      "facet": "authorization-permissions",
+      "status": "not-observed",
+      "reason": "No deployed ZeroDeck target/runtime capture is available. This facet has an investigation/property map, but no runtime observations."
+    },
+    {
+      "facet": "security-controls",
+      "status": "not-observed",
+      "reason": "No deployed ZeroDeck target/runtime capture is available. This facet has an investigation/property map, but no runtime observations."
+    },
+    {
+      "facet": "background-processing",
+      "status": "not-observed",
+      "reason": "No deployed ZeroDeck target/runtime capture is available. This facet has an investigation/property map, but no runtime observations."
+    },
+    {
+      "facet": "errors-recovery",
+      "status": "not-observed",
+      "reason": "No deployed ZeroDeck target/runtime capture is available. This facet has an investigation/property map, but no runtime observations."
+    },
+    {
+      "facet": "integrations",
+      "status": "not-observed",
+      "reason": "No deployed ZeroDeck target/runtime capture is available. This facet has an investigation/property map, but no runtime observations."
+    },
+    {
+      "facet": "configuration",
+      "status": "not-observed",
+      "reason": "No deployed ZeroDeck target/runtime capture is available. This facet has an investigation/property map, but no runtime observations."
+    },
+    {
+      "facet": "performance-resource-behaviour",
+      "status": "not-observed",
+      "reason": "No deployed ZeroDeck target/runtime capture is available. This facet has an investigation/property map, but no runtime observations."
+    }
+  ],
+  "limitations": [
+    "This is an initial synthesis of declared scope and evidence, not a runtime capture.",
+    "No deployed ZeroDeck target, build, runtime environment, execution, or observation has been supplied.",
+    "Prior-art source rules and official platform/provider documents are supporting evidence only and are not adopted as ZeroDeck implementation requirements.",
+    "The Google Web Risk Lookup API is not an approved production provider or procurement decision.",
+    "All unresolved properties in OPEN-PROPERTIES.md remain open and prevent replication-sufficiency claims."
+  ],
+  "replicationScope": {
+    "scopeId": "ZERODECK-MVP-001",
+    "description": "The owner-approved three-capability ZeroDeck MVP and all material properties required to reproduce those capabilities across the actual supported target environments. Scope excludes standalone future candidates listed in SCOPE.md.",
+    "facets": [
+      "interface",
+      "behavior",
+      "business-rules",
+      "data",
+      "persistence",
+      "api",
+      "messaging",
+      "identity-authentication",
+      "authorization-permissions",
+      "security-controls",
+      "background-processing",
+      "errors-recovery",
+      "integrations",
+      "configuration",
+      "performance-resource-behaviour"
+    ],
+    "propertyInventory": [
+      {
+        "propertyId": "MVP-01-INTERFACE",
+        "facet": "interface",
+        "subject": "manual-file-analysis",
+        "dimension": "interface-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-01-BEHAVIOR",
+        "facet": "behavior",
+        "subject": "manual-file-analysis",
+        "dimension": "behavior-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-01-BUSINESS_RULES",
+        "facet": "business-rules",
+        "subject": "manual-file-analysis",
+        "dimension": "business-rules-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-01-DATA",
+        "facet": "data",
+        "subject": "manual-file-analysis",
+        "dimension": "data-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-01-PERSISTENCE",
+        "facet": "persistence",
+        "subject": "manual-file-analysis",
+        "dimension": "persistence-required-properties",
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+      },
+      {
+        "propertyId": "MVP-01-API",
+        "facet": "api",
+        "subject": "manual-file-analysis",
+        "dimension": "api-required-properties",
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+      },
+      {
+        "propertyId": "MVP-01-MESSAGING",
+        "facet": "messaging",
+        "subject": "manual-file-analysis",
+        "dimension": "messaging-required-properties",
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+      },
+      {
+        "propertyId": "MVP-01-IDENTITY_AUTHENTICATION",
+        "facet": "identity-authentication",
+        "subject": "manual-file-analysis",
+        "dimension": "identity-authentication-required-properties",
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+      },
+      {
+        "propertyId": "MVP-01-AUTHORIZATION_PERMISSIONS",
+        "facet": "authorization-permissions",
+        "subject": "manual-file-analysis",
+        "dimension": "authorization-permissions-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-01-SECURITY_CONTROLS",
+        "facet": "security-controls",
+        "subject": "manual-file-analysis",
+        "dimension": "security-controls-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-01-BACKGROUND_PROCESSING",
+        "facet": "background-processing",
+        "subject": "manual-file-analysis",
+        "dimension": "background-processing-required-properties",
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+      },
+      {
+        "propertyId": "MVP-01-ERRORS_RECOVERY",
+        "facet": "errors-recovery",
+        "subject": "manual-file-analysis",
+        "dimension": "errors-recovery-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-01-INTEGRATIONS",
+        "facet": "integrations",
+        "subject": "manual-file-analysis",
+        "dimension": "integrations-required-properties",
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+      },
+      {
+        "propertyId": "MVP-01-CONFIGURATION",
+        "facet": "configuration",
+        "subject": "manual-file-analysis",
+        "dimension": "configuration-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-01-PERFORMANCE_RESOURCE_BEHAVIOUR",
+        "facet": "performance-resource-behaviour",
+        "subject": "manual-file-analysis",
+        "dimension": "performance-resource-behaviour-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-02-INTERFACE",
+        "facet": "interface",
+        "subject": "quarantine-and-disposition",
+        "dimension": "interface-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-02-BEHAVIOR",
+        "facet": "behavior",
+        "subject": "quarantine-and-disposition",
+        "dimension": "behavior-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-02-BUSINESS_RULES",
+        "facet": "business-rules",
+        "subject": "quarantine-and-disposition",
+        "dimension": "business-rules-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-02-DATA",
+        "facet": "data",
+        "subject": "quarantine-and-disposition",
+        "dimension": "data-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-02-PERSISTENCE",
+        "facet": "persistence",
+        "subject": "quarantine-and-disposition",
+        "dimension": "persistence-required-properties",
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+      },
+      {
+        "propertyId": "MVP-02-API",
+        "facet": "api",
+        "subject": "quarantine-and-disposition",
+        "dimension": "api-required-properties",
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+      },
+      {
+        "propertyId": "MVP-02-MESSAGING",
+        "facet": "messaging",
+        "subject": "quarantine-and-disposition",
+        "dimension": "messaging-required-properties",
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+      },
+      {
+        "propertyId": "MVP-02-IDENTITY_AUTHENTICATION",
+        "facet": "identity-authentication",
+        "subject": "quarantine-and-disposition",
+        "dimension": "identity-authentication-required-properties",
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+      },
+      {
+        "propertyId": "MVP-02-AUTHORIZATION_PERMISSIONS",
+        "facet": "authorization-permissions",
+        "subject": "quarantine-and-disposition",
+        "dimension": "authorization-permissions-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-02-SECURITY_CONTROLS",
+        "facet": "security-controls",
+        "subject": "quarantine-and-disposition",
+        "dimension": "security-controls-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-02-BACKGROUND_PROCESSING",
+        "facet": "background-processing",
+        "subject": "quarantine-and-disposition",
+        "dimension": "background-processing-required-properties",
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+      },
+      {
+        "propertyId": "MVP-02-ERRORS_RECOVERY",
+        "facet": "errors-recovery",
+        "subject": "quarantine-and-disposition",
+        "dimension": "errors-recovery-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-02-INTEGRATIONS",
+        "facet": "integrations",
+        "subject": "quarantine-and-disposition",
+        "dimension": "integrations-required-properties",
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+      },
+      {
+        "propertyId": "MVP-02-CONFIGURATION",
+        "facet": "configuration",
+        "subject": "quarantine-and-disposition",
+        "dimension": "configuration-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-02-PERFORMANCE_RESOURCE_BEHAVIOUR",
+        "facet": "performance-resource-behaviour",
+        "subject": "quarantine-and-disposition",
+        "dimension": "performance-resource-behaviour-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-03-INTERFACE",
+        "facet": "interface",
+        "subject": "website-link-checking",
+        "dimension": "interface-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-03-BEHAVIOR",
+        "facet": "behavior",
+        "subject": "website-link-checking",
+        "dimension": "behavior-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-03-BUSINESS_RULES",
+        "facet": "business-rules",
+        "subject": "website-link-checking",
+        "dimension": "business-rules-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-03-DATA",
+        "facet": "data",
+        "subject": "website-link-checking",
+        "dimension": "data-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-03-PERSISTENCE",
+        "facet": "persistence",
+        "subject": "website-link-checking",
+        "dimension": "persistence-required-properties",
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+      },
+      {
+        "propertyId": "MVP-03-API",
+        "facet": "api",
+        "subject": "website-link-checking",
+        "dimension": "api-required-properties",
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+      },
+      {
+        "propertyId": "MVP-03-MESSAGING",
+        "facet": "messaging",
+        "subject": "website-link-checking",
+        "dimension": "messaging-required-properties",
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+      },
+      {
+        "propertyId": "MVP-03-IDENTITY_AUTHENTICATION",
+        "facet": "identity-authentication",
+        "subject": "website-link-checking",
+        "dimension": "identity-authentication-required-properties",
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+      },
+      {
+        "propertyId": "MVP-03-AUTHORIZATION_PERMISSIONS",
+        "facet": "authorization-permissions",
+        "subject": "website-link-checking",
+        "dimension": "authorization-permissions-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-03-SECURITY_CONTROLS",
+        "facet": "security-controls",
+        "subject": "website-link-checking",
+        "dimension": "security-controls-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-03-BACKGROUND_PROCESSING",
+        "facet": "background-processing",
+        "subject": "website-link-checking",
+        "dimension": "background-processing-required-properties",
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+      },
+      {
+        "propertyId": "MVP-03-ERRORS_RECOVERY",
+        "facet": "errors-recovery",
+        "subject": "website-link-checking",
+        "dimension": "errors-recovery-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-03-INTEGRATIONS",
+        "facet": "integrations",
+        "subject": "website-link-checking",
+        "dimension": "integrations-required-properties",
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+      },
+      {
+        "propertyId": "MVP-03-CONFIGURATION",
+        "facet": "configuration",
+        "subject": "website-link-checking",
+        "dimension": "configuration-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      },
+      {
+        "propertyId": "MVP-03-PERFORMANCE_RESOURCE_BEHAVIOUR",
+        "facet": "performance-resource-behaviour",
+        "subject": "website-link-checking",
+        "dimension": "performance-resource-behaviour-required-properties",
+        "requirement": "required",
+        "status": "unknown",
+        "rationale": "The facet is required to reproduce this MVP capability, but the concrete ZeroDeck property values and rules have not yet been established by runtime evidence."
+      }
+    ],
+    "completeness": {
+      "status": "incomplete",
+      "assessedAt": "2026-11-27T11:40:00.892Z",
+      "assessmentMethod": "Review owner-approved scope, seven scenario definitions, Phase 2 facet applicability, Phase 4 evidence/gap audit, and each capability-by-facet property entry. No runtime observations exist.",
+      "rationale": "The MVP scope is declared, but the actual implementation boundary and many required properties across all three capabilities remain unknown or unobserved. Conditional architecture facets also require runtime/boundary evidence. The capture is not replication-sufficient."
+    }
+  }
+}
