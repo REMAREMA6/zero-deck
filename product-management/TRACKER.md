@@ -5,7 +5,7 @@
 **Started:** 2026-11-27  
 **Method:** CIRCLES — seven steps  
 **Overall status:** [~] In progress  
-**Current step:** C — Comprehend the situation
+**Current step:** R — Report customer needs
 
 > This tracker is the operational source of truth for product-planning progress. Update it whenever work starts, changes status, becomes blocked, or completes. A new session must be able to resume from this file and the linked records without relying on chat history.
 
@@ -26,14 +26,15 @@
 - **Current product scope authority:** Owner-approved three-capability MVP (manual file security analysis; quarantine/file disposition; website/link checking subject to Pro entitlement AND owner activation).
 - **Current product evidence status:** ZeroDeck-specific Software Rules remains Draft, incomplete and not replication-sufficient. Product planning must preserve unknowns.
 - **Primary business outcome:** Validate real market demand, per the owner's clarification on 2026-11-27. No target cohort has been selected; penetration testers/ethical hackers, non-technical users and businesses/licensed users are candidate segments for research.
-- **Next action:** Begin I — Identify. Compare candidate segments and identify the strongest initial customer cohort using evidence; do not assume one in advance. Define the demand-validation metric and threshold after I/R.
+- **I — Identify result:** Three candidate segments were compared. Segment B (non-technical individuals who regularly receive/download unfamiliar files and links) is recommended as a provisional cohort for needs discovery, not an owner-approved target market. Segment A (security practitioners) and Segment C (businesses/licensed organisations) remain alternatives.
+- **Next action:** Begin R — Report customer needs. Validate the provisional cohort's actual situations, current workarounds, pain, consequences and need for quarantine; compare practitioner evidence where it could overturn the cohort recommendation. Define the demand-validation metric and threshold after needs are established.
 
 ## CIRCLES progress
 
 | Step | Name | Status | Deliverable | Exit condition |
 |---|---|---|---|---|
 | C | Comprehend the situation | [x] Completed | `2026-11-27/01-C-COMPREHEND.md` | Goal, success-measure approach, constraints, context, assumptions and scope reconciled. Exact metric threshold is deferred to I/R after customer discovery. |
-| I | Identify the customer | [ ] Not started | `2026-11-27/02-I-IDENTIFY.md` | Segments assessed; one primary cohort chosen and defended; stakeholders/other sides acknowledged. |
+| I | Identify the customer | [x] Completed | `2026-11-27/02-I-IDENTIFY.md` | Three behavior/context-based segments assessed; one provisional cohort recommended and defended; stakeholders/other sides acknowledged. Owner has not approved a final target market. |
 | R | Report customer needs | [ ] Not started | `2026-11-27/03-R-NEEDS.md` | Needs/jobs stated; reported vs inferred distinguished; evidence and current alternatives linked. |
 | C | Cut through prioritization | [ ] Not started | `2026-11-27/04-C-PRIORITIZATION.md` | Needs prioritized on explicit criteria; MVP necessities, dependencies, cuts and deferrals justified. |
 | L | List solutions | [ ] Not started | `2026-11-27/05-L-SOLUTION-OPTIONS.md` | 2–3 materially different approaches address the selected need. |
@@ -46,7 +47,7 @@ These are supporting research streams within CIRCLES, not additional method step
 
 | Workstream | Status | Key questions | Evidence location |
 |---|---|---|---|
-| Customer, market and alternatives | [ ] Not started | Which customer has the strongest need? Direct competitors/substitutes? Existing workflows, pricing, adoption friction? | To be linked from CIRCLES deliverables |
+| Customer, market and alternatives | [~] In progress | Which customer has the strongest need? Direct competitors/substitutes? Existing workflows, pricing, adoption friction? | `2026-11-27/02-I-IDENTIFY.md`; continue in R |
 | File analysis and detection | [ ] Not started | Detection approaches, engine choices, coverage limits, privacy, false positives/negatives, licensing and cost. | To be linked |
 | Quarantine and file disposition | [ ] Not started | Android/platform constraints, isolation, integrity, restore, deletion, retention, recovery and key lifecycle. | To be linked |
 | Website/link checking | [ ] Not started | Provider contracts, commercial rights, costs, freshness, quotas, URL handling, privacy and failure semantics. | To be linked |
@@ -101,3 +102,4 @@ These are supporting research streams within CIRCLES, not additional method step
 | 2026-11-27 | Reviewed ZeroDeck README, scope decision, capability inventory, Software Rules scope/scenarios/open properties, and prior PM artifacts. | Confirmed three-capability MVP; identified stale 2026-11-24 assumptions requiring reconciliation. |
 | 2026-11-27 | Created current product-planning plan and tracker. | Planning authorized; C — Comprehend started. |
 | 2026-11-27 | Recorded owner's clarification that the first launch goal is to validate real market demand; no customer cohort is preselected. | C completed. I — Identify is next; practitioner, non-technical and business/licensed segments remain candidates. |
+| 2026-11-27 | Compared practitioner, non-technical individual and business/licensed segments using workflow context, MVP fit and current alternatives. | I completed. Segment B recommended provisionally for needs discovery; no final owner-approved target market or validated demand claim. R is next. |
