@@ -18,7 +18,7 @@
 
 ## Current position
 
-- **Current phase:** Phase 0 — Governance and handoff
+- **Current phase:** Phase 1 — Mockup inventory
 - **Current task:** Establish the project plan, tracker, contribution guide, and README navigation using the Software Rules contribution pattern.
 - **Completed:** Read `REMAREMA6/software-rules/CONTRIBUTING.md`, `PLAN.md`, `TRACKER.md`, `specification/CORE.md`, and `specification/REPLICATION-COMPLETENESS.md). Read this project's `RULES.md`, `re/MISSION.md`, and engagement understanding.
 - **Blockers:** None for governance setup. The 17-screen mockup inventory has not started.
