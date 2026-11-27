@@ -533,6 +533,108 @@
         "30-day retention is explicitly proposed; stack/service selections are planned direction or open decisions; do not treat them as finalized.",
         "Not runtime evidence."
       ]
+    },
+    {
+      "evidenceId": "EVD-SRC-HYP-001",
+      "evidenceClass": "source-artifact",
+      "evidenceType": "pinned-prior-art-source",
+      "mediaType": "text/plain",
+      "origin": {
+        "sourceUri": "https://github.com/MaintainTeam/Hypatia",
+        "sourceRevision": "c0f98977be935e58849726313635a2459cac3892",
+        "location": "MalwareScanner.kt; Database.kt; GPGDetachedSignatureVerifier.java; exact file blob locations recorded in Phase 4 extraction"
+      },
+      "capturedAt": "2026-11-27T00:00:00Z",
+      "locator": "https://github.com/MaintainTeam/Hypatia/tree/c0f98977be935e58849726313635a2459cac3892",
+      "retention": {
+        "status": "external",
+        "access": "Public GitHub source at pinned commit."
+      },
+      "limitations": [
+        "Prior-art only; describes Hypatia, not ZeroDeck.",
+        "Not an approved dependency or ZeroDeck implementation requirement."
+      ]
+    },
+    {
+      "evidenceId": "EVD-SRC-HYPDB-001",
+      "evidenceClass": "source-artifact",
+      "evidenceType": "pinned-prior-art-source",
+      "mediaType": "text/plain",
+      "origin": {
+        "sourceUri": "https://github.com/MaintainTeam/HypatiaDatabases",
+        "sourceRevision": "3c35f52e1a847caed46d8e1ad34968bfa3c8b10a",
+        "location": "README; App.java; stable-generation workflow; Bloom-generation script"
+      },
+      "capturedAt": "2026-11-27T00:00:00Z",
+      "locator": "https://github.com/MaintainTeam/HypatiaDatabases/tree/3c35f52e1a847caed46d8e1ad34968bfa3c8b10a",
+      "retention": {
+        "status": "external",
+        "access": "Public GitHub source at pinned commit."
+      },
+      "limitations": [
+        "Prior-art only; describes the reference feed-generation pipeline, not ZeroDeck.",
+        "No feed redistribution or dependency adoption is approved."
+      ]
+    },
+    {
+      "evidenceId": "EVD-DOC-ANDROID-001",
+      "evidenceClass": "supporting-context",
+      "evidenceType": "platform-documentation",
+      "mediaType": "text/html",
+      "origin": {
+        "sourceUri": "https://developer.android.com/training/data-storage",
+        "location": "Android storage, scoped storage and Storage Access Framework documentation; inspected sections listed in Phase 4 extraction"
+      },
+      "capturedAt": "2026-11-27T00:00:00Z",
+      "locator": "https://developer.android.com/training/data-storage",
+      "retention": {
+        "status": "external",
+        "access": "Public official Android documentation; access date 2026-11-27."
+      },
+      "limitations": [
+        "Mutable official documentation; access date and section provenance are recorded in Phase 4 extraction.",
+        "Platform constraints only; do not establish ZeroDeck Android-only scope or runtime behaviour."
+      ]
+    },
+    {
+      "evidenceId": "EVD-DOC-KEYSTORE-001",
+      "evidenceClass": "supporting-context",
+      "evidenceType": "platform-documentation",
+      "mediaType": "text/html",
+      "origin": {
+        "sourceUri": "https://developer.android.com/privacy-and-security/keystore",
+        "location": "Android Keystore security properties and limitations; inspected sections listed in Phase 4 extraction"
+      },
+      "capturedAt": "2026-11-27T00:00:00Z",
+      "locator": "https://developer.android.com/privacy-and-security/keystore",
+      "retention": {
+        "status": "external",
+        "access": "Public official Android documentation; access date 2026-11-27."
+      },
+      "limitations": [
+        "Mutable official documentation; access date and section provenance are recorded in Phase 4 extraction.",
+        "Key-protection reference only; does not select ZeroDeck cipher, key lifecycle or implementation."
+      ]
+    },
+    {
+      "evidenceId": "EVD-DOC-WEBRISK-001",
+      "evidenceClass": "supporting-context",
+      "evidenceType": "provider-documentation",
+      "mediaType": "text/html",
+      "origin": {
+        "sourceUri": "https://cloud.google.com/web-risk/docs/overview",
+        "location": "Lookup API, REST method, ThreatType, caching and pricing pages; exact sections recorded in Phase 4 extraction"
+      },
+      "capturedAt": "2026-11-27T00:00:00Z",
+      "locator": "https://cloud.google.com/web-risk/docs/overview",
+      "retention": {
+        "status": "external",
+        "access": "Public official Google Cloud documentation; access date 2026-11-27."
+      },
+      "limitations": [
+        "Mutable provider documentation and pricing; recheck before procurement.",
+        "Provider-contract reference only; Google Web Risk is not an approved production provider and no ZeroDeck runtime call was made."
+      ]
     }
   ],
   "coverage": [
