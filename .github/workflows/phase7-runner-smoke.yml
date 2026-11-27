@@ -16,7 +16,7 @@ concurrency:
 jobs:
   playwright-smoke:
     name: Headless browser, screenshot, video and trace
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     timeout-minutes: 15
 
     steps:
@@ -29,7 +29,8 @@ jobs:
       - name: Install Playwright
         run: |
           npm init -y
-          npm install --no-save playwright
+          npm install --no-save playwright@1.65.1
+          node -p "require('playwright/package.json').version"
           npx playwright install --with-deps chromium
 
       - name: Create first-party HTML fixture
