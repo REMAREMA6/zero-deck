@@ -1,6 +1,6 @@
 # Zerodek Reverse-Engineering Plan
 
-**Project:** Zerodek — Android security scanner  
+**Project:** ZeroDeck — ethical-hacking and penetration-testing tool/platform (startup)  
 **Repository:** REMAREMA6/zero-deck  
 **Product reference:** https://github.com/lordwhitefire/Zerodek  
 **Governing format:** https://github.com/REMAREMA6/software-rules  
@@ -9,7 +9,7 @@
 
 ## 1. Mission
 
-Reverse-engineer the complete software represented by the Zerodek mock screens and produce a sufficiently complete, evidence-backed, technology- and stack-independent Software Rules specification.
+Reverse-engineer the declared ZeroDeck MVP scope represented by the available product materials and produce an evidence-backed, technology- and stack-independent Software Rules specification. ZeroDeck is the broader ethical-hacking and penetration-testing startup; the Security Scanner materials represent one candidate service/capability area, not the startup's complete identity or scope. Do not assume every candidate capability belongs in the MVP.
 
 The objective is not merely to reproduce the screens. The rules must describe all in-scope properties needed to reproduce the declared product scope. Do not begin application implementation as part of this engagement.
 
@@ -57,14 +57,14 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 - [ ] Record every screen, visible element, content, control, state, navigation clue, and responsive/layout detail that can be established.
 - [ ] Distinguish directly visible facts from interaction hypotheses and unknowns.
 - [ ] Record source paths and stable evidence identifiers.
-**Exit gate:** all 17 screens are accounted for and independently reviewable; no screen is silently skipped.
+**Exit gate:** all 17 screens are accounted for and independently reviewable; no screen is silently skipped. Each screen/capability is classified as MVP, later candidate, or unresolved based on explicit scope evidence—not merely because it appears in the repository.
 
 ### Phase 2 — Capability and facet mapping
-- [ ] Derive product capabilities and workflows from the complete screen inventory.
+- [ ] Derive candidate capabilities and workflows from the complete screen inventory; separately establish which capabilities are selected for the MVP. Do not use the scanner repository materials to define the whole startup.
 - [ ] Map each capability and required property to the applicable Software Rules facets.
 - [ ] Identify cross-facet relationships, dependencies, states, and missing information.
 - [ ] Define the declared Zerodek replication scope, exclusions, scenarios, and required-property inventory.
-**Exit gate:** scope and property inventory are detailed enough to determine what evidence and source research are required.
+**Exit gate:** the startup direction, candidate capability set, and explicitly selected MVP scope are distinct; the MVP scenarios and property inventory are detailed enough to determine what evidence and source research are required.
 
 ### Phase 3 — Prior-art discovery and selection
 - [ ] Audit existing reconnaissance records for relevance to Zerodek.
