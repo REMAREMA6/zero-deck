@@ -11,7 +11,7 @@
 **Phase 4 extraction blob:** 7cc66f225f82a23a2b94bc53c3364c200f990f64  
 **Phase 4 facet audit blob:** 3b32ea7b60d90c30b1511a2e878a411cacc3a648  
 **Phase 4 plan closeout blob:** 71c734f9283e03d32263f75cbc9e46014e1e7e03  
-**Current phase:** Phase 5 — Software Rules synthesis (in progress)  
+**Current phase:** Phase 6 — Completeness and conformance (not started)  
 **Overall status:** Phases 0–4 are complete. The owner-approved MVP is manual file security analysis, quarantine/file disposition, and Pro-gated website/link checking (disabled until owner activation when paid revenue can fund costs). IP address tracking/investigation is a future candidate and excluded from MVP.
 
 > This is the persistent progress and handoff record. Update it whenever work starts, changes status, becomes blocked, or is completed. A new chat must be able to resume from this file and the linked repository records without depending on private chat history.
@@ -26,11 +26,11 @@
 
 ## Current position
 
-- **Current phase:** Phase 5 — Software Rules synthesis (ready to start)
-- **Current task:** Complete the machine-readable and human-readable rule synthesis: refine the property inventory at scenario/dimension level, trace every adopted rule to owner/product-material/platform/provider evidence, cross-check typed payload mappings, and validate capture.json against the governing 0.2.0 Draft schemas.
-- **Completed:** Phase 4 exit gate satisfied. Phase 5 started: re-read governing Software Rules 0.3.0 Draft and schema 0.2.0 Draft; created `software-rules/` scope, 6 owner rules, 27 provisional product-material workflow rules, seven-scenario catalogue, 15-facet map, typed payload map, evidence/traceability registers, open-property register and machine-readable capture. Reopened the original scanner product-decision document at pinned commit `86908bff1aa1bbf85a231ba0d47b8fe9fff148c6` / blob `c0b247ab3ba990890f5ebce2e161fed08fc801f3`; carried forward encrypted app-private quarantine, proposed 30-day retention, fresh-scan/restore/hash/audit/no-execution/no-overwrite/uninstall and no-silent-upload statements with draft/proposed status preserved. Capture contains 3 declared contracts, 7 evidence records, 7 scenarios, 15 facets and 45 capability/facet inventory entries. Custom structural/constraint checks against the governing capture and records schemas reported 0 errors; this is not a full official JSON Schema validator/CI run. Capture remains explicitly incomplete and has no fabricated runtime observations/rules.
-- **Blockers:** No Phase 5 start blocker. Carry forward unresolved properties: file scan coverage/data rights/locality and verdict policy; quarantine isolation/integrity/atomicity/retention/recovery; URL disclosure/consent, provider procurement/authentication, error mapping, Pro entitlement lifecycle, quotas and owner activation controls; runtime interface and performance evidence.
-- **Next action:** Expand the coarse 45-entry inventory into scenario/property-level traceable requirements; check every facet payload dimension against the 15 governing facet specifications; audit all rule-to-evidence references and capture semantics; obtain a full JSON Schema validator/CI run if available; then perform Phase 5 exit review. Keep IP tracking outside MVP.
+- **Current phase:** Phase 6 — Completeness and conformance (not started)
+- **Current task:** Independently assess the Phase 5 synthesis against the declared MVP replication scope: inspect every required property for omissions, evidence sufficiency, facet applicability, unresolved conflicts/unknowns and the need for runtime capture. Do not infer completeness from schema validity.
+- **Completed:** Phases 0–5 complete. Phase 5 produced 6 owner rules, 27 provisional product-material rules, 7 scenarios, 15 facets, 757 property entries (45 capability/facet applicability + 712 scenario/facet/dimension entries), 12 evidence records and individual rule-to-evidence traceability. All 15 governing semantic facet payloads are mapped. Governing Draft 2020-12 schema validation, governing completeness tests, governing cross-record integrity tests and ZeroDeck-specific reference validation passed in [CI run #45997192513](https://github.com/REMAREMA6/zero-deck/actions/runs/45997192513). See `software-rules/PHASE-5-SYNTHESIS-AUDIT.md`.
+- **Blockers / unresolved product properties:** No deployed ZeroDeck runtime target/build is available. File scan formats/engine/verdict criteria/data locality; quarantine storage/atomicity/recovery/retention/uninstall; URL parsing/disclosure/provider/authentication/entitlement lifecycle/quotas; interface runtime states; error/recovery mappings; actual integrations, configuration and performance targets remain unresolved. Preserve all open items; do not fabricate answers.
+- **Next action:** Begin Phase 6 completeness and conformance review against every scenario and property dimension. Keep IP investigation outside MVP.
 
 ## Phase tracking
 
@@ -41,7 +41,7 @@
 | 2 | Capability and facet mapping | [x] Complete | Owner selected manual file security analysis, quarantine/file disposition, and website/link checking. IP tracking is recorded as a future candidate and excluded from MVP. Scope decision, scenarios, exclusions and 15-facet map recorded. |
 | 3 | Prior-art discovery and selection | [x] Complete | Exit gate satisfied. Selected Phase 4 references and provenance recorded; unresolved technical/commercial/privacy gaps handed forward. Link checking is Pro-gated and owner-activation-gated. See PHASE-3-PRIOR-ART-REGISTER.md. |
 | 4 | Source-level rule extraction | [x] Complete | 31 source-derived rules, 28 platform/provider contract rules, 5 owner-declared link-gating rules, and a 15-facet audit across all three approved MVP capabilities. No ZeroDeck runtime behaviour or replication sufficiency is claimed. See `re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md` and `re/zerodek-product-re/2026-11-27/PHASE-4-15-FACET-COVERAGE-AUDIT.md`. |
-| 5 | Software Rules synthesis | [~] In progress | Initial deliverable and machine-readable capture created. Includes 6 owner rules, 27 product-material rules from the pinned working draft, 3 declared contracts, 7 evidence records, 7 scenarios, 15 facets and 45 capability/facet inventory entries. Custom schema-constraint check: 0 errors; full validator/CI and finer-grained traceability/completeness review remain. |
+| 5 | Software Rules synthesis | [x] Complete | Synthesis exit gate satisfied. Includes 6 owner rules, 27 provisional product-material rules, 3 declared contracts, 12 evidence records, 7 scenarios, 15 facets and 757 property entries. All 15 semantic payload mappings, individual rule/evidence traceability, Draft 2020-12 schema validation, governing completeness/integrity suites and ZeroDeck cross-reference checks passed. Capture remains explicitly incomplete and not replication-sufficient. See `software-rules/PHASE-5-SYNTHESIS-AUDIT.md`. |
 | 6 | Completeness and conformance | [ ] Not started | Validate coverage, traceability, schemas, and replication completeness. |
 
 ## Phase 0 — Governance and handoff
@@ -95,9 +95,9 @@ Extracted 31 source-derived rules from pinned Hypatia/HypatiaDatabases reference
 
 ## Phase 5 — Software Rules synthesis
 
-[~] In progress — governing specification and schemas re-read; initial ZeroDeck deliverable and machine-readable capture created. The capture is explicitly incomplete and contains no fabricated runtime observations. See `software-rules/README.md` and linked artifacts. Full traceability, detailed property inventory and schema validation remain.
+[x] Complete — synthesis exit gate satisfied 2026-11-27. The deliverable contains 6 owner rules, 27 provisional product-material rules, 7 scenarios, all 15 semantic facet mappings, 757 property inventory entries, 12 evidence records and individual rule/evidence traceability. The ZeroDeck capture passed the governing Draft 2020-12 schema validator, governing completeness tests, governing cross-record integrity tests and ZeroDeck-specific reference checks in CI run #45997192513. Full audit: `software-rules/PHASE-5-SYNTHESIS-AUDIT.md`.
 
-The deliverable belongs in the separately designated `software-rules/` folder and must follow the current governing Software Rules format/schema version. Preserve source-derived, documented-contract, owner-declared and unknown evidence classes. Do not copy the governing specification wholesale or alter its source repository.
+This closes synthesis only. The machine capture has no runtime executions, observations or runtime rules; all 757 inventory entries are not observed at runtime. The product-specific Software Rules remain explicitly incomplete and not replication-sufficient. Phase 6 must independently review omissions, applicability and evidence sufficiency. Preserve source-derived, documented-contract, owner-declared and unknown evidence classes; do not alter the governing specification repository.
 
 ## Phase 6 — Completeness and conformance
 
