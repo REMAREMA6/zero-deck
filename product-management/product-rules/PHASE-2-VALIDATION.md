@@ -30,7 +30,7 @@ The Markdown contract is canonical. The JSON file is its structured projection a
 ## 3. Research used
 
 The contract draws on:
-- NIST SP 800-63B-4 (final): authenticator/verifier requirements, password guidance, rate limiting, authenticator lifecycle, recovery and sessions.
+- NIST SP 800-63B-4 (final): authenticator/verifier requirements, 15-character minimum for single-factor passwords, 8-character minimum when passwords are used only within MFA, at least 64-character maximum-length recommendation, no composition rules, blocklist checks, no periodic changes absent compromise, rate limiting, authenticator lifecycle, recovery and sessions.
 - OWASP Authentication Cheat Sheet.
 - OWASP Password Storage Cheat Sheet.
 - OWASP Session Management Cheat Sheet.
