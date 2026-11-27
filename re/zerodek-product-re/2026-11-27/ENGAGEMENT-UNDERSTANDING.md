@@ -155,3 +155,26 @@ The following six categories are **not** a second taxonomy for this engagement:
 Using that list alongside the Software Rules facets would create a redundant parallel classification. The RE agent should not organize its investigation, capability mapping, or rule extraction around those six categories. It should work directly through the applicable Software Rules facets, using the specification's own definitions and requirements.
 
 The owner may revise or remove the six-category list later. Until then, this clarification governs the Zerodek RE engagement. It does not authorize the agent to independently change the separate `REMAREMA6/software-rules` specification repository.
+
+
+## 11. Owner clarification: ZeroDeck startup identity and product scope
+
+**Owner clarification, 2026-11-27**
+
+ZeroDeck is the name and identity of the startup. It is intended as a tool/platform for people involved in ethical hacking and penetration testing. The founder is a penetration tester.
+
+The Security Scanner materials in the reference repository describe **one service/capability area ZeroDeck may provide**. They must not be used to define the whole startup, its long-term product vision, or the complete universe of its capabilities.
+
+ZeroDeck is being developed as a startup with a deliberately constrained MVP scope. The initial build should focus on a selected, feasible subset of capabilities for launch; further capabilities may be added after observing the market and learning from users.
+
+Operational consequences for this engagement:
+
+- Treat ZeroDeck as the broader ethical-hacking and penetration-testing tool/platform described above.
+- Treat the existing Security Scanner screens and documents as evidence of a proposed service/capability within ZeroDeck, not as a definition of ZeroDeck.
+- Do not infer that every ethical-hacking or penetration-testing capability belongs in the MVP.
+- Do not infer the MVP scope solely from the current repository contents. Establish it from the owner's declared priorities and the available product evidence; mark unresolved scope decisions explicitly.
+- Keep three things distinct in all records: the startup's broader direction, candidate capabilities/services, and the explicitly selected MVP scope.
+- Continue inspecting the reference materials, but classify each finding by the capability it relates to and whether it is in the declared MVP scope, a later candidate, or unresolved.
+- This clarification supersedes the earlier repository-audit disposition that asked whether the scanner materials belonged to Zerodek. That identity question is resolved; the scope question remains open.
+
+This clarification changes the product framing and scope interpretation. It does not establish that the screens or source code are complete, working, production-ready, or runtime-verified.
