@@ -51,7 +51,7 @@
 
 The machine capture intentionally contains no scenario executions, runtime observations, runtime rules or ZeroDeck source-derived rules. No deployed ZeroDeck build, target environment, runtime interface, API exchange, persisted state, authentication/authorization enforcement, quarantine operation, provider call, security-control result or performance measurement was available.
 
-The property inventory remains unobserved at runtime. The existence of a complete inventory structure and a passing JSON Schema validation does not establish that the inventory is exhaustive or that the product is replication-sufficient.
+The 712 scenario/facet/dimension entries are marked not-observed; the 45 capability/facet applicability entries retain unknown status. No runtime observations exist. The existence of a complete inventory structure and a passing JSON Schema validation does not establish that the inventory is exhaustive or that the product is replication-sufficient.
 
 ## 5. Handoff to Phase 6
 
