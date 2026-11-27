@@ -42,7 +42,7 @@
 | 3 | Prior-art discovery and selection | [x] Complete | Exit gate satisfied. Selected Phase 4 references and provenance recorded; unresolved technical/commercial/privacy gaps handed forward. Link checking is Pro-gated and owner-activation-gated. See PHASE-3-PRIOR-ART-REGISTER.md. |
 | 4 | Source-level rule extraction | [x] Complete | 31 source-derived rules, 28 platform/provider contract rules, 5 owner-declared link-gating rules, and a 15-facet audit across all three approved MVP capabilities. No ZeroDeck runtime behaviour or replication sufficiency is claimed. See `re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md` and `re/zerodek-product-re/2026-11-27/PHASE-4-15-FACET-COVERAGE-AUDIT.md`. |
 | 5 | Software Rules synthesis | [x] Complete | Synthesis exit gate satisfied. Includes 6 owner rules, 27 provisional product-material rules, 3 declared contracts, 12 evidence records, 7 scenarios, 15 facets and 757 property entries. All 15 semantic payload mappings, individual rule/evidence traceability, Draft 2020-12 schema validation, governing completeness/integrity suites and ZeroDeck cross-reference checks passed. Capture remains explicitly incomplete and not replication-sufficient. See `software-rules/PHASE-5-SYNTHESIS-AUDIT.md`. |
-| 6 | Completeness and conformance | [~] In progress | Independent audit underway. Corrected missing Configuration coverage for quarantine scenarios; 775 property entries are recorded and validated by CI run #45999813143. Scenario-model, interface-source and runtime/conformance gaps remain. See `software-rules/PHASE-6-COMPLETENESS-AUDIT.md` and `re/zerodek-product-re/2026-11-27/PHASE-6-INTERFACE-SOURCE-REVIEW.md`. |
+| 6 | Completeness and conformance | [x] Complete — bounded review | Exit gate satisfied for an explicitly incomplete product deliverable. All 15 facets reviewed; inventory omissions/applicability inconsistencies corrected; 775 entries reconciled (700 required, 75 optional); CI #46000308895 passed. Product remains not replication-sufficient. See `software-rules/PHASE-6-COMPLETENESS-AUDIT.md`. |
 
 ## Phase 0 — Governance and handoff
 
@@ -103,7 +103,7 @@ This closes synthesis only. The machine capture has no runtime executions, obser
 
 [x] Complete 2026-11-27 — bounded completeness/conformance review. Exit gate satisfied only because the product-specific deliverable is explicitly marked incomplete with unresolved gaps. See `software-rules/PHASE-6-COMPLETENESS-AUDIT.md`. No runtime conformance or replication sufficiency is claimed.
 
-Assess completeness against the explicit declared replication scope and required-property inventory. A valid schema or matching subset is not sufficient to claim faithful replication.
+Review closed 2026-11-27 under the plan's incomplete-deliverable exit branch. The capture remains incomplete and not replication-sufficient; obtain an authorized runtime target/build and resolve the open product decisions before any conformance claim.
 
 ## Handoff protocol
 
