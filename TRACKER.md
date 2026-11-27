@@ -3,8 +3,8 @@
 **Project:** Zerodek reverse engineering  
 **Repository:** REMAREMA6/zero-deck  
 **Last updated:** 2026-11-27  
-**Current phase:** Phase 0 — Governance and handoff  
-**Overall status:** Investigation has not yet begun. Existing `re/oss-recon/` research is for an Android Security Scanner project and is not accepted as Zerodek capability coverage. The engagement understanding is recorded; project-specific governance files are being established.
+**Current phase:** Phase 1 — Mockup inventory  
+**Overall status:** Phase 0 governance and handoff setup is complete. The 17-screen inventory has not yet been produced. Existing `re/oss-recon/` research is for an Android Security Scanner project and is not accepted as Zerodek capability coverage.
 
 > This is the persistent progress and handoff record. Update it whenever work starts, changes status, becomes blocked, or is completed. A new chat must be able to resume from this file and the linked repository records without depending on private chat history.
 
