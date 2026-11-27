@@ -307,6 +307,86 @@
       "evidenceRefs": [
         "EVD-ZD-PRO-001"
       ]
+    },
+    {
+      "contractId": "ZD-PRODUCT-DRAFT-001",
+      "contractType": "working-draft-product-decisions",
+      "title": "Android Security Scanner product design decisions (working draft)",
+      "issuer": "ZeroDeck scanner product-design working document",
+      "artifact": {
+        "uri": "https://github.com/lordwhitefire/Zerodek/blob/86908bff1aa1bbf85a231ba0d47b8fe9fff148c6/upload/android_security_scanner_product_decisions.txt",
+        "version": "Working draft",
+        "revision": "86908bff1aa1bbf85a231ba0d47b8fe9fff148c6",
+        "digest": "c0b247ab3ba990890f5ebce2e161fed08fc801f3",
+        "mediaType": "text/plain"
+      },
+      "scope": "Only the documented file-analysis, quarantine and link-check workflows relevant to the owner-approved three-capability MVP. This working draft does not redefine ZeroDeck's broader startup identity or independently approve all scanner-service details.",
+      "statements": [
+        {
+          "statementId": "ZD-PRODUCT-DRAFT-001-S1",
+          "text": "Users manually choose files and request scans; automatic background download monitoring is later release.",
+          "location": "§4 Real-time protection; §9 MVP data flow"
+        },
+        {
+          "statementId": "ZD-PRODUCT-DRAFT-001-S2",
+          "text": "File results distinguish Threat found, Suspicious, No threat found and Could not decide; exact scanning engine and detection method remain open.",
+          "location": "§7 Decisions still open; §9 File scanning; §10 Screen 5"
+        },
+        {
+          "statementId": "ZD-PRODUCT-DRAFT-001-S3",
+          "text": "Files remain on the phone by default; do not upload files to the cloud by default. Any cloud-based file analysis must be separate, clearly explained and subject to appropriate user consent.",
+          "location": "§6 Privacy rule; §9 File scanning"
+        },
+        {
+          "statementId": "ZD-PRODUCT-DRAFT-001-S4",
+          "text": "SHA-256 is the stated planned direction for file fingerprints and integrity checks.",
+          "location": "§5 App technology direction"
+        },
+        {
+          "statementId": "ZD-PRODUCT-DRAFT-001-S5",
+          "text": "Confirmed malware is automatically quarantined when permitted and when the operation succeeds; suspicious files are reviewed; clean files are left untouched; unknown/inconclusive files are rescanned or reviewed.",
+          "location": "§3 Quarantine policy; §4 MVP"
+        },
+        {
+          "statementId": "ZD-PRODUCT-DRAFT-001-S6",
+          "text": "The quarantine baseline specifies encrypted, app-private storage on the user's device.",
+          "location": "§3 Quarantine policy"
+        },
+        {
+          "statementId": "ZD-PRODUCT-DRAFT-001-S7",
+          "text": "A 30-day default retention period, user configurability, automatic expiry and manual deletion are proposed; notify before expiry where practical.",
+          "location": "§3 Quarantine policy"
+        },
+        {
+          "statementId": "ZD-PRODUCT-DRAFT-001-S8",
+          "text": "Restoration requires a fresh security scan and user confirmation; restored files are verified against their recorded hash.",
+          "location": "§3 Quarantine policy"
+        },
+        {
+          "statementId": "ZD-PRODUCT-DRAFT-001-S9",
+          "text": "Quarantine, restoration and deletion must be auditable; failed deletion retains the record and is reported accurately; quarantined files must never be executed.",
+          "location": "§3 Quarantine policy"
+        },
+        {
+          "statementId": "ZD-PRODUCT-DRAFT-001-S10",
+          "text": "Protect encryption keys with Android Keystore; do not overwrite unrelated user files; explain what happens to quarantined data on app uninstall; manage scan history separately from quarantine retention.",
+          "location": "§3 Quarantine policy"
+        },
+        {
+          "statementId": "ZD-PRODUCT-DRAFT-001-S11",
+          "text": "Link-check outcomes distinguish Likely dangerous, No known threat found and Could not decide; a no-known-threat result is not a safety guarantee and a URL-only check must not be described as whole-site inspection.",
+          "location": "§4 MVP; §9 Website and link checking; §10 Screens 6–7"
+        },
+        {
+          "statementId": "ZD-PRODUCT-DRAFT-001-S12",
+          "text": "The link input method, detection method/provider and execution location remain open decisions.",
+          "location": "§7 Decisions still open; §9 Website and link checking"
+        }
+      ],
+      "retrievedAt": "2026-11-27T11:40:00.892Z",
+      "evidenceRefs": [
+        "EVD-SRC-PRODUCT-001"
+      ]
     }
   ],
   "evidence": [
@@ -429,6 +509,30 @@
       "limitations": [
         "Evidence/gap audit only; not runtime observation or completeness approval."
       ]
+    },
+    {
+      "evidenceId": "EVD-SRC-PRODUCT-001",
+      "evidenceClass": "declared-contract",
+      "evidenceType": "working-draft-product-decisions",
+      "mediaType": "text/plain",
+      "origin": {
+        "sourceUri": "https://github.com/lordwhitefire/Zerodek/blob/86908bff1aa1bbf85a231ba0d47b8fe9fff148c6/upload/android_security_scanner_product_decisions.txt",
+        "sourceRevision": "86908bff1aa1bbf85a231ba0d47b8fe9fff148c6",
+        "location": "upload/android_security_scanner_product_decisions.txt"
+      },
+      "capturedAt": "2026-11-27T11:40:00.892Z",
+      "locator": "https://github.com/lordwhitefire/Zerodek/blob/86908bff1aa1bbf85a231ba0d47b8fe9fff148c6/upload/android_security_scanner_product_decisions.txt",
+      "digest": "c0b247ab3ba990890f5ebce2e161fed08fc801f3",
+      "retention": {
+        "status": "external",
+        "access": "Public GitHub repository at immutable commit revision."
+      },
+      "limitations": [
+        "Source document labels itself Working draft.",
+        "The document describes an Android security scanner service; it does not redefine ZeroDeck's broader startup identity or prove that the planned implementation exists.",
+        "30-day retention is explicitly proposed; stack/service selections are planned direction or open decisions; do not treat them as finalized.",
+        "Not runtime evidence."
+      ]
     }
   ],
   "coverage": [
@@ -513,7 +617,8 @@
     "No deployed ZeroDeck target, build, runtime environment, execution, or observation has been supplied.",
     "Prior-art source rules and official platform/provider documents are supporting evidence only and are not adopted as ZeroDeck implementation requirements.",
     "The Google Web Risk Lookup API is not an approved production provider or procurement decision.",
-    "All unresolved properties in OPEN-PROPERTIES.md remain open and prevent replication-sufficiency claims."
+    "All unresolved properties in OPEN-PROPERTIES.md remain open and prevent replication-sufficiency claims.",
+    "The scanner product-decision source is a Working draft. Proposed retention values and open design choices are not treated as finalized owner decisions."
   ],
   "replicationScope": {
     "scopeId": "ZERODECK-MVP-001",
