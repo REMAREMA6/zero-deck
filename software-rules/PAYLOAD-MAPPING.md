@@ -226,10 +226,10 @@ This document maps the complete semantic dimension inventory of the governing So
 
 - **MVP-FILE-001:** interface, behavior, data, authorization-permissions, security-controls, errors-recovery, configuration, performance-resource-behaviour.
 - **MVP-FILE-002:** interface, behavior, business-rules, data, security-controls, errors-recovery.
-- **MVP-QUAR-001:** interface, behavior, business-rules, data, persistence, authorization-permissions, security-controls, errors-recovery, integrations, configuration, performance-resource-behaviour.
+- **MVP-QUAR-001:** interface, behavior, business-rules, data, persistence, authorization-permissions, security-controls, errors-recovery, configuration, performance-resource-behaviour; Integrations is conditional on a platform/provider boundary.
 - **MVP-QUAR-002:** interface, behavior, business-rules, data, authorization-permissions, security-controls, errors-recovery.
 - **MVP-QUAR-003:** interface, behavior, business-rules, data, persistence, authorization-permissions, security-controls, errors-recovery, configuration, performance-resource-behaviour.
-- **MVP-LINK-001:** interface, behavior, business-rules, data, api, identity-authentication, authorization-permissions, security-controls, errors-recovery, integrations, configuration, performance-resource-behaviour.
-- **MVP-LINK-002:** interface, behavior, business-rules, data, api, security-controls, errors-recovery, integrations, configuration, performance-resource-behaviour.
+- **MVP-LINK-001:** interface, behavior, business-rules, data, identity-authentication, authorization-permissions, security-controls, errors-recovery, configuration, performance-resource-behaviour; API and Integrations are conditional on the selected checking architecture.
+- **MVP-LINK-002:** interface, behavior, business-rules, data, security-controls, errors-recovery, configuration, performance-resource-behaviour; API and Integrations are conditional on the selected checking architecture.
 
 `messaging` and `background-processing` remain in the 15-facet universe but are not currently assigned to an approved MVP scenario. Their applicability is unresolved rather than assumed absent.
