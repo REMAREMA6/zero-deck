@@ -118,6 +118,8 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 - [ ] Map each observation to relevant ZeroDeck scenarios/facets while preserving evidence class. Reference-project runtime observations are never described as ZeroDeck production behaviour.
 - [ ] Update the capture, evidence, property inventory, traceability and open-property register only where supported; rerun governing validation.
 
+**Preflight record:** `re/zerodek-product-re/2026-11-27/PHASE-7-TARGET-PREFLIGHT.md` records target build paths, dependencies, external-feed/API constraints, licence/permission gaps and the environment check.
+
 **Execution gate:** no target code is run until both target-specific authorization/permission and a genuinely suitable named isolated environment are established. A normal container, folder, process or user account is not sufficient. If either gate fails, continue with safe source/document analysis and record runtime as blocked/unverified.
 
 **Environment preflight (2026-11-27):** the available container runs as root; Docker, Podman, Android Debug Bridge, Gradle and ClamAV executables were not found. No named isolated lab or its no-host-share/no-bridged-network/snapshot-and-destroy properties have been verified. Runtime execution is therefore **blocked at preflight**; this is not a completed runtime investigation.
