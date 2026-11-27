@@ -401,6 +401,20 @@ Capture eligibility, isolation and integrity outcomes. Trigger: A scan result is
 | Dependency outcome | Required; not observed at runtime |
 | Correlation | Required; not observed at runtime |
 
+#### configuration
+
+| Property dimension | Capture state |
+|---|---|
+| Configuration key/semantic identity | Required; not observed at runtime |
+| Effective value or redacted marker | Required; not observed at runtime |
+| Type/unit | Required; not observed at runtime |
+| Source/origin if exposed | Required; not observed at runtime |
+| Scope/precedence | Required; not observed at runtime |
+| Activation time | Required; not observed at runtime |
+| Mutability/reload behaviour | Required; not observed at runtime |
+| Target/build/environment | Required; not observed at runtime |
+| Observed behavioural effect link | Required; not observed at runtime |
+
 #### performance-resource-behaviour
 
 | Property dimension | Capture state |
@@ -672,6 +686,20 @@ Capture restore/delete preconditions, effects and recovery. Trigger: User reques
 | Timing | Required; not observed at runtime |
 | Impact | Required; not observed at runtime |
 | Evidence; distinguish expected validation rejection from unexpected fault | Required; not observed at runtime |
+
+#### configuration
+
+| Property dimension | Capture state |
+|---|---|
+| Configuration key/semantic identity | Required; not observed at runtime |
+| Effective value or redacted marker | Required; not observed at runtime |
+| Type/unit | Required; not observed at runtime |
+| Source/origin if exposed | Required; not observed at runtime |
+| Scope/precedence | Required; not observed at runtime |
+| Activation time | Required; not observed at runtime |
+| Mutability/reload behaviour | Required; not observed at runtime |
+| Target/build/environment | Required; not observed at runtime |
+| Observed behavioural effect link | Required; not observed at runtime |
 
 #### performance-resource-behaviour
 
