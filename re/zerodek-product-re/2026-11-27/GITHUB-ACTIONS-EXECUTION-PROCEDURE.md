@@ -126,5 +126,6 @@ The owner has now directed a renewed Phase 7 pass using GitHub Actions for previ
 
 - This procedure is recorded and adopted.
 - The previous bounded Phase 7 closeout is preserved as historical evidence.
-- Renewed Phase 7 is active. Its first task is a runner-capability smoke test against a first-party fixture. Execution against selected third-party prior-art targets is blocked until written permission is recorded.
+- First-party Playwright runner smoke passed twice, with screenshot, video and trace artifacts uploaded; see `PHASE-7-RUNNER-SMOKE-REPORT.md`.
+- Renewed Phase 7 remains active. New execution against selected third-party prior-art targets is blocked until written permission is recorded. Actual ZeroDeck runtime capture awaits the first-party app implementation.
 - ZeroDeck remains incomplete and not replication-sufficient until required properties are supported by evidence and the relevant target scenarios are executed.
