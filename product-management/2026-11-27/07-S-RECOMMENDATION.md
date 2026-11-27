@@ -6,7 +6,7 @@
 
 ## 1. Recommendation
 
-**Recommend that ZeroDeck validate Segment B first using Option 2: a user-initiated link check from the point of sharing.**
+**Recommend that ZeroDeck use Segment B as the first provisional discovery cohort and validate B-N1 using Option 2 (a user-initiated link check from the point of sharing) once MVP-03 is legitimately activated.**
 
 The initial cohort to recruit for validation is non-technical individuals who regularly receive or download unfamiliar files/apps and links from channels they do not fully trust. This remains a product-management recommendation, not an owner-approved target market.
 
@@ -43,7 +43,7 @@ Why this metric:
 - A second check on a separate day for a different real-world link is stronger evidence that the workflow is useful enough to return to.
 - The comparison tests whether the point-of-sharing interaction improves repeated use over a manual destination-check flow.
 
-**No numeric success threshold is set here.** There is no baseline, sample-size estimate or validated frequency distribution from which to justify an uplift target. The threshold and test duration must be fixed in the experiment protocol before results are observed. If both gates are false, no provider call may be made and that participant must not be counted as an eligible link-check user.
+**Activation dependency:** this metric cannot be run until the owner-controlled switch is enabled and participants have Pro entitlement. The owner decision says the switch remains off until paid-user revenue can fund operating/API costs. Therefore, if the switch is still off at initial launch, Option 2 is not available for a provider-backed demand test. Do not bypass the gate, make provider calls, or interpret zero usage while disabled as lack of demand. The first-launch validation focus must then be an independently approved, enabled MVP workflow (most plausibly manual file analysis and its disposition path); that separate need/solution sequence has not yet been fully prioritised or evaluated in this plan.\n\n**No numeric success threshold is set here.** There is no baseline, sample-size estimate or validated frequency distribution from which to justify an uplift target. The threshold and test duration must be fixed in the experiment protocol before results are observed. When the feature is legitimately enabled, if either gate is false, no provider call may be made and that participant must not be counted as an eligible link-check user.
 
 This metric is an adoption signal for the link-check workflow; it does not by itself prove a large market, willingness to pay, or demand for all three MVP capabilities.
 
@@ -60,7 +60,7 @@ The main risk is that the product improves the interaction but the underlying pr
 
 ## 5. Link to the business goal
 
-The owner-declared first-launch goal is to build, launch and validate real market demand/adoption before deciding the next direction. Option 2 offers a focused way to observe whether a specific user problem leads to repeated voluntary behaviour, rather than relying on positive reactions to a concept or one-time trial.
+The owner-declared first-launch goal is to build, launch and validate real market demand/adoption before deciding the next direction. Once MVP-03 is legitimately activated, Option 2 offers a focused way to observe whether a specific user problem leads to repeated voluntary behaviour, rather than relying on positive reactions to a concept or one-time trial. If the activation condition is not met at launch, this link-check recommendation is deferred and cannot serve as the first-launch adoption metric.
 
 The product should not claim that it has found product-market fit or validated ZeroDeck's overall market from this test.
 
@@ -93,7 +93,7 @@ The product-management agent recommends; the owner decides.
 1. **Target cohort:** accept, reject or revise Segment B as the first validation cohort. Segment A practitioners remain an alternative.
 2. **Validation approach:** accept, reject or revise Option 2 as the first link-check workflow to validate.
 3. **Metric:** accept or revise the 30-day qualified repeat link-check rate and its Option 1 comparison.
-4. **Gate availability:** confirm which users can legitimately participate under the Pro entitlement and owner-controlled activation switch. No test should bypass either gate or trigger a provider call while a gate is false.
+4. **Gate availability and launch sequence:** confirm whether the paid-user revenue condition can be met at launch. If not, decide which currently enabled MVP workflow will be the initial demand-validation focus while link checking remains locked. No test should bypass either gate or trigger a provider call while a gate is false.
 5. **Launch market/platform:** still unresolved. The current research does not establish a Nigeria-specific market, Android-only product boundary or distribution route.
 
 No owner decision is inferred from silence. Until the owner responds, these remain recommendations.
