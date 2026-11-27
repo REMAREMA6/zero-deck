@@ -54,6 +54,11 @@ A business buyer and the people using a product inside that business are treated
 - A Reddit r/netsec discussion explicitly warns that uploading targeted/custom malware to VirusTotal can expose it beyond the submitter. This is practitioner discussion and should be treated as a workflow/privacy concern to validate, not as a universal rule: https://www.reddit.com/r/netsec/comments/15mv0s/1_malware_analysis_protip_or_why_not_to_upload_to/.
 - A practitioner asking how to safely collect and upload malware describes malware analysis as a substantial task in its own right: https://www.reddit.com/r/AskNetsec/comments/9xlsc4/how_to_safely_collect_and_upload_malware/.
 
+**Additional authoritative practitioner-methodology evidence (reviewed after the initial I draft)**
+- OWASP's Mobile Application Security Testing Guide describes mobile app security testing as static and dynamic analysis and says it is usually part of a larger assessment covering the client-server architecture and server-side APIs. It also explains that automatic scans catch some issues while human analysis augments results; the OWASP tool catalogue warns that tool output can contain false positives and false negatives and is not a conclusive app-security verdict.
+- Sources: https://mas.owasp.org/MASTG/0x04b-Mobile-App-Security-Testing/ and https://mas.owasp.org/MASTG/tools/
+- **Limit:** this evidence is specifically about mobile application security testing, not every independent penetration tester or all ethical-hacking workflows. It is methodology evidence, not direct customer demand evidence for ZeroDeck.
+
 **MVP fit**
 - Manual file analysis and URL checking are directly relevant as first-pass triage.
 - Quarantine/disposition could help preserve separation between an untrusted artifact and normal files.
