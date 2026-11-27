@@ -37,7 +37,7 @@ All paths below are from the pinned revision above.
 
 - **Rule:** A screen component may own transient UI state for selection, input, validation visibility, progress display, cancellation display, search and clipboard feedback. Keep such state local unless the application shell needs to coordinate it across screens.
 - **Evidence:** FileSelectionScreen uses local state for active tab, selected sample file, picked device file and message; WebsiteLinkScreen uses local URL, attempted and error state; LinkScanResultScreen uses local copied state.
-- **Source:** SecurityScannerFileSelectionScreen.tsx (lines 92–100); WebsiteLinkScreen.tsx (lines 27–31); LinkScanResultScreen.tsx (lines 25–36).
+- **Source:** SecurityScannerFileSelectionScreen.tsx (lines 75–78); WebsiteLinkScreen.tsx (lines 27–31); LinkScanResultScreen.tsx (lines 25–36).
 - **Evidence class:** Source-derived.
 - **Limit:** This is an implementation pattern, not a ZeroDeck-wide state-management requirement.
 
@@ -116,7 +116,7 @@ All paths below are from the pinned revision above.
 
 - **Rule:** The screen source adapts navigation/layout based on available window width. Do not assume one universal breakpoint from the current implementation.
 - **Evidence:** File selection and scan progress use width >= 1000 for desktop layout; website link and link result use width >= 900; quarantine details uses width < 900 for compact layout.
-- **Source:** SecurityScannerFileSelectionScreen.tsx (line 76); SecurityScannerScanProgressScreen.tsx (line 30); WebsiteLinkScreen.tsx (line 28); LinkScanResultScreen.tsx (line 28); QuarantineDetailsScreen.tsx (line 156).
+- **Source:** SecurityScannerFileSelectionScreen.tsx (line 74); SecurityScannerScanProgressScreen.tsx (line 30); WebsiteLinkScreen.tsx (line 28); LinkScanResultScreen.tsx (line 28); QuarantineDetailsScreen.tsx (line 165).
 - **Evidence class:** Source-derived.
 - **Open property:** The intended canonical breakpoint and mobile/tablet/desktop behaviour need a product-level decision. Do not copy inconsistent thresholds blindly.
 
