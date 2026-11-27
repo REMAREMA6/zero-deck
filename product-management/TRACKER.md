@@ -5,7 +5,7 @@
 **Started:** 2026-11-27  
 **Method:** CIRCLES — seven steps, followed by supporting product-definition work  
 **Overall status:** [~] CIRCLES completed provisionally; blueprint, architecture follow-up and validation remain open; PM-authored product-rules workstream has started  
-**Current position:** PM-authored rules Phase 1 complete; Phase 2 (authentication requirements) is next  
+**Current position:** PM-authored rules Phases 0–2 complete; Phase 3 (authentication coverage validation) is next  
 **Last reconciled:** 2026-11-27
 
 > Operational source of truth. Update this tracker whenever work starts, changes status, becomes blocked, or completes. A new session must resume from this file and linked records without relying on chat history.
@@ -26,7 +26,7 @@ During that work, the owner added a distinct requirement: the Product Management
 
 That work is now recorded as a separate workstream. It does not restart CIRCLES or change the three-capability MVP.
 
-**Completed most recently:** PM-authored contract profile (Phase 1). **Next task:** research and draft authentication/account requirements (Phase 2).
+**Completed most recently:** authentication/account requirements contract (Phase 2). **Next task:** validate authentication coverage across relevant Software Rules facets (Phase 3).
 
 ### Current product authority
 
@@ -74,7 +74,7 @@ That work is now recorded as a separate workstream. It does not restart CIRCLES 
 
 **Workstream:** [11-PM-AUTHORED-PRODUCT-RULES.md](2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md)  
 **Author:** ZeroDeck Product Management Agent  
-**Status:** Phases 0–1 complete; Phase 2 next  
+**Status:** Phases 0–2 complete; Phase 3 next  
 **Purpose:** create implementation-ready, technology-independent product requirements aligned with Software Rules.
 
 **Profile:** [product-rules/PROFILE.md](product-rules/PROFILE.md) — Phase 1 complete. **Contract index:** [product-rules/README.md](product-rules/README.md). **Validation:** [product-rules/VALIDATION-REPORT.md](product-rules/VALIDATION-REPORT.md).
@@ -87,7 +87,7 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 |---|---|---|---|
 | 0 | Establish baseline, boundaries and authorship | [x] | Software Rules model inspected; product scope and PM identity recorded. |
 | 1 | Design PM contract profile | [x] | Exact mapping, author identity, ID/version rules, complete-record and extension schemas, and validation procedure documented and checked. |
-| 2 | Research and author authentication requirements | [ ] | Stack-agnostic account/auth contract with sources, acceptance criteria and unknowns. |
+| 2 | Research and author authentication requirements | [x] | [IDENTITY-AUTHENTICATION.md](product-rules/contracts/IDENTITY-AUTHENTICATION.md), structured projection, evidence record and [Phase 2 validation](product-rules/PHASE-2-VALIDATION.md); 21 PM-proposed requirements, 8 open owner questions. |
 | 3 | Validate authentication coverage | [ ] | Cross-facet assessment and negative/failure/recovery tests. |
 | 4 | Author manual file-analysis requirements | [ ] | File selection, input scope, verdicts, limitations, privacy and failure semantics. |
 | 5 | Author quarantine/disposition requirements | [ ] | Quarantine, integrity, restore, deletion, retention and recovery. |
@@ -122,7 +122,7 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 
 ## 6. Immediate next actions
 
-1. Start Phase 2: research and draft authentication/account requirements using the completed PM contract profile.
+1. Start Phase 3: assess authentication coverage across identity, authorization, security, API, data, persistence, configuration, errors/recovery and integrations.
 2. Keep architecture follow-up and blueprint gaps visible; do not mark them complete without evidence.
 3. Update this tracker at each phase transition and link every deliverable.
 4. Ask the owner only for decisions that evidence and PM deliberation cannot settle.
@@ -137,7 +137,8 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 | 2026-11-27 | Completed initial platform/integration assessment; owner directed Neon and first-party auth/backend. | Recommendation updated; native proof, auth threat model, hosting and approval remain open. |
 | 2026-11-27 | Owner requested PM-authored product rules aligned to Software Rules with explicit authorship. | New workstream opened. |
 | 2026-11-27 | Inspected Software Rules README, declared-contract schema, identity/authentication facet and Phase 6 property inventory. | Phase 0 complete; declared-contract is the current fit. |
-| 2026-11-27 | Completed PM contract profile, PM extension schema, full declared-contract schema, templates and format fixture; ran structural/semantic and negative checks, recorded in `product-rules/VALIDATION-REPORT.md`. | Phase 1 complete; Phase 2 is next. No ZeroDeck feature requirement has yet been authored or owner-approved. |
+| 2026-11-27 | Completed PM contract profile, PM extension schema, full declared-contract schema, templates and format fixture; ran targeted profile checks, recorded in `product-rules/VALIDATION-REPORT.md`. | Phase 1 complete. |
+| 2026-11-27 | Researched and authored the 21-requirement identity/authentication contract, structured declared-contract projection, retained evidence and eight open owner questions; ran targeted structural, parity, facet, reference and digest checks. | Phase 2 complete; Phase 3 coverage assessment is next. Requirements remain PM-proposed, not owner-approved. |
 
 ## 8. Authority and repository boundaries
 
