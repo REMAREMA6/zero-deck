@@ -60,3 +60,11 @@ The Phase 7 investigation did not execute ZeroDeck or transfer reference-project
 - Android and Google documentation are mutable public documents; access date and page/section provenance are recorded in the Phase 4 report, not a fabricated immutable commit.
 - The Google Web Risk provider is not a selected production dependency.
 - No real user file, URL, API key, malware sample, or ZeroDeck production environment was used in this synthesis.
+
+## Additional renewed Phase 7 reference-runtime evidence (not ZeroDeck runtime)
+
+| Evidence ID | Artifact | Execution provenance | Permitted use |
+|---|---|---|---|
+| EVD-RT-REF-002 | `re/zerodek-product-re/2026-11-27/PHASE-7-RENEWED-ACTIONS-RESULTS.md` and `PHASE-7-RUNTIME-OBSERVATION-MAP.md` renewed section | Investigation-initiated GitHub Actions runs at exact pinned revisions: Hypatia run `46029241394` (`c0f98977be935e58849726313635a2459cac3892`); HypatiaDatabases run `46029241394` (`3c35f52e1a847caed46d8e1ad34968bfa3c8b10a`); ClamAV run `46028645716` (`cad7b18a3e6505195fe08db1412449a18fc9f012`). | Contextual reference evidence only: Hypatia Android build/APK/lint findings (unit test task NO-SOURCE); HypatiaDatabases fixture-driven generator counts and four Bloom outputs (Maven test sources absent); ClamAV CMake build and CTest/Python test outcomes. No ZeroDeck runtime behaviour, no automatic product requirement, no dependency approval. |
+
+The renewed runs do not change the ZeroDeck runtime-observation count. Hypatia and HypatiaDatabases build/test outcomes and ClamAV's own test suite remain attributed to their pinned source projects.
