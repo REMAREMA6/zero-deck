@@ -19,7 +19,7 @@
 ## Current position
 
 - **Current phase:** Phase 1 — Mockup inventory
-- **Current task:** Establish the project plan, tracker, contribution guide, and README navigation using the Software Rules contribution pattern.
+- **Current task:** Audit and classify the complete Zerodek reference repository before inspecting the individual screens. The repository contains both design handoffs and substantial existing application source.
 - **Completed:** Read `REMAREMA6/software-rules/CONTRIBUTING.md`, `PLAN.md`, `TRACKER.md`, `specification/CORE.md`, and `specification/REPLICATION-COMPLETENESS.md). Read this project's `RULES.md`, `re/MISSION.md`, and engagement understanding.
 - **Blockers:** None for governance setup. The 17-screen mockup inventory has not started.
 - **Next action:** Complete governance setup, then inspect the Zerodek repository tree and all 17 mock screens to build the screen inventory.
@@ -29,7 +29,7 @@
 | Phase | Name | Status | Notes |
 |---|---|---|---|
 | 0 | Governance and handoff | [x] Complete | Project plan, persistent tracker, contribution guide, README navigation, and resumption pattern established and verified. |
-| 1 | Mockup inventory | [~] In progress | Enumerate repository assets and inspect all 17 screens. |
+| 1 | Repository and screen inventory | [~] In progress | Classify the full reference repository, then inventory all 17 screens and distinguish mockup intent from existing code and demo behaviour. |
 | 2 | Capability and facet mapping | [ ] Not started | Map all required capabilities/properties to the 15 Software Rules facets. |
 | 3 | Prior-art discovery and selection | [ ] Not started | Audit prior work; identify and verify relevant open-source sources. |
 | 4 | Source-level rule extraction | [ ] Not started | Inspect source code and record auditable source-derived rules. |
@@ -56,7 +56,7 @@
 
 Not started.
 
-Required outputs will be stored under `re/zerodek-product-re/2026-11-27/screen-inventory/`. Do not claim the mockup contains only visible UI properties; record implied capabilities separately and label inference.
+Required outputs will be stored under `re/zerodek-product-re/2026-11-27/screen-inventory/`. The reference repository contains existing application source and design handoffs as well as screen previews. Classify evidence by origin and maturity. Do not treat placeholder/demo code as implemented product behaviour, and do not treat source code as proof of deployed runtime behaviour.
 
 ## Phase 2 — Capability and facet mapping
 
