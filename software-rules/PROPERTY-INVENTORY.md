@@ -389,17 +389,17 @@ Capture eligibility, isolation and integrity outcomes. Trigger: A scan result is
 
 | Property dimension | Capture state |
 |---|---|
-| External system/provider identity | Required; not observed at runtime |
-| Boundary | Required; not observed at runtime |
-| Direction | Required; not observed at runtime |
-| Operation | Required; not observed at runtime |
-| Protocol reference | Required; not observed at runtime |
-| Request/response or message references | Required; not observed at runtime |
-| Credentials context (redacted) | Required; not observed at runtime |
-| Timeout/retry/circuit-breaker behaviour | Required; not observed at runtime |
-| Mapping/transformation | Required; not observed at runtime |
-| Dependency outcome | Required; not observed at runtime |
-| Correlation | Required; not observed at runtime |
+| External system/provider identity | Conditional; applicability unresolved |
+| Boundary | Conditional; applicability unresolved |
+| Direction | Conditional; applicability unresolved |
+| Operation | Conditional; applicability unresolved |
+| Protocol reference | Conditional; applicability unresolved |
+| Request/response or message references | Conditional; applicability unresolved |
+| Credentials context (redacted) | Conditional; applicability unresolved |
+| Timeout/retry/circuit-breaker behaviour | Conditional; applicability unresolved |
+| Mapping/transformation | Conditional; applicability unresolved |
+| Dependency outcome | Conditional; applicability unresolved |
+| Correlation | Conditional; applicability unresolved |
 
 #### configuration
 
@@ -796,19 +796,19 @@ Capture validation, independent gates, provider exchange and bounded result. Tri
 
 | Property dimension | Capture state |
 |---|---|
-| Protocol and version | Required; not observed at runtime |
-| Endpoint/operation identity | Required; not observed at runtime |
-| Method | Required; not observed at runtime |
-| Target | Required; not observed at runtime |
-| Request headers/query/path/body | Required; not observed at runtime |
-| Authentication context (redacted) | Required; not observed at runtime |
-| Response status/headers/body | Required; not observed at runtime |
-| Content types | Required; not observed at runtime |
-| Timing boundaries/units | Required; not observed at runtime |
-| Correlation IDs | Required; not observed at runtime |
-| Retries/redirects | Required; not observed at runtime |
-| Transport errors | Required; not observed at runtime |
-| Linked side-effect observations | Required; not observed at runtime |
+| Protocol and version | Conditional; applicability unresolved |
+| Endpoint/operation identity | Conditional; applicability unresolved |
+| Method | Conditional; applicability unresolved |
+| Target | Conditional; applicability unresolved |
+| Request headers/query/path/body | Conditional; applicability unresolved |
+| Authentication context (redacted) | Conditional; applicability unresolved |
+| Response status/headers/body | Conditional; applicability unresolved |
+| Content types | Conditional; applicability unresolved |
+| Timing boundaries/units | Conditional; applicability unresolved |
+| Correlation IDs | Conditional; applicability unresolved |
+| Retries/redirects | Conditional; applicability unresolved |
+| Transport errors | Conditional; applicability unresolved |
+| Linked side-effect observations | Conditional; applicability unresolved |
 
 #### identity-authentication
 
@@ -875,17 +875,17 @@ Capture validation, independent gates, provider exchange and bounded result. Tri
 
 | Property dimension | Capture state |
 |---|---|
-| External system/provider identity | Required; not observed at runtime |
-| Boundary | Required; not observed at runtime |
-| Direction | Required; not observed at runtime |
-| Operation | Required; not observed at runtime |
-| Protocol reference | Required; not observed at runtime |
-| Request/response or message references | Required; not observed at runtime |
-| Credentials context (redacted) | Required; not observed at runtime |
-| Timeout/retry/circuit-breaker behaviour | Required; not observed at runtime |
-| Mapping/transformation | Required; not observed at runtime |
-| Dependency outcome | Required; not observed at runtime |
-| Correlation | Required; not observed at runtime |
+| External system/provider identity | Conditional; applicability unresolved |
+| Boundary | Conditional; applicability unresolved |
+| Direction | Conditional; applicability unresolved |
+| Operation | Conditional; applicability unresolved |
+| Protocol reference | Conditional; applicability unresolved |
+| Request/response or message references | Conditional; applicability unresolved |
+| Credentials context (redacted) | Conditional; applicability unresolved |
+| Timeout/retry/circuit-breaker behaviour | Conditional; applicability unresolved |
+| Mapping/transformation | Conditional; applicability unresolved |
+| Dependency outcome | Conditional; applicability unresolved |
+| Correlation | Conditional; applicability unresolved |
 
 #### configuration
 
@@ -996,19 +996,19 @@ Capture threat, no-match, inconclusive and operational failure outcomes. Trigger
 
 | Property dimension | Capture state |
 |---|---|
-| Protocol and version | Required; not observed at runtime |
-| Endpoint/operation identity | Required; not observed at runtime |
-| Method | Required; not observed at runtime |
-| Target | Required; not observed at runtime |
-| Request headers/query/path/body | Required; not observed at runtime |
-| Authentication context (redacted) | Required; not observed at runtime |
-| Response status/headers/body | Required; not observed at runtime |
-| Content types | Required; not observed at runtime |
-| Timing boundaries/units | Required; not observed at runtime |
-| Correlation IDs | Required; not observed at runtime |
-| Retries/redirects | Required; not observed at runtime |
-| Transport errors | Required; not observed at runtime |
-| Linked side-effect observations | Required; not observed at runtime |
+| Protocol and version | Conditional; applicability unresolved |
+| Endpoint/operation identity | Conditional; applicability unresolved |
+| Method | Conditional; applicability unresolved |
+| Target | Conditional; applicability unresolved |
+| Request headers/query/path/body | Conditional; applicability unresolved |
+| Authentication context (redacted) | Conditional; applicability unresolved |
+| Response status/headers/body | Conditional; applicability unresolved |
+| Content types | Conditional; applicability unresolved |
+| Timing boundaries/units | Conditional; applicability unresolved |
+| Correlation IDs | Conditional; applicability unresolved |
+| Retries/redirects | Conditional; applicability unresolved |
+| Transport errors | Conditional; applicability unresolved |
+| Linked side-effect observations | Conditional; applicability unresolved |
 
 #### security-controls
 
@@ -1045,17 +1045,17 @@ Capture threat, no-match, inconclusive and operational failure outcomes. Trigger
 
 | Property dimension | Capture state |
 |---|---|
-| External system/provider identity | Required; not observed at runtime |
-| Boundary | Required; not observed at runtime |
-| Direction | Required; not observed at runtime |
-| Operation | Required; not observed at runtime |
-| Protocol reference | Required; not observed at runtime |
-| Request/response or message references | Required; not observed at runtime |
-| Credentials context (redacted) | Required; not observed at runtime |
-| Timeout/retry/circuit-breaker behaviour | Required; not observed at runtime |
-| Mapping/transformation | Required; not observed at runtime |
-| Dependency outcome | Required; not observed at runtime |
-| Correlation | Required; not observed at runtime |
+| External system/provider identity | Conditional; applicability unresolved |
+| Boundary | Conditional; applicability unresolved |
+| Direction | Conditional; applicability unresolved |
+| Operation | Conditional; applicability unresolved |
+| Protocol reference | Conditional; applicability unresolved |
+| Request/response or message references | Conditional; applicability unresolved |
+| Credentials context (redacted) | Conditional; applicability unresolved |
+| Timeout/retry/circuit-breaker behaviour | Conditional; applicability unresolved |
+| Mapping/transformation | Conditional; applicability unresolved |
+| Dependency outcome | Conditional; applicability unresolved |
+| Correlation | Conditional; applicability unresolved |
 
 #### configuration
 
