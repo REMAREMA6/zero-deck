@@ -29,10 +29,10 @@
 
 - **Current phase:** Phase 7 — Non-UI runtime investigation of selected prior-art implementations.
 - **Current task:** Corrected scope is recorded in PLAN.md and RUNTIME-INVESTIGATION-DECISION.md. Investigate Hypatia, HypatiaDatabases and ClamAV only for non-UI runtime behaviour relevant to the approved MVP. ZeroDeck's mockup fork is a product-intent/UI-source reference, not a runtime target.
-- **Completed:** Phases 0–6 review tasks complete. Phase 6 reviewed all 15 facets, reconciled 775 property entries (700 required; 75 optional), and passed validation in [CI run #46000308895](https://github.com/REMAREMA6/zero-deck/actions/runs/46000308895). Phase 7 scope correction committed.
+- **Completed:** Phases 0–6 review tasks complete. Phase 6 reviewed all 15 facets, reconciled 775 property entries (700 required; 75 optional), and passed validation in [CI run #46000308895](https://github.com/REMAREMA6/zero-deck/actions/runs/46000308895). Phase 7 scope correction committed. Supplemental UI source review extracted 11 source-derived rules at `re/zerodek-product-re/2026-11-27/UI-SOURCE-DERIVED-RULES.md`.
 - **Preflight blocker:** Available container is root-run; Docker, Podman, ADB, Gradle and ClamAV binaries are absent. No named isolated lab or no-host-share/no-bridged-network/snapshot/teardown properties have been verified. Do not execute reference code here.
 - **Out of scope:** UI runtime inspection, mockup runtime claims, external provider calls/secrets/paid services, malware samples, replacement implementation and IP investigation.
-- **Next action:** Continue source-derived analysis of the selected implementations and create source-derived UI rules from the mockup source separately. Runtime execution remains blocked until target-specific permission and a genuine lab are documented. Record external integration blockers rather than attempting provider calls.
+- **Next action:** Continue Phase 7 preflight/source inspection for the three selected prior-art implementations, determine exact permitted execution scope, and identify whether a genuine isolated lab can be supplied. Runtime execution remains blocked until target-specific permission and a genuine lab are documented. Record external integration blockers rather than attempting provider calls.
 
 ## Phase tracking
 
