@@ -121,6 +121,25 @@ jobs:
           test -s fixture/input/hypatia-sha1-bloom.bin
           test -s fixture/input/hypatia-sha256-bloom.bin
           test -s fixture/input/hypatia-domains-bloom.bin
+
+      - name: Exercise malformed-hash and exclusion branches with harmless fixtures
+        working-directory: targets/HypatiaDatabases
+        run: |
+          set -euxo pipefail
+          # Malformed input: non-hexadecimal and wrong-length hexadecimal lines.
+          mkdir -p fixture-invalid/input fixture-invalid/exclusions fixture-invalid/extras fixture-invalid/production
+          printf '%s\n' "not-a-hash" "abcd" > fixture-invalid/input/malformed.sha256
+          java -Xmx1g -cp "target/classes:$(cat target/classpath.txt)" org.maintainteam.hypatiadatabases.App "fixture-invalid/input/" | tee fixture-invalid/generator.log
+          grep -F "Lines read: valid: 0, invalid: 2" fixture-invalid/generator.log
+          grep -F "Read count: md5: 0, sha1: 0, sha256: 0, domains: 0" fixture-invalid/generator.log
+          # Exclusion input: the excluded MD5 must not enter the generated filter.
+          mkdir -p fixture-excluded/input fixture-excluded/exclusions fixture-excluded/extras fixture-excluded/production
+          printf '%s\n' "0123456789abcdef0123456789abcdef" > fixture-excluded/input/excluded.md5
+          printf '%s\n' "0123456789abcdef0123456789abcdef" > fixture-excluded/exclusions/excluded.txt
+          java -Xmx1g -cp "target/classes:$(cat target/classpath.txt)" org.maintainteam.hypatiadatabases.App "fixture-excluded/input/" | tee fixture-excluded/generator.log
+          grep -F "Skipping excluded hash: 0123456789abcdef0123456789abcdef" fixture-excluded/generator.log
+          grep -F "Lines read: valid: 0, invalid: 0" fixture-excluded/generator.log
+          grep -F "Read count: md5: 0, sha1: 0, sha256: 0, domains: 0" fixture-excluded/generator.log
       - name: Upload Maven reports and package
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
