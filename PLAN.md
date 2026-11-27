@@ -112,15 +112,15 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 - [x] Extract the mockup UI source-derived rules separately from runtime investigation; 12 bounded rules are recorded in `UI-SOURCE-DERIVED-RULES.md`.
 - [x] Check upstream CI runtime/build/test evidence for each selected executable target at its exact Phase 3 pinned revision; record run IDs, outcomes and accessible logs in `PHASE-7-AVAILABLE-RUNTIME-EVIDENCE.md`.
 - [x] Runtime evidence found for SRC-01 Hypatia (successful CI build workflow), SRC-02 HypatiaDatabases (successful full database-generation workflow), and SRC-06 ClamAV (successful cross-platform build; Ubuntu CTest 17/17 passed).
-- [~] Map the collected runtime observations to ZeroDeck-relevant scenarios and the 15 facets while retaining provenance and evidence class. Reference-project observations are not ZeroDeck production behaviour or automatic product requirements.
-- [ ] Investigate any additional non-invasive runtime scenarios that are actually feasible in the current environment; skip paths requiring unavailable local infrastructure.
-- [ ] Record precise blockers for skipped local/device/provider scenarios and continue with other eligible evidence.
-- [ ] SRC-04 Web Risk remains a remote provider contract. Do not make external provider calls, create accounts, obtain secrets or incur costs without separate owner approval; record live provider behaviour as unverified.
-- [ ] SRC-07 Android storage/SAF/Keystore are platform documents, not executable repositories; use them as documented constraints, not runtime targets.
-- [ ] Do not run malware samples or suspicious files. Use only benign, controlled fixtures where execution is appropriate and a suitable environment exists.
+- [x] Map the available upstream runtime observations to the 15 facets with exact provenance and explicit limitations. See `PHASE-7-RUNTIME-OBSERVATION-MAP.md`. Reference-project observations are not ZeroDeck production behaviour or automatic product requirements.
+- [x] Inspect additional non-invasive upstream CI log evidence where retained: HypatiaDatabases generation metrics/publication and ClamAV CVD, signature-tool and scan-callback tests. Local execution was rechecked and skipped because prerequisites and verified isolation remain unavailable.
+- [x] Record precise blockers for skipped local/device/provider scenarios and continue with other eligible evidence in `PHASE-7-RUNTIME-OBSERVATION-MAP.md`.
+- [x] SRC-04 Web Risk remains a remote provider contract. Live calls were skipped because no configured credentials/project or separate approval for URL disclosure and provider costs was available; live behaviour remains unverified.
+- [x] SRC-07 Android storage/SAF/Keystore are platform documents, not executable repositories; retained as documented constraints, not runtime targets.
+- [x] No malware samples or suspicious files were run. No local third-party test fixtures were executed because the required named, verified isolated lab is unavailable.
 - [ ] Reconcile the Software Rules capture, evidence, property inventory, traceability and open-property register only where supported; rerun governing validation and assess replication sufficiency.
 
-**Runtime evidence report:** `re/zerodek-product-re/2026-11-27/PHASE-7-AVAILABLE-RUNTIME-EVIDENCE.md` records exact pinned revisions, CI run IDs, verified outcomes, accessible job-log details, the current HypatiaDatabases ThreatFox HTTP 410 failure, and skipped paths.
+**Runtime evidence reports:** `re/zerodek-product-re/2026-11-27/PHASE-7-AVAILABLE-RUNTIME-EVIDENCE.md` records exact pinned revisions and run outcomes. `PHASE-7-RUNTIME-OBSERVATION-MAP.md` records the additional generator counts, generated/published artifacts, named ClamAV test cases, facet dispositions, and skipped paths.
 
 **Local execution disposition:** the current container lacks the Android SDK/ADB/Gradle, Maven and ClamAV dependencies, and a suitable isolated lab is not verified. The investigation therefore uses the available exact-revision upstream CI evidence and skips the corresponding local execution paths rather than blocking all Phase 7 work. Any further local execution must have an appropriate execution basis and environment; this does not invalidate or erase the CI evidence already collected.
 
