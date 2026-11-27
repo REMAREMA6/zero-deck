@@ -1,4 +1,5 @@
 name: Phase 7 — Pinned Prior-Art Runtime Tests
+# Owner-authorized scoped test run; see the Phase 7 authorization record.
 
 on:
   push:
