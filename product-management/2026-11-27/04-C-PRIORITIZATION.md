@@ -58,7 +58,7 @@ Why it ranks first:
 3. It maps to the approved link-check capability without assuming a full-site audit.
 4. It offers a specific demand hypothesis that can be tested through recent-behaviour interviews and a real workflow test.
 
-**Important constraint:** link checking is available only when both Pro entitlement and the owner-controlled activation switch are true. No provider/API call may occur if either gate is false. The need's high priority does not authorize enabling the capability, selecting a provider, relaxing the gates or making it free. The gating model may reduce how many users can experience this value and must be included in later viability evaluation.
+**Important constraint:** link checking is available only when both Pro entitlement and the owner-controlled activation switch are true. No provider/API call may occur if either gate is false. The need's priority does not authorize enabling the capability, selecting a provider, relaxing the gates or making it free. Because the owner intends to keep the switch off until paid-user revenue can fund operating/API costs, this need may not be testable at the initial launch. If the gate remains off, do not interpret zero link-check usage as evidence of absent demand; choose a separately approved, currently enabled MVP workflow for launch validation.
 
 ## 4. Practitioner comparison
 
