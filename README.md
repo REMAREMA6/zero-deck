@@ -21,6 +21,7 @@ Agent definitions (identities, skills, frameworks, and mental models) are intent
   - [Phase 2 candidate capability inventory](re/zerodek-product-re/2026-11-27/CAPABILITY-INVENTORY.md).
   - [Phase 2 capability-to-15-facet mapping](re/zerodek-product-re/2026-11-27/CAPABILITY-FACET-MAPPING.md).
   - [Owner-approved MVP scope decision](re/zerodek-product-re/2026-11-27/MVP-SCOPE-DECISION.md).
+  - [Phase 3 prior-art audit and source-selection register](re/zerodek-product-re/2026-11-27/PHASE-3-PRIOR-ART-REGISTER.md).
   - [Reference repository audit](re/zerodek-product-re/2026-11-27/REPOSITORY-AUDIT.md).
 - `re/oss-recon/` — earlier reconnaissance records. These were created for a separate Android Security Scanner engagement and must be audited before any content is reused for ZeroDeck.
 - `product-management/` — product-management agent workspace and its own records.
