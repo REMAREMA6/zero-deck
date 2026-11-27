@@ -3,8 +3,8 @@
 **Project:** Zerodek reverse engineering  
 **Repository:** REMAREMA6/zero-deck  
 **Last updated:** 2026-11-27  
-**Current phase:** Phase 1 — Mockup inventory  
-**Overall status:** Phase 0 governance and handoff setup is complete. Phase 1 repository audit is underway. The reference repository contains Android Security Scanner materials. The owner has clarified that Security Scanning is one candidate service/capability within the broader ZeroDeck ethical-hacking and penetration-testing startup, not the definition of the startup.
+**Current phase:** Phase 2 — Capability and facet mapping (next)  
+**Overall status:** Phase 0 governance and Phase 1 screen inventory are complete. ZeroDeck is the broader ethical-hacking and penetration-testing startup; Security Scanning is one candidate capability, not the startup definition or automatic launch scope.
 
 > This is the persistent progress and handoff record. Update it whenever work starts, changes status, becomes blocked, or is completed. A new chat must be able to resume from this file and the linked repository records without depending on private chat history.
 
@@ -18,19 +18,19 @@
 
 ## Current position
 
-- **Current phase:** Phase 1 — Mockup inventory
-- **Current task:** Inventory the canonical 17 screens and map each to its reference assets, handoff documents, routes, and implementation components. Classify scanner-related findings as one capability area and do not equate them with the full startup or assume all are MVP scope.
-- **Completed:** Re-read this project's governance and current tracker/plan/contribution guide; inspected the reference repository metadata, complete recursive tree (284 paths), route/component counts, `package.json`, Prisma schema, sample route files, and scanner-specific handoff/product-decision documents. Recorded findings in `REPOSITORY-AUDIT.md`. Owner clarified ZeroDeck's broader startup identity and the scanner materials' place within it; recorded in `ENGAGEMENT-UNDERSTANDING.md`.
-- **Blockers:** No identity blocker remains. The explicit MVP capability boundary has not yet been established; do not silently treat every scanner screen or every possible penetration-testing capability as MVP scope.
-- **Next action:** Complete the evidence-based 17-screen inventory, then map candidate capabilities to the Software Rules facets and explicitly separate MVP scope from later candidates and unresolved scope decisions.
+- **Current phase:** Phase 2 — Capability and facet mapping
+- **Current task:** Derive ZeroDeck's candidate capability inventory from the screen inventory and owner context; distinguish the startup direction, candidate service areas, declared MVP selection, later candidates, and unresolved scope before mapping properties to the 15 Software Rules facets.
+- **Completed:** Phase 1 screen inventory committed at `re/zerodek-product-re/2026-11-27/SCREEN-INVENTORY.md`; all 17 baseline screens mapped to route/preview/source handoffs and assigned stable IDs. Screen 18 and two additional routes are separately recorded. Uploaded images were inspected and classified. Product scope labels are bounded to the scanner working draft; ZeroDeck's actual MVP selection remains open.
+- **Blockers:** ZeroDeck's actual MVP capability boundary is not yet explicitly selected. Do not infer it from the scanner screens or assume every ethical-hacking/penetration-testing capability is in scope.
+- **Next action:** Begin Phase 2 by building the startup-wide candidate capability inventory and recording which capabilities are confirmed for MVP, later candidates, or unresolved.
 
 ## Phase tracking
 
 | Phase | Name | Status | Notes |
 |---|---|---|---|
 | 0 | Governance and handoff | [x] Complete | Project plan, persistent tracker, contribution guide, README navigation, and resumption pattern established and verified. |
-| 1 | Repository and screen inventory | [~] In progress | Repository audit recorded; owner clarified that scanner materials are one ZeroDeck capability area, not the startup definition; proceed with screen-by-screen inventory and keep MVP scope distinct. |
-| 2 | Capability and facet mapping | [ ] Not started | Map all required capabilities/properties to the 15 Software Rules facets. |
+| 1 | Repository and screen inventory | [x] Complete | 17-screen baseline inventory and route/source mapping committed; Screen 18 and extra routes/assets recorded separately. See SCREEN-INVENTORY.md. |
+| 2 | Capability and facet mapping | [ ] Not started | Next phase: establish ZeroDeck candidate capability inventory and MVP boundary, then map required properties to the 15 Software Rules facets. |
 | 3 | Prior-art discovery and selection | [ ] Not started | Audit prior work; identify and verify relevant open-source sources. |
 | 4 | Source-level rule extraction | [ ] Not started | Inspect source code and record auditable source-derived rules. |
 | 5 | Software Rules synthesis | [ ] Not started | Create separate product-specific `software-rules/` deliverable. |
@@ -54,15 +54,15 @@
 
 ## Phase 1 — Mockup inventory
 
-[~] In progress — preliminary repository audit completed; product identity confirmation pending.
+[x] Complete — 17-screen baseline inventory, route/source mapping, asset review, scope labels, and limitations recorded.
 
-Audit: `re/zerodek-product-re/2026-11-27/REPOSITORY-AUDIT.md`.
+Audit: `re/zerodek-product-re/2026-11-27/REPOSITORY-AUDIT.md`. Inventory: `re/zerodek-product-re/2026-11-27/SCREEN-INVENTORY.md`.
 
-The reference repository contains 19 route page files and 19 named screen components, plus scanner-specific product decisions, handoff documents, and a separate Expo source tree. Owner clarification: these materials concern a Security Scanner capability within the broader ZeroDeck ethical-hacking/penetration-testing startup. They do not define the startup or establish MVP scope. Inventory the canonical 17 screens and distinguish mockup intent, source implementation, demo/local state, connected behaviour, later candidates, MVP status, and unknowns.
+The inspected tree contains 20 Next.js page files (19 named subroutes plus the root welcome route), 19 named Screen.tsx components, 20 Preview components, scanner product decisions, screen handoffs, and a separate Expo source tree. The canonical first 17 numbered screens are inventoried. Screen 18 (System Health/Audit Logs) and two extra routes (Real-Time Protection and Privacy Audit) are separately recorded. The scanner working draft's MVP labels are not treated as ZeroDeck startup MVP approval.
 
 ## Phase 2 — Capability and facet mapping
 
-Not started.
+Not started. Next: derive the ZeroDeck-wide candidate capability inventory and establish the explicit MVP boundary before mapping to the 15 Software Rules facets.
 
 Use the 15 Software Rules facets as the investigation taxonomy. The six labels UI, Data, Business logic, Functionality, UX, and System are not a parallel taxonomy for this engagement.
 
