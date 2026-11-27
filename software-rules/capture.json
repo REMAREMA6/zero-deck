@@ -692,9 +692,9 @@
         "facet": "persistence",
         "subject": "quarantine-and-disposition",
         "dimension": "persistence-required-properties",
-        "requirement": "optional",
+        "requirement": "required",
         "status": "unknown",
-        "rationale": "Applicability depends on the actual implementation boundary or architecture. No ZeroDeck runtime evidence currently establishes whether this facet is used; do not treat it as absent."
+        "rationale": "A reproducible quarantine/disposition workflow necessarily has an artifact lifecycle whose storage and durability properties must be established. The actual storage mechanism and guarantees remain unknown."
       },
       {
         "propertyId": "MVP-02-API",
