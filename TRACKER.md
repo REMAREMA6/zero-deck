@@ -12,8 +12,9 @@
 **Phase 4 facet audit blob:** 3b32ea7b60d90c30b1511a2e878a411cacc3a648  
 **Phase 4 plan closeout blob:** 71c734f9283e03d32263f75cbc9e46014e1e7e03  
 **Phase 7 corrected decision commit:** 6cc99584682becef61dbb7d728d604c24d884b1b  
-**Current phase:** Phase 7 — final planned phase; bounded reference-runtime investigation complete (2026-11-27)  
-**Overall status:** Phase 7 is the final planned phase and its bounded reference-runtime investigation is complete. The three owner-authorized executable prior-art targets were exercised at exact pinned revisions; remaining paths have explicit evidence/skip dispositions. The Software Rules capture now registers the reference evidence as supporting context but retains zero ZeroDeck runtime observations/rules. The product-specific capture remains incomplete and not replication-sufficient because required product properties/owner decisions remain open in `software-rules/OPEN-PROPERTIES.md`. A first-party ZeroDeck runtime is not required to complete this reverse-engineering specification. No Phase 8 is planned. The owner authorization remains scoped to the three pinned targets; the consult-first default remains for other actions.
+**Agent assignment:** CLOSED — outgoing reverse-engineering agent work complete; successor handoff recorded in re/zerodek-product-re/2026-11-27/RE-AGENT-FINAL-CLOSEOUT.md.  
+**Current phase:** No active phase for the outgoing agent; Phases 0–7 closed.  
+**Overall status:** The outgoing reverse-engineering agent assignment is CLOSED. All seven planned phases, including final Phase 7, are complete. This is an agent/plan closeout, not a claim that the Software Rules capture is complete: required properties and owner decisions remain in software-rules/OPEN-PROPERTIES.md, and the capture remains incomplete and not replication-sufficient. Those remaining items are explicitly handed to the successor agent. No Phase 8 is planned.
 
 > This is the persistent progress and handoff record. Update it whenever work starts, changes status, becomes blocked, or is completed. A new chat must be able to resume from this file and the linked repository records without depending on private chat history.
 
@@ -27,7 +28,9 @@
 
 ## Current position
 
-- **Current phase:** Phase 7 — final planned phase; bounded reference-runtime investigation complete (2026-11-27).
+- **Outgoing agent status:** [x] CLOSED — assignment complete; final handoff: re/zerodek-product-re/2026-11-27/RE-AGENT-FINAL-CLOSEOUT.md.
+- **Successor status:** Not yet started in this tracker; successor must take ownership of the open Software Rules properties.
+- **Current phase:** No active phase for the outgoing agent. Phases 0–7 are closed.
 - **Owner authorization:** The owner explicitly authorized ordinary inspection/build/test work for the three exact-pinned open-source targets. Rationale and scope are recorded in `re/zerodek-product-re/2026-11-27/OWNER-AUTHORIZATION-PHASE-7-OPEN-SOURCE-TESTING.md`. This is a scoped exception; the absolute consult-first default remains for all unlisted targets/actions.
 - **Runner smoke:** First-party Playwright smoke passed three times: [#46026033625](https://github.com/REMAREMA6/zero-deck/actions/runs/46026033625), [#46026203672](https://github.com/REMAREMA6/zero-deck/actions/runs/46026203672), [#46026419660](https://github.com/REMAREMA6/zero-deck/actions/runs/46026419660).
 - **Hypatia:** [Run #46034540816](https://github.com/REMAREMA6/zero-deck/actions/runs/46034540816) successfully completed Gradle lint/build and produced a debug APK at the pinned SHA. The unit-test task was `NO-SOURCE`; a full 354-entry source-tree audit found no test source files. Lint report includes one Error-severity finding and warnings; see `PHASE-7-RENEWED-ACTIONS-RESULTS.md`.
@@ -164,3 +167,13 @@ At the end of every work session:
 - [x] Record all unavailable paths and reasons, and complete the renewed closeout audit.
 
 **Current status:** Phase 7 is complete for its bounded reference-runtime scope. The ZeroDeck-specific Software Rules capture remains incomplete because required product properties and owner decisions remain open. First-party ZeroDeck runtime capture and live provider calls are not Phase 7 prerequisites.
+
+## Final agent closeout — 2026-11-27
+
+- [x] Close the outgoing reverse-engineering agent assignment after completing all seven planned phases.
+- [x] Record Phase 7 as the final phase; no Phase 8 is planned.
+- [x] Preserve the distinction between completed agent work and incomplete Software Rules capture.
+- [x] Hand unresolved required properties and owner decisions to the successor through software-rules/OPEN-PROPERTIES.md.
+- [x] Create the successor handoff record at re/zerodek-product-re/2026-11-27/RE-AGENT-FINAL-CLOSEOUT.md.
+
+**Closeout decision:** The outgoing agent is done and its assignment is closed. The next agent owns continuation of the Software Rules capture from the existing records. Do not reopen Phase 7 or create Phase 8.
