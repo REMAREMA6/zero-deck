@@ -159,7 +159,7 @@ A dedicated workstream is recorded in [2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.m
 
 The PM contract profile is complete and maintained in [product-rules/PROFILE.md](product-rules/PROFILE.md); its fixture checks are recorded in [product-rules/VALIDATION-REPORT.md](product-rules/VALIDATION-REPORT.md). It maps requirements to the existing Software Rules `declaredContracts[]` record, identifies the issuer explicitly, and supplies a PM-specific extension schema plus a complete declared-contract profile schema. It does not introduce a new evidence class or modify the Software Rules repository.
 
-The workstream covers authentication as supporting infrastructure, then manual file analysis, quarantine/disposition, website/link checking and cross-cutting system requirements. It maps requirements to relevant Software Rules facets, preserves unknowns, and defines observable acceptance criteria. Phase 1 is complete; Phase 2 (authentication requirements) is next. This work does not approve implementation architecture.
+The workstream covers authentication as supporting infrastructure, then manual file analysis, quarantine/disposition, website/link checking and cross-cutting system requirements. It maps requirements to relevant Software Rules facets, preserves unknowns, and defines observable acceptance criteria. Phases 1–2 are complete. The authentication/account contract is drafted, structurally cross-checked and retained with evidence; Phase 3 (authentication coverage validation) is next. The contract remains PM-proposed and awaits owner review. This work does not approve implementation architecture.
 
 ## 6. Product blueprint expected at completion
 
