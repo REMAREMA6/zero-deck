@@ -914,7 +914,9 @@
             {
               "basisType": "owner-decision",
               "description": "Given a client alters a local role, Pro flag or activation flag, when it requests a protected operation, then the trusted service applies current server-side state and denies unauthorized actions.",
-              "refs": []
+              "refs": [
+                "https://github.com/REMAREMA6/zero-deck/blob/main/product-management/TRACKER.md"
+              ]
             }
           ],
           "acceptanceCriteria": [
@@ -959,7 +961,9 @@
             {
               "basisType": "owner-decision",
               "description": "Given one account authenticates on web and Android, when account-scoped resources are accessed, then both sessions resolve to the same principal and current account policy.",
-              "refs": []
+              "refs": [
+                "https://github.com/REMAREMA6/zero-deck/blob/main/product-management/TRACKER.md"
+              ]
             }
           ],
           "acceptanceCriteria": [
