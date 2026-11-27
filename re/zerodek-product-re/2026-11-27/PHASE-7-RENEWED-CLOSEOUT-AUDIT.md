@@ -20,9 +20,9 @@ The owner deliberately made the RE-agent ownership rule absolute as a consult-fi
 |---|---|---|
 | Exact target revisions pinned and authorized | Satisfied | Owner authorization record; Phase 3 register |
 | GitHub Actions runner mechanism proven | Satisfied | Three Playwright runner smoke runs and artifacts |
-| Hypatia target build/test path executed | Satisfied with limits | Run #46029241394; APK/lint artifact inspected |
-| HypatiaDatabases generator path executed without external feed/publication side effects | Satisfied | Run #46029241394; deterministic fixture log and Bloom outputs inspected |
-| ClamAV target build and test path executed | Satisfied | Run #46028645716; CTest and Python test artifact inspected |
+| Hypatia target build/test path executed | Satisfied with limits | Run #46034540816 (repeat of #46029241394); APK/lint artifact inspected; no test sources exist |
+| HypatiaDatabases generator path executed without external feed/publication side effects | Satisfied | Run #46034540816; valid, malformed-input and exclusion fixtures passed; job log and primary Bloom outputs inspected |
+| ClamAV target build and test path executed | Satisfied | Run #46029241394; CTest 15/15 targets and Python test artifact inspected |
 | Logs/artifacts inspected, not just green statuses | Satisfied | `PHASE-7-RENEWED-ACTIONS-RESULTS.md` |
 | All 15 facets mapped with evidence limits | Satisfied | Updated `PHASE-7-RUNTIME-OBSERVATION-MAP.md` |
 | All seven ZeroDeck MVP scenarios retain explicit evidence/skip dispositions | Satisfied | Scenario table in runtime observation map |
@@ -33,7 +33,7 @@ The owner deliberately made the RE-agent ownership rule absolute as a consult-fi
 
 ### Hypatia
 - Gradle lint/build/debug APK packaging succeeded.
-- Unit test task was `NO-SOURCE`; no unit tests ran.
+- Unit test task was `NO-SOURCE`; no unit tests ran. A full 354-entry pinned source-tree audit found no test source directories or test-named Kotlin/Java test files.
 - Lint report contains one Error-severity issue and additional warnings. The project allows lint errors without failing the Gradle task.
 - No emulator launch, real file scan, database update or quarantine action was performed. The pinned app's unit-test source set is empty; app-level runtime behaviour is not inferred from a successful APK build.
 - Direct HTTP checksum diagnostic differed from the pinned verification metadata, but Gradle's actual build succeeded. This discrepancy remains unresolved and was not bypassed.
@@ -41,15 +41,17 @@ The owner deliberately made the RE-agent ownership rule absolute as a consult-fi
 ### HypatiaDatabases
 - Maven package succeeded; no Maven test sources were present.
 - The actual generator ran against deterministic harmless fixtures and accepted three hashes and one domain, with zero invalid lines.
-- Four Bloom-filter files were generated and checked non-empty.
+- Follow-up deterministic fixtures confirmed two malformed hashes are rejected (0 valid / 2 invalid) and an excluded valid MD5 is skipped before counting (0 valid / 0 invalid). Both branches passed output assertions in run #46034540816.
+- A full 36-entry pinned source-tree audit found no `src/test` directory or test source files. The additional cases are investigation-owned fixture tests, not upstream unit tests.
+- Four Bloom-filter files were generated and checked non-empty for the valid fixture.
 - Live-feed ingestion, signed-pack generation, signing, branch publication and deployment were deliberately not run because they introduce external inputs or publication side effects outside this bounded test.
 
 ### ClamAV
 - CMake configure/build succeeded.
-- CTest passed 9/9 test targets, 0 failed.
-- Retained Python suite log reports 201 passed and 2 skipped across clamscan, clamd, freshclam and sigtool groups.
+- CTest passed 15/15 test targets, 0 failed (781.68 seconds).
+- Retained `LastTest.log` reports 416 passed and 2 skipped across 11 pytest invocations, including Valgrind variants. The 416 includes reruns and is not a count of unique test cases.
 - This includes reference-project scan/update/signature and quarantine-related test cases. No malware sample was executed by this investigation.
-- A duplicate follow-up run was still in progress at the time of audit; it is not needed to support the result because run #46028645716 completed and its logs/artifacts were inspected.
+- A duplicate follow-up run was still in progress at the time of audit; it is not needed to support the result because run #46029241394 completed and its logs/artifacts were inspected.
 
 ## 4. Explicit skips
 
