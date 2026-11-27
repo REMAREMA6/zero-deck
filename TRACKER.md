@@ -28,8 +28,8 @@
 
 | Phase | Name | Status | Notes |
 |---|---|---|---|
-| 0 | Governance and handoff | [~] In progress | Adopt Software Rules contribution/resumption pattern; create project plan, tracker, guide, and README links. |
-| 1 | Mockup inventory | [ ] Not started | Inspect all 17 screens and record evidence. |
+| 0 | Governance and handoff | [x] Complete | Project plan, persistent tracker, contribution guide, README navigation, and resumption pattern established and verified. |
+| 1 | Mockup inventory | [~] In progress | Enumerate repository assets and inspect all 17 screens. |
 | 2 | Capability and facet mapping | [ ] Not started | Map all required capabilities/properties to the 15 Software Rules facets. |
 | 3 | Prior-art discovery and selection | [ ] Not started | Audit prior work; identify and verify relevant open-source sources. |
 | 4 | Source-level rule extraction | [ ] Not started | Inspect source code and record auditable source-derived rules. |
@@ -44,13 +44,13 @@
 - [x] Read Software Rules core model and replication-completeness rule.
 - [x] Read this project's `RULES.md` and `re/MISSION.md`.
 - [x] Read the Zerodek engagement understanding.
-- [ ] Create this project's `PLAN.md`.
-- [ ] Create this project's `TRACKER.md`.
-- [ ] Create this project's `CONTRIBUTING.md`.
-- [ ] Update root `README.md` with navigation to governance and active RE workspace.
-- [ ] Verify all files and links on GitHub.
+- [x] Create this project's `PLAN.md`.
+- [x] Create this project's `TRACKER.md`.
+- [x] Create this project's `CONTRIBUTING.md`.
+- [x] Update root `README.md` with navigation to governance and active RE workspace.
+- [x] Verify all files and links on GitHub.
 
-**Phase 0 exit gate:** a new chat can find the mission, current status, active task, blockers, next action, contribution process, and relevant source documents by following repository links.
+**Phase 0 exit gate: satisfied.** A new chat can find the mission, current status, active task, blockers, next action, contribution process, and relevant source documents by following repository links.
 
 ## Phase 1 — Mockup inventory
 
