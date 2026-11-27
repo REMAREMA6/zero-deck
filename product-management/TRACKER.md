@@ -25,9 +25,9 @@
 - **Current step:** Post-CIRCLES blueprint synthesis (supporting work; not an eighth CIRCLES step).
 - **Current product scope authority:** Owner-approved three-capability MVP (manual file security analysis; quarantine/file disposition; website/link checking subject to Pro entitlement AND owner activation).
 - **Current product evidence status:** ZeroDeck-specific Software Rules remains Draft, incomplete and not replication-sufficient. Product planning must preserve unknowns.
-- **Primary business outcome:** Validate real market demand, per the owner's clarification on 2026-11-27. No final owner-approved target cohort has been selected. Segment B is provisionally recommended for needs discovery; practitioner and business/licensed segments remain alternatives.
-- **I — Identify result:** Three candidate segments were compared. Segment B (non-technical individuals who regularly receive/download unfamiliar files and links) is recommended as a provisional cohort for needs discovery, not an owner-approved target market. Segment A (security practitioners) and Segment C (businesses/licensed organisations) remain alternatives.
-- **Next action:** Independently review blueprint traceability and gaps; obtain primary customer evidence when participants/market are defined; resolve owner decisions without guessing. Critical sequencing dependency: MVP-03 link checking cannot be used for demand validation while the owner switch remains off. If it is off at initial launch, a separate enabled MVP workflow must be selected for launch validation; zero link-check usage is not evidence of no demand.
+- **Primary business outcome:** Build a simple, inexpensive first product/proof for everyday non-technical users, then learn from showing it to people and expand to technical users/businesses as the product matures. The owner selected everyday non-technical users as the first target audience on 2026-11-27. Formal large-scale interviews/recruitment are not feasible at this stage; use a tangible demonstrable product to elicit grounded reactions.
+- **I — Identify result:** Three candidate segments were compared. Everyday non-technical users are now the owner-selected first target audience. Technical users and businesses remain later expansion audiences, not the initial target.
+- **Next action:** Complete a security-first platform/integration assessment for web + Android, compare the minimum viable stack and data-storage boundaries, then present recommendations and trade-offs to the owner. Do not ask the owner to research technical choices. MVP-03 remains subject to Pro entitlement AND owner activation; no provider call if either gate is false.
 
 ## CIRCLES progress
 
@@ -77,16 +77,25 @@ These are supporting research streams within CIRCLES, not additional method step
 | ID | Question / decision | Current status | Consequence |
 |---|---|---|---|
 | PM-OPEN-001 | Primary business outcome for first MVP | [x] Resolved: validate real market demand, per owner's stated view | Success-measure approach is recorded; exact metric/threshold follows I/R |
-| PM-OPEN-002 | Primary customer cohort for initial release | [ ] To be evaluated in Identify | Determines product experience and positioning |
+| PM-OPEN-002 | Primary customer cohort for initial release | [x] Resolved: everyday non-technical users first; technical users/businesses are later expansion audiences | Product experience and positioning should optimise for non-technical comprehension and low friction first |
 | PM-OPEN-003 | Launch geography/distribution market | [ ] Unknown | Affects customer evidence, legal/app-store research and go-to-market |
-| PM-OPEN-004 | Product boundary/platform beyond the current scanner MVP | [ ] Unknown | Avoids assuming Android-only or prematurely expanding platform scope |
+| PM-OPEN-004 | Product platform | [x] Resolved: web application + Android application; same product, platform-specific capability differences allowed | Define platform-specific capabilities honestly; browser limitations must not be represented as native Android parity |
 | PM-OPEN-005 | Commercial model details beyond Pro-gated link checking | [ ] Unknown | Affects packaging, entitlements, cost and activation policy |
 | PM-OPEN-006 | Final link intelligence provider and activation economics | [ ] Unknown | Blocks activation of paid API checking, not MVP planning |
 | PM-OPEN-007 | File-analysis engine/licensing and final detection approach | [ ] Unknown | Affects coverage, offline operation, privacy and costs |
 | PM-OPEN-008 | Whether optional remote analysis is ever permitted | [ ] Unknown | Affects privacy promise, architecture boundary and cost |
-| PM-OPEN-009 | Product accounts/backend/data persistence needs | [ ] Unknown | Must be justified by workflows; no system component assumed |
+| PM-OPEN-009 | Product accounts/backend/data persistence needs | [~] Architecture assessment in progress | Justify the smallest secure backend and identity model; no cloud file storage assumed |
 | PM-OPEN-010 | Retention and quarantine lifecycle policy | [ ] Unknown | Affects trust, recovery, storage and support obligations |
 | PM-OPEN-011 | Initial launch validation workflow if MVP-03 remains locked pending revenue funding | [?] Needs owner decision | Link-check demand cannot be measured while the owner activation switch is off; a separate enabled MVP workflow must be chosen for the first launch test. |
+
+## Working agreement: recommendation-led product management
+
+- The product manager leads research and deliberation, makes a reasoned recommendation, explains trade-offs in plain language, and then invites the owner's opinion.
+- Do not expect the owner to know technical/product-management terminology or to research infrastructure choices independently.
+- Ask only for genuine owner decisions; do not use long questionnaires to transfer the analysis burden to the owner.
+- The owner has final authority and may accept, reject or revise recommendations.
+- Keep the first version simple and inexpensive. The owner prefers a tangible proof/demo that can be shown to people over expensive formal research and recruitment at this stage.
+- For security-sensitive decisions, explicitly analyse data exposure, permissions, encryption, key management, retention, deletion, failure modes and operating burden before recommending a service.
 
 ## Historical records and authority notes
 
@@ -112,4 +121,5 @@ These are supporting research streams within CIRCLES, not additional method step
 | 2026-11-27 | Researched file-analysis limits and prior art, Android SAF/storage/Keystore constraints, quarantine lifecycle risks, Web Risk pricing, URLhaus commercial terms, VirusTotal API/private-scanning distinctions and ClamAV licensing/platform limits. Created `2026-11-27/08-RESEARCH-FILE-QUARANTINE-LINK.md`. | First secondary-research pass recorded for the three MVP capabilities. No engine/provider/architecture selected; platform, retention, supported formats, detection criteria and customer needs remain open. |
 | 2026-11-27 | Created `PRODUCT-BLUEPRINT-DRAFT.md` with scope, owner decisions, customer needs, workflows, state/failure branches, trust requirements, possible system boundaries, conceptual data, metrics, risk register and a 15-facet crosswalk. | Blueprint is a structured draft, not an approved PRD or architecture. Primary validation, owner decisions, full property traceability and independent review remain open. |
 | 2026-11-27 | Added OWASP MASTG practitioner-methodology evidence to the Identify and technical research records. Independent review found an important launch-sequencing dependency: MVP-03 cannot be tested while the owner switch remains off pending paid-user revenue. Updated prioritization, recommendation and blueprint to make the link-check test conditional and added PM-OPEN-011. | No provider gate was bypassed. If MVP-03 remains locked at initial launch, a separate enabled MVP workflow must be selected for initial demand validation; disabled usage cannot be interpreted as lack of demand. |
-| 2026-11-27 | Added a dated, self-selected Reddit discussion as a low-confidence lead about modified/sideloaded APK scanning; updated R and the blueprint with explicit limitations. Prepared `2026-11-27/09-PRIMARY-RESEARCH-PROTOCOL.md` with segment screeners, behavioural interview guide, evidence-capture template, analysis rules and validation guardrails. | Ready for owner review. No participants recruited or interviewed; cohort and geography remain unselected. |
+| 2026-11-27 | Added a dated, self-selected Reddit discussion as a low-confidence lead about modified/sideloaded APK scanning; updated R and the blueprint with explicit limitations. Prepared `2026-11-27/09-PRIMARY-RESEARCH-PROTOCOL.md`. | No participants recruited or interviewed. Formal recruitment is not the immediate validation path. |
+| 2026-11-27 | Owner selected everyday non-technical users as the first target audience, confirmed both web and Android platforms, and set the working relationship: product manager researches, deliberates and recommends first; owner then gives an opinion and retains final authority. Owner prioritises a simple, inexpensive tangible proof/demo over costly formal research. | Updated target audience, platform scope and working agreement. Platform/integration assessment is now the next supporting workstream. |
