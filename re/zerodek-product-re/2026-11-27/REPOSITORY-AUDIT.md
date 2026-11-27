@@ -5,7 +5,7 @@
 **Reference repository:** https://github.com/lordwhitefire/Zerodek  
 **Branch:** `main`  
 **Inspected tree revision:** `86908bff1aa1bbf85a231ba0d47b8fe9fff148c6`  
-**Status:** Preliminary inventory; owner clarification received. Scanner materials are treated as one capability area within ZeroDeck, not as the startup definition or automatic MVP scope.
+**Status:** Repository audit and Phase 1 screen inventory complete for the 17-screen baseline. Owner clarification received: scanner materials are one capability area within ZeroDeck, not the startup definition or automatic MVP scope.
 
 ## 1. Repository-level facts
 
