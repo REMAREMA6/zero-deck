@@ -1,6 +1,6 @@
 # Phase 6 — Completeness and conformance audit
 
-**Status:** IN PROGRESS — independent completeness review underway  
+**Status:** COMPLETE — bounded completeness/conformance review; product capture remains incomplete  
 **Assessment date:** 2026-11-27  
 **Declared replication scope:** `ZERODECK-MVP-001`  
 **Governing specification:** Software Rules 0.3.0 Draft; schema 0.2.0 Draft  
@@ -65,6 +65,30 @@ MVP-QUAR-002 remains without Configuration because it is the non-destructive rev
 Messaging and Background Processing are not assigned to any current MVP scenario. The governing specification explicitly says facets are observation perspectives and not every system uses every facet. Their current status remains **conditional/unresolved**, not absent and not excluded. The actual target boundary and execution architecture must establish whether queue delivery, event messaging, workers, scheduling or deferred processing exist.
 
 The other optional capability-level facets (for example API, Persistence, Integrations and Identity/Authentication where conditional) must likewise remain unresolved until the actual architecture and observed interactions establish applicability. Scenario-level API/Integrations entries are now explicitly conditional where the capability-level register says so. An optional status is not evidence of non-existence.
+
+### 3.4 Independent 15-facet completeness matrix
+
+The governing semantic dimension counts below were cross-checked against the 15 current facet specifications and the ZeroDeck payload mapping. Every assigned scenario/facet pair has the full corresponding semantic dimension set; the programmatic reconciliation found no dimension-count mismatches. Applicability is based on the capability-level register, not on the existence of a source component.
+
+| Facet | Semantic dimensions | Capability applicability | Scenario coverage / disposition | Evidence and remaining gap |
+|---|---:|---|---|---|
+| Interface | 13 | Required for all three capabilities | All seven scenarios | SCR-02–SCR-09 mapped; source review is partial. No runtime hierarchy, computed styles, exact rendered geometry, complete states, accessibility tree or viewport capture. |
+| Behaviour | 12 | Required for all three | All seven scenarios | Scenario definitions exist, but actor/preconditions/inputs/ordered actions/stop criteria are incomplete and no execution is recorded. |
+| Business Rules | 11 | Required for all three | FILE-002; QUAR-001–003; LINK-001–002 | Owner gate rules are declared; file verdict criteria, thresholds, confidence, and many branch decisions remain unresolved. |
+| Data | 12 | Required for all three | All seven scenarios | Actual runtime schemas, field values, nullability, transformations, validation and serialization are unknown. |
+| Persistence | 12 | Required for quarantine; conditional for file analysis and link checking | QUAR-001 and QUAR-003 | Working-draft quarantine storage/retention statements are not runtime proof; no durable state or transaction was observed. |
+| API | 13 | Conditional for all capabilities | LINK-001 and LINK-002 dimensions retained as conditional | No provider/API has been selected or observed. Do not assume a request/response integration exists. |
+| Messaging | 12 | Conditional for all capabilities | No scenario assigned | Applicability unresolved. No queue, topic, message or delivery guarantee is assumed. |
+| Identity and Authentication | 10 | Required for link checking; conditional for file/quarantine | LINK-001 | Pro entitlement requires a principal, but identity source, authentication mechanism, lifecycle and enforcement are unknown. |
+| Authorization and Permissions | 10 | Required for all three | FILE-001; QUAR-001–003; LINK-001 | Permission/entitlement decisions and enforcement points are not runtime-observed. |
+| Security Controls | 10 | Required for all three | All seven scenarios | No ZeroDeck threat model, authorized runtime control test, detection/block result or telemetry evidence exists. |
+| Background Processing | 15 | Conditional for all capabilities | No scenario assigned | Applicability unresolved. No worker, scheduler, background job or deferred execution is assumed. |
+| Errors and Recovery | 11 | Required for all three | All seven scenarios | Failure branches are named, but actual error mapping, propagation, retry, compensation and recovery state are unknown. |
+| Integrations | 11 | Conditional for all capabilities | QUAR-001 and LINK-001–002 dimensions retained as conditional | Platform/provider boundaries are not selected or observed; no production integration is approved. |
+| Configuration | 9 | Required for all three | FILE-001; QUAR-001 and QUAR-003; LINK-001–002 | Missing quarantine coverage was corrected. Effective values, precedence, activation/reload behaviour and observed effects remain unknown. |
+| Performance and Resource Behaviour | 14 | Required for all three | FILE-001; QUAR-001 and QUAR-003; LINK-001–002 | No workload, latency, throughput, memory/CPU, device baseline, target or measurement exists. |
+
+All 15 semantic facet payloads are represented in the mapping. The two facets without scenario assignments (Messaging and Background Processing) remain conditional and unresolved, not absent or excluded. Conditional API/Integrations dimensions remain present in the inventory but are not treated as required until target architecture evidence establishes applicability.
 
 ## 4. Scenario-definition completeness
 
@@ -154,8 +178,17 @@ No unknown has been converted to a default or marked not-applicable without evid
 
 ## 9. Phase 6 exit disposition
 
-The independent completeness review is still in progress. The interface source review is now pinned and linked, but its source-derived design extraction remains partial. The final Phase 6 disposition will be one of:
-- Exit gate satisfied with an explicitly incomplete, bounded deliverable and all remaining gaps retained; or
-- Phase 6 remains open if property inventory omissions or traceability defects remain uncorrected.
+<badge>Exit gate satisfied — bounded assessment only</badge>
 
-Under no outcome may this product be labelled replication-sufficient until all applicable required properties have adequate evidence and conformance has been demonstrated.
+Phase 6 review is complete as a bounded completeness/conformance assessment. The exit gate is satisfied under the plan's explicit incomplete-deliverable branch:
+- All 15 facets and their semantic dimension sets were reviewed against the declared three-capability MVP.
+- The missing quarantine Configuration facet was added to the appropriate scenarios and its nine dimensions added to each.
+- Conditional API/Integrations dimensions were corrected from required to optional/unknown where capability-level applicability was conditional.
+- The 775-entry property inventory now has 700 required and 75 optional entries; all unknown/not-observed states remain explicit.
+- Scenario-definition and interface-source limitations are recorded in the scenario catalogue, open-property register, and linked Phase 6 source review.
+- Governing schema, completeness, cross-record integrity and ZeroDeck reference validation passed after the inventory corrections in [CI run #46000308895](https://github.com/REMAREMA6/zero-deck/actions/runs/46000308895).
+- All known remaining unknowns, conflicts and evidence gaps are retained; no values were invented and no conditional facet was treated as absent.
+
+**Product result:** the ZeroDeck Software Rules deliverable remains **INCOMPLETE and NOT REPLICATION-SUFFICIENT**. There is no deployed target/build, no scenario executions or runtime observations, no runtime rules, no ZeroDeck source-derived rules, no selected production link provider, and no independent replica/comparison. Exact interface replication and actual backend/security/persistence/performance conformance have not been established.
+
+This closes Phase 6's review and reporting task only. It does not complete the ZeroDeck product specification or authorize a faithful-replication claim. Further work requires authorized target/runtime evidence and resolution of the open product decisions in `OPEN-PROPERTIES.md`.
