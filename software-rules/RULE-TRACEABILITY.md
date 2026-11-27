@@ -90,3 +90,11 @@ Every new ZeroDeck rule must identify an owner decision, product-material artifa
 | EVD-RT-REF-001 | `re/zerodek-product-re/2026-11-27/PHASE-7-RUNTIME-OBSERVATION-MAP.md` | Runtime-observed behaviour of pinned reference projects in upstream CI | Contextual evidence only. It records Hypatia CI completion, HypatiaDatabases generation/feed/publication outcomes, and ClamAV verification/signature/callback tests. No ZeroDeck rule is traced to this record because the executions were not ZeroDeck runtime and no owner decision adopts those reference behaviours. |
 
 The Phase 7 evidence does not change the adopted owner-declared or product-material rule rows above. The ZeroDeck capture therefore retains zero runtime observations and zero runtime-derived ZeroDeck rules. The reference evidence remains in the RE workspace; this register points to it without copying raw logs or promoting reference implementation details into requirements.
+
+## 7. Renewed Phase 7 reference-runtime evidence — no rule promotion
+
+| Evidence ID | Evidence reference | Source class | Traceability disposition |
+|---|---|---|---|
+| EVD-RT-REF-002 | `re/zerodek-product-re/2026-11-27/PHASE-7-RENEWED-ACTIONS-RESULTS.md`; detailed observations in `PHASE-7-RUNTIME-OBSERVATION-MAP.md` | Investigation-initiated runtime/build/test evidence from pinned reference projects | Contextual only. Hypatia build/lint/APK, HypatiaDatabases deterministic fixture generator, and ClamAV CTest/Python test results remain attributed to their originating projects. No ZeroDeck product rule is traced to this evidence. |
+
+The additional evidence does not change owner-declared/product-material rule rows, does not populate `capture.json`, and does not create ZeroDeck runtime observations. In particular, ClamAV quarantine-related tests are not evidence that ZeroDeck has implemented or selected the same quarantine behaviour.
