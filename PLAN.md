@@ -86,11 +86,11 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 **Exit gate: satisfied 2026-11-27 for source-level extraction.** Every extracted rule has an evidence class, provenance and applicable facet mapping; all 15 facets were reviewed across the three approved MVP capabilities; unsupported behaviour and required unknowns are explicitly retained. This closes extraction only, not product completeness or replication sufficiency. See `PHASE-4-SOURCE-RULE-EXTRACTION.md` and `PHASE-4-15-FACET-COVERAGE-AUDIT.md`.
 
 ### Phase 5 — Software Rules synthesis
-- [ ] Read and apply the current Software Rules core model, terminology, principles, evidence/provenance, source-derived-rule requirements, and facet specifications.
-- [ ] Create the separate `software-rules/` deliverable.
-- [ ] Express rules in technology-independent terms using the required common record model and typed facet payloads.
-- [ ] Include scope, scenarios, coverage, evidence, provenance, unknowns, exclusions, and cross-facet links.
-**Exit gate:** the deliverable follows the governing format and all rules remain traceable to evidence.
+- [x] Re-read and apply the current Software Rules 0.3.0 Draft core model, terminology, principles, evidence/provenance, source-derived-rule requirements, 15 facet specifications, schema 0.2.0 Draft and versioning policy.
+- [x] Create the separate `software-rules/` deliverable with scope, owner rules, product-material workflow rules, scenarios, evidence register, open-property register and typed payload map.
+- [~] Express the three MVP capabilities in technology-independent terms using the common record model and typed facet payloads. Initial machine-readable capture created; full traceability and validation review remain.
+- [~] Include scope, seven scenarios, 15-facet coverage, evidence/provenance, unknowns, exclusions and cross-facet links. First pass exists; detailed property inventory and cross-reference audit remain.
+**Exit gate:** not yet satisfied. Complete rule/evidence traceability, schema validation and cross-facet consistency review before closing Phase 5.
 
 ### Phase 6 — Completeness and conformance
 - [ ] Review every facet applicable to the declared Zerodek scope.
