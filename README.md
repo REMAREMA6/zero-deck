@@ -29,8 +29,11 @@ Agent definitions (identities, skills, frameworks, and mental models) are intent
   - [Phase 6 completeness audit](software-rules/PHASE-6-COMPLETENESS-AUDIT.md).
   - [Phase 6 MVP interface source review](re/zerodek-product-re/2026-11-27/PHASE-6-INTERFACE-SOURCE-REVIEW.md).
   - [UI source-derived rules](re/zerodek-product-re/2026-11-27/UI-SOURCE-DERIVED-RULES.md) — 12 bounded rules extracted from pinned mockup screen source; not runtime evidence.
-  - [Phase 7 runtime investigation decision](re/zerodek-product-re/2026-11-27/RUNTIME-INVESTIGATION-DECISION.md) — corrected scope; runtime blocked at preflight pending a genuine isolated lab.
-  - [Phase 7 target preflight](re/zerodek-product-re/2026-11-27/PHASE-7-TARGET-PREFLIGHT.md) — pinned targets, build paths, external integrations, available tools and execution blockers.
+  - [Phase 7 target preflight](re/zerodek-product-re/2026-11-27/PHASE-7-TARGET-PREFLIGHT.md) — original environment, target pins and execution blockers.
+  - [GitHub Actions execution procedure](re/zerodek-product-re/2026-11-27/GITHUB-ACTIONS-EXECUTION-PROCEDURE.md) — remote runner process, Playwright, integrations, secrets, deployment and safety gates.
+  - [Phase 7 renewal target matrix](re/zerodek-product-re/2026-11-27/PHASE-7-RENEWAL-TARGET-MATRIX.md) — previously skipped targets, eligibility and current blockers.
+  - [Phase 7 runner smoke report](re/zerodek-product-re/2026-11-27/PHASE-7-RUNNER-SMOKE-REPORT.md) — three successful first-party GitHub Actions + Playwright runs with screenshot/video/trace artifacts.
+  - [Phase 7 original closeout](re/zerodek-product-re/2026-11-27/PHASE-7-CLOSEOUT-AUDIT.md) — historical record of the first bounded investigation; Phase 7 has since been reopened.
 - `re/oss-recon/` — earlier reconnaissance records. These were created for a separate Android Security Scanner engagement and must be audited before any content is reused for ZeroDeck.
 - `product-management/` — product-management agent workspace and its own records.
 
