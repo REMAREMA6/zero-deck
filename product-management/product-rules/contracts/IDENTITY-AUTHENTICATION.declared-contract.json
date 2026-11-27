@@ -144,7 +144,7 @@
         {
           "statementId": "ZD-AUTH-001",
           "requirementType": "functional",
-          "normativeKind": "conditional",
+          "normativeKind": "required",
           "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
@@ -181,7 +181,7 @@
         {
           "statementId": "ZD-AUTH-002",
           "requirementType": "data",
-          "normativeKind": "conditional",
+          "normativeKind": "required",
           "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
@@ -258,7 +258,7 @@
         {
           "statementId": "ZD-AUTH-004",
           "requirementType": "security",
-          "normativeKind": "conditional",
+          "normativeKind": "required",
           "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
@@ -296,7 +296,7 @@
         {
           "statementId": "ZD-AUTH-005",
           "requirementType": "security",
-          "normativeKind": "conditional",
+          "normativeKind": "required",
           "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
@@ -375,6 +375,9 @@
           ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-AUTH-001"
+          ],
+          "conditions": [
+            "Password authentication is offered by ZeroDeck."
           ]
         },
         {
@@ -464,7 +467,7 @@
         {
           "statementId": "ZD-AUTH-009",
           "requirementType": "functional",
-          "normativeKind": "conditional",
+          "normativeKind": "required",
           "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
@@ -629,7 +632,7 @@
         {
           "statementId": "ZD-AUTH-013",
           "requirementType": "functional",
-          "normativeKind": "conditional",
+          "normativeKind": "required",
           "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
@@ -670,7 +673,7 @@
         {
           "statementId": "ZD-AUTH-014",
           "requirementType": "security",
-          "normativeKind": "conditional",
+          "normativeKind": "required",
           "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
@@ -710,7 +713,7 @@
         {
           "statementId": "ZD-AUTH-015",
           "requirementType": "security",
-          "normativeKind": "conditional",
+          "normativeKind": "required",
           "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
@@ -789,7 +792,7 @@
         {
           "statementId": "ZD-AUTH-017",
           "requirementType": "compatibility",
-          "normativeKind": "conditional",
+          "normativeKind": "required",
           "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
@@ -827,7 +830,7 @@
         {
           "statementId": "ZD-AUTH-018",
           "requirementType": "reliability",
-          "normativeKind": "conditional",
+          "normativeKind": "required",
           "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
@@ -946,7 +949,7 @@
         {
           "statementId": "ZD-AUTH-021",
           "requirementType": "security",
-          "normativeKind": "conditional",
+          "normativeKind": "required",
           "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
