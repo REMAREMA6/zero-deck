@@ -97,7 +97,7 @@ Extracted 31 source-derived rules from pinned Hypatia/HypatiaDatabases reference
 
 [x] Complete — synthesis exit gate satisfied 2026-11-27. The deliverable contains 6 owner rules, 27 provisional product-material rules, 7 scenarios, all 15 semantic facet mappings, 757 property inventory entries, 12 evidence records and individual rule/evidence traceability. The ZeroDeck capture passed the governing Draft 2020-12 schema validator, governing completeness tests, governing cross-record integrity tests and ZeroDeck-specific reference checks in CI run #45997192513. Full audit: `software-rules/PHASE-5-SYNTHESIS-AUDIT.md`.
 
-This closes synthesis only. The machine capture has no runtime executions, observations or runtime rules; all 757 inventory entries are not observed at runtime. The product-specific Software Rules remain explicitly incomplete and not replication-sufficient. Phase 6 must independently review omissions, applicability and evidence sufficiency. Preserve source-derived, documented-contract, owner-declared and unknown evidence classes; do not alter the governing specification repository.
+This closes synthesis only. The machine capture has no runtime executions, observations or runtime rules; 712 scenario/facet/dimension entries are marked not-observed; the 45 capability/facet applicability entries retain their unknown status. No runtime observations exist. The product-specific Software Rules remain explicitly incomplete and not replication-sufficient. Phase 6 must independently review omissions, applicability and evidence sufficiency. Preserve source-derived, documented-contract, owner-declared and unknown evidence classes; do not alter the governing specification repository.
 
 ## Phase 6 — Completeness and conformance
 
