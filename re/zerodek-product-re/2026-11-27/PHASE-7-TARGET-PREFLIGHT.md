@@ -13,6 +13,7 @@ The repository-role check found:
 - GitHub reports lordwhitefire/Zerodek as a fork with parent felixik21/Zerodek.
 - Both repositories' main branches resolve to commit 86908bff1aa1bbf85a231ba0d47b8fe9fff148c6 at inspection time.
 - The owner clarified that this repository is only a limited product-intent/screen source. Its Expo screen code can support source-derived UI rules; it is not a Phase 7 runtime target.
+- GitHub repository metadata confirms lordwhitefire/Zerodek is a fork whose parent is felixik21/Zerodek. Both main branches pointed to commit 86908bff1aa1bbf85a231ba0d47b8fe9fff148c6 when checked; the inspected screen source is pinned to that shared revision.
 - REMAREMA6/zero-deck is the actual product repository being built.
 
 ## 2. Target-by-target preflight
