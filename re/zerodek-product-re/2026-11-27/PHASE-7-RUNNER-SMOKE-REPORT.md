@@ -1,7 +1,7 @@
 # Phase 7 — GitHub Actions Runner Capability Smoke Test
 
 **Date:** 2026-11-27  
-**Status:** PASS — two successful GitHub-hosted runs  
+**Status:** PASS — three successful GitHub-hosted runs  
 **Purpose:** Verify that a first-party GitHub Actions workflow can install Playwright, run headless Chromium, assert UI behaviour, and retain screenshot/video/trace artifacts. This is an infrastructure smoke test, not ZeroDeck product or prior-art evidence.
 
 ## 1. Workflow
@@ -9,7 +9,7 @@
 - File: `.github/workflows/phase7-runner-smoke.yml`
 - Trigger: push to the workflow file or manual workflow dispatch.
 - Job: `Headless browser, screenshot, video and trace`
-- Runner requested: `ubuntu-latest`
+- Final workflow runner: `ubuntu-26.04` (Runs A/B used `ubuntu-latest` before the runner label was pinned).
 - Permissions: `contents: read`
 - No external target, secrets, paid API, production system, or third-party application was used.
 - The job generated its own static HTML fixture in the ephemeral runner workspace.
@@ -53,7 +53,7 @@ All workflow steps passed. The log printed Playwright version `1.65.1` and the e
 From retained job logs:
 
 - GitHub-hosted Linux VM; runner version `2.338.2`.
-- Runner image resolved from `ubuntu-latest` to `ubuntu-26.04`, image version `20261116.202.1`.
+- Runs A/B resolved `ubuntu-latest` to `ubuntu-26.04`, image version `20261116.202.1`. Run C explicitly requested `ubuntu-26.04`; its resolved image revision is recorded in that run's log.
 - Node.js `v24.22.3`.
 - npm `11.19.1`.
 - Playwright `1.65.1` was explicitly pinned in Run C. It installed Chromium and its system dependencies. Run A's browser log identified Chrome for Testing `159.0.8154.6` (Playwright Chromium build `v1255`); each target workflow should record its exact browser/tool versions.
