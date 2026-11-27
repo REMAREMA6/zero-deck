@@ -22,7 +22,8 @@ The specification describes the properties that an independent implementation mu
 6. [Typed facet payload mapping](PAYLOAD-MAPPING.md)
 7. [Evidence and provenance register](EVIDENCE.md)
 8. [Open required properties](OPEN-PROPERTIES.md)
-9. [Machine-readable capture](capture.json)
+9. [Rule traceability register](RULE-TRACEABILITY.md)
+10. [Machine-readable capture](capture.json)
 
 ## Authority and evidence classes
 
