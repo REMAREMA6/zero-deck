@@ -32,6 +32,7 @@ At the start of Phase 6 review, the capture contained:
 - 29 capability-level required facet entries and 16 conditional/optional entries.
 - 15 facet IDs in the replication scope.
 - 13 facets assigned to at least one scenario; Messaging and Background Processing assigned to none.
+- At baseline, scenario-level API/Integrations dimensions were incorrectly marked required in link scenarios, and Integrations was marked required in the confirmed-quarantine scenario despite capability-level applicability being conditional.
 - Zero executions, zero observations, zero runtime rules, and zero ZeroDeck source-derived rules.
 - Three declared contracts and 12 evidence records.
 
@@ -49,13 +50,21 @@ Correction made in this review:
 
 The scenario/dimension inventory therefore increases by 18 entries, from 712 to **730**; the total property inventory increases from 757 to **775**. All 18 newly added dimensions remain not observed at runtime. This corrects inventory coverage; it does not establish configuration values.
 
+### 3.3 Conditional API and integration dimensions reconciled
+
+A second consistency check found that the capability-level applicability register marked API/Integrations conditional for the relevant capabilities, while the scenario-level inventory treated those dimensions as required. This overstated what the evidence establishes. Corrected the affected scenario entries:
+- MVP-QUAR-001: Integrations is conditional.
+- MVP-LINK-001 and MVP-LINK-002: API and Integrations are conditional.
+
+The dimensions remain enumerated so the investigator can capture them if the runtime architecture uses them, but their requirement is now optional and status unknown until applicability is established. The inventory remains 775 entries: **700 required** and **75 optional**; 671 scenario dimensions are required/not-observed, 59 scenario dimensions are conditional/unknown, 29 capability-level facets are required/unknown, and 16 capability-level facets are optional/unknown. This is an applicability correction, not a claim that those facets are absent.
+
 MVP-QUAR-002 remains without Configuration because it is the non-destructive review/rescan branch; any configuration that materially changes that branch must still be linked if runtime evidence shows it is relevant.
 
 ### 3.3 Conditional facets
 
 Messaging and Background Processing are not assigned to any current MVP scenario. The governing specification explicitly says facets are observation perspectives and not every system uses every facet. Their current status remains **conditional/unresolved**, not absent and not excluded. The actual target boundary and execution architecture must establish whether queue delivery, event messaging, workers, scheduling or deferred processing exist.
 
-The other optional capability-level facets (for example API, Persistence, Integrations and Identity/Authentication where conditional) must likewise remain unresolved until the actual architecture and observed interactions establish applicability. An optional status is not evidence of non-existence.
+The other optional capability-level facets (for example API, Persistence, Integrations and Identity/Authentication where conditional) must likewise remain unresolved until the actual architecture and observed interactions establish applicability. Scenario-level API/Integrations entries are now explicitly conditional where the capability-level register says so. An optional status is not evidence of non-existence.
 
 ## 4. Scenario-definition completeness
 
