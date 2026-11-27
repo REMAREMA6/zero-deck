@@ -1,72 +1,86 @@
-# Phase 7 Decision — Local Runtime Investigation
+# Phase 7 Decision — Non-UI Prior-Art Runtime Investigation
 
-**Decision ID:** ZD-DEC-2026-11-27-03  
+**Decision ID:** ZD-DEC-2026-11-27-03 (corrected scope)  
 **Recorded:** 2026-11-27  
-**Status:** Owner-approved approach; execution preflight not yet cleared  
-**Workspace:** `re/zerodek-product-re/2026-11-27/`
+**Status:** Phase 7 started; runtime execution blocked at preflight  
+**Workspace:** re/zerodek-product-re/2026-11-27/
 
-## Decision
+## Correction to the earlier decision
 
-Proceed from the completed Phase 6 bounded completeness audit to a Phase 7 investigation of locally executable parts of the ZeroDeck reference repository. The purpose is to replace unsupported source-only assumptions with reproducible runtime evidence wherever the available target and environment genuinely permit it.
+The earlier version incorrectly named lordwhitefire/Zerodek as the runtime target. That was a scope error and is superseded by this correction. The earlier commit remains in Git history; it is not silently erased.
 
-This is an investigation of the reference repository's executable implementation. The repository has previously been classified as a mock-screen/design reference with a separate Expo source tree; running it does **not** automatically establish behaviour of a deployed or production ZeroDeck product.
+The owner clarified the repository roles:
 
-## Approved investigation boundary
+- lordwhitefire/Zerodek is the owner's fork of Felix's repository. It contains limited product-intent material and screen/UI demonstrations. Use it to understand intended screens and inspect existing UI source. Do not treat it as a functioning product or run it for non-UI runtime extraction.
+- REMAREMA6/zero-deck is the actual ZeroDeck product repository being built.
+- Phase 7 runtime targets are the selected working prior-art implementations recorded in the Phase 3 register.
+- Software Rules remains technology- and stack-agnostic. Runtime investigation excludes UI.
+- UI rules are derived from screen/design evidence and source code now; later UI runtime rules can be captured from the actual ZeroDeck implementation by the developer agent.
 
-- Target: the user-designated reference repository, `lordwhitefire/Zerodek`, using a pinned immutable commit recorded before execution.
-- Work on a separate clone/copy. Do not modify the original repository or its history.
-- Run only locally executable components that pass pre-execution inspection.
-- Observe behaviour through reproducible commands, tests, local HTTP/API exchanges, process output, logs, and local data/state where available.
-- Compare supported observations with the existing ZeroDeck Software Rules capture and all 15 facets.
-- Correct or add rules only when the evidence supports the change.
-- Keep browser-based inspection, browser automation, and visual/UI parity work out of scope.
-- Do not build a replacement application.
-- Do not provision external accounts, purchase services, create paid subscriptions, or obtain new secrets solely for this investigation.
-- Do not send requests to external providers or production services. If a feature requires credentials, external infrastructure, or an unavailable dependency, record it as unverified.
-- Do not infer product requirements from incidental implementation details. Retain the existing evidence classes and distinguish reference-runtime observations from production ZeroDeck behaviour.
+## Phase 7 investigation targets
 
-## Required pre-execution gates
+| Phase 3 source | Nature | Phase 7 treatment |
+|---|---|---|
+| SRC-01 MaintainTeam/Hypatia, c0f98977be935e58849726313635a2459cac3892 | Working Android file scanner | Non-UI runtime target, subject to target-specific triage and real isolated-lab gate |
+| SRC-02 MaintainTeam/HypatiaDatabases, 3c35f52e1a847caed46d8e1ad34968bfa3c8b10a | Working database generator/CI pipeline | Non-UI pipeline target, subject to triage and safe execution gate; do not infer Android app behaviour from generator runs |
+| SRC-06 Cisco-Talos/ClamAV, cad7b18a3e6505195fe08db1412449a18fc9f012 | Working antivirus engine | Comparative runtime target only if safe and useful; not an adopted dependency |
+| SRC-04 Google Web Risk Lookup | Remote API contract | No provider calls, account creation, new secrets or paid activity. Runtime unverified unless separately approved |
+| SRC-07 Android storage, SAF and Keystore documentation | Platform documentation | Source/document-derived constraints only; not a runnable target |
 
-The user has approved this investigation approach. That approval is not, by itself, a verified ownership or third-party permission record for every file in the reference repository.
+SRC-03 Safe Browsing v4 is rejected for default commercial use; SRC-05 is a stale wrapper around that API. Neither is a runtime target. The Phase 3 register remains the authority for source selection and provenance.
 
-Before executing repository code:
+## In-scope runtime questions
 
-1. Complete the RE triage scope record with the target, question, owner/authorization basis, mode, allowed actions, and exclusions. Confirm ownership or obtain the required written permission for code not owned by the user.
-2. Pin and record the exact repository commit; preserve the original and record the clone provenance.
-3. Inspect package scripts, install lifecycle hooks, dependencies, build configuration, Dockerfiles, and executable entry points before running install/build/start commands.
-4. Name and verify the actual execution environment. Do not call an ordinary folder, chroot, privileged container, or separate process an isolated lab.
-5. If the work requires the RE agent's isolated-lab gate, verify actual isolation, absence of host filesystem shares and bridged networking, a pre-run snapshot, and the ability to revert or destroy the environment. If those conditions are unavailable, do not execute; continue only with permitted static/read-only inspection.
-6. Keep external network access disabled by default. Any required local loopback traffic must be explicitly scoped; no external provider traffic is permitted under this decision.
+Investigate non-UI implementation behaviour relevant to the owner-approved MVP:
 
-The uploaded RE-agent triage and dynamic-lab instructions remain applicable. Their prohibition on executing suspicious samples/APKs/bundles/firmware is not to be confused with permission to run this ordinary application repository: application execution is permitted only after the separate scope, authorization, and environment gates above are satisfied.
+- File content acquisition, hashing, signature lookup, scan orchestration, progress/cancellation, verdict semantics and failure paths.
+- Threat-database generation, feed transformation, deduplication, signing, verification, freshness and publication.
+- ClamAV engine input/output, supported operation modes, error handling and resource behaviour, only to the extent useful as comparison.
+- Relevant persistence, APIs, messaging, identity/authorization, security controls, background work, configuration, integrations, errors/recovery and performance/resource behaviour.
+- Quarantine behaviour only where an inspected working implementation actually provides it. Do not invent a quarantine implementation from Android documentation.
 
-## Evidence handling
+Exclude runtime UI inspection, visual parity, replacement implementation, production ZeroDeck claims, IP investigation and unrelated admin/background-protection capabilities.
 
-For each execution, record:
-- scenario ID and exact question;
-- pinned source revision and relevant file/symbol;
-- environment identity and isolation properties;
-- exact command or request, inputs, initial state, and ordered actions;
-- stdout/stderr, logs, HTTP/API response, test output, and relevant local state;
-- expected versus observed result and settling/stop criteria;
-- evidence hash/path and any reproduction steps;
-- limitations, failed attempts, and properties that remain unknown.
+## Integration and service limits
 
-Classify evidence as reference-runtime-observed, source-derived, documented contract, owner-declared, inference, or unknown. Never relabel reference-runtime observations as production observations.
+- Do not call Google Web Risk or another external provider; do not provision accounts, acquire secrets, buy services or incur charges.
+- Record provider request/response semantics from pinned official documentation as documented contracts, not runtime observations.
+- If a reference feature depends on credentials, remote infrastructure or an unavailable integration, skip execution and record the exact blocker.
+- Do not connect to production systems or send real user files/URLs.
 
-## Phase 7 completion criteria
+## Authorization and execution gates
 
-Phase 7 is complete only when:
-- the authorization and execution-environment gates have a documented pass/fail disposition;
-- every executable in-scope scenario that can safely be run has reproducible evidence, or a precise reason it could not be run;
-- the relevant 15 facets have evidence-backed dispositions, including explicit not-applicable, conditional, and unknown states;
-- affected rules, property inventory, evidence register, traceability, and open-property records are reconciled;
-- validation is rerun and its exact result recorded; and
-- the report states whether the resulting capture is replication-sufficient. A successful local run or green CI alone does not establish replication sufficiency.
+The owner authorized running the owner's own repository, but that authorization does not establish ownership of third-party prior-art repositories. Before executing each third-party target, record its exact licence/permission basis and the permitted action. Public source access is not treated as blanket authorization to bypass controls or ignore licence terms.
 
-## Current state and next action
+The uploaded RE-agent instructions require re-triage before deeper analysis and a real named isolated lab before dynamic execution. The lab must have no host filesystem shares, no bridged network, a restorable snapshot and teardown capability. An ordinary container, folder, process or separate user is not accepted as a lab. Never execute malware or suspicious samples.
 
-**Phase 7 status:** Preflight pending. No runtime execution has started.
+## Initial environment preflight — 2026-11-27
 
-**Next action:** Complete the ownership/permission and environment preflight, then pin and inspect the reference repository before deciding whether any local component can be executed safely.
+Observed in the available container:
+- Linux x86_64; process identity is root.
+- Java, Git, Node.js, npm and Python are present.
+- Docker, Podman, ADB, Gradle, ClamAV clamscan and freshclam were not found on PATH.
+- No named isolated lab has been supplied or verified.
+- No evidence currently establishes absence of host filesystem shares, absence of bridged networking, snapshot rollback or destroy/revert capability.
 
+**Disposition:** runtime execution is blocked. Do not execute selected repository code in this environment or describe static inspection as runtime evidence. Continue with source/document analysis and record the exact blocker. Reassess if a genuine lab and target-specific authorization become available.
+
+## Evidence requirements
+
+For every runtime observation, record immutable repository revision, exact environment, command, initial state, fixture/input, ordered actions, output/log excerpt, resulting state, stop condition, date and evidence hash where available. Map observations to the Software Rules 15 facets and ZeroDeck scenarios. Preserve these evidence classes:
+
+1. Runtime-observed behaviour of the reference implementation.
+2. Source-derived rules about the inspected reference implementation.
+3. Owner-declared ZeroDeck product intent.
+4. Inference/assumption.
+5. Unknown/unresolved.
+
+A reference runtime observation is not ZeroDeck production runtime behaviour. A source tree is not proof of execution. A successful build/test alone does not prove complete product behaviour.
+
+## UI handoff
+
+UI source/design rules are maintained separately from Phase 7 runtime work. The owner's fork is a product-intent and source reference. It does not establish backend behaviour. Later, the developer agent may capture runtime UI rules from the actual REMAREMA6/zero-deck implementation after it exists.
+
+## Supersession
+
+This corrected decision supersedes the initial target designation in commit b7187c126a8b3160a9a56828923843298abb33bf. The original record is retained in Git history for auditability.
