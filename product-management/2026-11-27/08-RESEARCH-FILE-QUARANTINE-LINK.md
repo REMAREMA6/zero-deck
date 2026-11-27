@@ -77,6 +77,18 @@ Sources:
 
 **Product implication:** Hypatia's patterns can inform a technology-independent requirements discussion; its code and datasets must not be copied or redistributed without explicit licence and source-rights review.
 
+### 2.4 Practitioner workflow comparison — OWASP MASTG
+
+OWASP's Mobile Application Security Testing Guide describes mobile app security testing as static and dynamic analysis and says it is usually part of a larger security assessment that includes the client-server architecture and server-side APIs. It explains that automated scans can catch lower-hanging issues while human testers investigate with specific usage contexts in mind. OWASP's testing-tools catalogue warns that tools assist assessment rather than provide conclusive security verdicts and that output may contain false positives and false negatives.
+
+Sources:
+- https://mas.owasp.org/MASTG/0x04b-Mobile-App-Security-Testing/
+- https://mas.owasp.org/MASTG/tools/
+
+**Product implication:** if the practitioner cohort is specifically mobile application penetration testers, the approved three-capability MVP is not a substitute for their broader assessment workflow. It may be a supporting utility, but a product claim that it is a complete penetration-testing solution would be inaccurate. This strengthens the need to validate whether practitioners want a lightweight file/link utility as a distinct step in their existing workflow.
+
+**Limit:** OWASP MASTG is methodology guidance for mobile application security testing. It does not represent every ethical-hacking/penetration-testing role, and it does not establish demand for ZeroDeck.
+
 ### 2.4 Unresolved customer and product questions
 
 - Which actual file types do the selected customers need to check?
@@ -291,6 +303,7 @@ These statements do not resolve the open Software Rules properties. They are can
 | RSR-11 | abuse.ch terms — https://abuse.ch/terms-of-use/ | Official provider terms | Fair-use limits and potential paid subscription for commercial use. | Requires current contract confirmation. |
 | RSR-12 | VirusTotal API comparison — https://docs.virustotal.com/docs/difference-public-private | Official provider documentation | Public vs Private API use, rate limits and paid commercial access. | Quote and contract needed for exact commercial cost. |
 | RSR-13 | VirusTotal Private Scanning — https://docs.virustotal.com/docs/private-scanning | Official provider documentation | Private remote-analysis data handling and missing multi-AV verdicts. | Paid service; not local-only processing. |
+| RSR-14 | OWASP MASTG — https://mas.owasp.org/MASTG/0x04b-Mobile-App-Security-Testing/ and https://mas.owasp.org/MASTG/tools/ | Authoritative practitioner methodology | Mobile app testing combines static/dynamic analysis, client-server/API assessment and human validation; tool output is not conclusive. | Specific to mobile application security testing; not direct ZeroDeck demand evidence. |
 
 ## 7. Next research actions
 
