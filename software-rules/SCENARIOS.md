@@ -25,3 +25,18 @@ Each scenario's governing facet dimensions are enumerated in [PROPERTY-INVENTORY
 - Link observations across facets where one operation affects multiple perspectives.
 - Record expected outcomes only when supported by an owner-approved requirement or an independently identified contract. A test expectation alone is not runtime evidence.
 - No scenario for IP address investigation is permitted in this MVP catalogue.
+
+
+## Phase 6 scenario-definition completeness
+
+The seven scenario records currently establish scenario identity, capability/subject, purpose, trigger, facet IDs and observable questions. They do not yet fully instantiate the governing conceptual scenario model. Before runtime execution, record (or explicitly mark unknown/unavailable) for each scenario:
+
+- Actor/principal and relevant identity context.
+- Target build, system boundary, platform, environment and effective configuration.
+- Initial state and preconditions.
+- Exact input values/variants and ordered user/system actions.
+- Expected outcomes only where supported by an owner-declared rule or independent contract; keep expected and actual outcomes separate.
+- Stop/settling condition and terminal-state criteria.
+- Evidence capture method, tool/version, timing and correlation plan.
+
+MVP-FILE-002 and MVP-LINK-002 contain branch families, not single aggregate tests. Every listed branch must be executed and recorded separately. MVP-QUAR-003 contains restore and permanent-delete paths; treat them as separate executions with their own success, denial and failure variants. No execution is currently recorded.
