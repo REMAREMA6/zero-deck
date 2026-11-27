@@ -3,13 +3,13 @@
 **Product:** ZeroDeck  
 **Author:** ZeroDeck Product Management Agent  
 **Profile:** [Product Requirements Contract Profile](PROFILE.md)  
-**Status:** Profile complete; feature contracts not yet authored.
+**Status:** PM contract profile complete; identity/authentication contract drafted and targeted-validated; later capability contracts remain to be authored.
 
 ## Contracts
 
 | Contract | Capability | Status |
 |---|---|---|
-| Identity and authentication contract | Supporting account/authentication infrastructure | Not started; create in Phase 2 |
+| [Identity and authentication contract](contracts/IDENTITY-AUTHENTICATION.md) | Supporting account/authentication infrastructure | Draft v0.1.0; Phase 2 complete; owner review pending |
 | Manual file-analysis contract | MVP-01 | Not started; create in Phase 4 |
 | Quarantine and disposition contract | MVP-02 | Not started; create in Phase 5 |
 | Website and link-checking contract | MVP-03 | Not started; create in Phase 6 |
@@ -19,7 +19,8 @@
 
 - The canonical profile is in [PROFILE.md](PROFILE.md).
 - Validate each complete PM declared contract with [the PM record schema](schemas/zero-deck-pm-declared-contract.schema.json), and validate its nested metadata with [the PM extension schema](schemas/zero-deck-pm-requirements-extension.schema.json).
-- See the [Phase 1 validation report](VALIDATION-REPORT.md) for the format fixture checks and their limitations.
+- See the [Phase 1 validation report](VALIDATION-REPORT.md) for profile-fixture checks and the [Phase 2 validation report](PHASE-2-VALIDATION.md) for the authentication contract checks and limitations.
+- The structured projection and retained evidence record for authentication are in `contracts/IDENTITY-AUTHENTICATION.declared-contract.json` and `evidence/identity-authentication-contract.evidence.json`.
 - Use [the declared-contract template](templates/declared-contract.template.json), [the evidence template](templates/declared-contract-evidence.template.json), and [the format-only example](examples/declared-contract-format-example.json).
 - Requirements are represented as Software Rules declared contracts, not runtime rules or source-derived rules.
 - Every contract explicitly identifies **ZeroDeck Product Management Agent** as issuer/author.
@@ -31,4 +32,4 @@ The example under `examples/` is only a schema/format fixture. It is not a ZeroD
 
 ## Current phase
 
-Phase 1 — PM contract profile design: **complete**. Next: Phase 2 — research and author authentication/account requirements.
+Phase 1 — PM contract profile design: **complete**. Phase 2 — authentication/account requirements: **complete**. Next: Phase 3 — validate authentication coverage across relevant facets.
