@@ -60,11 +60,11 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 **Exit gate: satisfied for the 17-screen baseline.** All 17 screens are inventoried and mapped; Screen 18 and two additional routes are separately recorded. Scanner-draft MVP/later/open labels are distinguished from ZeroDeck's still-unconfirmed startup MVP selection. See re/zerodek-product-re/2026-11-27/SCREEN-INVENTORY.md. This completes inventory only, not capability-level reverse engineering.
 
 ### Phase 2 — Capability and facet mapping
-- [ ] Derive candidate capabilities and workflows from the complete screen inventory; separately establish which capabilities are selected for the MVP. Do not use the scanner repository materials to define the whole startup.
-- [ ] Map each capability and required property to the applicable Software Rules facets.
-- [ ] Identify cross-facet relationships, dependencies, states, and missing information.
-- [ ] Define the declared Zerodek replication scope, exclusions, scenarios, and required-property inventory.
-**Exit gate:** the startup direction, candidate capability set, and explicitly selected MVP scope are distinct; the MVP scenarios and property inventory are detailed enough to determine what evidence and source research are required.
+- [x] Derive the evidence-backed candidate capabilities and workflows from the complete screen inventory; preserve the broader startup direction separately. See CAPABILITY-INVENTORY.md. The ZeroDeck MVP selection remains an owner decision.
+- [x] Map candidate capabilities and required properties to all 15 Software Rules facets. See CAPABILITY-FACET-MAPPING.md.
+- [x] Identify cross-facet relationships, dependencies, scenario branches, and missing information. See CAPABILITY-FACET-MAPPING.md.
+- [?] Draft candidate scenarios, exclusions and required-property inventory; final declared replication scope remains blocked until the owner selects the ZeroDeck launch MVP and included workflows.
+**Exit gate: pending owner decision.** Startup direction, evidence-backed candidates, and the unselected MVP are kept distinct. Candidate scenarios and facet/property inventories are documented, but the declared replication scope cannot be finalized until the owner selects the first ZeroDeck launch capability/service and its included workflows. Do not mark Phase 2 complete or start scope-specific source selection as if this decision were settled.
 
 ### Phase 3 — Prior-art discovery and selection
 - [ ] Audit existing reconnaissance records for relevance to Zerodek.
