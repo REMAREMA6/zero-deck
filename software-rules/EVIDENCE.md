@@ -11,7 +11,8 @@
 | Product-material | Supplied product decision/material; supports only the content actually documented. |
 | Source-derived prior art | Inspected source implementation; describes that source, not ZeroDeck. |
 | Platform/provider contract | Official documentation; defines a platform/provider contract or constraint, not ZeroDeck implementation. |
-| Runtime-observed (ZeroDeck) | No deployed ZeroDeck runtime evidence currently exists. |\n| Runtime-observed (reference project) | Directly observed behaviour in an upstream CI execution of a pinned prior-art project; applies only to that project and run. |
+| Runtime-observed (ZeroDeck) | No deployed ZeroDeck runtime evidence currently exists. |
+| Runtime-observed (reference project) | Directly observed behaviour in an upstream CI execution of a pinned prior-art project; applies only to that project and run. |
 | Unknown | Not established; cannot be treated as false, absent, safe, or not applicable. |
 
 ## Primary ZeroDeck decision and product-material records
