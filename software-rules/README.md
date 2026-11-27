@@ -20,10 +20,11 @@ The specification describes the properties that an independent implementation mu
 4. [Product-material workflow rules](PRODUCT-MATERIAL-RULES.md)
 5. [15-facet property map](FACET-MAP.md)
 6. [Typed facet payload mapping](PAYLOAD-MAPPING.md)
-7. [Evidence and provenance register](EVIDENCE.md)
-8. [Open required properties](OPEN-PROPERTIES.md)
-9. [Rule traceability register](RULE-TRACEABILITY.md)
-10. [Machine-readable capture](capture.json)
+7. [Scenario-level property inventory](PROPERTY-INVENTORY.md)
+8. [Evidence and provenance register](EVIDENCE.md)
+9. [Open required properties](OPEN-PROPERTIES.md)
+10. [Rule traceability register](RULE-TRACEABILITY.md)
+11. [Machine-readable capture](capture.json)
 
 ## Authority and evidence classes
 
