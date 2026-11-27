@@ -112,7 +112,7 @@ Supabase Storage is also convenient for ordinary private application files, but 
 Keep the first deployment shape small:
 - Static web hosting for the web client.
 - One trusted backend/function boundary for identity/entitlement and gated link checks.
-- Managed Postgres/auth only if accounts and Pro entitlements are needed for the launch workflow.
+- Neon-managed PostgreSQL plus the first-party backend/authentication service; keep those boundaries independently testable.
 - No dedicated queue, Redis, worker fleet or microservices for manual, user-initiated MVP operations unless file-analysis requirements prove they are necessary.
 - Add error monitoring and privacy-safe operational alerts before public launch; never log file contents, secrets, raw access tokens or full sensitive URLs by default.
 
