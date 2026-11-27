@@ -31,11 +31,11 @@
       "additionalProperties": false
     },
     "contractLifecycle": {
-      "enum": ["draft", "owner-review", "owner-approved", "superseded"]
+      "enum": ["draft", "owner-review", "owner-approved", "owner-rejected", "deferred", "superseded"]
     },
     "capabilityId": {
       "type": "string",
-      "pattern": "^[A-Z][A-Z0-9-]{1,31}$"
+      "pattern": "^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)*$"
     },
     "requirements": {
       "type": "array",
@@ -59,7 +59,7 @@
     },
     "supersedesContractIds": {
       "type": "array",
-      "items": { "type": "string", "pattern": "^ZD-CONTRACT-[A-Z0-9-]+$" },
+      "items": { "type": "string", "pattern": "^ZD-CONTRACT-[A-Z0-9]+(?:-[A-Z0-9]+)*$" },
       "uniqueItems": true
     }
   },
@@ -206,7 +206,7 @@
       "additionalProperties": false,
       "allOf": [
         {
-          "if": { "properties": { "status": { "const": "resolved" } }, "required": ["status"] },
+          "if": { "properties": { "status": { "enum": ["resolved", "deferred"] } }, "required": ["status"] },
           "then": { "required": ["resolution", "decisionRef"] }
         }
       ]
