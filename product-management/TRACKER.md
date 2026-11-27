@@ -25,14 +25,14 @@
 - **Current step:** C — Comprehend.
 - **Current product scope authority:** Owner-approved three-capability MVP (manual file security analysis; quarantine/file disposition; website/link checking subject to Pro entitlement AND owner activation).
 - **Current product evidence status:** ZeroDeck-specific Software Rules remains Draft, incomplete and not replication-sufficient. Product planning must preserve unknowns.
-- **Primary current question:** What business outcome should the first MVP optimize for? Existing historical PM work proposed trust/return behaviour, but that is not yet revalidated against the current owner direction.
-- **Next action:** Complete C context/evidence review and ask one material clarifying question if the goal cannot be established from owner decisions.
+- **Primary business outcome:** Validate real market demand, per the owner's clarification on 2026-11-27. No target cohort has been selected; penetration testers/ethical hackers, non-technical users and businesses/licensed users are candidate segments for research.
+- **Next action:** Begin I — Identify. Compare candidate segments and identify the strongest initial customer cohort using evidence; do not assume one in advance. Define the demand-validation metric and threshold after I/R.
 
 ## CIRCLES progress
 
 | Step | Name | Status | Deliverable | Exit condition |
 |---|---|---|---|---|
-| C | Comprehend the situation | [~] In progress | `2026-11-27/01-C-COMPREHEND.md` | Goal, success metric, constraints, context, assumptions and scope reconciled; one material question resolved or explicitly carried as an assumption. |
+| C | Comprehend the situation | [x] Completed | `2026-11-27/01-C-COMPREHEND.md` | Goal, success-measure approach, constraints, context, assumptions and scope reconciled. Exact metric threshold is deferred to I/R after customer discovery. |
 | I | Identify the customer | [ ] Not started | `2026-11-27/02-I-IDENTIFY.md` | Segments assessed; one primary cohort chosen and defended; stakeholders/other sides acknowledged. |
 | R | Report customer needs | [ ] Not started | `2026-11-27/03-R-NEEDS.md` | Needs/jobs stated; reported vs inferred distinguished; evidence and current alternatives linked. |
 | C | Cut through prioritization | [ ] Not started | `2026-11-27/04-C-PRIORITIZATION.md` | Needs prioritized on explicit criteria; MVP necessities, dependencies, cuts and deferrals justified. |
@@ -75,7 +75,7 @@ These are supporting research streams within CIRCLES, not additional method step
 
 | ID | Question / decision | Current status | Consequence |
 |---|---|---|---|
-| PM-OPEN-001 | Primary business outcome for first MVP (e.g. demand validation, trust/adoption, or revenue) | [?] Pending Comprehend | Determines success metric and trade-off weights |
+| PM-OPEN-001 | Primary business outcome for first MVP | [x] Resolved: validate real market demand, per owner's stated view | Success-measure approach is recorded; exact metric/threshold follows I/R |
 | PM-OPEN-002 | Primary customer cohort for initial release | [ ] To be evaluated in Identify | Determines product experience and positioning |
 | PM-OPEN-003 | Launch geography/distribution market | [ ] Unknown | Affects customer evidence, legal/app-store research and go-to-market |
 | PM-OPEN-004 | Product boundary/platform beyond the current scanner MVP | [ ] Unknown | Avoids assuming Android-only or prematurely expanding platform scope |
@@ -100,3 +100,4 @@ These are supporting research streams within CIRCLES, not additional method step
 |---|---|---|
 | 2026-11-27 | Reviewed ZeroDeck README, scope decision, capability inventory, Software Rules scope/scenarios/open properties, and prior PM artifacts. | Confirmed three-capability MVP; identified stale 2026-11-24 assumptions requiring reconciliation. |
 | 2026-11-27 | Created current product-planning plan and tracker. | Planning authorized; C — Comprehend started. |
+| 2026-11-27 | Recorded owner's clarification that the first launch goal is to validate real market demand; no customer cohort is preselected. | C completed. I — Identify is next; practitioner, non-technical and business/licensed segments remain candidates. |
