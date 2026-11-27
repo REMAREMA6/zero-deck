@@ -53,11 +53,11 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 **Exit gate:** a new chat can resume from repository records alone, without relying on private chat history.
 
 ### Phase 1 — Mockup inventory
-- [ ] Inspect all 17 mock screens and assets.
-- [ ] Record every screen, visible element, content, control, state, navigation clue, and responsive/layout detail that can be established.
-- [ ] Distinguish directly visible facts from interaction hypotheses and unknowns.
-- [ ] Record source paths and stable evidence identifiers.
-**Exit gate:** all 17 screens are accounted for and independently reviewable; no screen is silently skipped. Each screen/capability is classified as MVP, later candidate, or unresolved based on explicit scope evidence—not merely because it appears in the repository.
+- [x] Inspect and reconcile the 17-screen baseline, numbered Screen 18 extension, and additional routes/assets.
+- [x] Record screen content, controls, stated states/interactions, navigation clues, responsive/layout details, and evidence limits.
+- [x] Distinguish design intent, reference-image observations, source implementation, local/demo interactions, and unknowns.
+- [x] Record source paths, route/preview/component mappings, asset dispositions, and stable screen evidence IDs.
+**Exit gate: satisfied for the 17-screen baseline.** All 17 screens are inventoried and mapped; Screen 18 and two additional routes are separately recorded. Scanner-draft MVP/later/open labels are distinguished from ZeroDeck's still-unconfirmed startup MVP selection. See re/zerodek-product-re/2026-11-27/SCREEN-INVENTORY.md. This completes inventory only, not capability-level reverse engineering.
 
 ### Phase 2 — Capability and facet mapping
 - [ ] Derive candidate capabilities and workflows from the complete screen inventory; separately establish which capabilities are selected for the MVP. Do not use the scanner repository materials to define the whole startup.
