@@ -78,7 +78,7 @@ The Phase 1 inventory records the 17-screen design/source baseline. The approved
 - Link checking: SCR-02 dashboard entry, SCR-06 URL input, SCR-07 link result.
 - SCR-01 onboarding is a product-entry design reference; its inclusion in the exact MVP reproduction boundary is not independently established.
 
-The interface facet's 13 semantic dimensions are present in the property inventory, but actual ZeroDeck values are not. The screen inventory records content, controls, some layout/responsive clues and source/preview behaviour; it does not provide a complete runtime hierarchy, resolved computed styles, exact geometry, complete responsive states, accessibility tree, asset loading state or all interactive UI states. The reference routes are preview/demo implementations and sample data, not a deployed product.
+The interface facet's 13 semantic dimensions are present in the property inventory, but actual ZeroDeck runtime values are not. A Phase 6 source review now maps the MVP workflows to SCR-02–SCR-09 and pins the selected source artifacts, including their Git blob hashes. It confirms local demo/sample behaviour and extracts a few source-declared layout values, but it is not a complete screen-by-screen source-rule extraction or runtime observation. See `re/zerodek-product-re/2026-11-27/PHASE-6-INTERFACE-SOURCE-REVIEW.md`. The screen inventory and source files do not provide a complete runtime hierarchy, resolved computed styles, exact rendered geometry, complete responsive states, accessibility tree, asset loading state or all interactive UI states.
 
 Therefore, exact visual/interface replication is **not established**. A screen list or screenshot alone cannot close the interface facet. The target design source must be inspected at the pinned revision and its concrete visual properties recorded as design/source evidence, while runtime-only properties remain explicitly unobserved.
 
@@ -145,7 +145,7 @@ No unknown has been converted to a default or marked not-applicable without evid
 
 ## 9. Phase 6 exit disposition
 
-The independent completeness review is still in progress. The final Phase 6 disposition will be one of:
+The independent completeness review is still in progress. The interface source review is now pinned and linked, but its source-derived design extraction remains partial. The final Phase 6 disposition will be one of:
 - Exit gate satisfied with an explicitly incomplete, bounded deliverable and all remaining gaps retained; or
 - Phase 6 remains open if property inventory omissions or traceability defects remain uncorrected.
 
