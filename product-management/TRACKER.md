@@ -4,7 +4,7 @@
 **Workspace:** `product-management/`  
 **Started:** 2026-11-27  
 **Method:** CIRCLES — seven steps, followed by supporting product-definition work  
-**Overall status:** [~] CIRCLES completed provisionally; blueprint, architecture follow-up and validation remain open; PM-authored product-rules workstream has started  
+**Overall status:** [~] CIRCLES completed provisionally; blueprint, architecture follow-up, customer validation and owner decisions remain open; PM-authored product-rules Phase 2 is complete  
 **Current position:** PM-authored rules Phases 0–2 complete; Phase 3 (authentication coverage validation) is next  
 **Last reconciled:** 2026-11-27
 
@@ -26,7 +26,7 @@ During that work, the owner added a distinct requirement: the Product Management
 
 That work is now recorded as a separate workstream. It does not restart CIRCLES or change the three-capability MVP.
 
-**Completed most recently:** authentication/account requirements contract (Phase 2). **Next task:** validate authentication coverage across relevant Software Rules facets (Phase 3).
+**Completed most recently:** Phase 2 authentication/account contract, CIRCLES recommendation, structured projection and validation. **Next task:** validate authentication coverage across relevant Software Rules facets (Phase 3).
 
 ### Current product authority
 
@@ -87,7 +87,7 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 |---|---|---|---|
 | 0 | Establish baseline, boundaries and authorship | [x] | Software Rules model inspected; product scope and PM identity recorded. |
 | 1 | Design PM contract profile | [x] | Exact mapping, author identity, ID/version rules, complete-record and extension schemas, and validation procedure documented and checked. |
-| 2 | Research and author authentication requirements | [x] | [IDENTITY-AUTHENTICATION.md](product-rules/contracts/IDENTITY-AUTHENTICATION.md), structured projection, evidence record and [Phase 2 validation](product-rules/PHASE-2-VALIDATION.md); 21 PM-proposed requirements, 8 open owner questions. |
+| 2 | Research and author authentication requirements | [x] | [IDENTITY-AUTHENTICATION.md](product-rules/contracts/IDENTITY-AUTHENTICATION.md), structured projection, evidence, [CIRCLES analysis](2026-11-27/13-PHASE-2-CIRCLES-AUTHENTICATION.md) and [Phase 2 validation](product-rules/PHASE-2-VALIDATION.md); 21 PM-proposed requirements, 46 acceptance criteria, 8 open owner questions. |
 | 3 | Validate authentication coverage | [ ] | Cross-facet assessment and negative/failure/recovery tests. |
 | 4 | Author manual file-analysis requirements | [ ] | File selection, input scope, verdicts, limitations, privacy and failure semantics. |
 | 5 | Author quarantine/disposition requirements | [ ] | Quarantine, integrity, restore, deletion, retention and recovery. |
@@ -104,7 +104,7 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 4. MVP-03 website and link checking.
 5. Cross-cutting system requirements.
 
-**Important:** No ZeroDeck PM-authored requirement set has yet been completed. The Software Rules identity/authentication facet is Draft and not exhaustive. Existing JWT and Express-session cases cover bounded behaviour only. Uncovered properties are a checklist, not proof that ZeroDeck needs every mechanism; each must be classified as required, not applicable, deferred or unresolved.
+**Important:** The authentication/account contract is a PM-proposed supporting-infrastructure draft, not owner-approved. No PM-authored contract for the three user-facing MVP capabilities has yet been completed. The Software Rules identity/authentication facet is Draft and not exhaustive. Existing JWT and Express-session cases cover bounded behaviour only. Uncovered properties are a checklist, not proof that ZeroDeck needs every mechanism; each must be classified as required, not applicable, deferred or unresolved.
 
 ## 5. Remaining product-planning work outside the rules workstream
 
@@ -139,6 +139,7 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 | 2026-11-27 | Inspected Software Rules README, declared-contract schema, identity/authentication facet and Phase 6 property inventory. | Phase 0 complete; declared-contract is the current fit. |
 | 2026-11-27 | Completed PM contract profile, PM extension schema, full declared-contract schema, templates and format fixture; ran targeted profile checks, recorded in `product-rules/VALIDATION-REPORT.md`. | Phase 1 complete. |
 | 2026-11-27 | Researched and authored the 21-requirement identity/authentication contract, structured declared-contract projection, retained evidence and eight open owner questions; ran targeted structural, parity, facet, reference and digest checks. | Phase 2 complete; Phase 3 coverage assessment is next. Requirements remain PM-proposed, not owner-approved. |
+| 2026-11-27 | Completed authentication CIRCLES analysis; corrected provenance mapping and replaced generic projection criteria with 46 concrete Markdown-derived scenarios; validated PM/upstream record definitions and evidence, ran five negative checks, and verified the exact SHA-256 digest. | Phase 2 exit criteria pass; Phase 3 next. Sign-in/recovery/session policy questions remain with owner. |
 
 ## 8. Authority and repository boundaries
 
