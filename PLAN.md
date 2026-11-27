@@ -93,12 +93,12 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 **Exit gate: SATISFIED 2026-11-27 for synthesis readiness.** Individual rule/evidence traceability, scenario-level property inventory, all 15 semantic facet mappings, cross-facet consistency, governing Draft 2020-12 schema validation, governing completeness/integrity suites and ZeroDeck-specific reference checks passed. See `software-rules/PHASE-5-SYNTHESIS-AUDIT.md` and [CI run #45997192513](https://github.com/REMAREMA6/zero-deck/actions/runs/45997192513). This closes synthesis only: the capture remains incomplete and is not replication-sufficient; Phase 6 must independently assess completeness and conformance.
 
 ### Phase 6 — Completeness and conformance
-- [ ] Review every facet applicable to the declared Zerodek scope.
-- [ ] Review the required-property inventory for omissions, not merely completion percentages.
-- [ ] Validate schemas, references, evidence links, and supported conformance checks.
-- [ ] Resolve or explicitly retain every required unknown, conflict, and evidence gap.
-- [ ] Produce a bounded completeness assessment and state exactly what is and is not replication-sufficient.
-**Exit gate:** all in-scope required properties are sufficiently specified and supported, or the deliverable is explicitly marked incomplete with unresolved gaps. Never claim complete replication sufficiency prematurely.
+- [x] Independently review all 15 facets and their semantic dimension sets against the three-capability MVP; record applicability and scenario coverage in the Phase 6 audit.
+- [x] Review the capability/facet and scenario/dimension inventory for omissions and inconsistent applicability; correct missing quarantine Configuration coverage and conditional API/Integrations overstatement.
+- [x] Validate the corrected capture against governing schemas, completeness/integrity checks and ZeroDeck cross-reference checks in [CI run #46000308895](https://github.com/REMAREMA6/zero-deck/actions/runs/46000308895).
+- [x] Explicitly retain all unresolved properties, scenario-definition gaps, conditional facets, evidence limitations and runtime access gaps in `OPEN-PROPERTIES.md` and the Phase 6 audit.
+- [x] Produce the bounded completeness/conformance assessment and state exactly what is and is not replication-sufficient in `software-rules/PHASE-6-COMPLETENESS-AUDIT.md`.
+**Exit gate: SATISFIED 2026-11-27 for the bounded completeness/conformance review.** The deliverable is explicitly **incomplete and not replication-sufficient**, with all known unresolved properties and evidence gaps retained. This is not approval of product completeness or faithful replication.
 
 ## 6. Target project structure
 
