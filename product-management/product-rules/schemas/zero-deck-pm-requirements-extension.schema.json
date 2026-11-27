@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/REMAREMA6/zero-deck/blob/main/product-management/product-rules/schemas/zero-deck-pm-requirements-extension.schema.json",
+  "title": "ZeroDeck PM Product Requirements Contract extension",
+  "description": "Validates the ZeroDeck Product Management profile stored under declaredContract.extensions.zeroDeckProductRequirements. Validate the containing capture separately against the pinned Software Rules schemas.",
+  "type": "object",
+  "properties": {
+    "profileId": { "const": "zero-deck.pm-product-requirements" },
+    "profileVersion": { "const": "1.0.0-draft" },
+    "productId": { "const": "zero-deck" },
+    "author": {
+      "type": "object",
+      "properties": {
+        "name": { "const": "ZeroDeck Product Management Agent" },
+        "role": { "const": "Product Manager" },
+        "organization": { "const": "ZeroDeck Product Management" }
+      },
+      "required": ["name", "role", "organization"],
+      "additionalProperties": false
+    },
+    "softwareRulesCompatibility": {
+      "type": "object",
+      "properties": {
+        "repository": { "const": "https://github.com/REMAREMA6/software-rules" },
+        "commit": { "const": "5591a2e62287afc29bde002369eaf659673ec59b" },
+        "specificationRelease": { "const": "0.3.0-draft" },
+        "schemaVersion": { "const": "0.2.0" },
+        "schemaDialect": { "const": "https://json-schema.org/draft/2020-12/schema" }
+      },
+      "required": ["repository", "commit", "specificationRelease", "schemaVersion", "schemaDialect"],
+      "additionalProperties": false
+    },
+    "contractLifecycle": {
+      "enum": ["draft", "owner-review", "owner-approved", "superseded"]
+    },
+    "capabilityId": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9-]{1,31}$"
+    },
+    "requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/requirement" }
+    },
+    "openQuestions": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/openQuestion" }
+    },
+    "ownerApproval": {
+      "type": "object",
+      "properties": {
+        "decisionRef": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$" },
+        "decisionBy": { "const": "Product Owner" },
+        "decidedAt": { "type": "string", "format": "date-time" },
+        "decisionSummary": { "type": "string", "minLength": 1 }
+      },
+      "required": ["decisionRef", "decisionBy", "decidedAt", "decisionSummary"],
+      "additionalProperties": false
+    },
+    "supersedesContractIds": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^ZD-CONTRACT-[A-Z0-9-]+$" },
+      "uniqueItems": true
+    }
+  },
+  "required": [
+    "profileId",
+    "profileVersion",
+    "productId",
+    "author",
+    "softwareRulesCompatibility",
+    "contractLifecycle",
+    "capabilityId",
+    "requirements"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": { "properties": { "contractLifecycle": { "const": "owner-approved" } }, "required": ["contractLifecycle"] },
+      "then": { "required": ["ownerApproval"] }
+    }
+  ],
+  "$defs": {
+    "requirement": {
+      "type": "object",
+      "properties": {
+        "statementId": { "type": "string", "pattern": "^ZD-[A-Z0-9]+-[0-9]{3,}$" },
+        "requirementType": {
+          "enum": ["functional", "business-rule", "data", "security", "privacy", "usability", "compatibility", "performance", "reliability", "operational", "commercial", "policy"]
+        },
+        "normativeKind": { "enum": ["required", "forbidden", "permitted", "conditional"] },
+        "priority": { "enum": ["P0", "P1", "P2", "P3"] },
+        "decisionStatus": { "enum": ["pm-proposed", "owner-approved", "owner-rejected", "deferred"] },
+        "facetRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "interface",
+              "behavior",
+              "business-rules",
+              "data",
+              "persistence",
+              "api",
+              "messaging",
+              "identity-authentication",
+              "authorization-permissions",
+              "security-controls",
+              "background-processing",
+              "errors-recovery",
+              "integrations",
+              "configuration",
+              "performance-resource-behavior"
+            ]
+          }
+        },
+        "platforms": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["web", "android"] }
+        },
+        "subject": { "type": "string", "minLength": 1 },
+        "conditions": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "preconditions": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "inputs": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "outcomes": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "forbiddenBehaviors": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "rationale": { "type": "string", "minLength": 1 },
+        "acceptanceCriteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/acceptanceCriterion" }
+        },
+        "dependencies": { "type": "array", "items": { "type": "string", "pattern": "^ZD-[A-Z0-9-]+-[0-9]{3,}$" }, "uniqueItems": true },
+        "assumptions": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "constraints": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "decisionRefs": { "type": "array", "items": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$" }, "uniqueItems": true },
+        "evidenceRefs": { "type": "array", "items": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$" }, "uniqueItems": true }
+      },
+      "required": [
+        "statementId",
+        "requirementType",
+        "normativeKind",
+        "priority",
+        "decisionStatus",
+        "facetRefs",
+        "platforms",
+        "subject",
+        "rationale",
+        "acceptanceCriteria"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": { "properties": { "normativeKind": { "const": "conditional" } }, "required": ["normativeKind"] },
+          "then": { "properties": { "conditions": { "minItems": 1 } }, "required": ["conditions"] }
+        },
+        {
+          "if": { "properties": { "decisionStatus": { "enum": ["owner-approved", "owner-rejected", "deferred"] } }, "required": ["decisionStatus"] },
+          "then": { "properties": { "decisionRefs": { "minItems": 1 } }, "required": ["decisionRefs"] }
+        }
+      ]
+    },
+    "acceptanceCriterion": {
+      "type": "object",
+      "properties": {
+        "criterionId": { "type": "string", "pattern": "^ZD-[A-Z0-9]+-AC-[0-9]{2,}$" },
+        "given": { "type": "string", "minLength": 1 },
+        "when": { "type": "string", "minLength": 1 },
+        "then": { "type": "string", "minLength": 1 },
+        "verificationMethod": { "enum": ["automated-test", "manual-test", "inspection", "analysis", "operational-test", "mixed"] }
+      },
+      "required": ["criterionId", "given", "when", "then", "verificationMethod"],
+      "additionalProperties": false
+    },
+    "openQuestion": {
+      "type": "object",
+      "properties": {
+        "questionId": { "type": "string", "pattern": "^ZD-Q-[A-Z0-9-]+-[0-9]{3,}$" },
+        "question": { "type": "string", "minLength": 1 },
+        "impact": { "type": "string", "minLength": 1 },
+        "ownerDecisionRequired": { "type": "boolean" },
+        "status": { "enum": ["open", "resolved", "deferred"] },
+        "pmRecommendation": { "type": "string" },
+        "resolution": { "type": "string" },
+        "decisionRef": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$" }
+      },
+      "required": ["questionId", "question", "impact", "ownerDecisionRequired", "status"],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "resolved" } }, "required": ["status"] },
+          "then": { "required": ["resolution", "decisionRef"] }
+        }
+      ]
+    }
+  }
+}
