@@ -54,3 +54,15 @@ This proves the runner/tool/artifact path only. It does not count as a ZeroDeck 
 ## 5. Current result
 
 The renewed Phase 7 is reopened. The runner smoke test is the first eligible execution task. New execution against Hypatia, HypatiaDatabases, ClamAV or the reference fork is currently blocked by the uploaded RE-agent ownership rule, not by the ChatGPT sandbox. Web Risk and future first-party integrations are conditional on owner-provided test access and explicit approval. Actual ZeroDeck runtime capture remains pending implementation.
+
+
+## 6. Runner smoke test result
+
+The first eligible task has passed. A first-party Playwright runner smoke workflow completed successfully twice:
+
+- Run [#46026033625](https://github.com/REMAREMA6/zero-deck/actions/runs/46026033625), commit `3a1a0ff6d13da1df607f7ff50588a409d9a8c2dd`.
+- Run [#46026203672](https://github.com/REMAREMA6/zero-deck/actions/runs/46026203672), commit `9e05176b52c312ccb2124d4bac5279c38a34e598`, with the artifact upload action pinned to v4.6.2's immutable commit.
+
+Both runs installed Playwright/Chromium, rendered a first-party HTML fixture, passed title/heading/click assertions, captured a screenshot, recorded a video and trace, and uploaded all three artifacts. Run A's downloaded screenshot/video/trace files were inspected. See `PHASE-7-RUNNER-SMOKE-REPORT.md` for exact environment, run IDs, artifact IDs, hashes, and limitations.
+
+This proves the runner/artifact mechanism only. It is not a ZeroDeck UI observation or a test of the third-party prior-art targets.
