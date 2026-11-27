@@ -37,7 +37,7 @@
 | 1 | Repository and screen inventory | [x] Complete | 17-screen baseline inventory and route/source mapping committed; Screen 18 and extra routes/assets recorded separately. See SCREEN-INVENTORY.md. |
 | 2 | Capability and facet mapping | [x] Complete | Owner selected manual file security analysis, quarantine/file disposition, and website/link checking. IP tracking is recorded as a future candidate and excluded from MVP. Scope decision, scenarios, exclusions and 15-facet map recorded. |
 | 3 | Prior-art discovery and selection | [x] Complete | Exit gate satisfied. Selected Phase 4 references and provenance recorded; unresolved technical/commercial/privacy gaps handed forward. Link checking is Pro-gated and owner-activation-gated. See PHASE-3-PRIOR-ART-REGISTER.md. |
-| 4 | Source-level rule extraction | [ ] Ready to start | Trace selected pinned source and official documentation into auditable rules across applicable facets. |
+| 4 | Source-level rule extraction | [~] In progress | Hypatia file-analysis/database/verifier source extraction recorded; Android quarantine and Web Risk contract extraction remain pending. See `re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md`. |
 | 5 | Software Rules synthesis | [ ] Not started | Create separate product-specific `software-rules/` deliverable. |
 | 6 | Completeness and conformance | [ ] Not started | Validate coverage, traceability, schemas, and replication completeness. |
 
