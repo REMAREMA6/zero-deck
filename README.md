@@ -18,6 +18,8 @@ Agent definitions (identities, skills, frameworks, and mental models) are intent
 - `re/zerodek-product-re/` — ZeroDeck reverse-engineering engagement records.
   - [Engagement understanding](re/zerodek-product-re/2026-11-27/ENGAGEMENT-UNDERSTANDING.md).
   - [Phase 1 screen inventory](re/zerodek-product-re/2026-11-27/SCREEN-INVENTORY.md).
+  - [Phase 2 candidate capability inventory](re/zerodek-product-re/2026-11-27/CAPABILITY-INVENTORY.md).
+  - [Phase 2 capability-to-15-facet mapping](re/zerodek-product-re/2026-11-27/CAPABILITY-FACET-MAPPING.md).
   - [Reference repository audit](re/zerodek-product-re/2026-11-27/REPOSITORY-AUDIT.md).
 - `re/oss-recon/` — earlier reconnaissance records. These were created for a separate Android Security Scanner engagement and must be audited before any content is reused for ZeroDeck.
 - `product-management/` — product-management agent workspace and its own records.
