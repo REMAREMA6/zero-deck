@@ -14,6 +14,12 @@
 | Runtime-observed | No ZeroDeck runtime evidence currently exists. |
 | Unknown | Not established; cannot be treated as false, absent, safe, or not applicable. |
 
+## Primary ZeroDeck decision and product-material records
+
+| Evidence ID | Artifact | Immutable revision / blob | Use |
+|---|---|---|---|
+| EVD-SRC-PRODUCT-001 | `lordwhitefire/Zerodek/upload/android_security_scanner_product_decisions.txt` | Commit `86908bff1aa1bbf85a231ba0d47b8fe9fff148c6`; blob `c0b247ab3ba990890f5ebce2e161fed08fc801f3` | Working-draft product material for file scanning, quarantine, privacy, link checking, proposed retention, and unresolved design choices. Preserve its draft/proposed/open labels. |
+
 ## Primary ZeroDeck decision records
 
 | Evidence ID | Artifact | Immutable blob SHA | Use |
