@@ -1,6 +1,6 @@
 # ZeroDeck MVP — Scenario-level property inventory
 
-**Status:** Phase 5 synthesis inventory; all runtime values remain unobserved. This inventory enumerates the governing facet dimensions per approved scenario. It is not a runtime capture, not an implementation prescription, and not a claim of replication sufficiency.
+**Status:** Phase 6-reviewed inventory; the missing quarantine Configuration coverage was corrected. All runtime values remain unobserved. This inventory enumerates the governing facet dimensions per approved scenario. It is not a runtime capture, not an implementation prescription, and not a claim of replication sufficiency.
 
 ## How to read this inventory
 
