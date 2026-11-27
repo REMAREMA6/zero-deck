@@ -1,0 +1,52 @@
+name: Validate ZeroDeck Software Rules capture
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "software-rules/**"
+      - "scripts/validate-software-rules-integrity.mjs"
+      - ".github/workflows/validate-software-rules.yml"
+  pull_request:
+    paths:
+      - "software-rules/**"
+      - "scripts/validate-software-rules-integrity.mjs"
+      - ".github/workflows/validate-software-rules.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out ZeroDeck project
+        uses: actions/checkout@v4
+        with:
+          path: zero-deck
+
+      - name: Check out pinned governing Software Rules specification
+        uses: actions/checkout@v4
+        with:
+          repository: REMAREMA6/software-rules
+          ref: 5591a2e62287afc29bde002369eaf659673ec59b
+          path: software-rules-spec
+
+      - name: Install governing validator
+        run: npm install --prefix software-rules-spec/conformance/validation
+
+      - name: Add ZeroDeck capture to governing schema fixture suite
+        run: cp zero-deck/software-rules/capture.json software-rules-spec/schemas/v1/fixtures/valid/zerodeck-capture.json
+
+      - name: Validate capture against Draft 2020-12 schemas
+        run: npm run validate --prefix software-rules-spec/conformance/validation
+
+      - name: Run governing completeness tests
+        run: npm run test:completeness --prefix software-rules-spec/conformance/validation
+
+      - name: Run governing cross-record integrity tests
+        run: node software-rules-spec/conformance/integrity/test.mjs
+
+      - name: Validate ZeroDeck-specific cross references
+        run: node zero-deck/scripts/validate-software-rules-integrity.mjs
+        working-directory: .
