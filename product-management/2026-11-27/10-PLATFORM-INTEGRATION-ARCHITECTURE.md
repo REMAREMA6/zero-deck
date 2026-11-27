@@ -19,7 +19,7 @@ Use a **local-first file security model**:
 - Make retention, restore, deletion, app-data-clear and uninstall consequences explicit. App-private files are removed on uninstall; quarantine must never be marketed as permanent backup.
 - A cloud scanning/upload feature is a separate future product decision requiring explicit consent, provider terms, data-flow disclosure, cost controls and a security review.
 
-**Leading stack recommendation for evaluation:** Expo + React Native + TypeScript for Android; a separate React/Next.js web client; shared TypeScript domain contracts and validation; Supabase as the first backend candidate for authentication, Postgres and server-side functions. Keep private file storage out of the cloud in MVP. Do not add Neon, Sanity, Cloudinary, Redis, a separate worker fleet or a message broker unless a demonstrated requirement appears.
+**Leading stack recommendation for evaluation:** Expo + React Native + TypeScript for Android; a separate React/Next.js web client; shared TypeScript domain contracts and validation; Neon as the managed PostgreSQL database; first-party authentication and application backend implemented and operated by the project. Keep private file storage out of the cloud in MVP. Do not add a third-party authentication provider, Sanity, Cloudinary, Redis, a separate worker fleet or a message broker unless a demonstrated requirement appears. The owner prefers first-party implementation and fewer external service dependencies, and has reached the two-project-per-account limit on Supabase.
 
 This is the smallest coherent starting point I currently recommend. It is not a claim that Expo alone supplies every native security capability; quarantine and key handling require native Android integration and device testing.
 
@@ -72,25 +72,45 @@ Alternative: one Expo app for Android and web. This may reduce initial code dupl
 
 ### Backend, database and authentication
 
-**Leading recommendation: Supabase, provisionally.**
+**Recommendation: Neon PostgreSQL + first-party authentication + our own trusted backend.**
 
-Use only the parts needed:
-- Supabase Auth for account identity if account-based Pro entitlement is required.
-- Postgres for account entitlement, owner-controlled activation configuration, quota/budget accounting and minimal service records.
-- Edge Functions or a small trusted server API for link-check orchestration and secret-bearing provider calls.
+- Neon provides the managed PostgreSQL database only.
+- Build the account/authentication flows and application-side identity/session logic ourselves.
+- Build and operate our own backend/API for registration, sign-in, verification, session lifecycle, account recovery, entitlement checks and link-check orchestration.
+- Do not use Supabase Auth, Clerk, Auth0 or another hosted identity provider for the initial architecture.
+- Use mature, maintained cryptographic and protocol libraries. "Build authentication ourselves" means owning the application implementation, policies, data model and testability; it does **not** mean inventing password hashing, cryptographic algorithms, token formats or security protocols.
 
-Why it leads over Neon + a separate API + separate auth:
-- One integrated service can reduce initial integration and operational burden.
-- Current published pricing lists a Free tier with 500 MB database per project, 50,000 monthly active users, 1 GB storage and 500,000 Edge Function invocations. It also states free projects may pause after inactivity and do not include automatic backups. Those limitations make it suitable for a prototype, not automatically suitable for a security product with paying users.
-- Neon is a credible Postgres option, but it is only the database layer. Choosing it would still require separate authentication, API hosting and function execution. That may be worthwhile later if database-specific needs justify the added components.
+Why this direction:
+- The owner has reached Supabase's two-project-per-account limit and does not want to create more accounts to work around it.
+- Neon is deliberately being used as a database service, not as an all-in-one backend platform.
+- The owner prefers to implement and test more of the system directly because third-party service behaviour, opaque provider-side state and support/debugging dependencies create operational friction.
+- A first-party implementation gives the team direct control over code paths, logs, tests, failure simulation and deployment. It also transfers the full security and maintenance responsibility to the team.
 
-**Security condition:** the client must never decide for itself that a user is Pro or that link checking is enabled. The trusted backend must verify:
-1. authenticated principal;
+**Authentication must be treated as security-critical infrastructure.** At minimum, design and test:
+1. Registration and account uniqueness.
+2. Password storage using a current, purpose-built password-hashing algorithm and safe parameters; never plaintext or reversible password encryption.
+3. Sign-in, generic failure responses where appropriate, throttling and abuse detection.
+4. Email/phone verification only if the selected account workflow requires it, with single-use, expiring, rate-limited verification challenges.
+5. Session creation, rotation, expiry, revocation, logout and concurrent-session policy.
+6. Password reset/account recovery with expiring, single-use challenges and protections against account takeover.
+7. CSRF protection for cookie-based browser sessions; secure, HttpOnly and appropriate SameSite cookie settings; strict origin/CORS policy.
+8. Secure Android token/session storage using platform-backed protected storage; do not store long-lived secrets in ordinary preferences or logs.
+9. Authorization checks on every protected server operation; authentication alone does not imply permission.
+10. Pro entitlement and owner activation checks on the server before any link-provider call.
+11. Audit/security events that avoid recording passwords, raw tokens, verification codes, file contents or unnecessary sensitive data.
+12. Key/secret rotation, dependency updates, backup/recovery and incident response.
+
+Use standard, widely reviewed libraries for password hashing, secure random generation, cryptographic operations, cookie/session handling and request validation. Do not implement cryptographic primitives manually. Select concrete libraries only after the chosen language/runtime and deployment environment are confirmed.
+
+**Security condition:** the client must never decide for itself that a user is authenticated, Pro, or that link checking is enabled. The trusted backend must verify:
+1. authenticated principal and valid session;
 2. active Pro entitlement;
 3. owner-controlled activation switch;
 4. per-user allowance, rate limit and global spend/budget controls.
 
-If any required gate fails or cannot be verified, do not call the threat-intelligence provider. Do not put provider API keys in either client.
+If any required gate fails or cannot be verified, do not call the threat-intelligence provider. Do not put database credentials, signing secrets or provider API keys in either client.
+
+Neon remains a third-party managed database dependency. The goal is not "zero third parties"; it is to keep third parties at clearly bounded infrastructure boundaries and own the application logic we need to debug and test.
 
 ### Private object storage
 
@@ -128,7 +148,7 @@ For the first demo, Pro entitlement can be represented by a controlled test enti
 
 1. **Android app:** Expo/React Native + TypeScript, with native Android support for file operations and Keystore-backed encryption where necessary.
 2. **Web app:** React/Next.js, sharing typed contracts and domain logic with Android where useful.
-3. **Backend:** Supabase Auth + Postgres + Edge Functions as the leading low-complexity candidate; compare against a small standalone API before final selection.
+3. **Backend/authentication:** our own backend and first-party authentication, with Neon PostgreSQL as the managed database. Use standard security libraries rather than custom cryptography.
 4. **File data:** local-only for MVP; encrypted Android app-private quarantine. No server upload of suspicious files.
 5. **URL checks:** backend proxy; enforce Pro + owner activation + quota/budget before provider call; keep provider credentials server-side.
 6. **Storage services:** no R2/Supabase Storage/Sanity/Cloudinary dependency for quarantine in MVP.
@@ -157,8 +177,9 @@ For the first demo, Pro entitlement can be represented by a controlled test enti
 | Android quarantine | Encrypted app-private internal storage, Keystore-backed key protection | Recommended; requires technical validation |
 | Cloud quarantine | Exclude from MVP | Recommended |
 | Client stack | Expo/React Native Android + separate React/Next.js web; shared TypeScript contracts | Leading recommendation; not final |
-| Backend | Supabase Auth + Postgres + Edge Functions | Leading candidate; not final |
-| Database alternative | Neon only if a separate backend/auth stack is justified | Alternative |
+| Database | Neon PostgreSQL | Owner-preferred direction; subject to capacity, region, limits and pricing review |
+| Authentication | First-party implementation maintained by ZeroDeck; no hosted auth provider | Owner direction; security design and test plan required |
+| Backend/API | First-party trusted backend | Recommended; hosting/runtime still to be selected |
 | Object storage | None for user files in MVP; consider private R2 only for a future justified use | Recommended |
 | Sanity / Cloudinary | Defer | Recommended |
 | Payment processor | Defer selection; keep Pro entitlement provider-neutral | Recommended |
@@ -170,7 +191,8 @@ For the first demo, Pro entitlement can be represented by a controlled test enti
 - Prototype a complete file lifecycle: select → inspect → quarantine → verify integrity → restore → delete → interruption recovery.
 - Compare local detection engines, signature-update distribution, licences, file coverage, false positives/negatives and resource use. The storage recommendation does not settle the detection engine.
 - Test browser file analysis feasibility and define the exact web MVP capability boundary.
-- Compare Supabase against a minimal standalone API + Neon using current regional availability, limits, backup/recovery, security features and real projected cost.
+- Compare Neon plan limits, compute/storage/branching, pooling, region/latency, backup/recovery and projected cost; validate a suitable hosting/runtime for the first-party backend.
+- Produce an authentication threat model and test plan covering registration, password handling, verification, sessions, recovery, CSRF, authorization, rate limits, revocation and concurrent sessions. Select standard security libraries only after the runtime is chosen.
 - Verify the chosen hosting region and latency for users in the initial launch market.
 - Verify payment-provider onboarding and settlement eligibility for the actual business entity before implementing paid subscriptions.
 - Define retention, backup, telemetry, privacy notice, deletion and incident-response rules.
@@ -188,8 +210,10 @@ Platform:
 - Android background work constraints: https://developer.android.com/develop/background-work/background-tasks/persistent
 
 Provider and pricing:
-- Supabase pricing: https://supabase.com/pricing
 - Neon pricing: https://neon.com/pricing
+- OWASP Authentication Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html
+- OWASP Session Management Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html
+- OWASP Password Storage Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html
 - Cloudflare R2 pricing: https://developers.cloudflare.com/r2/pricing/
 - Cloudflare R2 public/private bucket behaviour: https://developers.cloudflare.com/r2/buckets/public-buckets/
 - Sanity assets: https://www.sanity.io/docs/content-lake/assets
