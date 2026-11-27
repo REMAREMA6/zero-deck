@@ -644,12 +644,12 @@
       "evidenceType": "historical-reference-runtime-evidence-report",
       "mediaType": "text/markdown",
       "origin": {
-        "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/PHASE-7-AVAILABLE-RUNTIME-EVIDENCE.md",
-        "sourceRevision": "e39e97e1ae61094bd1c8eb05bb57ce3aabe47a51",
-        "location": "re/zerodek-product-re/2026-11-27/PHASE-7-AVAILABLE-RUNTIME-EVIDENCE.md"
+        "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/PHASE-7-RUNTIME-OBSERVATION-MAP.md",
+        "sourceRevision": "724131f0ea455b3bf774489ba3e79176aff81e4e",
+        "location": "re/zerodek-product-re/2026-11-27/PHASE-7-RUNTIME-OBSERVATION-MAP.md"
       },
       "capturedAt": "2026-11-27T16:30:00Z",
-      "locator": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/PHASE-7-AVAILABLE-RUNTIME-EVIDENCE.md",
+      "locator": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/PHASE-7-RUNTIME-OBSERVATION-MAP.md",
       "retention": {
         "status": "external",
         "access": "Public GitHub repository; source report is retained in the RE workspace."
@@ -665,21 +665,20 @@
       "evidenceType": "investigation-initiated-reference-runtime-test-report",
       "mediaType": "text/markdown",
       "origin": {
-        "sourceUri": "https://github.com/REMAREMA6/zero-deck/actions/runs/46029241394",
-        "sourceRevision": "31ea0904840ef0572641ec73052d7da8d0f42c2a",
-        "location": "Workflow .github/workflows/phase7-prior-art-tests.yml; exact target revisions and job logs are recorded in the linked Phase 7 report."
+        "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/PHASE-7-RENEWED-ACTIONS-RESULTS.md",
+        "sourceRevision": "57d138eeb26afec5320d4d7664acd4b443ee78dd",
+        "location": "re/zerodek-product-re/2026-11-27/PHASE-7-RENEWED-ACTIONS-RESULTS.md; runtime map RT-HYP-002, RT-HDB-004/005 and RT-CLAM-003"
       },
       "capturedAt": "2026-11-27T16:13:10Z",
-      "locator": "https://github.com/REMAREMA6/zero-deck/actions/runs/46029241394",
-      "digest": "861109e76bc61ddb4ff3f4e6baaadc3ad6d8158f985661e2a36f41f33b92c944",
+      "locator": "https://github.com/REMAREMA6/zero-deck/blob/main/re/zerodek-product-re/2026-11-27/PHASE-7-RENEWED-ACTIONS-RESULTS.md",
       "retention": {
         "status": "external",
         "access": "GitHub Actions run and artifact are publicly accessible; artifact retention expires 2026-12-11."
       },
       "limitations": [
-        "Reference targets only: Hypatia c0f98977be935e58849726313635a2459cac3892, HypatiaDatabases 3c35f52e1a847caed46d8e1ad34968bfa3c8b10a, and ClamAV cad7b18a3e6505195fe08db1412449a18fc9f012.",
-        "The run did not execute ZeroDeck or any of its seven MVP scenarios.",
-        "ClamAV CTest results belong to ClamAV; Hypatia and HypatiaDatabases report no test sources in the pinned trees.",
+        "Reference targets only: Hypatia c0f98977be935e58849726313635a2459cac3892 (run 46034540816), HypatiaDatabases 3c35f52e1a847caed46d8e1ad34968bfa3c8b10a (run 46034540816), and ClamAV cad7b18a3e6505195fe08db1412449a18fc9f012 (completed run 46029241394).",
+        "The runs did not execute ZeroDeck or any of its seven MVP scenarios.",
+        "Hypatia and HypatiaDatabases contain no test source suites at their pinned revisions; fixture assertions were investigation-owned harness tests.",
         "Contextual evidence only; no automatic product requirement, dependency approval, or ZeroDeck runtime observation."
       ]
     }
