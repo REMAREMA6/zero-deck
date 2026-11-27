@@ -4,7 +4,7 @@
 **Author:** ZeroDeck Product Management Agent  
 **Owner authority:** Product owner retains final authority  
 **Opened:** 2026-11-27  
-**Status:** [~] Phase 0 complete; Phase 1 in progress  
+**Status:** [x] Phases 0–1 complete; Phase 2 next  
 **Tracker:** [../TRACKER.md](../TRACKER.md)
 
 ## Purpose
@@ -97,7 +97,12 @@ These are architecture directions, not a complete authentication contract. Do no
 ## Deliverable layout
 
 - `2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md` — this workstream plan.
-- `product-rules/README.md` — contract index, version, scope and status.\n- `product-rules/PROFILE.md` — completed PM authoring profile and validation rules.\n- `product-rules/schemas/zero-deck-pm-declared-contract.schema.json` — complete PM declared-contract profile schema.\n- `product-rules/schemas/zero-deck-pm-requirements-extension.schema.json` — PM extension schema.\n- `product-rules/templates/` — declared-contract and evidence templates.\n- `product-rules/examples/declared-contract-format-example.json` — format-only fixture, not an approved product requirement.
+- `product-rules/README.md` — contract index, version, scope and status.
+- `product-rules/PROFILE.md` — completed PM authoring profile and validation rules.
+- `product-rules/schemas/zero-deck-pm-declared-contract.schema.json` — complete PM declared-contract profile schema.
+- `product-rules/schemas/zero-deck-pm-requirements-extension.schema.json` — PM extension schema.
+- `product-rules/templates/` — declared-contract and evidence templates.
+- `product-rules/examples/declared-contract-format-example.json` — format-only fixture, not an approved product requirement.
 - `product-rules/contracts/IDENTITY-AUTHENTICATION.md`
 - `product-rules/contracts/MANUAL-FILE-ANALYSIS.md`
 - `product-rules/contracts/QUARANTINE-DISPOSITION.md`
@@ -107,7 +112,11 @@ These are architecture directions, not a complete authentication contract. Do no
 
 These remain ZeroDeck PM artifacts mapped to Software Rules declared contracts. Do not write them into the separate Software Rules repository unless the owner approves that contribution.
 
-## Phase 1 completion record\n\nPhase 1 is complete. The exact upstream Software Rules commit is pinned; the PM profile maps to the existing `declaredContracts[]` record; the author/issuer, artifact revision/digest, normative statements, requirement metadata, official facet IDs, IDs/versioning, and owner-approval states are specified. Separate JSON Schemas validate the complete PM declared-contract record and its namespaced extension. A format-only fixture was checked against the upstream declared-contract/evidence definitions and PM extension constraints; statement/metadata parity, evidence linkage, and issuer/author identity passed. Negative checks detected missing author identity, invalid facet IDs, missing conditions on conditional requirements, and missing acceptance criteria. This was a targeted authoring-session validation, not an upstream Software Rules CI run or a claim of runtime conformance.\n\n## Completion criteria
+## Phase 1 completion record
+
+Phase 1 is complete. The exact upstream Software Rules commit is pinned; the PM profile maps to the existing `declaredContracts[]` record; the author/issuer, artifact revision/digest, normative statements, requirement metadata, official facet IDs, IDs/versioning, and owner-approval states are specified. Separate JSON Schemas validate the complete PM declared-contract record and its namespaced extension. A format-only fixture was checked against the upstream declared-contract/evidence definitions and PM extension constraints; statement/metadata parity, evidence linkage, and issuer/author identity passed. Negative checks detected missing author identity, invalid facet IDs, missing conditions on conditional requirements, and missing acceptance criteria. This was a targeted authoring-session validation, not an upstream Software Rules CI run or a claim of runtime conformance.
+
+## Completion criteria
 
 All in-scope capabilities have structured, versioned contracts; author/issuer is explicit; requirements have stable IDs, unambiguous normative statements and observable acceptance criteria; relevant facets are assessed; unknowns and owner decisions are visible; evidence is traceable; implementation details are not unnecessarily prescribed; and cross-facet contradictions and lifecycle/failure/recovery gaps are reviewed.
 
