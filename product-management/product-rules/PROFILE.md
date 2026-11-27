@@ -105,7 +105,7 @@ All PM-specific metadata lives under exactly:
 }
 ```
 
-The extension schema is `schemas/zero-deck-pm-requirements-extension.schema.json`. It validates the contents of `extensions.zeroDeckProductRequirements`, not the entire Software Rules capture. Validate the containing capture separately with the pinned upstream capture and record schemas.
+The complete PM record schema is `schemas/zero-deck-pm-declared-contract.schema.json`; it composes the upstream `declaredContract` definition with ZeroDeck's stricter author, artifact, statement, and extension requirements. It references the pinned upstream records schema and the local extension schema. The extension schema is `schemas/zero-deck-pm-requirements-extension.schema.json` and validates the contents of `extensions.zeroDeckProductRequirements`. Validate the containing capture separately with the pinned upstream capture schema.
 
 The extension contains:
 - explicit author identity and role;
@@ -215,15 +215,16 @@ A facet is an observation perspective, not a code module. Do not force every req
 Every published contract must pass all of these layers:
 
 1. **Upstream structural validation:** validate the containing capture against the pinned Software Rules 0.2.0 Draft `capture.schema.json` and `records.schema.json` (Draft 2020-12).
-2. **PM extension validation:** validate each `declaredContracts[].extensions.zeroDeckProductRequirements` against `schemas/zero-deck-pm-requirements-extension.schema.json`.
-3. **Record integrity:** all contract IDs, statement IDs, evidence IDs, decision IDs, and references are unique/resolvable; each contract's evidence references resolve to the correct retained artifact evidence record.
-4. **Statement/metadata parity:** extension requirement statement IDs and declared statement IDs are an exact one-to-one set; no orphan statement and no orphan metadata.
-5. **Normative consistency:** normativeKind matches the uppercase normative term in statement text; conditional requirements contain explicit conditions; each statement is atomic.
-6. **Facet validity:** every facetRef is one of the 15 accepted IDs in the pinned upstream facet catalogue.
-7. **Testability:** every requirement has at least one observable Given/When/Then acceptance criterion and a stated verification method.
-8. **Authority/provenance:** issuer and extension author are exact; approval states have decision references; claims are traceable to owner decisions, external evidence, platform contracts, or labelled PM inference.
-9. **Technology-independence:** reject unnecessary framework, language, database, hosting, vendor, or code-structure prescriptions.
-10. **Completeness/consistency review:** check applicable normal, boundary, denied, failure, interruption, recovery, privacy, and cross-facet cases; unresolved questions remain visible.
+2. **PM record-profile validation:** validate each `declaredContracts[]` item against `schemas/zero-deck-pm-declared-contract.schema.json`, registering the pinned upstream records schema and the local extension schema.
+3. **Direct extension validation:** validate each `declaredContracts[].extensions.zeroDeckProductRequirements` against `schemas/zero-deck-pm-requirements-extension.schema.json` when validating or editing the extension independently.
+4. **Record integrity:** all contract IDs, statement IDs, evidence IDs, decision IDs, and references are unique/resolvable; each contract's evidence references resolve to the correct retained artifact evidence record.
+5. **Statement/metadata parity:** extension requirement statement IDs and declared statement IDs are an exact one-to-one set; no orphan statement and no orphan metadata.
+6. **Normative consistency:** normativeKind matches the uppercase normative term in statement text; conditional requirements contain explicit conditions; each statement is atomic.
+7. **Facet validity:** every facetRef is one of the 15 accepted IDs in the pinned upstream facet catalogue.
+8. **Testability:** every requirement has at least one observable Given/When/Then acceptance criterion and a stated verification method.
+9. **Authority/provenance:** issuer and extension author are exact; approval states have decision references; claims are traceable to owner decisions, external evidence, platform contracts, or labelled PM inference.
+10. **Technology-independence:** reject unnecessary framework, language, database, hosting, vendor, or code-structure prescriptions.
+11. **Completeness/consistency review:** check applicable normal, boundary, denied, failure, interruption, recovery, privacy, and cross-facet cases; unresolved questions remain visible.
 
 JSON Schema validation alone does not establish issuer authenticity, evidence truth, semantic completeness, requirement quality, or runtime conformance. The semantic and owner-authority checks above are mandatory.
 
@@ -238,7 +239,7 @@ The profile also does not change the Software Rules specification or claim that 
 - [x] Pinned and inspected the exact upstream specification/schema revision.
 - [x] Selected the existing `declaredContract` record and `declared-contract` evidence class without inventing a fourth class.
 - [x] Defined exact field mapping and explicit PM issuer/author identity.
-- [x] Defined a namespaced extension location and local JSON Schema.
+- [x] Defined a namespaced extension location, extension JSON Schema, and complete PM declared-contract JSON Schema.
 - [x] Defined contract, requirement, acceptance-criterion, question and evidence identifier conventions.
 - [x] Defined normative language, priority, owner-approval status and versioning semantics.
 - [x] Defined official facet mapping and technology-independence rules.
