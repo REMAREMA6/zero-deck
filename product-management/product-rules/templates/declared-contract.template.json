@@ -49,6 +49,12 @@
           "platforms": ["web", "android"],
           "subject": "Example subject; replace with the actual product subject.",
           "rationale": "Replace with evidence-backed rationale or explicitly labelled PM inference.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Illustrative placeholder only; replace with the actual evidence or clearly labelled inference."
+            }
+          ],
           "acceptanceCriteria": [
             {
               "criterionId": "ZD-AUTH-AC-01",
