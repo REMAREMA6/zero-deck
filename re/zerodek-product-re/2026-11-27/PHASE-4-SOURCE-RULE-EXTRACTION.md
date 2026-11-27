@@ -121,7 +121,7 @@ These 10 rules extend the manual file-analysis evidence chain into the upstream 
 
 | Rule ID | Facets | Source-derived rule | Evidence |
 |---|---|---|---|
-| HYP-GEN-001 | Configuration, Background Processing | The stable generation workflow can be started manually and is scheduled by cron at 01:00 UTC on every second day-of-month pattern expressed as `0 1 */2 * *`. | `generate_stable.yml`, lines 1–6. |
+| HYP-GEN-001 | Configuration, Background Processing | The stable generation workflow can be started manually and is scheduled by cron using the expression `0 1 */2 * *` (01:00 on days selected by the every-two-days day-of-month pattern). | `generate_stable.yml`, lines 1–6. |
 | HYP-GEN-002 | Integrations, Data | The workflow combines multiple separately sourced indicator feeds, including ClamAV-extracted signatures, ESET, Signature-Base, ThreatView, ThreatFox, MalwareBazaar, Stalkerware, SaneSecurity, Avast COVID-19 indicators, Targeted Threats and Divest domain data. | `generate_stable.yml`, lines 22–27 and 37–177; README “Databases”. |
 | HYP-GEN-003 | Data, Behaviour | The generator accepts multiple feed formats, including ClamAV `.hdb/.hsb/.hdu/.hsu`, one-hash-per-line formats, Loki semicolon formats, and best-effort text files; gzip inputs are decompressed before parsing. | `App.java`, lines 143–198. |
 | HYP-GEN-004 | Data, Business Rules | Candidate indicators are lowercased, checked for hexadecimal form and accepted only at lengths 32, 40 or 64; other parsed lengths and non-hex values are counted as invalid. | `App.java`, lines 263–307. |
