@@ -11,6 +11,7 @@
 **Phase 4 extraction blob:** 7cc66f225f82a23a2b94bc53c3364c200f990f64  
 **Phase 4 facet audit blob:** 3b32ea7b60d90c30b1511a2e878a411cacc3a648  
 **Phase 4 plan closeout blob:** 71c734f9283e03d32263f75cbc9e46014e1e7e03  
+**Phase 7 decision commit:** b7187c126a8b3160a9a56828923843298abb33bf  
 **Current phase:** Phase 7 — Local runtime investigation and verification (preflight pending)  
 **Overall status:** Phases 0–6 are complete as project/review phases. Phase 7 is approved and in preflight; no runtime execution has started. The ZeroDeck product-specific Software Rules capture remains incomplete and not replication-sufficient. The owner-approved MVP is manual file security analysis, quarantine/file disposition, and Pro-gated website/link checking (disabled until owner activation when paid revenue can fund costs). IP address tracking/investigation is a future candidate and excluded from MVP.
 
