@@ -33,18 +33,30 @@
 - Artifact: `phase7-playwright-runner-evidence`, ID `15212805113`
 - Artifact SHA-256: `adf0a13e27fd8fdda42ba867fa0c07cca8f12d032a1fd9eaae62ac3eab165362`
 
-Both runs completed all steps successfully, including Playwright installation, fixture creation, browser assertions, evidence listing, and artifact upload.
+Both initial runs completed all steps successfully, including Playwright installation, fixture creation, browser assertions, evidence listing, and artifact upload. A third run then pinned both the runner label and Playwright package and also passed.
+
+### Run C — runner and Playwright dependency pinned
+
+- Commit: `d6b0f1ee7680eedd343dc9ecb6c435082bfe5b6f`
+- Runner: `ubuntu-26.04`
+- Playwright npm package: `1.65.1`
+- Upload action remains pinned to `ea165f8d65b6e75b540449e92b4886f43607fa02`.
+- Run: [46026419660](https://github.com/REMAREMA6/zero-deck/actions/runs/46026419660)
+- Result: **success**
+- Artifact: `phase7-playwright-runner-evidence`, ID `15212178222`
+- Artifact SHA-256: `8da4fe47e9d26232e15bccb57dc4d3203ed7123a869e6629fa8819acb28ac6dc`
+
+All workflow steps passed. The log printed Playwright version `1.65.1` and the expected browser assertion success message.
 
 ## 3. Environment observed
 
-From Run A's retained job log:
+From retained job logs:
 
 - GitHub-hosted Linux VM; runner version `2.338.2`.
 - Runner image resolved from `ubuntu-latest` to `ubuntu-26.04`, image version `20261116.202.1`.
 - Node.js `v24.22.3`.
 - npm `11.19.1`.
-- Playwright installed Chromium and its system dependencies. Browser log identified Chrome for Testing `159.0.8154.6` (Playwright Chromium build `v1255`).
-- The exact npm Playwright package version was not printed by this first smoke workflow; future target workflows must pin and report their test dependencies.
+- Playwright `1.65.1` was explicitly pinned in Run C. It installed Chromium and its system dependencies. Run A's browser log identified Chrome for Testing `159.0.8154.6` (Playwright Chromium build `v1255`); each target workflow should record its exact browser/tool versions.
 
 ## 4. Assertions performed
 
@@ -61,7 +73,7 @@ The job log contains: `PASS: title, heading, click interaction and screenshot`.
 
 ## 5. Captured artifacts
 
-Both runs uploaded three files:
+All three runs uploaded three files:
 
 - `screenshots/runner-smoke.png` — 1280 × 720 PNG.
 - `videos/page@….webm` — browser recording.
@@ -79,11 +91,11 @@ Artifacts are retained by GitHub Actions for 14 days from each run. Use the run 
 
 ## 7. Remaining constraints
 
-- The workflow currently uses `ubuntu-latest`; the actual resolved image/version is recorded above but may change on later runs.
-- Playwright is installed without an exact npm version pin in this smoke workflow. Pin dependencies and report versions in target-specific workflows.
-- The upload action is now pinned to an immutable commit.
+- The workflow now requests `ubuntu-26.04` rather than `ubuntu-latest`; GitHub still updates the image revision over time, so logs must retain the resolved image version.
+- Playwright is pinned to `1.65.1` and the artifact upload action is pinned to an immutable commit.
+- Future target workflows should pin dependencies/tool versions and record the resolved runner image revision.
 - GitHub-hosted runners do not override the uploaded RE-agent ownership gate for third-party software and do not automatically qualify as an isolated malware-analysis lab.
 
 ## 8. Exit result
 
-**Runner capability smoke test: SATISFIED.** The first-party GitHub Actions + Playwright + artifact path passed twice, including once after pinning the artifact-upload action. The renewed Phase 7 prior-art investigation remains incomplete: selected third-party targets are currently blocked by the written-permission requirement, and conditional provider tests need owner-supplied credentials and explicit approval.
+**Runner capability smoke test: SATISFIED.** The first-party GitHub Actions + Playwright + artifact path passed three times. The final run pinned the runner label, Playwright `1.65.1`, and the artifact-upload action to an immutable commit. The renewed Phase 7 prior-art investigation remains incomplete: selected third-party targets are currently blocked by the written-permission requirement, and conditional provider tests need owner-supplied credentials and explicit approval.
