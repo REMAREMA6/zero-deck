@@ -12,8 +12,8 @@
 **Phase 4 facet audit blob:** 3b32ea7b60d90c30b1511a2e878a411cacc3a648  
 **Phase 4 plan closeout blob:** 71c734f9283e03d32263f75cbc9e46014e1e7e03  
 **Phase 7 corrected decision commit:** 6cc99584682becef61dbb7d728d604c24d884b1b  
-**Current phase:** Phase 7 — REOPENED (renewed GitHub Actions-enabled investigation)  
-**Overall status:** Phases 0–6 remain complete as bounded review phases. The first Phase 7 pass is preserved as a completed historical bounded investigation. The owner has approved a renewed Phase 7 pass using GitHub Actions hosted runners for previously skipped paths where feasible, and explicitly authorized ordinary tests of the three pinned open-source prior-art targets under the scoped authorization record. ZeroDeck's product-specific Software Rules capture remains incomplete and not replication-sufficient. The owner-approved MVP is manual file security analysis, quarantine/file disposition, and Pro-gated website/link checking (disabled until owner activation when paid revenue can fund costs). IP address tracking/investigation is a future candidate and excluded from MVP.
+**Current phase:** Phase 7 — bounded renewed reference-runtime investigation complete (2026-11-27)  
+**Overall status:** Phases 0–6 are complete as bounded review phases. The renewed Phase 7 reference-runtime pass is also complete within its stated limits. The owner authorization is scoped to the three pinned open-source targets; the absolute consult-first default remains for all other targets/actions. ZeroDeck's product-specific Software Rules capture remains incomplete and not replication-sufficient. The owner-approved MVP is manual file security analysis, quarantine/file disposition, and Pro-gated website/link checking (disabled until owner activation when paid revenue can fund costs). IP address tracking/investigation is a future candidate and excluded from MVP.
 
 > This is the persistent progress and handoff record. Update it whenever work starts, changes status, becomes blocked, or is completed. A new chat must be able to resume from this file and the linked repository records without depending on private chat history.
 
@@ -155,8 +155,8 @@ At the end of every work session:
 - [x] Re-read prior Phase 7 evidence, target pins, and the uploaded RE-agent ownership/safety constraints.
 - [x] Build the target-by-target eligibility matrix in `PHASE-7-RENEWAL-TARGET-MATRIX.md`.
 - [x] Build and run a first-party GitHub Actions + Playwright runner smoke test three times; screenshot/video/trace artifact upload succeeded. Final run pins runner label, Playwright and upload action. See `PHASE-7-RUNNER-SMOKE-REPORT.md`.
-- [ ] Execute additional selected third-party prior-art targets only after written permission from each relevant owner is recorded.
-- [ ] Reassess browser UI capture of the reference fork only after the ownership gate is satisfied; keep it separate from native-app runtime claims.
+- [x] Execute the three owner-authorized, exact-pinned prior-art targets using GitHub Actions; record outcomes and skips in `PHASE-7-RENEWED-CLOSEOUT-AUDIT.md`.
+- [x] Keep the mockup fork out of runtime testing; UI source capture remains separate from native-app runtime claims.
 - [ ] Reassess native build/test paths for actual ZeroDeck when first-party app source/build exists.
 - [ ] Run authorized integration/provider tests only with owner-configured test secrets, dedicated test environments, and explicit approval for live data disclosure/costs.
 - [ ] Reconcile eligible new evidence to the seven MVP scenarios and all 15 facets without promoting reference behaviour into ZeroDeck rules.
