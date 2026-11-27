@@ -12,8 +12,8 @@
 **Phase 4 facet audit blob:** 3b32ea7b60d90c30b1511a2e878a411cacc3a648  
 **Phase 4 plan closeout blob:** 71c734f9283e03d32263f75cbc9e46014e1e7e03  
 **Phase 7 corrected decision commit:** 6cc99584682becef61dbb7d728d604c24d884b1b  
-**Current phase:** Phase 7 — bounded renewed reference-runtime investigation complete (2026-11-27)  
-**Overall status:** Phases 0–6 are complete as bounded review phases. The renewed Phase 7 reference-runtime pass is also complete within its stated limits. The owner authorization is scoped to the three pinned open-source targets; the absolute consult-first default remains for all other targets/actions. ZeroDeck's product-specific Software Rules capture remains incomplete and not replication-sufficient. The owner-approved MVP is manual file security analysis, quarantine/file disposition, and Pro-gated website/link checking (disabled until owner activation when paid revenue can fund costs). IP address tracking/investigation is a future candidate and excluded from MVP.
+**Current phase:** Phase 7 — final planned phase; bounded reference-runtime investigation complete (2026-11-27)  
+**Overall status:** Phase 7 is the final planned phase and its bounded reference-runtime investigation is complete. The three owner-authorized executable prior-art targets were exercised at exact pinned revisions; remaining paths have explicit evidence/skip dispositions. The Software Rules capture now registers the reference evidence as supporting context but retains zero ZeroDeck runtime observations/rules. The product-specific capture remains incomplete and not replication-sufficient because required product properties/owner decisions remain open in `software-rules/OPEN-PROPERTIES.md`. A first-party ZeroDeck runtime is not required to complete this reverse-engineering specification. No Phase 8 is planned. The owner authorization remains scoped to the three pinned targets; the consult-first default remains for other actions.
 
 > This is the persistent progress and handoff record. Update it whenever work starts, changes status, becomes blocked, or is completed. A new chat must be able to resume from this file and the linked repository records without depending on private chat history.
 
@@ -27,16 +27,16 @@
 
 ## Current position
 
-- **Current phase:** Phase 7 — bounded renewed reference-runtime investigation complete (2026-11-27).
+- **Current phase:** Phase 7 — final planned phase; bounded reference-runtime investigation complete (2026-11-27).
 - **Owner authorization:** The owner explicitly authorized ordinary inspection/build/test work for the three exact-pinned open-source targets. Rationale and scope are recorded in `re/zerodek-product-re/2026-11-27/OWNER-AUTHORIZATION-PHASE-7-OPEN-SOURCE-TESTING.md`. This is a scoped exception; the absolute consult-first default remains for all unlisted targets/actions.
 - **Runner smoke:** First-party Playwright smoke passed three times: [#46026033625](https://github.com/REMAREMA6/zero-deck/actions/runs/46026033625), [#46026203672](https://github.com/REMAREMA6/zero-deck/actions/runs/46026203672), [#46026419660](https://github.com/REMAREMA6/zero-deck/actions/runs/46026419660).
-- **Hypatia:** [Run #46029241394](https://github.com/REMAREMA6/zero-deck/actions/runs/46029241394) successfully completed Gradle lint/build and produced a debug APK at the pinned SHA. The unit-test task was `NO-SOURCE`. Lint report includes one Error-severity finding and warnings; see `PHASE-7-RENEWED-ACTIONS-RESULTS.md`.
-- **HypatiaDatabases:** [Run #46029241394](https://github.com/REMAREMA6/zero-deck/actions/runs/46029241394) completed Maven packaging and ran the actual generator against deterministic harmless fixtures: 3 valid hashes, 1 domain, 0 invalid, four non-empty Bloom-filter outputs. Maven reported no test sources. No live feeds, signing or publication.
-- **ClamAV:** [Run #46028645716](https://github.com/REMAREMA6/zero-deck/actions/runs/46028645716) completed CMake configure/build and CTest 9/9 passed. Its retained test log reports 201 passed / 2 skipped across Python groups. A later repeat's CTest step is still running; use the completed run as current successful evidence.
+- **Hypatia:** [Run #46034540816](https://github.com/REMAREMA6/zero-deck/actions/runs/46034540816) successfully completed Gradle lint/build and produced a debug APK at the pinned SHA. The unit-test task was `NO-SOURCE`; a full 354-entry source-tree audit found no test source files. Lint report includes one Error-severity finding and warnings; see `PHASE-7-RENEWED-ACTIONS-RESULTS.md`.
+- **HypatiaDatabases:** [Run #46034540816](https://github.com/REMAREMA6/zero-deck/actions/runs/46034540816) completed Maven packaging and three harmless fixture branches: valid hashes/domain, malformed hash rejection (2 invalid), and excluded-hash filtering. Four non-empty Bloom-filter outputs were verified for the valid fixture. No upstream test sources, live feeds, signing or publication.
+- **ClamAV:** [Run #46029241394](https://github.com/REMAREMA6/zero-deck/actions/runs/46029241394) completed CMake configure/build and CTest 15/15 targets passed, 0 failed. Its retained `LastTest.log` reports 416 passed / 2 skipped across pytest invocations, including Valgrind reruns (not 416 unique tests).
 - **Initial failures and corrections:** First attempt exposed runner setup errors and a malformed escaped-newline fixture; corrected. Hypatia's first attempt failed dependency verification; subsequent Gradle build succeeded. A separate direct POM fetch returned a digest different from pinned metadata; unresolved, but Gradle's actual build succeeded and verification was not disabled.
 - **Artifacts inspected:** Hypatia APK/lint report, HypatiaDatabases fixture output, and ClamAV detailed CTest/Python logs. Details, exact revisions, commands, artifacts and limitations: `re/zerodek-product-re/2026-11-27/PHASE-7-RENEWED-ACTIONS-RESULTS.md`.
 - **Excluded / conditional:** Do not spend Phase 7 runtime effort on the mockup fork; UI source capture is sufficient. Web Risk live calls remain separately gated by credentials and explicit URL-disclosure/cost approval. No actual ZeroDeck app runtime exists yet.
-- **Closeout:** The bounded renewed Phase 7 pass is complete. See `re/zerodek-product-re/2026-11-27/PHASE-7-RENEWED-CLOSEOUT-AUDIT.md`. All three selected executable prior-art targets have exact-revision Actions build/test evidence; all 15 facets and seven MVP scenarios retain evidence/skip dispositions. The actual ZeroDeck product remains incomplete and NOT replication-sufficient. Next substantive runtime capture depends on a first-party ZeroDeck build becoming available.
+- **Closeout:** The bounded renewed Phase 7 pass is complete. See `re/zerodek-product-re/2026-11-27/PHASE-7-RENEWED-CLOSEOUT-AUDIT.md`. All three selected executable prior-art targets have exact-revision Actions build/test evidence; all 15 facets and seven MVP scenarios retain evidence/skip dispositions. Reference evidence is registered in `capture.json` as supporting context; ZeroDeck executions/observations/runtime rules remain zero. The product-specific capture remains incomplete because required product properties and owner decisions remain open; this is not a requirement to build ZeroDeck first.
 
 ## Phase tracking
 
@@ -112,23 +112,25 @@ This closes synthesis only. The machine capture has no runtime executions, obser
 
 Review closed 2026-11-27 under the plan's incomplete-deliverable exit branch. The capture remains incomplete and not replication-sufficient; obtain an authorized runtime target/build and resolve the open product decisions before any conformance claim.
 
-## Phase 7 — Renewed GitHub Actions-enabled runtime investigation
+## Phase 7 — Final planned phase: reference-runtime investigation and evidence reconciliation
 
-[~] Reopened by owner on 2026-11-27. The earlier bounded pass and closeout remain historical records; they are not being retroactively rewritten. The initial decision's target designation was incorrect and is superseded by the corrected decision. The actual targets were the selected Phase 3 implementations, not the ZeroDeck mockup fork.
+[x] Complete — bounded renewed investigation closed 2026-11-27. Phase 7 is the final planned phase; there is no Phase 8.
 
-- [x] Correct the Phase 7 scope: Hypatia, HypatiaDatabases and ClamAV (comparison only) are the runtime candidates; Web Risk is documented-only unless separately approved; Android platform docs are not executable targets.
-- [x] Exclude UI runtime inspection from Phase 7 and record that the actual ZeroDeck UI runtime rules may be captured later by the developer agent.
-- [x] Complete target and environment preflight for Hypatia, HypatiaDatabases and ClamAV; exact build paths, dependencies, external feed/API constraints, tool availability, licence/permission gaps and isolation blocker recorded in `PHASE-7-TARGET-PREFLIGHT.md`.
-- [x] Extract 12 bounded UI source-derived rules separately from the pinned lordwhitefire/Zerodek screen source. See `re/zerodek-product-re/2026-11-27/UI-SOURCE-DERIVED-RULES.md`.
-- [x] Check available upstream CI evidence for each selected executable target at its exact Phase 3 pinned revision; record run IDs, outcomes and accessible log evidence.
-- [x] Record the owner's execution instruction: complete what is feasible; skip a target/scenario that cannot reasonably be run; continue with the others; do not waste time forcing blocked paths.
-- [x] Map available upstream runtime/build/test observations to the 15 facets and all seven ZeroDeck MVP scenarios, preserving evidence class and limitations. See `PHASE-7-RUNTIME-OBSERVATION-MAP.md`.
-- [x] Inspect further accessible non-invasive CI logs: HypatiaDatabases generator metrics and unsigned publication; ClamAV CVD verification, signature-tool and scan-callback cases.
-- [x] Recheck local environment and record precise blockers for local/device/provider execution. Skip paths requiring absent prerequisites or an unverified lab.
-- [x] Reconcile the evidence register and rule traceability without transferring prior-art behaviour into ZeroDeck requirements; keep the machine capture's runtime-observation count at zero and preserve all open properties.
-- [x] Assess replication sufficiency: ZeroDeck remains incomplete and not replication-sufficient. See `PHASE-7-CLOSEOUT-AUDIT.md`.
+- [x] Correct the target scope: Hypatia, HypatiaDatabases and ClamAV are the three authorized executable prior-art targets; Web Risk remains documented-only; Android platform docs are not executable repositories; the mockup fork remains source/design evidence only.
+- [x] Complete preflight and exact-revision build/test execution using GitHub Actions hosted runners.
+- [x] Audit the pinned Hypatia tree (354 entries): no test source files or test directories exist; Gradle reports `testDebugUnitTest: NO-SOURCE`. Build/APK/lint evidence retained; lint error and warnings disclosed.
+- [x] Audit the pinned HypatiaDatabases tree (36 entries): no `src/test` or test source files exist. Run valid hash/domain, malformed-hash and exclusion fixture branches; all assertions passed.
+- [x] Execute ClamAV CMake build and CTest at the pinned revision: 15/15 targets passed, 0 failed; 416 pytest test executions passed and 2 skipped across standard and Valgrind invocations (not 416 unique tests).
+- [x] Inspect final logs/artifacts and record exact run IDs, revisions, artifact IDs/digests, test outcomes, lint findings and limits in `PHASE-7-RENEWED-ACTIONS-RESULTS.md`.
+- [x] Map reference findings to all 15 facets and seven MVP scenarios with explicit evidence boundaries; no reference behaviour promoted to ZeroDeck rules.
+- [x] Record Web Risk live-call, live feed, publication, emulator/device and malware-sample skips with reasons; continue all independent safe paths.
+- [x] Register EVD-RT-REF-001/002 as supporting-context evidence in `capture.json`, align `EVIDENCE.md`, and retain zero ZeroDeck executions, observations and runtime rules.
+- [x] Validate the reconciled machine capture and evidence cross-references; successful validation: [run #46034634801](https://github.com/REMAREMA6/zero-deck/actions/runs/46034634801). A later validation is running for the final evidence revision.
+- [x] Close the renewed Phase 7 audit and reconcile plan/tracker status.
 
-**Previous Phase 7 closeout:** the first bounded investigation exit gate was satisfied under its original constraints. That report remains valid for the work actually performed. The owner has now reopened Phase 7 for a renewed pass using GitHub Actions. The renewed pass must not erase or overstate the first pass. Follow `GITHUB-ACTIONS-EXECUTION-PROCEDURE.md`. ZeroDeck remains incomplete and not replication-sufficient.
+**Phase 7 exit gate:** satisfied for the bounded reference-runtime investigation. This does not claim that the ZeroDeck-specific Software Rules are complete. The remaining required product properties and owner decisions are listed in `software-rules/OPEN-PROPERTIES.md`; they remain visible and unresolved. A first-party ZeroDeck runtime is not required for this reverse-engineering specification, and no first-party runtime behaviour is claimed.
+
+**Deferred, separately gated work (not Phase 7 blockers):** live Web Risk calls require an owner-configured project/credentials and explicit approval for URL disclosure and costs. Live feed ingestion/signing/publication and destructive deployment remain outside the authorization. Native app implementation/runtime tests occur after this RE specification work.
 
 ## Handoff protocol
 
