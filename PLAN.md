@@ -76,11 +76,14 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 **Exit gate: satisfied 2026-11-27.** Every selected Phase 4 reference has a documented capability mapping and provenance. Commercial, privacy, technical and runtime gaps are explicitly handed to Phase 4; no direct third-party dependency adoption or runtime verification is implied. See `PHASE-3-PRIOR-ART-REGISTER.md` and `PRO-GATED-LINK-CHECK-DECISION.md`.
 
 ### Phase 4 — Source-level rule extraction
-- [ ] Inspect relevant source files and trace each selected capability through its implementation.
-- [ ] Extract conditions, decisions, state transitions, workflows, data constraints, persistence, interfaces, errors/recovery, security, integrations, configuration, and performance properties as applicable.
-- [ ] Record exact repository, immutable revision, file path, symbol/line references, and evidence classification for every finding.
-- [ ] Separate source-derived rules from any runtime-verified rules.
-**Exit gate:** each rule claim is auditable and linked to the Zerodek capability and applicable facet; unsupported claims are removed or marked unresolved.
+- [x] Inspect and trace the selected Hypatia scanner, database, verifier, and HypatiaDatabases generator/workflow at pinned revisions.
+- [x] Extract manual file-analysis, signature database, feed-generation, and signed-artifact rules with file/line provenance.
+- [x] Inspect Android storage, SAF, and Keystore documentation; extract quarantine-related platform constraints and explicitly retain implementation unknowns.
+- [x] Inspect Web Risk Lookup, REST schema, threat types, caching, and pricing; separate provider contracts from ZeroDeck owner policy.
+- [x] Record the Pro entitlement and owner-activation requirements as separate owner-declared rules.
+- [x] Audit all 15 Software Rules facets against each approved MVP capability and record evidence, conditional applicability, and unknowns.
+- [x] Separate source-derived/documented/owner-declared claims from runtime-verified claims; no ZeroDeck runtime behaviour is claimed.
+**Exit gate: satisfied 2026-11-27 for source-level extraction.** Every extracted rule has an evidence class, provenance and applicable facet mapping; all 15 facets were reviewed across the three approved MVP capabilities; unsupported behaviour and required unknowns are explicitly retained. This closes extraction only, not product completeness or replication sufficiency. See `PHASE-4-SOURCE-RULE-EXTRACTION.md` and `PHASE-4-15-FACET-COVERAGE-AUDIT.md`.
 
 ### Phase 5 — Software Rules synthesis
 - [ ] Read and apply the current Software Rules core model, terminology, principles, evidence/provenance, source-derived-rule requirements, and facet specifications.
