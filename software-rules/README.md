@@ -17,10 +17,12 @@ The specification describes the properties that an independent implementation mu
 1. [Scope and authority](SCOPE.md)
 2. [Capability scenarios](SCENARIOS.md)
 3. [Owner-declared rules](OWNER-RULES.md)
-4. [15-facet property map](FACET-MAP.md)
-5. [Evidence and provenance register](EVIDENCE.md)
-6. [Open required properties](OPEN-PROPERTIES.md)
-7. [Machine-readable capture](capture.json)
+4. [Product-material workflow rules](PRODUCT-MATERIAL-RULES.md)
+5. [15-facet property map](FACET-MAP.md)
+6. [Typed facet payload mapping](PAYLOAD-MAPPING.md)
+7. [Evidence and provenance register](EVIDENCE.md)
+8. [Open required properties](OPEN-PROPERTIES.md)
+9. [Machine-readable capture](capture.json)
 
 ## Authority and evidence classes
 
