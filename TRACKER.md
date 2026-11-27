@@ -4,7 +4,7 @@
 **Repository:** REMAREMA6/zero-deck  
 **Last updated:** 2026-11-27  
 **Current phase:** Phase 1 — Mockup inventory  
-**Overall status:** Phase 0 governance and handoff setup is complete. The 17-screen inventory has not yet been produced. Existing `re/oss-recon/` research is for an Android Security Scanner project and is not accepted as Zerodek capability coverage.
+**Overall status:** Phase 0 governance and handoff setup is complete. Phase 1 repository audit is underway. The reference repository currently contains extensive Android Security Scanner materials; the relationship between those materials and the Zerodek product identity must be confirmed before they are treated as Zerodek evidence.
 
 > This is the persistent progress and handoff record. Update it whenever work starts, changes status, becomes blocked, or is completed. A new chat must be able to resume from this file and the linked repository records without depending on private chat history.
 
@@ -19,17 +19,17 @@
 ## Current position
 
 - **Current phase:** Phase 1 — Mockup inventory
-- **Current task:** Audit and classify the complete Zerodek reference repository before inspecting the individual screens. The repository contains both design handoffs and substantial existing application source.
-- **Completed:** Read `REMAREMA6/software-rules/CONTRIBUTING.md`, `PLAN.md`, `TRACKER.md`, `specification/CORE.md`, and `specification/REPLICATION-COMPLETENESS.md). Read this project's `RULES.md`, `re/MISSION.md`, and engagement understanding.
-- **Blockers:** None for governance setup. The 17-screen mockup inventory has not started.
-- **Next action:** Complete governance setup, then inspect the Zerodek repository tree and all 17 mock screens to build the screen inventory.
+- **Current task:** Resolve the product identity discrepancy documented in `REPOSITORY-AUDIT.md`; then map the canonical 17 screens to their reference assets, handoff documents, routes, and implementation components.
+- **Completed:** Re-read this project's governance and current tracker/plan/contribution guide; inspected the reference repository metadata, complete recursive tree (284 paths), route/component counts, `package.json`, Prisma schema, sample route files, and scanner-specific handoff/product-decision documents. Recorded findings in `REPOSITORY-AUDIT.md`.
+- **Blockers:** The inspected `lordwhitefire/Zerodek` repository internally identifies its product as “Security Scanner” in product decisions, screen specs, route metadata, and component names. Confirm whether this is the intended Zerodek product or the wrong reference repository/material.
+- **Next action:** Confirm product identity. If confirmed as the intended Zerodek product, proceed with the 17-screen evidence-to-route/component inventory; otherwise provide the correct reference source.
 
 ## Phase tracking
 
 | Phase | Name | Status | Notes |
 |---|---|---|---|
 | 0 | Governance and handoff | [x] Complete | Project plan, persistent tracker, contribution guide, README navigation, and resumption pattern established and verified. |
-| 1 | Repository and screen inventory | [~] In progress | Classify the full reference repository, then inventory all 17 screens and distinguish mockup intent from existing code and demo behaviour. |
+| 1 | Repository and screen inventory | [~] In progress | Repository audit recorded; awaiting confirmation that the scanner-specific reference materials are the intended Zerodek product before screen-by-screen inventory. |
 | 2 | Capability and facet mapping | [ ] Not started | Map all required capabilities/properties to the 15 Software Rules facets. |
 | 3 | Prior-art discovery and selection | [ ] Not started | Audit prior work; identify and verify relevant open-source sources. |
 | 4 | Source-level rule extraction | [ ] Not started | Inspect source code and record auditable source-derived rules. |
@@ -54,9 +54,11 @@
 
 ## Phase 1 — Mockup inventory
 
-Not started.
+[~] In progress — preliminary repository audit completed; product identity confirmation pending.
 
-Required outputs will be stored under `re/zerodek-product-re/2026-11-27/screen-inventory/`. The reference repository contains existing application source and design handoffs as well as screen previews. Classify evidence by origin and maturity. Do not treat placeholder/demo code as implemented product behaviour, and do not treat source code as proof of deployed runtime behaviour.
+Audit: `re/zerodek-product-re/2026-11-27/REPOSITORY-AUDIT.md`.
+
+The reference repository contains 19 route page files and 19 named screen components, plus scanner-specific product decisions, handoff documents, and a separate Expo source tree. It identifies the product as “Security Scanner” internally. Do not treat these materials as Zerodek requirements until the owner confirms the relationship. After confirmation, inventory the canonical 17 screens and distinguish mockup intent, source implementation, demo/local state, connected behaviour, and unknowns.
 
 ## Phase 2 — Capability and facet mapping
 
