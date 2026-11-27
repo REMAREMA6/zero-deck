@@ -8,8 +8,8 @@
 **Phase 2 facet mapping (scope-finalized) commit:** d0a8e834b36da917ab26b8781d234c31e7a00c29
 **Phase 2 owner decision commit:** 281eae0327d772f8b2c787edb9eda38ab0131c89
 **Repository audit closeout commit:** a9ef68819d2793f524bea752f2ccd0ac541981f9  
-**Current phase:** Phase 4 — Source-level rule extraction (in progress)  
-**Overall status:** Phases 0–3 are complete. The owner-approved MVP is manual file security analysis, quarantine/file disposition, and Pro-gated website/link checking (disabled until owner activation when paid revenue can fund costs). IP address tracking/investigation is a future candidate and excluded from MVP.
+**Current phase:** Phase 5 — Software Rules synthesis (ready to start)  
+**Overall status:** Phases 0–4 are complete. The owner-approved MVP is manual file security analysis, quarantine/file disposition, and Pro-gated website/link checking (disabled until owner activation when paid revenue can fund costs). IP address tracking/investigation is a future candidate and excluded from MVP.
 
 > This is the persistent progress and handoff record. Update it whenever work starts, changes status, becomes blocked, or is completed. A new chat must be able to resume from this file and the linked repository records without depending on private chat history.
 
@@ -23,11 +23,11 @@
 
 ## Current position
 
-- **Current phase:** Phase 4 — Source-level rule extraction
-- **Current task:** Extract and provenance-check Hypatia manual file-analysis and signed-database behaviour first; then Android quarantine platform constraints and Web Risk Lookup semantics. Initial Hypatia extraction is underway; no ZeroDeck runtime behaviour is asserted.
-- **Completed:** Phase 3 exit gate satisfied. Phase 4 initial source review: Hypatia `MalwareScanner.kt`, `Database.kt`, and `GPGDetachedSignatureVerifier.java` inspected at pinned revision `c0f98977be935e58849726313635a2459cac3892`; first evidence-backed extraction is being recorded. Android and Web Risk contract extraction remain pending.
-- **Blockers:** No phase-start blocker. Phase 4 must retain unresolved gaps: file scan coverage/data rights/locality; quarantine URI/storage lifecycle; Web Risk URL disclosure/privacy, terms and budget controls; Pro entitlement lifecycle and activation policy.
-- **Next action:** Start source-level extraction from Hypatia's pinned scanner/database/verifier files and Android storage/SAF/Keystore docs; then trace Web Risk Lookup request/response/cache semantics. Keep IP tracking outside MVP.
+- **Current phase:** Phase 5 — Software Rules synthesis (ready to start)
+- **Current task:** Read the current governing Software Rules core model, schemas, evidence/provenance and facet specifications; then create the separate ZeroDeck `software-rules/` deliverable using the extracted evidence and preserving all unknowns.
+- **Completed:** Phase 4 exit gate satisfied 2026-11-27. Extracted 31 source-derived Hypatia/HypatiaDatabases rules, 28 Android/Web Risk documented-contract rules, and 5 owner-declared link-gating rules. Audited all 15 facets across all three approved MVP capabilities. No ZeroDeck runtime behaviour or replication sufficiency is claimed.
+- **Blockers:** No Phase 5 start blocker. Carry forward unresolved properties: file scan coverage/data rights/locality and verdict policy; quarantine isolation/integrity/atomicity/retention/recovery; URL disclosure/consent, provider procurement/authentication, error mapping, Pro entitlement lifecycle, quotas and owner activation controls; runtime interface and performance evidence.
+- **Next action:** Begin Phase 5 synthesis using the current Software Rules specification and the Phase 4 extraction/audit records. Keep IP tracking outside MVP.
 
 ## Phase tracking
 
@@ -37,8 +37,8 @@
 | 1 | Repository and screen inventory | [x] Complete | 17-screen baseline inventory and route/source mapping committed; Screen 18 and extra routes/assets recorded separately. See SCREEN-INVENTORY.md. |
 | 2 | Capability and facet mapping | [x] Complete | Owner selected manual file security analysis, quarantine/file disposition, and website/link checking. IP tracking is recorded as a future candidate and excluded from MVP. Scope decision, scenarios, exclusions and 15-facet map recorded. |
 | 3 | Prior-art discovery and selection | [x] Complete | Exit gate satisfied. Selected Phase 4 references and provenance recorded; unresolved technical/commercial/privacy gaps handed forward. Link checking is Pro-gated and owner-activation-gated. See PHASE-3-PRIOR-ART-REGISTER.md. |
-| 4 | Source-level rule extraction | [~] In progress | Hypatia file-analysis/database/verifier source extraction recorded; Android quarantine and Web Risk contract extraction remain pending. See `re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md`. |
-| 5 | Software Rules synthesis | [ ] Not started | Create separate product-specific `software-rules/` deliverable. |
+| 4 | Source-level rule extraction | [x] Complete | 31 source-derived rules, 28 platform/provider contract rules, 5 owner-declared link-gating rules, and a 15-facet audit across all three approved MVP capabilities. No ZeroDeck runtime behaviour or replication sufficiency is claimed. See Phase 4 extraction and facet audit. |
+| 5 | Software Rules synthesis | [~] Ready to start | Create separate product-specific `software-rules/` deliverable using current governing model, schemas, evidence classes and facet specifications. |
 | 6 | Completeness and conformance | [ ] Not started | Validate coverage, traceability, schemas, and replication completeness. |
 
 ## Phase 0 — Governance and handoff
@@ -86,17 +86,15 @@ The separate Android Security Scanner reconnaissance was audited and its relevan
 
 ## Phase 4 — Source-level rule extraction
 
-[~] In progress — first extraction pass is focused on Hypatia's pinned file-hashing, Bloom-filter matching, database loading, and detached-signature verification implementation. See `re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md`.
+[x] Complete — exit gate satisfied 2026-11-27 for source-level extraction. See `re/zerodek-product-re/2026-11-27/PHASE-4-SOURCE-RULE-EXTRACTION.md` and `PHASE-4-15-FACET-COVERAGE-AUDIT.md`.
 
-Next: inspect Android Storage Access Framework/storage/Keystore contracts for quarantine, then Google Web Risk Lookup request/response/cache semantics and Pro/owner activation gates. Keep source-derived evidence distinct from owner-declared intent and runtime observation.
-
-Every adopted rule must carry source provenance and a clear evidence class. Source-derived rules must not be represented as runtime-verified ZeroDeck behaviour.
+Extracted 31 source-derived rules from pinned Hypatia/HypatiaDatabases references; 28 documented Android/Web Risk platform/provider contract rules; and 5 owner-declared Pro/activation rules. The 15 facets were reviewed for each of the three approved MVP capabilities. Every claim is classified and linked to provenance/facets; unsupported properties remain explicitly unresolved. No ZeroDeck runtime behaviour, production provider call, malware execution, measured performance, or replication sufficiency is claimed.
 
 ## Phase 5 — Software Rules synthesis
 
-Not started.
+Ready to start.
 
-The deliverable belongs in the separately designated `software-rules/` folder and must follow the current governing Software Rules format/schema version. Do not copy the governing specification wholesale or alter its source repository.
+The deliverable belongs in the separately designated `software-rules/` folder and must follow the current governing Software Rules format/schema version. Preserve source-derived, documented-contract, owner-declared and unknown evidence classes. Do not copy the governing specification wholesale or alter its source repository.
 
 ## Phase 6 — Completeness and conformance
 
