@@ -12,9 +12,9 @@ Three scopes must remain distinct:
 
 1. **Startup direction:** ethical-hacking and penetration-testing tools/platform.
 2. **Evidence-backed candidates:** capabilities actually described by the supplied ZeroDeck/reference materials.
-3. **Selected launch MVP:** not yet explicitly designated by the owner in the inspected project record.
+3. **Selected launch MVP:** owner-approved three-capability slice recorded in `MVP-SCOPE-DECISION.md`.
 
-The scanner working draft labels some features “MVP”, but that document defines an Android Security Scanner product. It is evidence of a proposed scanner-service scope, not by itself approval that ZeroDeck's first launch MVP is that scanner.
+The scanner working draft's labels are evidence of a proposed scanner-service scope; the ZeroDeck owner separately selected the first MVP. Link checking is Pro-gated and owner-activation-gated under decision `PRO-GATED-LINK-CHECK-DECISION.md`.
 
 ## 2. Candidate capability register
 
