@@ -83,7 +83,7 @@ All rows below derive from the pinned working-draft document EVD-SRC-PRODUCT-001
 Every new ZeroDeck rule must identify an owner decision, product-material artifact, runtime observation, source-derived inference about ZeroDeck source, or external declared contract. Every prior-art fact remains attributed to its originating project/provider. Unsupported propositions remain proposed or unknown.
 
 
-### 3.1 Phase 7 reference-runtime observations — contextual only
+## 6. Phase 7 reference-runtime observations — contextual only
 
 | Evidence ID | Evidence reference | Source class | Traceability disposition |
 |---|---|---|---|
