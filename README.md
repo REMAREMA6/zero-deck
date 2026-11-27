@@ -28,6 +28,7 @@ Agent definitions (identities, skills, frameworks, and mental models) are intent
 - [ZeroDeck-specific Software Rules](software-rules/README.md) — Phase 5 synthesis and Phase 6 bounded completeness/conformance review complete; the product capture remains incomplete and not replication-sufficient.
   - [Phase 6 completeness audit](software-rules/PHASE-6-COMPLETENESS-AUDIT.md).
   - [Phase 6 MVP interface source review](re/zerodek-product-re/2026-11-27/PHASE-6-INTERFACE-SOURCE-REVIEW.md).
+  - [UI source-derived rules](re/zerodek-product-re/2026-11-27/UI-SOURCE-DERIVED-RULES.md) — 11 bounded rules extracted from pinned mockup screen source; not runtime evidence.
   - [Phase 7 runtime investigation decision](re/zerodek-product-re/2026-11-27/RUNTIME-INVESTIGATION-DECISION.md) — corrected scope; runtime blocked at preflight pending a genuine isolated lab.
 - `re/oss-recon/` — earlier reconnaissance records. These were created for a separate Android Security Scanner engagement and must be audited before any content is reused for ZeroDeck.
 - `product-management/` — product-management agent workspace and its own records.
