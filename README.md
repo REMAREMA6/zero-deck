@@ -30,6 +30,7 @@ Agent definitions (identities, skills, frameworks, and mental models) are intent
   - [Phase 6 MVP interface source review](re/zerodek-product-re/2026-11-27/PHASE-6-INTERFACE-SOURCE-REVIEW.md).
   - [UI source-derived rules](re/zerodek-product-re/2026-11-27/UI-SOURCE-DERIVED-RULES.md) — 12 bounded rules extracted from pinned mockup screen source; not runtime evidence.
   - [Phase 7 runtime investigation decision](re/zerodek-product-re/2026-11-27/RUNTIME-INVESTIGATION-DECISION.md) — corrected scope; runtime blocked at preflight pending a genuine isolated lab.
+  - [Phase 7 target preflight](re/zerodek-product-re/2026-11-27/PHASE-7-TARGET-PREFLIGHT.md) — pinned targets, build paths, external integrations, available tools and execution blockers.
 - `re/oss-recon/` — earlier reconnaissance records. These were created for a separate Android Security Scanner engagement and must be audited before any content is reused for ZeroDeck.
 - `product-management/` — product-management agent workspace and its own records.
 
