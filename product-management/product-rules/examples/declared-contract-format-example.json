@@ -1,0 +1,93 @@
+{
+  "_comment": "Format example only. This is not an approved ZeroDeck requirement and must not be treated as product policy.",
+  "declaredContract": {
+    "contractId": "ZD-CONTRACT-EXAMPLE",
+    "contractType": "product-requirements-contract",
+    "title": "Illustrative Product Requirements Contract",
+    "issuer": "ZeroDeck Product Management Agent",
+    "artifact": {
+      "uri": "https://example.invalid/zero-deck/EXAMPLE.md",
+      "version": "0.1.0-draft",
+      "revision": "0000000000000000000000000000000000000000",
+      "digest": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      "mediaType": "text/markdown"
+    },
+    "scope": "Illustrative example of one bounded product requirement.",
+    "statements": [
+      {
+        "statementId": "ZD-EXAMPLE-001",
+        "text": "When the example precondition holds, the system MUST produce the stated example outcome.",
+        "location": "## Requirement ZD-EXAMPLE-001"
+      }
+    ],
+    "evidenceRefs": ["ZD-EV-CONTRACT-EXAMPLE-001"],
+    "extensions": {
+      "zeroDeckProductRequirements": {
+        "profileId": "zero-deck.pm-product-requirements",
+        "profileVersion": "1.0.0-draft",
+        "productId": "zero-deck",
+        "author": {
+          "name": "ZeroDeck Product Management Agent",
+          "role": "Product Manager",
+          "organization": "ZeroDeck Product Management"
+        },
+        "softwareRulesCompatibility": {
+          "repository": "https://github.com/REMAREMA6/software-rules",
+          "commit": "5591a2e62287afc29bde002369eaf659673ec59b",
+          "specificationRelease": "0.3.0-draft",
+          "schemaVersion": "0.2.0",
+          "schemaDialect": "https://json-schema.org/draft/2020-12/schema"
+        },
+        "contractLifecycle": "draft",
+        "capabilityId": "EXAMPLE",
+        "requirements": [
+          {
+            "statementId": "ZD-EXAMPLE-001",
+            "requirementType": "functional",
+            "normativeKind": "required",
+            "priority": "P2",
+            "decisionStatus": "pm-proposed",
+            "facetRefs": ["behavior"],
+            "platforms": ["web", "android"],
+            "subject": "Illustrative example subject",
+            "rationale": "Illustrative format demonstration only.",
+            "basis": [
+              {
+                "basisType": "pm-inference",
+                "description": "Illustrative placeholder; not a product decision."
+              }
+            ],
+            "acceptanceCriteria": [
+              {
+                "criterionId": "ZD-EXAMPLE-AC-01",
+                "given": "The example precondition holds.",
+                "when": "The example trigger occurs.",
+                "then": "The stated example outcome is observable.",
+                "verificationMethod": "automated-test"
+              }
+            ],
+            "decisionRefs": [],
+            "evidenceRefs": []
+          }
+        ],
+        "openQuestions": []
+      }
+    }
+  },
+  "evidence": {
+    "evidenceId": "ZD-EV-CONTRACT-EXAMPLE-001",
+    "evidenceClass": "declared-contract",
+    "evidenceType": "product-requirements-contract",
+    "origin": {
+      "sourceUri": "https://example.invalid/zero-deck/EXAMPLE.md",
+      "sourceRevision": "0000000000000000000000000000000000000000",
+      "location": "EXAMPLE.md"
+    },
+    "capturedAt": "2026-11-27T00:00:00Z",
+    "locator": "EXAMPLE.md",
+    "retention": {
+      "status": "retained",
+      "access": "Illustrative only; no real artifact exists."
+    }
+  }
+}
