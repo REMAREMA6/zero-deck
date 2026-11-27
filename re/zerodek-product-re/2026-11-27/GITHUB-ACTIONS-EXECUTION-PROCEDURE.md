@@ -80,11 +80,13 @@ GitHub Actions can also perform deployment when a workflow and credentials are c
 - Record the commit, target environment, workflow run, deployment result, and post-deployment smoke-test result.
 - Do not claim a deployment succeeded until the workflow reports success and the deployed target is verified.
 
-## 7. Runner limits and safety
+## 7. Runner limits, ownership, and safety
 
 GitHub-hosted runners are configurable virtual machines, not unrestricted machines. Available operating systems, hardware, permissions, networking, storage, execution time, concurrency, billing/usage quotas, and emulator support depend on runner type and GitHub plan/policy. Some tests may still require self-hosted hardware, a physical device, a paid service, or a separately provisioned lab.
 
-For third-party software, suspicious files, malware, or security-sensitive dynamic analysis, a hosted runner is not automatically a verified isolated lab. Before execution, assess ownership/authorization, provenance, pinned source, licence, network access, host/runner exposure, secrets, persistence, and teardown. Never execute untrusted samples merely because the job runs in GitHub Actions. Follow the engagement's uploaded reverse-engineering safety constraints and the named-lab requirements for suspicious samples.
+For reverse-engineering or behavioural analysis, the uploaded RE-agent ownership gate is mandatory: analyse only software the owner wrote/owns or software covered by written permission from its owner. Public availability, a public repository, a fork, a licence, a GitHub account, or the owner's verbal instruction does not substitute for written permission. If the target is third-party software and written permission is absent, do not execute it or continue analysing it; record the blocker and move to another eligible target. The four ownership cases and evidence to record are in the uploaded RE-agent instructions.
+
+For suspicious files or malware, a GitHub-hosted runner is not automatically a verified isolated lab. A fresh hosted VM may be suitable for ordinary builds/tests of authorized own software, but it does not by itself prove the required no-host-share/no-bridged-network/snapshot/teardown properties. Never execute untrusted samples merely because the job runs in GitHub Actions. Follow the uploaded RE-agent named-lab requirements and stop if the isolation facts cannot be verified.
 
 Do not expose secrets to untrusted pull-request code. Avoid privileged workflows and broad write permissions. Pin third-party actions to immutable revisions where practical, and review actions and scripts before running them.
 
@@ -109,9 +111,9 @@ The previous Phase 7 closeout remains a valid record of the bounded investigatio
 The owner has now directed a renewed Phase 7 pass using GitHub Actions for previously skipped execution paths where feasible. The renewed pass must:
 
 1. Re-read the Phase 3 target register, prior Phase 7 preflight, available-runtime-evidence report, observation map, closeout, and governing safety constraints.
-2. Reassess each previously skipped target/scenario individually for a suitable hosted-runner workflow.
+2. Reassess each previously skipped target/scenario individually for a suitable hosted-runner workflow, but apply the uploaded ownership gate first. The current selected prior-art targets are third-party repositories; no written permission is recorded in this engagement. Their new execution/analysis is therefore blocked until written permission is supplied by the relevant owner. Do not treat a hosted runner as a way around this gate.
 3. Prioritize the skipped Hypatia Android build/test path, HypatiaDatabases generator path, ClamAV local build/test path, UI/browser capture of the reference preview where useful, and authorized integration/provider paths.
-4. Use exact pinned revisions for prior-art targets and preserve upstream CI evidence separately from newly initiated investigation runs.
+4. Use exact pinned revisions for any target that becomes eligible for execution, and preserve upstream CI evidence separately from newly initiated investigation runs.
 5. Avoid external feed publication or other side effects unless the workflow can safely isolate them or the owner explicitly authorizes the action.
 6. Treat Web Risk live calls as requiring owner-supplied credentials/project and explicit approval for URL disclosure and potential cost.
 7. Record any path still blocked by runner limitations, missing credentials, missing authorization, unsupported hardware, or safety constraints; continue with remaining targets.
@@ -124,5 +126,5 @@ The owner has now directed a renewed Phase 7 pass using GitHub Actions for previ
 
 - This procedure is recorded and adopted.
 - The previous bounded Phase 7 closeout is preserved as historical evidence.
-- Renewed Phase 7 is the next active task and has not yet been executed under this procedure.
+- Renewed Phase 7 is active. Its first task is a runner-capability smoke test against a first-party fixture. Execution against selected third-party prior-art targets is blocked until written permission is recorded.
 - ZeroDeck remains incomplete and not replication-sufficient until required properties are supported by evidence and the relevant target scenarios are executed.
