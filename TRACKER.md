@@ -38,7 +38,7 @@
 | 2 | Capability and facet mapping | [x] Complete | Owner selected manual file security analysis, quarantine/file disposition, and website/link checking. IP tracking is recorded as a future candidate and excluded from MVP. Scope decision, scenarios, exclusions and 15-facet map recorded. |
 | 3 | Prior-art discovery and selection | [x] Complete | Exit gate satisfied. Selected Phase 4 references and provenance recorded; unresolved technical/commercial/privacy gaps handed forward. Link checking is Pro-gated and owner-activation-gated. See PHASE-3-PRIOR-ART-REGISTER.md. |
 | 4 | Source-level rule extraction | [x] Complete | 31 source-derived rules, 28 platform/provider contract rules, 5 owner-declared link-gating rules, and a 15-facet audit across all three approved MVP capabilities. No ZeroDeck runtime behaviour or replication sufficiency is claimed. See Phase 4 extraction and facet audit. |
-| 5 | Software Rules synthesis | [~] Ready to start | Create separate product-specific `software-rules/` deliverable using current governing model, schemas, evidence classes and facet specifications. |
+| 5 | Software Rules synthesis | [ ] Ready to start | Create separate product-specific `software-rules/` deliverable using current governing model, schemas, evidence classes and facet specifications. |
 | 6 | Completeness and conformance | [ ] Not started | Validate coverage, traceability, schemas, and replication completeness. |
 
 ## Phase 0 — Governance and handoff
