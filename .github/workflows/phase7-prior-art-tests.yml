@@ -1,0 +1,158 @@
+name: Phase 7 — Pinned Prior-Art Runtime Tests
+
+on:
+  push:
+    paths:
+      - ".github/workflows/phase7-prior-art-tests.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: phase7-prior-art-tests-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  hypatia-android:
+    name: Hypatia — lint, unit tests and debug APK
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - name: Checkout investigation repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Checkout pinned Hypatia source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: MaintainTeam/Hypatia
+          ref: c0f98977be935e58849726313635a2459cac3892
+          path: targets/Hypatia
+          persist-credentials: false
+      - name: Set up Java 17
+        uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v4.5.0
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Record target and runner
+        working-directory: targets/Hypatia
+        run: |
+          git rev-parse HEAD
+          java -version
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          uname -a
+      - name: Install Android SDK components
+        run: |
+          set -euxo pipefail
+          SDKMANAGER="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          test -x "$SDKMANAGER"
+          yes | "$SDKMANAGER" --licenses >/dev/null
+          "$SDKMANAGER" "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+      - name: Run lint, unit tests and debug APK build
+        working-directory: targets/Hypatia
+        run: |
+          chmod +x ./gradlew
+          ./gradlew --no-daemon --stacktrace lint testDebugUnitTest assembleDebug
+      - name: Upload Hypatia reports and APK
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: phase7-hypatia-build-evidence
+          path: |
+            targets/Hypatia/app/build/reports/
+            targets/Hypatia/app/build/test-results/
+            targets/Hypatia/app/build/outputs/apk/debug/
+          if-no-files-found: warn
+          retention-days: 14
+
+  hypatiadatabases-build:
+    name: HypatiaDatabases — bounded Maven build and tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: Checkout investigation repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Checkout pinned HypatiaDatabases source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: MaintainTeam/HypatiaDatabases
+          ref: 3c35f52e1a847caed46d8e1ad34968bfa3c8b10a
+          path: targets/HypatiaDatabases
+          persist-credentials: false
+      - name: Set up Java 17
+        uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v4.5.0
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+          cache-dependency-path: targets/HypatiaDatabases/pom.xml
+      - name: Run bounded Maven test/package lifecycle
+        working-directory: targets/HypatiaDatabases
+        run: |
+          git rev-parse HEAD
+          java -version
+          mvn --batch-mode --no-transfer-progress clean test package
+      - name: Upload Maven reports and package
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: phase7-hypatiadatabases-maven-evidence
+          path: |
+            targets/HypatiaDatabases/target/surefire-reports/
+            targets/HypatiaDatabases/target/*.jar
+          if-no-files-found: warn
+          retention-days: 14
+
+  clamav-build-test:
+    name: ClamAV — CMake build and CTest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - name: Checkout investigation repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Checkout pinned ClamAV source
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          repository: Cisco-Talos/clamav
+          ref: cad7b18a3e6505195fe08db1412449a18fc9f012
+          path: targets/clamav
+          persist-credentials: false
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            bison flex gperf pkg-config python3 python3-pip python3-pytest \
+            build-essential cmake ninja-build rustc cargo \
+            libbz2-dev zlib1g-dev libxml2-dev libpcre2-dev libssl-dev \
+            libjson-c-dev libcurl4-openssl-dev libmspack-dev libncurses-dev \
+            libcheck-dev libsystemd-dev
+      - name: Record target and toolchain
+        working-directory: targets/clamav
+        run: |
+          git rev-parse HEAD
+          cmake --version
+          gcc --version
+          rustc --version
+          python3 --version
+      - name: Configure ClamAV
+        working-directory: targets/clamav
+        run: |
+          cmake -S . -B build -G Ninja \
+            -D CMAKE_BUILD_TYPE=RelWithDebInfo \
+            -D ENABLE_TESTS=ON \
+            -D ENABLE_MILTER=OFF
+      - name: Build ClamAV
+        working-directory: targets/clamav
+        run: cmake --build build --parallel 2
+      - name: Run CTest suite
+        working-directory: targets/clamav
+        run: ctest --test-dir build --output-on-failure -C RelWithDebInfo
+      - name: Upload CTest and build evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: phase7-clamav-build-test-evidence
+          path: |
+            targets/clamav/build/Testing/Temporary/
+            targets/clamav/build/CTestTestfile.cmake
+          if-no-files-found: warn
+          retention-days: 14
