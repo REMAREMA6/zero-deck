@@ -3414,99 +3414,99 @@
         "facet": "integrations",
         "subject": "MVP-QUAR-001",
         "dimension": "External system/provider identity",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-QUAR-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-QUAR-001:integrations:boundary",
         "facet": "integrations",
         "subject": "MVP-QUAR-001",
         "dimension": "Boundary",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-QUAR-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-QUAR-001:integrations:direction",
         "facet": "integrations",
         "subject": "MVP-QUAR-001",
         "dimension": "Direction",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-QUAR-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-QUAR-001:integrations:operation",
         "facet": "integrations",
         "subject": "MVP-QUAR-001",
         "dimension": "Operation",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-QUAR-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-QUAR-001:integrations:protocol-reference",
         "facet": "integrations",
         "subject": "MVP-QUAR-001",
         "dimension": "Protocol reference",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-QUAR-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-QUAR-001:integrations:request-response-or-message-references",
         "facet": "integrations",
         "subject": "MVP-QUAR-001",
         "dimension": "Request/response or message references",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-QUAR-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-QUAR-001:integrations:credentials-context-redacted",
         "facet": "integrations",
         "subject": "MVP-QUAR-001",
         "dimension": "Credentials context (redacted)",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-QUAR-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-QUAR-001:integrations:timeout-retry-circuit-breaker-behaviour",
         "facet": "integrations",
         "subject": "MVP-QUAR-001",
         "dimension": "Timeout/retry/circuit-breaker behaviour",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-QUAR-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-QUAR-001:integrations:mapping-transformation",
         "facet": "integrations",
         "subject": "MVP-QUAR-001",
         "dimension": "Mapping/transformation",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-QUAR-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-QUAR-001:integrations:dependency-outcome",
         "facet": "integrations",
         "subject": "MVP-QUAR-001",
         "dimension": "Dependency outcome",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-QUAR-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-QUAR-001:integrations:correlation",
         "facet": "integrations",
         "subject": "MVP-QUAR-001",
         "dimension": "Correlation",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-QUAR-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-QUAR-001:performance-resource-behaviour:metric-name-definition",
@@ -5727,117 +5727,117 @@
         "facet": "api",
         "subject": "MVP-LINK-001",
         "dimension": "Protocol and version",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:api:endpoint-operation-identity",
         "facet": "api",
         "subject": "MVP-LINK-001",
         "dimension": "Endpoint/operation identity",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:api:method",
         "facet": "api",
         "subject": "MVP-LINK-001",
         "dimension": "Method",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:api:target",
         "facet": "api",
         "subject": "MVP-LINK-001",
         "dimension": "Target",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:api:request-headers-query-path-body",
         "facet": "api",
         "subject": "MVP-LINK-001",
         "dimension": "Request headers/query/path/body",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:api:authentication-context-redacted",
         "facet": "api",
         "subject": "MVP-LINK-001",
         "dimension": "Authentication context (redacted)",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:api:response-status-headers-body",
         "facet": "api",
         "subject": "MVP-LINK-001",
         "dimension": "Response status/headers/body",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:api:content-types",
         "facet": "api",
         "subject": "MVP-LINK-001",
         "dimension": "Content types",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:api:timing-boundaries-units",
         "facet": "api",
         "subject": "MVP-LINK-001",
         "dimension": "Timing boundaries/units",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:api:correlation-ids",
         "facet": "api",
         "subject": "MVP-LINK-001",
         "dimension": "Correlation IDs",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:api:retries-redirects",
         "facet": "api",
         "subject": "MVP-LINK-001",
         "dimension": "Retries/redirects",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:api:transport-errors",
         "facet": "api",
         "subject": "MVP-LINK-001",
         "dimension": "Transport errors",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:api:linked-side-effect-observations",
         "facet": "api",
         "subject": "MVP-LINK-001",
         "dimension": "Linked side-effect observations",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:identity-authentication:privacy-safe-principal-reference",
@@ -6213,99 +6213,99 @@
         "facet": "integrations",
         "subject": "MVP-LINK-001",
         "dimension": "External system/provider identity",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:integrations:boundary",
         "facet": "integrations",
         "subject": "MVP-LINK-001",
         "dimension": "Boundary",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:integrations:direction",
         "facet": "integrations",
         "subject": "MVP-LINK-001",
         "dimension": "Direction",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:integrations:operation",
         "facet": "integrations",
         "subject": "MVP-LINK-001",
         "dimension": "Operation",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:integrations:protocol-reference",
         "facet": "integrations",
         "subject": "MVP-LINK-001",
         "dimension": "Protocol reference",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:integrations:request-response-or-message-references",
         "facet": "integrations",
         "subject": "MVP-LINK-001",
         "dimension": "Request/response or message references",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:integrations:credentials-context-redacted",
         "facet": "integrations",
         "subject": "MVP-LINK-001",
         "dimension": "Credentials context (redacted)",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:integrations:timeout-retry-circuit-breaker-behaviour",
         "facet": "integrations",
         "subject": "MVP-LINK-001",
         "dimension": "Timeout/retry/circuit-breaker behaviour",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:integrations:mapping-transformation",
         "facet": "integrations",
         "subject": "MVP-LINK-001",
         "dimension": "Mapping/transformation",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:integrations:dependency-outcome",
         "facet": "integrations",
         "subject": "MVP-LINK-001",
         "dimension": "Dependency outcome",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:integrations:correlation",
         "facet": "integrations",
         "subject": "MVP-LINK-001",
         "dimension": "Correlation",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-001. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-001:configuration:configuration-key-semantic-identity",
@@ -6951,117 +6951,117 @@
         "facet": "api",
         "subject": "MVP-LINK-002",
         "dimension": "Protocol and version",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:api:endpoint-operation-identity",
         "facet": "api",
         "subject": "MVP-LINK-002",
         "dimension": "Endpoint/operation identity",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:api:method",
         "facet": "api",
         "subject": "MVP-LINK-002",
         "dimension": "Method",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:api:target",
         "facet": "api",
         "subject": "MVP-LINK-002",
         "dimension": "Target",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:api:request-headers-query-path-body",
         "facet": "api",
         "subject": "MVP-LINK-002",
         "dimension": "Request headers/query/path/body",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:api:authentication-context-redacted",
         "facet": "api",
         "subject": "MVP-LINK-002",
         "dimension": "Authentication context (redacted)",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:api:response-status-headers-body",
         "facet": "api",
         "subject": "MVP-LINK-002",
         "dimension": "Response status/headers/body",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:api:content-types",
         "facet": "api",
         "subject": "MVP-LINK-002",
         "dimension": "Content types",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:api:timing-boundaries-units",
         "facet": "api",
         "subject": "MVP-LINK-002",
         "dimension": "Timing boundaries/units",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:api:correlation-ids",
         "facet": "api",
         "subject": "MVP-LINK-002",
         "dimension": "Correlation IDs",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:api:retries-redirects",
         "facet": "api",
         "subject": "MVP-LINK-002",
         "dimension": "Retries/redirects",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:api:transport-errors",
         "facet": "api",
         "subject": "MVP-LINK-002",
         "dimension": "Transport errors",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:api:linked-side-effect-observations",
         "facet": "api",
         "subject": "MVP-LINK-002",
         "dimension": "Linked side-effect observations",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses a synchronous API exchange for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:security-controls:threat-test-objective",
@@ -7257,99 +7257,99 @@
         "facet": "integrations",
         "subject": "MVP-LINK-002",
         "dimension": "External system/provider identity",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:integrations:boundary",
         "facet": "integrations",
         "subject": "MVP-LINK-002",
         "dimension": "Boundary",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:integrations:direction",
         "facet": "integrations",
         "subject": "MVP-LINK-002",
         "dimension": "Direction",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:integrations:operation",
         "facet": "integrations",
         "subject": "MVP-LINK-002",
         "dimension": "Operation",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:integrations:protocol-reference",
         "facet": "integrations",
         "subject": "MVP-LINK-002",
         "dimension": "Protocol reference",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:integrations:request-response-or-message-references",
         "facet": "integrations",
         "subject": "MVP-LINK-002",
         "dimension": "Request/response or message references",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:integrations:credentials-context-redacted",
         "facet": "integrations",
         "subject": "MVP-LINK-002",
         "dimension": "Credentials context (redacted)",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:integrations:timeout-retry-circuit-breaker-behaviour",
         "facet": "integrations",
         "subject": "MVP-LINK-002",
         "dimension": "Timeout/retry/circuit-breaker behaviour",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:integrations:mapping-transformation",
         "facet": "integrations",
         "subject": "MVP-LINK-002",
         "dimension": "Mapping/transformation",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:integrations:dependency-outcome",
         "facet": "integrations",
         "subject": "MVP-LINK-002",
         "dimension": "Dependency outcome",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:integrations:correlation",
         "facet": "integrations",
         "subject": "MVP-LINK-002",
         "dimension": "Correlation",
-        "requirement": "required",
-        "status": "not-observed",
-        "rationale": "Required property dimension for scenario MVP-LINK-002. The scenario is defined, but no ZeroDeck runtime execution or observation currently establishes its concrete value/behaviour."
+        "requirement": "optional",
+        "status": "unknown",
+        "rationale": "Conditional property: applicability depends on whether the actual ZeroDeck architecture uses an external-system/provider integration for this workflow. The provider/system boundary is not selected or runtime-observed; do not treat this facet as present or absent."
       },
       {
         "propertyId": "MVP-LINK-002:configuration:configuration-key-semantic-identity",
