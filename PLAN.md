@@ -4,7 +4,7 @@
 **Repository:** REMAREMA6/zero-deck  
 **Product reference:** https://github.com/lordwhitefire/Zerodek  
 **Governing format:** https://github.com/REMAREMA6/software-rules  
-**Plan version:** 1.0  
+**Plan version:** 1.1  
 **Last updated:** 2026-11-27
 
 ## 1. Mission
