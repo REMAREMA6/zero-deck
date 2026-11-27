@@ -2,7 +2,7 @@
 
 **Date:** 2026-11-27  
 **Basis:** Owner clarification in `ENGAGEMENT-UNDERSTANDING.md` §11; completed `SCREEN-INVENTORY.md`; reference repository revision `86908bff1aa1bbf85a231ba0d47b8fe9fff148c6`; scanner working draft `upload/android_security_scanner_product_decisions.txt`.  
-**Status:** Candidate inventory complete for available evidence. ZeroDeck launch-MVP selection remains an owner decision and is not inferred from the scanner document.
+**Status:** Phase 2 scope decision recorded. The ZeroDeck launch MVP is the three-capability scanner slice selected by the owner; IP tracking is a deferred candidate and excluded from MVP.
 
 ## 1. Product boundary
 
@@ -31,7 +31,8 @@ The scanner working draft labels some features “MVP”, but that document defi
 | CAP-09 | Help-content administration | SCR-17 | Create/edit/preview/publish articles, FAQs, tips and announcements. | Conditional on CMS/content-management choice; Sanity is only a possible service. | Unresolved candidate. |
 | CAP-10 | Service health and audit visibility | SCR-18; EXTRA-01/02 references | Inspect service availability, errors and administrative audit events. | Screen 18 extension; sample data/local filters in handoff. | Unresolved candidate. |
 | CAP-11 | Automatic/background protection | EXTRA-01; product decisions §4 | Monitor eligible downloads/security events, scan supported events, pause/resume protection and handle background limitations. | Explicitly later release in scanner draft; browser extension also deferred. | Later candidate only if scanner capability is selected. |
-| CAP-12 | Device privacy audit | EXTRA-02 | Inspect device permission/privacy categories and present recommendations or revocation affordances. | Extra route only; no matching approved product decision or screen specification. | Unresolved candidate; no MVP evidence. |
+| CAP-12 | Device privacy audit | EXTRA-02 | Inspect device permission/privacy categories and present recommendations or revocation affordances. | Extra route only; no matching approved product decision or screen specification. | Unresolved candidate; outside MVP. |
+| CAP-13 | IP address tracking and investigation | Owner clarification during Phase 2: a stakeholder said IP tracking should be a feature; exact intended meaning and workflow were not defined. | Potentially record, monitor, correlate or investigate IP addresses associated with assessment activity; these are possible interpretations, not adopted requirements. | Not defined in scanner working draft; requires discovery and precise product definition. | Future candidate only; explicitly excluded from MVP. |
 
 ## 3. What is not established
 
