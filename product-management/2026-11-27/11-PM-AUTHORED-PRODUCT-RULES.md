@@ -4,7 +4,7 @@
 **Author:** ZeroDeck Product Management Agent  
 **Owner authority:** Product owner retains final authority  
 **Opened:** 2026-11-27  
-**Status:** [x] Phases 0–1 complete; Phase 2 next  
+**Status:** [x] Phases 0–2 complete; Phase 3 next  
 **Tracker:** [../TRACKER.md](../TRACKER.md)
 
 ## Purpose
@@ -53,7 +53,7 @@ Every requirement must:
 |---|---|---|---|
 | 0 | Baseline and boundaries | Software Rules model inspected; product scope and PM author identity recorded | [x] |
 | 1 | Design PM contract profile | Exact mapping, complete-record and extension schemas, ID convention, author identity, and validation approach documented and checked without unauthorized core changes | [x] |
-| 2 | Research and author authentication requirements | Stack-agnostic account/auth contract drafted with sources, decisions, acceptance criteria and unknowns | [ ] |
+| 2 | Research and author authentication requirements | Stack-agnostic account/auth contract, structured projection, retained evidence, sources, acceptance criteria and unresolved owner decisions | [x] |
 | 3 | Validate authentication coverage | Identity, authorization, security, API, data, persistence, configuration, errors/recovery and integration facets assessed | [ ] |
 | 4 | Author manual file-analysis requirements | File selection, input scope, verdicts, limitations, privacy, failure and result semantics drafted | [ ] |
 | 5 | Author quarantine/disposition requirements | Quarantine, integrity, restore, deletion, retention, key loss, interruption and recovery drafted | [ ] |
@@ -62,7 +62,7 @@ Every requirement must:
 | 8 | Cross-facet completeness and consistency review | Traceability complete; contradictions, missing states and untestable claims resolved or explicitly open | [ ] |
 | 9 | Owner review and release | Owner decisions recorded; versioned contract package ready for engineering handoff | [ ] |
 
-Phases 0 and 1 are complete. Phase 2 is next. No ZeroDeck feature requirement set has yet been authored or approved.
+Phases 0–2 are complete. The authentication/account contract is authored as a draft with 21 PM-proposed requirements and 8 unresolved owner questions. It is not owner-approved. Phase 3 is next. Other feature requirement sets have not yet been authored.
 
 ## Feature order
 
@@ -104,7 +104,10 @@ These are architecture directions, not a complete authentication contract. Do no
 - `product-rules/schemas/zero-deck-pm-requirements-extension.schema.json` — PM extension schema.
 - `product-rules/templates/` — declared-contract and evidence templates.
 - `product-rules/examples/declared-contract-format-example.json` — format-only fixture, not an approved product requirement.
-- `product-rules/contracts/IDENTITY-AUTHENTICATION.md`
+- `product-rules/contracts/IDENTITY-AUTHENTICATION.md` — Phase 2 canonical draft.
+- `product-rules/contracts/IDENTITY-AUTHENTICATION.declared-contract.json` — structured Software Rules projection.
+- `product-rules/evidence/identity-authentication-contract.evidence.json` — retained declared-contract evidence.
+- `product-rules/PHASE-2-VALIDATION.md` — targeted Phase 2 checks and limitations.
 - `product-rules/contracts/MANUAL-FILE-ANALYSIS.md`
 - `product-rules/contracts/QUARANTINE-DISPOSITION.md`
 - `product-rules/contracts/WEBSITE-LINK-CHECKING.md`
@@ -112,6 +115,10 @@ These are architecture directions, not a complete authentication contract. Do no
 - `product-rules/TRACEABILITY.md`
 
 These remain ZeroDeck PM artifacts mapped to Software Rules declared contracts. Do not write them into the separate Software Rules repository unless the owner approves that contribution.
+
+## Phase 2 completion record
+
+Phase 2 is complete. The authentication/account contract contains 21 stable PM-proposed requirements, each with observable acceptance criteria, basis/provenance and Software Rules facet references. A structured declared-contract projection and retained declared-contract evidence record were added. Eight decisions remain open for owner review; no requirement is marked owner-approved. Targeted checks verified JSON parsing, 21-to-21 statement/metadata parity, unique IDs, facet references, profile enumerations, conditional requirement conditions, platform scope, evidence linkage and the canonical Markdown SHA-256 digest. This was not a full Draft 2020-12 validator or upstream CI run. Phase 3 will assess cross-facet completeness; it is not implied by Phase 2 completion.
 
 ## Phase 1 completion record
 
