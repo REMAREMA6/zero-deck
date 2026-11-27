@@ -4,7 +4,7 @@
 **Repository:** REMAREMA6/zero-deck  
 **Product reference:** https://github.com/lordwhitefire/Zerodek  
 **Governing format:** https://github.com/REMAREMA6/software-rules  
-**Plan version:** 1.2  
+**Plan version:** 1.3  
 **Last updated:** 2026-11-27
 
 ## 1. Mission
@@ -102,31 +102,34 @@ Use the Software Rules 15 facets directly as the investigation and rule-organiza
 - [x] Produce the bounded completeness/conformance assessment and state exactly what is and is not replication-sufficient in `software-rules/PHASE-6-COMPLETENESS-AUDIT.md`.
 **Exit gate: SATISFIED 2026-11-27 for the bounded completeness/conformance review.** The deliverable is explicitly **incomplete and not replication-sufficient**, with all known unresolved properties and evidence gaps retained. This is not approval of product completeness or faithful replication.
 
-### Phase 7 — Non-UI runtime investigation of selected prior-art implementations
+### Phase 7 — Final planned phase: reference-runtime investigation and evidence reconciliation
 
-**Corrected scope (owner clarification, 2026-11-27):** Phase 7 does not run the ZeroDeck mockup repository. lordwhitefire/Zerodek is the owner's fork of Felix's product-intent repository. It is used for screen/design intent and source-level UI inspection only. REMAREMA6/zero-deck is the actual ZeroDeck product repository being built. The selected prior-art implementations from Phase 3 are the runtime-investigation targets.
+**Corrected scope (owner clarification, 2026-11-27):** The task is to extract the rules and properties needed to build the approved ZeroDeck MVP by studying the approved product materials, selected working reference software and official platform/provider contracts. The ZeroDeck first-party application does not need to exist for this reverse-engineering work to be completed. `lordwhitefire/Zerodek` is a product-intent/mock-screen source, not a runtime target. The selected Phase 3 prior-art implementations are the runtime-investigation targets. Software Rules must remain technology- and stack-independent.
 
-**Owner execution instruction (2026-11-27):** Do the runtime investigation that can reasonably be completed. If one target or scenario cannot be run, record why, skip it and continue with the others. Do not stop the entire investigation because one path is blocked, and do not waste excessive time forcing unavailable paths. Prefer exact-revision, reproducible upstream CI runtime/build/test evidence when local execution is unavailable. Clearly label upstream CI evidence; never claim it was executed locally by this investigation.
+**Owner execution instruction (2026-11-27):** Complete all ordinary inspection/build/test work that can reasonably be performed against the three explicitly authorized pinned open-source targets. If a test path does not exist or cannot be safely run, record the reason, skip it, and continue. Do not invent upstream tests or modify third-party source to manufacture coverage.
 
-- [x] Inventory the available environment and inspect the target build/test paths and prerequisites. See `PHASE-7-TARGET-PREFLIGHT.md`.
-- [x] Extract the mockup UI source-derived rules separately from runtime investigation; 12 bounded rules are recorded in `UI-SOURCE-DERIVED-RULES.md`.
-- [x] Check upstream CI runtime/build/test evidence for each selected executable target at its exact Phase 3 pinned revision; record run IDs, outcomes and accessible logs in `PHASE-7-AVAILABLE-RUNTIME-EVIDENCE.md`.
-- [x] Runtime evidence found for SRC-01 Hypatia (successful CI build workflow), SRC-02 HypatiaDatabases (successful full database-generation workflow), and SRC-06 ClamAV (successful cross-platform build; Ubuntu CTest 17/17 passed).
-- [x] Map the available upstream runtime observations to the 15 facets and all seven MVP scenarios with exact provenance and explicit limitations. See `PHASE-7-RUNTIME-OBSERVATION-MAP.md`. Reference-project observations are not ZeroDeck production behaviour or automatic product requirements.
-- [x] Inspect additional non-invasive upstream CI log evidence where retained: HypatiaDatabases generation metrics/publication and ClamAV CVD, signature-tool and scan-callback tests. Local execution was rechecked and skipped because prerequisites and verified isolation remain unavailable.
-- [x] Record precise blockers for skipped local/device/provider scenarios and continue with other eligible evidence in `PHASE-7-RUNTIME-OBSERVATION-MAP.md`.
-- [x] SRC-04 Web Risk remains a remote provider contract. Live calls were skipped because no configured credentials/project or separate approval for URL disclosure and provider costs was available; live behaviour remains unverified.
-- [x] SRC-07 Android storage/SAF/Keystore are platform documents, not executable repositories; retained as documented constraints, not runtime targets.
-- [x] No malware samples or suspicious files were run. No local third-party test fixtures were executed because the required named, verified isolated lab is unavailable.
-- [x] Reconcile the Software Rules evidence register and rule traceability without transferring prior-art behaviour into ZeroDeck requirements; preserve all unresolved properties and keep the machine capture's runtime-observation count at zero. Assess replication sufficiency in `PHASE-7-CLOSEOUT-AUDIT.md`.
+**Authorized executable targets:**
+- Hypatia `c0f98977be935e58849726313635a2459cac3892`
+- HypatiaDatabases `3c35f52e1a847caed46d8e1ad34968bfa3c8b10a`
+- ClamAV `cad7b18a3e6505195fe08db1412449a18fc9f012`
 
-**Runtime evidence reports:** `re/zerodek-product-re/2026-11-27/PHASE-7-AVAILABLE-RUNTIME-EVIDENCE.md` records exact pinned revisions and run outcomes. `PHASE-7-RUNTIME-OBSERVATION-MAP.md` records the additional generator counts, generated/published artifacts, named ClamAV test cases, facet dispositions, and skipped paths.
+- [x] Complete target/environment preflight and owner authorization; preserve the consult-first default for every other target/action.
+- [x] Verify the GitHub Actions runner and artifact mechanism using three first-party Playwright smoke runs.
+- [x] Build/lint Hypatia at its pinned revision; inspect APK and lint artifact. `testDebugUnitTest` is `NO-SOURCE`; recursive audit of 354 tree entries found no test sources or test directories.
+- [x] Build/package HypatiaDatabases at its pinned revision and run deterministic valid hash/domain, malformed-hash and exclusion fixture branches. All fixture assertions passed. Recursive audit of 36 tree entries found no `src/test` or upstream test sources.
+- [x] Build and test ClamAV at its pinned revision. CTest passed 15/15 targets, 0 failed; retained test logs report 416 passed and 2 skipped across standard and Valgrind pytest invocations (not 416 unique cases).
+- [x] Inspect the final logs and artifacts; record exact target revisions, workflow commits, run IDs, artifact IDs/digests, lint findings, test outcomes, side effects and limits in `PHASE-7-RENEWED-ACTIONS-RESULTS.md`.
+- [x] Record additional observations in `PHASE-7-RUNTIME-OBSERVATION-MAP.md` and map evidence to all 15 facets and seven MVP scenarios with explicit boundaries.
+- [x] Record unavailable paths and reasons: Web Risk live calls require configured credentials/project plus separate approval for URL disclosure/costs; Android storage/SAF/Keystore are documentation; mockup UI runtime is out of scope; no malware/suspicious samples or external feed/publication operations were performed.
+- [x] Reconcile `EVIDENCE.md`, `RULE-TRACEABILITY.md` and `capture.json`. Register reference-runtime reports as supporting context only; keep ZeroDeck executions, observations and runtime rules at zero.
+- [x] Validate the machine capture and cross-references after adding EVD-RT-REF-001/002. [Validation run #46034634801](https://github.com/REMAREMA6/zero-deck/actions/runs/46034634801) passed; the latest evidence revision is being revalidated.
+- [x] Complete the renewed closeout audit and reconcile the tracker.
 
-**Local execution disposition:** the current container lacks the Android SDK/ADB/Gradle, Maven and ClamAV dependencies, and a suitable isolated lab is not verified. The investigation therefore uses the available exact-revision upstream CI evidence and skips the corresponding local execution paths rather than blocking all Phase 7 work. Any further local execution must have an appropriate execution basis and environment; this does not invalidate or erase the CI evidence already collected.
+**Phase 7 exit gate: satisfied for the bounded reference-runtime investigation.** All three authorized executable reference targets have exact-pinned build/test evidence; the 15 facets and seven ZeroDeck MVP scenarios have explicit evidence-or-skip dispositions; provenance classes remain separate; evidence registers and machine capture are reconciled; and unavailable paths have reasons. See `PHASE-7-RENEWED-CLOSEOUT-AUDIT.md`.
 
-**UI source work is separate:** source-derived UI rules from the owner's mockup fork are not runtime observations. Later, when the actual ZeroDeck React/TypeScript native app is implemented, the developer agent may capture UI runtime rules and complete the UI evidence.
+**Important boundary:** Phase 7 completion does not mean the ZeroDeck-specific Software Rules are complete. `software-rules/OPEN-PROPERTIES.md` still contains unresolved required product properties and owner decisions. Those remain visible and cannot be guessed or silently defaulted. This is not a reason to create Phase 8. Phase 7 is the final planned phase. A first-party ZeroDeck runtime is not required for this RE specification; the implementation agent will use the completed rules after product decisions are resolved.
 
-**Exit gate: SATISFIED 2026-11-27 for the bounded runtime investigation.** All accessible exact-pinned upstream CI evidence was extracted; all seven MVP scenarios and all 15 facets have explicit evidence-or-skip dispositions; evidence classes remain distinct; the evidence register and traceability are reconciled without unsupported rule promotion; and replication sufficiency is explicitly assessed as **NOT SUFFICIENT**. See `PHASE-7-CLOSEOUT-AUDIT.md`. Skipped scenarios remain unverified and must not be described as runtime-complete. Future runtime capture against the actual ZeroDeck app is a later implementation-time task.
+**Deferred / separately gated:** Web Risk live API calls require owner-configured credentials/project and explicit approval for URL disclosure and provider costs. Live feed ingestion, signing, upstream publication and deployment remain outside this authorization.
 
 ## 6. Target project structure
 
