@@ -22,10 +22,10 @@
 - **Owner authorization:** [x] Owner explicitly instructed: document the plan, add a tracker, and start the product planning/research.
 - **Plan:** [x] `PLAN.md` created and committed.
 - **Tracker:** [x] Created.
-- **Current step:** C — Comprehend.
+- **Current step:** R — Report customer needs.
 - **Current product scope authority:** Owner-approved three-capability MVP (manual file security analysis; quarantine/file disposition; website/link checking subject to Pro entitlement AND owner activation).
 - **Current product evidence status:** ZeroDeck-specific Software Rules remains Draft, incomplete and not replication-sufficient. Product planning must preserve unknowns.
-- **Primary business outcome:** Validate real market demand, per the owner's clarification on 2026-11-27. No target cohort has been selected; penetration testers/ethical hackers, non-technical users and businesses/licensed users are candidate segments for research.
+- **Primary business outcome:** Validate real market demand, per the owner's clarification on 2026-11-27. No final owner-approved target cohort has been selected. Segment B is provisionally recommended for needs discovery; practitioner and business/licensed segments remain alternatives.
 - **I — Identify result:** Three candidate segments were compared. Segment B (non-technical individuals who regularly receive/download unfamiliar files and links) is recommended as a provisional cohort for needs discovery, not an owner-approved target market. Segment A (security practitioners) and Segment C (businesses/licensed organisations) remain alternatives.
 - **Next action:** Begin R — Report customer needs. Validate the provisional cohort's actual situations, current workarounds, pain, consequences and need for quarantine; compare practitioner evidence where it could overturn the cohort recommendation. Define the demand-validation metric and threshold after needs are established.
 
