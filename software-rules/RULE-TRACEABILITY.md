@@ -1,36 +1,83 @@
 # ZeroDeck MVP — Rule Traceability Register
 
 **Maturity:** Draft  
-**Purpose:** Connect every adopted owner-declared or product-material workflow rule to its authority and evidence. Prior-art source rules remain contextual and are not silently promoted to ZeroDeck requirements.
+**Purpose:** Connect every adopted owner-declared and product-material rule to its authority and evidence. Prior-art source rules remain contextual and are not silently promoted to ZeroDeck requirements.
 
-## 1. ZeroDeck product rules
+## 1. Owner-declared rules
 
-| Rule IDs | Evidence class | Evidence references | Interpretation |
+| Rule ID | Evidence class | Evidence references | Traceable statement |
 |---|---|---|---|
-| ZD-OWNER-001–002 | Owner-declared | EVD-ZD-SCOPE-001 | The three-capability MVP and IP exclusion are explicit owner decisions. |
-| ZD-OWNER-003–006 | Owner-declared | EVD-ZD-PRO-001 | Pro entitlement, separate owner activation, no-call conditions and need for usage/budget controls are explicit owner decisions. |
-| PM-FILE-001–008 | Product-material-derived | EVD-SRC-PRODUCT-001; EVD-ZD-CAP-001; EVD-ZD-MAP-001 | Manual file selection, result branches, on-device default, no silent cloud upload, consent boundary and SHA-256 planned direction are described in the pinned working draft. Engine, supported formats and thresholds remain open. |
-| PM-QUAR-001–013 | Product-material-derived | EVD-SRC-PRODUCT-001; EVD-ZD-CAP-001; EVD-ZD-MAP-001; EVD-ZD-P4-001 | Quarantine policy, encrypted app-private storage baseline, proposed 30-day retention, fresh-scan/confirmation, hash verification, auditability, no execution, Keystore, no overwrite and uninstall disclosure are recorded with their draft/proposed maturity preserved. Android constraints inform feasibility but do not prove implementation. |
-| PM-LINK-001–006 | Product-material-derived | EVD-SRC-PRODUCT-001; EVD-ZD-CAP-001; EVD-ZD-MAP-001; EVD-ZD-P4-001 | User-submitted URL, bounded result categories, no safety guarantee, no whole-site claim and unresolved input/provider/execution choices are recorded from the working draft. Web Risk informs one possible provider contract only. |
+| ZD-OWNER-001 | Owner-declared | EVD-ZD-SCOPE-001 | First MVP contains exactly manual file security analysis, quarantine/file disposition, and website/link checking. |
+| ZD-OWNER-002 | Owner-declared | EVD-ZD-SCOPE-001 | IP address tracking/investigation is a future candidate and explicitly excluded from MVP. |
+| ZD-OWNER-003 | Owner-declared | EVD-ZD-PRO-001 | Website/link checking requires Pro entitlement. |
+| ZD-OWNER-004 | Owner-declared | EVD-ZD-PRO-001 | Link checking remains disabled until the owner explicitly activates the separate owner-controlled switch when paid-user revenue can fund operating/API costs. |
+| ZD-OWNER-005 | Owner-declared | EVD-ZD-PRO-001 | No provider/API lookup may occur when Pro entitlement is absent or the owner switch is disabled; both gates must allow the operation. |
+| ZD-OWNER-006 | Owner-declared | EVD-ZD-PRO-001 | Pro does not mean unlimited checks; usage allowances/quotas and budget controls are required, while exact values remain unresolved. |
 
-## 2. Prior-art and platform/provider rule families
+## 2. Product-material rules
 
-| Rule family | Evidence reference | Source class | Transfer rule |
+All rows below derive from the pinned working-draft document EVD-SRC-PRODUCT-001. The source labels itself Working draft. Rule maturity remains provisional; proposed values and open decisions are not promoted to final owner requirements.
+
+### MVP-01 — Manual file security analysis
+
+| Rule ID | Evidence references | Traceable statement |
+|---|---|---|
+| PM-FILE-001 | EVD-SRC-PRODUCT-001; EVD-ZD-CAP-001; EVD-ZD-MAP-001 | User manually chooses a file and requests a scan. |
+| PM-FILE-002 | EVD-SRC-PRODUCT-001; EVD-ZD-CAP-001 | Result classes distinguish Threat found, Suspicious, No threat found, and Could not decide. |
+| PM-FILE-003 | EVD-SRC-PRODUCT-001 | No-known-threat must not be presented as a guarantee that the file is safe. |
+| PM-FILE-004 | EVD-SRC-PRODUCT-001 | Unsupported, inaccessible, interrupted and engine-failure cases must not be represented as successful scans. |
+| PM-FILE-005 | EVD-SRC-PRODUCT-001 | On-device is the default analysis location; files are not uploaded to cloud by default. |
+| PM-FILE-006 | EVD-SRC-PRODUCT-001 | Any future cloud file analysis must be separate, clearly explained and subject to appropriate user consent and data disclosure. |
+| PM-FILE-007 | EVD-SRC-PRODUCT-001 | SHA-256 is a planned direction for fingerprints/integrity, not a verified or frozen implementation. |
+| PM-FILE-008 | EVD-SRC-PRODUCT-001; EVD-ZD-MAP-001 | Supported file types/sizes, engine and local detection method remain open. |
+
+### MVP-02 — Quarantine and file disposition
+
+| Rule ID | Evidence references | Traceable statement |
+|---|---|---|
+| PM-QUAR-001 | EVD-SRC-PRODUCT-001; EVD-ZD-CAP-001 | Confirmed malware is automatically quarantined only when permitted and the operation succeeds; confirmation threshold remains open. |
+| PM-QUAR-002 | EVD-SRC-PRODUCT-001 | Suspicious files are reviewed; clean files remain untouched; unknown/inconclusive files are rescanned or reviewed and not assumed malicious. |
+| PM-QUAR-003 | EVD-SRC-PRODUCT-001; EVD-DOC-ANDROID-001; EVD-ZD-P4-001 | Encrypted app-private on-device storage is the working-draft baseline; actual implementation and guarantees are unverified. |
+| PM-QUAR-004 | EVD-SRC-PRODUCT-001 | 30-day default retention, configurability, automatic expiry and manual deletion are proposed, not final. |
+| PM-QUAR-005 | EVD-SRC-PRODUCT-001 | Restoration requires a fresh security scan and user confirmation; exact scan mechanism/timing remain open. |
+| PM-QUAR-006 | EVD-SRC-PRODUCT-001 | Restored file is checked against its recorded hash; exact algorithm is not fixed by this rule. |
+| PM-QUAR-007 | EVD-SRC-PRODUCT-001; EVD-DOC-ANDROID-001; EVD-ZD-P4-001 | Failed deletion retains the record and is reported accurately; exact partial-operation/recovery semantics remain open. |
+| PM-QUAR-008 | EVD-SRC-PRODUCT-001 | Quarantine, restoration and deletion must be auditable; audit fields/storage/retention/access remain open. |
+| PM-QUAR-009 | EVD-SRC-PRODUCT-001 | Quarantined files must never be executed. |
+| PM-QUAR-010 | EVD-SRC-PRODUCT-001; EVD-DOC-KEYSTORE-001; EVD-ZD-P4-001 | Android Keystore is the working-draft key-protection direction; device support, key policy and runtime enforcement remain unverified. |
+| PM-QUAR-011 | EVD-SRC-PRODUCT-001; EVD-DOC-ANDROID-001 | Do not overwrite unrelated user files during quarantine or restoration; atomicity/conflict policy remain open. |
+| PM-QUAR-012 | EVD-SRC-PRODUCT-001; EVD-DOC-ANDROID-001 | Explain what happens to quarantined data on app uninstall; actual lifecycle consequences remain unverified. |
+| PM-QUAR-013 | EVD-SRC-PRODUCT-001 | Manage scan history separately from quarantine retention; this does not approve scan history as a standalone MVP capability. |
+
+### MVP-03 — Website and link checking
+
+| Rule ID | Evidence references | Traceable statement |
+|---|---|---|
+| PM-LINK-001 | EVD-SRC-PRODUCT-001; EVD-ZD-CAP-001; EVD-ZD-MAP-001 | User supplies a website link; exact input method remains open. |
+| PM-LINK-002 | EVD-SRC-PRODUCT-001 | Result classes distinguish Likely dangerous, No known threat found, and Could not decide. |
+| PM-LINK-003 | EVD-SRC-PRODUCT-001; EVD-ZD-P4-001 | No-known-threat is not a guarantee that the website is safe; provider lookup semantics are bounded to requested threat lists. |
+| PM-LINK-004 | EVD-SRC-PRODUCT-001 | Do not claim whole-site inspection when only the submitted link was checked. |
+| PM-LINK-005 | EVD-SRC-PRODUCT-001 | Explain clearly when a link appears dangerous, suspicious or cannot be checked confidently; exact taxonomy/wording remain open. |
+| PM-LINK-006 | EVD-SRC-PRODUCT-001; EVD-ZD-P4-001 | Detection method/provider and execution location remain open; Web Risk is a reference contract only. |
+
+## 3. Prior-art and platform/provider rule families
+
+| Rule family | Evidence reference | Source class | Transfer boundary |
 |---|---|---|---|
-| HYP-FILE-001–011 | EVD-SRC-HYP-001 | Source-derived prior art | Describes Hypatia's scan input, hashing, Bloom matching, candidate verdict, cancellation and failure behaviour. Not a ZeroDeck algorithm or verdict policy. |
-| HYP-DB-001–010 | EVD-SRC-HYP-001 | Source-derived prior art | Describes Hypatia's database loading and detached-signature verification. Not a ZeroDeck trust-root or update policy. |
-| HYP-GEN-001–010 | EVD-SRC-HYPDB-001 | Source-derived prior art | Describes one signature-feed generation pipeline. Does not approve feed redistribution, vendor selection or generator adoption. |
-| AND-STO-001–006 | EVD-DOC-ANDROID-001 | Platform documentation | Android storage/SAF constraints only. Do not infer ZeroDeck Android-only scope or universal move/delete/atomicity. |
-| AND-KEY-001–005 | EVD-DOC-KEYSTORE-001 | Platform documentation | Android key-protection capabilities/limitations only. Does not select ZeroDeck encryption, cipher or key lifecycle. |
-| WR-API-001–012 | EVD-DOC-WEBRISK-001 | Provider documentation | Web Risk Lookup contract/pricing/caching reference only. Not production-provider procurement or actual ZeroDeck integration. |
+| HYP-FILE-001–011 | EVD-SRC-HYP-001 | Source-derived prior art | Hypatia's scan input, hashing, Bloom matching, candidate verdict, cancellation and failure behaviour; not a ZeroDeck algorithm or verdict policy. |
+| HYP-DB-001–010 | EVD-SRC-HYP-001 | Source-derived prior art | Hypatia database loading and detached-signature verification; not a ZeroDeck trust-root or update policy. |
+| HYP-GEN-001–010 | EVD-SRC-HYPDB-001 | Source-derived prior art | One signature-feed generation pipeline; does not approve feed redistribution, vendor selection or generator adoption. |
+| AND-STO-001–006 | EVD-DOC-ANDROID-001 | Platform documentation | Android storage/SAF constraints only; no universal move/delete/atomicity guarantee. |
+| AND-KEY-001–005 | EVD-DOC-KEYSTORE-001 | Platform documentation | Android key-protection capabilities/limitations only; no ZeroDeck cipher/key lifecycle selected. |
+| WR-API-001–012 | EVD-DOC-WEBRISK-001 | Provider documentation | Web Risk Lookup contract/pricing/caching reference only; no production-provider procurement or actual ZeroDeck integration. |
 
-## 3. Evidence not yet available
+## 4. Evidence not available
 
-- No ZeroDeck runtime observation, execution, API trace, persisted record, background job, authentication event, authorization decision, security-control test or performance measurement exists in this engagement.
+- No ZeroDeck runtime observation, execution, API trace, persisted record, background job, authentication event, authorization decision, security-control test or performance measurement exists.
 - The product mockup/source repository does not establish runtime screen equivalence.
-- The actual ZeroDeck build, target environment and deployed system boundary remain unidentified.
-- The owner decisions establish intended scope/policy, not that the implementation enforces them. The pinned scanner product document is a Working draft; proposed retention and open design choices are not promoted to settled requirements.
+- Actual ZeroDeck build, target environment and deployed system boundary remain unidentified.
+- Owner decisions establish intended scope/policy, not runtime enforcement. The pinned scanner product document is a Working draft; proposed retention and open design choices remain provisional.
 
-## 4. Traceability rule for subsequent edits
+## 5. Traceability rule for future edits
 
-Every new ZeroDeck rule MUST identify one of: owner decision, product-material artifact, runtime observation, source-derived inference about ZeroDeck source, or external declared contract. Every prior-art fact MUST remain explicitly attributed to its originating project/provider. A rule with no support remains proposed or unknown; it must not be presented as supported.
+Every new ZeroDeck rule must identify an owner decision, product-material artifact, runtime observation, source-derived inference about ZeroDeck source, or external declared contract. Every prior-art fact remains attributed to its originating project/provider. Unsupported propositions remain proposed or unknown.
