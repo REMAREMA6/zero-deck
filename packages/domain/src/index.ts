@@ -137,11 +137,13 @@ export async function runLocalFileAnalysis(
     if (
       !engine.supportsProgress ||
       !observer?.onProgress ||
+      !isRecord(progress) ||
       !Number.isFinite(progress.completed) ||
       !Number.isFinite(progress.total) ||
       progress.total <= 0 ||
       progress.completed < 0 ||
       progress.completed > progress.total ||
+      typeof progress.unit !== 'string' ||
       !progress.unit.trim()
     ) {
       return;
