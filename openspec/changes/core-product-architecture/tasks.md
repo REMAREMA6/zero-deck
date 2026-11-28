@@ -1,8 +1,10 @@
-# Tasks
+# Outcome-Level Implementation Plans
 
-> **Execution status:** Planning only. All tasks are unstarted. This plan does not authorize implementation. The owner must approve the architecture and explicitly authorize the Developer Agent before task 1 begins.
+> **Plan type:** Architect-authored, outcome-level implementation plans. These are goals and acceptance contracts, not Developer execution breakdowns or step-by-step coding tasks.
+> **Execution status:** Planning only. All plans are unstarted. Implementation requires the owner's architecture approval and explicit authorization to the Developer Agent.
+> **Decomposition ownership:** For each authorized plan, the Developer Agent—not the Architect—uses its planning-and-task-breakdown skill, inspects the repository, and creates its own small executable tasks, dependency graph, sequence and checkpoints. The Developer chooses the implementation method within the approved architecture.
 >
-> **Developer rule:** The Developer builds and tests its own work continuously. Every implementation task includes its own verification evidence; there is no separate routine testing agent or final catch-all testing phase.
+> **Developer rule:** The Developer owns detailed task decomposition, engineering execution planning, implementation and continuous testing. Every delivered outcome must have verification evidence; there is no separate routine testing agent or final catch-all testing phase.
 >
 > **Source authority:** Use the five product contracts, Phase 9 owner-decision register, 64-question disposition register, authentication owner-decision record, Software Rules owner rules and open-properties register. Preserve each source's approval/evidence label. Do not treat every PM-proposed contract requirement as owner-approved.
 
@@ -82,3 +84,12 @@
 
 - Archive this OpenSpec change only after architecture review and owner approval are complete and the task plan is accepted.
 - After the core product is implemented and tested, create a separate OpenSpec change for approved hosted integrations; do not expand this change to include Neon, Vercel or live provider deployment.
+
+
+## Plan interpretation and Developer-owned breakdown
+
+The numbered entries above are the Architect's implementation plans. Each entry defines an outcome, boundaries and acceptance expectations. They are deliberately not decomposed into session-sized coding tasks.
+
+When the owner authorizes implementation, the Developer Agent selects an outcome-level plan, studies its requirements and current repository state, and performs the detailed breakdown using the installed `planning-and-task-breakdown` skill. That Developer-owned breakdown must identify implementable slices, dependencies, order, checkpoints and tests. The Developer determines the concrete engineering approach without changing the approved outcome or architecture.
+
+The Architect must not expand this document into a step-by-step Developer work queue. If implementation evidence reveals an architectural gap, the Developer reports it and the Architect updates the architecture or relevant outcome-level plan.
