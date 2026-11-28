@@ -15,6 +15,7 @@ const app = buildApp({
   accountRegistration,
   emailVerification,
   sessionService,
+  // Account deletion stays unconfigured until the owner/legal retention schedule is approved.
   logger: config.NODE_ENV !== 'test',
 });
 app.addHook('onClose', async () => {
