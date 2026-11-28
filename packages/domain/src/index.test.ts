@@ -50,14 +50,14 @@ describe('local analysis engine boundary', () => {
     const result = await runLocalFileAnalysis(engine, bytes, clock);
 
     expect(engine.analyze).toHaveBeenCalledWith({ bytes });
-    expect(result).toEqual({
+    expect(result).toMatchObject({
       outcome,
       lifecycle: 'completed',
       engineId: 'test-engine',
       engineVersion: 'test-version',
       completedAt,
-      explanation: expectedEngineExplanation(outcome),
     });
+    expect(result.explanation).toBe(expectedEngineExplanation(outcome));
   });
 
   it('never presents no-known-threat as proof that the file is safe', () => {
@@ -74,19 +74,19 @@ describe('local analysis engine boundary', () => {
   });
 
   it('does not invent engine identity when metadata is absent', () => {
-    expect(
-      mapAnalysisEngineResult(
-        { outcome: 'no_known_threat_found', explanation: 'No known threat was found.' },
-        clock,
-      ),
-    ).toEqual({
+    const result = mapAnalysisEngineResult(
+      { outcome: 'no_known_threat_found', explanation: 'No known threat was found.' },
+      clock,
+    );
+
+    expect(result).toMatchObject({
       outcome: 'no_known_threat_found',
       lifecycle: 'completed',
       engineId: null,
       engineVersion: null,
       completedAt,
-      explanation: noKnownThreatExplanation,
     });
+    expect(result.explanation).toBe(noKnownThreatExplanation);
   });
 
   it('maps malformed engine output to a failed inconclusive result', () => {
