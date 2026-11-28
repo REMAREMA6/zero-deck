@@ -18,41 +18,36 @@ describe('server-authoritative authorization gates', () => {
     if (!pool) throw new Error('PostgreSQL is unavailable.');
     const authorization = createAuthorizationService(pool);
     const states = [true, false, null] as const;
-    for (const permission of states) {
-      for (const pro of states) {
-        for (const activation of states) {
-          const accountId = randomUUID();
-          await pool.query('INSERT INTO accounts (account_id, email, email_canonical) VALUES ($1, $2, $2)',
-            [accountId, accountId + '@example.test']);
-          if (permission !== null) await pool.query(
-            "INSERT INTO account_permissions (account_id, permission_key, granted) VALUES ($1, 'website.check', $2)",
-            [accountId, permission]);
-          if (pro !== null) await pool.query(
-            'INSERT INTO account_entitlements (account_id, pro_active) VALUES ($1, $2)', [accountId, pro]);
-          if (activation !== null) await pool.query(
-            "INSERT INTO system_feature_controls (feature_key, enabled) VALUES ('mvp03_url_check', $1) ON CONFLICT (feature_key) DO UPDATE SET enabled = EXCLUDED.enabled",
-            [activation]);
-          const decision = await authorization.authorize({
-            accountId, permission: 'website.check', requirePro: true, featureKey: 'mvp03_url_check',
-          });
-          expect(decision.allowed).toBe(permission === true && pro === true && activation === true);
-          if (permission === null) expect(decision).toEqual({ allowed: false, reason: 'permission_unknown' });
-          else if (permission === false) expect(decision).toEqual({ allowed: false, reason: 'permission_denied' });
-          else if (pro === null) expect(decision).toEqual({ allowed: false, reason: 'entitlement_unknown' });
-          else if (pro === false) expect(decision).toEqual({ allowed: false, reason: 'pro_required' });
-          else if (activation === null) expect(decision).toEqual({ allowed: false, reason: 'activation_unknown' });
-          else if (activation === false) expect(decision).toEqual({ allowed: false, reason: 'activation_disabled' });
-          else expect(decision).toEqual({ allowed: true });
-        }
-      }
+    for (const permission of states) for (const pro of states) for (const activation of states) {
+      const accountId = randomUUID();
+      const featureKey = 'test.authorization.' + randomUUID();
+      await pool.query('INSERT INTO accounts (account_id, email, email_canonical) VALUES ($1, $2, $2)',
+        [accountId, accountId + '@example.test']);
+      if (permission !== null) await pool.query(
+        'INSERT INTO account_permissions (account_id, permission_key, granted) VALUES ($1, $2, $3)',
+        [accountId, 'website.check', permission]);
+      if (pro !== null) await pool.query(
+        'INSERT INTO account_entitlements (account_id, pro_active) VALUES ($1, $2)', [accountId, pro]);
+      if (activation !== null) await pool.query(
+        'INSERT INTO system_feature_controls (feature_key, enabled) VALUES ($1, $2)', [featureKey, activation]);
+      const decision = await authorization.authorize({
+        accountId, permission: 'website.check', requirePro: true, featureKey,
+      });
+      expect(decision.allowed).toBe(permission === true && pro === true && activation === true);
+      if (permission === null) expect(decision).toEqual({ allowed: false, reason: 'permission_unknown' });
+      else if (permission === false) expect(decision).toEqual({ allowed: false, reason: 'permission_denied' });
+      else if (pro === null) expect(decision).toEqual({ allowed: false, reason: 'entitlement_unknown' });
+      else if (pro === false) expect(decision).toEqual({ allowed: false, reason: 'pro_required' });
+      else if (activation === null) expect(decision).toEqual({ allowed: false, reason: 'activation_unknown' });
+      else if (activation === false) expect(decision).toEqual({ allowed: false, reason: 'activation_disabled' });
+      else expect(decision).toEqual({ allowed: true });
     }
   });
 
   it('denies disabled and unknown accounts and never trusts caller-supplied authorization flags', async () => {
     if (!pool) throw new Error('PostgreSQL is unavailable.');
     const authorization = createAuthorizationService(pool);
-    const missing = randomUUID();
-    expect(await authorization.authorize({ accountId: missing, permission: 'website.check' })).toEqual(
+    expect(await authorization.authorize({ accountId: randomUUID(), permission: 'website.check' })).toEqual(
       { allowed: false, reason: 'account_unknown' });
     const accountId = randomUUID();
     await pool.query("INSERT INTO accounts (account_id, email, email_canonical, status) VALUES ($1, $2, $2, 'disabled')",
@@ -65,10 +60,21 @@ describe('server-authoritative authorization gates', () => {
       { allowed: false, reason: 'account_unknown' });
   });
 
+  it('observes permission revocation on the next authorization evaluation', async () => {
+    if (!pool) throw new Error('PostgreSQL is unavailable.');
+    const accountId = randomUUID();
+    await pool.query('INSERT INTO accounts (account_id, email, email_canonical) VALUES ($1, $2, $2)',
+      [accountId, accountId + '@example.test']);
+    await pool.query("INSERT INTO account_permissions (account_id, permission_key, granted) VALUES ($1, 'website.check', true)", [accountId]);
+    const authorization = createAuthorizationService(pool);
+    expect(await authorization.authorize({ accountId, permission: 'website.check' })).toEqual({ allowed: true });
+    await pool.query("UPDATE account_permissions SET granted = false, updated_at = now() WHERE account_id = $1 AND permission_key = 'website.check'", [accountId]);
+    expect(await authorization.authorize({ accountId, permission: 'website.check' })).toEqual(
+      { allowed: false, reason: 'permission_denied' });
+  });
+
   it('denies protected operations when the authorization database is unavailable', async () => {
-    const authorization = createAuthorizationService({
-      connect: async () => { throw new Error('database unavailable'); },
-    } as never);
+    const authorization = createAuthorizationService({ connect: async () => { throw new Error('database unavailable'); } } as never);
     expect(await authorization.authorize({ accountId: randomUUID(), permission: 'website.check' })).toEqual(
       { allowed: false, reason: 'unavailable' });
   });
@@ -82,4 +88,4 @@ describe('server-authoritative authorization gates', () => {
       { allowed: false, reason: 'permission_unknown' });
     expect(connected).toBe(false);
   });
-}
+});
