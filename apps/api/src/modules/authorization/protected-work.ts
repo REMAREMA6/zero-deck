@@ -82,7 +82,10 @@ export function createProtectedWorkService(database: ProtectedWorkDatabase): {
       let workId: string | undefined;
       const notifiedWorkIds = new Set<string>();
       const controller = new AbortController();
-      const onNotification = (message: { channel?: string | undefined; payload?: string | undefined }) => {
+      const onNotification = (message: {
+        channel?: string | undefined;
+        payload?: string | undefined;
+      }) => {
         if (message.channel !== 'zerodeck_protected_work' || !message.payload) return;
         notifiedWorkIds.add(message.payload);
         if (message.payload === workId) controller.abort();
