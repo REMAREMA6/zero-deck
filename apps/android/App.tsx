@@ -17,6 +17,7 @@ import {
   View,
 } from 'react-native';
 import { createSessionStorage } from './src/session-storage';
+import { rotateSessionCredential } from './src/session-client';
 
 const sessionStorage = createSessionStorage(SecureStore);
 const fileSelection = createAndroidFileSelectionAdapter({
@@ -219,6 +220,30 @@ export default function App() {
       setScreen('account');
     } catch {
       setError('The account service or secure storage could not be reached.');
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  async function handleRotateSession() {
+    setError(null);
+    setSubmitting(true);
+    try {
+      const token = await sessionStorage.read();
+      const apiBase = getApiBaseUrl();
+      if (!token || !apiBase) {
+        setError('A valid session and account service are required to rotate this credential.');
+        return;
+      }
+      const rotated = await rotateSessionCredential(apiBase, token, sessionStorage);
+      if (profile) setProfile({ ...profile, sessionId: rotated.sessionId });
+      setError('Session credential rotated. The previous credential can no longer be used.');
+    } catch (rotationError) {
+      setError(
+        rotationError instanceof Error
+          ? rotationError.message
+          : 'The session credential could not be rotated.',
+      );
     } finally {
       setSubmitting(false);
     }
@@ -471,6 +496,14 @@ export default function App() {
             </Text>
           ) : null}
           <View style={styles.form}>
+            <Pressable
+              accessibilityRole="button"
+              disabled={submitting}
+              onPress={handleRotateSession}
+              style={[styles.secondaryButton, submitting && styles.submitDisabled]}
+            >
+              <Text style={styles.secondaryButtonText}>Rotate session credential</Text>
+            </Pressable>
             <PrimaryButton
               label="Sign out"
               submitting={submitting}
