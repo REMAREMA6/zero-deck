@@ -189,7 +189,7 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### B5. Recovery and fresh-authentication boundaries
 
-**Recovery sub-slice (Architect outcome 3.3): Complete.** Verified-email challenge issuance, expiry, one-time consumption, password replacement, session revocation and fake security notification are implemented and passed full CI run [46152754260](https://github.com/REMAREMA6/zero-deck/actions/runs/46152754260). **Fresh-authentication guard (Architect outcome 3.5): implementation and PostgreSQL tests committed; CI verification is pending** for transaction-bound current-password verification, row locks, inactive-account denial and rollback on protected-action failure. The guard is the required boundary for future password/passkey changes, verified recovery-email changes and account deletion endpoints; passkeys remain deferred and account-deletion execution belongs to 3.8.
+**Recovery sub-slice (Architect outcome 3.3): Complete.** Verified-email challenge issuance, expiry, one-time consumption, password replacement, session revocation and fake security notification are implemented and passed full CI run [46152754260](https://github.com/REMAREMA6/zero-deck/actions/runs/46152754260). **Fresh-authentication guard (Architect outcome 3.5): Complete and verified** for transaction-bound current-password verification, account/credential row locks, invalid/valid credential handling, disabled-account denial and rollback on protected-action failure. Full clean CI passed in [run 46154392546](https://github.com/REMAREMA6/zero-deck/actions/runs/46154392546). The guard is the required boundary for future password/passkey changes, verified recovery-email changes and account deletion endpoints; passkeys remain deferred and account-deletion execution belongs to 3.8.
 
 **Description:** Implement verified-email recovery, fake security notifications and fresh authentication for sensitive account-security actions.
 
@@ -197,13 +197,13 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 - [x] Recovery uses a single-use, time-limited verified-email challenge; challenge lifetime is explicitly injected and no production expiry default is invented.
 - [x] Successful recovery revokes existing sessions and emits a security notification through the fake delivery adapter.
 - [x] Unverified email is never used for recovery or security notifications.
-- [ ] A transaction-bound fresh-authentication guard verifies the current password before a sensitive mutation; sensitive action routes must invoke it. Passkeys remain deferred; account-deletion execution is tracked separately under 3.8. CI verification pending.
+- [x] A transaction-bound fresh-authentication guard verifies the current password before a sensitive mutation. Future sensitive action routes must invoke it; passkeys remain deferred and account-deletion execution is tracked separately under 3.8. PostgreSQL tests cover valid/invalid credentials, disabled-account denial and transaction rollback.
 - [x] Fresh authentication is operation-scoped and is not added to ordinary session authentication or routine requests.
 - [ ] Expiry, resend, rate and notification retry policy values are not invented.
 
 **Verification**
 - [x] PostgreSQL integration tests cover expiry, consumed/replayed challenges, revocation, verified-recipient notification and recovery-delivery failure.
-- [ ] Fake notification transport failure does not undo completed recovery; PostgreSQL step-up tests cover invalid/valid password, disabled account and rollback on protected-action failure. Clean CI verification pending.
+- [x] Fake notification transport failure does not undo completed recovery; PostgreSQL step-up tests cover invalid/valid password, disabled account and rollback on protected-action failure. Full CI run 46154392546 passed.
 - [ ] No challenge/token is exposed in logs or URLs.
 
 **Dependencies:** B2–B4.  
