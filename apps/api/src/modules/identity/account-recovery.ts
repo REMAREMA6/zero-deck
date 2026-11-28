@@ -43,11 +43,11 @@ export function createAccountRecoveryService(
   const configured = () =>
     Boolean(
       policy &&
-        Number.isSafeInteger(policy.challengeLifetimeMs) &&
-        policy.challengeLifetimeMs > 0 &&
-        delivery &&
-        passwordPolicy &&
-        notifier,
+      Number.isSafeInteger(policy.challengeLifetimeMs) &&
+      policy.challengeLifetimeMs > 0 &&
+      delivery &&
+      passwordPolicy &&
+      notifier,
     );
 
   return {
