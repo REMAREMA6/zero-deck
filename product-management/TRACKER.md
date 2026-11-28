@@ -6,7 +6,7 @@
 **Method:** CIRCLES — seven steps, followed by supporting product-definition work  
 **Overall status:** [~] CIRCLES completed provisionally; blueprint, architecture follow-up, customer validation and owner decisions remain open; PM-authored product-rules Phase 3 is complete  
 **Current position:** PM-authored rules Phases 0–3 complete; Phase 4 (MVP-01 manual file-analysis requirements) is next  
-**Last reconciled:** 2026-11-27
+**Last reconciled:** 2026-11-28
 
 > Operational source of truth. Update this tracker whenever work starts, changes status, becomes blocked, or completes. A new session must resume from this file and linked records without relying on chat history.
 
@@ -88,7 +88,7 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 | 0 | Establish baseline, boundaries and authorship | [x] | Software Rules model inspected; product scope and PM identity recorded. |
 | 1 | Design PM contract profile | [x] | Exact mapping, author identity, ID/version rules, complete-record and extension schemas, and validation procedure documented and checked. |
 | 2 | Research and author authentication requirements | [x] | [IDENTITY-AUTHENTICATION.md](product-rules/contracts/IDENTITY-AUTHENTICATION.md), structured projection, evidence, [CIRCLES analysis](2026-11-27/13-PHASE-2-CIRCLES-AUTHENTICATION.md) and [Phase 2 validation](product-rules/PHASE-2-VALIDATION.md); 21 PM-proposed requirements, 46 acceptance criteria, 8 open owner questions. |
-| 3 | Validate authentication coverage | [x] | [15-facet assessment](product-rules/PHASE-3-15-FACET-COVERAGE.md), [23-scenario matrix](product-rules/PHASE-3-NEGATIVE-FAILURE-RECOVERY-MATRIX.md), [structured proposals](product-rules/proposals/PHASE-3-AUTHENTICATION-COVERAGE-ADDITIONS.json), [CIRCLES analysis](2026-11-28/15-PHASE-3-CIRCLES-COVERAGE.md) and [validation](product-rules/PHASE-3-VALIDATION.md). All 15 facets assessed; 21 existing requirements/46 criteria preserved; 8 owner questions remain open. |
+| 3 | Validate authentication coverage | [x] | [15-facet assessment](product-rules/PHASE-3-15-FACET-COVERAGE.md), [23-scenario matrix](product-rules/PHASE-3-NEGATIVE-FAILURE-RECOVERY-MATRIX.md), [structured proposals](product-rules/proposals/PHASE-3-AUTHENTICATION-COVERAGE-ADDITIONS.json), [Behaviour facet-reference amendment](product-rules/proposals/PHASE-3-BEHAVIOUR-FACET-REFERENCE.json), [CIRCLES analysis](2026-11-28/15-PHASE-3-CIRCLES-COVERAGE.md) and [validation](product-rules/PHASE-3-VALIDATION.md). All 15 facets assessed; 21 existing requirements/46 criteria preserved; 8 owner questions remain open. |
 | 4 | Author manual file-analysis requirements | [ ] | File selection, input scope, verdicts, limitations, privacy and failure semantics. |
 | 5 | Author quarantine/disposition requirements | [ ] | Quarantine, integrity, restore, deletion, retention and recovery. |
 | 6 | Author website/link-check requirements | [ ] | URL semantics, provider failure, privacy, Pro + activation gates, quotas and budget controls. |
