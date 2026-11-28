@@ -29,4 +29,24 @@ describe('health endpoints', () => {
     expect(response.json()).toEqual({ status: 'not_ready', reason: 'database_unavailable' });
     await app.close();
   });
+  it('does not write exception messages or stack details to application logs', async () => {
+    const app = buildApp({ database: { query: vi.fn() } as never, logger: true });
+    const logError = vi.spyOn(app.log, 'error');
+    const secret = 'challenge-secret-that-must-not-be-logged';
+
+    app.get('/test/unhandled-error', async () => {
+      throw new Error(secret);
+    });
+
+    const response = await app.inject({ method: 'GET', url: '/test/unhandled-error' });
+
+    expect(response.statusCode).toBe(500);
+    expect(logError).toHaveBeenCalledWith(
+      { code: 'UNHANDLED_REQUEST_ERROR' },
+      'Unhandled request error',
+    );
+    expect(JSON.stringify(logError.mock.calls)).not.toContain(secret);
+    await app.close();
+  });
+
 });
