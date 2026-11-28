@@ -4,7 +4,7 @@
 **Author:** ZeroDeck Product Management Agent  
 **Owner authority:** Product owner retains final authority  
 **Opened:** 2026-11-27  
-**Status:** [x] Phases 0–3 complete; Phase 4 next  
+**Status:** [x] Phases 0–3 complete; eight authentication owner decisions recorded; Phase 4 next  
 **Tracker:** [../TRACKER.md](../TRACKER.md)
 
 ## Purpose
@@ -62,7 +62,11 @@ Every requirement must:
 | 8 | Cross-facet completeness and consistency review | Traceability complete; contradictions, missing states and untestable claims resolved or explicitly open | [ ] |
 | 9 | Owner review and release | Owner decisions recorded; versioned contract package ready for engineering handoff | [ ] |
 
-Phases 0–3 are complete. Phase 3 assessed all 15 Software Rules facets, classified 23 negative/failure/recovery scenarios, reviewed cross-facet/platform interactions, and documented three structured PM-proposed additions and a Behaviour facet-reference metadata amendment without changing the canonical Phase 2 contract. Eight owner questions remain open. Phase 2 includes the canonical draft contract with 21 PM-proposed requirements, 46 concrete acceptance criteria, 8 unresolved owner questions, a schema-checked structured projection, retained evidence, and the seven-step CIRCLES analysis/recommendation in 2026-11-27/13-PHASE-2-CIRCLES-AUTHENTICATION.md. No requirement is owner-approved. Phase 4 is next. Other feature requirement sets have not yet been authored.
+Phases 0–3 are complete. On 2026-11-28 the owner accepted all eight PM recommendations for identity/authentication decisions. The dated decision record is 2026-11-28/17-AUTHENTICATION-OWNER-DECISIONS.md; the canonical contract is now v0.2.0-draft with 25 requirements and 67 acceptance criteria in the synchronized structured projection/evidence. The original 21 requirements remain PM-proposed; only ZD-AUTH-025 through ZD-AUTH-028 directly encode owner-approved decisions and are marked owner-approved. The eight original questions are resolved; five additional operational questions remain open. Phase 3 candidate additions (ZD-AUTH-022–024) and the Behaviour facet-reference amendment remain unaccepted proposals. Decision recording validation is in product-rules/PHASE-4-AUTH-DECISION-VALIDATION.md. Phase 4 is next. Other feature requirement sets have not yet been authored.
+
+## Recorded authentication owner decisions
+
+The owner approved email/password launch sign-in; verified-email rules; optional MFA and later passkeys; verified-email recovery; 7-day inactivity and 30-day absolute session limits; current-session/logout-all controls without a launch session list; user-initiated account deletion with documented retention; and risk-based step-up authentication. Exact email verification operations, abuse thresholds, renewal cadence, deletion/retention schedule and authorization propagation bounds remain open. See 2026-11-28/17-AUTHENTICATION-OWNER-DECISIONS.md and product-rules/PHASE-4-AUTH-DECISION-VALIDATION.md.
 
 ## Feature order
 
