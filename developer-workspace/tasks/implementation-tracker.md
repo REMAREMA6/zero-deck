@@ -14,34 +14,33 @@
 - **Partial** means some implementation or tests exist, but at least one material acceptance criterion or verification item remains.
 - **Blocked** means progress depends on an unresolved owner/security/platform/provider decision. Safe preparatory work may still proceed.
 - **Not started** means no meaningful implementation/evidence has been verified yet.
-- **Architect-owned reference** means the item is architecture-baseline work rather than Developer product implementation. The Developer does not rewrite or claim ownership of that work.
+- All 51 numbered outcomes in the Architect's plan are tracked as Developer work. The first five are included; they are not excluded as Architect-only references.
 
 ## Current reconciliation
 
-<small>Counts below are for the 46 Developer implementation outcomes (sections 2–7), not the five architecture-baseline reference items.</small>
+These counts cover **all 51 numbered Architect outcomes (1.1–7.7)**. They are Developer's independent assessment of implementation evidence, not a transcription of the Architect's checkbox state.
 
 | Status | Count |
 |---|---:|
 | Done | 2 |
-| Partial | 16 |
+| Partial | 19 |
 | Blocked | 2 |
-| Not started | 26 |
-| Architect-owned reference | 5 |
-| **Total tracked outcomes** | **51** |
+| Not started | 28 |
+| **Total Architect outcomes tracked** | **51** |
 
-**Important:** These are outcome-level statuses, not a claim that 18 complete features exist. Only two outcomes currently meet the Done definition. Partial items have working code and/or tests but are not complete.
+**Important:** Only two outcomes currently meet the Done definition. Partial items have some implementation and/or evidence, but do not yet satisfy the full acceptance contract. The 51 are all Architect-defined implementation outcomes; none are excluded from Developer tracking.
 
-## Section 1 — Architecture baseline (reference only)
+## Section 1 — Architecture baseline and requirement authority
 
-These five items remain owned by the Architect's architecture work. They are listed here only so the Developer's tracker accounts for the full 51-outcome scope. The Developer does not change their status or rewrite their source documents.
+These are the first five of the 51 Architect-defined outcomes. The Architect's source document remains untouched. Existing architecture artifacts provide partial evidence, but the Developer must verify traceability, convert relevant decisions into implementation constraints and record its own evidence.
 
-| ID | Outcome | Developer tracking disposition |
-|---|---|---|
-| 1.1 | Requirement-authority and traceability matrix | Architect-owned reference |
-| 1.2 | Question dispositions and open-decision reconciliation | Architect-owned reference |
-| 1.3 | Architecture decision log and alternatives | Architect-owned reference |
-| 1.4 | Supported-platform investigation plan | Architect-owned reference |
-| 1.5 | Product Owner architecture baseline review | Architect-owned reference |
+| ID | Outcome | Status | Implementation / verification evidence and remaining work |
+|---|---|---|---|
+| 1.1 | Requirement-authority and traceability matrix across five contracts | **Partial** | Architecture traceability artifacts exist under `openspec/` and product-management contracts. Developer still needs to verify every requirement maps to a module/work package/test or is explicitly unresolved/out of scope, and link that evidence in the Developer workspace. |
+| 1.2 | Reconcile Phase 9 dispositions with open-decision register | **Partial** | Phase 9 disposition and architecture decision/open-question records exist. Developer must verify all 15 resolved and 49 deferred questions have consistent authority, owner/stage and release gates, without inventing values. |
+| 1.3 | Architecture decision log with alternatives and evidence | **Partial** | Architecture decision log and handoff artifacts exist. Developer must verify the decisions relevant to implementation cite authority, alternatives and limitations, and preserve unresolved decisions as blockers. |
+| 1.4 | Supported-platform investigation plan and reproducible experiments | **Not started** | No Developer-owned experiment plan/evidence records verified for file access, permissions, quarantine, key protection, cancellation and storage persistence on Web and Android. |
+| 1.5 | Product Owner review and disposition of architecture conflicts | **Not started** | No explicit recorded Product Owner review/disposition verified in the Developer workspace. Do not infer approval from implementation authorization. |
 
 ## Section 2 — Core repository and backend foundation
 
