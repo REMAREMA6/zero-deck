@@ -2,7 +2,7 @@ name: ZeroDeck Core CI
 
 on:
   push:
-    branches: [developer/core-product]
+    branches: [main]
     paths:
       - 'apps/**'
       - 'packages/**'
