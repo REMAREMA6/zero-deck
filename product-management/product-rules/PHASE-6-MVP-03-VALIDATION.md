@@ -10,15 +10,15 @@
 
 | Item | Result |
 |---|---:|
-| Normative requirements | 39 |
-| Acceptance criteria | 39 |
+| Normative requirements | 41 |
+| Acceptance criteria | 41 |
 | Owner-approved requirements directly encoding `ZD-SCOPE-001` | 4 |
 | PM-proposed requirements | 35 |
 | Open product/owner questions | 18 |
 | Official Software Rules facets assessed | 15 |
 | Negative/failure/recovery scenarios | 75 |
 
-The four owner-approved statements are ZD-WEB-001–004: active Pro gate, independent owner activation gate, no-provider-call invariant, and Pro is not unlimited. The remaining 35 requirements are PM-proposed. None of the 18 questions was silently resolved.
+The four owner-approved statements are ZD-WEB-001–004: active Pro gate, independent owner activation gate, no-provider-call invariant, and Pro is not unlimited. The remaining 37 requirements are PM-proposed. None of the 18 questions was silently resolved.
 
 ## 2. Targeted structural and semantic checks
 
@@ -31,7 +31,7 @@ The four owner-approved statements are ZD-WEB-001–004: active Pro gate, indepe
 5. Every requirement has at least one Given/When/Then acceptance criterion.
 6. Every referenced facet is one of the 15 official facet IDs.
 7. Every requirement declares web and Android applicability.
-8. Decision-status split is exactly four owner-approved and 35 PM-proposed.
+8. Decision-status split is exactly four owner-approved and 37 PM-proposed.
 9. Every owner-approved requirement references `ZD-SCOPE-001`.
 10. All 18 open questions remain open.
 11. Evidence source URI and source revision match the structured artifact identity.
@@ -42,7 +42,7 @@ The four owner-approved statements are ZD-WEB-001–004: active Pro gate, indepe
 16. The PM extension and declared-contract schema files parse as JSON and expose the expected definitions.
 17. The structured projection contains a SHA-256 digest recomputed from the exact canonical Markdown bytes and an immutable Markdown revision.
 18. The TLS failure requirement and certificate-verification prohibition are separate atomic requirements with matching normative metadata.
-19. The final Markdown statement text and structured statement text are byte-for-byte equal for all 39 requirements.
+19. The final Markdown statement text and structured statement text are byte-for-byte equal for all 41 requirements.
 
 Five malformed in-memory fixtures were rejected: missing acceptance criteria, invalid facet ID, duplicate requirement ID, owner-approved requirement without a decision reference, and conditional requirement without explicit conditions (**5/5 rejected**).
 
@@ -87,6 +87,6 @@ The local checks were targeted structural and semantic checks performed against 
 
 ## 7. Phase 6 validation conclusion
 
-The planned Phase 6 authoring deliverables exist and their targeted structural/traceability checks pass. Phase 6 may be marked complete as a **PM requirements-authoring phase**, with 39 requirements, 39 acceptance criteria, 18 open questions, 15-facet assessment and 75 failure/recovery scenarios.
+The planned Phase 6 authoring deliverables exist and their targeted structural/traceability checks pass. Phase 6 may be marked complete as a **PM requirements-authoring phase**, with 41 requirements, 41 acceptance criteria, 18 open questions, 15-facet assessment and 75 failure/recovery scenarios.
 
 The contract remains draft. Only four requirements directly encode the existing owner-approved scope decision; 34 remain PM-proposed. The Product Owner must review the open policy questions before implementation decisions are treated as settled.
