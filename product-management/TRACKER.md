@@ -4,9 +4,9 @@
 **Workspace:** `product-management/`  
 **Started:** 2026-11-27  
 **Method:** CIRCLES — seven steps, followed by supporting product-definition work  
-**Overall status:** [~] CIRCLES completed provisionally; blueprint, architecture follow-up, customer validation and owner decisions remain open; PM-authored product-rules Phases 0–6 are complete  
-**Current position:** PM-authored rules Phases 0–6 complete; Phase 7 cross-cutting system requirements is next  
-**Last reconciled:** 2026-11-28
+**Overall status:** [~] CIRCLES completed provisionally; blueprint, architecture follow-up, customer validation and owner decisions remain open; PM-authored product-rules Phases 0–7 are complete  
+**Current position:** PM-authored rules Phases 0–7 complete; Phase 8 cross-facet completeness/consistency review is next  
+**Last reconciled:** 2026-11-28 — Phase 7 complete
 
 > Operational source of truth. Update this tracker whenever work starts, changes status, becomes blocked, or completes. A new session must resume from this file and linked records without relying on chat history.
 
@@ -26,7 +26,7 @@ During that work, the owner added a distinct requirement: the Product Management
 
 That work is now recorded as a separate workstream. It does not restart CIRCLES or change the three-capability MVP.
 
-**Completed most recently:** Phase 6 MVP-03 website/link-checking requirements: 41 requirements / 41 acceptance criteria; four direct encodings of owner-approved scope and 37 PM-proposed requirements; 18 open questions; all 15 facets assessed; 81 failure/recovery scenarios; synchronized projection/evidence; CIRCLES analysis; 19/19 targeted checks and 5/5 malformed fixtures rejected. **Next task:** prepare the Phase 7 cross-cutting system-requirements plan and wait for owner approval.
+**Completed most recently:** Phase 7 cross-cutting system requirements: 28 PM-proposed requirements / 28 acceptance criteria; 18 open questions; all 15 facets assessed; 58 failure/recovery scenarios; synchronized structured projection/evidence; seven-step CIRCLES analysis; 30/30 targeted checks and 5/5 malformed fixtures rejected. Phase 7 is complete as PM requirements authoring only; owner review, implementation and runtime verification remain open. **Next task:** Phase 8 cross-facet completeness/consistency review.
 
 ### Current product authority
 
@@ -74,7 +74,7 @@ That work is now recorded as a separate workstream. It does not restart CIRCLES 
 
 **Workstream:** [11-PM-AUTHORED-PRODUCT-RULES.md](2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md)  
 **Author:** ZeroDeck Product Management Agent  
-**Status:** [x] Phases 0–6 complete; Phase 7 next  
+**Status:** [x] Phases 0–7 complete; Phase 8 next  
 **Purpose:** create implementation-ready, technology-independent product requirements aligned with Software Rules.
 
 **Profile:** [product-rules/PROFILE.md](product-rules/PROFILE.md) — Phase 1 complete. **Contract index:** [product-rules/README.md](product-rules/README.md). **Validation:** [product-rules/VALIDATION-REPORT.md](product-rules/VALIDATION-REPORT.md).
@@ -92,7 +92,7 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 | 4 | Author manual file-analysis requirements | [x] | [MVP-01 contract](product-rules/contracts/MANUAL-FILE-ANALYSIS.md), [structured projection](product-rules/contracts/MANUAL-FILE-ANALYSIS.declared-contract.json), [15-facet assessment](product-rules/PHASE-4-MVP-01-FACET-COVERAGE.md), [35-scenario matrix](product-rules/PHASE-4-MVP-01-NEGATIVE-FAILURE-RECOVERY-MATRIX.md), [CIRCLES analysis](2026-11-28/19-PHASE-4-CIRCLES-MANUAL-FILE-ANALYSIS.md), [validation](product-rules/PHASE-4-MVP-01-VALIDATION.md); 28 PM-proposed requirements / 56 criteria; nine open questions. |
 | 5 | Author quarantine/disposition requirements | [MVP-02 contract](product-rules/contracts/QUARANTINE-FILE-DISPOSITION.md), structured projection/evidence, 15-facet assessment, 58-scenario matrix, CIRCLES analysis and validation; 38 requirements / 68 criteria / 14 open questions | [x] |
 | 6 | Author website/link-check requirements | [x] | [MVP-03 contract](product-rules/contracts/WEBSITE-LINK-CHECKING.md), structured projection/evidence, [CIRCLES](2026-11-28/23-PHASE-6-CIRCLES-WEBSITE-LINK-CHECKING.md), [15 facets](product-rules/PHASE-6-MVP-03-FACET-COVERAGE.md), [81 scenarios](product-rules/PHASE-6-MVP-03-NEGATIVE-FAILURE-RECOVERY-MATRIX.md), [validation](product-rules/PHASE-6-MVP-03-VALIDATION.md); 41 requirements / 41 criteria / 18 open questions. |
-| 7 | Author cross-cutting system requirements | [ ] | Accounts, entitlement, configuration, platform differences, data lifecycle, security and operations. |
+| 7 | Author cross-cutting system requirements | [x] | [Cross-cutting contract](product-rules/contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.md), [structured projection](product-rules/contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.declared-contract.json), [evidence](product-rules/evidence/cross-cutting-system-requirements-contract.evidence.json), [CIRCLES](2026-11-28/24-PHASE-7-CIRCLES-CROSS-CUTTING-SYSTEM-REQUIREMENTS.md), [15 facets](product-rules/PHASE-7-CROSS-CUTTING-FACET-COVERAGE.md), [58 scenarios](product-rules/PHASE-7-CROSS-CUTTING-FAILURE-RECOVERY-MATRIX.md), [validation](product-rules/PHASE-7-CROSS-CUTTING-VALIDATION.md); 28 requirements / 28 criteria / 18 open questions. |
 | 8 | Cross-facet completeness/consistency review | [ ] | Traceability complete; contradictions and missing states resolved or explicitly open. |
 | 9 | Owner review and release | [ ] | Owner decisions recorded; versioned contract package ready for engineering handoff. |
 
