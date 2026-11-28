@@ -4,7 +4,7 @@
 **Contract version:** `0.2.0-draft`  
 **Capability:** `AUTH` — supporting account infrastructure  
 **Author / issuer:** ZeroDeck Product Management Agent  
-**Lifecycle:** Draft; the eight owner decisions in Section 4 are approved and recorded. Requirements ZD-AUTH-025 and ZD-AUTH-026 directly encode two of those decisions and are owner-approved; the other requirements remain PM-proposed.  
+**Lifecycle:** Draft; the eight owner decisions in Section 4 are approved and recorded. Requirements ZD-AUTH-025 through ZD-AUTH-028 directly encode owner-approved account-security and launch sign-in/verification decisions; the other requirements remain PM-proposed.  
 **Platforms:** Web and Android  
 **Software Rules compatibility target:** `REMAREMA6/software-rules` commit `5591a2e62287afc29bde002369eaf659673ec59b`, specification 0.3.0 Draft, schema 0.2.0 Draft
 
@@ -326,6 +326,37 @@ The system MUST provide a user-initiated account deletion process that immediate
 - Basis: owner decision; PM recommendation accepted by the owner.
 - Decision reference: ZD-DEC-AUTH-2026-11-28.
 - Open dependency: exact retention schedules, lawful retention categories and launch-market obligations must be established before release.
+
+
+
+#### Requirement ZD-AUTH-027 — Support email-and-password sign-in at launch
+
+At launch, the system MUST allow a user to create and access a ZeroDeck account using an email address and password, with the email address as the primary sign-in identifier. The launch sign-in journey MUST NOT require a phone number or a social-login account.
+
+- Priority: P0
+- Facets: identity-authentication, interface, api, behavior
+- Rationale: the owner selected a direct email-and-password launch path and did not make phone or social sign-in prerequisites.
+- Acceptance:
+  - Given a person does not yet have a ZeroDeck account, when they register with a valid email address and password, then an account is created with a stable account principal.
+  - Given an account has been created with an email address and password, when the user submits valid credentials, then the system authenticates the corresponding account.
+  - Given a person is completing the launch registration or sign-in journey, when the flow is used, then a phone number or social-login account is not required to complete it.
+- Basis: owner decision; PM recommendation accepted by the owner.
+- Decision reference: ZD-DEC-AUTH-2026-11-28.
+
+#### Requirement ZD-AUTH-028 — Apply the approved email-verification boundaries
+
+The system MUST allow account creation while the email address is explicitly unverified. It MUST verify the email address before relying on it for account recovery or security notifications, and before any feature or action whose documented policy requires a verified email. A change to the account's primary email address MUST complete the documented verification process before the new address becomes the verified primary address.
+
+- Priority: P0
+- Facets: identity-authentication, interface, api, security-controls, errors-recovery
+- Rationale: allowing initial account creation without verification reduces onboarding friction while preventing an unverified address from being treated as a trusted recovery or security channel.
+- Acceptance:
+  - Given a person registers with a valid email address and password, when account creation completes before email verification, then the account is explicitly marked as having an unverified email address.
+  - Given an account's email address is unverified, when recovery or a security notification must be sent, then the system does not rely on that unverified address as the trusted channel.
+  - Given a feature or action has a documented verified-email precondition, when an account with an unverified email attempts it, then the precondition is not satisfied.
+  - Given an account holder changes the primary email address, when the new address has not completed verification, then it is not treated as the verified primary address.
+- Basis: owner decision; PM recommendation accepted by the owner.
+- Decision reference: ZD-DEC-AUTH-2026-11-28.
 
 ## 4. Owner decisions and remaining open questions
 
