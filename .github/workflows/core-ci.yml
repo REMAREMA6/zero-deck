@@ -82,6 +82,9 @@ jobs:
             apps/api/src/modules/identity/verified-email-notifications.ts \
             apps/api/test/email-verification.integration.test.ts \
             apps/api/test/verified-email-notifications.test.ts \
+            apps/api/test/sessions.integration.test.ts \
+            apps/web/app/api/sessions/logout-all/route.test.ts \
+            packages/domain/src/index.test.ts \
             apps/web/app/api/sessions/current/rotate/route.test.ts \
             apps/web/app/api/sessions/current/route.test.ts \
             apps/web/app/file-analysis/page.tsx \
@@ -101,6 +104,9 @@ jobs:
               apps/api/src/modules/identity/verified-email-notifications.ts \
               apps/api/test/email-verification.integration.test.ts \
               apps/api/test/verified-email-notifications.test.ts \
+              apps/api/test/sessions.integration.test.ts \
+              apps/web/app/api/sessions/logout-all/route.test.ts \
+              packages/domain/src/index.test.ts \
               apps/web/app/api/sessions/current/rotate/route.test.ts \
               apps/web/app/api/sessions/current/route.test.ts \
               apps/web/app/file-analysis/page.tsx \
