@@ -4,9 +4,9 @@
 **Workspace:** `product-management/`  
 **Started:** 2026-11-27  
 **Method:** CIRCLES — seven steps, followed by supporting product-definition work  
-**Overall status:** [~] CIRCLES completed provisionally; blueprint, architecture follow-up, customer validation and owner decisions remain open; PM-authored product-rules Phases 0–8 are complete; Phase 9 owner review is next  
-**Current position:** PM-authored rules Phases 0–8 complete; Phase 9 owner review and release is next  
-**Last reconciled:** 2026-11-28 — Phase 8 review complete
+**Overall status:** [x] Product-design workstream closed; technical architecture is next. Separate blueprint/customer-validation follow-ups remain visible and are not implied complete.  
+**Current position:** PM-authored product-rules Phases 0–9 complete; architecture handoff prepared  
+**Last reconciled:** 2026-11-28 — Phase 9 product-design closure complete
 
 > Operational source of truth. Update this tracker whenever work starts, changes status, becomes blocked, or completes. A new session must resume from this file and linked records without relying on chat history.
 
@@ -26,7 +26,7 @@ During that work, the owner added a distinct requirement: the Product Management
 
 That work is now recorded as a separate workstream. It does not restart CIRCLES or change the three-capability MVP.
 
-**Completed most recently:** Phase 8 cross-facet completeness/consistency review across all five contracts. Reconciled 160 requirements / 259 acceptance criteria, 72 owner questions (8 resolved / 64 open), all 15 official facets, five projection/evidence pairs and cross-feature lifecycle/failure interactions. Corrected four authentication projection statement mismatches. Recorded remaining profile, dependency, notification, revocation and data-lifecycle findings. Phase 8 is complete as a PM review only; Phase 9 owner review is next. No implementation or runtime conformance is claimed.
+**Completed most recently:** Phase 9 owner review and product-design closure across all five contracts. Reconciled 160 requirements / 259 acceptance criteria, all 15 official facets, 72 contract question records and 64 Phase 8 open questions (15 resolved / 49 deferred). Synchronized all five Markdown/projection/evidence pairs, corrected Phase 8 traceability findings, and prepared the architecture handoff. Phase 9 is complete as product-design work only; technical architecture is next. No implementation or runtime conformance is claimed.
 
 ### Current product authority
 
@@ -168,3 +168,8 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 | 2026-11-28 | Completed Phase 6 MVP-03 contract, projection/evidence, CIRCLES analysis, 15-facet assessment, 81-scenario matrix and targeted validation. | Phase 6 complete: 41 requirements / 41 criteria; 4 owner-approved scope encodings / 37 PM-proposed; 18 open questions; 19/19 targeted checks and 5/5 malformed fixtures rejected. No implementation or Software Rules repo changes. Phase 7 complete; Phase 8 cross-contract review is complete. Phase 9 owner review is next. |
 
 | 2026-11-28 | Owner authorized Phase 8 execution; completed cross-contract traceability, 15-facet assessment, findings register, lifecycle/failure matrix, projection/evidence audit, CIRCLES review and validation. | Phase 8 complete: 160 requirements / 259 criteria; 15 facets; 72 questions (8 resolved / 64 open); four authentication projection mismatches corrected. Remaining findings carried to Phase 9. No implementation/runtime conformance claimed. |
+
+
+## Phase 9 completion record
+
+Phase 9 is complete. Owner decision `ZD-DEC-PHASE9-2026-11-28` approves the product-level recommendations only. The 64 Phase 8 questions are dispositioned 15 resolved / 49 deferred. Validation passed for 160 unique requirements, 259 unique capability-scoped criteria, all 15 facets, zero dangling dependency IDs, Markdown/projection statement and criterion parity, and all five evidence revision/URI/digest pairs. Phase 8 findings P8-F01–F09, F11 and F12 are closed (some at product-policy level with technical mechanics deferred); P8-F10 is explicitly deferred to architecture/evidence. See `2026-11-28/39-PHASE-9-CLOSURE-VALIDATION.md` and `2026-11-28/40-ARCHITECTURE-HANDOFF.md`. **Next: technical architecture workstream.**
