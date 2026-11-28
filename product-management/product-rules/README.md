@@ -3,7 +3,7 @@
 **Product:** ZeroDeck  
 **Author:** ZeroDeck Product Management Agent  
 **Profile:** [Product Requirements Contract Profile](PROFILE.md)  
-**Status:** PM contract profile and Phases 2–5 are complete. The owner approved and recorded eight authentication policy decisions. MVP-01 is a v0.1.0-draft contract with 28 PM-proposed requirements / 56 criteria / 9 open questions. MVP-02 is a v0.1.0-draft contract with 38 PM-proposed requirements / 68 criteria / 14 open questions. MVP-03 and cross-cutting contracts remain open.
+**Status:** PM contract profile and Phases 2–6 are complete. The owner approved and recorded eight authentication policy decisions. MVP-01 is a v0.1.0-draft contract with 28 PM-proposed requirements / 56 criteria / 9 open questions. MVP-02 is a v0.1.0-draft contract with 38 PM-proposed requirements / 68 criteria / 14 open questions. MVP-03 is drafted in v0.1.0-draft; Phase 7 cross-cutting contract remains open.
 
 ## Contracts
 
@@ -12,7 +12,7 @@
 | [Identity and authentication contract](contracts/IDENTITY-AUTHENTICATION.md) | Supporting account/authentication infrastructure | Draft v0.2.0; eight owner decisions recorded; 25 requirements / 66 criteria; five operational questions remain open |
 | [Manual file-analysis contract](contracts/MANUAL-FILE-ANALYSIS.md) | MVP-01 | Draft v0.1.0; 28 PM-proposed requirements / 56 criteria; 9 open questions; Phase 4 complete |
 | [Quarantine and file-disposition contract](contracts/QUARANTINE-FILE-DISPOSITION.md) | MVP-02 | Draft v0.1.0; 38 PM-proposed requirements / 68 criteria; 14 open questions; Phase 5 complete |
-| Website and link-checking contract | MVP-03 | Not started; create in Phase 6 |
+| [Website and link-checking contract](contracts/WEBSITE-LINK-CHECKING.md) | MVP-03 | Draft v0.1.0; 39 requirements / 39 criteria; 4 owner-approved scope encodings / 35 PM-proposed; 18 open questions; Phase 6 complete |
 | Cross-cutting system contract | Shared product/system requirements | Not started; create in Phase 7 |
 
 ## Authoring and validation
@@ -33,4 +33,4 @@ The example under `examples/` is only a schema/format fixture. It is not a ZeroD
 
 ## Current phase
 
-Phase 1 — PM contract profile design: **complete**. Phase 2 — authentication/account requirements: **complete**. Phase 3 — authentication coverage across all 15 facets: **complete**. Phase 4 — MVP-01 manual file-analysis requirements: **complete** (28 requirements, 56 criteria, nine open questions; all remain PM-proposed). Phase 5 — MVP-02 quarantine and file disposition: **complete** (38 requirements, 68 criteria, 14 open questions; all remain PM-proposed). Next: Phase 6 — MVP-03 website and link-check requirements; its own written plan and owner approval are required.
+Phase 1 — PM contract profile design: **complete**. Phase 2 — authentication/account requirements: **complete**. Phase 3 — authentication coverage across all 15 facets: **complete**. Phase 4 — MVP-01 manual file-analysis requirements: **complete** (28 requirements, 56 criteria, nine open questions; all remain PM-proposed). Phase 5 — MVP-02 quarantine and file disposition: **complete** (38 requirements, 68 criteria, 14 open questions; all remain PM-proposed). Phase 6 — MVP-03 website and link checking: **complete** (39 requirements, 39 criteria, four direct encodings of owner-approved scope, 35 PM-proposed requirements, 18 open questions, all 15 facets assessed, 75 failure/recovery scenarios and 19/19 targeted checks). See the [CIRCLES analysis](../2026-11-28/23-PHASE-6-CIRCLES-WEBSITE-LINK-CHECKING.md), [facet assessment](PHASE-6-MVP-03-FACET-COVERAGE.md), [failure matrix](PHASE-6-MVP-03-NEGATIVE-FAILURE-RECOVERY-MATRIX.md) and [validation](PHASE-6-MVP-03-VALIDATION.md). Next: Phase 7 — cross-cutting system requirements.
