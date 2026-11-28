@@ -87,14 +87,14 @@ export function createSessionService(
 
       const result = await database.query<{ session_id: string; account_id: string }>(
         `UPDATE sessions AS session
-         SET last_seen_at = $2
+         SET last_seen_at = $2::timestamptz
          FROM accounts AS account
          WHERE session.token_hash = $1
            AND session.account_id = account.account_id
            AND account.status = 'active'
            AND session.revoked_at IS NULL
-           AND session.last_seen_at > ($2 - ($3::double precision * INTERVAL '1 millisecond'))
-           AND session.absolute_expires_at > $2
+           AND session.last_seen_at > ($2::timestamptz - ($3::double precision * INTERVAL '1 millisecond'))
+           AND session.absolute_expires_at > $2::timestamptz
          RETURNING session.session_id, session.account_id`,
         [hashSessionToken(token), clock(), SESSION_INACTIVITY_WINDOW_MS],
       );
