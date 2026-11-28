@@ -1,7 +1,7 @@
 # Developer Implementation Tracker — ZeroDeck Core
 
 **Owner:** Developer Agent  
-**Branch:** `main`  
+**Branch:** `developer/authorization-3-6`  
 **Last reconciled:** 2026-11-28  
 **Purpose:** This is the Developer Agent's own implementation and verification tracker. It is maintained in `developer-workspace/` and does not edit, replace, or control Architect-owned OpenSpec documents.
 
@@ -22,13 +22,13 @@ These counts cover **all 51 numbered Architect outcomes (1.1–7.7)**. They are 
 
 | Status | Count |
 |---|---:|
-| Done | 10 |
+| Done | 11 |
 | Partial | 14 |
-| Blocked | 2 |
-| Not started | 25 |
+| Blocked | 5 |
+| Not started | 21 |
 | **Total Architect outcomes tracked** | **51** |
 
-**Important:** Ten outcomes currently meet the Done definition: 2.2, 2.4, 3.1, 3.2, 3.3, 3.4, 3.5, 4.1, 4.2 and 4.4. Partial items have some implementation and/or evidence, but do not yet satisfy the full acceptance contract. The 51 are all Architect-defined implementation outcomes; none are excluded from Developer tracking.
+**Important:** Eleven outcomes currently meet the Done definition: 2.2, 2.4, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 4.1, 4.2 and 4.4. Partial items have some implementation and/or evidence, but do not yet satisfy the full acceptance contract. The 51 are all Architect-defined implementation outcomes; none are excluded from Developer tracking.
 
 ## Section 1 — Architecture baseline and requirement authority
 
@@ -62,7 +62,7 @@ These are the first five of the 51 Architect-defined outcomes. The Architect's s
 | 3.3 | Single-use verified-email recovery challenges and fake security notification | **Done** | `apps/api/src/modules/identity/account-recovery.ts`, `account-recovery-routes.ts`, `apps/api/migrations/0005_account_recovery.sql`, `packages/contracts/src/index.ts` and `apps/api/test/account-recovery.integration.test.ts`. Recovery requests return an enumeration-neutral response; only active accounts with verified email receive a challenge; random challenge secrets are stored only as SHA-256 hashes; configured lifetime is explicit (no production default invented); replacement challenges consume prior outstanding challenges; delivery failure consumes the undelivered challenge; recovery atomically consumes the challenge, changes the password and revokes every active session; notification resolves the verified address through the 3.2 lookup. PostgreSQL tests cover unverified recipient denial, token-hash-only persistence, expiry, replay/consumption, session revocation, fake recovery-delivery failure and verified-recipient notification. Full clean CI [46152754260](https://github.com/REMAREMA6/zero-deck/actions/runs/46152754260) passed formatting, typecheck, unit tests, PostgreSQL integration tests and API/Web/Android builds. Fresh-authentication/step-up remains 3.5; no real email provider is configured. |
 | 3.4 | Session expiry, rotation, logout and revocation across clients | **Done** | Server enforces seven-day inactivity and thirty-day absolute expiry. `SessionService.rotateCurrent` atomically replaces the token hash under a row lock, preserves session identity/absolute expiry, and rejects superseded-token replay and concurrent duplicate rotation. Web BFF replaces only the HttpOnly/Secure/SameSite=Lax cookie and never exposes the new token in JSON; Android persists the replacement in SecureStore and attempts server revocation if secure persistence fails. Current logout, logout-all and individual-session revocation are server-authoritative. Tests cover cross-client stable account principal, database/auth outage denial, rotation, concurrent replay, logout/revocation and client credential clearing. Full clean CI passed [run 46150614089](https://github.com/REMAREMA6/zero-deck/actions/runs/46150614089). |
 | 3.5 | Fresh-authentication for sensitive security actions | **Done** | `apps/api/src/modules/identity/fresh-authentication.ts` provides transaction-bound current-password verification with account/credential row locks; invalid credentials and disabled accounts cannot execute the protected action, and protected mutations roll back if the action fails. `apps/api/test/fresh-authentication.integration.test.ts` covers valid/invalid credentials, disabled-account denial and rollback. It is operation-scoped, not imposed on ordinary session use. Future password/passkey, verified recovery-email and account-deletion mutation routes must call this guard; passkeys remain deferred and deletion execution is tracked under 3.8. Full clean CI [run 46154392546](https://github.com/REMAREMA6/zero-deck/actions/runs/46154392546) passed formatting, typecheck, unit tests, PostgreSQL integration tests and API/Web/Android builds. |
-| 3.6 | Authoritative permission, entitlement and owner-activation evaluation | **Partial** | URL-check service independently reads Pro entitlement and owner activation from PostgreSQL and denies false/unknown states. General permission model, exhaustive state matrix and full authorization surface remain. |
+| 3.6 | Authoritative permission, entitlement and owner-activation evaluation | **Done** | Added `apps/api/src/modules/authorization/authorization.ts` as a reusable PostgreSQL-backed authorization service and `apps/api/migrations/0006_account_permissions.sql` for explicit per-account permission grants. Each permission, Pro-entitlement and owner-activation record has an explicit `fresh`/`stale`/`unknown` state; new and existing rows default to `unknown`, which denies. Authorization re-reads server-owned records on every evaluation, locks the account and applicable gate rows for the transaction, and denies missing, stale, unknown, false, disabled-account or unavailable-database states. Client-supplied role/Pro/activation flags are not inputs to the authorization decision. MVP-03 URL checks now require the explicit `website.check` permission in addition to independent Pro and owner-activation gates. PostgreSQL tests cover all 125 combinations of permission, entitlement and activation state, disabled/unknown accounts, tampered client flags, permission revocation and database unavailability. No freshness TTL, role hierarchy, entitlement defaults or provider was invented. Full clean CI [run 46180414239](https://github.com/REMAREMA6/zero-deck/actions/runs/46180414239) passed formatting, typecheck, unit tests, PostgreSQL integration tests and API/Web/Android builds. Queued/dispatched-work revocation remains task 3.7. |
 | 3.7 | Shared revocation invariant for queued/dispatched work | **Not started** | No verified queued-work cancellation, dispatch-time revocation coordination or no-follow-on-call race suite. |
 | 3.8 | User-initiated account deletion and retention boundary | **Not started** | No verified deletion/closure workflow, immediate access disablement and retention execution boundary. |
 | 3.9 | Authentication/authorization abuse and cross-platform security tests | **Partial** | Registration enumeration-equivalence, password hash protection, session expiry/revocation and verification replay/concurrency tests exist. Full abuse, stale-client, outage, rotation, recovery and cross-platform security coverage remains. |
@@ -143,13 +143,11 @@ These are the first five of the 51 Architect-defined outcomes. The Architect's s
 
 ## Next execution queue
 
-1. Implement 3.5 fresh-authentication/step-up boundaries for sensitive security actions only after the relevant owner-approved policy is explicit.
-3. Complete 3.6 server-authoritative permission, entitlement and owner-activation gates, including revocation races and fail-closed truth-table tests.
-4. Continue MVP-01 by completing 4.3 evidence-led production-engine and threat-intelligence evaluation; do not select or activate a production engine without owner approval. Keep file analysis unavailable while no approved engine/support matrix exists.
-5. Implement safe parsing/resource isolation and bounded processing only after supported formats and resource budgets are established; preserve the current fail-closed behavior.
-6. Complete MVP-03 consent UI, dispatch-time gate revalidation, cancellation/usage controls, redaction evidence and adversarial tests while keeping the production provider disabled.
-7. Continue MVP-02 quarantine feasibility only within owner-approved security boundaries and verified platform capabilities.
-
+1. Implement 3.7 shared revocation invariant for newly evaluated and queued work, dispatched-work cancellation where supported, and deterministic no-follow-on-call race tests.
+2. Continue MVP-01 by completing 4.3 evidence-led production-engine and threat-intelligence evaluation; do not select or activate a production engine without owner approval. Keep file analysis unavailable while no approved engine/support matrix exists.
+3. Implement safe parsing/resource isolation and bounded processing only after supported formats and resource budgets are established; preserve the current fail-closed behavior.
+4. Complete MVP-03 consent UI, dispatch-time gate revalidation, cancellation/usage controls, redaction evidence and adversarial tests while keeping the production provider disabled.
+5. Continue MVP-02 quarantine feasibility only within owner-approved security boundaries and verified platform capabilities.
 ## Maintenance rule
 
 Update this tracker in the same implementation increment that changes status. Every transition to **Done** must cite product source paths and passing GitHub Actions evidence. Every **Blocked** item must state the decision/evidence needed to unblock it. Do not use Architect checklist checkbox state as a proxy for Developer implementation progress.

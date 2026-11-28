@@ -9,7 +9,11 @@ interface UrlCheckService {
     submittedUrl: string,
     consent: boolean,
   ): Promise<
-    | { status: 'blocked'; reason: 'pro_required' | 'activation_disabled' | 'eligibility_unknown' }
+    | {
+        status: 'blocked';
+        reason:
+          'pro_required' | 'activation_disabled' | 'permission_required' | 'eligibility_unknown';
+      }
     | { status: 'unavailable' }
     | { status: 'completed'; verdict: string; explanation: string }
   >;
@@ -68,7 +72,9 @@ export function registerUrlCheckRoutes(
                 ? 'An active Pro entitlement is required.'
                 : result.reason === 'activation_disabled'
                   ? 'Website checking is not currently activated by the owner.'
-                  : 'Website-check eligibility is not available for this account.',
+                  : result.reason === 'permission_required'
+                    ? 'This account is not permitted to check websites.'
+                    : 'Website-check eligibility is not available for this account.',
           },
         });
       }
