@@ -4,6 +4,7 @@ import { Pool } from 'pg';
 import { applyMigrations } from '../src/db/migrate.js';
 import { buildApp } from '../src/app.js';
 import { createAccountRegistrationService } from '../src/modules/identity/account-registration.js';
+import { createVerifiedEmailSecurityNotifier } from '../src/modules/identity/verified-email-notifications.js';
 import {
   createEmailVerificationService,
   EmailVerificationDeliveryError,
@@ -27,6 +28,14 @@ class FailingVerificationDelivery implements VerificationDelivery {
 const databaseUrl = process.env.DATABASE_URL;
 const pool = databaseUrl ? new Pool({ connectionString: databaseUrl }) : null;
 const testPasswordPolicy = { assertAccepted: (_password: string) => undefined };
+
+class FakeSecurityNotificationDelivery {
+  readonly notifications: Array<{ email: string; kind: string }> = [];
+
+  async sendSecurityNotification(email: string, kind: 'password_changed' | 'primary_email_changed' | 'account_recovery_completed') {
+    this.notifications.push({ email, kind });
+  }
+}
 
 describe('email verification with PostgreSQL and fake delivery', () => {
   beforeAll(async () => {
@@ -200,6 +209,41 @@ describe('email verification with PostgreSQL and fake delivery', () => {
     } finally {
       await app.close();
     }
+  });
+
+  it('uses only the currently verified primary email for security notifications', async () => {
+    if (!pool) throw new Error('PostgreSQL test dependency is unavailable.');
+
+    const email = 'SecurityNotice-' + randomUUID() + '@example.com';
+    const registration = createAccountRegistrationService(pool, testPasswordPolicy);
+    await registration.register({ email, password: 'test-only-password' });
+    const account = await pool.query<{ account_id: string }>(
+      'SELECT account_id FROM accounts WHERE email_canonical = $1',
+      [email],
+    );
+    const accountId = account.rows[0]!.account_id;
+    const verificationDelivery = new FakeVerificationDelivery();
+    const verification = createEmailVerificationService(
+      pool,
+      { challengeLifetimeMs: 60_000 },
+      verificationDelivery,
+    );
+    const securityDelivery = new FakeSecurityNotificationDelivery();
+    const notifier = createVerifiedEmailSecurityNotifier(verification, securityDelivery);
+
+    await expect(
+      notifier.notify(accountId, 'account_recovery_completed'),
+    ).resolves.toBe(false);
+    expect(securityDelivery.notifications).toHaveLength(0);
+
+    await verification.request(email);
+    const challenge = verificationDelivery.deliveries[0]!;
+    expect(await verification.verify(challenge.token)).toBe(true);
+
+    await expect(notifier.notify(accountId, 'primary_email_changed')).resolves.toBe(true);
+    expect(securityDelivery.notifications).toEqual([
+      { email, kind: 'primary_email_changed' },
+    ]);
   });
 
   it('invalidates a challenge when fake delivery fails', async () => {
