@@ -9,7 +9,7 @@
 
 | Contract | Capability | Status |
 |---|---|---|
-| [Identity and authentication contract](contracts/IDENTITY-AUTHENTICATION.md) | Supporting account/authentication infrastructure | Draft v0.2.0; eight owner decisions recorded; 25 requirements / 67 criteria; five operational questions remain open |
+| [Identity and authentication contract](contracts/IDENTITY-AUTHENTICATION.md) | Supporting account/authentication infrastructure | Draft v0.2.0; eight owner decisions recorded; 25 requirements / 66 criteria; five operational questions remain open |
 | Manual file-analysis contract | MVP-01 | Not started; create in Phase 4 |
 | Quarantine and disposition contract | MVP-02 | Not started; create in Phase 5 |
 | Website and link-checking contract | MVP-03 | Not started; create in Phase 6 |
