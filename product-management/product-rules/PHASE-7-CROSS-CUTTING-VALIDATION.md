@@ -2,8 +2,8 @@
 
 **Status:** Targeted validation passed  
 **Contract:** `ZD-CONTRACT-CROSS-CUTTING-SYSTEM` v0.1.0-draft  
-**Canonical Markdown revision:** `8ad461896994f58632a570faee9b2c82c9945806`  
-**Canonical Markdown SHA-256:** `sha256:6de28670247210f80ae7835633d9fdadf771db926af26ad102c76a3afd9b34c4`  
+**Canonical Markdown revision:** `4b4d32b939e627fe84b4120ab43df6b5c733d421`  
+**Canonical Markdown SHA-256:** `sha256:f0b491d4ce97b7286ad9f56d35f61761204fffb36e0700f1778eae27da7dc06a`  
 **Validation scope:** Structural, semantic, traceability, facet, failure-matrix and provenance checks against the PM profile and existing contract projections.
 
 ## 1. Artifact counts
@@ -20,7 +20,7 @@
 
 ## 2. Targeted validation
 
-**29/29 checks passed.**
+**30/30 checks passed.**
 
 1. Contract ID, contract type and issuer match the PM profile.
 2. Profile ID, version and pinned Software Rules compatibility match the project profile.
@@ -50,7 +50,7 @@
 26. The projection references the matching evidence record.
 27. Evidence source revision matches the structured artifact revision.
 28. Evidence source URI matches the structured artifact URI.
-29. Scope checks confirm the contract does not introduce product implementation files or claim implementation completion.
+29. Every requirement has an explicit, requirement-specific forbidden outcome in both the canonical Markdown and structured metadata.\n30. Scope checks confirm the contract does not introduce product implementation files or claim implementation completion.
 
 ## 3. Malformed-fixture checks
 
