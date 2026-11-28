@@ -4,10 +4,10 @@
   "title": "ZeroDeck MVP-02 Quarantine and File Disposition Product Requirements",
   "issuer": "ZeroDeck Product Management Agent",
   "artifact": {
-    "uri": "https://github.com/REMAREMA6/zero-deck/blob/ef98e91d6bc72bf09840d9fbd67175ea2e868b90/product-management/product-rules/contracts/QUARANTINE-FILE-DISPOSITION.md",
-    "version": "0.1.0-draft",
-    "revision": "ef98e91d6bc72bf09840d9fbd67175ea2e868b90",
-    "digest": "sha256:e76291f7635b89221a785056af0912858225d278ee431495c1f118e96e508e9e",
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/225a4bc0237da08298dce74ed957f8abba6a258d/product-management/product-rules/contracts/QUARANTINE-FILE-DISPOSITION.md",
+    "version": "0.2.0-draft",
+    "revision": "225a4bc0237da08298dce74ed957f8abba6a258d",
+    "digest": "sha256:4d6ad84685b16f01c810d1918257da2f7c44bb53e14f25d4df1658bb6228d696",
     "mediaType": "text/markdown"
   },
   "scope": "MVP-02 quarantine and file disposition for web and Android; eligibility, verified quarantine, source disposition, review, restore, deletion, retention and recovery; excludes MVP-01 scan-engine requirements and MVP-03 website/link checking.",
@@ -19,7 +19,7 @@
     },
     {
       "statementId": "ZD-QUAR-002",
-      "text": "The system MUST perform automatic quarantine only when an owner-approved policy explicitly authorizes automatic handling for the applicable confirmed-threat class and the active platform permits the operation; otherwise it MUST require the policy-defined user action or leave the item unchanged.",
+      "text": "The system MUST require explicit user confirmation before every MVP-02 quarantine operation and MUST NOT automatically quarantine an item in MVP.",
       "location": "### Requirement ZD-QUAR-002 — Keep automatic quarantine policy explicit"
     },
     {
@@ -49,7 +49,7 @@
     },
     {
       "statementId": "ZD-QUAR-008",
-      "text": "The system MUST record whether the original source was left in place, copied, moved, or successfully removed, and MUST NOT describe a copy as a move or a quarantine copy as proof that the original was removed.",
+      "text": "The system MUST record whether the original source was left in place, copied, moved, or successfully removed, MUST obtain explicit user confirmation before attempting to remove the original, and MUST NOT describe a copy as a move or a quarantine copy as proof that the original was removed.",
       "location": "### Requirement ZD-QUAR-008 — Separate quarantine copy creation from source disposition"
     },
     {
@@ -139,12 +139,12 @@
     },
     {
       "statementId": "ZD-QUAR-026",
-      "text": "Before release, the product MUST define whether quarantined content, encryption keys, and quarantine metadata are included in backup, device transfer, synchronization, or restore operations, and MUST disclose any mismatch that could make restored metadata refer to unavailable or undecryptable content.",
+      "text": "By default, the system MUST NOT include quarantined file contents or their encryption keys in backup, device transfer, synchronization or restore operations. The product MUST disclose the consequences of uninstall, data clearing, device transfer and device loss; any separately approved metadata recovery policy MUST avoid references to unavailable or undecryptable content.",
       "location": "### Requirement ZD-QUAR-026 — Define backup, restore and device-migration treatment"
     },
     {
       "statementId": "ZD-QUAR-027",
-      "text": "If the approved quarantine design encrypts stored file content, the system MUST protect the required key material using an established platform-appropriate key-protection mechanism and MUST NOT store recoverable plaintext key material alongside the quarantined content.",
+      "text": "The system MUST protect quarantined file content at rest using encryption and MUST protect required key material with established platform-appropriate mechanisms. It MUST NOT store recoverable plaintext key material alongside quarantined content.",
       "location": "### Requirement ZD-QUAR-027 — Protect encryption keys when encrypted quarantine is used"
     },
     {
@@ -179,7 +179,7 @@
     },
     {
       "statementId": "ZD-QUAR-034",
-      "text": "The system MUST enforce documented quarantine storage and file-size/resource limits, and MUST fail or defer an operation safely when capacity or resource constraints prevent completion without corrupting existing quarantined items.",
+      "text": "The system MUST enforce documented quarantine storage and file-size/resource limits, MUST NOT automatically evict existing quarantined items to free capacity, and MUST fail or defer an operation safely when capacity or resource constraints prevent completion without corrupting existing quarantined items.",
       "location": "### Requirement ZD-QUAR-034 — Handle storage exhaustion and resource limits safely"
     },
     {
@@ -189,7 +189,7 @@
     },
     {
       "statementId": "ZD-QUAR-036",
-      "text": "The system MUST disclose any remote storage or processing boundary before it is used for quarantine content and MUST NOT treat a source document provider's own cloud hosting as a ZeroDeck upload or imply that the source file is stored locally.",
+      "text": "The system MUST disclose any remote source-provider storage or processing boundary before the user selects or relies on the source, MUST NOT treat disclosure alone as authorization to transfer quarantined content remotely, and MUST NOT treat a source document provider's own cloud hosting as a ZeroDeck upload or imply that the source file is stored locally. Remote transfer by ZeroDeck remains forbidden unless a separate owner-approved capability and explicit user consent authorize the specific transfer.",
       "location": "### Requirement ZD-QUAR-036 — Keep quarantine local unless transfer is separately authorized"
     },
     {
@@ -264,14 +264,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-001-AC-01",
+              "criterionId": "ZD-QUAR-AC-01",
               "given": "A completed scan result exists and the eligibility policy is available",
               "when": "The system evaluates the item for quarantine",
               "then": "The system exposes the policy outcome and does not perform a disposition outside the policy.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-QUAR-001-AC-02",
+              "criterionId": "ZD-QUAR-AC-02",
               "given": "The scan result is suspicious, inconclusive or otherwise not eligible for destructive handling",
               "when": "The system evaluates quarantine eligibility",
               "then": "The item is marked for review or another explicitly permitted non-destructive path; it is not silently treated as confirmed malware.",
@@ -279,14 +279,20 @@
             }
           ],
           "decisionRefs": [],
-          "evidenceRefs": []
+          "evidenceRefs": [],
+          "dependencies": [
+            "ZD-FILE-001",
+            "ZD-FILE-010",
+            "ZD-FILE-012",
+            "ZD-FILE-015"
+          ]
         },
         {
           "statementId": "ZD-QUAR-002",
           "requirementType": "business-rule",
           "normativeKind": "required",
           "priority": "P0",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "behavior",
             "business-rules",
@@ -314,25 +320,34 @@
               "refs": [
                 "EVD-PM-QUAR-RESEARCH-001"
               ]
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-002-AC-01",
+              "criterionId": "ZD-QUAR-AC-03",
               "given": "No owner-approved automatic-quarantine policy applies",
               "when": "A confirmed-threat result is produced",
               "then": "The system does not infer authorization for automatic quarantine from the draft baseline alone.",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-QUAR-002-AC-02",
+              "criterionId": "ZD-QUAR-AC-04",
               "given": "An owner-approved automatic-quarantine policy applies and the platform permits the operation",
               "when": "A qualifying confirmed-threat result is produced",
               "then": "The system follows that policy and reports the actual operation outcome.",
               "verificationMethod": "operational-test"
             }
           ],
-          "decisionRefs": [],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
+          ],
           "evidenceRefs": []
         },
         {
@@ -366,14 +381,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-003-AC-01",
+              "criterionId": "ZD-QUAR-AC-05",
               "given": "The analysis result is suspicious or inconclusive",
               "when": "A disposition decision is evaluated",
               "then": "No automatic permanent deletion or irreversible disposition occurs.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-QUAR-003-AC-02",
+              "criterionId": "ZD-QUAR-AC-06",
               "given": "The item cannot be analysed reliably",
               "when": "The user opens its available actions",
               "then": "The system identifies the uncertainty and offers only policy-permitted actions.",
@@ -412,7 +427,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-004-AC-01",
+              "criterionId": "ZD-QUAR-AC-07",
               "given": "A completed analysis returns No known threat found",
               "when": "The system evaluates disposition",
               "then": "The original file remains untouched by quarantine/disposition processing.",
@@ -459,14 +474,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-005-AC-01",
+              "criterionId": "ZD-QUAR-AC-08",
               "given": "The quarantine artifact has not been fully written or verified",
               "when": "The system attempts to update the item state",
               "then": "The item is not shown as successfully Quarantined.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-QUAR-005-AC-02",
+              "criterionId": "ZD-QUAR-AC-09",
               "given": "The artifact is written and verified but the original remains in place",
               "when": "The system reports the quarantine outcome",
               "then": "The system states that the quarantined copy exists and separately discloses that the source remains in its original location.",
@@ -506,14 +521,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-006-AC-01",
+              "criterionId": "ZD-QUAR-AC-10",
               "given": "Two different source items are quarantined",
               "when": "Their records are created",
               "then": "Each record remains associated with the correct source and artifact identity.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-QUAR-006-AC-02",
+              "criterionId": "ZD-QUAR-AC-11",
               "given": "A restore or delete request is made for one record",
               "when": "The operation resolves its target",
               "then": "Only the artifact associated with that record is targeted.",
@@ -553,14 +568,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-007-AC-01",
+              "criterionId": "ZD-QUAR-AC-12",
               "given": "A quarantine copy is created",
               "when": "Integrity verification runs",
               "then": "A mismatch or unavailable verification prevents a successful quarantine state and is reported.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-QUAR-007-AC-02",
+              "criterionId": "ZD-QUAR-AC-13",
               "given": "The selected integrity method is documented and verification passes",
               "when": "The quarantine operation reaches its commit point",
               "then": "The record stores the identity of the verified artifact and the verification result.",
@@ -575,7 +590,7 @@
           "requirementType": "data",
           "normativeKind": "required",
           "priority": "P0",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "data",
             "behavior",
@@ -596,25 +611,34 @@
                 "EVD-PM-QUAR-RESEARCH-001",
                 "EVD-SRC-QUAR-004"
               ]
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-008-AC-01",
+              "criterionId": "ZD-QUAR-AC-14",
               "given": "A quarantine copy succeeds but source deletion is unsupported or fails",
               "when": "The operation completes its available steps",
               "then": "The item is reported as a verified quarantined copy with the original still present, not as moved.",
               "verificationMethod": "manual-test"
             },
             {
-              "criterionId": "ZD-QUAR-008-AC-02",
+              "criterionId": "ZD-QUAR-AC-15",
               "given": "The source is successfully removed after a verified quarantine artifact exists",
               "when": "The operation status is published",
               "then": "The source-removal outcome is recorded separately from quarantine-copy verification.",
               "verificationMethod": "automated-test"
             }
           ],
-          "decisionRefs": [],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
+          ],
           "evidenceRefs": []
         },
         {
@@ -646,14 +670,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-009-AC-01",
+              "criterionId": "ZD-QUAR-AC-16",
               "given": "The quarantine artifact is incomplete or integrity verification failed",
               "when": "A source-removal step would otherwise run",
               "then": "The original source is not removed.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-QUAR-009-AC-02",
+              "criterionId": "ZD-QUAR-AC-17",
               "given": "The quarantine artifact is complete and verified",
               "when": "A policy-authorized source-removal step begins",
               "then": "Source removal occurs only after the verification point.",
@@ -694,14 +718,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-010-AC-01",
+              "criterionId": "ZD-QUAR-AC-18",
               "given": "The user has not granted the permission required for an operation",
               "when": "The system attempts that operation",
               "then": "The operation is denied without bypassing platform controls.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-QUAR-010-AC-02",
+              "criterionId": "ZD-QUAR-AC-19",
               "given": "A previously granted URI permission is revoked or unavailable",
               "when": "A later restore/delete operation is requested",
               "then": "The operation fails safely and its record remains available for recovery or explanation.",
@@ -741,14 +765,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-011-AC-01",
+              "criterionId": "ZD-QUAR-AC-20",
               "given": "A provider does not advertise the required delete or write capability",
               "when": "The system evaluates a requested operation",
               "then": "It does not issue an unsupported operation and explains the limitation.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-QUAR-011-AC-02",
+              "criterionId": "ZD-QUAR-AC-21",
               "given": "The selected item is a virtual document or has no usable byte representation",
               "when": "A byte-copy quarantine path is requested",
               "then": "The system reports unsupported or uses only a separately documented supported path.",
@@ -787,7 +811,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-012-AC-01",
+              "criterionId": "ZD-QUAR-AC-22",
               "given": "A multi-step operation fails after one side effect has succeeded",
               "when": "The system reconciles the operation state",
               "then": "It reports partial/indeterminate state and does not claim an all-or-nothing success.",
@@ -826,14 +850,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-013-AC-01",
+              "criterionId": "ZD-QUAR-AC-23",
               "given": "A quarantined item is listed or inspected",
               "when": "The system renders its details",
               "then": "The system does not execute or automatically open the file content.",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-QUAR-013-AC-02",
+              "criterionId": "ZD-QUAR-AC-24",
               "given": "A restore or deletion operation is initiated",
               "when": "The system processes the quarantined artifact",
               "then": "The operation does not launch the content as part of processing.",
@@ -873,14 +897,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-014-AC-01",
+              "criterionId": "ZD-QUAR-AC-25",
               "given": "A quarantined item has no fresh analysis result",
               "when": "The user requests restore",
               "then": "The system requires a fresh analysis and does not restore the item yet.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-QUAR-014-AC-02",
+              "criterionId": "ZD-QUAR-AC-26",
               "given": "Fresh analysis is interrupted or inconclusive",
               "when": "The user requests restore",
               "then": "The restore is blocked or remains pending review; it is not reported as completed.",
@@ -888,7 +912,13 @@
             }
           ],
           "decisionRefs": [],
-          "evidenceRefs": []
+          "evidenceRefs": [],
+          "dependencies": [
+            "ZD-FILE-001",
+            "ZD-FILE-010",
+            "ZD-FILE-012",
+            "ZD-FILE-015"
+          ]
         },
         {
           "statementId": "ZD-QUAR-015",
@@ -919,14 +949,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-015-AC-01",
+              "criterionId": "ZD-QUAR-AC-27",
               "given": "The item meets the documented restore eligibility policy",
               "when": "The user initiates restore",
               "then": "The system presents a confirmation and does not restore until the user confirms.",
               "verificationMethod": "manual-test"
             },
             {
-              "criterionId": "ZD-QUAR-015-AC-02",
+              "criterionId": "ZD-QUAR-AC-28",
               "given": "The user cancels the restore confirmation",
               "when": "The confirmation is dismissed",
               "then": "The quarantined artifact remains quarantined and unchanged.",
@@ -965,14 +995,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-016-AC-01",
+              "criterionId": "ZD-QUAR-AC-29",
               "given": "The restored content does not match the recorded integrity identity",
               "when": "The system verifies the restore",
               "then": "The system does not report successful restore and preserves the quarantined artifact where possible.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-QUAR-016-AC-02",
+              "criterionId": "ZD-QUAR-AC-30",
               "given": "The restored content matches the recorded integrity identity",
               "when": "The restore reaches completion",
               "then": "The system records the successful verification and restore outcome.",
@@ -1012,14 +1042,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-017-AC-01",
+              "criterionId": "ZD-QUAR-AC-31",
               "given": "A file already exists at the intended restore destination",
               "when": "Restore is requested",
               "then": "The system does not overwrite it and offers a non-destructive conflict outcome.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-QUAR-017-AC-02",
+              "criterionId": "ZD-QUAR-AC-32",
               "given": "A replacement action is separately supported and documented",
               "when": "The user selects and confirms replacement for the exact destination",
               "then": "Only the confirmed destination is affected and the outcome is reported.",
@@ -1059,7 +1089,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-018-AC-01",
+              "criterionId": "ZD-QUAR-AC-33",
               "given": "Restore fails during writing or verification",
               "when": "The operation terminates",
               "then": "The item remains recorded as quarantined, failed, or recovery-required according to its actual state; it is not marked restored.",
@@ -1099,14 +1129,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-019-AC-01",
+              "criterionId": "ZD-QUAR-AC-34",
               "given": "A quarantined artifact is selected for permanent deletion",
               "when": "The user invokes delete",
               "then": "The system presents a clear item-specific destructive confirmation before deletion.",
               "verificationMethod": "manual-test"
             },
             {
-              "criterionId": "ZD-QUAR-019-AC-02",
+              "criterionId": "ZD-QUAR-AC-35",
               "given": "The user cancels the confirmation",
               "when": "The confirmation is dismissed",
               "then": "The artifact and record remain unchanged.",
@@ -1153,14 +1183,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-020-AC-01",
+              "criterionId": "ZD-QUAR-AC-36",
               "given": "The provider rejects deletion or reports failure",
               "when": "The deletion request ends",
               "then": "The system reports failure and retains the quarantine record with its actual state.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-QUAR-020-AC-02",
+              "criterionId": "ZD-QUAR-AC-37",
               "given": "The provider reports a successful delete operation",
               "when": "The deletion request ends",
               "then": "The system records the provider-confirmed outcome without claiming secure erasure unless separately guaranteed.",
@@ -1200,7 +1230,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-021-AC-01",
+              "criterionId": "ZD-QUAR-AC-38",
               "given": "A delete action completes on a provider that does not guarantee secure erasure",
               "when": "The system communicates the outcome",
               "then": "The wording describes the operation as deleted/removed according to provider semantics, not securely erased or irrecoverable.",
@@ -1241,14 +1271,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-022-AC-01",
+              "criterionId": "ZD-QUAR-AC-39",
               "given": "No owner-approved retention policy has been recorded",
               "when": "The product is prepared for release",
               "then": "The release gate remains unmet and no default duration is silently selected.",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-QUAR-022-AC-02",
+              "criterionId": "ZD-QUAR-AC-40",
               "given": "A retention policy is approved and effective",
               "when": "A quarantined item approaches or reaches its expiry condition",
               "then": "The system applies the documented timing and outcome and communicates the result.",
@@ -1288,14 +1318,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-023-AC-01",
+              "criterionId": "ZD-QUAR-AC-41",
               "given": "An item reaches an approved expiry point but purge fails",
               "when": "The expiry process runs",
               "then": "The item is marked expiry/purge failed or pending and is not reported as deleted.",
               "verificationMethod": "operational-test"
             },
             {
-              "criterionId": "ZD-QUAR-023-AC-02",
+              "criterionId": "ZD-QUAR-AC-42",
               "given": "An item expires and purge succeeds",
               "when": "The expiry process completes",
               "then": "The record reflects the actual purge outcome and any required retained audit metadata.",
@@ -1335,14 +1365,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-024-AC-01",
+              "criterionId": "ZD-QUAR-AC-43",
               "given": "The source remains in place after a copy-based quarantine",
               "when": "The user views the completed operation",
               "then": "The interface states that the original remains at its source location.",
               "verificationMethod": "manual-test"
             },
             {
-              "criterionId": "ZD-QUAR-024-AC-02",
+              "criterionId": "ZD-QUAR-AC-44",
               "given": "The user is about to confirm deletion or a policy-driven expiry",
               "when": "The confirmation is shown",
               "then": "The applicable irreversible or unrecoverable consequences are disclosed before confirmation.",
@@ -1389,14 +1419,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-025-AC-01",
+              "criterionId": "ZD-QUAR-AC-45",
               "given": "Quarantined content is stored in app-specific storage",
               "when": "The product describes its lifecycle",
               "then": "The uninstall/data-clear consequences are stated without implying post-uninstall retention.",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-QUAR-025-AC-02",
+              "criterionId": "ZD-QUAR-AC-46",
               "given": "The product has not established the lifecycle for an applicable platform",
               "when": "A release candidate is reviewed",
               "then": "The release gate remains unmet rather than assuming the data survives.",
@@ -1411,7 +1441,7 @@
           "requirementType": "policy",
           "normativeKind": "required",
           "priority": "P0",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "persistence",
             "data",
@@ -1439,26 +1469,35 @@
               "refs": [
                 "EVD-DOC-ANDROID-003"
               ]
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-026-AC-01",
+              "criterionId": "ZD-QUAR-AC-47",
               "given": "Backup or device migration is available or enabled for relevant data",
               "when": "The product defines its backup policy",
               "then": "The policy separately accounts for quarantine bytes, metadata and keys and discloses what is not recoverable.",
               "verificationMethod": "inspection"
             }
           ],
-          "decisionRefs": [],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
+          ],
           "evidenceRefs": []
         },
         {
           "statementId": "ZD-QUAR-027",
           "requirementType": "security",
-          "normativeKind": "conditional",
+          "normativeKind": "required",
           "priority": "P0",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "security-controls",
             "persistence",
@@ -1486,29 +1525,35 @@
               "refs": [
                 "EVD-DOC-OWASP-CRYPTO-001"
               ]
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-027-AC-01",
+              "criterionId": "ZD-QUAR-AC-48",
               "given": "The approved design uses encrypted quarantine",
               "when": "A key is created or used",
               "then": "The implementation uses the approved platform key-protection mechanism and does not place recoverable plaintext key material beside the artifact.",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-QUAR-027-AC-02",
+              "criterionId": "ZD-QUAR-AC-49",
               "given": "The device does not support a stated hardware-backed security level",
               "when": "The encryption design is evaluated",
               "then": "The product does not claim StrongBox/TEE protection that the device has not established.",
               "verificationMethod": "operational-test"
             }
           ],
-          "decisionRefs": [],
-          "evidenceRefs": [],
-          "conditions": [
-            "The approved quarantine design encrypts stored file content."
-          ]
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
+          ],
+          "evidenceRefs": []
         },
         {
           "statementId": "ZD-QUAR-028",
@@ -1540,7 +1585,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-028-AC-01",
+              "criterionId": "ZD-QUAR-AC-50",
               "given": "Encrypted quarantine content exists but its required key is unavailable",
               "when": "The user requests restore or inspection",
               "then": "The system reports that the item is inaccessible and does not claim a successful decrypt/restore.",
@@ -1558,7 +1603,7 @@
           "requirementType": "privacy",
           "normativeKind": "required",
           "priority": "P0",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "security-controls",
             "data",
@@ -1580,25 +1625,34 @@
                 "EVD-SRC-QUAR-001",
                 "EVD-PM-QUAR-RESEARCH-001"
               ]
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-029-AC-01",
+              "criterionId": "ZD-QUAR-AC-51",
               "given": "No separate owner-approved cloud-transfer capability and user consent exist",
               "when": "A quarantine operation runs while network access is available",
               "then": "Quarantined file content is not uploaded to ZeroDeck or a third party.",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-QUAR-029-AC-02",
+              "criterionId": "ZD-QUAR-AC-52",
               "given": "A future cloud-transfer capability has been separately approved and consented to",
               "when": "A user initiates that transfer",
               "then": "Only the disclosed data and recipient are used for the approved purpose.",
               "verificationMethod": "manual-test"
             }
           ],
-          "decisionRefs": [],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
+          ],
           "evidenceRefs": []
         },
         {
@@ -1631,14 +1685,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-030-AC-01",
+              "criterionId": "ZD-QUAR-AC-53",
               "given": "A quarantine record is created",
               "when": "The system persists its metadata",
               "then": "Only fields justified by the documented item lifecycle and audit purpose are stored.",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-QUAR-030-AC-02",
+              "criterionId": "ZD-QUAR-AC-54",
               "given": "An unauthorized principal or process attempts to access quarantine metadata",
               "when": "The access is evaluated",
               "then": "The metadata is not disclosed beyond the approved access boundary.",
@@ -1679,14 +1733,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-031-AC-01",
+              "criterionId": "ZD-QUAR-AC-55",
               "given": "A quarantine, restore or delete operation changes its real state",
               "when": "The lifecycle record is updated",
               "then": "The record reflects the established operation outcome and does not jump to a success state early.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-QUAR-031-AC-02",
+              "criterionId": "ZD-QUAR-AC-56",
               "given": "An operation is partial or its outcome cannot be determined",
               "when": "The system reconciles lifecycle state",
               "then": "The record uses a partial, failed, or recovery-required state rather than a false terminal success.",
@@ -1725,14 +1779,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-032-AC-01",
+              "criterionId": "ZD-QUAR-AC-57",
               "given": "The same action is submitted repeatedly while an operation is active",
               "when": "The system processes the requests",
               "then": "Only one effective operation is applied or duplicates are safely recognized without duplicate side effects.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-QUAR-032-AC-02",
+              "criterionId": "ZD-QUAR-AC-58",
               "given": "A terminal action is retried after success",
               "when": "The same logical operation is submitted again",
               "then": "The system returns the established result or safely rejects the duplicate without repeating destructive effects.",
@@ -1773,14 +1827,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-033-AC-01",
+              "criterionId": "ZD-QUAR-AC-59",
               "given": "The app process ends during a multi-step disposition operation",
               "when": "The app or service resumes",
               "then": "It inspects the actual source/artifact/record state and reports a truthful recovered or recovery-required outcome.",
               "verificationMethod": "operational-test"
             },
             {
-              "criterionId": "ZD-QUAR-033-AC-02",
+              "criterionId": "ZD-QUAR-AC-60",
               "given": "The source provider or removable storage is unavailable during recovery",
               "when": "The operation is reconciled",
               "then": "The system does not claim completion or remove the record needed to explain the unresolved item.",
@@ -1795,7 +1849,7 @@
           "requirementType": "performance",
           "normativeKind": "required",
           "priority": "P0",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "performance-resource-behavior",
             "configuration",
@@ -1822,25 +1876,34 @@
               "refs": [
                 "EVD-DOC-OWASP-FILE-001"
               ]
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-034-AC-01",
+              "criterionId": "ZD-QUAR-AC-61",
               "given": "Insufficient storage is detected before or during quarantine",
               "when": "A new quarantine operation is attempted",
               "then": "The operation is rejected or safely stopped and existing quarantine artifacts remain intact.",
               "verificationMethod": "operational-test"
             },
             {
-              "criterionId": "ZD-QUAR-034-AC-02",
+              "criterionId": "ZD-QUAR-AC-62",
               "given": "A file exceeds the documented quarantine limit",
               "when": "The user requests quarantine",
               "then": "The system reports the applicable limit and does not begin an unbounded operation.",
               "verificationMethod": "automated-test"
             }
           ],
-          "decisionRefs": [],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
+          ],
           "evidenceRefs": []
         },
         {
@@ -1874,14 +1937,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-035-AC-01",
+              "criterionId": "ZD-QUAR-AC-63",
               "given": "The active platform cannot perform the requested isolation or source operation",
               "when": "The user requests quarantine",
               "then": "The system states the unsupported capability and does not imply that the original has been isolated or removed.",
               "verificationMethod": "manual-test"
             },
             {
-              "criterionId": "ZD-QUAR-035-AC-02",
+              "criterionId": "ZD-QUAR-AC-64",
               "given": "The platform supports only a subset of the product operation",
               "when": "The user views available actions",
               "then": "Only the supported subset is offered and its limitations are disclosed.",
@@ -1896,7 +1959,7 @@
           "requirementType": "privacy",
           "normativeKind": "required",
           "priority": "P1",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "data",
             "security-controls",
@@ -1917,18 +1980,27 @@
                 "EVD-PM-QUAR-RESEARCH-001",
                 "EVD-SRC-QUAR-004"
               ]
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-036-AC-01",
+              "criterionId": "ZD-QUAR-AC-65",
               "given": "The selected file originates from a remote document provider",
               "when": "The system explains its data handling",
               "then": "It does not imply the source provider is local or claim that no remote source-provider transfer occurred.",
               "verificationMethod": "inspection"
             }
           ],
-          "decisionRefs": [],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
+          ],
           "evidenceRefs": []
         },
         {
@@ -1961,14 +2033,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-037-AC-01",
+              "criterionId": "ZD-QUAR-AC-66",
               "given": "A disposition operation succeeds, fails, or is partial",
               "when": "The operation reaches a reportable state",
               "then": "A privacy-minimized outcome record is retained under the approved policy.",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-QUAR-037-AC-02",
+              "criterionId": "ZD-QUAR-AC-67",
               "given": "An unauthorized user requests an audit record",
               "when": "The record is accessed",
               "then": "The system denies access outside the approved authorization boundary.",
@@ -2008,7 +2080,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-QUAR-038-AC-01",
+              "criterionId": "ZD-QUAR-AC-68",
               "given": "A quarantine item requires a lifecycle record",
               "when": "The record is created",
               "then": "The record contains only lifecycle/disposition information needed for MVP-02 and does not introduce standalone scan-history browsing.",
@@ -2024,113 +2096,141 @@
           "questionId": "ZD-Q-QUAR-001",
           "question": "Should confirmed threats be quarantined automatically when platform capabilities permit, or only after explicit user confirmation?",
           "impact": "Determines trigger, consent, user control, false-positive exposure and the relationship between MVP-01 scan completion and MVP-02 action.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Prefer explicit user confirmation for the first release unless the owner specifically accepts automatic quarantine after a rigorously defined confirmed-threat threshold and false-positive recovery path."
+          "ownerDecisionRequired": false,
+          "status": "resolved",
+          "pmRecommendation": "Prefer explicit user confirmation for the first release unless the owner specifically accepts automatic quarantine after a rigorously defined confirmed-threat threshold and false-positive recovery path.",
+          "resolution": "MVP-02 quarantine requires explicit user confirmation. Automatic quarantine is not enabled in MVP.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-QUAR-002",
           "question": "What exact evidence threshold and analysis outcomes qualify as confirmed threats eligible for automatic or user-initiated quarantine?",
           "impact": "Affects eligibility, false-positive risk, automatic action authorization and safe handling of suspicious/inconclusive outcomes.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Do not authorize automatic handling until the MVP-01 verdict policy and measured evidence threshold are approved."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Do not authorize automatic handling until the MVP-01 verdict policy and measured evidence threshold are approved.",
+          "resolution": "Only an MVP-01 result that meets a documented, validated confirmed-threat policy may qualify. Suspicious, inconclusive, unsupported or unanalysed items are not confirmed threats. Exact evidence thresholds require engine validation. Even qualifying threats require explicit user confirmation in MVP.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-QUAR-003",
           "question": "What does quarantine mean operationally on each platform: copy into an app-controlled area, move through a provider, or another isolation boundary?",
           "impact": "Determines whether the original remains accessible, the strength of isolation, storage lifetime, web feasibility and user-facing promises.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Prefer a verified local quarantine copy with an explicit source-disposition step, but treat this as a recommendation pending engineering proof and owner approval."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Prefer a verified local quarantine copy with an explicit source-disposition step, but treat this as a recommendation pending engineering proof and owner approval.",
+          "resolution": "Quarantine is local/app-controlled by default. Platform-specific isolation, copy/move semantics and provider capability checks belong to architecture. Remote transfer remains prohibited without a separate owner-approved capability and explicit user consent.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-QUAR-004",
           "question": "After a verified quarantine copy is created, should ZeroDeck attempt to remove the original, leave it in place, or ask the user?",
           "impact": "Affects data-loss risk, duplicate copies, platform support, permissions and whether the original remains exposed.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep source removal separate and require an explicit policy/confirmation; never delete before copy verification."
+          "ownerDecisionRequired": false,
+          "status": "resolved",
+          "pmRecommendation": "Keep source removal separate and require an explicit policy/confirmation; never delete before copy verification.",
+          "resolution": "After a verified quarantine copy is created, ask the user before attempting to remove the original. Do not automatically delete the source file.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-QUAR-005",
           "question": "What exact fresh-scan age/window and result classes make a quarantined item eligible for restore?",
           "impact": "Determines restore safety, scan dependency, result freshness and whether suspicious/inconclusive/no-known-threat results permit restoration.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Require a new successful scan at restore time; do not treat Suspicious, Threat found, or Could not decide as restore clearance. Define acceptable result classes and age with the MVP-01 detection policy."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Require a new successful scan at restore time; do not treat Suspicious, Threat found, or Could not decide as restore clearance. Define acceptable result classes and age with the MVP-01 detection policy.",
+          "resolution": "A fresh MVP-01 analysis is required before restore. Threat-found, suspicious, inconclusive, incomplete or unavailable results do not authorize restore. Exact freshness window and allowed clean-result class require validation and architecture definition.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-QUAR-006",
           "question": "Which integrity identifier/algorithm and metadata format should bind the original, quarantine artifact and restored output?",
           "impact": "Determines compatibility, corruption detection, exact content identity and upgrade/migration behaviour.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Evaluate SHA-256 as the leading candidate because it appears in the working draft, but approve exact use, encoding, metadata and migration separately; this is not selected here."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Evaluate SHA-256 as the leading candidate because it appears in the working draft, but approve exact use, encoding, metadata and migration separately; this is not selected here.",
+          "resolution": "The product requires integrity binding between the original, quarantined artifact and restored output. Exact identifier algorithm and metadata representation are architecture decisions; no algorithm is selected in product design.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-QUAR-007",
           "question": "What does permanent deletion guarantee across app storage, document providers, backups, snapshots and flash storage?",
           "impact": "Determines truthful UI wording, legal/security expectations, verification and whether secure-erasure claims are supportable.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Promise only the deletion operation the selected platform/provider confirms; do not claim forensic or secure erasure without proof."
+          "ownerDecisionRequired": false,
+          "status": "resolved",
+          "pmRecommendation": "Promise only the deletion operation the selected platform/provider confirms; do not claim forensic or secure erasure without proof.",
+          "resolution": "Describe deletion only according to what the platform/provider confirms. Do not promise secure erasure, forensic irrecoverability or removal from every storage layer without verified evidence.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-QUAR-008",
           "question": "What quarantine retention duration, start event, expiry action and exception policy should launch use?",
           "impact": "Determines user data lifetime, storage pressure, automatic cleanup and recoverability.",
           "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Do not adopt the proposed 30-day value by default. Choose duration only after owner review of false-positive recovery, storage cost and legal needs."
+          "status": "deferred",
+          "pmRecommendation": "Do not adopt the proposed 30-day value by default. Choose duration only after owner review of false-positive recovery, storage cost and legal needs.",
+          "resolution": "A retention period and start event must be documented before release. Do not assume a 30-day period. Provide advance expiry notice where supported and report purge failures truthfully; exact period and exceptions require owner/legal review.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-QUAR-009",
           "question": "Should retention be user-configurable, and what expiry warnings or manual purge controls are required?",
           "impact": "Changes configuration, interface, notification, storage and accidental-loss risk.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Prefer a simple owner-defined retention policy and user-initiated deletion for launch; add configurable retention only if user research justifies the complexity."
+          "ownerDecisionRequired": false,
+          "status": "resolved",
+          "pmRecommendation": "Prefer a simple owner-defined retention policy and user-initiated deletion for launch; add configurable retention only if user research justifies the complexity.",
+          "resolution": "User-configurable retention is out of MVP-02. Provide manual purge controls and clear notice before expiry; exact notice timing follows the approved retention policy.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-QUAR-010",
           "question": "Is encryption mandatory for all quarantine content, and what key protection, rotation, recovery and hardware-support policy is required?",
           "impact": "Determines the security boundary, supported devices, key loss behaviour, backup/migration and recovery.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "If encryption is selected, use established authenticated encryption and platform-backed key protection; do not invent primitives. Exact algorithms and lifecycle require a security design review."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "If encryption is selected, use established authenticated encryption and platform-backed key protection; do not invent primitives. Exact algorithms and lifecycle require a security design review.",
+          "resolution": "Quarantined content must be protected at rest using encryption. Exact algorithm, platform key protection, rotation, recovery and hardware-support requirements belong to architecture; use established mechanisms, not custom cryptography.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-QUAR-011",
           "question": "What should happen to quarantined content and keys during backup, device transfer, app uninstall, app-data clear and device loss?",
           "impact": "Can determine whether the only quarantined copy is lost or becomes undecryptable; affects user warnings and recovery promises.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Do not back up or synchronize quarantine bytes/keys by implication. Define and test an explicit lifecycle before release, and warn users about irreversible loss."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Do not back up or synchronize quarantine bytes/keys by implication. Define and test an explicit lifecycle before release, and warn users about irreversible loss.",
+          "resolution": "Do not back up quarantined file contents or their keys by default. Clearly warn about consequences of uninstall, data clearing, device transfer and device loss. Metadata backup and recovery behaviour require architecture/privacy review.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-QUAR-012",
           "question": "Which quarantine and restore operations should the web client support, given browser file-handle and permission limits?",
           "impact": "Determines MVP web parity, user-visible capability, storage lifetime and whether the browser can truthfully provide isolation.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Do not promise device-wide or arbitrary-file quarantine on web. Expose only operations demonstrated with user-granted browser capabilities; otherwise mark the operation unsupported."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Do not promise device-wide or arbitrary-file quarantine on web. Expose only operations demonstrated with user-granted browser capabilities; otherwise mark the operation unsupported.",
+          "resolution": "Web quarantine/restore supports only operations demonstrably available within browser file permissions. Do not promise device-wide isolation or deletion. Exact browser capability matrix requires testing.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-QUAR-013",
           "question": "What file size, aggregate quarantine capacity, per-device limits and low-storage behaviour should launch enforce?",
           "impact": "Determines supported workloads, storage exhaustion behaviour, responsiveness and user data protection.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Measure representative files on supported devices before setting numeric limits; fail safely without evicting existing quarantined items."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Measure representative files on supported devices before setting numeric limits; fail safely without evicting existing quarantined items.",
+          "resolution": "Set file-size and aggregate capacity limits from device/platform testing. Never automatically evict existing quarantined items to make room; reject or safely defer new work when capacity is insufficient.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-QUAR-014",
           "question": "What audit-record fields, access rules and retention period are required for disposition operations?",
           "impact": "Determines data model, privacy exposure, dispute resolution and whether user-visible history becomes a separate feature.",
           "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Retain a minimal item lifecycle record and operation outcomes; avoid a separate searchable scan-history feature in MVP."
+          "status": "deferred",
+          "pmRecommendation": "Retain a minimal item lifecycle record and operation outcomes; avoid a separate searchable scan-history feature in MVP.",
+          "resolution": "Retain only minimal lifecycle outcome records for quarantine, restore, deletion and expiry. Do not log file content. Exact fields, access roles and retention periods require architecture and legal review.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         }
       ]
     }
