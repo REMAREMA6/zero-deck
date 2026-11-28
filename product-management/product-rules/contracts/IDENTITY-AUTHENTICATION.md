@@ -1,10 +1,10 @@
 # ZeroDeck Identity and Authentication Product Requirements
 
 **Contract ID:** `ZD-CONTRACT-AUTH`  
-**Contract version:** `0.1.0-draft`  
+**Contract version:** `0.2.0-draft`  
 **Capability:** `AUTH` — supporting account infrastructure  
 **Author / issuer:** ZeroDeck Product Management Agent  
-**Lifecycle:** Draft; all requirements are PM-proposed and none are owner-approved by this document  
+**Lifecycle:** Draft; the eight owner decisions in Section 4 are approved and recorded. Requirements ZD-AUTH-025 and ZD-AUTH-026 directly encode two of those decisions and are owner-approved; the other requirements remain PM-proposed.  
 **Platforms:** Web and Android  
 **Software Rules compatibility target:** `REMAREMA6/software-rules` commit `5591a2e62287afc29bde002369eaf659673ec59b`, specification 0.3.0 Draft, schema 0.2.0 Draft
 
@@ -24,7 +24,8 @@ Identity establishes who is acting. Authorization determines what that identity 
 - **Owner-approved product boundary:** authentication is supporting infrastructure; MVP-03 link checking requires both active Pro entitlement and owner-controlled activation.
 - **External research:** NIST SP 800-63B-4; OWASP Authentication, Password Storage, Session Management and Forgot Password Cheat Sheets; Android Security Tips and Android Keystore documentation.
 - **PM inference:** the requirements below translate those security principles into testable product outcomes for a consumer product serving web and Android.
-- **Unresolved:** identifier and sign-in methods, verification channel, MFA/passkey policy, recovery method, session durations, account deletion policy, and exact assurance target.
+- **Owner-approved decisions:** email/password sign-in; verified-email use and verification boundaries; optional MFA with passkeys deferred; verified-email recovery; 7-day inactivity and 30-day absolute session limits; current-session and logout-all controls with no launch session-list UI; user-initiated account deletion with a documented retention schedule; and risk-based step-up authentication for sensitive account actions.
+- **Still unresolved:** exact email canonicalization, verification message/expiry details, numeric abuse-control thresholds, session renewal cadence and concurrency edge cases, exact deletion/retention schedule and legally required retention categories, entitlement/activation propagation bounds, and operational assurance thresholds.
 
 Every requirement below is **PM-proposed**, not owner-approved. Normative language expresses the proposed product contract, not a claim about current implementation behaviour.
 
@@ -46,7 +47,7 @@ When an account is successfully created, the system MUST establish one stable, u
 
 #### Requirement ZD-AUTH-002 — Prevent duplicate account identifiers
 
-When an account identifier is used as a unique sign-in or recovery identifier, the system MUST enforce uniqueness according to one documented canonicalization policy and MUST NOT create two accounts that resolve to the same canonical identifier.
+When an email address is used as the primary sign-in or recovery identifier, the system MUST enforce uniqueness according to one documented email canonicalization policy and MUST NOT create two accounts that resolve to the same canonical identifier.
 
 - Priority: P0
 - Facets: identity-authentication, data, persistence, errors-recovery
@@ -55,7 +56,7 @@ When an account identifier is used as a unique sign-in or recovery identifier, t
   - Given an existing account identifier, when another account attempts to claim an identifier that canonicalizes to the same value, then the second claim is rejected without changing the first account.
   - Given identifiers that differ only in forms the documented canonicalization treats as equivalent, when submitted, then the uniqueness check treats them consistently.
 - Basis: PM inference.
-- Open dependency: identifier type and canonicalization policy are not selected.
+- Owner decision: email is the primary sign-in identifier. The exact canonicalization policy remains to be documented and tested before launch.
 
 #### Requirement ZD-AUTH-003 — Keep account identity separate from credentials
 
@@ -93,9 +94,9 @@ If the system stores a password or other reusable authenticator secret, it MUST 
 - Basis: external research; OWASP Password Storage Cheat Sheet.
 - Constraint: use a maintained security library; do not design a password-hashing or cryptographic primitive in product code.
 
-#### Requirement ZD-AUTH-006 — Apply safe password acceptance rules if passwords are supported
+#### Requirement ZD-AUTH-006 — Apply safe password acceptance rules for launch password authentication
 
-If password authentication is offered, the system MUST require a minimum of 15 characters for a password used as a single-factor authenticator and a minimum of 8 characters when the password is used only as part of multi-factor authentication; MUST permit passwords of at least 64 characters; MUST accept Unicode and whitespace; MUST NOT silently truncate passwords or impose other character-composition rules; MUST compare new or changed passwords against a blocklist of commonly used, expected or compromised passwords; and MUST NOT require periodic password changes unless there is evidence of compromise.
+For ZeroDeck's email-and-password launch authentication, the system MUST require a minimum of 15 characters for a password used as a single-factor authenticator and a minimum of 8 characters when the password is used only as part of multi-factor authentication; MUST permit passwords of at least 64 characters; MUST accept Unicode and whitespace; MUST NOT silently truncate passwords or impose other character-composition rules; MUST compare new or changed passwords against a blocklist of commonly used, expected or compromised passwords; and MUST NOT require periodic password changes unless there is evidence of compromise.
 
 - Priority: P1
 - Facets: identity-authentication, interface, security-controls, errors-recovery
@@ -106,7 +107,7 @@ If password authentication is offered, the system MUST require a minimum of 15 c
   - Given a password on the blocklist, when submitted for creation or change, then it is rejected with an actionable reason.
   - Given no evidence of compromise, when the account remains in good standing, then the system does not force a periodic password change.
 - Basis: external research; NIST SP 800-63B-4 and OWASP Authentication Cheat Sheet.
-- Open dependency: the sign-in method is not yet selected. If passwords are not supported, this requirement is not applicable with a recorded rationale.
+- Applicability: email-and-password authentication is an owner-approved launch choice. The password-length and verifier controls in this requirement remain PM-proposed security requirements based on the cited guidance.
 
 #### Requirement ZD-AUTH-007 — Resist automated authentication abuse
 
@@ -164,8 +165,10 @@ The system MUST enforce both an inactivity-based expiry policy and an absolute m
 - Acceptance:
   - Given a session exceeds its configured inactivity limit, when its credential is presented, then protected access is denied.
   - Given a session exceeds its configured absolute lifetime despite continued activity, when its credential is presented, then protected access is denied.
+  - Given an authenticated session has had no qualifying activity for 7 days, when its credential is presented, then protected access is denied.
+  - Given an authenticated session reaches 30 days from establishment, when its credential is presented, then protected access is denied even if it has remained active.
 - Basis: external research; OWASP Session Management Cheat Sheet; NIST SP 800-63B-4 session management.
-- Open dependency: actual durations, renewal rules and any remembered-device policy are unresolved and must be set before release.
+- Owner-approved duration policy: inactivity expiry is 7 days; absolute session lifetime is 30 days. The system must enforce both limits server-side. Exact renewal cadence and remembered-device behaviour remain unresolved and must be specified before release.
 
 #### Requirement ZD-AUTH-012 — Revoke sessions
 
@@ -176,8 +179,10 @@ The system MUST provide a trusted mechanism to revoke an individual session and 
 - Acceptance:
   - Given a session is revoked, when its credential is replayed, then the request is denied.
   - Given all sessions for an account are revoked, when any previously issued session credential for that account is replayed, then each is denied.
+  - Given an account holder selects logout all devices, when the operation completes, then every active session for that account is revoked.
+  - Given the launch account interface is inspected, when session-management capabilities are reviewed, then current-session logout and logout-all-devices are available but a detailed device/session list is not required.
 - Basis: external research; OWASP Session Management Cheat Sheet.
-- Product decision required: whether users receive a session/device management interface in the MVP or whether account-wide revocation is initially exposed only through recovery/security events.
+- Owner-approved launch policy: provide current-session logout and a logout-all-devices action. Do not include a detailed device/session-management screen at launch. The service must still support individual-session revocation so a management screen can be added later.
 
 #### Requirement ZD-AUTH-013 — End the current session on logout
 
@@ -262,70 +267,96 @@ The system MUST request only the credential information required for the current
   - Given a secret-bearing request is generated, when its URL and diagnostic output are inspected, then the secret is not included.
 - Basis: external research; Android Security Tips and OWASP guidance.
 
-#### Requirement ZD-AUTH-020 — Provide a secure authenticator recovery path
+#### Requirement ZD-AUTH-020 — Provide a secure verified-email recovery path
 
-The system MUST provide a documented recovery process for users who lose access to a supported authenticator, and MUST verify recovery authority using a one-time, time-bounded challenge or an equivalently secure recovery mechanism before changing authenticators or restoring account access.
+The system MUST provide a documented recovery process for users who lose access to a supported authenticator. At launch, it MUST deliver a single-use, time-limited recovery link or challenge to the account's verified email address and MUST verify recovery authority before changing authenticators or restoring account access. The system MUST NOT use security questions as a recovery factor.
 
 - Priority: P0
 - Facets: identity-authentication, security-controls, api, errors-recovery, data
 - Acceptance:
-  - Given a valid recovery challenge, when it is successfully used, then it cannot be used again.
+  - Given a valid recovery challenge delivered to the account's verified email address, when it is successfully used, then it cannot be used again.
+  - Given an account has no verified email address, when recovery is requested, then the unverified address is not used as the recovery channel.
   - Given an expired, invalid, already-used or altered recovery challenge, when submitted, then no authenticator or account security state is changed.
   - Given a recovery attempt for an identifier, when the requester is unauthenticated, then the response does not reveal whether the account exists.
 - Basis: external research; OWASP Forgot Password Cheat Sheet.
-- Open dependency: recovery channel and assurance method are unresolved. Do not assume email or SMS is approved.
+- Owner decision: verified email is the recovery channel at launch. Exact challenge expiry/resend limits and operational notification details remain unresolved.
 
-#### Requirement ZD-AUTH-021 — Invalidate affected sessions after credential recovery or replacement
+#### Requirement ZD-AUTH-021 — Invalidate sessions after credential recovery or replacement
 
-When an authenticator is reset, replaced, or confirmed compromised through an authorized security process, the system MUST revoke sessions that are no longer trusted and MUST require fresh authentication before protected access resumes.
+When an authenticator is reset, replaced, or confirmed compromised through an authorized security process, the system MUST revoke all existing sessions after successful account recovery and MUST require fresh authentication before protected access resumes.
 
 - Priority: P0
 - Facets: identity-authentication, security-controls, errors-recovery, persistence
 - Acceptance:
-  - Given a password or authenticator is reset, when the reset completes, then sessions selected by the documented revocation policy no longer authorize protected operations.
+  - Given account recovery succeeds, when the recovery operation completes, then all existing sessions for that account are revoked and a security notification is sent to the account owner.
+  - Given a password or authenticator is reset outside account recovery, when the reset completes, then sessions selected by the documented revocation policy no longer authorize protected operations.
   - Given a former session is replayed after required revocation, then access is denied.
 - Basis: external research; OWASP Authentication and Forgot Password Cheat Sheets.
 
-## 4. Deliberately not specified in this contract
 
-The following are not silently decided by this draft:
 
-- Sign-in identifier: email, username, phone number, passkey or a combination.
-- Whether passwords are offered, and whether passkeys or other authenticators are offered at launch.
-- Email/phone ownership verification, its timing and channel.
-- Mandatory or optional MFA and the required assurance level.
-- Recovery channel, recovery delay, notification and identity-proofing requirements.
-- Session idle and absolute durations, renewal policy, concurrent-session limits and user-facing session management.
-- Account suspension, closure, deletion, data-retention and post-deletion handling.
-- Whether step-up authentication is required for destructive or high-risk actions.
-- Numeric throttling thresholds, anti-automation controls and alerting.
-- Exact token/session representation, cryptographic algorithms, libraries, database tables and deployment topology.
+### Sensitive account actions and account deletion
 
-These are tracked as open questions, not implicit permission to choose defaults during implementation.
+#### Requirement ZD-AUTH-025 — Require fresh authentication for sensitive account-security changes
 
-## 5. PM recommendations for owner review
+The system MUST require fresh authentication before a user changes their password or passkey, changes the verified recovery email address, or confirms account deletion. It MUST NOT require repeated fresh authentication for ordinary account use.
 
-1. **Keep the account model minimal.** Use a stable internal principal and a separately changeable authenticator/identifier. Do not require legal identity proofing for an ordinary consumer security utility without a demonstrated need.
-2. **Do not make social login/federation an MVP dependency.** It conflicts with the current first-party direction unless the owner later chooses otherwise.
-3. **Choose the sign-in and recovery channel together.** An email-based account is not operationally complete until deliverability, ownership verification, recovery and abuse controls are designed. Do not assume SMS is preferable; it adds number lifecycle and SIM-swap considerations.
-4. **Offer phishing-resistant authentication as a considered enhancement.** Evaluate passkeys and optional MFA against target-user usability, device coverage and recovery burden before deciding. This draft does not mandate them.
-5. **Set session durations and revocation policy before release.** They are security policy decisions, not values to leave as hidden library defaults.
-6. **Keep authorization and Pro checks server-side.** Authentication must not be conflated with entitlement or feature activation.
+- Priority: P0
+- Facets: identity-authentication, security-controls, authorization-permissions, errors-recovery
+- Rationale: sensitive changes can transfer control of an account or permanently remove it; a recent proof of account control reduces the impact of a stolen or unattended session.
+- Acceptance:
+  - Given an authenticated session, when the user attempts to change the password or a passkey, then fresh authentication is required before the change is accepted.
+  - Given an authenticated session, when the user attempts to change the verified recovery email address, then fresh authentication is required before the change is accepted.
+  - Given an authenticated session, when the user confirms account deletion, then fresh authentication is required before deletion proceeds.
+  - Given an authenticated session, when the user performs ordinary account actions that are not designated sensitive, then the system does not repeatedly require fresh authentication solely because the session is active.
+- Basis: owner decision; PM recommendation accepted by the owner.
+- Decision reference: ZD-DEC-AUTH-2026-11-28.
 
-## 6. Open questions requiring owner decisions or later evidence
+#### Requirement ZD-AUTH-026 — Support user-initiated account deletion with documented retention
 
-| ID | Question | PM recommendation | Why it remains open |
-|---|---|---|---|
-| ZD-Q-AUTH-001 | Which account identifier(s) and sign-in method should launch support? | Compare email/password and passkey-capable options; avoid phone-only identity as a default. | Affects onboarding, verification, recovery, support and platform coverage. |
-| ZD-Q-AUTH-002 | Must users verify an email address or phone number, and before which account actions? | Require verification before relying on a contact point for recovery or security notifications; decide whether limited account creation can precede it. | No verified contact channel or provider has been selected. |
-| ZD-Q-AUTH-003 | Is MFA/passkey support required at MVP launch, optional, or deferred? | Evaluate passkeys and optional additional factors; do not impose mandatory MFA without user-risk evidence. | Assurance target and recovery burden are not yet assessed. |
-| ZD-Q-AUTH-004 | What recovery mechanism and channel are supported? | Prefer a recovery path resistant to account enumeration, replay and takeover; design it alongside sign-in. | Email/SMS/passkey recovery has different operational and threat implications. |
-| ZD-Q-AUTH-005 | What idle and absolute session durations, renewal rules and concurrent-session policy apply? | Define explicit server-enforced limits and revocation semantics before release; choose durations through threat/usability review. | Numeric values require product risk and support decisions. |
-| ZD-Q-AUTH-006 | Does MVP need user-visible device/session management and per-session revocation? | At minimum support account-wide revocation; assess a session list as a separate UI feature. | Could expand UI scope and support expectations. |
-| ZD-Q-AUTH-007 | What account closure/deletion and retention behaviour is promised? | Specify with the broader data lifecycle and applicable launch-market obligations. | Cross-cutting system phase and launch jurisdiction are unresolved. |
-| ZD-Q-AUTH-008 | What assurance level and step-up events are appropriate for ZeroDeck? | Start with a documented risk assessment; require stronger re-authentication for account-security changes and other high-impact actions where justified. | NIST AALs are a useful framework, not an automatic product mandate. |
+The system MUST provide a user-initiated account deletion process that immediately revokes the account's active sessions and disables further account access. It MUST delete personal data according to a documented retention schedule and MUST retain only records for which a legitimate requirement exists, with the reason and retention period documented.
 
-## 7. Evidence and limitations
+- Priority: P0
+- Facets: functional, data, persistence, privacy, errors-recovery
+- Rationale: account holders need a clear way to end their relationship with the product, while retained records must be limited, justified and time-bounded.
+- Acceptance:
+  - Given an authenticated account holder who completes the required fresh authentication, when account deletion is confirmed, then all active sessions are revoked and account access is disabled immediately.
+  - Given account deletion has been confirmed, when the documented deletion schedule is applied, then personal data is deleted according to that schedule.
+  - Given a record must be retained for a legitimate requirement, when deletion is processed, then the record, retention reason and retention period are documented and access is restricted to the justified purpose.
+- Basis: owner decision; PM recommendation accepted by the owner.
+- Decision reference: ZD-DEC-AUTH-2026-11-28.
+- Open dependency: exact retention schedules, lawful retention categories and launch-market obligations must be established before release.
+
+## 4. Owner decisions and remaining open questions
+
+The owner explicitly accepted the Product Management Agent's eight recommendations on 2026-11-28. The decisions are recorded in the [owner decision record](../2026-11-28/17-AUTHENTICATION-OWNER-DECISIONS.md). This approval resolves these eight questions only; it does not approve every PM-proposed requirement or the separate Phase 3 proposals.
+
+| ID | Owner-approved decision | Recorded outcome |
+|---|---|---|
+| ZD-Q-AUTH-001 | Sign-in identifier and method | Launch with email + password. Email is the primary sign-in identifier. Phone and social sign-in are not required at launch. The stable account principal remains separate from the email address and password. Email changes require a verified process; passkeys may be added later. |
+| ZD-Q-AUTH-002 | Contact verification | Account creation may complete in an explicitly unverified state. Verify email before using it for recovery or security notifications, and before any feature/action whose policy explicitly requires a verified email. No additional feature gate is inferred. |
+| ZD-Q-AUTH-003 | MFA/passkeys | MFA is optional, not mandatory, at launch. Passkeys are a later enhancement and are not a launch dependency. |
+| ZD-Q-AUTH-004 | Recovery | Use the verified email address for a single-use, time-limited recovery link or challenge. Expired or consumed challenges fail. Successful recovery revokes existing sessions and notifies the account owner. Security questions are not used. |
+| ZD-Q-AUTH-005 | Session policy | Enforce a 7-day inactivity limit and a 30-day absolute maximum session lifetime. Rotate session/renewal credentials securely. Allow concurrent sessions across devices. Logout immediately revokes the current session. |
+| ZD-Q-AUTH-006 | Session management | At launch provide current-session logout and logout-all-devices. Defer a detailed device/session-management screen. The service must support individual-session revocation for later use. |
+| ZD-Q-AUTH-007 | Account deletion and retention | Provide user-initiated account deletion, immediate session revocation and account-access disablement. Delete personal data on a documented schedule; retain only records with a legitimate requirement, documenting the reason and period. Exact schedules and legal exceptions remain open. |
+| ZD-Q-AUTH-008 | Assurance and step-up | Use risk-based assurance rather than imposing a complex formal assurance tier at launch. Require fresh authentication before password/passkey changes, recovery-email changes and account deletion. Do not require repeated authentication for ordinary use. |
+
+### Remaining questions and operational values
+
+These items were not resolved by the eight approved recommendations and remain open:
+
+| ID | Open item | Required resolution |
+|---|---|---|
+| ZD-Q-AUTH-009 | Email canonicalization and verification operations | Document email normalization, verification challenge expiry/resend limits, and the exact notification policy. |
+| ZD-Q-AUTH-010 | Authentication and recovery abuse thresholds | Set numeric rate limits, progressive delays and temporary restriction behaviour through risk/usability review. |
+| ZD-Q-AUTH-011 | Session renewal details | Specify renewal cadence, rotation/replay handling and edge cases without exceeding the approved 7-day inactivity and 30-day absolute limits. |
+| ZD-Q-AUTH-012 | Deletion/retention schedule and legal categories | Determine exact deletion timelines, legitimate retention categories, jurisdictional obligations and evidence of deletion before release. |
+| ZD-Q-AUTH-013 | Authorization propagation bound | Specify how quickly entitlement, permission and owner-controlled activation changes must affect protected operations. |
+
+The owner decisions do not select an authentication library, framework, token format, database schema or implementation architecture. The three Phase 3 candidate additions (ZD-AUTH-022–ZD-AUTH-024) and the Behaviour facet-reference amendment remain separate PM proposals and are not accepted by this decision.
+
+## 6. Evidence and limitations
 
 ### External sources
 
@@ -351,8 +382,8 @@ These cases inform the test vocabulary only. They do not prove ZeroDeck behaviou
 
 This is a product requirement proposal, not a security audit, legal opinion, architecture approval, or implementation verification. No ZeroDeck authentication implementation was tested. NIST is a government digital-identity standard and its assurance levels should be applied proportionately, not copied wholesale into this consumer product. OWASP material is security guidance, not a ZeroDeck owner decision. Platform guidance establishes Android capabilities and constraints, not a complete token-storage design.
 
-## 8. Phase 2 exit statement
+## 7. Phase 2 and Phase 3 exit statement
 
-Phase 2 is complete when this draft is committed with a matching declared-contract projection and retained evidence record, all requirements have observable acceptance criteria and explicit provenance, and unresolved product choices remain visible. Authentication coverage validation across the full relevant facet set is Phase 3; owner approval and implementation conformance are later activities.
+Phase 2 and Phase 3 are complete. The eight owner decisions are recorded in Section 4 and the linked owner decision record. Remaining operational questions are explicit. Owner approval of those eight decisions does not imply blanket approval of the remaining PM-proposed requirements, Phase 3 candidate additions, or implementation conformance.
 
 **Phase 2 status at authoring:** requirements drafted; awaiting structural, semantic and cross-reference validation before phase close.
