@@ -17,6 +17,7 @@ export default function AccountPage() {
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -46,6 +47,26 @@ export default function AccountPage() {
       active = false;
     };
   }, [router]);
+
+  async function rotateSession() {
+    setBusy(true);
+    setError(null);
+    setNotice(null);
+    try {
+      const response = await fetch('/api/sessions/current/rotate', { method: 'POST' });
+      const data = await response.json().catch(() => null);
+      if (!response.ok) {
+        setError(data?.error?.message ?? 'The session credential could not be rotated.');
+        if (response.status === 401) router.replace('/login');
+        return;
+      }
+      setNotice('Session credential rotated. The previous credential can no longer be used.');
+    } catch {
+      setError('The session rotation request could not be completed.');
+    } finally {
+      setBusy(false);
+    }
+  }
 
   async function signOut(
     path: '/api/sessions/current' | '/api/sessions/logout-all',
@@ -92,6 +113,9 @@ export default function AccountPage() {
               {profile.emailVerified ? 'EMAIL VERIFIED' : 'EMAIL NOT VERIFIED'}
             </span>
             <div className="account-actions">
+              <button type="button" disabled={busy} onClick={rotateSession}>
+                {busy ? 'Updating…' : 'Rotate session credential'}
+              </button>
               <button
                 className="primary"
                 type="button"
@@ -113,6 +137,11 @@ export default function AccountPage() {
         {error ? (
           <p className="form-message error" role="alert">
             {error}
+          </p>
+        ) : null}
+        {notice ? (
+          <p className="form-message success" role="status">
+            {notice}
           </p>
         ) : null}
         <p className="auth-footnote">
