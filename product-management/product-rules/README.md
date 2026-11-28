@@ -3,17 +3,17 @@
 **Product:** ZeroDeck  
 **Author:** ZeroDeck Product Management Agent  
 **Profile:** [Product Requirements Contract Profile](PROFILE.md)  
-**Status:** PM contract profile and Phases 2–8 are complete as requirements authoring/review; Phase 9 owner review remains. The owner approved and recorded eight authentication policy decisions. MVP-01 is a v0.1.0-draft contract with 28 PM-proposed requirements / 56 criteria / 9 open questions. MVP-02 is a v0.1.0-draft contract with 38 PM-proposed requirements / 68 criteria / 14 open questions. MVP-03 is drafted in v0.1.0-draft; Phase 7 cross-cutting system contract is complete as a PM-proposed draft (28 requirements / 28 criteria / 18 open questions).
+**Status:** Phases 0–9 complete as product requirements authoring and owner review. Product design is closed; technical architecture is next. The five draft contracts contain 160 requirements / 259 acceptance criteria across all 15 official facets; 64 Phase 8 questions are dispositioned (15 resolved / 49 deferred). Contract versions and owner decisions are recorded below. This is not runtime conformance or production readiness.
 
 ## Contracts
 
 | Contract | Capability | Status |
 |---|---|---|
-| [Identity and authentication contract](contracts/IDENTITY-AUTHENTICATION.md) | Supporting account/authentication infrastructure | Draft v0.2.0; eight owner decisions recorded; 25 requirements / 66 criteria; five operational questions remain open |
-| [Manual file-analysis contract](contracts/MANUAL-FILE-ANALYSIS.md) | MVP-01 | Draft v0.1.0; 28 PM-proposed requirements / 56 criteria; 9 open questions; Phase 4 complete |
-| [Quarantine and file-disposition contract](contracts/QUARANTINE-FILE-DISPOSITION.md) | MVP-02 | Draft v0.1.0; 38 PM-proposed requirements / 68 criteria; 14 open questions; Phase 5 complete |
-| [Website and link-checking contract](contracts/WEBSITE-LINK-CHECKING.md) | MVP-03 | Draft v0.1.0; 41 requirements / 41 criteria; 4 owner-approved scope encodings / 37 PM-proposed; 18 open questions; Phase 6 complete |
-| [Cross-cutting system contract](contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.md) | Shared product/system requirements | Draft v0.1.0; 28 PM-proposed requirements / 28 criteria / 18 open questions; Phase 7 complete |
+| [Identity and authentication contract](contracts/IDENTITY-AUTHENTICATION.md) | Supporting account/authentication infrastructure | Draft v0.3.0; 25 requirements / 66 criteria; 13 question records, all dispositioned |
+| [Manual file-analysis contract](contracts/MANUAL-FILE-ANALYSIS.md) | MVP-01 | Draft v0.2.0; 28 requirements / 56 criteria; 9 question records, all dispositioned |
+| [Quarantine and file-disposition contract](contracts/QUARANTINE-FILE-DISPOSITION.md) | MVP-02 | Draft v0.2.0; 38 requirements / 68 criteria; 14 question records, all dispositioned |
+| [Website and link-checking contract](contracts/WEBSITE-LINK-CHECKING.md) | MVP-03 | Draft v0.2.0; 41 requirements / 41 criteria; 18 question records, all dispositioned |
+| [Cross-cutting system contract](contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.md) | Shared product/system requirements | Draft v0.2.0; 28 requirements / 28 criteria; 18 question records, all dispositioned |
 
 ## Phase 8 cross-contract review
 
@@ -37,4 +37,9 @@ The example under `examples/` is only a schema/format fixture. It is not a ZeroD
 
 ## Current phase
 
-Phase 1 — PM contract profile design: **complete**. Phase 2 — authentication/account requirements: **complete**. Phase 3 — authentication coverage across all 15 facets: **complete**. Phase 4 — MVP-01 manual file-analysis requirements: **complete** (28 requirements, 56 criteria, nine open questions; all remain PM-proposed). Phase 5 — MVP-02 quarantine and file disposition: **complete** (38 requirements, 68 criteria, 14 open questions; all remain PM-proposed). Phase 6 — MVP-03 website and link checking: **complete** (41 requirements, 41 criteria, four direct encodings of owner-approved scope, 37 PM-proposed requirements, 18 open questions, all 15 facets assessed, 81 failure/recovery scenarios and 19/19 targeted checks). See the [CIRCLES analysis](../2026-11-28/23-PHASE-6-CIRCLES-WEBSITE-LINK-CHECKING.md), [facet assessment](PHASE-6-MVP-03-FACET-COVERAGE.md), [failure matrix](PHASE-6-MVP-03-NEGATIVE-FAILURE-RECOVERY-MATRIX.md) and [validation](PHASE-6-MVP-03-VALIDATION.md). Phase 7 — cross-cutting system requirements is complete as PM requirements authoring. Phase 8 cross-facet completeness/consistency review is complete. Next: Phase 9 owner review and release.
+Phase 1 — PM contract profile design: **complete**. Phase 2 — authentication/account requirements: **complete**. Phase 3 — authentication coverage across all 15 facets: **complete**. Phase 4 — MVP-01 manual file-analysis requirements: **complete** (28 requirements, 56 criteria, nine open questions; all remain PM-proposed). Phase 5 — MVP-02 quarantine and file disposition: **complete** (38 requirements, 68 criteria, 14 open questions; all remain PM-proposed). Phase 6 — MVP-03 website and link checking: **complete** (41 requirements, 41 criteria, four direct encodings of owner-approved scope, 37 PM-proposed requirements, 18 open questions, all 15 facets assessed, 81 failure/recovery scenarios and 19/19 targeted checks). See the [CIRCLES analysis](../2026-11-28/23-PHASE-6-CIRCLES-WEBSITE-LINK-CHECKING.md), [facet assessment](PHASE-6-MVP-03-FACET-COVERAGE.md), [failure matrix](PHASE-6-MVP-03-NEGATIVE-FAILURE-RECOVERY-MATRIX.md) and [validation](PHASE-6-MVP-03-VALIDATION.md). Phase 7 — cross-cutting system requirements is complete as PM requirements authoring. Phase 8 cross-facet completeness/consistency review is complete. Phase 9 owner review and product-design closure is complete. See [Phase 9 closure validation](../2026-11-28/39-PHASE-9-CLOSURE-VALIDATION.md) and [architecture handoff](../2026-11-28/40-ARCHITECTURE-HANDOFF.md). Technical architecture is next.
+
+
+## Phase 9 closure
+
+Phase 9 owner review and product-design closure is complete. The owner-approved decision register is `../2026-11-28/35-PHASE-9-OWNER-DECISION-REGISTER.md`; all 64 question dispositions are in `../2026-11-28/37-PHASE-9-QUESTION-DISPOSITION-REGISTER.md`. See the [validation report](../2026-11-28/39-PHASE-9-CLOSURE-VALIDATION.md) and [architecture handoff](../2026-11-28/40-ARCHITECTURE-HANDOFF.md).
