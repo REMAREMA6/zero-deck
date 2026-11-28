@@ -1,3 +1,4 @@
+
 import type { Pool } from 'pg';
 import { URLCheckProviderResultSchema } from '@zerodeck/contracts';
 import { createAuthorizationService } from '../authorization/authorization.js';
@@ -11,7 +12,8 @@ export interface UrlCheckProvider {
 export type UrlCheckDecision =
   | {
       status: 'blocked';
-      reason: 'pro_required' | 'activation_disabled' | 'permission_required' | 'eligibility_unknown';
+      reason:
+        'pro_required' | 'activation_disabled' | 'permission_required' | 'eligibility_unknown';
     }
   | { status: 'unavailable' }
   | { status: 'completed'; verdict: UrlCheckVerdict; explanation: string };
