@@ -1,8 +1,8 @@
 # Phase 6 — MVP-03 Website and Link Checking: Validation Report
 
 **Contract:** `ZD-CONTRACT-WEBSITE-LINK-CHECKING` v0.1.0-draft  
-**Canonical Markdown revision:** `8f0aeecee5b97a7fbfe98c4e048e6b40f436df60`  
-**Canonical Markdown SHA-256:** `sha256:c17303dc66e34aca21729edc3d971b554254ceec73de10000f4a1611e9e44fc5`  
+**Canonical Markdown revision:** `1210f236d80972a4c877ee042cce1963da872d62`  
+**Canonical Markdown SHA-256:** `sha256:d38382a6f9f90a7abdf15df243be357cdac9a2b36b0cf2a7d2e97352badc3fd6`  
 **Validation date:** 2026-11-28  
 **Status:** Targeted authoring-session checks passed; limitations remain explicit.
 
@@ -13,7 +13,7 @@
 | Normative requirements | 41 |
 | Acceptance criteria | 41 |
 | Owner-approved requirements directly encoding `ZD-SCOPE-001` | 4 |
-| PM-proposed requirements | 35 |
+| PM-proposed requirements | 37 |
 | Open product/owner questions | 18 |
 | Official Software Rules facets assessed | 15 |
 | Negative/failure/recovery scenarios | 81 |
