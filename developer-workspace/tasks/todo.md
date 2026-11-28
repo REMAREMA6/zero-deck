@@ -150,13 +150,13 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 - [ ] Session credentials are unguessable and only their hashes are persisted.
 - [ ] Server enforces 7-day inactivity and 30-day absolute expiry.
 - [ ] Concurrent sessions across devices are allowed.
-- [ ] Web credentials use an HttpOnly/Secure production cookie with explicit `SameSite=Lax` policy and no token in browser-readable JSON (regression test added; CI pending).
+- [x] Web credentials use an HttpOnly/Secure production cookie with explicit `SameSite=Lax` policy and no token in browser-readable JSON (verified in `apps/web/app/api/sessions/route.test.ts`, full green CI run 46145669565).
 - [x] Android credentials use Expo SecureStore; read/write/clear fail closed when secure storage is unavailable (unit tests in `apps/android/test/session-storage.test.ts`).
 - [ ] Database/auth dependency failure denies protected access.
 
 **Verification**
 - [ ] PostgreSQL tests cover valid/invalid sessions, inactivity expiry and absolute expiry.
-- [ ] Web cookie attributes and token non-disclosure are tested in `apps/web/app/api/sessions/route.test.ts` (CI pending).
+- [x] Web cookie attributes and token non-disclosure are tested in `apps/web/app/api/sessions/route.test.ts` (full green CI run 46145669565).
 - [x] Android secure-storage failure paths are tested in `apps/android/test/session-storage.test.ts`.
 - [ ] Cross-platform tests prove one account principal.
 
