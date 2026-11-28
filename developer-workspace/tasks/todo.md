@@ -261,17 +261,17 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### C2. Analysis engine port and result mapping
 
-**Status: Partial — local engine port, canonical four-outcome mapping, deterministic fake-engine tests and no-known-threat safety wording are implemented. The current verification chain has been correcting stale test expectations and formatting; latest CI run 46146977405 is pending. No production engine is selected.**
+**Status: Complete — local engine port, canonical four-outcome mapping and deterministic fake-engine tests passed full CI run [46146977405](https://github.com/REMAREMA6/zero-deck/actions/runs/46146977405), including formatting, typecheck, unit tests, PostgreSQL integration and API/Web/Android builds. No production engine is selected or activated.**
 
 **Description:** Define the platform-independent engine boundary and deterministic fake used only for tests.
 
 **Acceptance criteria**
-- [ ] Four result outcomes remain distinct.
-- [ ] No-match is not described as safe.
-- [ ] Engine failure never becomes a clean result.
-- [ ] Fake engine is never activated as a production scanner.
+- [x] Four result outcomes remain distinct.
+- [x] No-match is not described as safe.
+- [x] Engine failure never becomes a clean result.
+- [x] Fake engine is never activated as a production scanner.
 
-**Verification:** Engine contract tests and mapping tests.  
+**Verification:** Engine contract tests and mapping tests in `packages/domain/src/index.test.ts`; full CI run 46146977405.  
 **Dependencies:** A4.  
 **Likely files:** packages/domain analysis port, apps/* adapters, tests.  
 **Estimated scope:** Small/Medium.
