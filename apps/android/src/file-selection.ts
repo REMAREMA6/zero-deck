@@ -18,6 +18,7 @@ export interface SelectedAndroidFile {
   name: string;
   sizeBytes: number;
   declaredType: string;
+  supportStatus: 'not_evaluated';
   readBytes(): Promise<Uint8Array>;
 }
 
@@ -52,6 +53,7 @@ export function createAndroidFileSelectionAdapter(picker: AndroidFilePickerPort)
         name: handle.name,
         sizeBytes: selectedSize,
         declaredType: handle.type || 'Not reported by Android',
+        supportStatus: 'not_evaluated',
         async readBytes() {
           try {
             if (!handle.exists) throw new AndroidFileAccessError('unavailable');
