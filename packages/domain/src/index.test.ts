@@ -9,6 +9,14 @@ import {
 
 const completedAt = '2026-11-28T12:00:00.000Z';
 const clock = () => new Date(completedAt);
+const noKnownThreatExplanation =
+  'No known threat was found. This is not a guarantee that the file is safe.';
+
+function expectedEngineExplanation(outcome: FileAnalysisOutcome): string {
+  return outcome === 'no_known_threat_found'
+    ? noKnownThreatExplanation
+    : 'The test engine returned this outcome.';
+}
 
 describe('file analysis outcome semantics', () => {
   it('treats confirmed threat and suspicious as threat-positive outcomes', () => {
@@ -35,10 +43,7 @@ describe('local analysis engine boundary', () => {
         outcome,
         engineId: 'test-engine',
         engineVersion: 'test-version',
-        explanation:
-          outcome === 'no_known_threat_found'
-            ? 'No known threat was found. This is not a guarantee that the file is safe.'
-            : 'The test engine returned this outcome.',
+        explanation: expectedEngineExplanation(outcome),
       })),
     };
 
@@ -51,10 +56,7 @@ describe('local analysis engine boundary', () => {
       engineId: 'test-engine',
       engineVersion: 'test-version',
       completedAt,
-      explanation:
-        outcome === 'no_known_threat_found'
-          ? 'No known threat was found. This is not a guarantee that the file is safe.'
-          : 'The test engine returned this outcome.',
+      explanation: expectedEngineExplanation(outcome),
     });
   });
 
@@ -69,7 +71,7 @@ describe('local analysis engine boundary', () => {
 
     expect(result.outcome).toBe('no_known_threat_found');
     expect(result.explanation).toBe(
-      'No known threat was found. This is not a guarantee that the file is safe.',
+      noKnownThreatExplanation,
     );
   });
 
@@ -85,8 +87,7 @@ describe('local analysis engine boundary', () => {
       engineId: null,
       engineVersion: null,
       completedAt,
-      explanation:
-        'No known threat was found. This is not a guarantee that the file is safe.',
+      explanation: noKnownThreatExplanation,
     });
   });
 
