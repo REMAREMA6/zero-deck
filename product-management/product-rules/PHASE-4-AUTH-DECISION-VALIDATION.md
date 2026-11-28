@@ -11,7 +11,7 @@
 
 - Eight original owner questions (ZD-Q-AUTH-001–ZD-Q-AUTH-008) are marked resolved and point to ZD-DEC-AUTH-2026-11-28.
 - Five additional operational questions (ZD-Q-AUTH-009–ZD-Q-AUTH-013) remain open.
-- The contract contains 25 requirements and 67 acceptance criteria.
+- The contract contains 25 requirements and 66 acceptance criteria.
 - ZD-AUTH-025 through ZD-AUTH-028 directly encode owner-approved step-up authentication, account deletion, email/password launch sign-in and email-verification boundaries. They are marked owner-approved.
 - The original 21 requirements remain PM-proposed; no blanket approval was applied.
 - Phase 3 proposals ZD-AUTH-022–ZD-AUTH-024 and the Behaviour facet-reference amendment remain separate and unaccepted.
@@ -27,7 +27,7 @@
 | Canonical statements and structured metadata have exact ordered ID parity | PASS — 25/25 |
 | Statement IDs unique | PASS |
 | Requirement IDs unique | PASS |
-| Acceptance-criterion IDs unique | PASS — 67/67 |
+| Acceptance-criterion IDs unique | PASS — 66/66 |
 | Every requirement has at least one acceptance criterion | PASS |
 | Original 21 requirements remain PM-proposed | PASS — 21/21 |
 | Only the four new directly owner-approved requirements are marked owner-approved | PASS |
