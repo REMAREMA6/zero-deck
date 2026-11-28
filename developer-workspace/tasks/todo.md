@@ -121,7 +121,7 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### B2. Email verification boundary and fake delivery
 
-**Status: Partial — challenge lifecycle, verified-only account-email lookup and response-secret assertions passed in full green run 46145316979. API unhandled-error logging was changed to emit only a fixed error code; captured-log secret-redaction regression test was added and awaits CI run 46147168375. Recovery/security-notification integration remains part of B5.**
+**Status: Partial — challenge lifecycle, verified-only account-email lookup, response-secret assertions and captured-log exception-secret redaction passed full CI run [46147584370](https://github.com/REMAREMA6/zero-deck/actions/runs/46147584370). Recovery/security-notification integration remains part of B5.**
 
 **Description:** Implement single-use verification challenges and a delivery port with a deterministic fake adapter only.
 
@@ -135,7 +135,7 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 **Verification**
 - [x] Tests cover success, expiry, replay, altered challenge, concurrent verification and fake delivery failure.
 - [x] API responses contain no challenge secret (request-response body assertions passed in PostgreSQL integration run 46145316979).
-- [ ] Logs contain no challenge secret (dedicated captured-log verification remains).
+- [x] Logs contain no challenge secret (API error handler logs a fixed code without exception details; captured-log regression test passed in CI run 46147584370).
 
 **Dependencies:** B1.  
 **Files likely touched:** apps/api/src/modules/identity/verification*, delivery port/adapters, migrations, contracts, tests.  
