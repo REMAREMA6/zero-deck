@@ -27,17 +27,19 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### A2. Backend bootstrap and safe configuration
 
+**Status: Complete — configuration validation and readiness tests passed in CI run 46138912170.**
+
 **Description:** Establish one Fastify modular-monolith API process with validated configuration, health/readiness and safe error handling.
 
 **Acceptance criteria**
-- [ ] Missing/invalid required configuration prevents startup with field names/codes but no secret values.
-- [ ] Liveness does not depend on PostgreSQL; readiness performs a real database check.
-- [ ] Database outage returns unavailable and never reports ready.
-- [ ] Unhandled errors return a generic structured response and do not expose stack/database details.
+- [x] Missing/invalid required configuration prevents startup with field names/codes but no secret values.
+- [x] Liveness does not depend on PostgreSQL; readiness performs a real database check.
+- [x] Database outage returns unavailable and never reports ready.
+- [x] Unhandled errors return a generic structured response and do not expose stack/database details.
 
 **Verification**
-- [ ] Unit tests cover liveness, readiness success/failure and configuration validation.
-- [ ] API build and typecheck pass.
+- [x] Unit tests cover liveness, readiness success/failure and configuration validation.
+- [x] API build and typecheck pass.
 
 **Dependencies:** A1.  
 **Files likely touched:** apps/api/src/config.ts, app.ts, server.ts, db/pool.ts, tests.  
@@ -45,18 +47,20 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### A3. PostgreSQL migration and repository foundation
 
+**Status: Complete — PostgreSQL 17 migration idempotency, checksum mismatch and rollback tests passed in CI run 46138912170.**
+
 **Description:** Establish a versioned SQL migration runner and real PostgreSQL integration test path.
 
 **Acceptance criteria**
-- [ ] Fresh PostgreSQL can initialize the migration ledger and apply ordered SQL migrations.
-- [ ] Applied migration checksums are immutable; a changed applied migration fails closed.
-- [ ] Each migration runs transactionally and failure rolls back.
-- [ ] Core CI uses PostgreSQL 17, not SQLite or an in-memory substitute.
+- [x] Fresh PostgreSQL can initialize the migration ledger and apply ordered SQL migrations.
+- [x] Applied migration checksums are immutable; a changed applied migration fails closed.
+- [x] Each migration runs transactionally and failure rolls back.
+- [x] Core CI uses PostgreSQL 17, not SQLite or an in-memory substitute.
 
 **Verification**
-- [ ] Integration test connects to the PostgreSQL service and proves readiness.
-- [ ] Migration runner is exercised in CI.
-- [ ] Later migration tests cover idempotency, checksum mismatch and failure rollback.
+- [x] Integration test connects to the PostgreSQL service and proves readiness.
+- [x] Migration runner is exercised in CI.
+- [x] Later migration tests cover idempotency, checksum mismatch and failure rollback.
 
 **Dependencies:** A1, A2.  
 **Files likely touched:** apps/api/src/db/*, apps/api/migrations/*, apps/api/test/*.test.ts, core-ci.yml.  
@@ -83,10 +87,12 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 **Estimated scope:** Small/Medium.
 
 **Checkpoint A**
-- [ ] A1–A4 evidence is green in GitHub Actions.
-- [ ] Lockfile is committed and CI uses frozen installation.
-- [ ] Real PostgreSQL integration evidence exists.
-- [ ] Web and Android shells build.
+
+**Status: Complete — frozen-lockfile CI, formatting, typecheck, unit/integration tests and Web/Android builds passed in run 46138912170.**
+- [x] A1–A4 evidence is green in GitHub Actions.
+- [x] Lockfile is committed and CI uses frozen installation.
+- [x] Real PostgreSQL integration evidence exists.
+- [x] Web and Android shells build.
 
 ## Phase B — Identity and authorization
 
