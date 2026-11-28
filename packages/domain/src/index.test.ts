@@ -70,9 +70,7 @@ describe('local analysis engine boundary', () => {
     );
 
     expect(result.outcome).toBe('no_known_threat_found');
-    expect(result.explanation).toBe(
-      noKnownThreatExplanation,
-    );
+    expect(result.explanation).toBe(noKnownThreatExplanation);
   });
 
   it('does not invent engine identity when metadata is absent', () => {
