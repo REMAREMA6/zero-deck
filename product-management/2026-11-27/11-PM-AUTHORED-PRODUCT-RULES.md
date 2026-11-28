@@ -128,7 +128,13 @@ These are architecture directions, not a complete authentication contract. Do no
 - `product-rules/PHASE-4-MVP-01-VALIDATION.md` — targeted checks and limitations.
 - `2026-11-28/19-PHASE-4-CIRCLES-MANUAL-FILE-ANALYSIS.md` — seven-step CIRCLES analysis.
 - `product-rules/contracts/QUARANTINE-DISPOSITION.md`
-- `product-rules/contracts/WEBSITE-LINK-CHECKING.md`
+- `product-rules/contracts/WEBSITE-LINK-CHECKING.md` — Phase 6 canonical draft (39 requirements / 39 criteria; four owner-approved scope encodings, 35 PM-proposed; 18 open questions).
+- `product-rules/contracts/WEBSITE-LINK-CHECKING.declared-contract.json` — synchronized structured projection.
+- `product-rules/evidence/website-link-checking-contract.evidence.json` — retained declared-contract provenance.
+- `product-rules/PHASE-6-MVP-03-FACET-COVERAGE.md` — all 15 facets assessed.
+- `product-rules/PHASE-6-MVP-03-NEGATIVE-FAILURE-RECOVERY-MATRIX.md` — 75 distinct scenarios.
+- `product-rules/PHASE-6-MVP-03-VALIDATION.md` — 19 targeted checks and limitations.
+- `2026-11-28/23-PHASE-6-CIRCLES-WEBSITE-LINK-CHECKING.md` — seven-step CIRCLES analysis and PM recommendation.
 - `product-rules/contracts/CROSS-CUTTING-SYSTEM.md`
 - `product-rules/TRACEABILITY.md`
 
@@ -156,3 +162,8 @@ A complete product contract does not prove that an implementation conforms. Runt
 ## Phase 3 completion record
 
 Phase 3 is complete for the PM-authored authentication coverage assessment. All 15 official Software Rules facets were assessed against the 21-requirement/46-criterion contract; 23 negative, failure, recovery, conditional and deferred scenarios were classified; cross-facet and web/Android interactions were reviewed; and three candidate additions were documented with stable IDs, six complete acceptance criteria and structured metadata. The canonical Phase 2 Markdown/JSON/evidence revision and digest were left unchanged. Targeted structural and traceability checks passed. A full independent Draft 2020-12 validator, upstream Software Rules CI and ZeroDeck runtime testing were not run. Eight owner questions remain open. See `product-rules/PHASE-3-VALIDATION.md` for the exact boundary. Phase 4 is next.
+
+
+## Phase 6 completion record
+
+Phase 6 is complete as a PM requirements-authoring phase. The canonical MVP-03 website/link-checking contract is v0.1.0-draft with 39 requirements, 39 acceptance criteria and 18 open questions. Four requirements directly encode owner-approved scope decision ZD-SCOPE-001 (independent active Pro and owner-activation gates, no provider call unless both pass, and Pro is not unlimited); the remaining 35 are PM-proposed. The structured declared-contract projection and retained evidence match the final canonical Markdown revision `8f0aeecee5b97a7fbfe98c4e048e6b40f436df60` and SHA-256 `sha256:c17303dc66e34aca21729edc3d971b554254ceec73de10000f4a1611e9e44fc5`. The phase includes the seven-step CIRCLES recommendation, all 15 official facets, 75 negative/failure/recovery scenarios and 19/19 targeted checks with five malformed fixtures rejected. Full independent Draft 2020-12 validation, upstream Software Rules CI, runtime/provider tests, security audit, customer research, legal/privacy review and production-readiness assessment were not performed. No product implementation or Software Rules repository files were changed. Phase 7 is next.
