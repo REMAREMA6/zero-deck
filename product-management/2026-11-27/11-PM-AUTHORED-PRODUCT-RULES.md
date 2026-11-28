@@ -4,7 +4,7 @@
 **Author:** ZeroDeck Product Management Agent  
 **Owner authority:** Product owner retains final authority  
 **Opened:** 2026-11-27  
-**Status:** [x] Phases 0–2 complete; Phase 3 next  
+**Status:** [x] Phases 0–3 complete; Phase 4 next  
 **Tracker:** [../TRACKER.md](../TRACKER.md)
 
 ## Purpose
@@ -54,7 +54,7 @@ Every requirement must:
 | 0 | Baseline and boundaries | Software Rules model inspected; product scope and PM author identity recorded | [x] |
 | 1 | Design PM contract profile | Exact mapping, complete-record and extension schemas, ID convention, author identity, and validation approach documented and checked without unauthorized core changes | [x] |
 | 2 | Research and author authentication requirements | Stack-agnostic account/auth contract, structured projection, retained evidence, sources, acceptance criteria and unresolved owner decisions | [x] |
-| 3 | Validate authentication coverage | Identity, authorization, security, API, data, persistence, configuration, errors/recovery and integration facets assessed | [ ] |
+| 3 | Validate authentication coverage | [15-facet assessment](../product-rules/PHASE-3-15-FACET-COVERAGE.md), [23-scenario matrix](../product-rules/PHASE-3-NEGATIVE-FAILURE-RECOVERY-MATRIX.md), [structured proposals](../product-rules/proposals/PHASE-3-AUTHENTICATION-COVERAGE-ADDITIONS.json), [CIRCLES analysis](15-PHASE-3-CIRCLES-COVERAGE.md), and [validation](../product-rules/PHASE-3-VALIDATION.md); all 15 facets assessed, 23 scenarios classified, three candidate additions recorded; eight owner questions remain open | [x] |
 | 4 | Author manual file-analysis requirements | File selection, input scope, verdicts, limitations, privacy, failure and result semantics drafted | [ ] |
 | 5 | Author quarantine/disposition requirements | Quarantine, integrity, restore, deletion, retention, key loss, interruption and recovery drafted | [ ] |
 | 6 | Author website/link-check requirements | URL handling, privacy, provider failure, inconclusive results, Pro + activation gates, quotas and spend controls drafted | [ ] |
@@ -62,7 +62,7 @@ Every requirement must:
 | 8 | Cross-facet completeness and consistency review | Traceability complete; contradictions, missing states and untestable claims resolved or explicitly open | [ ] |
 | 9 | Owner review and release | Owner decisions recorded; versioned contract package ready for engineering handoff | [ ] |
 
-Phases 0–2 are complete. Phase 2 includes the canonical draft contract with 21 PM-proposed requirements, 46 concrete acceptance criteria, 8 unresolved owner questions, a schema-checked structured projection, retained evidence, and the seven-step CIRCLES analysis/recommendation in 2026-11-27/13-PHASE-2-CIRCLES-AUTHENTICATION.md. No requirement is owner-approved. Phase 3 is next. Other feature requirement sets have not yet been authored.
+Phases 0–3 are complete. Phase 3 assessed all 15 Software Rules facets, classified 23 negative/failure/recovery scenarios, reviewed cross-facet/platform interactions, and documented three structured PM-proposed additions without changing the canonical Phase 2 contract. Eight owner questions remain open. Phase 2 includes the canonical draft contract with 21 PM-proposed requirements, 46 concrete acceptance criteria, 8 unresolved owner questions, a schema-checked structured projection, retained evidence, and the seven-step CIRCLES analysis/recommendation in 2026-11-27/13-PHASE-2-CIRCLES-AUTHENTICATION.md. No requirement is owner-approved. Phase 3 is next. Other feature requirement sets have not yet been authored.
 
 ## Feature order
 
@@ -108,6 +108,12 @@ These are architecture directions, not a complete authentication contract. Do no
 - `product-rules/contracts/IDENTITY-AUTHENTICATION.declared-contract.json` — structured Software Rules projection.
 - `product-rules/evidence/identity-authentication-contract.evidence.json` — retained declared-contract evidence.
 - `product-rules/PHASE-2-VALIDATION.md` — Phase 2 structural/semantic validation, corrections, negative tests and limitations.
+- `product-rules/PHASE-3-15-FACET-COVERAGE.md` — Phase 3 assessment of all 15 facets and classification of uncovered properties.
+- `product-rules/PHASE-3-NEGATIVE-FAILURE-RECOVERY-MATRIX.md` — Phase 3 scenario traceability for negative, failure, recovery, conditional and deferred cases.
+- `product-rules/proposals/PHASE-3-AUTHENTICATION-COVERAGE-ADDITIONS.json` — machine-readable metadata and acceptance criteria for three PM-proposed candidate additions; not yet part of the canonical contract.
+- `product-rules/PHASE-3-VALIDATION.md` — Phase 3 checks, integrity and validation limitations.
+- `2026-11-28/14-PHASE-3-COMPLETION-PLAN.md` — owner-approved Phase 3 plan.
+- `2026-11-28/15-PHASE-3-CIRCLES-COVERAGE.md` — seven-step Phase 3 CIRCLES analysis and recommendation.
 - `2026-11-27/13-PHASE-2-CIRCLES-AUTHENTICATION.md` — the seven-step CIRCLES analysis, alternatives, trade-offs and PM recommendation.
 - `product-rules/contracts/MANUAL-FILE-ANALYSIS.md`
 - `product-rules/contracts/QUARANTINE-DISPOSITION.md`
@@ -134,3 +140,8 @@ Phase 1 is complete. The exact upstream Software Rules commit is pinned; the PM 
 All in-scope capabilities have structured, versioned contracts; author/issuer is explicit; requirements have stable IDs, unambiguous normative statements and observable acceptance criteria; relevant facets are assessed; unknowns and owner decisions are visible; evidence is traceable; implementation details are not unnecessarily prescribed; and cross-facet contradictions and lifecycle/failure/recovery gaps are reviewed.
 
 A complete product contract does not prove that an implementation conforms. Runtime verification is a later engineering/testing activity.
+
+
+## Phase 3 completion record
+
+Phase 3 is complete for the PM-authored authentication coverage assessment. All 15 official Software Rules facets were assessed against the 21-requirement/46-criterion contract; 23 negative, failure, recovery, conditional and deferred scenarios were classified; cross-facet and web/Android interactions were reviewed; and three candidate additions were documented with stable IDs, six complete acceptance criteria and structured metadata. The canonical Phase 2 Markdown/JSON/evidence revision and digest were left unchanged. Targeted structural and traceability checks passed. A full independent Draft 2020-12 validator, upstream Software Rules CI and ZeroDeck runtime testing were not run. Eight owner questions remain open. See `product-rules/PHASE-3-VALIDATION.md` for the exact boundary. Phase 4 is next.
