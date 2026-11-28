@@ -9,7 +9,9 @@ function bearerToken(authorization: string | undefined): string | null {
   return token || null;
 }
 
-function unauthorized(reply: { code: (statusCode: number) => { send: (body: unknown) => unknown } }) {
+function unauthorized(reply: {
+  code: (statusCode: number) => { send: (body: unknown) => unknown };
+}) {
   return reply.code(401).send({
     error: { code: 'UNAUTHENTICATED', message: 'Authentication is required.' },
   });

@@ -100,9 +100,7 @@ export function createSessionService(
       );
       const session = result.rows[0];
 
-      return session
-        ? { accountId: session.account_id, sessionId: session.session_id }
-        : null;
+      return session ? { accountId: session.account_id, sessionId: session.session_id } : null;
     },
 
     async revokeCurrent(token) {

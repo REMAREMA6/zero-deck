@@ -59,7 +59,9 @@ describe('shared account sessions with PostgreSQL', () => {
       absoluteExpiresAt: string;
     }>();
     expect(issued.sessionToken).toBeTruthy();
-    expect(issued.absoluteExpiresAt).toBe(new Date(now.getTime() + SESSION_ABSOLUTE_LIFETIME_MS).toISOString());
+    expect(issued.absoluteExpiresAt).toBe(
+      new Date(now.getTime() + SESSION_ABSOLUTE_LIFETIME_MS).toISOString(),
+    );
 
     const stored = await pool.query<{ token_hash: string }>(
       'SELECT token_hash FROM sessions WHERE session_id = $1',
