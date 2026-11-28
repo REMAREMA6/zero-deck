@@ -37,6 +37,24 @@ describe('Web file selection and access', () => {
     });
   });
 
+  it('reads selected bytes locally without initiating a network request', async () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock);
+    try {
+      const bytes = new Uint8Array([7, 8]);
+      const selected = createWebFileAccessHandle({
+        name: 'local.bin',
+        size: 2,
+        type: '',
+        arrayBuffer: async () => bytes.buffer.slice(0),
+      });
+      await expect(selected.readBytes()).resolves.toEqual(bytes);
+      expect(fetchMock).not.toHaveBeenCalled();
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
   it('reports revoked or unreadable browser file access without leaking details', async () => {
     const file = {
       name: 'sample.bin',
