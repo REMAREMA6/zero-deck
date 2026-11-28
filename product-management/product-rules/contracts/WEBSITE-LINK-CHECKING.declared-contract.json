@@ -1442,8 +1442,9 @@
           "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
-            "privacy",
-            "data"
+            "data",
+            "security-controls",
+            "integrations"
           ],
           "platforms": [
             "web",
