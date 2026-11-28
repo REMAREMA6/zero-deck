@@ -9,7 +9,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "vitest run",
     "test:integration": "vitest run test/*.integration.test.ts",
-    "migrate": "tsx src/db/migrate-cli.ts"
+    "migrate": "tsx src/db/migrate-cli.ts",
+    "account-deletions:execute": "tsx src/modules/identity/account-deletion-worker.ts"
   },
   "dependencies": {
     "@node-rs/argon2": "^2.2.2",
