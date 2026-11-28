@@ -160,7 +160,6 @@ export function createAccountDeletionService(
   };
 }
 
-
 /**
  * Owner-approved initial account-deletion policy.
  *
