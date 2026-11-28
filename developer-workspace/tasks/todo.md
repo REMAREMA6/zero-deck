@@ -121,20 +121,21 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### B2. Email verification boundary and fake delivery
 
-**Status: Core challenge lifecycle complete — verified in CI run 46139448216. Recovery/security-notification enforcement for unverified addresses remains part of B5.**
+**Status: Core challenge lifecycle complete — verified in CI run 46139448216. Added a verified-only account-email lookup and response-secret assertions; these additions are awaiting full CI verification in run 46145179403. Recovery/security-notification integration remains part of B5.**
 
 **Description:** Implement single-use verification challenges and a delivery port with a deterministic fake adapter only.
 
 **Acceptance criteria**
 - [x] New accounts may remain explicitly unverified.
-- [ ] Unverified addresses cannot be used for recovery or security notifications.
+- [ ] Recovery and security-notification flows consume only the verified-email lookup; those flows are not implemented yet.
 - [x] Challenges are single-use and time-limited.
 - [x] No real email provider is called in core CI.
 - [x] Challenge expiry/resend values are required policy configuration, not invented production defaults.
 
 **Verification**
 - [x] Tests cover success, expiry, replay, altered challenge, concurrent verification and fake delivery failure.
-- [ ] Logs and API responses contain no challenge secret.
+- [ ] API responses contain no challenge secret (assertions added; CI verification pending).
+- [ ] Logs contain no challenge secret (dedicated captured-log verification remains).
 
 **Dependencies:** B1.  
 **Files likely touched:** apps/api/src/modules/identity/verification*, delivery port/adapters, migrations, contracts, tests.  
