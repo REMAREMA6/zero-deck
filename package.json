@@ -10,9 +10,9 @@
     "dev:web": "pnpm --filter @zerodeck/web dev",
     "dev:android": "pnpm --filter @zerodeck/android start",
     "lint": "prettier --check \"apps/**/*.{ts,tsx,js,jsx,json,css,yml,yaml}\" \"packages/**/*.{ts,tsx,js,jsx,json}\"",
-    "typecheck": "pnpm -r --if-present typecheck",
+    "typecheck": "pnpm --filter @zerodeck/contracts build && pnpm --filter @zerodeck/domain build && pnpm -r --if-present typecheck",
     "test": "pnpm -r --if-present test",
-    "build": "pnpm --filter @zerodeck/api build && pnpm --filter @zerodeck/web build && pnpm --filter @zerodeck/android export"
+    "build": "pnpm --filter @zerodeck/contracts build && pnpm --filter @zerodeck/domain build && pnpm --filter @zerodeck/api build && pnpm --filter @zerodeck/web build && pnpm --filter @zerodeck/android export"
   },
   "devDependencies": {
     "prettier": "^3.6.2",

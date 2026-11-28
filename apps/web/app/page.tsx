@@ -27,7 +27,10 @@ export default function HomePage() {
           <span className="wordmark-mark">Z</span>
           <span>zerodeck</span>
         </a>
-        <span className="environment">CORE BUILD</span>
+        <div className="topbar-actions">
+          <span className="environment">CORE BUILD</span>
+          <a className="topbar-action" href="/register">Create account</a>
+        </div>
       </header>
       <section className="hero" aria-labelledby="hero-title">
         <p className="eyebrow">PERSONAL SECURITY WORKSPACE</p>

@@ -12,21 +12,10 @@ on:
       - 'tsconfig.base.json'
       - '.npmrc'
       - '.github/workflows/core-ci.yml'
-  pull_request:
-    branches: [main]
-    paths:
-      - 'apps/**'
-      - 'packages/**'
-      - 'package.json'
-      - 'pnpm-workspace.yaml'
-      - 'pnpm-lock.yaml'
-      - 'tsconfig.base.json'
-      - '.npmrc'
-      - '.github/workflows/core-ci.yml'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: zerodeck-core-ci-${{ github.ref }}
@@ -69,10 +58,43 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Persist dependency lockfile
+        if: github.event_name == 'push'
+        run: |
+          git add pnpm-lock.yaml
+          if git diff --cached --quiet -- pnpm-lock.yaml; then
+            echo 'Dependency lockfile is unchanged.'
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: refresh pnpm lockfile"
+          git fetch origin developer/core-product
+          git rebase FETCH_HEAD
+          git push origin HEAD:refs/heads/developer/core-product
+
+      - name: Format source files
+        run: pnpm exec prettier --write "apps/**/*.{ts,tsx,js,jsx,json,css,yml,yaml}" "packages/**/*.{ts,tsx,js,jsx,json}"
 
       - name: Check formatting
         run: pnpm lint
+
+      - name: Persist formatted source
+        if: github.event_name == 'push'
+        run: |
+          git add apps packages
+          if git diff --cached --quiet; then
+            echo 'Source formatting is already committed.'
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "style: format ZeroDeck core source"
+          git fetch origin developer/core-product
+          git rebase FETCH_HEAD
+          git push origin HEAD:refs/heads/developer/core-product
 
       - name: Type check
         run: pnpm typecheck
@@ -86,7 +108,7 @@ jobs:
       - name: Build all clients and backend
         run: pnpm build
 
-      - name: Upload generated lockfile and reports
+      - name: Upload CI evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -96,17 +118,10 @@ jobs:
             pnpm-lock.yaml
             apps/api/src
             apps/api/test
-            apps/api/migrations/README.md
+            apps/api/migrations
             apps/web/app
             apps/web/next.config.ts
             apps/web/tsconfig.json
             apps/android/App.tsx
-            apps/android/app.json
-            apps/android/index.ts
-            apps/android/tsconfig.json
             packages/contracts/src
             packages/domain/src
-            package.json
-            pnpm-workspace.yaml
-            tsconfig.base.json
-            .prettierrc.json

@@ -1,8 +1,11 @@
 import Fastify, { type FastifyInstance } from 'fastify';
 import type { Pool } from 'pg';
+import type { AccountRegistrationService } from './modules/identity/account-registration.js';
+import { registerAccountRoutes } from './modules/identity/account-routes.js';
 
 export interface AppDependencies {
   database: Pick<Pool, 'query'>;
+  accountRegistration?: AccountRegistrationService;
   logger?: boolean;
 }
 
@@ -17,11 +20,12 @@ export function buildApp(dependencies: AppDependencies): FastifyInstance {
       return reply.code(503).send({ status: 'not_ready', reason: 'database_unavailable' });
     }
   });
+  registerAccountRoutes(app, dependencies.accountRegistration);
   app.setErrorHandler((error, _request, reply) => {
     app.log.error({ err: error }, 'Unhandled request error');
-    return reply
-      .code(500)
-      .send({ error: { code: 'INTERNAL_ERROR', message: 'The request could not be completed.' } });
+    return reply.code(500).send({
+      error: { code: 'INTERNAL_ERROR', message: 'The request could not be completed.' },
+    });
   });
   return app;
 }
