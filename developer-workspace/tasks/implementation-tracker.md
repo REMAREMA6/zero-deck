@@ -23,9 +23,9 @@ These counts cover **all 51 numbered Architect outcomes (1.1–7.7)**. They are 
 | Status | Count |
 |---|---:|
 | Done | 3 |
-| Partial | 18 |
+| Partial | 20 |
 | Blocked | 2 |
-| Not started | 28 |
+| Not started | 26 |
 | **Total Architect outcomes tracked** | **51** |
 
 **Important:** Three outcomes currently meet the Done definition: 2.2, 2.4 and 3.1. Partial items have some implementation and/or evidence, but do not yet satisfy the full acceptance contract. The 51 are all Architect-defined implementation outcomes; none are excluded from Developer tracking.
@@ -74,7 +74,7 @@ These are the first five of the 51 Architect-defined outcomes. The Architect's s
 | 4.1 | Web/Android file-selection and access adapters | **Not started** | No verified user-selected file adapters, permission-loss handling or capability tests. |
 | 4.2 | Analysis engine port and canonical result mapping | **Partial** | `packages/domain/src/index.ts` now defines `LocalAnalysisEnginePort`, validates unknown engine responses against the four canonical outcomes, maps valid responses to `FileAnalysisResult`, and converts invalid responses or thrown engine errors into a fail-closed `could_not_decide` result. Commit `3f93b72d` adds this boundary. The latest CI run `46145945402` is still in progress; adapter contract tests, deterministic fake-engine tests and orchestration integration remain before this outcome can be considered done. |
 | 4.3 | Evidence-led production engine/threat-intelligence evaluation | **Blocked** | No production engine/source is approved. Evaluation and owner approval are required before selection. |
-| 4.4 | Local-only analysis orchestration | **Not started** | No verified local orchestration, lifecycle, cancellation or network-boundary tests. |
+| 4.4 | Local-only analysis orchestration | **Partial** | Added `runLocalFileAnalysis` to invoke the local engine port with selected bytes in memory and convert engine exceptions into a failed `could_not_decide` result without exposing exception details. CI verification is pending in [run 46146024978](https://github.com/REMAREMA6/zero-deck/actions/runs/46146024978). Progress, cancellation, retry, interrupted states, platform adapters and an explicit cross-network-boundary test remain. |
 | 4.5 | Safe parsing, resource isolation and bounded processing | **Blocked** | Supported formats and resource budgets are not established. Do not invent limits or claim file-execution isolation. |
 | 4.6 | Platform tests and published file support matrix | **Not started** | No verified file support matrix or reproducible browser/OS/file-type coverage. |
 | 4.7 | Scan-result and diagnostic data minimization | **Not started** | No file-analysis persistence/network-boundary or diagnostic redaction evidence yet. |
