@@ -4,10 +4,10 @@
   "title": "ZeroDeck MVP-03 Website and Link Checking Product Requirements",
   "issuer": "ZeroDeck Product Management Agent",
   "artifact": {
-    "uri": "https://github.com/REMAREMA6/zero-deck/blob/ba8010b0a7643465f19e0d95329ada02368ac75d/product-management/product-rules/contracts/WEBSITE-LINK-CHECKING.md",
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/8f0aeecee5b97a7fbfe98c4e048e6b40f436df60/product-management/product-rules/contracts/WEBSITE-LINK-CHECKING.md",
     "version": "0.1.0-draft",
-    "revision": "ba8010b0a7643465f19e0d95329ada02368ac75d",
-    "digest": "sha256:3304273e2468b7683ca0eadc8ed94fc0a47fa156317439786c66edcb13a0e0e9",
+    "revision": "8f0aeecee5b97a7fbfe98c4e048e6b40f436df60",
+    "digest": "sha256:c17303dc66e34aca21729edc3d971b554254ceec73de10000f4a1611e9e44fc5",
     "mediaType": "text/markdown"
   },
   "scope": "MVP-03 website and link checking for web and Android; bounded user-initiated URL checks, eligibility/no-call gates, URL and destination safety, provider interaction, privacy, results, failures, usage controls and platform semantics; excludes crawling and general network reconnaissance.",
