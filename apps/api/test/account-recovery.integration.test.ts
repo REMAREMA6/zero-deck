@@ -271,4 +271,5 @@ describe('account recovery with PostgreSQL and fake delivery', () => {
     await expect(
       recovery.recover(recoveryDelivery.deliveries[0]!.token, 'another-password'),
     ).resolves.toBe(false);
-  });});
+  });
+});
