@@ -260,7 +260,7 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### B7. Account deletion
 
-**Status: Partial — immediate closure, policy gate, Web/Android confirmation and PostgreSQL scheduled-deletion executor are implemented and verified in [full CI run 46183869945](https://github.com/REMAREMA6/zero-deck/actions/runs/46183869945). Production activation remains blocked because the exact deletion schedule and legitimate retention categories are still unresolved under ZD-Q-AUTH-012.**
+**Status: Partial — owner-approved 30-day personal-data deletion schedule, 12-calendar-month post-deletion audit retention, Web/Android confirmation, PostgreSQL executor and daily 02:00 UTC GitHub Actions scheduler are implemented. CI verification is pending for this policy activation. Production execution requires the repository `DATABASE_URL` Actions secret and legal review for applicable markets.**
 
 **Description:** Implement user-confirmed account closure with immediate access disablement and session revocation; keep personal-data deletion schedule behind an approved policy.
 
@@ -270,8 +270,9 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 - [x] The API reports deletion as scheduled, never completed, before the documented due time; the executor deletes the disabled account only after that time.
 - [x] The retained deletion audit row requires a purpose, reason and explicit retention-until timestamp; its account reference is cleared when personal data is deleted, and the audit row is purged only after its declared retention period.
 - [x] No deletion schedule or legal retention category is invented. The production API is intentionally unavailable until an approved policy is injected.
-- [ ] The owner/legal-reviewed schedule and retention policy are not yet approved or configured; production account deletion remains a release blocker.
-- [ ] An owner-approved operational scheduler must invoke the due-deletion worker. No cadence is selected in this implementation.
+- [x] Owner-approved policy: delete personal data 30 days after the confirmed request; retain only the minimal deletion audit record for 12 calendar months after personal-data deletion, with purpose and reason recorded.
+- [x] Daily 02:00 UTC GitHub Actions schedule invokes the due-deletion worker on `main`; manual dispatch is also available.
+- [ ] Configure the repository `DATABASE_URL` Actions secret and confirm one successful scheduled/manual production-database run; complete applicable-market legal review before production activation.
 
 **Verification**
 - [x] PostgreSQL tests prove wrong-password and missing-policy denial do not disable the account.
@@ -279,11 +280,11 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 - [x] A pre-due execution leaves the account intact; a due execution deletes the account, credentials and sessions while retaining the audit record until its declared expiry.
 - [x] Web and Android require fresh password plus typed confirmation; Web clears its cookie and Android clears secure storage only after the server accepts the request.
 - [x] Full CI passed formatting, typecheck, unit tests, PostgreSQL integration tests and API/Web/Android builds in run 46183869945.
-- [ ] Production schedule configuration and scheduled-worker operation remain unverified pending owner/legal policy approval.
+- [ ] Production worker execution remains unverified until the repository `DATABASE_URL` Actions secret is configured and a scheduled/manual run succeeds; legal review remains a production-readiness check.
 
 **Dependencies:** B3–B6; owner/legal disposition of ZD-Q-AUTH-012.  
 **Files implemented:** `apps/api/migrations/0008_account_deletion.sql`, `apps/api/src/modules/identity/account-deletion.ts`, `apps/api/src/modules/identity/account-deletion-routes.ts`, `apps/api/src/modules/identity/account-deletion-worker.ts`, `apps/api/test/account-deletion.integration.test.ts`, `apps/web/app/account/page.tsx`, `apps/web/app/api/account/deletion/route.ts`, `apps/android/App.tsx`.  
-**Worker command:** `pnpm --filter @zerodeck/api account-deletions:execute` — invoke only through an owner-approved scheduler after policy approval; no cadence is defined here.  
+**Worker command:** `pnpm --filter @zerodeck/api account-deletions:execute`. The `.github/workflows/account-deletion-scheduler.yml` workflow runs it daily at 02:00 UTC and supports manual dispatch. Configure the repository Actions secret `DATABASE_URL` before enabling production execution.  
 **Estimated scope:** Medium/Large.
 
 ### C1. File access and capability adapters
