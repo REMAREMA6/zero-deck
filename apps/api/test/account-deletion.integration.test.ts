@@ -179,7 +179,7 @@ describe('policy-gated account deletion with PostgreSQL', () => {
         audit_retention_reason: string;
         audit_retain_until: Date;
       }>(
-        `SELECT account_id, status, completed_at, audit_retention_reason
+        `SELECT account_id, status, completed_at, audit_retention_reason, audit_retain_until
          FROM account_deletion_requests WHERE deletion_due_at = $1`,
         [deletionDueAt],
       );
