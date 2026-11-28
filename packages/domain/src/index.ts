@@ -1,15 +1,7 @@
 export type FileAnalysisOutcome =
-  | 'confirmed_threat'
-  | 'suspicious'
-  | 'no_known_threat_found'
-  | 'could_not_decide';
+  'confirmed_threat' | 'suspicious' | 'no_known_threat_found' | 'could_not_decide';
 export type AnalysisLifecycle =
-  | 'queued'
-  | 'analyzing'
-  | 'completed'
-  | 'cancelled'
-  | 'interrupted'
-  | 'failed';
+  'queued' | 'analyzing' | 'completed' | 'cancelled' | 'interrupted' | 'failed';
 
 export interface FileAnalysisResult {
   outcome: FileAnalysisOutcome;
