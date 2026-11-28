@@ -3,8 +3,8 @@
   "evidenceClass": "declared-contract",
   "evidenceType": "product-requirements-contract",
   "origin": {
-    "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/3356950a11bef8e2d3a60a9c30ff8b850aa4e6d0/product-management/product-rules/contracts/QUARANTINE-FILE-DISPOSITION.md",
-    "sourceRevision": "3356950a11bef8e2d3a60a9c30ff8b850aa4e6d0",
+    "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/ef98e91d6bc72bf09840d9fbd67175ea2e868b90/product-management/product-rules/contracts/QUARANTINE-FILE-DISPOSITION.md",
+    "sourceRevision": "ef98e91d6bc72bf09840d9fbd67175ea2e868b90",
     "location": "product-management/product-rules/contracts/QUARANTINE-FILE-DISPOSITION.md"
   },
   "capturedAt": "2026-11-28T00:00:00Z",
