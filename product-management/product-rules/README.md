@@ -3,13 +3,13 @@
 **Product:** ZeroDeck  
 **Author:** ZeroDeck Product Management Agent  
 **Profile:** [Product Requirements Contract Profile](PROFILE.md)  
-**Status:** PM contract profile and Phase 2 identity/authentication contract are complete as PM-proposed drafts; owner review and later capability contracts remain open.
+**Status:** PM contract profile and Phase 2 identity/authentication contract are complete as PM-proposed drafts; Phase 3 cross-facet coverage assessment is complete; owner review and later capability contracts remain open.
 
 ## Contracts
 
 | Contract | Capability | Status |
 |---|---|---|
-| [Identity and authentication contract](contracts/IDENTITY-AUTHENTICATION.md) | Supporting account/authentication infrastructure | Draft v0.1.0; Phase 2 complete; owner review pending |
+| [Identity and authentication contract](contracts/IDENTITY-AUTHENTICATION.md) | Supporting account/authentication infrastructure | Draft v0.1.0; Phase 2 authoring and Phase 3 coverage assessment complete; owner review pending |
 | Manual file-analysis contract | MVP-01 | Not started; create in Phase 4 |
 | Quarantine and disposition contract | MVP-02 | Not started; create in Phase 5 |
 | Website and link-checking contract | MVP-03 | Not started; create in Phase 6 |
@@ -33,4 +33,4 @@ The example under `examples/` is only a schema/format fixture. It is not a ZeroD
 
 ## Current phase
 
-Phase 1 — PM contract profile design: **complete**. Phase 2 — authentication/account requirements: **complete**. Next: Phase 3 — validate authentication coverage across relevant facets.
+Phase 1 — PM contract profile design: **complete**. Phase 2 — authentication/account requirements: **complete**. Phase 3 — authentication coverage across all 15 facets: **complete**. Next: Phase 4 — author MVP-01 manual file-analysis requirements.
