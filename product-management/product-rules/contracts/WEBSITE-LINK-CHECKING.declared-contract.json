@@ -4,10 +4,10 @@
   "title": "ZeroDeck MVP-03 Website and Link Checking Product Requirements",
   "issuer": "ZeroDeck Product Management Agent",
   "artifact": {
-    "uri": "https://github.com/REMAREMA6/zero-deck/blob/8f0aeecee5b97a7fbfe98c4e048e6b40f436df60/product-management/product-rules/contracts/WEBSITE-LINK-CHECKING.md",
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/1210f236d80972a4c877ee042cce1963da872d62/product-management/product-rules/contracts/WEBSITE-LINK-CHECKING.md",
     "version": "0.1.0-draft",
-    "revision": "8f0aeecee5b97a7fbfe98c4e048e6b40f436df60",
-    "digest": "sha256:c17303dc66e34aca21729edc3d971b554254ceec73de10000f4a1611e9e44fc5",
+    "revision": "1210f236d80972a4c877ee042cce1963da872d62",
+    "digest": "sha256:d38382a6f9f90a7abdf15df243be357cdac9a2b36b0cf2a7d2e97352badc3fd6",
     "mediaType": "text/markdown"
   },
   "scope": "MVP-03 website and link checking for web and Android; bounded user-initiated URL checks, eligibility/no-call gates, URL and destination safety, provider interaction, privacy, results, failures, usage controls and platform semantics; excludes crawling and general network reconnaissance.",
@@ -29,7 +29,7 @@
     },
     {
       "statementId": "ZD-WEB-004",
-      "text": "The system MUST apply an explicit usage policy to Pro link checking and MUST NOT represent Pro entitlement as unlimited usage.",
+      "text": "The system MUST NOT represent Pro entitlement as unlimited usage.",
       "location": "### Requirement ZD-WEB-004 — Pro is bounded"
     },
     {
@@ -39,7 +39,7 @@
     },
     {
       "statementId": "ZD-WEB-006",
-      "text": "The system MUST identify the submitted target as one URL and MUST NOT imply that checking it inspected the entire website, linked pages, files, or other resources.",
+      "text": "The system MUST identify the submitted target as one URL.",
       "location": "### Requirement ZD-WEB-006 — Single URL scope"
     },
     {
@@ -206,6 +206,16 @@
       "statementId": "ZD-WEB-038",
       "text": "The system MUST NOT use MVP-03 as a general-purpose URL fetcher, crawler, website auditor, port scanner, or network-reconnaissance interface.",
       "location": "### Requirement ZD-WEB-038 — No arbitrary fetch"
+    },
+    {
+      "statementId": "ZD-WEB-040",
+      "text": "The system MUST apply an explicit usage policy to Pro link checking.",
+      "location": "### Requirement ZD-WEB-040 — Enforce an explicit Pro usage policy"
+    },
+    {
+      "statementId": "ZD-WEB-041",
+      "text": "The system MUST NOT imply that checking one submitted URL inspected the entire website, linked pages, files, or other resources.",
+      "location": "### Requirement ZD-WEB-041 — Do not imply whole-site inspection"
     }
   ],
   "evidenceRefs": [
@@ -434,7 +444,7 @@
         {
           "statementId": "ZD-WEB-006",
           "requirementType": "functional",
-          "normativeKind": "forbidden",
+          "normativeKind": "required",
           "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
@@ -1650,6 +1660,78 @@
               "when": "the request is processed",
               "then": "only the bounded, selected MVP-03 lookup occurs; no page traversal or unrelated network probing is initiated",
               "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-040",
+          "requirementType": "business-rule",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "business-rules",
+            "configuration"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Explicit Pro usage policy",
+          "rationale": "PM inference from the owner-approved constraint that Pro is not unlimited. The actual allowance, reset period and enforcement thresholds remain owner decisions.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Operationalizes the owner-approved non-unlimited Pro constraint without inventing numeric values."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-040-01",
+              "given": "an account has an applicable Pro usage allowance",
+              "when": "the user submits a check that reaches or exceeds that allowance",
+              "then": "the system applies the configured usage policy before provider dispatch",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-041",
+          "requirementType": "usability",
+          "normativeKind": "forbidden",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "One-URL result scope",
+          "rationale": "PM inference; the MVP-03 scope is a bounded one-URL check, not crawling or site auditing.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Product-boundary inference from the approved MVP-03 website/link-checking scope and explicit Phase 6 exclusions."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-041-01",
+              "given": "a user submits one URL from a website containing other pages or linked resources",
+              "when": "the check result is presented",
+              "then": "the product describes only the submitted URL as checked and does not claim whole-site inspection",
+              "verificationMethod": "manual-test"
             }
           ],
           "decisionRefs": [],
