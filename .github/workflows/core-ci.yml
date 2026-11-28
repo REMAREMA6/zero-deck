@@ -90,7 +90,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "style: format ZeroDeck core source"
-          git push
+          git fetch origin developer/core-product
+          git rebase FETCH_HEAD
+          git push origin HEAD:refs/heads/developer/core-product
 
       - name: Type check
         run: pnpm typecheck
