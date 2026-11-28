@@ -18,6 +18,11 @@ export interface AnalysisProgress {
   unit: string;
 }
 
+export interface LocalFileByteSource {
+  supportStatus: 'supported' | 'not_evaluated' | 'unsupported';
+  readBytes(): Promise<Uint8Array>;
+}
+
 export interface LocalAnalysisObserver {
   onLifecycleChange?: (lifecycle: AnalysisLifecycle) => void;
   onProgress?: (progress: AnalysisProgress) => void;
@@ -120,7 +125,7 @@ function notifyLifecycle(
 
 export async function runLocalFileAnalysis(
   engine: LocalAnalysisEnginePort,
-  bytes: Uint8Array,
+  input: Uint8Array | LocalFileByteSource,
   clock: () => Date = () => new Date(),
   signal?: AbortSignal,
   observer?: LocalAnalysisObserver,
@@ -132,6 +137,26 @@ export async function runLocalFileAnalysis(
       'cancelled',
       'The analysis was cancelled before a reliable result was available.',
     );
+  }
+
+  let bytes: Uint8Array;
+  if (input instanceof Uint8Array) {
+    bytes = input;
+  } else {
+    if (input.supportStatus !== 'supported') {
+      notifyLifecycle(observer, 'failed');
+      return createAnalysisFailureResult();
+    }
+    try {
+      bytes = await input.readBytes();
+      if (!(bytes instanceof Uint8Array)) {
+        notifyLifecycle(observer, 'failed');
+        return createAnalysisFailureResult();
+      }
+    } catch {
+      notifyLifecycle(observer, 'failed');
+      return createAnalysisFailureResult();
+    }
   }
 
   notifyLifecycle(observer, 'analyzing');
