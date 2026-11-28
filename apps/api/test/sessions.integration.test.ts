@@ -167,6 +167,83 @@ describe('shared account sessions with PostgreSQL', () => {
     expect(await sessions.authenticateToken(second!.sessionToken)).toBeNull();
   });
 
+  it('rotates the current credential atomically and rejects the superseded token', async () => {
+    if (!pool || !app || !sessions) {
+      throw new Error('PostgreSQL test dependencies are unavailable.');
+    }
+
+    const email = 'Rotate-' + randomUUID() + '@example.com';
+    await createAccount(email);
+    const issued = await sessions.authenticate(email, 'test-only-password');
+    expect(issued).not.toBeNull();
+
+    const rotation = await app.inject({
+      method: 'POST',
+      url: '/v1/sessions/current/rotate',
+      headers: { authorization: 'Bearer ' + issued!.sessionToken },
+    });
+    expect(rotation.statusCode).toBe(200);
+    const rotated = rotation.json<{
+      sessionToken: string;
+      sessionId: string;
+      accountId: string;
+      absoluteExpiresAt: string;
+    }>();
+
+    expect(rotated.sessionToken).not.toBe(issued!.sessionToken);
+    expect(rotated.sessionId).toBe(issued!.sessionId);
+    expect(rotated.accountId).toBe(issued!.accountId);
+    expect(rotated.absoluteExpiresAt).toBe(issued!.absoluteExpiresAt.toISOString());
+
+    const oldCredential = await app.inject({
+      method: 'GET',
+      url: '/v1/session',
+      headers: { authorization: 'Bearer ' + issued!.sessionToken },
+    });
+    const newCredential = await app.inject({
+      method: 'GET',
+      url: '/v1/session',
+      headers: { authorization: 'Bearer ' + rotated.sessionToken },
+    });
+    expect(oldCredential.statusCode).toBe(401);
+    expect(newCredential.statusCode).toBe(200);
+
+    const persisted = await pool.query<{ token_hash: string }>(
+      'SELECT token_hash FROM sessions WHERE session_id = $1',
+      [issued!.sessionId],
+    );
+    expect(persisted.rows[0]?.token_hash).toBe(
+      createHash('sha256').update(rotated.sessionToken).digest('hex'),
+    );
+    expect(persisted.rows[0]?.token_hash).not.toBe(rotated.sessionToken);
+  });
+
+  it('allows only one concurrent rotation of the same session credential', async () => {
+    if (!pool || !app || !sessions) {
+      throw new Error('PostgreSQL test dependencies are unavailable.');
+    }
+
+    const email = 'RotateRace-' + randomUUID() + '@example.com';
+    await createAccount(email);
+    const issued = await sessions.authenticate(email, 'test-only-password');
+    expect(issued).not.toBeNull();
+
+    const responses = await Promise.all([
+      app.inject({
+        method: 'POST',
+        url: '/v1/sessions/current/rotate',
+        headers: { authorization: 'Bearer ' + issued!.sessionToken },
+      }),
+      app.inject({
+        method: 'POST',
+        url: '/v1/sessions/current/rotate',
+        headers: { authorization: 'Bearer ' + issued!.sessionToken },
+      }),
+    ]);
+
+    expect(responses.map((response) => response.statusCode).sort()).toEqual([200, 401]);
+  });
+
   it('denies existing sessions and new sign-in after account disablement', async () => {
     if (!pool || !sessions) throw new Error('PostgreSQL test dependencies are unavailable.');
 
