@@ -3,7 +3,7 @@
 **Decision reference:** ZD-DEC-PHASE9-2026-11-28  
 **Decision date:** 2026-11-28  
 **Authority:** Product Owner  
-**Status:** Owner accepted the product-level recommendations; technical and specialist details are explicitly deferred  
+**Status:** [x] Recorded and applied — product-level recommendations owner-approved; technical and specialist details explicitly deferred  
 **Scope:** Product-design closure only; no architecture or implementation approval
 
 ## Owner approval and boundary
@@ -14,7 +14,7 @@ The pre-existing owner decisions remain authoritative, including the eight authe
 
 ## Question dispositions
 
-All 64 Phase 8 questions now have an explicit disposition. **Resolved** means the product-level question is decided. **Deferred** means the accepted product direction is recorded, but an evidence-dependent technical, operational, legal or later owner decision remains. Deferred does not mean silently accepted or implementation-ready.
+All 64 Phase 8 questions now have an explicit disposition: 15 resolved at product-policy level and 49 deferred to architecture, evidence-led testing, operations or qualified legal review. See the [question disposition register](37-PHASE-9-QUESTION-DISPOSITION-REGISTER.md) for the normalized 64-row crosswalk. **Resolved** means the product-level question is decided. **Deferred** means the accepted product direction is recorded, but an evidence-dependent technical, operational, legal or later owner decision remains. Deferred does not mean silently accepted or implementation-ready.
 
 ### AUTH
 
