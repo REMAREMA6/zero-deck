@@ -23,7 +23,8 @@ const testPasswordPolicy = { assertAccepted: (_password: string) => undefined };
 
 describe('email verification with PostgreSQL and fake delivery', () => {
   beforeAll(async () => {
-    if (!pool) throw new Error('DATABASE_URL is required for email verification integration tests.');
+    if (!pool)
+      throw new Error('DATABASE_URL is required for email verification integration tests.');
     await applyMigrations(pool, new URL('../migrations/', import.meta.url).pathname);
   });
 

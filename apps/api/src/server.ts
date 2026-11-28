@@ -8,7 +8,12 @@ const config = loadConfig();
 const database = createDatabasePool(config.DATABASE_URL);
 const accountRegistration = createAccountRegistrationService(database, null);
 const emailVerification = createEmailVerificationService(database, null, null);
-const app = buildApp({ database, accountRegistration, emailVerification, logger: config.NODE_ENV !== 'test' });
+const app = buildApp({
+  database,
+  accountRegistration,
+  emailVerification,
+  logger: config.NODE_ENV !== 'test',
+});
 app.addHook('onClose', async () => {
   await database.end();
 });

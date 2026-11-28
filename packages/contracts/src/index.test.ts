@@ -35,7 +35,9 @@ describe('shared API contracts', () => {
   });
 
   it('validates email verification inputs without exposing challenge details', () => {
-    expect(RequestEmailVerificationInputSchema.safeParse({ email: 'owner@example.com' }).success).toBe(true);
+    expect(
+      RequestEmailVerificationInputSchema.safeParse({ email: 'owner@example.com' }).success,
+    ).toBe(true);
     expect(RequestEmailVerificationInputSchema.safeParse({ email: 'invalid' }).success).toBe(false);
     expect(VerifyEmailInputSchema.safeParse({ token: 'opaque-token' }).success).toBe(true);
     expect(VerifyEmailInputSchema.safeParse({ token: '' }).success).toBe(false);

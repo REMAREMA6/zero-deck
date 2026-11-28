@@ -20,5 +20,7 @@ export type RegisterAccountInput = z.infer<typeof RegisterAccountInputSchema>;
 export type AccountRegistrationAccepted = z.infer<typeof AccountRegistrationAcceptedSchema>;
 export type RequestEmailVerificationInput = z.infer<typeof RequestEmailVerificationInputSchema>;
 export type VerifyEmailInput = z.infer<typeof VerifyEmailInputSchema>;
-export type EmailVerificationRequestAccepted = z.infer<typeof EmailVerificationRequestAcceptedSchema>;
+export type EmailVerificationRequestAccepted = z.infer<
+  typeof EmailVerificationRequestAcceptedSchema
+>;
 export type EmailVerificationResult = z.infer<typeof EmailVerificationResultSchema>;

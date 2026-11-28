@@ -1,8 +1,5 @@
 import type { FastifyInstance } from 'fastify';
-import {
-  RequestEmailVerificationInputSchema,
-  VerifyEmailInputSchema,
-} from '@zerodeck/contracts';
+import { RequestEmailVerificationInputSchema, VerifyEmailInputSchema } from '@zerodeck/contracts';
 import {
   EmailVerificationDeliveryError,
   EmailVerificationUnavailableError,
@@ -35,7 +32,10 @@ export function registerEmailVerificationRoutes(
         error instanceof EmailVerificationDeliveryError
       ) {
         return reply.code(503).send({
-          error: { code: 'VERIFICATION_UNAVAILABLE', message: 'Email verification is unavailable.' },
+          error: {
+            code: 'VERIFICATION_UNAVAILABLE',
+            message: 'Email verification is unavailable.',
+          },
         });
       }
       throw error;
