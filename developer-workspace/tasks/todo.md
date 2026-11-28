@@ -245,11 +245,12 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 - [x] Revocation events are delivered through transactional PostgreSQL notifications; the application subscribes before queue admission so the admission/dispatch gap cannot lose a revocation event.
 - [x] Dispatched work receives an AbortSignal; URL-check provider adapters are contractually required to honor it before each outbound call and pass it to cancellable transports.
 - [x] A cancelled operation never returns a provider result to the caller; URL-check cancellation is exposed as an explicit conflict response.
+- [x] Provider adapter cancellation contract checks the AbortSignal before each outbound follow-on request; a deterministic fake-provider test proves revocation prevents the follow-on call.
 - [ ] Deterministic PostgreSQL integration tests and full GitHub Actions verification pass on main.
 
 **Verification**
 - [x] Deterministic race test revokes permission after queue admission but before dispatch; operation is never invoked and queued work is cancelled.
-- [x] Dispatched-provider test revokes permission, observes AbortSignal, rejects provider work and proves no result is returned.
+- [x] Dispatched-provider test revokes permission, observes AbortSignal, rejects provider work, proves no result is returned and asserts the fake provider's follow-on call was never invoked.
 - [x] PostgreSQL trigger tests cover account disablement, permission revocation, Pro-entitlement revocation and owner-activation revocation for queued and dispatched work.
 - [ ] Full CI: formatting, typecheck, unit tests, PostgreSQL integration tests and API/Web/Android builds.
 
