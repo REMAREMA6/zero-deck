@@ -130,9 +130,9 @@ describe('shared account sessions with PostgreSQL', () => {
     expect(await sessions.authenticateToken(inactivitySession!.sessionToken)).toBeNull();
 
     const absoluteEmail = 'Absolute-' + randomUUID() + '@example.com';
-    await createAccount(absoluteEmail);
-    now = new Date('2026-11-28T12:00:00.000Z');
+    now = new Date();
     const absoluteStart = new Date(now);
+    await createAccount(absoluteEmail);
     const absoluteSession = await sessions.authenticate(absoluteEmail, 'test-only-password');
     expect(absoluteSession).not.toBeNull();
 
