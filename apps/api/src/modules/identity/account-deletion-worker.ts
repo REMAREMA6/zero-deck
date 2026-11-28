@@ -1,6 +1,9 @@
 import { loadConfig } from '../../config.js';
 import { createDatabasePool } from '../../db/pool.js';
-import { createAccountDeletionService, createApprovedAccountDeletionPolicy } from './account-deletion.js';
+import {
+  createAccountDeletionService,
+  createApprovedAccountDeletionPolicy,
+} from './account-deletion.js';
 import { createFreshAuthenticationGuard } from './fresh-authentication.js';
 
 const config = loadConfig();
