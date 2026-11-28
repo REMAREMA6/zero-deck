@@ -121,7 +121,7 @@ N/A is scoped to this contract, not to ZeroDeck as a whole.
 
 ## 5. PM-proposed contract additions for owner review
 
-These are recommendations only. They are **not inserted into the Phase 2 canonical contract or its structured projection**, so the existing 21-statement/46-criterion parity and artifact digest remain unchanged. If accepted, they should be added together in a versioned contract revision and then revalidated.
+These are recommendations only. They are **not inserted into the Phase 2 canonical contract or its structured projection**, so the existing 21-statement/46-criterion parity and artifact digest remain unchanged. Their machine-readable metadata and acceptance-criterion IDs are recorded in [the structured proposal](proposals/PHASE-3-AUTHENTICATION-COVERAGE-ADDITIONS.json). The next proposed contract revision is `0.2.0-draft` if the owner accepts any addition. If accepted, all statements and metadata should be added together in a versioned contract revision and revalidated.
 
 ### Candidate ZD-AUTH-022 — Reject invalid authenticators without creating a session
 
@@ -133,8 +133,8 @@ These are recommendations only. They are **not inserted into the Phase 2 canonic
 - **Basis:** PM inference; NIST SP 800-63B-4; OWASP Authentication Cheat Sheet.
 - **Rationale:** `ZD-AUTH-004` requires trusted verification and tests fabricated client state, but its acceptance criteria do not explicitly exercise a real but incorrect/invalid authenticator. This leaves a testability gap at the core authentication boundary.
 - **Acceptance criteria:**
-  1. Given an account identifier and an invalid or incorrect authenticator, when an authentication attempt is evaluated, then no authenticated session is issued and protected operations remain denied.
-  2. Given an invalid authenticator for an existing identifier and an unknown identifier, when equivalent unauthenticated attempts are made, then the externally observable response does not reveal account existence.
+  1. `ZD-AUTH-022-AC-01` — Given an account identifier and an invalid or incorrect authenticator, when an authentication attempt is evaluated, then no authenticated session is issued and protected operations remain denied.
+  2. `ZD-AUTH-022-AC-02` — Given an invalid authenticator for an existing identifier and an unknown identifier, when equivalent unauthenticated attempts are made, then the externally observable response does not reveal account existence.
 - **Verification:** automated-test and manual-test.
 
 ### Candidate ZD-AUTH-023 — Preserve atomic trust state during credential replacement and session revocation
@@ -162,8 +162,8 @@ These are recommendations only. They are **not inserted into the Phase 2 canonic
 - **Basis:** PM inference; OWASP Session Management Cheat Sheet; unresolved `ZD-Q-AUTH-005`.
 - **Rationale:** `ZD-AUTH-010` covers rotation at authentication and security-sensitive boundaries, but does not explicitly define renewal-credential rotation and replay handling.
 - **Acceptance criteria:**
-  1. Given a renewable session, when a valid renewal credential is used, then the service issues the next credential according to the documented policy and rejects the superseded renewal credential.
-  2. Given a renewal credential is replayed or reused concurrently, when the service detects the reuse, then it does not silently create additional valid sessions and applies the documented revocation/recovery response.
+  1. `ZD-AUTH-024-AC-01` — Given a renewable session, when a valid renewal credential is used, then the service issues the next credential according to the documented policy and rejects the superseded renewal credential.
+  2. `ZD-AUTH-024-AC-02` — Given a renewal credential is replayed or reused concurrently, when the service detects the reuse, then it does not silently create additional valid sessions and applies the documented revocation/recovery response.
 - **Verification:** automated-test and operational-test.
 
 These candidates are not evidence that the implementation is defective; no implementation was tested. They identify product-contract coverage gaps.
