@@ -1,0 +1,48 @@
+name: ZeroDeck account deletion scheduler
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: zerodeck-account-deletion-scheduler
+  cancel-in-progress: false
+
+jobs:
+  execute-due-deletions:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    steps:
+      - name: Require the production database secret
+        shell: bash
+        run: |
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::error::Configure the repository Actions secret DATABASE_URL before running the account-deletion scheduler."
+            exit 1
+          fi
+
+      - name: Check out main
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12.0.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Execute due account deletions and expire audit records
+        run: pnpm --filter @zerodeck/api account-deletions:execute
