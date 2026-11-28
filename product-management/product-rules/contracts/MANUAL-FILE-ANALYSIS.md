@@ -151,7 +151,7 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 
 **Normative statement:** By default, the system MUST perform MVP-01 file analysis without uploading the selected file's content to a cloud service.
 
-**Type:** privacy | **Priority:** P0 | **Status:** PM-proposed
+**Type:** privacy | **Priority:** P0 | **Status:** Owner-approved
 **Facets:** security-controls, integrations, data, configuration
 **Platforms:** web, android
 **Subject:** Default file-content data flow
@@ -162,11 +162,12 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 - ZD-FILE-AC-13 — Given a user starts a scan under default configuration, when the system analyses the file, then file content is not transmitted to a cloud service. Verification: inspection.
 - ZD-FILE-AC-14 — Given a network connection is available, when a default local analysis is performed, then network availability alone does not cause file-content upload. Verification: automated-test.
 
+- Owner decision: ZD-DEC-PHASE9-2026-11-28.
 ### Requirement ZD-FILE-008 — Gate any future cloud analysis behind separate consent
 
 **Normative statement:** If a future, separately approved cloud-analysis capability is introduced, the system MUST obtain explicit user consent after disclosing the data sent, purpose, recipient or processor, and the choice to proceed or decline.
 
-**Type:** privacy | **Priority:** P1 | **Status:** PM-proposed | **Normative kind:** conditional
+**Type:** privacy | **Priority:** P1 | **Status:** Owner-approved | **Normative kind:** conditional
 **Condition:** Only if a separate cloud-analysis capability is approved and made available; none is approved by this contract.
 **Facets:** interface, behavior, data, integrations, security-controls
 **Platforms:** web, android
@@ -178,6 +179,7 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 - ZD-FILE-AC-15 — Given a separately approved cloud-analysis option is offered, when the user is asked to enable it, then the disclosure identifies data sent, purpose and recipient or processor. Verification: inspection.
 - ZD-FILE-AC-16 — Given the user declines or has not consented, when a scan is requested, then no file content is sent to the cloud. Verification: automated-test.
 
+- Owner decision: ZD-DEC-PHASE9-2026-11-28.
 ### Requirement ZD-FILE-009 — Do not execute selected files as part of analysis
 
 **Normative statement:** The system MUST NOT execute a user-selected file as part of manual security analysis.
@@ -227,7 +229,7 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 
 **Normative statement:** The system MUST distinguish at least the outcomes Threat found, Suspicious, No known threat found, and Could not decide or Could not analyse.
 
-**Type:** business-rule | **Priority:** P0 | **Status:** PM-proposed
+**Type:** business-rule | **Priority:** P0 | **Status:** Owner-approved
 **Facets:** business-rules, data, interface, behavior
 **Platforms:** web, android
 **Subject:** File scan result taxonomy
@@ -238,11 +240,12 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 - ZD-FILE-AC-23 — Given evidence meets documented confirmed-threat criteria, when the result is presented, then it is classified as Threat found. Verification: automated-test.
 - ZD-FILE-AC-24 — Given analysis is incomplete, unsupported or lacks sufficient evidence, when the result is presented, then it is Could not decide or Could not analyse rather than No known threat found. Verification: automated-test.
 
+- Owner decision: ZD-DEC-PHASE9-2026-11-28.
 ### Requirement ZD-FILE-013 — Do not equate no known threat with safety
 
 **Normative statement:** When no matching threat is identified, the system MUST describe the outcome as No known threat found or equivalent wording and MUST NOT claim or imply that the file is safe, harmless, or guaranteed free of malware.
 
-**Type:** policy | **Priority:** P0 | **Status:** PM-proposed
+**Type:** policy | **Priority:** P0 | **Status:** Owner-approved
 **Facets:** interface, business-rules, security-controls
 **Platforms:** web, android
 **Subject:** No-known-threat result semantics
@@ -253,6 +256,7 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 - ZD-FILE-AC-25 — Given available analysis finds no known threat, when the result is displayed, then wording communicates only that no known threat was found. Verification: inspection.
 - ZD-FILE-AC-26 — Given the result is No known threat found, when summary or follow-up text is rendered, then no part guarantees safety or absence of all malware. Verification: manual-test.
 
+- Owner decision: ZD-DEC-PHASE9-2026-11-28.
 ### Requirement ZD-FILE-014 — Record result provenance and analysis context
 
 **Normative statement:** For each completed analysis result, the system MUST make available the scan-attempt identity and the analysis context needed to interpret the result, including detection-source or engine identity and version when that information exists.
@@ -272,7 +276,7 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 
 **Normative statement:** If analysis is partial, interrupted, inconclusive, or based on unavailable detection data, the system MUST communicate the limitation and MUST NOT present the result as a complete analysis.
 
-**Type:** reliability | **Priority:** P0 | **Status:** PM-proposed
+**Type:** reliability | **Priority:** P0 | **Status:** Owner-approved
 **Facets:** business-rules, data, interface, errors-recovery
 **Platforms:** web, android
 **Subject:** Incomplete and uncertain result semantics
@@ -283,6 +287,7 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 - ZD-FILE-AC-29 — Given only part of a file was analysed or required detection data was unavailable, when a result is returned, then the result is marked partial or inconclusive and the limitation is explained. Verification: automated-test.
 - ZD-FILE-AC-30 — Given analysis is interrupted before its completion condition, when the attempt terminates, then no complete verdict is issued from the incomplete attempt. Verification: automated-test.
 
+- Owner decision: ZD-DEC-PHASE9-2026-11-28.
 ### Requirement ZD-FILE-016 — Explain detections without inventing evidence
 
 **Normative statement:** For a Threat found or Suspicious outcome, the system MUST provide the available finding explanation and MUST distinguish observed detection evidence from interpretation or uncertainty.
@@ -347,7 +352,7 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 
 **Normative statement:** The system MUST access and process only the file content and metadata necessary to perform the requested analysis and communicate its result.
 
-**Type:** privacy | **Priority:** P0 | **Status:** PM-proposed
+**Type:** privacy | **Priority:** P0 | **Status:** Owner-approved
 **Facets:** data, security-controls, behavior
 **Platforms:** web, android
 **Subject:** File and metadata minimization
@@ -358,11 +363,12 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 - ZD-FILE-AC-39 — Given a file is selected for analysis, when the system reads content and metadata, then access is limited to information necessary for analysis and result communication. Verification: inspection.
 - ZD-FILE-AC-40 — Given a metadata field is not required for analysis or result interpretation, when the scan is processed, then that field is not collected solely by default. Verification: inspection.
 
+- Owner decision: ZD-DEC-PHASE9-2026-11-28.
 ### Requirement ZD-FILE-021 — Protect file data in diagnostics
 
 **Normative statement:** The system MUST NOT expose file content, secrets extracted from files, or sensitive file metadata in ordinary logs, analytics, crash reports, or user-visible error details unless a separately documented and consented diagnostic purpose authorizes that specific disclosure.
 
-**Type:** privacy | **Priority:** P0 | **Status:** PM-proposed
+**Type:** privacy | **Priority:** P0 | **Status:** Owner-approved
 **Facets:** security-controls, data, errors-recovery
 **Platforms:** web, android
 **Subject:** Diagnostic disclosure boundary
@@ -373,6 +379,7 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 - ZD-FILE-AC-41 — Given a scan encounters a parsing or engine error, when diagnostic information is recorded, then file contents and sensitive metadata are absent from ordinary diagnostic output. Verification: inspection.
 - ZD-FILE-AC-42 — Given a diagnostic workflow requests additional file data, when no specific disclosure purpose and consent exist, then that data is not transmitted or retained for diagnostics. Verification: manual-test.
 
+- Owner decision: ZD-DEC-PHASE9-2026-11-28.
 ### Requirement ZD-FILE-022 — Separate retained scan-result policy from quarantine retention
 
 **Normative statement:** If the product retains a scan result or scan history, it MUST define and apply a separate retention and deletion policy for that record rather than inheriting MVP-02 quarantine retention.
