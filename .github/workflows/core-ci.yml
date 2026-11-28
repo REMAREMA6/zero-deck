@@ -30,7 +30,7 @@ permissions:
 
 concurrency:
   group: zerodeck-core-ci-${{ github.ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   quality:
@@ -66,7 +66,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: pnpm
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
