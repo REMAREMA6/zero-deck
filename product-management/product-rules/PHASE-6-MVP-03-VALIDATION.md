@@ -1,8 +1,8 @@
 # Phase 6 — MVP-03 Website and Link Checking: Validation Report
 
 **Contract:** `ZD-CONTRACT-WEBSITE-LINK-CHECKING` v0.1.0-draft  
-**Canonical Markdown revision:** `ba8010b0a7643465f19e0d95329ada02368ac75d`  
-**Canonical Markdown SHA-256:** `sha256:3304273e2468b7683ca0eadc8ed94fc0a47fa156317439786c66edcb13a0e0e9`  
+**Canonical Markdown revision:** `8f0aeecee5b97a7fbfe98c4e048e6b40f436df60`  
+**Canonical Markdown SHA-256:** `sha256:c17303dc66e34aca21729edc3d971b554254ceec73de10000f4a1611e9e44fc5`  
 **Validation date:** 2026-11-28  
 **Status:** Targeted authoring-session checks passed; limitations remain explicit.
 
