@@ -1,3 +1,4 @@
+
 import { randomUUID } from 'node:crypto';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { Pool } from 'pg';
@@ -95,7 +96,9 @@ describe('server-authoritative authorization gates', () => {
   it('denies disabled and unknown accounts and ignores client-supplied role or gate flags', async () => {
     if (!pool) throw new Error('PostgreSQL is unavailable.');
     const authorization = createAuthorizationService(pool);
-    expect(await authorization.authorize({ accountId: randomUUID(), permission: 'website.check' })).toEqual({
+    expect(
+      await authorization.authorize({ accountId: randomUUID(), permission: 'website.check' }),
+    ).toEqual({
       allowed: false,
       reason: 'account_unknown',
     });
@@ -105,7 +108,9 @@ describe('server-authoritative authorization gates', () => {
       "INSERT INTO accounts (account_id, email, email_canonical, status) VALUES ($1, $2, $2, 'disabled')",
       [disabledId, disabledId + '@example.test'],
     );
-    expect(await authorization.authorize({ accountId: disabledId, permission: 'website.check' })).toEqual({
+    expect(
+      await authorization.authorize({ accountId: disabledId, permission: 'website.check' }),
+    ).toEqual({
       allowed: false,
       reason: 'account_disabled',
     });
@@ -159,7 +164,9 @@ describe('server-authoritative authorization gates', () => {
         throw new Error('database unavailable');
       },
     } as never);
-    expect(await authorization.authorize({ accountId: randomUUID(), permission: 'website.check' })).toEqual({
+    expect(
+      await authorization.authorize({ accountId: randomUUID(), permission: 'website.check' }),
+    ).toEqual({
       allowed: false,
       reason: 'unavailable',
     });
@@ -173,7 +180,9 @@ describe('server-authoritative authorization gates', () => {
         throw new Error('must not connect');
       },
     } as never);
-    expect(await authorization.authorize({ accountId: randomUUID(), permission: 'Admin *' })).toEqual({
+    expect(
+      await authorization.authorize({ accountId: randomUUID(), permission: 'Admin *' }),
+    ).toEqual({
       allowed: false,
       reason: 'permission_unknown',
     });
