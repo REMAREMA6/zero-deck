@@ -72,7 +72,10 @@ export function mapAnalysisEngineResult(
         ? value.engineVersion
         : null,
     completedAt: clock().toISOString(),
-    explanation: value.explanation,
+    explanation:
+      value.outcome === 'no_known_threat_found'
+        ? 'No known threat was found. This is not a guarantee that the file is safe.'
+        : value.explanation,
   };
 }
 
