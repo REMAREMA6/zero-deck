@@ -71,9 +71,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Print formatter output for Web analysis CSS (temporary diagnostic)
-        run: pnpm exec prettier "apps/web/app/globals.css"
-
       - name: Check formatting
         run: pnpm lint
 
