@@ -16,7 +16,10 @@ export interface AppDependencies {
 }
 
 export function buildApp(dependencies: AppDependencies): FastifyInstance {
-  const app = Fastify({ logger: dependencies.logger ?? false, logController: { disableRequestLogging: true } });
+  const app = Fastify({
+    logger: dependencies.logger ?? false,
+    logController: { disableRequestLogging: true },
+  });
   app.get('/health/live', async () => ({ status: 'ok' }));
   app.get('/health/ready', async (_request, reply) => {
     try {
