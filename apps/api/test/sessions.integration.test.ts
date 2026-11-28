@@ -14,7 +14,7 @@ const databaseUrl = process.env.DATABASE_URL;
 const pool = databaseUrl ? new Pool({ connectionString: databaseUrl }) : null;
 const testPasswordPolicy = { assertAccepted: (_password: string) => undefined };
 const registration = pool ? createAccountRegistrationService(pool, testPasswordPolicy) : null;
-let now = new Date('2026-11-28T12:00:00.000Z');
+let now = new Date();
 const sessions = pool ? createSessionService(pool, () => now) : null;
 const app = pool && sessions ? buildApp({ database: pool, sessionService: sessions }) : null;
 
@@ -30,7 +30,7 @@ describe('shared account sessions with PostgreSQL', () => {
   });
 
   beforeEach(() => {
-    now = new Date('2026-11-28T12:00:00.000Z');
+    now = new Date();
   });
 
   afterAll(async () => {
@@ -132,20 +132,19 @@ describe('shared account sessions with PostgreSQL', () => {
     const absoluteEmail = 'Absolute-' + randomUUID() + '@example.com';
     await createAccount(absoluteEmail);
     now = new Date('2026-11-28T12:00:00.000Z');
+    const absoluteStart = new Date(now);
     const absoluteSession = await sessions.authenticate(absoluteEmail, 'test-only-password');
     expect(absoluteSession).not.toBeNull();
 
     for (let day = 6; day <= 24; day += 6) {
-      now = new Date('2026-11-28T12:00:00.000Z');
-      now = new Date(now.getTime() + day * 24 * 60 * 60 * 1000);
+      now = new Date(absoluteStart.getTime() + day * 24 * 60 * 60 * 1000);
       expect(await sessions.authenticateToken(absoluteSession!.sessionToken)).not.toBeNull();
     }
 
-    now = new Date('2026-11-28T12:00:00.000Z');
-    now = new Date(now.getTime() + 29 * 24 * 60 * 60 * 1000);
+    now = new Date(absoluteStart.getTime() + 29 * 24 * 60 * 60 * 1000);
     expect(await sessions.authenticateToken(absoluteSession!.sessionToken)).not.toBeNull();
 
-    now = new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000);
+    now = new Date(absoluteStart.getTime() + 31 * 24 * 60 * 60 * 1000);
     expect(await sessions.authenticateToken(absoluteSession!.sessionToken)).toBeNull();
     expect(SESSION_INACTIVITY_WINDOW_MS).toBe(7 * 24 * 60 * 60 * 1000);
   });

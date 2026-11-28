@@ -93,10 +93,10 @@ export function createSessionService(
            AND session.account_id = account.account_id
            AND account.status = 'active'
            AND session.revoked_at IS NULL
-           AND session.last_seen_at > $2 - INTERVAL '7 days'
+           AND session.last_seen_at > ($2 - ($3::double precision * INTERVAL '1 millisecond'))
            AND session.absolute_expires_at > $2
          RETURNING session.session_id, session.account_id`,
-        [hashSessionToken(token), clock()],
+        [hashSessionToken(token), clock(), SESSION_INACTIVITY_WINDOW_MS],
       );
       const session = result.rows[0];
 
