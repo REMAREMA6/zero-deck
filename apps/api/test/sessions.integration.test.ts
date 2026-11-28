@@ -230,7 +230,12 @@ describe('shared account sessions with PostgreSQL', () => {
     expect(await sessions.authenticateToken(first!.sessionToken)).toBeNull();
     expect(await sessions.authenticateToken(second!.sessionToken)).not.toBeNull();
 
-    await sessions.revokeAll(second!.accountId);
+    const logoutAll = await app!.inject({
+      method: 'POST',
+      url: '/v1/sessions/logout-all',
+      headers: { authorization: 'Bearer ' + second!.sessionToken },
+    });
+    expect(logoutAll.statusCode).toBe(204);
     expect(await sessions.authenticateToken(second!.sessionToken)).toBeNull();
   });
 
