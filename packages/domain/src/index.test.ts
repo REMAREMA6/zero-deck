@@ -94,7 +94,8 @@ describe('local analysis engine boundary', () => {
     controller.abort();
     const engine = { supportsCancellation: true, analyze: vi.fn(async () => null) };
 
-    const result = await runLocalFileAnalysis(engine, new Uint8Array([1]), clock, controller.signal);
+    const bytes = new Uint8Array([1]);
+    const result = await runLocalFileAnalysis(engine, bytes, clock, controller.signal);
 
     expect(engine.analyze).not.toHaveBeenCalled();
     expect(result).toMatchObject({
@@ -124,7 +125,12 @@ describe('local analysis engine boundary', () => {
       ),
     };
 
-    const pending = runLocalFileAnalysis(engine, new Uint8Array([1]), clock, controller.signal);
+    const pending = runLocalFileAnalysis(
+      engine,
+      new Uint8Array([1]),
+      clock,
+      controller.signal,
+    );
     controller.abort();
     const result = await pending;
 
