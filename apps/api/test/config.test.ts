@@ -15,9 +15,7 @@ describe('application configuration', () => {
   });
 
   it('rejects missing database configuration', () => {
-    expect(() => loadConfig({ NODE_ENV: 'test' })).toThrow(
-      'Invalid application configuration:',
-    );
+    expect(() => loadConfig({ NODE_ENV: 'test' })).toThrow('Invalid application configuration:');
   });
 
   it('rejects invalid ports and does not include secret values in errors', () => {
