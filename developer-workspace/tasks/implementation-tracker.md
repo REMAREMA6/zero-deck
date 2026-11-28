@@ -28,7 +28,7 @@ These counts cover **all 51 numbered Architect outcomes (1.1–7.7)**. They are 
 | Not started | 28 |
 | **Total Architect outcomes tracked** | **51** |
 
-**Important:** Only two outcomes currently meet the Done definition. Partial items have some implementation and/or evidence, but do not yet satisfy the full acceptance contract. The 51 are all Architect-defined implementation outcomes; none are excluded from Developer tracking.
+**Important:** Three outcomes currently meet the Done definition: 2.2, 2.4 and 3.1. Partial items have some implementation and/or evidence, but do not yet satisfy the full acceptance contract. The 51 are all Architect-defined implementation outcomes; none are excluded from Developer tracking.
 
 ## Section 1 — Architecture baseline and requirement authority
 
@@ -72,7 +72,7 @@ These are the first five of the 51 Architect-defined outcomes. The Architect's s
 | ID | Outcome | Status | Implementation / verification evidence and remaining work |
 |---|---|---|---|
 | 4.1 | Web/Android file-selection and access adapters | **Not started** | No verified user-selected file adapters, permission-loss handling or capability tests. |
-| 4.2 | Analysis engine port and canonical result mapping | **Not started** | Shared four-outcome domain semantics exist, but no verified engine adapter/fake contract and engine-result integration. |
+| 4.2 | Analysis engine port and canonical result mapping | **Partial** | `packages/domain/src/index.ts` now defines `LocalAnalysisEnginePort`, validates unknown engine responses against the four canonical outcomes, maps valid responses to `FileAnalysisResult`, and converts invalid responses or thrown engine errors into a fail-closed `could_not_decide` result. Commit `3f93b72d` adds this boundary. The latest CI run `46145945402` is still in progress; adapter contract tests, deterministic fake-engine tests and orchestration integration remain before this outcome can be considered done. |
 | 4.3 | Evidence-led production engine/threat-intelligence evaluation | **Blocked** | No production engine/source is approved. Evaluation and owner approval are required before selection. |
 | 4.4 | Local-only analysis orchestration | **Not started** | No verified local orchestration, lifecycle, cancellation or network-boundary tests. |
 | 4.5 | Safe parsing, resource isolation and bounded processing | **Blocked** | Supported formats and resource budgets are not established. Do not invent limits or claim file-execution isolation. |
@@ -125,16 +125,18 @@ These are the first five of the 51 Architect-defined outcomes. The Architect's s
 | 46138520229 | Success | Account registration, Argon2id, PostgreSQL tests and client builds |
 | 46138912170 | Success | Configuration, migration idempotency/checksum/rollback and builds |
 | 46139448216 | Success | Email verification lifecycle, replay/concurrency/delivery failure and builds |
-| 46143307056 | Failure | Latest observed run; URL-check integration test formatting failed. Must be fixed and rerun. |
+| 46145316979 | Success | Full CI: formatting, typecheck, unit tests, PostgreSQL 17 integration tests and API/Web/Android builds. |
+| 46145669565 | Success | Full CI including Web session-cookie security regression test; browser-readable JSON excludes token and production cookie is HttpOnly, Secure and SameSite=Lax. |
+| 46145945402 | In progress | Adds local analysis engine port and canonical result mapping; do not treat as verified until all CI jobs pass. |
 
 ## Next execution queue
 
-1. Fix the current CI formatting failure and rerun the complete workflow.
-2. Reconcile the detailed checklist in `todo.md` against the implemented session and URL-check code so it no longer reports implemented work as untouched.
-3. Finish B2/B3/B4: challenge redaction and unverified-address rules, session rotation, Web secure cookie handling and complete cross-client session verification.
-4. Implement recovery, step-up authentication, authoritative general authorization and account closure.
-5. Complete the URL-check UI consent flow, dispatch-time gate revalidation and adversarial tests while keeping the production provider disabled.
-6. Proceed to MVP-01 local file capability and analysis-engine boundary; do not claim real detection until a production engine is evaluated and approved.
+1. Wait for and inspect CI run `46145945402`; fix any quality/build failures before counting the new MVP-01 boundary as verified.
+2. Add deterministic fake-engine contract tests for valid, malformed, unsupported and thrown engine responses, then connect the port to a local-only orchestration boundary.
+3. Reconcile `todo.md` against the implemented session and URL-check code so it reflects actual verified work.
+4. Finish identity recovery, step-up authentication, credential rotation, cross-client session verification, general authorization and account closure.
+5. Complete URL-check UI consent, dispatch-time gate revalidation, cancellation/usage controls and adversarial tests while keeping the production provider disabled.
+6. Implement MVP-01 file-selection/access adapters and bounded local orchestration; do not claim real detection until a production engine is evaluated and approved.
 7. Continue quarantine feasibility only within owner-approved security boundaries.
 
 ## Maintenance rule
