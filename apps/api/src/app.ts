@@ -38,7 +38,7 @@ export function buildApp(dependencies: AppDependencies): FastifyInstance {
     createUrlCheckService(dependencies.database, dependencies.urlCheckProvider ?? null),
   );
   app.setErrorHandler((error, _request, reply) => {
-    app.log.error({ err: error }, 'Unhandled request error');
+    app.log.error({ code: 'UNHANDLED_REQUEST_ERROR' }, 'Unhandled request error');
     return reply.code(500).send({
       error: { code: 'INTERNAL_ERROR', message: 'The request could not be completed.' },
     });
