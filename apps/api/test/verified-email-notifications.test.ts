@@ -1,5 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import {
+  createVerifiedEmailRecoveryBoundary,
   createVerifiedEmailSecurityNotifier,
   type SecurityNotificationDelivery,
 } from '../src/modules/identity/verified-email-notifications';
@@ -30,6 +31,26 @@ describe('verified-email security notification boundary', () => {
     expect(delivery.sendSecurityNotification).toHaveBeenCalledExactlyOnceWith(
       'verified@example.test',
       'primary_email_changed',
+    );
+  });
+
+  it('does not request recovery delivery for an unverified email', async () => {
+    const lookup = { getVerifiedEmail: vi.fn(async () => null) };
+    const delivery = { sendRecoveryChallenge: vi.fn(async () => undefined) };
+    const recovery = createVerifiedEmailRecoveryBoundary(lookup, delivery);
+
+    await expect(recovery.request('account-1')).resolves.toBe(false);
+    expect(delivery.sendRecoveryChallenge).not.toHaveBeenCalled();
+  });
+
+  it('sends a recovery challenge only to the verified-email lookup result', async () => {
+    const lookup = { getVerifiedEmail: vi.fn(async () => 'verified@example.test') };
+    const delivery = { sendRecoveryChallenge: vi.fn(async () => undefined) };
+    const recovery = createVerifiedEmailRecoveryBoundary(lookup, delivery);
+
+    await expect(recovery.request('account-1')).resolves.toBe(true);
+    expect(delivery.sendRecoveryChallenge).toHaveBeenCalledExactlyOnceWith(
+      'verified@example.test',
     );
   });
 
