@@ -4,10 +4,10 @@
   "title": "ZeroDeck MVP-03 Website and Link Checking Product Requirements",
   "issuer": "ZeroDeck Product Management Agent",
   "artifact": {
-    "uri": "https://github.com/REMAREMA6/zero-deck/blob/d162584f48d8682d0994ffc8681702df68d39231/product-management/product-rules/contracts/WEBSITE-LINK-CHECKING.md",
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/ba8010b0a7643465f19e0d95329ada02368ac75d/product-management/product-rules/contracts/WEBSITE-LINK-CHECKING.md",
     "version": "0.1.0-draft",
-    "revision": "d162584f48d8682d0994ffc8681702df68d39231",
-    "digest": "sha256:95c70e5ff15021162cb5e91d97d2d7806687eeabe8fa0a2ef26e6317235567d2",
+    "revision": "ba8010b0a7643465f19e0d95329ada02368ac75d",
+    "digest": "sha256:3304273e2468b7683ca0eadc8ed94fc0a47fa156317439786c66edcb13a0e0e9",
     "mediaType": "text/markdown"
   },
   "scope": "MVP-03 website and link checking for web and Android; bounded user-initiated URL checks, eligibility/no-call gates, URL and destination safety, provider interaction, privacy, results, failures, usage controls and platform semantics; excludes crawling and general network reconnaissance.",
@@ -86,6 +86,11 @@
       "statementId": "ZD-WEB-015",
       "text": "The system MUST treat TLS negotiation or certificate validation failure on any product-controlled provider connection as a failed lookup and MUST NOT silently disable certificate verification.",
       "location": "### Requirement ZD-WEB-015 — TLS validation"
+    },
+    {
+      "statementId": "ZD-WEB-039",
+      "text": "The system MUST NOT disable or bypass TLS certificate verification on any product-controlled provider connection.",
+      "location": "### Requirement ZD-WEB-039 — Preserve provider TLS certificate verification"
     },
     {
       "statementId": "ZD-WEB-016",
@@ -778,6 +783,42 @@
               "given": "a provider connection presents an invalid, expired, mismatched, or untrusted certificate",
               "when": "the connection is established",
               "then": "the lookup fails safely; certificate verification is not bypassed",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-039",
+          "requirementType": "security",
+          "normativeKind": "forbidden",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "integrations"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Provider TLS certificate verification",
+          "rationale": "PM inference; a provider connection without certificate verification weakens the integrity and confidentiality boundary. The TLS implementation choice remains open.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Product security inference; no provider or TLS library has been selected."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-039-01",
+              "given": "a provider connection presents an invalid, expired, mismatched, or untrusted certificate",
+              "when": "the system attempts to establish the provider connection",
+              "then": "certificate verification remains enabled and the connection is rejected",
               "verificationMethod": "mixed"
             }
           ],
