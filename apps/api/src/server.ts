@@ -4,7 +4,10 @@ import { createDatabasePool } from './db/pool.js';
 import { createAccountRegistrationService } from './modules/identity/account-registration.js';
 import { createEmailVerificationService } from './modules/identity/email-verification.js';
 import { createSessionService } from './modules/identity/sessions.js';
-import { createApprovedAccountDeletionPolicy, createAccountDeletionService } from './modules/identity/account-deletion.js';
+import {
+  createAccountDeletionService,
+  createApprovedAccountDeletionPolicy,
+} from './modules/identity/account-deletion.js';
 import { createFreshAuthenticationGuard } from './modules/identity/fresh-authentication.js';
 
 const config = loadConfig();
