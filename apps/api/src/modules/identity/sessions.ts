@@ -19,6 +19,7 @@ export interface IssuedSession extends SessionPrincipal {
 export interface SessionService {
   authenticate(email: string, password: string): Promise<IssuedSession | null>;
   authenticateToken(token: string): Promise<SessionPrincipal | null>;
+  rotateCurrent(token: string): Promise<IssuedSession | null>;
   revokeCurrent(token: string): Promise<void>;
   revokeAll(accountId: string): Promise<void>;
   revokeSession(accountId: string, sessionId: string): Promise<void>;
@@ -101,6 +102,61 @@ export function createSessionService(
       const session = result.rows[0];
 
       return session ? { accountId: session.account_id, sessionId: session.session_id } : null;
+    },
+
+    async rotateCurrent(token) {
+      if (!token) return null;
+
+      const client = await database.connect();
+      try {
+        await client.query('BEGIN');
+        const now = clock();
+        const current = await client.query<{
+          session_id: string;
+          account_id: string;
+          absolute_expires_at: Date;
+        }>(
+          `SELECT session.session_id, session.account_id, session.absolute_expires_at
+           FROM sessions AS session
+           INNER JOIN accounts AS account ON account.account_id = session.account_id
+           WHERE session.token_hash = $1
+             AND account.status = 'active'
+             AND session.revoked_at IS NULL
+             AND session.last_seen_at > ($2::timestamptz - ($3::double precision * INTERVAL '1 millisecond'))
+             AND session.absolute_expires_at > $2::timestamptz
+           FOR UPDATE OF session`,
+          [hashSessionToken(token), now, SESSION_INACTIVITY_WINDOW_MS],
+        );
+        const row = current.rows[0];
+        if (!row) {
+          await client.query('COMMIT');
+          return null;
+        }
+
+        const sessionToken = randomBytes(32).toString('base64url');
+        const updated = await client.query(
+          `UPDATE sessions
+           SET token_hash = $2, last_seen_at = $3
+           WHERE session_id = $1 AND token_hash = $4 AND revoked_at IS NULL`,
+          [row.session_id, hashSessionToken(sessionToken), now, hashSessionToken(token)],
+        );
+        if (updated.rowCount !== 1) {
+          await client.query('ROLLBACK');
+          return null;
+        }
+        await client.query('COMMIT');
+        return {
+          accountId: row.account_id,
+          sessionId: row.session_id,
+          sessionToken,
+          absoluteExpiresAt: row.absolute_expires_at,
+        };
+      } catch (error) {
+        await client.query('ROLLBACK');
+        throw error;
+      } finally {
+        client.release();
+      }
     },
 
     async revokeCurrent(token) {
