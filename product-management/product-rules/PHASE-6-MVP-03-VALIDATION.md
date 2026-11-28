@@ -22,7 +22,7 @@ The four owner-approved statements are ZD-WEB-001–004: active Pro gate, indepe
 
 ## 2. Targeted structural and semantic checks
 
-**17/17 checks passed.**
+**19/19 checks passed on the final synchronized artifacts.**
 
 1. Markdown requirement statements and structured projection are present and in the same order.
 2. Markdown statement IDs and structured requirement metadata have one-to-one parity.
@@ -40,7 +40,9 @@ The four owner-approved statements are ZD-WEB-001–004: active Pro gate, indepe
 14. All scenario requirement references resolve to canonical requirement IDs.
 15. The CIRCLES artifact contains all seven steps in order.
 16. The PM extension and declared-contract schema files parse as JSON and expose the expected definitions.
-17. The structured projection contains a pinned SHA-256 digest and immutable Markdown revision.
+17. The structured projection contains a SHA-256 digest recomputed from the exact canonical Markdown bytes and an immutable Markdown revision.
+18. The TLS failure requirement and certificate-verification prohibition are separate atomic requirements with matching normative metadata.
+19. The final Markdown statement text and structured statement text are byte-for-byte equal for all 39 requirements.
 
 Five malformed in-memory fixtures were rejected: missing acceptance criteria, invalid facet ID, duplicate requirement ID, owner-approved requirement without a decision reference, and conditional requirement without explicit conditions (**5/5 rejected**).
 
