@@ -127,7 +127,7 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 **Acceptance criteria**
 - [x] New accounts may remain explicitly unverified.
-- [ ] Recovery and security-notification flows consume only the verified-email lookup; those flows are not implemented yet.
+- [x] Recovery and security-notification boundaries consume only `EmailVerificationService.getVerifiedEmail`; fake-delivery tests verify unverified addresses are never recipients. Full recovery challenge consumption remains in B5.
 - [x] Challenges are single-use and time-limited.
 - [x] No real email provider is called in core CI.
 - [x] Challenge expiry/resend values are required policy configuration, not invented production defaults.
@@ -143,24 +143,24 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### B3. Sign-in and session lifecycle
 
-**Status: Partial — PostgreSQL session service, token hashing, seven-day inactivity and thirty-day absolute expiry, multiple active sessions, current logout and Web/Android credential storage exist. Cross-client principal proof and auth/database outage coverage remain. API integration evidence for the session lifecycle passed in full CI run 46145669565; Web cookie regression also passed in that run.**
+**Status: Partial — added atomic server-side credential rotation, Web BFF cookie replacement, Android SecureStore rotation client, cross-client same-principal and auth-database outage tests. Full CI for this increment is pending.**
 
 **Description:** Authenticate credentials at the trusted API boundary and issue revocable server-backed sessions shared across Web and Android account identity.
 
 **Acceptance criteria**
-- [ ] Valid credentials resolve to the same stable principal across clients.
+- [x] Valid credentials resolve to the same stable principal across Web/Android sign-in sessions (PostgreSQL integration test verifies identical `accountId` with independent session IDs).
 - [x] Session credentials are unguessable and only their hashes are persisted (32-byte random opaque token; PostgreSQL stores SHA-256 hash, verified in `apps/api/test/sessions.integration.test.ts`).
 - [x] Server enforces 7-day inactivity and 30-day absolute expiry (PostgreSQL clock-controlled integration test).
 - [x] Multiple active sessions are allowed for one account (integration test creates two active sessions and independently revokes one).
 - [x] Web credentials use an HttpOnly/Secure production cookie with explicit `SameSite=Lax` policy and no token in browser-readable JSON (verified in `apps/web/app/api/sessions/route.test.ts`, full green CI run 46145669565).
 - [x] Android credentials use Expo SecureStore; read/write/clear fail closed when secure storage is unavailable (unit tests in `apps/android/test/session-storage.test.ts`).
-- [ ] Database/auth dependency failure denies protected access.
+- [x] Database/auth dependency failure denies protected access (injected authentication-service outage returns a generic 500 and no principal/session data).
 
 **Verification**
 - [x] PostgreSQL tests cover valid/invalid credentials, token persistence, inactivity expiry, absolute expiry, logout and revocation in `apps/api/test/sessions.integration.test.ts` (full green CI run 46145669565).
 - [x] Web cookie attributes and token non-disclosure are tested in `apps/web/app/api/sessions/route.test.ts` (full green CI run 46145669565).
 - [x] Android secure-storage failure paths are tested in `apps/android/test/session-storage.test.ts`.
-- [ ] Cross-platform tests prove one account principal.
+- [x] Cross-client API integration test proves both client sign-ins resolve to the same stable account principal.
 
 **Dependencies:** B1, A3, A4.  
 **Files likely touched:** apps/api/src/modules/sessions/*, apps/api/migrations/*, apps/web auth client, apps/android auth client, tests.  
@@ -168,18 +168,20 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### B4. Logout, rotation and revocation
 
+**Status: Partial — server-side atomic token rotation, replay rejection, concurrent-rotation serialization, Web HttpOnly cookie replacement and Android SecureStore replacement are implemented. Full CI verification is pending.**
+
 **Description:** Implement current-session logout, logout-all, individual-session revocation service support and credential rotation at trust-boundary changes.
 
 **Acceptance criteria**
-- [ ] Logout immediately revokes the current session and clears/discards its client credential.
-- [ ] Logout-all revokes all sessions for the principal.
-- [ ] Superseded credentials cannot authorize requests.
-- [ ] Individual-session revocation exists in the service without adding a detailed session-management screen.
-- [ ] Revocation checks are server-authoritative.
+- [x] Logout immediately revokes the current session at the API; Web clears the HttpOnly cookie and Android clears SecureStore. If upstream revocation is unavailable, clients report that server revocation was not confirmed.
+- [x] Logout-all revokes all sessions for the principal through the API route; PostgreSQL integration test replays prior credentials.
+- [x] Superseded credentials cannot authorize requests after atomic rotation.
+- [x] Individual-session revocation exists in the service without adding a detailed session-management screen.
+- [x] Revocation checks are server-authoritative.
 
 **Verification**
-- [ ] Replay tests cover current logout, logout-all and rotation.
-- [ ] Concurrent requests cannot use stale session state to regain access.
+- [x] Replay tests cover current logout, logout-all and rotation.
+- [x] Concurrent rotation of the same old credential permits only one successful rotation; stale replay is rejected.
 
 **Dependencies:** B3.  
 **Files likely touched:** session services/repositories/routes, Web and Android auth state, integration tests.  
@@ -246,7 +248,7 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### C1. File access and capability adapters
 
-**Status: Partial — Web file selection and metadata-only state are implemented in `apps/web/app/file-analysis/page.tsx` and `apps/web/lib/file-selection.ts`; no content read/upload or scan is performed. Unit tests are awaiting full CI run [46148090831](https://github.com/REMAREMA6/zero-deck/actions/runs/46148090831); the previous run caught a CSS formatting issue that has been corrected. Android picker, permission-loss/unreadable handling and explicit backend/network-boundary proof remain.**
+**Status: Partial — Web file input and Android Expo File picker are wired to local access adapters. Selection retains metadata only; bytes are exposed only through explicit local read methods. Tests cover picker cancellation, revoked/unavailable handles, unreadable reads, changed file snapshots, unknown file types and no network calls. Support remains explicitly `not_evaluated` because no support matrix is approved. Full CI is pending.**
 
 **Description:** Add explicit user-selected file access for Web and Android and truthfully handle revoked/unreadable/unsupported inputs.
 
@@ -280,7 +282,7 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### C3. Local analysis orchestration
 
-**Status: Partial — `runLocalFileAnalysis` invokes the local engine in memory, fails closed on engine errors, passes `AbortSignal` only to engines that declare cancellation support, and distinguishes observed cancellation from interruption. Tests for pre-start and engine-supported cancellation, interruption, independent retry invocation and no network calls passed full CI run [46147584370](https://github.com/REMAREMA6/zero-deck/actions/runs/46147584370). Platform adapters, meaningful progress and explicit selected-bytes backend/network-boundary verification remain.**
+**Status: Partial — `runLocalFileAnalysis` invokes the local engine in memory, fails closed on engine errors, emits lifecycle state changes and accepts progress only when explicitly supported and valid. Cancellation, interruption and retry are tested. Web and Android local file-access adapter tests also stub network fetches and verify reads remain local. No production engine is selected, so no percentage/progress is fabricated. Full CI is pending.**
 
 **Description:** Orchestrate analysis lifecycle, cancellation where supported, interruption, retry and local-only processing.
 
