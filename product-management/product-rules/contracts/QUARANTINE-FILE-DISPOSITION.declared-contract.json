@@ -4,10 +4,10 @@
   "title": "ZeroDeck MVP-02 Quarantine and File Disposition Product Requirements",
   "issuer": "ZeroDeck Product Management Agent",
   "artifact": {
-    "uri": "https://github.com/REMAREMA6/zero-deck/blob/3356950a11bef8e2d3a60a9c30ff8b850aa4e6d0/product-management/product-rules/contracts/QUARANTINE-FILE-DISPOSITION.md",
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/ef98e91d6bc72bf09840d9fbd67175ea2e868b90/product-management/product-rules/contracts/QUARANTINE-FILE-DISPOSITION.md",
     "version": "0.1.0-draft",
-    "revision": "3356950a11bef8e2d3a60a9c30ff8b850aa4e6d0",
-    "digest": "sha256:2ec43e658e8c55eaac6ee0a3fc0d58ec9df0238c2db95e6fe6180b7ba3e5d8f2",
+    "revision": "ef98e91d6bc72bf09840d9fbd67175ea2e868b90",
+    "digest": "sha256:3c2d3d303c05d7752dda87f08a080d691f5470c5fe39532013b9e9d09c77f591",
     "mediaType": "text/markdown"
   },
   "scope": "MVP-02 quarantine and file disposition for web and Android; eligibility, verified quarantine, source disposition, review, restore, deletion, retention and recovery; excludes MVP-01 scan-engine requirements and MVP-03 website/link checking.",
@@ -1636,6 +1636,13 @@
               "when": "The system persists its metadata",
               "then": "Only fields justified by the documented item lifecycle and audit purpose are stored.",
               "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-QUAR-030-AC-02",
+              "given": "An unauthorized principal or process attempts to access quarantine metadata",
+              "when": "The access is evaluated",
+              "then": "The metadata is not disclosed beyond the approved access boundary.",
+              "verificationMethod": "operational-test"
             }
           ],
           "decisionRefs": [],
@@ -1959,6 +1966,13 @@
               "when": "The operation reaches a reportable state",
               "then": "A privacy-minimized outcome record is retained under the approved policy.",
               "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-QUAR-037-AC-02",
+              "given": "An unauthorized user requests an audit record",
+              "when": "The record is accessed",
+              "then": "The system denies access outside the approved authorization boundary.",
+              "verificationMethod": "operational-test"
             }
           ],
           "decisionRefs": [],
