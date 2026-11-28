@@ -48,6 +48,9 @@ export default function HomePage() {
           Security checks should explain what they know, what they do not know, and what happens
           next.
         </p>
+        <a className="hero-action" href="/file-analysis">
+          Open file analysis
+        </a>
       </section>
       <section className="capability-section" aria-labelledby="capability-title">
         <div className="section-heading">
