@@ -89,6 +89,117 @@ describe('local analysis engine boundary', () => {
     expect(result.explanation).toBe(noKnownThreatExplanation);
   });
 
+  it('does not start an analysis when cancellation was requested before start', async () => {
+    const controller = new AbortController();
+    controller.abort();
+    const engine = { supportsCancellation: true, analyze: vi.fn(async () => null) };
+
+    const result = await runLocalFileAnalysis(engine, new Uint8Array([1]), clock, controller.signal);
+
+    expect(engine.analyze).not.toHaveBeenCalled();
+    expect(result).toMatchObject({
+      outcome: 'could_not_decide',
+      lifecycle: 'cancelled',
+      completedAt: null,
+    });
+  });
+
+  it('reports cancellation only when the engine supports and receives an abort signal', async () => {
+    const controller = new AbortController();
+    const engine = {
+      supportsCancellation: true,
+      analyze: vi.fn(
+        ({ signal }: { bytes: Uint8Array; signal?: AbortSignal }) =>
+          new Promise<unknown>((_resolve, reject) => {
+            signal?.addEventListener(
+              'abort',
+              () => {
+                const error = new Error('engine cancelled');
+                error.name = 'AbortError';
+                reject(error);
+              },
+              { once: true },
+            );
+          }),
+      ),
+    };
+
+    const pending = runLocalFileAnalysis(engine, new Uint8Array([1]), clock, controller.signal);
+    controller.abort();
+    const result = await pending;
+
+    expect(engine.analyze).toHaveBeenCalledWith({
+      bytes: new Uint8Array([1]),
+      signal: controller.signal,
+    });
+    expect(result).toMatchObject({
+      outcome: 'could_not_decide',
+      lifecycle: 'cancelled',
+      completedAt: null,
+    });
+  });
+
+  it('reports an engine AbortError without a user cancellation as interrupted', async () => {
+    const engine = {
+      analyze: vi.fn(async () => {
+        const error = new Error('engine process interrupted');
+        error.name = 'AbortError';
+        throw error;
+      }),
+    };
+
+    const result = await runLocalFileAnalysis(engine, new Uint8Array([1]), clock);
+
+    expect(result).toMatchObject({
+      outcome: 'could_not_decide',
+      lifecycle: 'interrupted',
+      completedAt: null,
+    });
+  });
+
+  it('treats retry as a new invocation and never reuses a failed result', async () => {
+    let attempts = 0;
+    const engine = {
+      analyze: vi.fn(async () => {
+        attempts += 1;
+        if (attempts === 1) throw new Error('temporary engine failure');
+        return {
+          outcome: 'suspicious',
+          explanation: 'The second attempt returned suspicious evidence.',
+        };
+      }),
+    };
+
+    const first = await runLocalFileAnalysis(engine, new Uint8Array([1]), clock);
+    const second = await runLocalFileAnalysis(engine, new Uint8Array([1]), clock);
+
+    expect(engine.analyze).toHaveBeenCalledTimes(2);
+    expect(first.lifecycle).toBe('failed');
+    expect(first.outcome).toBe('could_not_decide');
+    expect(second.lifecycle).toBe('completed');
+    expect(second.outcome).toBe('suspicious');
+  });
+
+  it('does not call the network while running the local analysis orchestrator', async () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock);
+    try {
+      const engine = {
+        analyze: vi.fn(async () => ({
+          outcome: 'suspicious',
+          explanation: 'The local test engine returned suspicious evidence.',
+        })),
+      };
+
+      const result = await runLocalFileAnalysis(engine, new Uint8Array([1, 2, 3]), clock);
+
+      expect(result.outcome).toBe('suspicious');
+      expect(fetchMock).not.toHaveBeenCalled();
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
   it('maps malformed engine output to a failed inconclusive result', () => {
     expect(mapAnalysisEngineResult({ outcome: 'safe', explanation: 'Safe.' }, clock)).toEqual(
       createAnalysisFailureResult(),
