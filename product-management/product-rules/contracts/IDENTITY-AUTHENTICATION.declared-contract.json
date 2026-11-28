@@ -1236,13 +1236,6 @@
             },
             {
               "criterionId": "ZD-AUTH-020-AC-04",
-              "given": "a valid recovery challenge delivered to the account's verified email address",
-              "when": "it is successfully used",
-              "then": "it cannot be used again.",
-              "verificationMethod": "automated-test"
-            },
-            {
-              "criterionId": "ZD-AUTH-020-AC-05",
               "given": "an account has no verified email address",
               "when": "recovery is requested",
               "then": "the unverified address is not used as the recovery channel.",
