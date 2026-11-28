@@ -598,6 +598,51 @@ export default function App() {
             >
               <Text style={styles.secondaryButtonText}>Sign out all devices</Text>
             </Pressable>
+            <Pressable
+              accessibilityRole="button"
+              disabled={submitting}
+              onPress={() => setShowDeletionForm((open) => !open)}
+              style={[styles.secondaryButton, submitting && styles.submitDisabled]}
+            >
+              <Text style={styles.secondaryButtonText}>Delete account</Text>
+            </Pressable>
+            {showDeletionForm ? (
+              <View style={styles.card}>
+                <Text style={styles.cardTitle}>Close your ZeroDeck account</Text>
+                <Text style={styles.cardCopy}>
+                  This immediately disables access and revokes sessions. Personal data is deleted later under an approved retention schedule. A schedule must be configured before this action can proceed.
+                </Text>
+                <Text style={styles.fieldLabel}>Current password</Text>
+                <TextInput
+                  accessibilityLabel="Current password for account deletion"
+                  autoComplete="current-password"
+                  secureTextEntry
+                  value={deletionPassword}
+                  onChangeText={setDeletionPassword}
+                  style={styles.input}
+                />
+                <Text style={styles.fieldLabel}>Type DELETE MY ACCOUNT to confirm</Text>
+                <TextInput
+                  accessibilityLabel="Type DELETE MY ACCOUNT to confirm"
+                  autoCapitalize="characters"
+                  autoCorrect={false}
+                  value={deletionConfirmation}
+                  onChangeText={setDeletionConfirmation}
+                  style={styles.input}
+                />
+                <Pressable
+                  accessibilityRole="button"
+                  disabled={submitting || !deletionPassword || deletionConfirmation !== 'DELETE MY ACCOUNT'}
+                  onPress={handleAccountDeletion}
+                  style={[styles.createAccountButton, submitting && styles.submitDisabled]}
+                >
+                  <Text style={styles.submitText}>{submitting ? 'Submitting…' : 'Confirm account deletion'}</Text>
+                </Pressable>
+                <Pressable accessibilityRole="button" disabled={submitting} onPress={() => setShowDeletionForm(false)}>
+                  <Text style={styles.backAction}>Cancel</Text>
+                </Pressable>
+              </View>
+            ) : null}
           </View>
           <Text style={styles.footnote}>
             Session expiry is enforced by the server after seven days of inactivity or thirty days
