@@ -1,13 +1,19 @@
+
 import type { FastifyInstance } from 'fastify';
 import { URLCheckInputSchema } from '@zerodeck/contracts';
 import type { SessionService } from '../identity/sessions.js';
 import { UrlInputError } from './url-checking.js';
 
 interface UrlCheckService {
-  check(accountId: string, submittedUrl: string, consent: boolean): Promise<
+  check(
+    accountId: string,
+    submittedUrl: string,
+    consent: boolean,
+  ): Promise<
     | {
         status: 'blocked';
-        reason: 'pro_required' | 'activation_disabled' | 'permission_required' | 'eligibility_unknown';
+        reason:
+          'pro_required' | 'activation_disabled' | 'permission_required' | 'eligibility_unknown';
       }
     | { status: 'unavailable' }
     | { status: 'completed'; verdict: string; explanation: string }
