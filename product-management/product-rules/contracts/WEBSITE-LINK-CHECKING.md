@@ -80,7 +80,7 @@ The system MUST NOT make an external provider/API call unless both active Pro en
 
 **P0 · business-rule · business-rules**
 
-The system MUST apply an explicit usage policy to Pro link checking and MUST NOT represent Pro entitlement as unlimited usage.
+The system MUST NOT represent Pro entitlement as unlimited usage.
 
 **Rationale / basis:** Owner decision ZD-SCOPE-001 explicitly says Pro does not mean unlimited usage.
 
@@ -110,7 +110,7 @@ The system MUST initiate an MVP-03 check only in response to an explicit user ac
 
 **P1 · functional · data, behavior**
 
-The system MUST identify the submitted target as one URL and MUST NOT imply that checking it inspected the entire website, linked pages, files, or other resources.
+The system MUST identify the submitted target as one URL.
 
 **Rationale / basis:** PM inference; existing product planning says URL checking is a single-URL lookup unless more scope is approved.
 
@@ -616,6 +616,37 @@ The system MUST NOT use MVP-03 as a general-purpose URL fetcher, crawler, websit
 - **Then** only the bounded, selected MVP-03 lookup occurs; no page traversal or unrelated network probing is initiated
 - **Verification:** automated test / manual test / inspection as appropriate.
 
+
+
+### Requirement ZD-WEB-040 — Enforce an explicit Pro usage policy
+
+**P1 · business-rule · business-rules, configuration**
+
+The system MUST apply an explicit usage policy to Pro link checking.
+
+**Rationale / basis:** PM inference from the owner-approved constraint that Pro is not unlimited. The actual allowance, reset period and enforcement thresholds remain owner decisions.
+
+**Acceptance criterion — ZD-WEB-AC-040-01**
+
+- **Given** an account has an applicable Pro usage allowance
+- **When** the user submits a check that reaches or exceeds that allowance
+- **Then** the system applies the configured usage policy before provider dispatch
+- **Verification:** automated test / inspection as appropriate.
+
+### Requirement ZD-WEB-041 — Do not imply whole-site inspection
+
+**P1 · usability · interface, behavior**
+
+The system MUST NOT imply that checking one submitted URL inspected the entire website, linked pages, files, or other resources.
+
+**Rationale / basis:** PM inference; the MVP-03 scope is a bounded one-URL check, not crawling or site auditing.
+
+**Acceptance criterion — ZD-WEB-AC-041-01**
+
+- **Given** a user submits one URL from a website containing other pages or linked resources
+- **When** the check result is presented
+- **Then** the product describes only the submitted URL as checked and does not claim whole-site inspection
+- **Verification:** manual test / inspection.
 
 ## 5. Open product and owner questions
 
