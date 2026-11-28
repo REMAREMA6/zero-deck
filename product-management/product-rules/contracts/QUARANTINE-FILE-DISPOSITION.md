@@ -498,7 +498,7 @@ Product state terms used in this draft:
 
 **Acceptance criteria:**
 - ZD-QUAR-030-AC-01 — Given A quarantine record is created, when The system persists its metadata, then Only fields justified by the documented item lifecycle and audit purpose are stored. Verification: inspection.
-- ZD-QUAR-030-AC-02 — Given An unauthorized principal or process attempts to access quarantine metadata, when The access is evaluated, then The metadata is not disclosed beyond the approved access boundary. Verification: security-test.
+- ZD-QUAR-030-AC-02 — Given An unauthorized principal or process attempts to access quarantine metadata, when The access is evaluated, then The metadata is not disclosed beyond the approved access boundary. Verification: operational-test.
 
 ### Requirement ZD-QUAR-031 — Maintain an accurate quarantine lifecycle record
 
@@ -602,7 +602,7 @@ Product state terms used in this draft:
 
 **Acceptance criteria:**
 - ZD-QUAR-037-AC-01 — Given A disposition operation succeeds, fails, or is partial, when The operation reaches a reportable state, then A privacy-minimized outcome record is retained under the approved policy. Verification: inspection.
-- ZD-QUAR-037-AC-02 — Given An unauthorized user requests an audit record, when The record is accessed, then The system denies access outside the approved authorization boundary. Verification: security-test.
+- ZD-QUAR-037-AC-02 — Given An unauthorized user requests an audit record, when The record is accessed, then The system denies access outside the approved authorization boundary. Verification: operational-test.
 
 ### Requirement ZD-QUAR-038 — Do not create a standalone scan-history capability
 
