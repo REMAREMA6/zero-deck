@@ -1,4 +1,3 @@
-
 import type { FastifyInstance } from 'fastify';
 import { URLCheckInputSchema } from '@zerodeck/contracts';
 import type { SessionService } from '../identity/sessions.js';
