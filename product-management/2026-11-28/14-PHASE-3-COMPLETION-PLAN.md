@@ -3,7 +3,7 @@
 **Project:** ZeroDeck  
 **Workstream:** PM-authored product rules  
 **Phase:** 3 — validate authentication coverage  
-**Status:** Awaiting owner approval  
+**Status:** Owner-approved — 2026-11-28  
 **Scope:** Product Management artifacts under `product-management/` only
 
 ## Requested outcome
