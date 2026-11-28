@@ -245,7 +245,7 @@ The system MUST NOT follow a redirect that downgrades a secure URL scheme to an 
 
 **P0 · security · security-controls, integrations**
 
-The system MUST treat TLS negotiation or certificate validation failure on any product-controlled provider connection as a failed lookup and MUST NOT silently disable certificate verification.
+The system MUST treat TLS negotiation or certificate validation failure on any product-controlled provider connection as a failed lookup.
 
 **Rationale / basis:** PM inference; TLS implementation choice remains open.
 
@@ -255,6 +255,21 @@ The system MUST treat TLS negotiation or certificate validation failure on any p
 - **When** the connection is established
 - **Then** the lookup fails safely; certificate verification is not bypassed
 - **Verification:** automated test / manual test / inspection as appropriate.
+
+### Requirement ZD-WEB-039 — Preserve provider TLS certificate verification
+
+**P0 · security · security-controls, integrations**
+
+The system MUST NOT disable or bypass TLS certificate verification on any product-controlled provider connection.
+
+**Rationale / basis:** PM inference; a provider connection without certificate verification weakens the integrity and confidentiality boundary. The TLS implementation choice remains open.
+
+**Acceptance criterion — ZD-WEB-AC-039-01**
+
+- **Given** a provider connection presents an invalid, expired, mismatched, or untrusted certificate
+- **When** the system attempts to establish the provider connection
+- **Then** certificate verification remains enabled and the connection is rejected
+- **Verification:** automated test / inspection as appropriate.
 
 ### Requirement ZD-WEB-016 — Minimum disclosure
 
