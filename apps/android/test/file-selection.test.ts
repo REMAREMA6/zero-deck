@@ -36,6 +36,7 @@ describe('Android document access adapter', () => {
       name: 'sample.bin',
       sizeBytes: 3,
       declaredType: 'application/octet-stream',
+      supportStatus: 'not_evaluated',
     });
     expect(handle.arrayBuffer).not.toHaveBeenCalled();
     await expect(selected!.readBytes()).resolves.toEqual(new Uint8Array([1, 2, 3]));
