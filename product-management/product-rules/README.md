@@ -3,13 +3,13 @@
 **Product:** ZeroDeck  
 **Author:** ZeroDeck Product Management Agent  
 **Profile:** [Product Requirements Contract Profile](PROFILE.md)  
-**Status:** PM contract profile and Phase 2 identity/authentication contract are complete as PM-proposed drafts; Phase 3 cross-facet coverage assessment is complete; owner review and later capability contracts remain open.
+**Status:** PM contract profile and Phase 3 authentication coverage are complete. The owner approved and recorded eight authentication policy decisions; the canonical authentication contract is v0.2.0-draft. Remaining operational questions, PM-proposed requirements and later capability contracts remain open.
 
 ## Contracts
 
 | Contract | Capability | Status |
 |---|---|---|
-| [Identity and authentication contract](contracts/IDENTITY-AUTHENTICATION.md) | Supporting account/authentication infrastructure | Draft v0.1.0; Phase 2 authoring and Phase 3 coverage assessment complete; owner review pending |
+| [Identity and authentication contract](contracts/IDENTITY-AUTHENTICATION.md) | Supporting account/authentication infrastructure | Draft v0.2.0; eight owner decisions recorded; 25 requirements / 67 criteria; five operational questions remain open |
 | Manual file-analysis contract | MVP-01 | Not started; create in Phase 4 |
 | Quarantine and disposition contract | MVP-02 | Not started; create in Phase 5 |
 | Website and link-checking contract | MVP-03 | Not started; create in Phase 6 |
@@ -19,8 +19,8 @@
 
 - The canonical profile is in [PROFILE.md](PROFILE.md).
 - Validate each complete PM declared contract with [the PM record schema](schemas/zero-deck-pm-declared-contract.schema.json), and validate its nested metadata with [the PM extension schema](schemas/zero-deck-pm-requirements-extension.schema.json).
-- See the [Phase 1 validation report](VALIDATION-REPORT.md) for profile-fixture checks and the [Phase 2 validation report](PHASE-2-VALIDATION.md) for authentication contract checks, corrections and limitations.
-- The seven-step [Phase 2 CIRCLES analysis](../2026-11-27/13-PHASE-2-CIRCLES-AUTHENTICATION.md) records the customer need, options, trade-offs and PM recommendation.
+- See the [Phase 1 validation report](VALIDATION-REPORT.md), [Phase 2 validation report](PHASE-2-VALIDATION.md), [Phase 3 validation report](PHASE-3-VALIDATION.md), and [owner-decision recording validation](PHASE-4-AUTH-DECISION-VALIDATION.md).
+- The seven-step [Phase 2 CIRCLES analysis](../2026-11-27/13-PHASE-2-CIRCLES-AUTHENTICATION.md) records the original authentication recommendation. Accepted owner choices are in the [dated decision record](../2026-11-28/17-AUTHENTICATION-OWNER-DECISIONS.md).
 - The structured projection and retained evidence record for authentication are in `contracts/IDENTITY-AUTHENTICATION.declared-contract.json` and `evidence/identity-authentication-contract.evidence.json`.
 - Use [the declared-contract template](templates/declared-contract.template.json), [the evidence template](templates/declared-contract-evidence.template.json), and [the format-only example](examples/declared-contract-format-example.json).
 - Requirements are represented as Software Rules declared contracts, not runtime rules or source-derived rules.
@@ -33,4 +33,4 @@ The example under `examples/` is only a schema/format fixture. It is not a ZeroD
 
 ## Current phase
 
-Phase 1 — PM contract profile design: **complete**. Phase 2 — authentication/account requirements: **complete**. Phase 3 — authentication coverage across all 15 facets: **complete**. Next: Phase 4 — author MVP-01 manual file-analysis requirements.
+Phase 1 — PM contract profile design: **complete**. Phase 2 — authentication/account requirements: **complete**. Phase 3 — authentication coverage across all 15 facets: **complete**. Eight owner decisions are recorded; five operational questions remain open. Next: Phase 4 — author MVP-01 manual file-analysis requirements.
