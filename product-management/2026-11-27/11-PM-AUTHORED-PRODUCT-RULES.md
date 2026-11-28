@@ -111,6 +111,7 @@ These are architecture directions, not a complete authentication contract. Do no
 - `product-rules/PHASE-3-15-FACET-COVERAGE.md` — Phase 3 assessment of all 15 facets and classification of uncovered properties.
 - `product-rules/PHASE-3-NEGATIVE-FAILURE-RECOVERY-MATRIX.md` — Phase 3 scenario traceability for negative, failure, recovery, conditional and deferred cases.
 - `product-rules/proposals/PHASE-3-AUTHENTICATION-COVERAGE-ADDITIONS.json` — machine-readable metadata and acceptance criteria for three PM-proposed candidate additions; not yet part of the canonical contract.
+- `product-rules/proposals/PHASE-3-BEHAVIOUR-FACET-REFERENCE.json` — metadata-only proposal to add the missing Behaviour facet reference to all 21 authentication requirements; not yet applied to the canonical contract.
 - `product-rules/PHASE-3-VALIDATION.md` — Phase 3 checks, integrity and validation limitations.
 - `2026-11-28/14-PHASE-3-COMPLETION-PLAN.md` — owner-approved Phase 3 plan.
 - `2026-11-28/15-PHASE-3-CIRCLES-COVERAGE.md` — seven-step Phase 3 CIRCLES analysis and recommendation.
