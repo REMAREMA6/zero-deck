@@ -1,4 +1,4 @@
-import type { Pool } from 'pg';
+import type { Pool, PoolClient } from 'pg';
 
 export interface AuthorizationRequest {
   accountId: string;
@@ -43,7 +43,7 @@ export function createAuthorizationService(database: AuthorizationDatabase): {
         return { allowed: false, reason: 'permission_unknown' };
       }
 
-      let client: Awaited<ReturnType<AuthorizationDatabase['connect']>> | undefined;
+      let client: PoolClient | undefined;
       try {
         client = await database.connect();
         await client.query('BEGIN');
