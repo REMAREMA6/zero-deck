@@ -85,7 +85,8 @@ describe('local analysis engine boundary', () => {
       engineId: null,
       engineVersion: null,
       completedAt,
-      explanation: 'No known threat was found. This is not a guarantee that the file is safe.',
+      explanation:
+        'No known threat was found. This is not a guarantee that the file is safe.',
     });
   });
 
