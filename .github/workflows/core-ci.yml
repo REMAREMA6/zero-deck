@@ -71,9 +71,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Print formatter output for URL-check test (temporary diagnostic)
-        run: pnpm exec prettier "apps/api/test/url-checking.integration.test.ts"
-
       - name: Check formatting
         run: pnpm lint
 
