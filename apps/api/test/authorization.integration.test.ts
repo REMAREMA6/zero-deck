@@ -6,6 +6,13 @@ import { createAuthorizationService } from '../src/modules/authorization/authori
 
 const databaseUrl = process.env.DATABASE_URL;
 const pool = databaseUrl ? new Pool({ connectionString: databaseUrl }) : null;
+const gateStates = [
+  { value: true, freshness: 'fresh' },
+  { value: false, freshness: 'fresh' },
+  { value: true, freshness: 'stale' },
+  { value: true, freshness: 'unknown' },
+  { value: null, freshness: null },
+] as const;
 
 describe('server-authoritative authorization gates', () => {
   beforeAll(async () => {
@@ -14,50 +21,69 @@ describe('server-authoritative authorization gates', () => {
   });
   afterAll(async () => { await pool?.end(); });
 
-  it('evaluates permission, Pro entitlement and owner activation independently across all 27 states', async () => {
+  it('evaluates permission, Pro entitlement and owner activation independently across all 125 states', async () => {
     if (!pool) throw new Error('PostgreSQL is unavailable.');
     const authorization = createAuthorizationService(pool);
-    const states = [true, false, null] as const;
-    for (const permission of states) for (const pro of states) for (const activation of states) {
+    for (const permission of gateStates) for (const pro of gateStates) for (const activation of gateStates) {
       const accountId = randomUUID();
       const featureKey = 'test.authorization.' + randomUUID();
       await pool.query('INSERT INTO accounts (account_id, email, email_canonical) VALUES ($1, $2, $2)',
         [accountId, accountId + '@example.test']);
-      if (permission !== null) await pool.query(
-        'INSERT INTO account_permissions (account_id, permission_key, granted) VALUES ($1, $2, $3)',
-        [accountId, 'website.check', permission]);
-      if (pro !== null) await pool.query(
-        'INSERT INTO account_entitlements (account_id, pro_active) VALUES ($1, $2)', [accountId, pro]);
-      if (activation !== null) await pool.query(
-        'INSERT INTO system_feature_controls (feature_key, enabled) VALUES ($1, $2)', [featureKey, activation]);
+      if (permission.freshness !== null) await pool.query(
+        'INSERT INTO account_permissions (account_id, permission_key, granted, state_status) VALUES ($1, $2, $3, $4)',
+        [accountId, 'website.check', permission.value, permission.freshness]);
+      if (pro.freshness !== null) await pool.query(
+        'INSERT INTO account_entitlements (account_id, pro_active, state_status) VALUES ($1, $2, $3)',
+        [accountId, pro.value, pro.freshness]);
+      if (activation.freshness !== null) await pool.query(
+        'INSERT INTO system_feature_controls (feature_key, enabled, state_status) VALUES ($1, $2, $3)',
+        [featureKey, activation.value, activation.freshness]);
       const decision = await authorization.authorize({
         accountId, permission: 'website.check', requirePro: true, featureKey,
       });
-      expect(decision.allowed).toBe(permission === true && pro === true && activation === true);
-      if (permission === null) expect(decision).toEqual({ allowed: false, reason: 'permission_unknown' });
-      else if (permission === false) expect(decision).toEqual({ allowed: false, reason: 'permission_denied' });
-      else if (pro === null) expect(decision).toEqual({ allowed: false, reason: 'entitlement_unknown' });
-      else if (pro === false) expect(decision).toEqual({ allowed: false, reason: 'pro_required' });
-      else if (activation === null) expect(decision).toEqual({ allowed: false, reason: 'activation_unknown' });
-      else if (activation === false) expect(decision).toEqual({ allowed: false, reason: 'activation_disabled' });
+      const permitted = permission.value === true && permission.freshness === 'fresh';
+      const proEligible = pro.value === true && pro.freshness === 'fresh';
+      const activated = activation.value === true && activation.freshness === 'fresh';
+      expect(decision.allowed).toBe(permitted && proEligible && activated);
+      if (permission.freshness === null || permission.freshness === 'unknown')
+        expect(decision).toEqual({ allowed: false, reason: 'permission_unknown' });
+      else if (permission.freshness === 'stale')
+        expect(decision).toEqual({ allowed: false, reason: 'permission_stale' });
+      else if (permission.value === false)
+        expect(decision).toEqual({ allowed: false, reason: 'permission_denied' });
+      else if (pro.freshness === null || pro.freshness === 'unknown')
+        expect(decision).toEqual({ allowed: false, reason: 'entitlement_unknown' });
+      else if (pro.freshness === 'stale')
+        expect(decision).toEqual({ allowed: false, reason: 'entitlement_stale' });
+      else if (pro.value === false)
+        expect(decision).toEqual({ allowed: false, reason: 'pro_required' });
+      else if (activation.freshness === null || activation.freshness === 'unknown')
+        expect(decision).toEqual({ allowed: false, reason: 'activation_unknown' });
+      else if (activation.freshness === 'stale')
+        expect(decision).toEqual({ allowed: false, reason: 'activation_stale' });
+      else if (activation.value === false)
+        expect(decision).toEqual({ allowed: false, reason: 'activation_disabled' });
       else expect(decision).toEqual({ allowed: true });
     }
   });
 
-  it('denies disabled and unknown accounts and never trusts caller-supplied authorization flags', async () => {
+  it('denies disabled and unknown accounts and ignores client-supplied role or gate flags', async () => {
     if (!pool) throw new Error('PostgreSQL is unavailable.');
     const authorization = createAuthorizationService(pool);
     expect(await authorization.authorize({ accountId: randomUUID(), permission: 'website.check' })).toEqual(
       { allowed: false, reason: 'account_unknown' });
-    const accountId = randomUUID();
+    const disabledId = randomUUID();
     await pool.query("INSERT INTO accounts (account_id, email, email_canonical, status) VALUES ($1, $2, $2, 'disabled')",
-      [accountId, accountId + '@example.test']);
-    expect(await authorization.authorize({ accountId, permission: 'website.check' })).toEqual(
+      [disabledId, disabledId + '@example.test']);
+    expect(await authorization.authorize({ accountId: disabledId, permission: 'website.check' })).toEqual(
       { allowed: false, reason: 'account_disabled' });
-    const tampered = { accountId: randomUUID(), permission: 'website.check', proActive: true,
+    const activeId = randomUUID();
+    await pool.query('INSERT INTO accounts (account_id, email, email_canonical) VALUES ($1, $2, $2)',
+      [activeId, activeId + '@example.test']);
+    const tampered = { accountId: activeId, permission: 'website.check', proActive: true,
       ownerActivation: true, role: 'admin' } as never;
     expect(await authorization.authorize(tampered)).toEqual(
-      { allowed: false, reason: 'account_unknown' });
+      { allowed: false, reason: 'permission_unknown' });
   });
 
   it('observes permission revocation on the next authorization evaluation', async () => {
@@ -65,7 +91,7 @@ describe('server-authoritative authorization gates', () => {
     const accountId = randomUUID();
     await pool.query('INSERT INTO accounts (account_id, email, email_canonical) VALUES ($1, $2, $2)',
       [accountId, accountId + '@example.test']);
-    await pool.query("INSERT INTO account_permissions (account_id, permission_key, granted) VALUES ($1, 'website.check', true)", [accountId]);
+    await pool.query("INSERT INTO account_permissions (account_id, permission_key, granted, state_status) VALUES ($1, 'website.check', true, 'fresh')", [accountId]);
     const authorization = createAuthorizationService(pool);
     expect(await authorization.authorize({ accountId, permission: 'website.check' })).toEqual({ allowed: true });
     await pool.query("UPDATE account_permissions SET granted = false, updated_at = now() WHERE account_id = $1 AND permission_key = 'website.check'", [accountId]);
