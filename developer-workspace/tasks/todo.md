@@ -232,6 +232,31 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 **Files implemented:** `apps/api/src/modules/authorization/authorization.ts`, `apps/api/migrations/0006_account_permissions.sql`, `apps/api/src/modules/website/url-checking.ts`, `apps/api/src/modules/website/url-check-routes.ts`, `apps/api/test/authorization.integration.test.ts`, `apps/api/test/url-checking.integration.test.ts`.  
 **Estimated scope:** Medium/Large.
 
+### B6.7. Shared revocation invariant for queued and dispatched work
+
+**Status: Implementation in place; full CI verification pending. Architect outcome 3.7.**
+
+**Description:** Make protected work admission, queueing, dispatch and in-flight cancellation share the same server-authoritative permission/entitlement/activation gates. Revocation must prevent queued work from dispatching and signal dispatched work to cancel where its provider transport supports cancellation.
+
+**Acceptance criteria**
+- [x] Protected work is admitted only after the current account and applicable authorization gates are positively established under row locks in the same transaction that creates its queued record.
+- [x] Dispatch re-evaluates the same gates and atomically transitions only still-queued work to dispatched.
+- [x] PostgreSQL revocation triggers cancel queued work and request cancellation for dispatched work when an account is disabled or its required permission, Pro entitlement or owner activation becomes false, stale, unknown or is removed.
+- [x] Revocation events are delivered through transactional PostgreSQL notifications; the application subscribes before queue admission so the admission/dispatch gap cannot lose a revocation event.
+- [x] Dispatched work receives an AbortSignal; URL-check provider adapters are contractually required to honor it before each outbound call and pass it to cancellable transports.
+- [x] A cancelled operation never returns a provider result to the caller; URL-check cancellation is exposed as an explicit conflict response.
+- [ ] Deterministic PostgreSQL integration tests and full GitHub Actions verification pass on main.
+
+**Verification**
+- [x] Deterministic race test revokes permission after queue admission but before dispatch; operation is never invoked and queued work is cancelled.
+- [x] Dispatched-provider test revokes permission, observes AbortSignal, rejects provider work and proves no result is returned.
+- [x] PostgreSQL trigger tests cover account disablement, permission revocation, Pro-entitlement revocation and owner-activation revocation for queued and dispatched work.
+- [ ] Full CI: formatting, typecheck, unit tests, PostgreSQL integration tests and API/Web/Android builds.
+
+**Dependencies:** B6.  
+**Files implemented:** `apps/api/migrations/0007_protected_work_revocation.sql`, `apps/api/src/modules/authorization/authorization.ts`, `apps/api/src/modules/authorization/protected-work.ts`, `apps/api/src/modules/website/url-checking.ts`, `apps/api/src/modules/website/url-check-routes.ts`, `apps/api/test/url-checking.integration.test.ts`.  
+**Estimated scope:** Medium/Large.
+
 ### B7. Account deletion
 
 **Description:** Implement user-confirmed account closure with immediate access disablement and session revocation; keep personal-data deletion schedule behind an approved policy.
