@@ -75,10 +75,9 @@ describe('Android document access adapter', () => {
 
   it('reports permission loss after selection as unavailable', async () => {
     let exists = true;
-    const handle = createHandle({
-      get exists() {
-        return exists;
-      },
+    const handle = createHandle();
+    Object.defineProperty(handle, 'exists', {
+      get: () => exists,
     });
     const adapter = createAndroidFileSelectionAdapter({
       pickFileAsync: vi.fn(async () => ({ canceled: false as const, result: handle })),
