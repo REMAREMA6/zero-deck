@@ -1,0 +1,232 @@
+{
+  "profileId": "zero-deck.pm-product-requirements",
+  "profileVersion": "1.0.0-draft",
+  "productId": "zero-deck",
+  "author": {
+    "name": "ZeroDeck Product Management Agent",
+    "role": "Product Manager",
+    "organization": "ZeroDeck Product Management"
+  },
+  "softwareRulesCompatibility": {
+    "repository": "https://github.com/REMAREMA6/software-rules",
+    "commit": "5591a2e62287afc29bde002369eaf659673ec59b",
+    "specificationRelease": "0.3.0-draft",
+    "schemaVersion": "0.2.0",
+    "schemaDialect": "https://json-schema.org/draft/2020-12/schema"
+  },
+  "contractLifecycle": "draft",
+  "capabilityId": "AUTH",
+  "requirements": [
+    {
+      "statementId": "ZD-AUTH-022",
+      "requirementType": "security",
+      "normativeKind": "required",
+      "priority": "P0",
+      "decisionStatus": "pm-proposed",
+      "facetRefs": [
+        "identity-authentication",
+        "api",
+        "security-controls",
+        "errors-recovery"
+      ],
+      "platforms": [
+        "web",
+        "android"
+      ],
+      "subject": "Invalid authenticator rejection",
+      "preconditions": [
+        "An account identifier and an authenticator are submitted to the trusted authentication boundary."
+      ],
+      "inputs": [
+        "Account identifier",
+        "Presented authenticator"
+      ],
+      "outcomes": [
+        "Invalid or incorrect authenticators do not establish an authenticated session.",
+        "Protected operations remain denied until trusted verification succeeds."
+      ],
+      "forbiddenBehaviors": [
+        "Issuing an authenticated session after failed authenticator verification.",
+        "Returning an account-existence signal through equivalent unauthenticated failure responses."
+      ],
+      "rationale": "ZD-AUTH-004 requires trusted verification but does not explicitly state the incorrect-authenticator negative outcome as an acceptance criterion.",
+      "basis": [
+        {
+          "basisType": "pm-inference",
+          "description": "The negative authentication outcome must be directly testable, rather than inferred from the positive verification path."
+        },
+        {
+          "basisType": "external-research",
+          "description": "NIST SP 800-63B-4 and OWASP Authentication Cheat Sheet provide authentication-verification and failure-handling guidance.",
+          "refs": [
+            "https://pages.nist.gov/800-63-4/sp800-63b.html",
+            "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html"
+          ]
+        }
+      ],
+      "acceptanceCriteria": [
+        {
+          "criterionId": "ZD-AUTH-022-AC-01",
+          "given": "An account identifier is submitted with an invalid or incorrect authenticator.",
+          "when": "The trusted service evaluates the authentication attempt.",
+          "then": "No authenticated session is issued and protected operations remain denied.",
+          "verificationMethod": "automated-test"
+        },
+        {
+          "criterionId": "ZD-AUTH-022-AC-02",
+          "given": "Equivalent unauthenticated attempts use an invalid authenticator with an existing identifier and an unknown identifier.",
+          "when": "The service returns the authentication result.",
+          "then": "The externally observable response does not reveal whether the account exists.",
+          "verificationMethod": "mixed"
+        }
+      ],
+      "dependencies": [
+        "ZD-AUTH-004",
+        "ZD-AUTH-008"
+      ]
+    },
+    {
+      "statementId": "ZD-AUTH-023",
+      "requirementType": "security",
+      "normativeKind": "required",
+      "priority": "P0",
+      "decisionStatus": "pm-proposed",
+      "facetRefs": [
+        "identity-authentication",
+        "persistence",
+        "errors-recovery",
+        "security-controls"
+      ],
+      "platforms": [
+        "web",
+        "android"
+      ],
+      "subject": "Atomic trust state during credential replacement and session revocation",
+      "preconditions": [
+        "A credential replacement or recovery event requires revocation of one or more existing sessions."
+      ],
+      "inputs": [
+        "Credential replacement state",
+        "Affected session state",
+        "Interruption or retry event"
+      ],
+      "outcomes": [
+        "The service never exposes an inconsistent state that leaves a credential or session required to be revoked authoritative.",
+        "Interrupted transitions are safely recoverable and do not re-authorize revoked credentials."
+      ],
+      "forbiddenBehaviors": [
+        "Leaving a compromised credential/session authorized because only part of a multi-record state change persisted.",
+        "Re-authorizing a credential marked as superseded or revoked."
+      ],
+      "rationale": "ZD-AUTH-020 and ZD-AUTH-021 specify recovery and revocation outcomes but do not explicitly cover partial writes or interruption between the related durable state changes.",
+      "basis": [
+        {
+          "basisType": "pm-inference",
+          "description": "The product-level trust outcome must remain safe across interrupted state transitions without prescribing a database or transaction implementation."
+        },
+        {
+          "basisType": "external-research",
+          "description": "OWASP Session Management and Forgot Password guidance supports invalidating affected sessions after credential recovery.",
+          "refs": [
+            "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html",
+            "https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html"
+          ]
+        }
+      ],
+      "acceptanceCriteria": [
+        {
+          "criterionId": "ZD-AUTH-023-AC-01",
+          "given": "A credential replacement requires session revocation.",
+          "when": "The state transition is interrupted at any persistence boundary.",
+          "then": "The system does not expose a state in which a credential or session required to be revoked remains authorized.",
+          "verificationMethod": "operational-test"
+        },
+        {
+          "criterionId": "ZD-AUTH-023-AC-02",
+          "given": "A credential replacement/session-revocation transition is retried after interruption.",
+          "when": "The trusted service evaluates the account and its sessions.",
+          "then": "The result is a consistent completed or safely recoverable state and no revoked credential is re-authorized.",
+          "verificationMethod": "mixed"
+        }
+      ],
+      "dependencies": [
+        "ZD-AUTH-020",
+        "ZD-AUTH-021"
+      ]
+    },
+    {
+      "statementId": "ZD-AUTH-024",
+      "requirementType": "security",
+      "normativeKind": "conditional",
+      "priority": "P1",
+      "decisionStatus": "pm-proposed",
+      "facetRefs": [
+        "identity-authentication",
+        "api",
+        "security-controls",
+        "persistence",
+        "errors-recovery"
+      ],
+      "platforms": [
+        "web",
+        "android"
+      ],
+      "subject": "Renewable session credential rotation",
+      "conditions": [
+        "This requirement applies only if the selected session design supports renewal using a refresh or renewal credential."
+      ],
+      "preconditions": [
+        "A renewable session credential has been issued under an owner-approved session policy."
+      ],
+      "inputs": [
+        "Current renewal credential",
+        "Renewal request",
+        "Replay or concurrent reuse"
+      ],
+      "outcomes": [
+        "Successful renewal follows a documented credential-rotation policy.",
+        "Superseded renewal credentials are rejected.",
+        "Detected reuse does not silently create additional valid sessions."
+      ],
+      "forbiddenBehaviors": [
+        "Allowing a superseded renewal credential to renew a session.",
+        "Creating multiple valid sessions from unrecognized replay of the same renewal credential."
+      ],
+      "rationale": "ZD-AUTH-010 covers rotation at authentication and security-sensitive boundaries but does not explicitly cover renewal-credential rotation and replay if session renewal is selected.",
+      "basis": [
+        {
+          "basisType": "pm-inference",
+          "description": "Renewal replay behaviour must be explicit if a renewable session mechanism is chosen; no renewal mechanism is assumed."
+        },
+        {
+          "basisType": "external-research",
+          "description": "OWASP Session Management Cheat Sheet discusses session renewal and rotation.",
+          "refs": [
+            "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html"
+          ]
+        }
+      ],
+      "acceptanceCriteria": [
+        {
+          "criterionId": "ZD-AUTH-024-AC-01",
+          "given": "A renewable session is active and a valid renewal credential is presented.",
+          "when": "The service processes renewal.",
+          "then": "The service issues the next credential under the documented policy and rejects the superseded renewal credential.",
+          "verificationMethod": "automated-test"
+        },
+        {
+          "criterionId": "ZD-AUTH-024-AC-02",
+          "given": "A renewal credential is replayed or reused concurrently.",
+          "when": "The service detects the reuse.",
+          "then": "It does not silently create additional valid sessions and applies the documented revocation/recovery response.",
+          "verificationMethod": "operational-test"
+        }
+      ],
+      "dependencies": [
+        "ZD-AUTH-010",
+        "ZD-Q-AUTH-005"
+      ]
+    }
+  ],
+  "openQuestions": []
+}
