@@ -4,8 +4,8 @@
 **Workspace:** `product-management/`  
 **Started:** 2026-11-27  
 **Method:** CIRCLES — seven steps, followed by supporting product-definition work  
-**Overall status:** [~] CIRCLES completed provisionally; blueprint, architecture follow-up, customer validation and owner decisions remain open; PM-authored product-rules Phase 2 is complete  
-**Current position:** PM-authored rules Phases 0–2 complete; Phase 3 (authentication coverage validation) is next  
+**Overall status:** [~] CIRCLES completed provisionally; blueprint, architecture follow-up, customer validation and owner decisions remain open; PM-authored product-rules Phase 3 is complete  
+**Current position:** PM-authored rules Phases 0–3 complete; Phase 4 (MVP-01 manual file-analysis requirements) is next  
 **Last reconciled:** 2026-11-27
 
 > Operational source of truth. Update this tracker whenever work starts, changes status, becomes blocked, or completes. A new session must resume from this file and linked records without relying on chat history.
@@ -26,7 +26,7 @@ During that work, the owner added a distinct requirement: the Product Management
 
 That work is now recorded as a separate workstream. It does not restart CIRCLES or change the three-capability MVP.
 
-**Completed most recently:** Phase 2 authentication/account contract, CIRCLES recommendation, structured projection and validation. **Next task:** validate authentication coverage across relevant Software Rules facets (Phase 3).
+**Completed most recently:** Phase 3 authentication coverage assessment: all 15 facets assessed, 23 negative/failure/recovery scenarios classified, three structured candidate additions recorded, and validation report completed. **Next task:** author MVP-01 manual file-analysis requirements (Phase 4).
 
 ### Current product authority
 
@@ -74,7 +74,7 @@ That work is now recorded as a separate workstream. It does not restart CIRCLES 
 
 **Workstream:** [11-PM-AUTHORED-PRODUCT-RULES.md](2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md)  
 **Author:** ZeroDeck Product Management Agent  
-**Status:** Phases 0–2 complete; Phase 3 next  
+**Status:** [x] Phases 0–3 complete; Phase 4 next  
 **Purpose:** create implementation-ready, technology-independent product requirements aligned with Software Rules.
 
 **Profile:** [product-rules/PROFILE.md](product-rules/PROFILE.md) — Phase 1 complete. **Contract index:** [product-rules/README.md](product-rules/README.md). **Validation:** [product-rules/VALIDATION-REPORT.md](product-rules/VALIDATION-REPORT.md).
@@ -88,7 +88,7 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 | 0 | Establish baseline, boundaries and authorship | [x] | Software Rules model inspected; product scope and PM identity recorded. |
 | 1 | Design PM contract profile | [x] | Exact mapping, author identity, ID/version rules, complete-record and extension schemas, and validation procedure documented and checked. |
 | 2 | Research and author authentication requirements | [x] | [IDENTITY-AUTHENTICATION.md](product-rules/contracts/IDENTITY-AUTHENTICATION.md), structured projection, evidence, [CIRCLES analysis](2026-11-27/13-PHASE-2-CIRCLES-AUTHENTICATION.md) and [Phase 2 validation](product-rules/PHASE-2-VALIDATION.md); 21 PM-proposed requirements, 46 acceptance criteria, 8 open owner questions. |
-| 3 | Validate authentication coverage | [ ] | Cross-facet assessment and negative/failure/recovery tests. |
+| 3 | Validate authentication coverage | [x] | [15-facet assessment](product-rules/PHASE-3-15-FACET-COVERAGE.md), [23-scenario matrix](product-rules/PHASE-3-NEGATIVE-FAILURE-RECOVERY-MATRIX.md), [structured proposals](product-rules/proposals/PHASE-3-AUTHENTICATION-COVERAGE-ADDITIONS.json), [CIRCLES analysis](2026-11-28/15-PHASE-3-CIRCLES-COVERAGE.md) and [validation](product-rules/PHASE-3-VALIDATION.md). All 15 facets assessed; 21 existing requirements/46 criteria preserved; 8 owner questions remain open. |
 | 4 | Author manual file-analysis requirements | [ ] | File selection, input scope, verdicts, limitations, privacy and failure semantics. |
 | 5 | Author quarantine/disposition requirements | [ ] | Quarantine, integrity, restore, deletion, retention and recovery. |
 | 6 | Author website/link-check requirements | [ ] | URL semantics, provider failure, privacy, Pro + activation gates, quotas and budget controls. |
@@ -122,7 +122,7 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 
 ## 6. Immediate next actions
 
-1. Start Phase 3: assess authentication coverage across identity, authorization, security, API, data, persistence, configuration, errors/recovery and integrations.
+1. Start Phase 4: author MVP-01 manual file security analysis requirements, preserving product scope and technology independence.
 2. Keep architecture follow-up and blueprint gaps visible; do not mark them complete without evidence.
 3. Update this tracker at each phase transition and link every deliverable.
 4. Ask the owner only for decisions that evidence and PM deliberation cannot settle.
@@ -139,7 +139,8 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 | 2026-11-27 | Inspected Software Rules README, declared-contract schema, identity/authentication facet and Phase 6 property inventory. | Phase 0 complete; declared-contract is the current fit. |
 | 2026-11-27 | Completed PM contract profile, PM extension schema, full declared-contract schema, templates and format fixture; ran targeted profile checks, recorded in `product-rules/VALIDATION-REPORT.md`. | Phase 1 complete. |
 | 2026-11-27 | Researched and authored the 21-requirement identity/authentication contract, structured declared-contract projection, retained evidence and eight open owner questions; ran targeted structural, parity, facet, reference and digest checks. | Phase 2 complete; Phase 3 coverage assessment is next. Requirements remain PM-proposed, not owner-approved. |
-| 2026-11-27 | Completed authentication CIRCLES analysis; corrected provenance mapping and replaced generic projection criteria with 46 concrete Markdown-derived scenarios; validated PM/upstream record definitions and evidence, ran five negative checks, and verified the exact SHA-256 digest. | Phase 2 exit criteria pass; Phase 3 next. Sign-in/recovery/session policy questions remain with owner. |
+| 2026-11-27 | Completed authentication CIRCLES analysis; corrected provenance mapping and replaced generic projection criteria with 46 concrete Markdown-derived scenarios; validated PM/upstream record definitions and evidence, ran five negative checks, and verified the exact SHA-256 digest. | Phase 2 exit criteria pass; sign-in/recovery/session policy questions remain with owner. |
+| 2026-11-28 | Owner approved the written Phase 3 plan; completed 15-facet assessment, 23-scenario negative/failure/recovery matrix, cross-facet review, three structured candidate additions and targeted validation. | Phase 3 complete for PM requirements coverage; canonical Phase 2 contract remains unchanged; eight owner questions remain open. Phase 4 is next. |
 
 ## 8. Authority and repository boundaries
 
