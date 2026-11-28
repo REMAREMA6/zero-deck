@@ -84,7 +84,7 @@
     },
     {
       "statementId": "ZD-WEB-015",
-      "text": "The system MUST treat TLS negotiation or certificate validation failure on any product-controlled provider connection as a failed lookup and MUST NOT silently disable certificate verification.",
+      "text": "The system MUST treat TLS negotiation or certificate validation failure on any product-controlled provider connection as a failed lookup.",
       "location": "### Requirement ZD-WEB-015 — TLS validation"
     },
     {
