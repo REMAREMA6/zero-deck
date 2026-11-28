@@ -28,7 +28,7 @@ These counts cover **all 51 numbered Architect outcomes (1.1–7.7)**. They are 
 | Not started | 26 |
 | **Total Architect outcomes tracked** | **51** |
 
-**Important:** Three outcomes currently meet the Done definition: 2.2, 2.4 and 3.1. Partial items have some implementation and/or evidence, but do not yet satisfy the full acceptance contract. The 51 are all Architect-defined implementation outcomes; none are excluded from Developer tracking.
+**Important:** Four outcomes currently meet the Done definition: 2.2, 2.4, 3.1 and 4.2. Partial items have some implementation and/or evidence, but do not yet satisfy the full acceptance contract. The 51 are all Architect-defined implementation outcomes; none are excluded from Developer tracking.
 
 ## Section 1 — Architecture baseline and requirement authority
 
@@ -72,7 +72,7 @@ These are the first five of the 51 Architect-defined outcomes. The Architect's s
 | ID | Outcome | Status | Implementation / verification evidence and remaining work |
 |---|---|---|---|
 | 4.1 | Web/Android file-selection and access adapters | **Not started** | No verified user-selected file adapters, permission-loss handling or capability tests. |
-| 4.2 | Analysis engine port and canonical result mapping | **Partial** | `packages/domain/src/index.ts` defines `LocalAnalysisEnginePort`, validates unknown engine responses against the four canonical outcomes, maps valid responses to `FileAnalysisResult`, and converts invalid responses or thrown engine errors into a fail-closed `could_not_decide` result. Deterministic fake-engine tests in `packages/domain/src/index.test.ts` now cover all four outcomes, malformed/unsupported output, missing metadata, exception handling and the no-known-threat safety wording. Implementation/test commits: `3f93b72d`, `950ac03a`, `20040887`. CI run `46146507604` passed formatting and typecheck but failed two stale no-match wording assertions; corrected expectations are in `20040887`. Replacement run `46146627115` is pending. Local-only orchestration/network-boundary evidence and full green CI remain before this outcome can be Done. |
+| 4.2 | Analysis engine port and canonical result mapping | **Done** | `packages/domain/src/index.ts` defines `LocalAnalysisEnginePort` and canonical mapping for all four outcomes. `packages/domain/src/index.test.ts` uses a deterministic fake engine and verifies all four outcomes remain distinct, malformed/unsupported output and engine exceptions fail closed, metadata is not invented, and no-known-threat is never presented as proof of safety. Full CI passed formatting, typecheck, unit tests, PostgreSQL integration tests and API/Web/Android builds in [run 46146977405](https://github.com/REMAREMA6/zero-deck/actions/runs/46146977405). No production engine is selected or activated. Related implementation/test commits: `3f93b72d`, `950ac03a`, `20040887`, `41b2c932`. |
 | 4.3 | Evidence-led production engine/threat-intelligence evaluation | **Blocked** | No production engine/source is approved. Evaluation and owner approval are required before selection. |
 | 4.4 | Local-only analysis orchestration | **Partial** | Added `runLocalFileAnalysis` to invoke the local engine port with selected bytes in memory and convert engine exceptions into a failed `could_not_decide` result without exposing exception details. The relevant earlier CI run `46146024978` failed at formatting before tests/builds, so it is not evidence for this orchestration. Progress, cancellation, retry, interrupted states, platform adapters and an explicit cross-network-boundary test remain. |
 | 4.5 | Safe parsing, resource isolation and bounded processing | **Blocked** | Supported formats and resource budgets are not established. Do not invent limits or claim file-execution isolation. |
@@ -136,7 +136,7 @@ These are the first five of the 51 Architect-defined outcomes. The Architect's s
 
 ## Next execution queue
 
-1. Verify replacement CI after assertion simplification `41b2c932`; run `46146869648` stopped at Prettier in the domain test file. Run `46146507604` passed formatting and typecheck but failed two stale domain test expectations.
+1. Continue MVP-01 local-only orchestration by adding explicit progress/cancellation/interruption semantics only where supported, then prove file bytes never cross the backend/network boundary. Engine port and canonical result mapping (4.2) are now Done with full CI evidence in run `46146977405`.
 2. The domain package now has deterministic fake-engine tests for all four canonical outcomes, malformed/unsupported output, safe no-match wording and thrown engine failures. Verify these tests in green CI, then add explicit orchestration/network-boundary evidence before changing 4.2 or 4.4 status.
 3. Reconcile `todo.md` against the implemented session and URL-check code so it reflects actual verified work.
 4. Finish identity recovery, step-up authentication, credential rotation, cross-client session verification, general authorization and account closure.
