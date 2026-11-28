@@ -71,9 +71,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Print formatter output for Web session test (temporary diagnostic)
-        run: pnpm exec prettier "apps/web/app/api/sessions/route.test.ts"
-
       - name: Check formatting
         run: pnpm lint
 
