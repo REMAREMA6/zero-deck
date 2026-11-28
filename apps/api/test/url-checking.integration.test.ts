@@ -54,7 +54,8 @@ describe('MVP-03 independent URL-check authorization gates', () => {
       [accountId],
     );
     await pool.query(
-      "UPDATE system_feature_controls SET enabled = false WHERE feature_key = 'mvp03_url_check'",
+      `UPDATE system_feature_controls SET enabled = false
+       WHERE feature_key = 'mvp03_url_check'`,
     );
     expect(await service.check(accountId, 'https://example.com/path', true)).toEqual({
       status: 'blocked',
@@ -75,7 +76,9 @@ describe('MVP-03 independent URL-check authorization gates', () => {
       [accountId],
     );
     await pool.query(
-      "INSERT INTO system_feature_controls (feature_key, enabled) VALUES ('mvp03_url_check', true) ON CONFLICT (feature_key) DO UPDATE SET enabled = true",
+      `INSERT INTO system_feature_controls (feature_key, enabled)
+       VALUES ('mvp03_url_check', true)
+       ON CONFLICT (feature_key) DO UPDATE SET enabled = true`,
     );
     const lookup = vi.fn(async () => ({
       verdict: 'no_match',
@@ -100,7 +103,11 @@ describe('MVP-03 independent URL-check authorization gates', () => {
     if (!pool) throw new Error('PostgreSQL is unavailable.');
     const lookup = vi.fn();
     const service = createUrlCheckService(pool, { lookup });
-    for (const value of ['javascript:alert(1)', 'file:///etc/passwd', 'https://user:pass@example.com']) {
+    for (const value of [
+      'javascript:alert(1)',
+      'file:///etc/passwd',
+      'https://user:pass@example.com',
+    ]) {
       await expect(service.check(randomUUID(), value, true)).rejects.toThrow();
     }
     expect(lookup).not.toHaveBeenCalled();
