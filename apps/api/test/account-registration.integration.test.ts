@@ -26,7 +26,8 @@ describe('account registration with PostgreSQL', () => {
     : null;
 
   beforeAll(async () => {
-    if (!pool) throw new Error('DATABASE_URL is required for account registration integration tests.');
+    if (!pool)
+      throw new Error('DATABASE_URL is required for account registration integration tests.');
     await applyMigrations(pool, new URL('../migrations/', import.meta.url).pathname);
   });
 
@@ -76,7 +77,9 @@ describe('account registration with PostgreSQL', () => {
     expect(credential.rows[0]?.password_hash).not.toBe(password);
     expect(credential.rows[0]?.password_hash.startsWith('$argon2id$')).toBe(true);
     expect(await verifyPassword(credential.rows[0]!.password_hash, password)).toBe(true);
-    expect(await verifyPassword(credential.rows[0]!.password_hash, 'incorrect-password')).toBe(false);
+    expect(await verifyPassword(credential.rows[0]!.password_hash, 'incorrect-password')).toBe(
+      false,
+    );
   });
 
   it('preserves local-part semantics and canonicalizes only the domain', async () => {

@@ -45,7 +45,9 @@ export default function RegisterPage() {
           <span className="wordmark-mark">Z</span>
           <span>zerodeck</span>
         </Link>
-        <Link className="topbar-action" href="/">Back to home</Link>
+        <Link className="topbar-action" href="/">
+          Back to home
+        </Link>
       </header>
 
       <section className="auth-card" aria-labelledby="register-title">
@@ -84,7 +86,11 @@ export default function RegisterPage() {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
-            {error ? <p className="form-message error" role="alert">{error}</p> : null}
+            {error ? (
+              <p className="form-message error" role="alert">
+                {error}
+              </p>
+            ) : null}
             <button className="auth-submit" type="submit" disabled={state === 'submitting'}>
               {state === 'submitting' ? 'Submitting…' : 'Create account'}
             </button>

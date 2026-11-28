@@ -206,7 +206,9 @@ h3 {
   border: 1px solid var(--line);
   border-radius: 999px;
   padding: 10px 15px;
-  transition: border-color 160ms ease, color 160ms ease;
+  transition:
+    border-color 160ms ease,
+    color 160ms ease;
 }
 .topbar-action:hover,
 .topbar-action:focus-visible {

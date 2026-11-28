@@ -30,7 +30,9 @@ export async function POST(request: Request) {
     const responseBody = await upstream.json().catch(() => null);
 
     return NextResponse.json(
-      responseBody ?? { error: { code: 'UPSTREAM_ERROR', message: 'The request could not be completed.' } },
+      responseBody ?? {
+        error: { code: 'UPSTREAM_ERROR', message: 'The request could not be completed.' },
+      },
       { status: upstream.status, headers: { 'cache-control': 'no-store' } },
     );
   } catch {

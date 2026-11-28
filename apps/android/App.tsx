@@ -46,7 +46,9 @@ export default function App() {
 
     const apiBase = process.env.EXPO_PUBLIC_API_BASE_URL;
     if (!apiBase) {
-      setError('Account registration is unavailable because this build has no API address configured.');
+      setError(
+        'Account registration is unavailable because this build has no API address configured.',
+      );
       return;
     }
 
@@ -98,8 +100,8 @@ export default function App() {
 
           {accepted ? (
             <Text accessibilityRole="alert" style={styles.successMessage}>
-              Your request was accepted. Email verification and sign-in are not enabled in this
-              core build yet.
+              Your request was accepted. Email verification and sign-in are not enabled in this core
+              build yet.
             </Text>
           ) : (
             <View style={styles.form}>
@@ -122,7 +124,11 @@ export default function App() {
                 onChangeText={setPassword}
                 style={styles.input}
               />
-              {error ? <Text accessibilityRole="alert" style={styles.errorMessage}>{error}</Text> : null}
+              {error ? (
+                <Text accessibilityRole="alert" style={styles.errorMessage}>
+                  {error}
+                </Text>
+              ) : null}
               <Pressable
                 accessibilityRole="button"
                 disabled={submitting}
@@ -233,7 +239,13 @@ const styles = StyleSheet.create({
   registerHero: { paddingTop: 58, paddingBottom: 32 },
   eyebrow: { color: '#c8f169', fontSize: 10, letterSpacing: 1.8, marginBottom: 13 },
   title: { color: '#f2f5f1', fontSize: 54, lineHeight: 56, fontWeight: '800', letterSpacing: -3.5 },
-  registerTitle: { color: '#f2f5f1', fontSize: 42, lineHeight: 46, fontWeight: '800', letterSpacing: -2.6 },
+  registerTitle: {
+    color: '#f2f5f1',
+    fontSize: 42,
+    lineHeight: 46,
+    fontWeight: '800',
+    letterSpacing: -2.6,
+  },
   heroCopy: { color: '#9aa79e', fontSize: 15, lineHeight: 24, marginTop: 22, maxWidth: 440 },
   createAccountButton: {
     alignSelf: 'flex-start',

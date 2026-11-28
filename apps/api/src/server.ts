@@ -7,7 +7,9 @@ const config = loadConfig();
 const database = createDatabasePool(config.DATABASE_URL);
 const accountRegistration = createAccountRegistrationService(database, null);
 const app = buildApp({ database, accountRegistration, logger: config.NODE_ENV !== 'test' });
-app.addHook('onClose', async () => { await database.end(); });
+app.addHook('onClose', async () => {
+  await database.end();
+});
 
 try {
   await app.listen({ host: config.HOST, port: config.PORT });

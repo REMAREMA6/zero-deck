@@ -21,13 +21,15 @@ describe('shared API contracts', () => {
 
   it('validates registration input without embedding an unapproved password threshold', () => {
     expect(
-      RegisterAccountInputSchema.safeParse({ email: 'owner@example.com', password: 'test' }).success,
+      RegisterAccountInputSchema.safeParse({ email: 'owner@example.com', password: 'test' })
+        .success,
     ).toBe(true);
     expect(
       RegisterAccountInputSchema.safeParse({ email: 'not-an-email', password: 'test' }).success,
     ).toBe(false);
-    expect(RegisterAccountInputSchema.safeParse({ email: 'owner@example.com', password: '' }).success)
-      .toBe(false);
+    expect(
+      RegisterAccountInputSchema.safeParse({ email: 'owner@example.com', password: '' }).success,
+    ).toBe(false);
   });
 
   it('accepts only the generic registration acknowledgement', () => {

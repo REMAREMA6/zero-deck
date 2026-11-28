@@ -21,7 +21,10 @@ export function registerAccountRoutes(
 
     if (!service) {
       return reply.code(503).send({
-        error: { code: 'REGISTRATION_UNAVAILABLE', message: 'Account registration is unavailable.' },
+        error: {
+          code: 'REGISTRATION_UNAVAILABLE',
+          message: 'Account registration is unavailable.',
+        },
       });
     }
 
@@ -40,7 +43,10 @@ export function registerAccountRoutes(
 
       if (error instanceof PasswordPolicyRejectedError) {
         return reply.code(422).send({
-          error: { code: 'PASSWORD_POLICY_REJECTED', message: 'The password does not meet the account policy.' },
+          error: {
+            code: 'PASSWORD_POLICY_REJECTED',
+            message: 'The password does not meet the account policy.',
+          },
         });
       }
 
