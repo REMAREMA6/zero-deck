@@ -7,7 +7,7 @@
 ## Approved initial policy
 
 1. A confirmed account-deletion request disables account access and revokes all sessions immediately.
-2. Personal account data is scheduled for deletion **30 calendar days after the confirmed request**.
+2. Personal account data is scheduled for deletion **30 days after the confirmed request**.
 3. Retain only the minimal account-deletion security/audit record for **12 calendar months after personal-data deletion**.
 4. The retained record must include its purpose, reason, request/deletion timestamps and explicit retention-until timestamp.
 5. Expired deletion audit records are automatically purged by the scheduled worker.
