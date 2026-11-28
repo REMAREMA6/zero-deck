@@ -55,9 +55,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
+          cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
       - name: Persist generated lockfile
         if: github.event_name == 'push'
@@ -77,6 +78,19 @@ jobs:
 
       - name: Check formatting
         run: pnpm lint
+
+      - name: Persist formatted source
+        if: github.event_name == 'push'
+        run: |
+          git add apps packages
+          if git diff --cached --quiet; then
+            echo 'Source formatting is already committed.'
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "style: format ZeroDeck core source"
+          git push
 
       - name: Type check
         run: pnpm typecheck
