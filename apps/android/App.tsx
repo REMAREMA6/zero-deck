@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as SecureStore from 'expo-secure-store';
 import {
   ActivityIndicator,
   Pressable,
@@ -10,6 +11,9 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import { createSessionStorage } from './src/session-storage';
+
+const sessionStorage = createSessionStorage(SecureStore);
 
 const capabilities = [
   {
@@ -32,29 +36,87 @@ const capabilities = [
   },
 ];
 
+type Screen = 'home' | 'register' | 'login' | 'account';
+
+interface SessionProfile {
+  accountId: string;
+  sessionId: string;
+  email: string;
+  emailVerified: boolean;
+}
+
+function getApiBaseUrl(): string | null {
+  const value = process.env.EXPO_PUBLIC_API_BASE_URL;
+  return value ? value.replace(/\/+$/, '') : null;
+}
+
 export default function App() {
-  const [showRegistration, setShowRegistration] = useState(false);
+  const [screen, setScreen] = useState<Screen>('home');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [profile, setProfile] = useState<SessionProfile | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [accepted, setAccepted] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  useEffect(() => {
+    let active = true;
+
+    async function restoreSession() {
+      try {
+        const token = await sessionStorage.read();
+        if (!token || !active) return;
+
+        const apiBase = getApiBaseUrl();
+        if (!apiBase) {
+          if (active) setError('A server address is required to restore your session.');
+          return;
+        }
+
+        const response = await fetch(apiBase + '/v1/session', {
+          headers: { authorization: 'Bearer ' + token },
+        });
+
+        if (response.status === 401) {
+          await sessionStorage.clear();
+          return;
+        }
+        if (!response.ok) {
+          if (active) setError('Your stored session could not be verified. Try again later.');
+          return;
+        }
+
+        const restored = (await response.json()) as SessionProfile;
+        if (active) {
+          setProfile(restored);
+          setScreen('account');
+        }
+      } catch {
+        if (active) setError('Secure session storage or the account service is unavailable.');
+      }
+    }
+
+    void restoreSession();
+    return () => {
+      active = false;
+    };
+  }, []);
+
   async function handleRegistration() {
     setError(null);
     setAccepted(false);
+    const apiBase = getApiBaseUrl();
 
-    const apiBase = process.env.EXPO_PUBLIC_API_BASE_URL;
     if (!apiBase) {
-      setError(
-        'Account registration is unavailable because this build has no API address configured.',
-      );
+      setError('Account registration is unavailable because this build has no API address configured.');
       return;
     }
 
     setSubmitting(true);
     try {
-      const response = await fetch(apiBase.replace(/\/+$/, '') + '/v1/accounts', {
+      const response = await fetch(apiBase + '/v1/accounts', {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -74,34 +136,120 @@ export default function App() {
     }
   }
 
-  if (showRegistration) {
+  async function handleLogin() {
+    setError(null);
+    const apiBase = getApiBaseUrl();
+
+    if (!apiBase) {
+      setError('Sign-in is unavailable because this build has no API address configured.');
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const response = await fetch(apiBase + '/v1/sessions', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ email: loginEmail, password: loginPassword }),
+      });
+      const payload = await response.json().catch(() => null);
+
+      if (!response.ok || typeof payload?.sessionToken !== 'string') {
+        setError(payload?.error?.message ?? 'Sign-in could not be completed.');
+        return;
+      }
+
+      const token = payload.sessionToken as string;
+      try {
+        await sessionStorage.write(token);
+      } catch {
+        await fetch(apiBase + '/v1/sessions/current', {
+          method: 'DELETE',
+          headers: { authorization: 'Bearer ' + token },
+        }).catch(() => undefined);
+        setError('Secure storage is unavailable. The new session was not saved on this device.');
+        return;
+      }
+
+      const profileResponse = await fetch(apiBase + '/v1/session', {
+        headers: { authorization: 'Bearer ' + token },
+      });
+      if (!profileResponse.ok) {
+        await sessionStorage.clear();
+        setError('The new session could not be verified.');
+        return;
+      }
+
+      const nextProfile = (await profileResponse.json()) as SessionProfile;
+      setProfile(nextProfile);
+      setLoginPassword('');
+      setScreen('account');
+    } catch {
+      setError('The account service or secure storage could not be reached.');
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  async function handleSignOut(path: '/v1/sessions/current' | '/v1/sessions/logout-all') {
+    setError(null);
+    setSubmitting(true);
+    let revocationConfirmed = false;
+
+    try {
+      const token = await sessionStorage.read();
+      const apiBase = getApiBaseUrl();
+
+      if (!token) {
+        revocationConfirmed = true;
+      } else if (apiBase) {
+        try {
+          const response = await fetch(apiBase + path, {
+            method: path.endsWith('logout-all') ? 'POST' : 'DELETE',
+            headers: { authorization: 'Bearer ' + token },
+          });
+          revocationConfirmed = response.ok || response.status === 401;
+        } catch {
+          revocationConfirmed = false;
+        }
+      }
+
+      await sessionStorage.clear();
+      setProfile(null);
+      setScreen('home');
+      if (!revocationConfirmed) {
+        setError('The local session was cleared, but server-side revocation could not be confirmed.');
+      }
+    } catch {
+      setError('Secure session storage could not be accessed. Sign-out is not confirmed.');
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  if (screen === 'register') {
     return (
       <SafeAreaView style={styles.safeArea}>
         <StatusBar barStyle="light-content" />
         <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
           <View style={styles.topbar}>
-            <View style={styles.brand}>
-              <Text style={styles.brandMark}>Z</Text>
-              <Text style={styles.brandName}>zerodeck</Text>
-            </View>
-            <Pressable accessibilityRole="button" onPress={() => setShowRegistration(false)}>
+            <Brand />
+            <Pressable accessibilityRole="button" onPress={() => setScreen('home')}>
               <Text style={styles.backAction}>Back</Text>
             </Pressable>
           </View>
-
           <View style={styles.registerHero}>
             <Text style={styles.eyebrow}>ACCOUNT ACCESS</Text>
             <Text style={styles.registerTitle}>Create your account.</Text>
             <Text style={styles.heroCopy}>
-              One account for ZeroDeck on Web and Android. Your email remains unverified until the
-              verification flow is enabled.
+              One account for ZeroDeck on Web and Android. Your email remains unverified until
+              verification delivery is configured.
             </Text>
           </View>
-
           {accepted ? (
             <Text accessibilityRole="alert" style={styles.successMessage}>
-              Your request was accepted. Email verification and sign-in are not enabled in this core
-              build yet.
+              Your request was accepted. Email verification and sign-in are not enabled for new
+              accounts until the owner-approved password policy is configured.
             </Text>
           ) : (
             <View style={styles.form}>
@@ -110,6 +258,7 @@ export default function App() {
                 accessibilityLabel="Email address"
                 autoCapitalize="none"
                 autoComplete="email"
+                autoCorrect={false}
                 keyboardType="email-address"
                 value={email}
                 onChangeText={setEmail}
@@ -124,28 +273,111 @@ export default function App() {
                 onChangeText={setPassword}
                 style={styles.input}
               />
-              {error ? (
-                <Text accessibilityRole="alert" style={styles.errorMessage}>
-                  {error}
-                </Text>
-              ) : null}
-              <Pressable
-                accessibilityRole="button"
-                disabled={submitting}
+              {error ? <Text accessibilityRole="alert" style={styles.errorMessage}>{error}</Text> : null}
+              <PrimaryButton
+                label="Create account"
+                submitting={submitting}
                 onPress={handleRegistration}
-                style={[styles.submitButton, submitting && styles.submitDisabled]}
-              >
-                {submitting ? (
-                  <ActivityIndicator color="#10160d" />
-                ) : (
-                  <Text style={styles.submitText}>Create account</Text>
-                )}
-              </Pressable>
+              />
             </View>
           )}
-
+          <Text style={styles.footnote}>
+            Already have an account?{' '}
+            <Text style={styles.inlineLink} onPress={() => setScreen('login')}>Sign in</Text>
+          </Text>
           <Text style={styles.footnote}>
             Registration stays disabled until the owner-approved password policy is configured.
+          </Text>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+
+  if (screen === 'login') {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <StatusBar barStyle="light-content" />
+        <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
+          <View style={styles.topbar}>
+            <Brand />
+            <Pressable accessibilityRole="button" onPress={() => setScreen('home')}>
+              <Text style={styles.backAction}>Back</Text>
+            </Pressable>
+          </View>
+          <View style={styles.registerHero}>
+            <Text style={styles.eyebrow}>ACCOUNT ACCESS</Text>
+            <Text style={styles.registerTitle}>Welcome back.</Text>
+            <Text style={styles.heroCopy}>Sign in to your ZeroDeck account.</Text>
+          </View>
+          <View style={styles.form}>
+            <Text style={styles.fieldLabel}>Email address</Text>
+            <TextInput
+              accessibilityLabel="Email address"
+              autoCapitalize="none"
+              autoComplete="email"
+              autoCorrect={false}
+              keyboardType="email-address"
+              value={loginEmail}
+              onChangeText={setLoginEmail}
+              style={styles.input}
+            />
+            <Text style={styles.fieldLabel}>Password</Text>
+            <TextInput
+              accessibilityLabel="Password"
+              autoComplete="current-password"
+              secureTextEntry
+              value={loginPassword}
+              onChangeText={setLoginPassword}
+              style={styles.input}
+            />
+            {error ? <Text accessibilityRole="alert" style={styles.errorMessage}>{error}</Text> : null}
+            <PrimaryButton label="Sign in" submitting={submitting} onPress={handleLogin} />
+          </View>
+          <Text style={styles.footnote}>
+            New to ZeroDeck?{' '}
+            <Text style={styles.inlineLink} onPress={() => setScreen('register')}>Create an account</Text>
+          </Text>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+
+  if (screen === 'account' && profile) {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <StatusBar barStyle="light-content" />
+        <ScrollView contentContainerStyle={styles.container}>
+          <View style={styles.topbar}>
+            <Brand />
+            <Text style={styles.environment}>ACCOUNT</Text>
+          </View>
+          <View style={styles.registerHero}>
+            <Text style={styles.eyebrow}>YOUR ACCOUNT</Text>
+            <Text style={styles.registerTitle}>You are signed in.</Text>
+            <Text style={styles.heroCopy}>{profile.email}</Text>
+            <Text style={profile.emailVerified ? styles.verified : styles.unverified}>
+              {profile.emailVerified ? 'EMAIL VERIFIED' : 'EMAIL NOT VERIFIED'}
+            </Text>
+          </View>
+          {error ? <Text accessibilityRole="alert" style={styles.errorMessage}>{error}</Text> : null}
+          <View style={styles.form}>
+            <PrimaryButton
+              label="Sign out"
+              submitting={submitting}
+              onPress={() => handleSignOut('/v1/sessions/current')}
+            />
+            <Pressable
+              accessibilityRole="button"
+              disabled={submitting}
+              onPress={() => handleSignOut('/v1/sessions/logout-all')}
+              style={[styles.secondaryButton, submitting && styles.submitDisabled]}
+            >
+              <Text style={styles.secondaryButtonText}>Sign out all devices</Text>
+            </Pressable>
+          </View>
+          <Text style={styles.footnote}>
+            Session expiry is enforced by the server after seven days of inactivity or thirty days
+            from sign-in.
           </Text>
         </ScrollView>
       </SafeAreaView>
@@ -157,10 +389,7 @@ export default function App() {
       <StatusBar barStyle="light-content" />
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.topbar}>
-          <View style={styles.brand}>
-            <Text style={styles.brandMark}>Z</Text>
-            <Text style={styles.brandName}>zerodeck</Text>
-          </View>
+          <Brand />
           <Text style={styles.environment}>CORE BUILD</Text>
         </View>
         <View style={styles.hero}>
@@ -170,13 +399,29 @@ export default function App() {
             Security checks should explain what they know, what they do not know, and what happens
             next.
           </Text>
-          <Pressable
-            accessibilityRole="button"
-            onPress={() => setShowRegistration(true)}
-            style={styles.createAccountButton}
-          >
-            <Text style={styles.submitText}>Create account</Text>
-          </Pressable>
+          <View style={styles.heroActions}>
+            <Pressable
+              accessibilityRole="button"
+              onPress={() => {
+                setError(null);
+                setScreen('login');
+              }}
+              style={styles.createAccountButton}
+            >
+              <Text style={styles.submitText}>Sign in</Text>
+            </Pressable>
+            <Pressable
+              accessibilityRole="button"
+              onPress={() => {
+                setError(null);
+                setScreen('register');
+              }}
+              style={styles.secondaryButton}
+            >
+              <Text style={styles.secondaryButtonText}>Create account</Text>
+            </Pressable>
+          </View>
+          {error ? <Text accessibilityRole="alert" style={styles.errorMessage}>{error}</Text> : null}
         </View>
         <View style={styles.sectionHeading}>
           <Text style={styles.eyebrow}>YOUR TOOLS</Text>
@@ -196,6 +441,40 @@ export default function App() {
         <Text style={styles.footer}>ZERO DECK · CHECKS ARE NOT GUARANTEES OF SAFETY</Text>
       </ScrollView>
     </SafeAreaView>
+  );
+}
+
+function Brand() {
+  return (
+    <View style={styles.brand}>
+      <Text style={styles.brandMark}>Z</Text>
+      <Text style={styles.brandName}>zerodeck</Text>
+    </View>
+  );
+}
+
+function PrimaryButton({
+  label,
+  submitting,
+  onPress,
+}: {
+  label: string;
+  submitting: boolean;
+  onPress: () => void;
+}) {
+  return (
+    <Pressable
+      accessibilityRole="button"
+      disabled={submitting}
+      onPress={onPress}
+      style={[styles.submitButton, submitting && styles.submitDisabled]}
+    >
+      {submitting ? (
+        <ActivityIndicator color="#10160d" />
+      ) : (
+        <Text style={styles.submitText}>{label}</Text>
+      )}
+    </Pressable>
   );
 }
 
@@ -247,9 +526,9 @@ const styles = StyleSheet.create({
     letterSpacing: -2.6,
   },
   heroCopy: { color: '#9aa79e', fontSize: 15, lineHeight: 24, marginTop: 22, maxWidth: 440 },
+  heroActions: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginTop: 26 },
   createAccountButton: {
     alignSelf: 'flex-start',
-    marginTop: 26,
     backgroundColor: '#c8f169',
     paddingHorizontal: 20,
     paddingVertical: 14,
@@ -294,6 +573,17 @@ const styles = StyleSheet.create({
   },
   submitDisabled: { opacity: 0.6 },
   submitText: { color: '#10160d', fontSize: 13, fontWeight: '800' },
+  secondaryButton: {
+    minHeight: 48,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: '#52633d',
+    borderRadius: 10,
+    paddingHorizontal: 16,
+    marginTop: 14,
+  },
+  secondaryButtonText: { color: '#c8f169', fontSize: 13, fontWeight: '700' },
   errorMessage: { color: '#ffd5d1', fontSize: 12, lineHeight: 19, marginTop: 8 },
   successMessage: {
     color: '#c8f169',
@@ -305,5 +595,8 @@ const styles = StyleSheet.create({
     padding: 14,
   },
   footnote: { color: '#9aa79e', fontSize: 11, lineHeight: 18, marginTop: 22 },
+  inlineLink: { color: '#c8f169', fontWeight: '700' },
+  verified: { color: '#c8f169', fontSize: 10, letterSpacing: 1.5, marginTop: 20 },
+  unverified: { color: '#e7c77b', fontSize: 10, letterSpacing: 1.5, marginTop: 20 },
   footer: { color: '#9aa79e', fontSize: 9, letterSpacing: 1.2, marginTop: 24 },
 });

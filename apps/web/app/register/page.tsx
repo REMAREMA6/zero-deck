@@ -100,6 +100,9 @@ export default function RegisterPage() {
         <p className="auth-footnote">
           Registration stays disabled until the owner-approved password policy is configured.
         </p>
+        <p className="auth-footnote">
+          Already have an account? <Link className="auth-inline-link" href="/login">Sign in</Link>
+        </p>
       </section>
     </main>
   );

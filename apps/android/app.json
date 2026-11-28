@@ -7,6 +7,14 @@
     "userInterfaceStyle": "dark",
     "android": {
       "package": "com.zerodeck.app"
-    }
+    },
+    "plugins": [
+      [
+        "expo-secure-store",
+        {
+          "configureAndroidBackup": true
+        }
+      ]
+    ]
   }
 }

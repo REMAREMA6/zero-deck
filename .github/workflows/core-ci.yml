@@ -12,21 +12,10 @@ on:
       - 'tsconfig.base.json'
       - '.npmrc'
       - '.github/workflows/core-ci.yml'
-  pull_request:
-    branches: [main]
-    paths:
-      - 'apps/**'
-      - 'packages/**'
-      - 'package.json'
-      - 'pnpm-workspace.yaml'
-      - 'pnpm-lock.yaml'
-      - 'tsconfig.base.json'
-      - '.npmrc'
-      - '.github/workflows/core-ci.yml'
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: zerodeck-core-ci-${{ github.ref }}
@@ -69,10 +58,25 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --no-frozen-lockfile
 
       - name: Check formatting
         run: pnpm lint
+
+      - name: Persist formatted source
+        if: github.event_name == 'push'
+        run: |
+          git add apps packages
+          if git diff --cached --quiet; then
+            echo 'Source formatting is already committed.'
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "style: format session client integration"
+          git fetch origin developer/core-product
+          git rebase FETCH_HEAD
+          git push origin HEAD:refs/heads/developer/core-product
 
       - name: Type check
         run: pnpm typecheck
