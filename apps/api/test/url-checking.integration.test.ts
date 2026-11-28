@@ -1,6 +1,3 @@
-env:
-  PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
-##[endgroup]
 import { randomUUID } from 'node:crypto';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { Pool } from 'pg';
