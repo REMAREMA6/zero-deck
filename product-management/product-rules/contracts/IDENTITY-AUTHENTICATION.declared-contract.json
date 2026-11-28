@@ -4,10 +4,10 @@
   "title": "ZeroDeck Identity and Authentication Product Requirements",
   "issuer": "ZeroDeck Product Management Agent",
   "artifact": {
-    "uri": "https://github.com/REMAREMA6/zero-deck/blob/db93a19fcbd4d7197be852a0cadd395c9af5a977/product-management/product-rules/contracts/IDENTITY-AUTHENTICATION.md",
-    "version": "0.1.0-draft",
-    "revision": "db93a19fcbd4d7197be852a0cadd395c9af5a977",
-    "digest": "sha256:9f6759de0dd81f4d7d3a5e9af0b2c5ee148cfb895ebc3492770f1ce698a679a2",
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/88e336687d4e09efebcecb2eb30287a8b62e7837/product-management/product-rules/contracts/IDENTITY-AUTHENTICATION.md",
+    "version": "0.2.0-draft",
+    "revision": "88e336687d4e09efebcecb2eb30287a8b62e7837",
+    "digest": "sha256:c44844872e6c70a1f50c17286cd9c35cd27ae0397cd09ede1c62a7135d6267ac",
     "mediaType": "text/markdown"
   },
   "scope": "Identity and account lifecycle requirements for ZeroDeck; supporting infrastructure for web and Android, not a fourth user-facing MVP capability.",
@@ -116,6 +116,26 @@
       "statementId": "ZD-AUTH-021",
       "text": "When an authenticator is reset, replaced, or confirmed compromised through an authorized security process, the system MUST revoke sessions that are no longer trusted and MUST require fresh authentication before protected access resumes.",
       "location": "#### Requirement ZD-AUTH-021 — Invalidate affected sessions after credential recovery or replacement"
+    },
+    {
+      "statementId": "ZD-AUTH-025",
+      "text": "The system MUST require fresh authentication before a user changes their password or passkey, changes the verified recovery email address, or confirms account deletion. It MUST NOT require repeated fresh authentication for ordinary account use.",
+      "location": "#### Requirement ZD-AUTH-025 — Require fresh authentication for sensitive account-security changes"
+    },
+    {
+      "statementId": "ZD-AUTH-026",
+      "text": "The system MUST provide a user-initiated account deletion process that immediately revokes the account's active sessions and disables further account access. It MUST delete personal data according to a documented retention schedule and MUST retain only records for which a legitimate requirement exists, with the reason and retention period documented.",
+      "location": "#### Requirement ZD-AUTH-026 — Support user-initiated account deletion with documented retention"
+    },
+    {
+      "statementId": "ZD-AUTH-027",
+      "text": "At launch, the system MUST allow a user to create and access a ZeroDeck account using an email address and password, with the email address as the primary sign-in identifier. The launch sign-in journey MUST NOT require a phone number or a social-login account.",
+      "location": "#### Requirement ZD-AUTH-027 — Support email-and-password sign-in at launch"
+    },
+    {
+      "statementId": "ZD-AUTH-028",
+      "text": "The system MUST allow account creation while the email address is explicitly unverified. It MUST verify the email address before relying on it for account recovery or security notifications, and before any feature or action whose documented policy requires a verified email. A change to the account's primary email address MUST complete the documented verification process before the new address becomes the verified primary address.",
+      "location": "#### Requirement ZD-AUTH-028 — Apply the approved email-verification boundaries"
     }
   ],
   "evidenceRefs": [
@@ -212,6 +232,13 @@
               "refs": [
                 "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html"
               ]
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "The owner accepted the relevant authentication policy choice recorded in the dated owner decision register.",
+              "refs": [
+                "ZD-DEC-AUTH-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
@@ -232,6 +259,9 @@
           ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-AUTH-001"
+          ],
+          "decisionRefs": [
+            "ZD-DEC-AUTH-2026-11-28"
           ]
         },
         {
@@ -376,7 +406,7 @@
         {
           "statementId": "ZD-AUTH-006",
           "requirementType": "security",
-          "normativeKind": "conditional",
+          "normativeKind": "required",
           "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
@@ -398,6 +428,13 @@
               "refs": [
                 "https://pages.nist.gov/800-63-4/sp800-63b.html",
                 "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html"
+              ]
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "The owner accepted the relevant authentication policy choice recorded in the dated owner decision register.",
+              "refs": [
+                "ZD-DEC-AUTH-2026-11-28"
               ]
             }
           ],
@@ -441,8 +478,8 @@
           "evidenceRefs": [
             "ZD-EV-CONTRACT-AUTH-001"
           ],
-          "conditions": [
-            "Password authentication is offered by ZeroDeck."
+          "decisionRefs": [
+            "ZD-DEC-AUTH-2026-11-28"
           ]
         },
         {
@@ -665,6 +702,13 @@
                 "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html",
                 "https://pages.nist.gov/800-63-4/sp800-63b.html"
               ]
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "The owner accepted the relevant authentication policy choice recorded in the dated owner decision register.",
+              "refs": [
+                "ZD-DEC-AUTH-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
@@ -681,10 +725,27 @@
               "when": "its credential is presented",
               "then": "protected access is denied.",
               "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-011-AC-03",
+              "given": "an authenticated session has had no qualifying activity for 7 days",
+              "when": "its credential is presented",
+              "then": "protected access is denied.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-011-AC-04",
+              "given": "an authenticated session reaches 30 days from establishment",
+              "when": "its credential is presented",
+              "then": "protected access is denied even if it has remained active.",
+              "verificationMethod": "automated-test"
             }
           ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-AUTH-001"
+          ],
+          "decisionRefs": [
+            "ZD-DEC-AUTH-2026-11-28"
           ]
         },
         {
@@ -714,6 +775,13 @@
                 "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html",
                 "https://pages.nist.gov/800-63-4/sp800-63b.html"
               ]
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "The owner accepted the relevant authentication policy choice recorded in the dated owner decision register.",
+              "refs": [
+                "ZD-DEC-AUTH-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
@@ -730,10 +798,27 @@
               "when": "any previously issued session credential for that account is replayed",
               "then": "each is denied.",
               "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-012-AC-03",
+              "given": "an account holder selects logout all devices",
+              "when": "the operation completes",
+              "then": "every active session for that account is revoked.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-012-AC-04",
+              "given": "the launch account interface is inspected",
+              "when": "session-management capabilities are reviewed",
+              "then": "current-session logout and logout-all-devices are available but a detailed device/session list is not required.",
+              "verificationMethod": "inspection"
             }
           ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-AUTH-001"
+          ],
+          "decisionRefs": [
+            "ZD-DEC-AUTH-2026-11-28"
           ]
         },
         {
@@ -762,6 +847,13 @@
                 "https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html",
                 "https://pages.nist.gov/800-63-4/sp800-63b.html"
               ]
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "The owner accepted the relevant authentication policy choice recorded in the dated owner decision register.",
+              "refs": [
+                "ZD-DEC-AUTH-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
@@ -782,6 +874,9 @@
           ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-AUTH-001"
+          ],
+          "decisionRefs": [
+            "ZD-DEC-AUTH-2026-11-28"
           ]
         },
         {
@@ -1108,6 +1203,13 @@
                 "https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html",
                 "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html"
               ]
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "The owner accepted the relevant authentication policy choice recorded in the dated owner decision register.",
+              "refs": [
+                "ZD-DEC-AUTH-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
@@ -1131,10 +1233,27 @@
               "when": "the requester is unauthenticated",
               "then": "the response does not reveal whether the account exists.",
               "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-020-AC-04",
+              "given": "a valid recovery challenge delivered to the account's verified email address",
+              "when": "it is successfully used",
+              "then": "it cannot be used again.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-020-AC-05",
+              "given": "an account has no verified email address",
+              "when": "recovery is requested",
+              "then": "the unverified address is not used as the recovery channel.",
+              "verificationMethod": "automated-test"
             }
           ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-AUTH-001"
+          ],
+          "decisionRefs": [
+            "ZD-DEC-AUTH-2026-11-28"
           ]
         },
         {
@@ -1163,6 +1282,13 @@
                 "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html",
                 "https://cheatsheetseries.owasp.org/cheatsheets/Forgot_Password_Cheat_Sheet.html"
               ]
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "The owner accepted the relevant authentication policy choice recorded in the dated owner decision register.",
+              "refs": [
+                "ZD-DEC-AUTH-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
@@ -1179,7 +1305,261 @@
               "when": "Given a former session is replayed after required revocation",
               "then": "access is denied.",
               "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-021-AC-03",
+              "given": "account recovery succeeds",
+              "when": "the recovery operation completes",
+              "then": "all existing sessions for that account are revoked and a security notification is sent to the account owner.",
+              "verificationMethod": "automated-test"
             }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-AUTH-001"
+          ],
+          "decisionRefs": [
+            "ZD-DEC-AUTH-2026-11-28"
+          ]
+        },
+        {
+          "statementId": "ZD-AUTH-025",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "owner-approved",
+          "facetRefs": [
+            "identity-authentication",
+            "security-controls",
+            "authorization-permissions",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Sensitive account-security changes require recent proof of account control.",
+          "rationale": "Password/passkey, recovery-email and account-deletion actions can transfer control of or permanently remove an account; fresh authentication reduces reliance on an unattended or stolen session.",
+          "basis": [
+            {
+              "basisType": "owner-decision",
+              "description": "Owner approved risk-based step-up authentication for password/passkey changes, recovery-email changes and account deletion; ordinary use does not require repeated authentication.",
+              "refs": [
+                "ZD-DEC-AUTH-2026-11-28"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-AUTH-025-AC-01",
+              "given": "an authenticated session",
+              "when": "the user attempts to change the password or a passkey",
+              "then": "fresh authentication is required before the change is accepted.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-025-AC-02",
+              "given": "an authenticated session",
+              "when": "the user attempts to change the verified recovery email address",
+              "then": "fresh authentication is required before the change is accepted.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-025-AC-03",
+              "given": "an authenticated session",
+              "when": "the user confirms account deletion",
+              "then": "fresh authentication is required before deletion proceeds.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-025-AC-04",
+              "given": "an authenticated session",
+              "when": "the user performs ordinary account actions that are not designated sensitive",
+              "then": "the system does not repeatedly require fresh authentication solely because the session is active.",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "decisionRefs": [
+            "ZD-DEC-AUTH-2026-11-28"
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-AUTH-001"
+          ]
+        },
+        {
+          "statementId": "ZD-AUTH-026",
+          "requirementType": "functional",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "owner-approved",
+          "facetRefs": [
+            "interface",
+            "behavior",
+            "data",
+            "persistence",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Account holders can end their account and have personal data deleted under a documented schedule.",
+          "rationale": "Account holders need a clear way to end their relationship with the product, while retained records must be limited, justified and time-bounded.",
+          "basis": [
+            {
+              "basisType": "owner-decision",
+              "description": "Owner approved user-initiated account deletion, immediate session revocation/access disablement, and documented deletion with only justified retention exceptions.",
+              "refs": [
+                "ZD-DEC-AUTH-2026-11-28"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-AUTH-026-AC-01",
+              "given": "an authenticated account holder who completes required fresh authentication",
+              "when": "account deletion is confirmed",
+              "then": "all active sessions are revoked and account access is disabled immediately.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-026-AC-02",
+              "given": "account deletion has been confirmed",
+              "when": "the documented deletion schedule is applied",
+              "then": "personal data is deleted according to that schedule.",
+              "verificationMethod": "operational-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-026-AC-03",
+              "given": "a record must be retained for a legitimate requirement",
+              "when": "deletion is processed",
+              "then": "the record, retention reason and retention period are documented and access is restricted to the justified purpose.",
+              "verificationMethod": "inspection"
+            }
+          ],
+          "decisionRefs": [
+            "ZD-DEC-AUTH-2026-11-28"
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-AUTH-001"
+          ]
+        },
+        {
+          "statementId": "ZD-AUTH-027",
+          "requirementType": "functional",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "owner-approved",
+          "facetRefs": [
+            "identity-authentication",
+            "interface",
+            "api",
+            "behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Launch accounts use email and password without requiring phone or social sign-in.",
+          "rationale": "The owner selected a direct email-and-password launch path and did not make phone or social sign-in prerequisites.",
+          "basis": [
+            {
+              "basisType": "owner-decision",
+              "description": "Owner approved email + password at launch, email as primary identifier, and no required phone or social sign-in.",
+              "refs": [
+                "ZD-DEC-AUTH-2026-11-28"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-AUTH-027-AC-01",
+              "given": "a person does not yet have a ZeroDeck account",
+              "when": "they register with a valid email address and password",
+              "then": "an account is created with a stable account principal.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-027-AC-02",
+              "given": "an account has been created with an email address and password",
+              "when": "the user submits valid credentials",
+              "then": "the system authenticates the corresponding account.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-027-AC-03",
+              "given": "a person is completing the launch registration or sign-in journey",
+              "when": "the flow is used",
+              "then": "a phone number or social-login account is not required to complete it.",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "decisionRefs": [
+            "ZD-DEC-AUTH-2026-11-28"
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-AUTH-001"
+          ]
+        },
+        {
+          "statementId": "ZD-AUTH-028",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "owner-approved",
+          "facetRefs": [
+            "identity-authentication",
+            "interface",
+            "api",
+            "security-controls",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Email verification controls when an email address can be trusted for recovery and sensitive account operations.",
+          "rationale": "Allowing initial account creation without verification reduces onboarding friction while preventing an unverified address from being treated as a trusted recovery or security channel.",
+          "basis": [
+            {
+              "basisType": "owner-decision",
+              "description": "Owner approved account creation in an unverified state and verification before recovery/security-notification use or any explicitly verified-email-gated action.",
+              "refs": [
+                "ZD-DEC-AUTH-2026-11-28"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-AUTH-028-AC-01",
+              "given": "a person registers with a valid email address and password",
+              "when": "account creation completes before email verification",
+              "then": "the account is explicitly marked as having an unverified email address.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-028-AC-02",
+              "given": "an account's email address is unverified",
+              "when": "recovery or a security notification must be sent",
+              "then": "the system does not rely on that unverified address as the trusted channel.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-028-AC-03",
+              "given": "a feature or action has a documented verified-email precondition",
+              "when": "an account with an unverified email attempts it",
+              "then": "the precondition is not satisfied.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-AUTH-028-AC-04",
+              "given": "an account holder changes the primary email address",
+              "when": "the new address has not completed verification",
+              "then": "it is not treated as the verified primary address.",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "decisionRefs": [
+            "ZD-DEC-AUTH-2026-11-28"
           ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-AUTH-001"
@@ -1192,64 +1572,120 @@
           "question": "Which account identifier(s) and sign-in method should launch support?",
           "impact": "Determines onboarding, verification, recovery and support.",
           "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Compare email/password and passkey-capable options; avoid phone-only identity as a default."
+          "status": "resolved",
+          "pmRecommendation": "Compare email/password and passkey-capable options; avoid phone-only identity as a default.",
+          "resolution": "Owner approved launch sign-in with email + password; email is the primary identifier, phone/social sign-in are not required at launch, email changes require verification, and passkeys may be added later.",
+          "decisionRef": "ZD-DEC-AUTH-2026-11-28"
         },
         {
           "questionId": "ZD-Q-AUTH-002",
           "question": "Must users verify an email address or phone number, and before which account actions?",
           "impact": "Affects account takeover risk, recovery and security notifications.",
           "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Verify any contact point before relying on it for recovery or security notifications."
+          "status": "resolved",
+          "pmRecommendation": "Verify any contact point before relying on it for recovery or security notifications.",
+          "resolution": "Owner approved account creation in an unverified state; verify email before using it for recovery/security notifications or before a feature/action whose policy explicitly requires verified email.",
+          "decisionRef": "ZD-DEC-AUTH-2026-11-28"
         },
         {
           "questionId": "ZD-Q-AUTH-003",
           "question": "Is MFA/passkey support required at MVP launch, optional, or deferred?",
           "impact": "Determines assurance and recovery burden.",
           "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Evaluate passkeys and optional additional factors; do not impose mandatory MFA without user-risk evidence."
+          "status": "resolved",
+          "pmRecommendation": "Evaluate passkeys and optional additional factors; do not impose mandatory MFA without user-risk evidence.",
+          "resolution": "Owner approved optional, non-mandatory MFA at launch; passkeys are deferred as a later enhancement.",
+          "decisionRef": "ZD-DEC-AUTH-2026-11-28"
         },
         {
           "questionId": "ZD-Q-AUTH-004",
           "question": "What recovery mechanism and channel are supported?",
           "impact": "A weak recovery path can bypass strong sign-in.",
           "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Design recovery with sign-in; resist enumeration, replay and account takeover."
+          "status": "resolved",
+          "pmRecommendation": "Design recovery with sign-in; resist enumeration, replay and account takeover.",
+          "resolution": "Owner approved verified-email recovery using a single-use, time-limited link/challenge; expired/consumed challenges fail; successful recovery revokes existing sessions and sends a security notification; no security questions.",
+          "decisionRef": "ZD-DEC-AUTH-2026-11-28"
         },
         {
           "questionId": "ZD-Q-AUTH-005",
           "question": "What idle and absolute session durations, renewal rules and concurrent-session policy apply?",
           "impact": "Required to configure and test finite sessions.",
           "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Set explicit server-enforced limits before release."
+          "status": "resolved",
+          "pmRecommendation": "Set explicit server-enforced limits before release.",
+          "resolution": "Owner approved 7-day inactivity expiry, 30-day absolute session lifetime, secure session/renewal credential rotation and concurrent sessions across devices.",
+          "decisionRef": "ZD-DEC-AUTH-2026-11-28"
         },
         {
           "questionId": "ZD-Q-AUTH-006",
           "question": "Does MVP need user-visible device/session management and per-session revocation?",
           "impact": "Could expand UI scope and support expectations.",
           "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "At minimum support account-wide revocation; assess a session list separately."
+          "status": "resolved",
+          "pmRecommendation": "At minimum support account-wide revocation; assess a session list separately.",
+          "resolution": "Owner approved current-session logout and logout-all-devices at launch; a detailed device/session list is deferred; backend individual-session revocation remains required.",
+          "decisionRef": "ZD-DEC-AUTH-2026-11-28"
         },
         {
           "questionId": "ZD-Q-AUTH-007",
           "question": "What account closure/deletion and retention behaviour is promised?",
           "impact": "Cross-cutting data lifecycle and jurisdiction issue.",
           "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Specify with the broader data lifecycle and applicable launch-market obligations."
+          "status": "resolved",
+          "pmRecommendation": "Specify with the broader data lifecycle and applicable launch-market obligations.",
+          "resolution": "Owner approved user-initiated account deletion, immediate session revocation/access disablement, and documented deletion with only justified retention exceptions.",
+          "decisionRef": "ZD-DEC-AUTH-2026-11-28"
         },
         {
           "questionId": "ZD-Q-AUTH-008",
           "question": "What assurance level and step-up events are appropriate for ZeroDeck?",
           "impact": "Determines whether additional authentication is proportionate.",
           "ownerDecisionRequired": true,
+          "status": "resolved",
+          "pmRecommendation": "Use a documented risk assessment; require stronger re-authentication for account-security changes where justified.",
+          "resolution": "Owner approved risk-based assurance without a complex formal tier at launch; fresh authentication is required before password/passkey changes, recovery-email changes and account deletion; ordinary use does not require repeated authentication.",
+          "decisionRef": "ZD-DEC-AUTH-2026-11-28"
+        },
+        {
+          "questionId": "ZD-Q-AUTH-009",
+          "question": "What exact email canonicalization and verification operational policy applies?",
+          "impact": "Required for consistent identity matching, verification delivery and recovery operations.",
+          "ownerDecisionRequired": true,
           "status": "open",
-          "pmRecommendation": "Use a documented risk assessment; require stronger re-authentication for account-security changes where justified."
+          "pmRecommendation": "Document normalization, verification challenge expiry/resend limits and notification policy."
+        },
+        {
+          "questionId": "ZD-Q-AUTH-010",
+          "question": "What numeric authentication and recovery abuse thresholds apply?",
+          "impact": "Required to configure and test rate limits, progressive delays and temporary restrictions.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Set thresholds through risk and usability review; avoid permanent lockout."
+        },
+        {
+          "questionId": "ZD-Q-AUTH-011",
+          "question": "What exact session renewal cadence and edge-case policy applies?",
+          "impact": "The approved lifetime limits do not fully specify renewal timing or all concurrent-session edge cases.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Specify renewal cadence and replay handling within the approved 7-day inactivity and 30-day absolute limits."
+        },
+        {
+          "questionId": "ZD-Q-AUTH-012",
+          "question": "What exact account-deletion schedule and legally required retention categories apply?",
+          "impact": "Exact deletion and retention behaviour depends on launch jurisdiction and documented operational obligations.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Determine exact timelines, lawful retention categories and evidence of deletion before release."
+        },
+        {
+          "questionId": "ZD-Q-AUTH-013",
+          "question": "What authorization propagation bound applies to entitlement, permission and owner-controlled activation changes?",
+          "impact": "Protected operations need a measurable bound for applying current trusted authorization state.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Set and test a propagation bound in the cross-cutting authorization contract."
         }
       ]
     }
