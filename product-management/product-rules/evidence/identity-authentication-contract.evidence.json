@@ -3,11 +3,11 @@
   "evidenceClass": "declared-contract",
   "evidenceType": "product-requirements-contract",
   "origin": {
-    "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/db93a19fcbd4d7197be852a0cadd395c9af5a977/product-management/product-rules/contracts/IDENTITY-AUTHENTICATION.md",
-    "sourceRevision": "db93a19fcbd4d7197be852a0cadd395c9af5a977",
+    "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/88e336687d4e09efebcecb2eb30287a8b62e7837/product-management/product-rules/contracts/IDENTITY-AUTHENTICATION.md",
+    "sourceRevision": "88e336687d4e09efebcecb2eb30287a8b62e7837",
     "location": "product-management/product-rules/contracts/IDENTITY-AUTHENTICATION.md"
   },
-  "capturedAt": "2026-11-27T00:00:00Z",
+  "capturedAt": "2026-11-28T00:00:00Z",
   "locator": "product-management/product-rules/contracts/IDENTITY-AUTHENTICATION.md",
   "retention": {
     "status": "retained",
