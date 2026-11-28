@@ -16,17 +16,17 @@
 | V8-07 | Every requirement has one or more acceptance criteria | PASS, 160/160 | 259 criteria total |
 | V8-08 | Acceptance criteria contain Given, When, Then and verification method | PASS, 259/259 | No missing required fields |
 | V8-09 | Acceptance-criterion IDs unique | PASS, 259/259 | No duplicates |
-| V8-10 | Acceptance-criterion ID profile pattern | FAIL, 231/259 | 28/259 conform; P8-F02 |
+| V8-10 | Acceptance-criterion ID profile pattern | FAIL at Phase 8 baseline, 231/259 legacy IDs | 231 migrated in Phase 9; all 259 now conform; see 38-PHASE-9-ACCEPTANCE-CRITERION-ID-MIGRATION.md |
 | V8-11 | Dependency IDs resolve to existing requirement IDs | PASS, all declared links | No dangling dependency IDs |
 | V8-12 | Dependency meaning matches prerequisite semantics | FAIL / OPEN | Multiple semantically misdirected links; P8-F03 and P8-F12 |
 | V8-13 | Facet references use official IDs | PASS | No invalid facet identifiers |
 | V8-14 | All official facets appear in package | PASS, 15/15 | Facet matrix |
 | V8-15 | Cross-feature prerequisites represented in structured dependencies | FAIL / OPEN | QUAR-001 and QUAR-014 lack explicit MVP-01 dependencies; P8-F04 |
-| V8-16 | Owner question status reconciled | PASS | 72 total; 8 resolved, 64 open |
+| V8-16 | Owner question status reconciled | PASS at Phase 8 baseline | 72 total; 8 original AUTH decisions resolved; the remaining 64 received Phase 9 resolved/deferred dispositions (15 resolved, 49 deferred) |
 | V8-17 | Owner-approved MVP-03 two-gate/no-call invariant consistent across WEB and SYS | PASS | WEB-001–004 and SYS-004 align |
-| V8-18 | In-flight gate-revocation state fully specified | OPEN | WEB-Q-WEB-011/012 and SYS-Q-SYS-013 remain open |
-| V8-19 | Account deletion/backup/audit lifecycle fully specified | OPEN | AUTH-026 and SYS-Q-SYS-004/017 |
-| V8-20 | Authentication recovery notification facet and delivery semantics reconciled | FAIL / OPEN | P8-F05 and P8-F11 |
+| V8-18 | In-flight gate-revocation product policy | OPEN at Phase 8 baseline | Phase 9 owner policy now denies new/queued work after revocation and cancels already-dispatched calls where supported; exact timing/cancellation mechanics deferred |
+| V8-19 | Account deletion/backup/audit product policy | OPEN at Phase 8 baseline | Phase 9 product policy recorded; exact schedule, backup expiry and legal categories remain deferred |
+| V8-20 | Authentication recovery notification product requirement/facet | FAIL / OPEN at Phase 8 baseline | Phase 9 updated AUTH-021 statement and Messaging facet; delivery failure/retry/ack/duplicate mechanics remain deferred |
 | V8-21 | Phase 3–7 failure/recovery assessments reviewed for cross-feature interaction | PASS as review | Existing assessments used; no runtime test claimed |
 | V8-22 | Tracker, index, workstream and plan reconciled | PASS | Updated with Phase 8 completion and Phase 9 next |
 
@@ -41,14 +41,14 @@
 - 0 duplicate requirement IDs.
 - 0 duplicate acceptance-criterion IDs.
 - 0 dangling dependency IDs.
-- 231 acceptance-criterion ID profile deviations.
+- 231 acceptance-criterion IDs were migrated in Phase 9; 259/259 now conform to the capability-scoped PM profile.
 - 4 authentication statement/projection mismatches corrected.
 
 ## 3. Phase 8 exit decision
 
 **Phase 8 review is complete.** The review has a pinned baseline, complete requirement/criterion inventory, all-facet assessment, cross-feature lifecycle matrix, projection/evidence audit, and explicit findings for every identified contradiction, ambiguity, traceability defect and unresolved state.
 
-This completion is not a claim that all findings have been corrected or all owner questions decided. The plan permits material findings to remain explicitly open with evidence and owner action required. The open findings are carried into Phase 9.
+This Phase 8 record remains a historical baseline. Phase 9 dispositions and corrections are recorded in the Phase 9 owner decision register, migration crosswalk and validation report.
 
 ## 4. Limitations
 
