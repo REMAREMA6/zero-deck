@@ -212,20 +212,24 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### B6. Entitlement, permission and owner-activation gates
 
+**Status: Complete — Architect outcome 3.6 implemented and verified in [full CI run 46180414239](https://github.com/REMAREMA6/zero-deck/actions/runs/46180414239).**
+
 **Description:** Implement server-owned authorization state and reusable fail-closed guards.
 
 **Acceptance criteria**
-- [ ] Pro entitlement and owner activation are independent gates.
-- [ ] False, unknown, stale, revoked or unavailable state denies protected work.
-- [ ] Client-supplied role/Pro/activation flags never authorize an operation.
-- [ ] Revocation prevents new/queued work and stops follow-on provider calls from dispatched work where supported.
+- [x] Pro entitlement and owner activation are independent gates; MVP-03 additionally requires the explicit `website.check` permission.
+- [x] False, unknown, stale or unavailable permission/entitlement/activation state denies protected work. Gate records use explicit `fresh`/`stale`/`unknown` state; new and existing records default to unknown. No numeric freshness TTL is invented.
+- [x] Client-supplied role/Pro/activation flags never authorize an operation; only the authenticated account principal and server-owned PostgreSQL records are evaluated.
+- [x] Each authorization evaluation reads current server state and locks the account and applicable gate rows for the transaction. Permission revocation is observed on the next evaluation. Queued/dispatched-work revocation and follow-on-call cancellation remain Architect outcome 3.7, not part of 3.6.
 
 **Verification**
-- [ ] PostgreSQL truth-table tests cover all gate combinations.
-- [ ] Tampered client-state and revocation race tests pass.
+- [x] PostgreSQL tests cover all 125 combinations of permission, Pro-entitlement and owner-activation values/freshness states.
+- [x] Tests cover missing, false, stale, unknown, disabled-account and unavailable-database denial.
+- [x] Tampered client flags are ignored; permission revocation is denied on the next authorization evaluation.
+- [x] Full CI passed formatting, typecheck, unit tests, PostgreSQL integration tests and API/Web/Android builds in run 46180414239.
 
 **Dependencies:** A3, A4, B1.  
-**Files likely touched:** authorization/entitlement modules, migrations, API guards, tests.  
+**Files implemented:** `apps/api/src/modules/authorization/authorization.ts`, `apps/api/migrations/0006_account_permissions.sql`, `apps/api/src/modules/website/url-checking.ts`, `apps/api/src/modules/website/url-check-routes.ts`, `apps/api/test/authorization.integration.test.ts`, `apps/api/test/url-checking.integration.test.ts`.  
 **Estimated scope:** Medium/Large.
 
 ### B7. Account deletion
