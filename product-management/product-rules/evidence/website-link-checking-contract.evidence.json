@@ -3,8 +3,8 @@
   "evidenceClass": "declared-contract",
   "evidenceType": "product-requirements-contract",
   "origin": {
-    "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/ba8010b0a7643465f19e0d95329ada02368ac75d/product-management/product-rules/contracts/WEBSITE-LINK-CHECKING.md",
-    "sourceRevision": "ba8010b0a7643465f19e0d95329ada02368ac75d",
+    "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/8f0aeecee5b97a7fbfe98c4e048e6b40f436df60/product-management/product-rules/contracts/WEBSITE-LINK-CHECKING.md",
+    "sourceRevision": "8f0aeecee5b97a7fbfe98c4e048e6b40f436df60",
     "location": "product-management/product-rules/contracts/WEBSITE-LINK-CHECKING.md"
   },
   "capturedAt": "2026-11-28T07:42:00+01:00",
