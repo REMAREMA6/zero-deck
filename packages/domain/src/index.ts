@@ -58,7 +58,8 @@ export function mapAnalysisEngineResult(
   return {
     outcome: value.outcome as FileAnalysisOutcome,
     lifecycle: 'completed',
-    engineId: typeof value.engineId === 'string' && value.engineId.trim() ? value.engineId : null,
+    engineId:
+      typeof value.engineId === 'string' && value.engineId.trim() ? value.engineId : null,
     engineVersion:
       typeof value.engineVersion === 'string' && value.engineVersion.trim()
         ? value.engineVersion
