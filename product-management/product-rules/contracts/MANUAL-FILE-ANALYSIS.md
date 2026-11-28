@@ -69,8 +69,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** owner-decision — Owner-approved MVP scope defines manual file security analysis (ZD-SCOPE-001).
 
 **Acceptance criteria:**
-- ZD-FILE-001-AC-01 — Given no scan request exists, when a file becomes available, then no analysis is initiated. Verification: automated-test.
-- ZD-FILE-001-AC-02 — Given an eligible file is selected, when the user requests a scan, then one scan attempt is initiated and its accepted or rejected state is communicated. Verification: automated-test.
+- ZD-FILE-AC-01 — Given no scan request exists, when a file becomes available, then no analysis is initiated. Verification: automated-test.
+- ZD-FILE-AC-02 — Given an eligible file is selected, when the user requests a scan, then one scan attempt is initiated and its accepted or rejected state is communicated. Verification: automated-test.
 
 ### Requirement ZD-FILE-002 — Respect the selected file's access boundary
 
@@ -84,8 +84,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** platform-contract — Platform file selection and Android SAF grant access to selected resources subject to platform permissions (EVD-DOC-ANDROID-001).
 
 **Acceptance criteria:**
-- ZD-FILE-002-AC-01 — Given the user selected one file and access was granted, when the scan reads input, then no unrelated file is read as part of that scan. Verification: inspection.
-- ZD-FILE-002-AC-02 — Given the platform has not granted access to a selected file, when analysis is requested, then the system does not bypass the platform boundary and reports the access failure. Verification: manual-test.
+- ZD-FILE-AC-03 — Given the user selected one file and access was granted, when the scan reads input, then no unrelated file is read as part of that scan. Verification: inspection.
+- ZD-FILE-AC-04 — Given the platform has not granted access to a selected file, when analysis is requested, then the system does not bypass the platform boundary and reports the access failure. Verification: manual-test.
 
 ### Requirement ZD-FILE-003 — Reject revoked or unavailable file access
 
@@ -99,8 +99,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** pm-inference — PM inference based on platform-controlled file access and MVP-FILE-001/002.
 
 **Acceptance criteria:**
-- ZD-FILE-003-AC-01 — Given access to the selected file has been revoked, when the scan attempts to read it, then the attempt ends as an access failure and no completed verdict is presented. Verification: automated-test.
-- ZD-FILE-003-AC-02 — Given access is restored through a valid user/platform action, when the user retries, then a new attempt may proceed using the newly granted access. Verification: manual-test.
+- ZD-FILE-AC-05 — Given access to the selected file has been revoked, when the scan attempts to read it, then the attempt ends as an access failure and no completed verdict is presented. Verification: automated-test.
+- ZD-FILE-AC-06 — Given access is restored through a valid user/platform action, when the user retries, then a new attempt may proceed using the newly granted access. Verification: manual-test.
 
 ### Requirement ZD-FILE-004 — Publish the supported-input boundary
 
@@ -114,8 +114,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** source-evidence — PM-FILE-008 and OPEN-PROPERTIES identify these constraints as unresolved (EVD-SRC-PRODUCT-001).
 
 **Acceptance criteria:**
-- ZD-FILE-004-AC-01 — Given the supported-input policy is published, when the user views or invokes file selection, then accepted types and applicable limits are discoverable before a scan is accepted. Verification: inspection.
-- ZD-FILE-004-AC-02 — Given an input is outside a documented constraint, when analysis is requested, then the system rejects it with a specific unsupported-input outcome. Verification: automated-test.
+- ZD-FILE-AC-07 — Given the supported-input policy is published, when the user views or invokes file selection, then accepted types and applicable limits are discoverable before a scan is accepted. Verification: inspection.
+- ZD-FILE-AC-08 — Given an input is outside a documented constraint, when analysis is requested, then the system rejects it with a specific unsupported-input outcome. Verification: automated-test.
 
 ### Requirement ZD-FILE-005 — Reject unreadable and invalid inputs truthfully
 
@@ -129,8 +129,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** source-evidence — PM-FILE-004 and OPEN-PROPERTIES enumerate unsupported, inaccessible, malformed, encrypted, oversized and unreadable cases.
 
 **Acceptance criteria:**
-- ZD-FILE-005-AC-01 — Given an input is invalid under the published policy, when analysis is requested, then the system returns the corresponding invalid-input outcome without a successful verdict. Verification: automated-test.
-- ZD-FILE-005-AC-02 — Given an encrypted input has no approved analysis path, when analysis is requested, then the system reports that it could not analyse the file rather than inferring a threat or clean result. Verification: manual-test.
+- ZD-FILE-AC-09 — Given an input is invalid under the published policy, when analysis is requested, then the system returns the corresponding invalid-input outcome without a successful verdict. Verification: automated-test.
+- ZD-FILE-AC-10 — Given an encrypted input has no approved analysis path, when analysis is requested, then the system reports that it could not analyse the file rather than inferring a threat or clean result. Verification: manual-test.
 
 ### Requirement ZD-FILE-006 — Preserve the original file during analysis
 
@@ -144,8 +144,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** pm-inference — PM inference from the owner-approved separation of MVP-01 analysis and MVP-02 disposition (ZD-SCOPE-001).
 
 **Acceptance criteria:**
-- ZD-FILE-006-AC-01 — Given a readable file is selected, when the scan completes or fails, then the original file content and location remain unchanged by the scan. Verification: inspection.
-- ZD-FILE-006-AC-02 — Given a scan is cancelled or interrupted, when the user inspects the original file, then the scan has not deleted or replaced it. Verification: manual-test.
+- ZD-FILE-AC-11 — Given a readable file is selected, when the scan completes or fails, then the original file content and location remain unchanged by the scan. Verification: inspection.
+- ZD-FILE-AC-12 — Given a scan is cancelled or interrupted, when the user inspects the original file, then the scan has not deleted or replaced it. Verification: manual-test.
 
 ### Requirement ZD-FILE-007 — Keep file analysis on-device by default
 
@@ -159,8 +159,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** source-evidence — PM-FILE-005 records on-device analysis and no cloud upload by default (EVD-SRC-PRODUCT-001).
 
 **Acceptance criteria:**
-- ZD-FILE-007-AC-01 — Given a user starts a scan under default configuration, when the system analyses the file, then file content is not transmitted to a cloud service. Verification: inspection.
-- ZD-FILE-007-AC-02 — Given a network connection is available, when a default local analysis is performed, then network availability alone does not cause file-content upload. Verification: automated-test.
+- ZD-FILE-AC-13 — Given a user starts a scan under default configuration, when the system analyses the file, then file content is not transmitted to a cloud service. Verification: inspection.
+- ZD-FILE-AC-14 — Given a network connection is available, when a default local analysis is performed, then network availability alone does not cause file-content upload. Verification: automated-test.
 
 ### Requirement ZD-FILE-008 — Gate any future cloud analysis behind separate consent
 
@@ -175,8 +175,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** source-evidence — PM-FILE-006 specifies separate disclosure and consent; cloud analysis is not approved by this contract.
 
 **Acceptance criteria:**
-- ZD-FILE-008-AC-01 — Given a separately approved cloud-analysis option is offered, when the user is asked to enable it, then the disclosure identifies data sent, purpose and recipient or processor. Verification: inspection.
-- ZD-FILE-008-AC-02 — Given the user declines or has not consented, when a scan is requested, then no file content is sent to the cloud. Verification: automated-test.
+- ZD-FILE-AC-15 — Given a separately approved cloud-analysis option is offered, when the user is asked to enable it, then the disclosure identifies data sent, purpose and recipient or processor. Verification: inspection.
+- ZD-FILE-AC-16 — Given the user declines or has not consented, when a scan is requested, then no file content is sent to the cloud. Verification: automated-test.
 
 ### Requirement ZD-FILE-009 — Do not execute selected files as part of analysis
 
@@ -190,8 +190,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** pm-inference — PM inference; safe parsing/isolation and execution boundaries remain open in OPEN-PROPERTIES.
 
 **Acceptance criteria:**
-- ZD-FILE-009-AC-01 — Given a user-selected file is submitted, when the analysis workflow processes it, then the file is not launched or executed as a program, script, macro or active document. Verification: inspection.
-- ZD-FILE-009-AC-02 — Given the selected engine would require execution to produce a result, when execution would be required, then the system does not silently execute the file and reports the limitation. Verification: analysis.
+- ZD-FILE-AC-17 — Given a user-selected file is submitted, when the analysis workflow processes it, then the file is not launched or executed as a program, script, macro or active document. Verification: inspection.
+- ZD-FILE-AC-18 — Given the selected engine would require execution to produce a result, when execution would be required, then the system does not silently execute the file and reports the limitation. Verification: analysis.
 
 ### Requirement ZD-FILE-010 — Expose an honest scan lifecycle
 
@@ -205,8 +205,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** source-evidence — MVP-FILE-001/002 require scan start, progress, termination and truthful terminal state (software-rules/SCENARIOS.md).
 
 **Acceptance criteria:**
-- ZD-FILE-010-AC-01 — Given a scan is accepted and processing has begun, when the user checks its state, then it is distinguishable from rejected and terminal attempts. Verification: manual-test.
-- ZD-FILE-010-AC-02 — Given a scan reaches cancellation, interruption or failure, when the attempt terminates, then its terminal state is not reported as completed. Verification: automated-test.
+- ZD-FILE-AC-19 — Given a scan is accepted and processing has begun, when the user checks its state, then it is distinguishable from rejected and terminal attempts. Verification: manual-test.
+- ZD-FILE-AC-20 — Given a scan reaches cancellation, interruption or failure, when the attempt terminates, then its terminal state is not reported as completed. Verification: automated-test.
 
 ### Requirement ZD-FILE-011 — Support truthful cancellation
 
@@ -220,8 +220,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** pm-inference — PM inference; cancellation and interruption are explicit open dimensions in OPEN-PROPERTIES.
 
 **Acceptance criteria:**
-- ZD-FILE-011-AC-01 — Given a scan is active and cancellation is supported, when the user requests cancellation, then the system stops further analysis as soon as the process can safely stop and reports cancellation. Verification: manual-test.
-- ZD-FILE-011-AC-02 — Given cancellation is unavailable or cannot stop an operation, when the user requests cancellation, then the system does not claim cancellation succeeded and communicates the actual state. Verification: manual-test.
+- ZD-FILE-AC-21 — Given a scan is active and cancellation is supported, when the user requests cancellation, then the system stops further analysis as soon as the process can safely stop and reports cancellation. Verification: manual-test.
+- ZD-FILE-AC-22 — Given cancellation is unavailable or cannot stop an operation, when the user requests cancellation, then the system does not claim cancellation succeeded and communicates the actual state. Verification: manual-test.
 
 ### Requirement ZD-FILE-012 — Use distinct security-analysis outcome classes
 
@@ -235,8 +235,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** source-evidence — PM-FILE-002 defines the four-way result model (EVD-SRC-PRODUCT-001).
 
 **Acceptance criteria:**
-- ZD-FILE-012-AC-01 — Given evidence meets documented confirmed-threat criteria, when the result is presented, then it is classified as Threat found. Verification: automated-test.
-- ZD-FILE-012-AC-02 — Given analysis is incomplete, unsupported or lacks sufficient evidence, when the result is presented, then it is Could not decide or Could not analyse rather than No known threat found. Verification: automated-test.
+- ZD-FILE-AC-23 — Given evidence meets documented confirmed-threat criteria, when the result is presented, then it is classified as Threat found. Verification: automated-test.
+- ZD-FILE-AC-24 — Given analysis is incomplete, unsupported or lacks sufficient evidence, when the result is presented, then it is Could not decide or Could not analyse rather than No known threat found. Verification: automated-test.
 
 ### Requirement ZD-FILE-013 — Do not equate no known threat with safety
 
@@ -250,8 +250,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** source-evidence — PM-FILE-003 prohibits presenting a no-known-threat result as a guarantee that the file is safe.
 
 **Acceptance criteria:**
-- ZD-FILE-013-AC-01 — Given available analysis finds no known threat, when the result is displayed, then wording communicates only that no known threat was found. Verification: inspection.
-- ZD-FILE-013-AC-02 — Given the result is No known threat found, when summary or follow-up text is rendered, then no part guarantees safety or absence of all malware. Verification: manual-test.
+- ZD-FILE-AC-25 — Given available analysis finds no known threat, when the result is displayed, then wording communicates only that no known threat was found. Verification: inspection.
+- ZD-FILE-AC-26 — Given the result is No known threat found, when summary or follow-up text is rendered, then no part guarantees safety or absence of all malware. Verification: manual-test.
 
 ### Requirement ZD-FILE-014 — Record result provenance and analysis context
 
@@ -265,8 +265,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** pm-inference — PM inference for explainability and reproducibility; engine and feed details remain open.
 
 **Acceptance criteria:**
-- ZD-FILE-014-AC-01 — Given a completed scan has a known engine or detection-source identity and version, when its result is retrieved, then that provenance is associated with the result. Verification: inspection.
-- ZD-FILE-014-AC-02 — Given a provenance field is unavailable, when the result is presented, then the system does not fabricate an engine, source or version. Verification: inspection.
+- ZD-FILE-AC-27 — Given a completed scan has a known engine or detection-source identity and version, when its result is retrieved, then that provenance is associated with the result. Verification: inspection.
+- ZD-FILE-AC-28 — Given a provenance field is unavailable, when the result is presented, then the system does not fabricate an engine, source or version. Verification: inspection.
 
 ### Requirement ZD-FILE-015 — Represent uncertainty and partial analysis explicitly
 
@@ -280,8 +280,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** pm-inference — PM inference grounded in MVP-FILE-002's inconclusive/interruption branches and OPEN-PROPERTIES.
 
 **Acceptance criteria:**
-- ZD-FILE-015-AC-01 — Given only part of a file was analysed or required detection data was unavailable, when a result is returned, then the result is marked partial or inconclusive and the limitation is explained. Verification: automated-test.
-- ZD-FILE-015-AC-02 — Given analysis is interrupted before its completion condition, when the attempt terminates, then no complete verdict is issued from the incomplete attempt. Verification: automated-test.
+- ZD-FILE-AC-29 — Given only part of a file was analysed or required detection data was unavailable, when a result is returned, then the result is marked partial or inconclusive and the limitation is explained. Verification: automated-test.
+- ZD-FILE-AC-30 — Given analysis is interrupted before its completion condition, when the attempt terminates, then no complete verdict is issued from the incomplete attempt. Verification: automated-test.
 
 ### Requirement ZD-FILE-016 — Explain detections without inventing evidence
 
@@ -295,8 +295,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** source-evidence — MVP-FILE-002 requires classification basis where exposed and a user-facing explanation.
 
 **Acceptance criteria:**
-- ZD-FILE-016-AC-01 — Given a Threat found or Suspicious result includes detection evidence, when the user opens the result, then available evidence or detection reason is presented without inventing unavailable detail. Verification: inspection.
-- ZD-FILE-016-AC-02 — Given the engine cannot provide a meaningful explanation, when the result is displayed, then the system states the limitation rather than fabricating a reason. Verification: manual-test.
+- ZD-FILE-AC-31 — Given a Threat found or Suspicious result includes detection evidence, when the user opens the result, then available evidence or detection reason is presented without inventing unavailable detail. Verification: inspection.
+- ZD-FILE-AC-32 — Given the engine cannot provide a meaningful explanation, when the result is displayed, then the system states the limitation rather than fabricating a reason. Verification: manual-test.
 
 ### Requirement ZD-FILE-017 — Provide outcome-consistent next-step guidance
 
@@ -310,8 +310,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** pm-inference — PM inference grounded in the four-way result model and no-guarantee rule.
 
 **Acceptance criteria:**
-- ZD-FILE-017-AC-01 — Given a Suspicious or Could not decide result is shown, when the user views its guidance, then the guidance preserves uncertainty and does not label the file confirmed safe or malicious. Verification: manual-test.
-- ZD-FILE-017-AC-02 — Given a Threat found result is shown, when the user views its guidance, then it explains the result and does not instruct execution of the file. Verification: manual-test.
+- ZD-FILE-AC-33 — Given a Suspicious or Could not decide result is shown, when the user views its guidance, then the guidance preserves uncertainty and does not label the file confirmed safe or malicious. Verification: manual-test.
+- ZD-FILE-AC-34 — Given a Threat found result is shown, when the user views its guidance, then it explains the result and does not instruct execution of the file. Verification: manual-test.
 
 ### Requirement ZD-FILE-018 — Keep engine failures separate from verdicts
 
@@ -325,8 +325,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** source-evidence — PM-FILE-004 and OPEN-PROPERTIES identify engine/database unavailable and update failure.
 
 **Acceptance criteria:**
-- ZD-FILE-018-AC-01 — Given a required analysis engine or detection source is unavailable, when a scan is requested, then the system reports unavailable or inconclusive and does not issue a clean verdict. Verification: automated-test.
-- ZD-FILE-018-AC-02 — Given a dependency returns an invalid or unusable response, when the result is evaluated, then the attempt fails safely and the response is not treated as detection evidence. Verification: automated-test.
+- ZD-FILE-AC-35 — Given a required analysis engine or detection source is unavailable, when a scan is requested, then the system reports unavailable or inconclusive and does not issue a clean verdict. Verification: automated-test.
+- ZD-FILE-AC-36 — Given a dependency returns an invalid or unusable response, when the result is evaluated, then the attempt fails safely and the response is not treated as detection evidence. Verification: automated-test.
 
 ### Requirement ZD-FILE-019 — Make retry a distinguishable new attempt
 
@@ -340,8 +340,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** pm-inference — PM inference based on explicit retry/interruption gaps in OPEN-PROPERTIES.
 
 **Acceptance criteria:**
-- ZD-FILE-019-AC-01 — Given a prior attempt failed or was interrupted and the file remains eligible, when the user requests a retry, then a new attempt is created and distinguishable from the prior attempt. Verification: automated-test.
-- ZD-FILE-019-AC-02 — Given a prior attempt produced a partial result, when a retry begins, then the prior result is not relabelled as the retry's completed result. Verification: automated-test.
+- ZD-FILE-AC-37 — Given a prior attempt failed or was interrupted and the file remains eligible, when the user requests a retry, then a new attempt is created and distinguishable from the prior attempt. Verification: automated-test.
+- ZD-FILE-AC-38 — Given a prior attempt produced a partial result, when a retry begins, then the prior result is not relabelled as the retry's completed result. Verification: automated-test.
 
 ### Requirement ZD-FILE-020 — Minimize file and metadata collection
 
@@ -355,8 +355,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** pm-inference — PM privacy recommendation; no separate analytics or remote-processing feature is approved by MVP scope.
 
 **Acceptance criteria:**
-- ZD-FILE-020-AC-01 — Given a file is selected for analysis, when the system reads content and metadata, then access is limited to information necessary for analysis and result communication. Verification: inspection.
-- ZD-FILE-020-AC-02 — Given a metadata field is not required for analysis or result interpretation, when the scan is processed, then that field is not collected solely by default. Verification: inspection.
+- ZD-FILE-AC-39 — Given a file is selected for analysis, when the system reads content and metadata, then access is limited to information necessary for analysis and result communication. Verification: inspection.
+- ZD-FILE-AC-40 — Given a metadata field is not required for analysis or result interpretation, when the scan is processed, then that field is not collected solely by default. Verification: inspection.
 
 ### Requirement ZD-FILE-021 — Protect file data in diagnostics
 
@@ -370,8 +370,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** pm-inference — PM privacy/security recommendation based on the on-device default and minimization principle.
 
 **Acceptance criteria:**
-- ZD-FILE-021-AC-01 — Given a scan encounters a parsing or engine error, when diagnostic information is recorded, then file contents and sensitive metadata are absent from ordinary diagnostic output. Verification: inspection.
-- ZD-FILE-021-AC-02 — Given a diagnostic workflow requests additional file data, when no specific disclosure purpose and consent exist, then that data is not transmitted or retained for diagnostics. Verification: manual-test.
+- ZD-FILE-AC-41 — Given a scan encounters a parsing or engine error, when diagnostic information is recorded, then file contents and sensitive metadata are absent from ordinary diagnostic output. Verification: inspection.
+- ZD-FILE-AC-42 — Given a diagnostic workflow requests additional file data, when no specific disclosure purpose and consent exist, then that data is not transmitted or retained for diagnostics. Verification: manual-test.
 
 ### Requirement ZD-FILE-022 — Separate retained scan-result policy from quarantine retention
 
@@ -386,8 +386,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** source-evidence — PM-FILE-009 and PM-QUAR-013 state separate retention; OPEN-PROPERTIES makes persistence conditional.
 
 **Acceptance criteria:**
-- ZD-FILE-022-AC-01 — Given scan results are persisted beyond the active interaction, when the retention policy is applied, then scan-result retention is documented separately from quarantine-item retention. Verification: inspection.
-- ZD-FILE-022-AC-02 — Given a scan record reaches its documented deletion condition, when the record is deleted, then the policy does not imply deletion or modification of a separate quarantine artifact. Verification: manual-test.
+- ZD-FILE-AC-43 — Given scan results are persisted beyond the active interaction, when the retention policy is applied, then scan-result retention is documented separately from quarantine-item retention. Verification: inspection.
+- ZD-FILE-AC-44 — Given a scan record reaches its documented deletion condition, when the record is deleted, then the policy does not imply deletion or modification of a separate quarantine artifact. Verification: manual-test.
 
 ### Requirement ZD-FILE-023 — Do not require a standalone scan-history feature
 
@@ -401,8 +401,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** owner-decision — The approved MVP exclusions list scan history as a standalone capability (ZD-SCOPE-001).
 
 **Acceptance criteria:**
-- ZD-FILE-023-AC-01 — Given a user opens the MVP-01 workflow, when the user selects, scans and views a result, then those actions do not depend on a standalone scan-history feature. Verification: manual-test.
-- ZD-FILE-023-AC-02 — Given a minimal record is required for another in-scope operation, when the record is retained, then it is not expanded into standalone history without owner approval. Verification: inspection.
+- ZD-FILE-AC-45 — Given a user opens the MVP-01 workflow, when the user selects, scans and views a result, then those actions do not depend on a standalone scan-history feature. Verification: manual-test.
+- ZD-FILE-AC-46 — Given a minimal record is required for another in-scope operation, when the record is retained, then it is not expanded into standalone history without owner approval. Verification: inspection.
 
 ### Requirement ZD-FILE-024 — Maintain shared outcome semantics across platforms
 
@@ -416,8 +416,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** owner-decision — Owner selected web and Android platforms with platform-specific capability differences allowed (product-management/TRACKER.md).
 
 **Acceptance criteria:**
-- ZD-FILE-024-AC-01 — Given equivalent analysis evidence is available on web and Android, when each platform presents the result, then the same product-level outcome class and safety limitation are communicated. Verification: manual-test.
-- ZD-FILE-024-AC-02 — Given a file cannot be accessed on one platform due to platform constraints, when the user requests a scan, then that platform reports its limitation rather than pretending to provide equivalent analysis. Verification: manual-test.
+- ZD-FILE-AC-47 — Given equivalent analysis evidence is available on web and Android, when each platform presents the result, then the same product-level outcome class and safety limitation are communicated. Verification: manual-test.
+- ZD-FILE-AC-48 — Given a file cannot be accessed on one platform due to platform constraints, when the user requests a scan, then that platform reports its limitation rather than pretending to provide equivalent analysis. Verification: manual-test.
 
 ### Requirement ZD-FILE-025 — Disclose unsupported analysis coverage
 
@@ -431,8 +431,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** source-evidence — OPEN-PROPERTIES lists these coverage questions as unresolved.
 
 **Acceptance criteria:**
-- ZD-FILE-025-AC-01 — Given a file exceeds a documented analysis boundary, when the user requests analysis, then the system identifies the applicable limitation. Verification: manual-test.
-- ZD-FILE-025-AC-02 — Given an archive or nested content is only partially covered, when a result is presented, then the uncovered portion is disclosed and the result is not represented as complete coverage. Verification: inspection.
+- ZD-FILE-AC-49 — Given a file exceeds a documented analysis boundary, when the user requests analysis, then the system identifies the applicable limitation. Verification: manual-test.
+- ZD-FILE-AC-50 — Given an archive or nested content is only partially covered, when a result is presented, then the uncovered portion is disclosed and the result is not represented as complete coverage. Verification: inspection.
 
 ### Requirement ZD-FILE-026 — Define and enforce bounded resource limits
 
@@ -446,8 +446,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** source-evidence — OPEN-PROPERTIES identifies file limits and performance/resource targets as unresolved.
 
 **Acceptance criteria:**
-- ZD-FILE-026-AC-01 — Given supported workload and resource limits are documented, when an input or concurrent workload exceeds a limit, then the system rejects, defers or terminates the scan with an explicit bounded outcome. Verification: operational-test.
-- ZD-FILE-026-AC-02 — Given the system is under resource pressure, when a scan cannot safely continue, then it fails or pauses according to documented policy without reporting a completed verdict. Verification: operational-test.
+- ZD-FILE-AC-51 — Given supported workload and resource limits are documented, when an input or concurrent workload exceeds a limit, then the system rejects, defers or terminates the scan with an explicit bounded outcome. Verification: operational-test.
+- ZD-FILE-AC-52 — Given the system is under resource pressure, when a scan cannot safely continue, then it fails or pauses according to documented policy without reporting a completed verdict. Verification: operational-test.
 
 ### Requirement ZD-FILE-027 — Verify integrity of conditional engine or detection updates
 
@@ -462,8 +462,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** pm-inference — PM security recommendation; OPEN-PROPERTIES identifies update/freshness and trust verification as open.
 
 **Acceptance criteria:**
-- ZD-FILE-027-AC-01 — Given an updateable engine or detection dataset is selected, when an update is received, then its authenticity and integrity are verified before activation. Verification: inspection.
-- ZD-FILE-027-AC-02 — Given update verification fails or the update is incomplete, when a scan would depend on that update, then the invalid update is not used and the scan is unavailable or inconclusive as applicable. Verification: automated-test.
+- ZD-FILE-AC-53 — Given an updateable engine or detection dataset is selected, when an update is received, then its authenticity and integrity are verified before activation. Verification: inspection.
+- ZD-FILE-AC-54 — Given update verification fails or the update is incomplete, when a scan would depend on that update, then the invalid update is not used and the scan is unavailable or inconclusive as applicable. Verification: automated-test.
 
 ### Requirement ZD-FILE-028 — Disclose known detection-data freshness
 
@@ -478,8 +478,8 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 **Basis:** pm-inference — PM inference; detection-source freshness remains unresolved in OPEN-PROPERTIES.
 
 **Acceptance criteria:**
-- ZD-FILE-028-AC-01 — Given a scan uses detection data with a known update timestamp or freshness state, when the result is displayed, then the known relevant freshness information is available with the result. Verification: inspection.
-- ZD-FILE-028-AC-02 — Given no reliable freshness information exists, when the result is displayed, then the system does not invent an update date or freshness guarantee. Verification: inspection.
+- ZD-FILE-AC-55 — Given a scan uses detection data with a known update timestamp or freshness state, when the result is displayed, then the known relevant freshness information is available with the result. Verification: inspection.
+- ZD-FILE-AC-56 — Given no reliable freshness information exists, when the result is displayed, then the system does not invent an update date or freshness guarantee. Verification: inspection.
 
 ## 7. Open product questions
 
@@ -549,3 +549,13 @@ If a future implementation introduces an API, messaging, worker, external engine
 ## 9. Approval and conformance status
 
 This is a PM-authored declared product contract in Draft status. All 28 requirements are PM-proposed. The owner approved the plan to author this contract, not the normative product statements. No implementation was changed or tested. This contract does not establish runtime conformance, security certification, production readiness or complete replication of a reference application.
+
+
+## Phase 9 owner-approved policy and deferred details
+
+- On-device/local analysis is the default. Optional cloud analysis is not part of MVP-01; a future capability requires separate owner approval and explicit user consent before transmission.
+- Keep the four result classes distinct. Suspicious, partial, unavailable and inconclusive results must not be presented as safe; no-known-threat is not a safety guarantee.
+- Minimize file content and metadata. Do not retain file content after the active scan by default; any retained result data requires a documented purpose, retention policy and deletion path.
+- Publish a tested support matrix and reject unsupported inputs. Engine selection, exact file types/limits, verdict thresholds, numeric resource budgets, hash algorithms and progress/cancellation mechanics remain deferred to architecture and evidence-led testing.
+
+Detailed question dispositions: [Phase 9 owner decision register](../../2026-11-28/35-PHASE-9-OWNER-DECISION-REGISTER.md).
