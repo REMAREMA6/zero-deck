@@ -4,8 +4,8 @@
 **Workspace:** `product-management/`  
 **Started:** 2026-11-27  
 **Method:** CIRCLES — seven steps, followed by supporting product-definition work  
-**Overall status:** [~] CIRCLES completed provisionally; blueprint, architecture follow-up, customer validation and owner decisions remain open; PM-authored product-rules Phase 3 is complete  
-**Current position:** PM-authored rules Phases 0–3 complete; eight authentication owner decisions recorded; Phase 4 (MVP-01 manual file-analysis requirements) is next  
+**Overall status:** [~] CIRCLES completed provisionally; blueprint, architecture follow-up, customer validation and owner decisions remain open; PM-authored product-rules Phase 4 is complete  
+**Current position:** PM-authored rules Phases 0–4 complete; authentication decisions recorded; MVP-01 manual file-analysis contract drafted and validated; Phase 5 (MVP-02 quarantine/disposition) is next  
 **Last reconciled:** 2026-11-28
 
 > Operational source of truth. Update this tracker whenever work starts, changes status, becomes blocked, or completes. A new session must resume from this file and linked records without relying on chat history.
@@ -26,7 +26,7 @@ During that work, the owner added a distinct requirement: the Product Management
 
 That work is now recorded as a separate workstream. It does not restart CIRCLES or change the three-capability MVP.
 
-**Completed most recently:** recorded the owner's eight approved authentication decisions, updated the canonical contract to v0.2.0-draft, synchronized its structured projection/evidence and validated the result. **Next task:** author MVP-01 manual file-analysis requirements (Phase 4).
+**Completed most recently:** completed Phase 4 MVP-01 manual file-analysis requirements: 28 requirements, 56 acceptance criteria, nine open questions, 15-facet assessment, 35-scenario failure/recovery matrix, synchronized projection/evidence and targeted validation. **Next task:** prepare the Phase 5 plan for MVP-02; do not begin until the owner approves it.
 
 ### Current product authority
 
@@ -89,7 +89,7 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 | 1 | Design PM contract profile | [x] | Exact mapping, author identity, ID/version rules, complete-record and extension schemas, and validation procedure documented and checked. |
 | 2 | Research and author authentication requirements | [x] | [IDENTITY-AUTHENTICATION.md](product-rules/contracts/IDENTITY-AUTHENTICATION.md), structured projection, evidence, [CIRCLES analysis](2026-11-27/13-PHASE-2-CIRCLES-AUTHENTICATION.md) and [Phase 2 validation](product-rules/PHASE-2-VALIDATION.md); 25 requirements, 66 acceptance criteria; eight decisions resolved, five operational questions open. |
 | 3 | Validate authentication coverage | [x] | [15-facet assessment](product-rules/PHASE-3-15-FACET-COVERAGE.md), [23-scenario matrix](product-rules/PHASE-3-NEGATIVE-FAILURE-RECOVERY-MATRIX.md), [structured proposals](product-rules/proposals/PHASE-3-AUTHENTICATION-COVERAGE-ADDITIONS.json), [Behaviour facet-reference amendment](product-rules/proposals/PHASE-3-BEHAVIOUR-FACET-REFERENCE.json), [CIRCLES analysis](2026-11-28/15-PHASE-3-CIRCLES-COVERAGE.md) and [validation](product-rules/PHASE-3-VALIDATION.md). All 15 facets assessed; 21 existing requirements/46 criteria preserved at Phase 3 close; 8 owner questions were then open. |
-| 4 | Author manual file-analysis requirements | [ ] | File selection, input scope, verdicts, limitations, privacy and failure semantics. |
+| 4 | Author manual file-analysis requirements | [x] | [MVP-01 contract](product-rules/contracts/MANUAL-FILE-ANALYSIS.md), [structured projection](product-rules/contracts/MANUAL-FILE-ANALYSIS.declared-contract.json), [15-facet assessment](product-rules/PHASE-4-MVP-01-FACET-COVERAGE.md), [35-scenario matrix](product-rules/PHASE-4-MVP-01-NEGATIVE-FAILURE-RECOVERY-MATRIX.md), [CIRCLES analysis](2026-11-28/19-PHASE-4-CIRCLES-MANUAL-FILE-ANALYSIS.md), [validation](product-rules/PHASE-4-MVP-01-VALIDATION.md); 28 PM-proposed requirements / 56 criteria; nine open questions. |
 | 5 | Author quarantine/disposition requirements | [ ] | Quarantine, integrity, restore, deletion, retention and recovery. |
 | 6 | Author website/link-check requirements | [ ] | URL semantics, provider failure, privacy, Pro + activation gates, quotas and budget controls. |
 | 7 | Author cross-cutting system requirements | [ ] | Accounts, entitlement, configuration, platform differences, data lifecycle, security and operations. |
@@ -122,10 +122,10 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 
 ## 6. Immediate next actions
 
-1. Start Phase 4: author MVP-01 manual file security analysis requirements, preserving product scope and technology independence.
+1. Prepare the Phase 5 plan for MVP-02 quarantine and file disposition; show it to the owner, write it under `product-management/`, and wait for explicit approval.
 2. Keep architecture follow-up and blueprint gaps visible; do not mark them complete without evidence.
 3. Update this tracker at each phase transition and link every deliverable.
-4. Ask the owner only for decisions that evidence and PM deliberation cannot settle.
+4. Do not start Phase 5 until its plan is approved.
 
 ## 7. Session log
 
@@ -141,7 +141,8 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 | 2026-11-27 | Researched and authored the 21-requirement identity/authentication contract, structured declared-contract projection, retained evidence and eight open owner questions; ran targeted structural, parity, facet, reference and digest checks. | Phase 2 complete; Phase 3 coverage assessment is next. Requirements remain PM-proposed, not owner-approved. |
 | 2026-11-27 | Completed authentication CIRCLES analysis; corrected provenance mapping and replaced generic projection criteria with 46 concrete Markdown-derived scenarios; validated PM/upstream record definitions and evidence, ran five negative checks, and verified the exact SHA-256 digest. | Phase 2 exit criteria pass; sign-in/recovery/session policy questions remain with owner. |
 | 2026-11-28 | Owner approved the written Phase 3 plan; completed 15-facet assessment, 23-scenario negative/failure/recovery matrix, cross-facet review, three structured candidate additions and targeted validation. | Phase 3 complete for PM requirements coverage; canonical Phase 2 contract remained unchanged at that point. |
-| 2026-11-28 | Owner accepted all eight authentication recommendations; updated contract v0.2.0-draft, structured projection, evidence, decision register, validation, index, tracker and workstream. | Eight original questions resolved; five additional operational questions remain open; original 21 requirements remain PM-proposed; Phase 4 is next. |
+| 2026-11-28 | Owner accepted all eight authentication recommendations; updated contract v0.2.0-draft, structured projection, evidence, decision register, validation, index, tracker and workstream. | Eight original questions resolved; five additional operational questions remain open; original 21 requirements remain PM-proposed. |
+| 2026-11-28 | Owner approved Phase 4 plan; completed MVP-01 CIRCLES analysis, 28-requirement contract, 56 acceptance criteria, nine open questions, 15-facet assessment, 35-scenario matrix, structured projection/evidence and targeted validation. | Phase 4 complete within documented scope; all requirements remain PM-proposed; no runtime or full Draft 2020-12 validation claim; Phase 5 plan is next and requires approval. |
 
 ## 8. Authority and repository boundaries
 
