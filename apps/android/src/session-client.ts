@@ -10,7 +10,9 @@ export interface RotatedSession {
 }
 
 export class SessionRotationError extends Error {
-  constructor(readonly reason: 'unauthenticated' | 'unavailable' | 'invalid_response' | 'secure_storage') {
+  constructor(
+    readonly reason: 'unauthenticated' | 'unavailable' | 'invalid_response' | 'secure_storage',
+  ) {
     super(
       reason === 'unauthenticated'
         ? 'The session is no longer valid. Sign in again.'

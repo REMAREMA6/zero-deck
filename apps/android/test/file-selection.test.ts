@@ -21,7 +21,9 @@ function createHandle(overrides: Partial<AndroidPickedFileHandle> = {}) {
 
 describe('Android document access adapter', () => {
   it('treats picker cancellation as no selection', async () => {
-    const picker = { pickFileAsync: vi.fn(async () => ({ canceled: true as const, result: null })) };
+    const picker = {
+      pickFileAsync: vi.fn(async () => ({ canceled: true as const, result: null })),
+    };
     const adapter = createAndroidFileSelectionAdapter(picker);
     await expect(adapter.select()).resolves.toBeNull();
   });
@@ -99,9 +101,7 @@ describe('Android document access adapter', () => {
       pickFileAsync: vi.fn(async () => ({ canceled: false as const, result: handle })),
     });
     const selected = await adapter.select();
-    await expect(selected!.readBytes()).rejects.toEqual(
-      new AndroidFileAccessError('unreadable'),
-    );
+    await expect(selected!.readBytes()).rejects.toEqual(new AndroidFileAccessError('unreadable'));
   });
 
   it('detects a file that changed size after selection', async () => {

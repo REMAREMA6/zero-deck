@@ -51,7 +51,10 @@ describe('Web session credential rotation boundary', () => {
   it('clears the browser cookie when the server rejects the old credential', async () => {
     vi.stubEnv('API_INTERNAL_URL', 'https://api.example.test');
     vi.stubEnv('NODE_ENV', 'production');
-    vi.stubGlobal('fetch', vi.fn(async () => new Response(null, { status: 401 })));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async () => new Response(null, { status: 401 })),
+    );
 
     const request = new NextRequest('https://app.example.test/api/sessions/current/rotate', {
       method: 'POST',

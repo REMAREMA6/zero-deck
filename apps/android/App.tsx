@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as SecureStore from 'expo-secure-store';
 import { File } from 'expo-file-system';
-import {
-  createAndroidFileSelectionAdapter,
-  type SelectedAndroidFile,
-} from './src/file-selection';
+import { createAndroidFileSelectionAdapter, type SelectedAndroidFile } from './src/file-selection';
 import {
   ActivityIndicator,
   Pressable,
@@ -69,7 +66,9 @@ export default function App() {
   const [submitting, setSubmitting] = useState(false);
   const [accepted, setAccepted] = useState(false);
   const [selectedFile, setSelectedFile] = useState<SelectedAndroidFile | null>(null);
-  const [fileStatus, setFileStatus] = useState('No file selected. Selecting a file does not start analysis.');
+  const [fileStatus, setFileStatus] = useState(
+    'No file selected. Selecting a file does not start analysis.',
+  );
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
 
@@ -461,7 +460,8 @@ export default function App() {
           </Pressable>
           <Text style={styles.footnote}>
             The selected file stays on this device. ZeroDeck has not read or uploaded its contents.
-            File-type coverage and size limits are not yet approved; no security verdict is available.
+            File-type coverage and size limits are not yet approved; no security verdict is
+            available.
           </Text>
         </ScrollView>
       </SafeAreaView>

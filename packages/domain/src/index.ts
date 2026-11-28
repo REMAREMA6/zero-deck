@@ -107,7 +107,10 @@ export function mapAnalysisEngineResult(
   };
 }
 
-function notifyLifecycle(observer: LocalAnalysisObserver | undefined, lifecycle: AnalysisLifecycle) {
+function notifyLifecycle(
+  observer: LocalAnalysisObserver | undefined,
+  lifecycle: AnalysisLifecycle,
+) {
   try {
     observer?.onLifecycleChange?.(lifecycle);
   } catch {

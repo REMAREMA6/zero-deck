@@ -32,7 +32,10 @@ const testPasswordPolicy = { assertAccepted: (_password: string) => undefined };
 class FakeSecurityNotificationDelivery {
   readonly notifications: Array<{ email: string; kind: string }> = [];
 
-  async sendSecurityNotification(email: string, kind: 'password_changed' | 'primary_email_changed' | 'account_recovery_completed') {
+  async sendSecurityNotification(
+    email: string,
+    kind: 'password_changed' | 'primary_email_changed' | 'account_recovery_completed',
+  ) {
     this.notifications.push({ email, kind });
   }
 }
@@ -231,9 +234,7 @@ describe('email verification with PostgreSQL and fake delivery', () => {
     const securityDelivery = new FakeSecurityNotificationDelivery();
     const notifier = createVerifiedEmailSecurityNotifier(verification, securityDelivery);
 
-    await expect(
-      notifier.notify(accountId, 'account_recovery_completed'),
-    ).resolves.toBe(false);
+    await expect(notifier.notify(accountId, 'account_recovery_completed')).resolves.toBe(false);
     expect(securityDelivery.notifications).toHaveLength(0);
 
     await verification.request(email);
@@ -241,9 +242,7 @@ describe('email verification with PostgreSQL and fake delivery', () => {
     expect(await verification.verify(challenge.token)).toBe(true);
 
     await expect(notifier.notify(accountId, 'primary_email_changed')).resolves.toBe(true);
-    expect(securityDelivery.notifications).toEqual([
-      { email, kind: 'primary_email_changed' },
-    ]);
+    expect(securityDelivery.notifications).toEqual([{ email, kind: 'primary_email_changed' }]);
   });
 
   it('invalidates a challenge when fake delivery fails', async () => {

@@ -9,8 +9,7 @@ export interface AndroidPickedFileHandle {
 
 export interface AndroidFilePickerPort {
   pickFileAsync(): Promise<
-    | { canceled: true; result: null }
-    | { canceled: false; result: AndroidPickedFileHandle }
+    { canceled: true; result: null } | { canceled: false; result: AndroidPickedFileHandle }
   >;
 }
 

@@ -390,7 +390,9 @@ h3 {
   color: #10160d;
   font-size: 12px;
   font-weight: 800;
-  transition: transform 160ms ease, filter 160ms ease;
+  transition:
+    transform 160ms ease,
+    filter 160ms ease;
 }
 .hero-action:hover,
 .hero-action:focus-visible {

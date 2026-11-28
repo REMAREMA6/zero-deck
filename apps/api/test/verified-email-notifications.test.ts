@@ -49,9 +49,7 @@ describe('verified-email security notification boundary', () => {
     const recovery = createVerifiedEmailRecoveryBoundary(lookup, delivery);
 
     await expect(recovery.request('account-1')).resolves.toBe(true);
-    expect(delivery.sendRecoveryChallenge).toHaveBeenCalledExactlyOnceWith(
-      'verified@example.test',
-    );
+    expect(delivery.sendRecoveryChallenge).toHaveBeenCalledExactlyOnceWith('verified@example.test');
   });
 
   it('propagates delivery failure without substituting an unverified address', async () => {

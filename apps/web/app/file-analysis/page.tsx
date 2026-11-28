@@ -67,7 +67,10 @@ export default function FileAnalysisPage() {
             onChange={handleFileChange}
           />
           <span className="file-picker-action">Choose file</span>
-          <span className="file-picker-hint">One file · selected locally in this browser · access can be lost if the browser invalidates the selection</span>
+          <span className="file-picker-hint">
+            One file · selected locally in this browser · access can be lost if the browser
+            invalidates the selection
+          </span>
         </label>
 
         {selectedFile ? (

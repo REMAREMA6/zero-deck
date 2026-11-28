@@ -1,5 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
-import { createWebFileAccessHandle, summarizeSelectedFile, WebFileAccessError } from './file-selection';
+import {
+  createWebFileAccessHandle,
+  summarizeSelectedFile,
+  WebFileAccessError,
+} from './file-selection';
 
 describe('Web file selection and access', () => {
   it('returns no selection when the user has not chosen a file', () => {
@@ -27,9 +31,7 @@ describe('Web file selection and access', () => {
   });
 
   it('does not infer a file type when the browser reports none', () => {
-    expect(
-      summarizeSelectedFile({ name: 'sample.unknown', size: 12, type: '' }),
-    ).toEqual({
+    expect(summarizeSelectedFile({ name: 'sample.unknown', size: 12, type: '' })).toEqual({
       name: 'sample.unknown',
       sizeBytes: 12,
       declaredType: 'Not reported by the browser',

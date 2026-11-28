@@ -21,16 +21,17 @@ function createStorage() {
 describe('Android session rotation client', () => {
   it('stores the replacement token in secure storage and returns only session metadata', async () => {
     const { storage, values } = createStorage();
-    const fetcher = vi.fn(async () =>
-      new Response(
-        JSON.stringify({
-          sessionToken: 'new-token',
-          accountId: 'account-1',
-          sessionId: 'session-1',
-          absoluteExpiresAt: '2026-12-28T00:00:00.000Z',
-        }),
-        { status: 200 },
-      ),
+    const fetcher = vi.fn(
+      async () =>
+        new Response(
+          JSON.stringify({
+            sessionToken: 'new-token',
+            accountId: 'account-1',
+            sessionId: 'session-1',
+            absoluteExpiresAt: '2026-12-28T00:00:00.000Z',
+          }),
+          { status: 200 },
+        ),
     );
 
     const result = await rotateSessionCredential(
