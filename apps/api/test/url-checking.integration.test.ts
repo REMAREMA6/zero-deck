@@ -3,6 +3,7 @@ import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { Pool } from 'pg';
 import { applyMigrations } from '../src/db/migrate.js';
 import { createUrlCheckService } from '../src/modules/website/url-checking.js';
+import { createProtectedWorkService } from '../src/modules/authorization/protected-work.js';
 
 const databaseUrl = process.env.DATABASE_URL;
 const pool = databaseUrl ? new Pool({ connectionString: databaseUrl }) : null;
@@ -100,7 +101,10 @@ describe('MVP-03 independent URL-check authorization gates', () => {
       explanation: 'No known match was returned. This is not a safety guarantee.',
     });
     expect(lookup).toHaveBeenCalledTimes(1);
-    expect(lookup).toHaveBeenCalledWith({ url: 'https://example.com/path' });
+    expect(lookup).toHaveBeenCalledWith({
+      url: 'https://example.com/path',
+      signal: expect.any(AbortSignal),
+    });
   });
 
   it('rejects unsupported schemes, malformed URLs and embedded credentials before dispatch', async () => {
