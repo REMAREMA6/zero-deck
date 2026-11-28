@@ -35,7 +35,10 @@ describe('local analysis engine boundary', () => {
         outcome,
         engineId: 'test-engine',
         engineVersion: 'test-version',
-        explanation: 'The test engine returned this outcome.',
+        explanation:
+        outcome === 'no_known_threat_found'
+          ? 'No known threat was found. This is not a guarantee that the file is safe.'
+          : 'The test engine returned this outcome.',
       })),
     };
 
