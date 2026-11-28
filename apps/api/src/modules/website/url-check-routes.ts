@@ -15,6 +15,7 @@ interface UrlCheckService {
           'pro_required' | 'activation_disabled' | 'permission_required' | 'eligibility_unknown';
       }
     | { status: 'unavailable' }
+    | { status: 'cancelled' }
     | { status: 'completed'; verdict: string; explanation: string }
   >;
 }
