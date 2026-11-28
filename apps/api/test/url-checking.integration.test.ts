@@ -1,3 +1,6 @@
+env:
+  PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+##[endgroup]
 import { randomUUID } from 'node:crypto';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { Pool } from 'pg';
@@ -107,11 +110,7 @@ describe('MVP-03 independent URL-check authorization gates', () => {
     if (!pool) throw new Error('PostgreSQL is unavailable.');
     const lookup = vi.fn();
     const service = createUrlCheckService(pool, { lookup });
-    for (const value of [
-      'javascript:alert(1)',
-      'file:///etc/passwd',
-      '***example.com',
-    ]) {
+    for (const value of ['javascript:alert(1)', 'file:///etc/passwd', '***example.com']) {
       await expect(service.check(randomUUID(), value, true)).rejects.toThrow();
     }
     expect(lookup).not.toHaveBeenCalled();
