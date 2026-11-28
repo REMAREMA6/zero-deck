@@ -7,7 +7,7 @@
     "uri": "https://github.com/REMAREMA6/zero-deck/blob/d162584f48d8682d0994ffc8681702df68d39231/product-management/product-rules/contracts/WEBSITE-LINK-CHECKING.md",
     "version": "0.1.0-draft",
     "revision": "d162584f48d8682d0994ffc8681702df68d39231",
-    "digest": "sha256:a2d479a1a56cfe01cb8a51e5b4a9253296c807635d5d69273af4a91b916091cc",
+    "digest": "sha256:95c70e5ff15021162cb5e91d97d2d7806687eeabe8fa0a2ef26e6317235567d2",
     "mediaType": "text/markdown"
   },
   "scope": "MVP-03 website and link checking for web and Android; bounded user-initiated URL checks, eligibility/no-call gates, URL and destination safety, provider interaction, privacy, results, failures, usage controls and platform semantics; excludes crawling and general network reconnaissance.",
