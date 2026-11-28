@@ -246,6 +246,8 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### C1. File access and capability adapters
 
+**Status: Partial — Web file selection and metadata-only state are implemented in `apps/web/app/file-analysis/page.tsx` and `apps/web/lib/file-selection.ts`; no content read/upload or scan is performed. Unit tests are awaiting full CI run [46147873294](https://github.com/REMAREMA6/zero-deck/actions/runs/46147873294). Android picker, permission-loss/unreadable handling and explicit backend/network-boundary proof remain.**
+
 **Description:** Add explicit user-selected file access for Web and Android and truthfully handle revoked/unreadable/unsupported inputs.
 
 **Acceptance criteria**
@@ -295,12 +297,14 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### C4. Analysis client surfaces
 
+**Status: Partial — Web file-selection surface now explains engine-unavailable and unsupported-format/limit states without presenting a fake scan result. Android parity and browser accessibility/responsive interaction tests remain. CI verification is pending in run [46147873294](https://github.com/REMAREMA6/zero-deck/actions/runs/46147873294).**
+
 **Description:** Build the Web and Android file-selection and result experiences with honest engine-unavailable states.
 
 **Acceptance criteria**
 - [ ] Both clients present the same four outcome meanings.
-- [ ] No fake result is shown as a real scan.
-- [ ] Unsupported formats/capabilities are disclosed.
+- [x] No fake result is shown as a real scan (Web explicitly states that no scan was performed).
+- [x] Unsupported formats/capabilities are disclosed (Web states supported formats and size limits are not yet approved).
 - [ ] Responsive/accessibility behavior is verified.
 
 **Verification:** Playwright and Android UI tests.  
