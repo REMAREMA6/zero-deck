@@ -4,9 +4,11 @@ import { verifyPassword } from './password-hasher.js';
 export type FreshAuthenticationAction<T> = (client: PoolClient) => Promise<T>;
 
 export interface FreshAuthenticationGuard {
-  execute<T>(accountId: string, currentPassword: string, action: FreshAuthenticationAction<T>): Promise<
-    { authenticated: false } | { authenticated: true; value: T }
-  >;
+  execute<T>(
+    accountId: string,
+    currentPassword: string,
+    action: FreshAuthenticationAction<T>,
+  ): Promise<{ authenticated: false } | { authenticated: true; value: T }>;
 }
 
 /**
