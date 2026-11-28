@@ -4,10 +4,10 @@
   "title": "ZeroDeck Cross-Cutting System Requirements",
   "issuer": "ZeroDeck Product Management Agent",
   "artifact": {
-    "uri": "https://github.com/REMAREMA6/zero-deck/blob/8ad461896994f58632a570faee9b2c82c9945806/product-management/product-rules/contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.md",
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/4b4d32b939e627fe84b4120ab43df6b5c733d421/product-management/product-rules/contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.md",
     "version": "0.1.0-draft",
-    "revision": "8ad461896994f58632a570faee9b2c82c9945806",
-    "digest": "sha256:6de28670247210f80ae7835633d9fdadf771db926af26ad102c76a3afd9b34c4",
+    "revision": "4b4d32b939e627fe84b4120ab43df6b5c733d421",
+    "digest": "sha256:f0b491d4ce97b7286ad9f56d35f61761204fffb36e0700f1778eae27da7dc06a",
     "mediaType": "text/markdown"
   },
   "scope": "Cross-capability system and operational product requirements applying across ZeroDeck web and Android; excludes capability-specific implementation details and technology/architecture selection.",
@@ -202,7 +202,7 @@
             "Both sessions resolve to the same account principal; session credentials remain independently controlled."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Shared account identity."
+            "The system MUST NOT create unrelated account principals for the same ZeroDeck account solely because the user is on a different supported platform."
           ],
           "rationale": "Owner direction: one product identity across web and Android; detailed session policy remains in authentication contract.  ",
           "basis": [
@@ -259,7 +259,7 @@
             "The platform limitation and consequence are clear; unsupported parity is not implied."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Platform capability boundary."
+            "The system MUST NOT imply identical platform capability or permission where a material difference exists."
           ],
           "rationale": "Owner permits platform-specific differences; truthful disclosure is a PM inference.  ",
           "basis": [
@@ -312,7 +312,7 @@
             "Operation is allowed only after applicable authoritative checks pass."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Authoritative authorization."
+            "A client-supplied entitlement, activation, role, or permission claim MUST NOT by itself authorize a protected operation."
           ],
           "rationale": "Cross-platform security inference; MVP-03 requires independent eligibility checks.  ",
           "basis": [
@@ -375,7 +375,7 @@
             "Both gates are independently positive; neither substitutes for the other."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Independent MVP-03 gates."
+            "The system MUST NOT infer one eligibility gate from the other or dispatch a provider/API call while either gate is false or unknown."
           ],
           "rationale": "Owner-approved scope invariant ZD-SCOPE-001 and MVP-03 ZD-WEB-001..003.  ",
           "basis": [
@@ -436,7 +436,7 @@
             "Operation is denied according to updated authoritative state."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Authorization revocation."
+            "A newly evaluated protected operation MUST NOT be authorized solely by stale client-side state after authoritative revocation."
           ],
           "rationale": "Propagation timing and in-flight treatment remain open in ZD-Q-AUTH-013 and ZD-Q-WEB-011/012.  ",
           "basis": [
@@ -499,7 +499,7 @@
             "Its purpose and authorized access boundary are documented."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Cross-capability data purpose."
+            "The system MUST NOT collect, generate, or retain a data category without a documented product purpose and access boundary."
           ],
           "rationale": "Inferred from shared data handling across authentication and the three capability contracts.  ",
           "basis": [
@@ -564,7 +564,7 @@
             "Only required and permitted data is disclosed."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Minimum necessary disclosure."
+            "The system MUST NOT disclose unrelated account data, file contents, credentials, or diagnostics to an external service."
           ],
           "rationale": "Complements MVP-01 no-upload-by-default and MVP-03 minimum disclosure.  ",
           "basis": [
@@ -625,7 +625,7 @@
             "A reviewable lifecycle policy records purpose, trigger, deletion behaviour and exceptions."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Data lifecycle transparency."
+            "The system MUST NOT retain system-managed user data indefinitely by omission or without documented lifecycle rules."
           ],
           "rationale": "Exact schedules and lawful retention categories remain unresolved in existing contracts.  ",
           "basis": [
@@ -682,7 +682,7 @@
             "The secret is not disclosed through that channel."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Secret isolation."
+            "Server-only secrets MUST NOT be shipped in public client configuration or exposed in ordinary responses or diagnostics."
           ],
           "rationale": "Security boundary inference; owner prefers mature security libraries and first-party backend.  ",
           "basis": [
@@ -735,7 +735,7 @@
             "Unsafe operation is blocked and an actionable operator signal is produced."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Configuration validation."
+            "A missing, malformed, or inconsistent required configuration value MUST NOT be treated as enabled or valid."
           ],
           "rationale": "MVP-03 owner activation is a protected control; no configuration mechanism selected.  ",
           "basis": [
@@ -794,7 +794,7 @@
             "Each environment uses only its intended authority and values."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Environment separation."
+            "Non-production credentials or operational controls MUST NOT authorize production operations."
           ],
           "rationale": "Cross-cutting operational safeguard; deployment topology remains undecided.  ",
           "basis": [
@@ -847,7 +847,7 @@
             "Operation is reported failed, incomplete, or unavailable with known limitation."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Dependency failure truthfulness."
+            "A failed, timed-out, or unusable required dependency MUST NOT be represented as a successful operation."
           ],
           "rationale": "Capability contracts distinguish unknown/failure from successful outcomes.  ",
           "basis": [
@@ -908,7 +908,7 @@
             "Unaffected capability remains available if its own dependencies permit."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Degraded capability isolation."
+            "A failure in one capability's optional or independent dependency MUST NOT by itself disable an unrelated capability."
           ],
           "rationale": "Product-level outcome; does not prescribe microservices or topology.  ",
           "basis": [
@@ -969,7 +969,7 @@
             "Recoverable records and limitations are documented for operators."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Recoverable backend state."
+            "The system MUST NOT assume that every data category is backed up or recoverable; recovery coverage and limitations must be explicit."
           ],
           "rationale": "Account, entitlement, activation and audit state; RPO/RTO and backup policy remain open.  ",
           "basis": [
@@ -1030,7 +1030,7 @@
             "Restored authorization state is verified before use."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Restore integrity."
+            "Unverified restored state MUST NOT authorize protected operations."
           ],
           "rationale": "No integrity mechanism or recovery topology selected.  ",
           "basis": [
@@ -1093,7 +1093,7 @@
             "Actor, action, target, time and outcome are reviewable subject to approved minimization and retention."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Audit security-sensitive changes."
+            "A security-sensitive administrative change MUST NOT become unreviewable because no attributable record was retained."
           ],
           "rationale": "Owner-controlled activation and entitlement affect provider dispatch; exact fields/retention remain open.  ",
           "basis": [
@@ -1154,7 +1154,7 @@
             "Only minimized or redacted fields are included."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Diagnostic minimization."
+            "Ordinary diagnostics MUST NOT contain raw credentials, secrets, unnecessary file contents, or unredacted sensitive URL components."
           ],
           "rationale": "Complements explicit MVP-01 and MVP-03 diagnostic privacy requirements.  ",
           "basis": [
@@ -1213,7 +1213,7 @@
             "Affected capability and failure class are distinguishable with privacy-safe detail."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Operational health visibility."
+            "Operational health output MUST NOT expose user content or secrets, and MUST NOT conceal the affected failure class."
           ],
           "rationale": "No monitoring vendor, topology or numeric SLO selected.  ",
           "basis": [
@@ -1274,7 +1274,7 @@
             "A reviewable record captures scope, timeline, containment and resolution."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Incident record."
+            "A material security or availability incident MUST NOT be closed without a record of its scope, timeline, containment and resolution status."
           ],
           "rationale": "Incident severity, notification duties and retention require owner/legal review.  ",
           "basis": [
@@ -1333,7 +1333,7 @@
             "Operation respects an explicit applicable bound."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Bounded shared resource use."
+            "A resource-consuming operation MUST NOT be enabled for general use without a documented applicable resource bound."
           ],
           "rationale": "MVP contracts contain resource/usage constraints; numeric limits remain open.  ",
           "basis": [
@@ -1396,7 +1396,7 @@
             "Request receives explicit non-success or bounded queue state; it is not falsely completed."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Overload behaviour."
+            "The system MUST NOT silently drop accepted work or report work as complete when overload prevented safe completion."
           ],
           "rationale": "No queue architecture or numeric limit chosen.  ",
           "basis": [
@@ -1459,7 +1459,7 @@
             "Role, failure impact, responsible owner and exit consideration are documented."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for External dependency lifecycle."
+            "A production-critical external dependency MUST NOT be adopted without an identified purpose, responsible owner, failure impact and exit consideration."
           ],
           "rationale": "MVP-03 provider remains unselected; no vendor/procurement choice made.  ",
           "basis": [
@@ -1516,7 +1516,7 @@
             "Response is validated and cannot override trusted local policy."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for External response trust."
+            "Unvalidated external response data MUST NOT override trusted account state, authorization policy, or local security policy."
           ],
           "rationale": "Provider-specific schema and verdict mapping remain in MVP-03.  ",
           "basis": [
@@ -1575,7 +1575,7 @@
             "Documented duplicate-request policy prevents unintended duplicate effects."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Idempotent state-changing operations."
+            "A retry or duplicate submission MUST NOT create unintended duplicate state changes or side effects."
           ],
           "rationale": "Idempotency format and endpoint-specific rules remain implementation/API decisions.  ",
           "basis": [
@@ -1638,7 +1638,7 @@
             "Only artifacts satisfying the approved release policy are accepted."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Release provenance."
+            "An artifact with unverifiable or mismatched release provenance MUST NOT be accepted as a trusted product update."
           ],
           "rationale": "Signing, distribution channels, CI/CD and rollback design are not selected.  ",
           "basis": [
@@ -1691,7 +1691,7 @@
             "Operation is blocked or safely constrained with actionable compatibility guidance."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Version compatibility."
+            "An incompatible client/service version MUST NOT silently execute an operation whose semantics or security assumptions are unsupported."
           ],
           "rationale": "Supported-version windows and upgrade deadlines remain open.  ",
           "basis": [
@@ -1750,7 +1750,7 @@
             "Status accurately describes only the operation and scope that occurred."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Truthful cross-capability status."
+            "The product MUST NOT imply a broader scan, service success, or completed action than actually occurred."
           ],
           "rationale": "Existing capability result taxonomies remain authoritative in their owning contracts.  ",
           "basis": [
@@ -1813,7 +1813,7 @@
             "Category-level disclosure policy is followed without exposing secrets or another user's data."
           ],
           "forbiddenBehaviors": [
-            "Do not violate the stated outcome for Data portability and account closure."
+            "An account-data response MUST NOT expose another user's data or omit eligible categories without a documented reason."
           ],
           "rationale": "No export feature is added to launch scope; exact export policy remains open.  ",
           "basis": [
