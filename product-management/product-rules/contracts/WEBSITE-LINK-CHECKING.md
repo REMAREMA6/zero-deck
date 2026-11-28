@@ -3,7 +3,7 @@
 **Contract ID:** `ZD-CONTRACT-WEBSITE-LINK-CHECKING`  
 **Version:** `0.1.0-draft`  
 **Author / issuer:** ZeroDeck Product Management Agent  
-**Status:** PM-authored draft; requirements are PM-proposed except the four direct encodings of owner-approved scope constraints.  
+**Status:** PM-authored draft; requirements ZD-WEB-001–004 directly encode owner-approved scope constraints; ZD-WEB-005–038 are PM-proposed.  
 **Scope:** MVP-03 website and link checking on web and Android.  
 **Owner scope decision:** `ZD-SCOPE-001` (2026-11-27).  
 **Related contracts:** Identity/authentication (supporting identity/authorization dependency only); MVP-01 and MVP-02 are not re-authored here.
@@ -12,7 +12,7 @@
 
 This contract defines observable product behaviour for a user-initiated, bounded website/link reputation check. It is a technology-independent declared product contract, not a runtime observation, source-derived rule, implementation design, security audit, or proof of conformance. ZeroDeck Product Management Agent is the author. The Product Owner retains final authority.
 
-The four requirements ZD-WEB-001–004 directly encode owner-approved MVP scope: active Pro entitlement, independent owner-controlled activation, no provider/API call unless both are positively established, and Pro is not unlimited. These are marked owner-approved with reference `ZD-SCOPE-001`. All other requirements remain PM-proposed. Plan approval authorizes this analysis; it does not approve those proposed requirements.
+The four requirements ZD-WEB-001–004 directly encode owner-approved MVP scope: active Pro entitlement, independent owner-controlled activation, no provider/API call unless both are positively established, and Pro is not unlimited. These are marked owner-approved with reference `ZD-SCOPE-001`. All remaining requirements are PM-proposed. Plan approval authorizes this analysis; it does not approve those proposed requirements.
 
 ## 2. Product boundary and invariants
 
@@ -31,499 +31,575 @@ Normative terms: MUST, MUST NOT and MAY. Each requirement is atomic, stack-agnos
 
 ## 4. Requirements
 
-### Requirement ZD-WEB-001 — A request is made by an account without active Pro entitlement.
+### Requirement ZD-WEB-001 — Pro eligibility
 
 **P0 · business-rule · business-rules, authorization-permissions**
 
-Pro eligibility
+The system MUST permit an MVP-03 provider-backed check only when the requesting account has an active Pro entitlement at the authorization point.
 
-**Rationale / basis:** The system MUST permit an MVP-03 provider-backed check only when the requesting account has an active Pro entitlement at the authorization point.
+**Rationale / basis:** Owner decision ZD-SCOPE-001: Pro entitlement is a mandatory independent gate.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-001-01**
 
-- **ZD-WEB-AC-001-01** — Given Owner decision ZD-SCOPE-001: Pro entitlement is a mandatory independent gate. When A request is made by an account with active Pro entitlement. Then A request is made by an account without active Pro entitlement.: The request is eligible for gate evaluation only in the active case; otherwise blocked without provider call.
-- **ZD-WEB-AC-001-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a request is made by an account with active Pro entitlement
+- **When** the user submits a website/link check
+- **Then** the request is eligible for gate evaluation only in the active case; otherwise it is blocked without a provider call
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-002 — A user requests an MVP-03 check.
+### Requirement ZD-WEB-002 — Owner activation
 
 **P0 · business-rule · configuration, authorization-permissions**
 
-Owner activation
+The system MUST permit an MVP-03 provider-backed check only when the owner-controlled activation switch is enabled.
 
-**Rationale / basis:** The system MUST permit an MVP-03 provider-backed check only when the owner-controlled activation switch is enabled.
+**Rationale / basis:** Owner decision ZD-SCOPE-001: owner-controlled activation is a separate mandatory gate.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-002-01**
 
-- **ZD-WEB-AC-002-01** — Given Owner decision ZD-SCOPE-001: owner-controlled activation is a separate mandatory gate. When The owner activation switch is enabled or disabled. Then A user requests an MVP-03 check.: The switch state is evaluated independently of Pro entitlement.
-- **ZD-WEB-AC-002-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** the owner activation switch is enabled or disabled
+- **When** a user requests an MVP-03 check
+- **Then** the switch state is evaluated independently of Pro entitlement
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-003 — Any synchronous, retry, redirect, queued, cached-refresh, batch, fallback, or background path attempts dispatch.
+### Requirement ZD-WEB-003 — No-call invariant
 
 **P0 · security · authorization-permissions, integrations, security-controls**
 
-No-call invariant
+The system MUST NOT make an external provider/API call unless both active Pro entitlement and enabled owner-controlled activation have been positively established for that request.
 
-**Rationale / basis:** The system MUST NOT make an external provider/API call unless both active Pro entitlement and enabled owner-controlled activation have been positively established for that request.
+**Rationale / basis:** Owner decision ZD-SCOPE-001 establishes the two mandatory gates and no-call rule; PM inference extends this invariant to unknown/unavailable states and every execution path.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-003-01**
 
-- **ZD-WEB-AC-003-01** — Given Owner decision ZD-SCOPE-001: no provider/API lookup if either gate is false; PM inference extends this invariant to unknown/unavailable states and every execution path. When Either gate is false, unknown, stale, unavailable, revoked, or disabled before dispatch. Then Any synchronous, retry, redirect, queued, cached-refresh, batch, fallback, or background path attempts dispatch.: No provider/API request is emitted; the decision and reason are recorded without sensitive URL content.
-- **ZD-WEB-AC-003-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** either gate is false, unknown, stale, unavailable, revoked, or disabled before dispatch
+- **When** any synchronous, retry, redirect, queued, cached-refresh, batch, fallback, or background path attempts dispatch
+- **Then** no provider/API request is emitted; the decision and reason are recorded without sensitive URL content
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-004 — The user submits another check.
+### Requirement ZD-WEB-004 — Pro is bounded
 
 **P0 · business-rule · business-rules**
 
-Pro is bounded
+The system MUST apply an explicit usage policy to Pro link checking and MUST NOT represent Pro entitlement as unlimited usage.
 
-**Rationale / basis:** The system MUST apply an explicit usage policy to Pro link checking and MUST NOT represent Pro entitlement as unlimited usage.
+**Rationale / basis:** Owner decision ZD-SCOPE-001 explicitly says Pro does not mean unlimited usage.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-004-01**
 
-- **ZD-WEB-AC-004-01** — Given Owner decision ZD-SCOPE-001 explicitly says Pro does not mean unlimited usage. When A Pro user has reached an applicable usage limit. Then The user submits another check.: The request is denied or deferred according to the configured policy; no provider call occurs.
-- **ZD-WEB-AC-004-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a Pro user has reached an applicable usage limit
+- **When** the user submits another check
+- **Then** the request is denied or deferred according to configured policy; no provider call occurs
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-005 — The user explicitly submits one URL for checking.
+### Requirement ZD-WEB-005 — User initiation
 
 **P1 · functional · interface, behavior**
 
-User initiation
+The system MUST initiate an MVP-03 check only in response to an explicit user action on a supported URL input.
 
-**Rationale / basis:** The system MUST initiate an MVP-03 check only in response to an explicit user action on a supported URL input.
+**Rationale / basis:** PM inference from MVP-03 scope; automatic/background checking is excluded by the Phase 6 plan.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-005-01**
 
-- **ZD-WEB-AC-005-01** — Given PM inference from MVP-03 scope; automatic/background checking is excluded by the Phase 6 plan. When No check is currently running. Then The user explicitly submits one URL for checking.: Exactly that submitted URL enters the request lifecycle.
-- **ZD-WEB-AC-005-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** no check is currently running
+- **When** the user explicitly submits one URL for checking
+- **Then** exactly that submitted URL enters the request lifecycle
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-006 — The check completes.
+### Requirement ZD-WEB-006 — Single URL scope
 
 **P1 · functional · data, behavior**
 
-Single URL scope
+The system MUST identify the submitted target as one URL and MUST NOT imply that checking it inspected the entire website, linked pages, files, or other resources.
 
-**Rationale / basis:** The system MUST identify the submitted target as one URL and MUST NOT imply that checking it inspected the entire website, linked pages, files, or other resources.
+**Rationale / basis:** PM inference; existing product planning says URL checking is a single-URL lookup unless more scope is approved.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-006-01**
 
-- **ZD-WEB-AC-006-01** — Given PM inference; existing product planning says URL checking is a single-URL lookup unless more scope is approved. When A user submits a URL on a page with links or embedded resources. Then The check completes.: The result identifies the checked URL only and makes no whole-site inspection claim.
-- **ZD-WEB-AC-006-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a user submits a URL on a page with links or embedded resources
+- **When** the check completes
+- **Then** the result identifies the checked URL only and makes no whole-site inspection claim
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-007 — The user submits it.
+### Requirement ZD-WEB-007 — Input validation
 
-**P0 · security · security-controls, data**
+**P0 · security · security-controls, api**
 
-Input validation
+The system MUST reject empty, malformed, unsupported, or structurally ambiguous URL inputs before any provider request.
 
-**Rationale / basis:** The system MUST reject empty, malformed, unsupported, or structurally ambiguous URL inputs before any provider request.
+**Rationale / basis:** PM inference; parser/library and exact accepted URL policy remain open.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-007-01**
 
-- **ZD-WEB-AC-007-01** — Given PM inference; parser/library and exact accepted URL policy remain open. When The submitted value is empty, malformed, or unsupported by the currently configured URL policy. Then The user submits it.: The request is rejected with an actionable reason and zero provider calls.
-- **ZD-WEB-AC-007-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** the submitted value is empty, malformed, or unsupported by the currently configured URL policy
+- **When** the user submits it
+- **Then** the request is rejected with an actionable reason and zero provider calls
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-008 — The system records or displays the check.
+### Requirement ZD-WEB-008 — Submitted and normalized identity
 
 **P1 · data · data, behavior**
 
-Submitted and normalized identity
+The system MUST preserve the submitted URL separately from any normalized lookup representation whenever normalization changes its representation.
 
-**Rationale / basis:** The system MUST preserve the submitted URL separately from any normalized lookup representation whenever normalization changes its representation.
+**Rationale / basis:** PM inference; exact normalization semantics require evidence and owner policy.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-008-01**
 
-- **ZD-WEB-AC-008-01** — Given PM inference; exact normalization semantics require evidence and owner policy. When A submitted URL is transformed for lookup. Then The system records or displays the check.: The original submitted value remains distinguishable from the normalized lookup target, subject to privacy controls.
-- **ZD-WEB-AC-008-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a submitted URL is transformed for lookup
+- **When** the system records or displays the check
+- **Then** the original submitted value remains distinguishable from the normalized lookup target, subject to privacy controls
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-009 — The request is prepared for provider lookup.
+### Requirement ZD-WEB-009 — URL credentials
+
+**P0 · security · security-controls, data**
+
+The system MUST NOT transmit URL-embedded username or password credentials to a reputation provider as part of an MVP-03 lookup.
+
+**Rationale / basis:** PM inference based on data-minimization and credential-exposure risk.
+
+**Acceptance criterion — ZD-WEB-AC-009-01**
+
+- **Given** the submitted URL contains user-info credentials
+- **When** the request is prepared for provider lookup
+- **Then** credentials are removed or the URL is rejected; no credentials are disclosed to the provider
+- **Verification:** automated test / manual test / inspection as appropriate.
+
+### Requirement ZD-WEB-010 — Destination safety
+
+**P0 · security · security-controls, integrations**
+
+The system MUST prevent MVP-03 processing from causing an external fetch to loopback, private, link-local, reserved, multicast, metadata-service, or otherwise disallowed internal destinations.
+
+**Rationale / basis:** PM inference; precise address classification and policy require security design and validation.
+
+**Acceptance criterion — ZD-WEB-AC-010-01**
+
+- **Given** a URL resolves or redirects to a prohibited destination
+- **When** the system considers dispatch or follows a redirect
+- **Then** the destination is blocked before network access to that destination
+- **Verification:** automated test / manual test / inspection as appropriate.
+
+### Requirement ZD-WEB-011 — DNS rebinding
+
+**P0 · security · security-controls, integrations**
+
+The system MUST ensure destination restrictions remain effective when DNS answers change between validation and connection establishment.
+
+**Rationale / basis:** PM inference; implementation mechanism intentionally unspecified.
+
+**Acceptance criterion — ZD-WEB-AC-011-01**
+
+- **Given** a hostname resolves to an allowed address during initial validation and a prohibited address at connection time, or its answer changes during redirects/retries
+- **When** the system attempts a connection
+- **Then** no connection is made to the prohibited address
+- **Verification:** automated test / manual test / inspection as appropriate.
+
+### Requirement ZD-WEB-012 — Address representation
 
 **P0 · security · security-controls, api**
 
-URL credentials
+The system MUST apply destination policy consistently to IPv4, IPv6, IPv4-mapped IPv6, alternate numeric representations, and internationalized hostnames.
 
-**Rationale / basis:** The system MUST NOT transmit URL-embedded username or password credentials to a reputation provider as part of an MVP-03 lookup.
+**Rationale / basis:** PM inference; precise canonicalization policy remains open.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-012-01**
 
-- **ZD-WEB-AC-009-01** — Given PM inference based on data minimization and credential exposure risk. When The submitted URL contains user-info credentials. Then The request is prepared for provider lookup.: Credentials are removed or the URL is rejected; no credentials are disclosed to the provider.
-- **ZD-WEB-AC-009-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** the input uses an alternate address or hostname representation
+- **When** the URL is validated
+- **Then** the same destination policy is applied; ambiguous representations are rejected rather than bypassing controls
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-010 — The system considers dispatch or follows a redirect.
-
-**P0 · security · security-controls, integrations**
-
-Destination safety
-
-**Rationale / basis:** The system MUST prevent MVP-03 processing from causing an external fetch to loopback, private, link-local, reserved, multicast, metadata-service, or otherwise disallowed internal destinations.
-
-**Acceptance criteria**
-
-- **ZD-WEB-AC-010-01** — Given PM inference; precise address classification and policy require security design and validation. When A URL resolves or redirects to a prohibited destination. Then The system considers dispatch or follows a redirect.: The destination is blocked before network access to that destination.
-- **ZD-WEB-AC-010-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
-
-### Requirement ZD-WEB-011 — The system attempts a connection.
+### Requirement ZD-WEB-013 — Redirect control
 
 **P0 · security · security-controls, integrations**
 
-DNS rebinding
+The system MUST apply an explicit redirect policy and revalidate the destination and both MVP-03 gates before any subsequent outbound request caused by a redirect.
 
-**Rationale / basis:** The system MUST ensure destination restrictions remain effective when DNS answers change between validation and connection establishment.
+**Rationale / basis:** PM inference; redirect support and hop limits remain open.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-013-01**
 
-- **ZD-WEB-AC-011-01** — Given PM inference; implementation mechanism intentionally unspecified. When A hostname resolves to an allowed address during initial validation and a prohibited address at connection time, or its answer changes during redirects/retries. Then The system attempts a connection.: No connection is made to the prohibited address.
-- **ZD-WEB-AC-011-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a provider or permitted fetch path returns a redirect
+- **When** the system considers following it
+- **Then** disallowed destinations and gate failures stop the chain before another outbound request
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-012 — The URL is validated.
-
-**P0 · security · security-controls, api**
-
-Address representation
-
-**Rationale / basis:** The system MUST apply destination policy consistently to IPv4, IPv6, IPv4-mapped IPv6, alternate numeric representations, and internationalized hostnames.
-
-**Acceptance criteria**
-
-- **ZD-WEB-AC-012-01** — Given PM inference; precise canonicalization policy remains open. When The input uses an alternate address or hostname representation. Then The URL is validated.: The same destination policy is applied; ambiguous representations are rejected rather than bypassing controls.
-- **ZD-WEB-AC-012-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
-
-### Requirement ZD-WEB-013 — The system considers following it.
+### Requirement ZD-WEB-014 — Scheme downgrade
 
 **P0 · security · security-controls, integrations**
 
-Redirect control
+The system MUST NOT follow a redirect that downgrades a secure URL scheme to an insecure scheme unless a separately owner-approved policy explicitly permits it.
 
-**Rationale / basis:** The system MUST apply an explicit redirect policy and revalidate the destination and both MVP-03 gates before any subsequent outbound request caused by a redirect.
+**Rationale / basis:** PM inference; no downgrade exception is currently approved.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-014-01**
 
-- **ZD-WEB-AC-013-01** — Given PM inference; redirect support and hop limits remain open. When A provider or permitted fetch path returns a redirect. Then The system considers following it.: Disallowed destinations and gate failures stop the chain before another outbound request.
-- **ZD-WEB-AC-013-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a secure URL redirects to an insecure scheme
+- **When** the redirect is evaluated
+- **Then** the redirect is rejected and no insecure destination request occurs
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-014 — The redirect is evaluated.
-
-**P0 · security · security-controls, integrations**
-
-Scheme downgrade
-
-**Rationale / basis:** The system MUST NOT follow a redirect that downgrades a secure URL scheme to an insecure scheme unless a separately owner-approved policy explicitly permits it.
-
-**Acceptance criteria**
-
-- **ZD-WEB-AC-014-01** — Given PM inference; no downgrade exception is currently approved. When A secure URL redirects to an insecure scheme. Then The redirect is evaluated.: The redirect is rejected and no insecure destination request occurs.
-- **ZD-WEB-AC-014-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
-
-### Requirement ZD-WEB-015 — The connection is established.
+### Requirement ZD-WEB-015 — TLS validation
 
 **P0 · security · security-controls, integrations**
 
-TLS validation
+The system MUST treat TLS negotiation or certificate validation failure on any product-controlled provider connection as a failed lookup and MUST NOT silently disable certificate verification.
 
-**Rationale / basis:** The system MUST treat TLS negotiation or certificate validation failure on any product-controlled provider connection as a failed lookup and MUST NOT silently disable certificate verification.
+**Rationale / basis:** PM inference; TLS implementation choice remains open.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-015-01**
 
-- **ZD-WEB-AC-015-01** — Given PM inference; TLS implementation choice remains open. When A provider connection presents an invalid, expired, mismatched, or untrusted certificate. Then The connection is established.: The lookup fails safely; certificate verification is not bypassed.
-- **ZD-WEB-AC-015-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a provider connection presents an invalid, expired, mismatched, or untrusted certificate
+- **When** the connection is established
+- **Then** the lookup fails safely; certificate verification is not bypassed
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-016 — The request payload is assembled.
+### Requirement ZD-WEB-016 — Minimum disclosure
 
-**P1 · data · data, integrations**
+**P1 · privacy · data, integrations**
 
-Minimum disclosure
+The system MUST disclose to an external provider only the URL representation and metadata required for the selected lookup operation, excluding account credentials and unrelated user data.
 
-**Rationale / basis:** The system MUST disclose to an external provider only the URL representation and metadata required for the selected lookup operation, excluding account credentials and unrelated user data.
+**Rationale / basis:** PM inference; provider-specific payload cannot be fixed until selection.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-016-01**
 
-- **ZD-WEB-AC-016-01** — Given PM inference; provider-specific payload cannot be fixed until selection. When A provider lookup is eligible and a provider contract is selected. Then The request payload is assembled.: Only documented minimum required fields are sent.
-- **ZD-WEB-AC-016-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a provider lookup is eligible and a provider contract is selected
+- **When** the request payload is assembled
+- **Then** only documented minimum required fields are sent
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-017 — The system handles, transmits, stores, logs, or displays it.
+### Requirement ZD-WEB-017 — URL sensitivity
 
 **P0 · privacy · data, security-controls, integrations**
 
-URL sensitivity
+The system MUST treat submitted URLs, including paths and query parameters, as potentially sensitive user data.
 
-**Rationale / basis:** The system MUST treat submitted URLs, including paths and query parameters, as potentially sensitive user data.
+**Rationale / basis:** PM inference; URLs can contain tokens, identifiers or private resource names.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-017-01**
 
-- **ZD-WEB-AC-017-01** — Given PM inference; URLs can contain tokens, identifiers or private resource names. When A URL is submitted or processed. Then The system handles, transmits, stores, logs, or displays it.: The URL receives privacy protections and is not assumed public merely because it is a URL.
-- **ZD-WEB-AC-017-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a URL is submitted or processed
+- **When** the system handles, transmits, stores, logs, or displays it
+- **Then** the URL receives privacy protections and is not assumed public merely because it is a URL
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-018 — The system records the event.
+### Requirement ZD-WEB-018 — Logging redaction
 
 **P0 · privacy · data, security-controls**
 
-Logging redaction
+The system MUST NOT place full submitted URLs, query strings, embedded credentials, or provider secrets in routine logs, analytics, or diagnostics unless a separately documented and justified owner-approved exception applies.
 
-**Rationale / basis:** The system MUST NOT place full submitted URLs, query strings, embedded credentials, or provider secrets in routine logs, analytics, or diagnostics unless a separately documented and justified owner-approved exception applies.
+**Rationale / basis:** PM inference; detailed telemetry policy remains open.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-018-01**
 
-- **ZD-WEB-AC-018-01** — Given PM inference; detailed telemetry policy remains open. When A check generates operational telemetry. Then The system records the event.: Sensitive URL components and secrets are omitted or redacted.
-- **ZD-WEB-AC-018-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a check generates operational telemetry
+- **When** the system records the event
+- **Then** sensitive URL components and secrets are omitted or redacted
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-019 — The result is presented or retained.
+### Requirement ZD-WEB-019 — Provider provenance
 
-**P1 · integrations · integrations, data**
+**P1 · data · data, integrations**
 
-Provider provenance
+The system MUST associate each provider-derived result with the provider identity, lookup time, and provider result/version metadata when supplied by that provider.
 
-**Rationale / basis:** The system MUST associate each provider-derived result with the provider identity, lookup time, and provider result/version metadata when supplied by that provider.
+**Rationale / basis:** PM inference; provider selection unresolved.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-019-01**
 
-- **ZD-WEB-AC-019-01** — Given PM inference; provider selection unresolved. When A provider returns a result. Then The result is presented or retained.: Its provenance and lookup timestamp are available to the product's result semantics.
-- **ZD-WEB-AC-019-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a provider returns a result
+- **When** the result is presented or retained
+- **Then** its provenance and lookup timestamp are available to the product's result semantics
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-020 — The response is processed.
+### Requirement ZD-WEB-020 — Provider response validation
 
 **P1 · reliability · integrations, errors-recovery**
 
-Provider response validation
+The system MUST validate provider responses against the selected provider's documented response contract before using them to produce a user-visible result.
 
-**Rationale / basis:** The system MUST validate provider responses against the selected provider's documented response contract before using them to produce a user-visible result.
+**Rationale / basis:** PM inference; provider schema depends on later provider selection.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-020-01**
 
-- **ZD-WEB-AC-020-01** — Given PM inference; provider schema depends on later provider selection. When A provider response is malformed, incomplete, unexpected, or contains untrusted fields. Then The response is processed.: The response is rejected or represented as unavailable/inconclusive; it is not treated as a clean result.
-- **ZD-WEB-AC-020-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a provider response is malformed, incomplete, unexpected, or contains untrusted fields
+- **When** the response is processed
+- **Then** the response is rejected or represented as unavailable/inconclusive; it is not treated as a clean result
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-021 — The result is classified.
+### Requirement ZD-WEB-021 — Result uncertainty
 
 **P1 · functional · behavior, interface**
 
-Result uncertainty
+The system MUST distinguish a provider-confirmed match, no known match, suspicious/ambiguous result, and unavailable or inconclusive lookup whenever the selected provider and approved result policy support those distinctions.
 
-**Rationale / basis:** The system MUST distinguish a provider-confirmed match, no known match, suspicious/ambiguous result, and unavailable or inconclusive lookup whenever the selected provider and approved result policy support those distinctions.
+**Rationale / basis:** PM inference; exact taxonomy and mapping are unresolved.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-021-01**
 
-- **ZD-WEB-AC-021-01** — Given PM inference; exact taxonomy and mapping are unresolved. When A provider response or lookup failure is received. Then The result is classified.: The user sees the supported outcome and its limitations; absence of a match is not stated as proof of safety.
-- **ZD-WEB-AC-021-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a provider response or lookup failure is received
+- **When** the result is classified
+- **Then** the user sees the supported outcome and its limitations; absence of a match is not stated as proof of safety
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-022 — The result is displayed.
+### Requirement ZD-WEB-022 — No absolute safety claim
 
 **P1 · usability · interface, behavior**
 
-No absolute safety claim
+The system MUST NOT describe a URL as absolutely safe, guaranteed harmless, or free of threats solely because a provider reports no known match.
 
-**Rationale / basis:** The system MUST NOT describe a URL as absolutely safe, guaranteed harmless, or free of threats solely because a provider reports no known match.
+**Rationale / basis:** PM inference grounded in honest, bounded result semantics.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-022-01**
 
-- **ZD-WEB-AC-022-01** — Given PM inference grounded in the requirement for honest, bounded results. When A provider reports no known match. Then The result is displayed.: The wording states only that no known match was returned within the stated provider/check scope.
-- **ZD-WEB-AC-022-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a provider reports no known match
+- **When** the result is displayed
+- **Then** the wording states only that no known match was returned within the stated provider/check scope
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-023 — The user views the result.
+### Requirement ZD-WEB-023 — Freshness
 
 **P1 · data · data, persistence**
 
-Freshness
+The system MUST expose the lookup time and any provider-supplied freshness/expiry information used to determine whether a result may be reused.
 
-**Rationale / basis:** The system MUST expose the lookup time and any provider-supplied freshness/expiry information used to determine whether a result may be reused.
+**Rationale / basis:** PM inference; cache policy and freshness threshold remain open.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-023-01**
 
-- **ZD-WEB-AC-023-01** — Given PM inference; cache policy and freshness threshold remain open. When A result is reused or displayed after its original lookup. Then The user views the result.: The lookup time and applicable freshness limitation are visible or otherwise disclosed.
-- **ZD-WEB-AC-023-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a result is reused or displayed after its original lookup
+- **When** the user views the result
+- **Then** the lookup time and applicable freshness limitation are visible or otherwise disclosed
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-024 — The request terminates.
+### Requirement ZD-WEB-024 — Provider outage
 
 **P1 · reliability · errors-recovery, integrations**
 
-Provider outage
+The system MUST represent provider outage, timeout, DNS failure, connection reset, quota rejection, rate limiting, and service unavailability as failed or inconclusive states rather than a no-threat result.
 
-**Rationale / basis:** The system MUST represent provider outage, timeout, DNS failure, connection reset, quota rejection, rate limiting, and service unavailability as failed or inconclusive states rather than a no-threat result.
+**Rationale / basis:** PM inference.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-024-01**
 
-- **ZD-WEB-AC-024-01** — Given PM inference. When Any listed provider/network failure occurs. Then The request terminates.: The result is not converted into a clean/no-match verdict.
-- **ZD-WEB-AC-024-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** any listed provider/network failure occurs
+- **When** the request terminates
+- **Then** the result is not converted into a clean/no-match verdict
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-025 — The retry is scheduled or dispatched.
+### Requirement ZD-WEB-025 — Retry safety
 
 **P1 · reliability · errors-recovery, behavior**
 
-Retry safety
+The system MUST apply an explicit retry policy that cannot bypass current entitlement, owner activation, URL safety, rate limits, or request budgets.
 
-**Rationale / basis:** The system MUST apply an explicit retry policy that cannot bypass current entitlement, owner activation, URL safety, rate limits, or request budgets.
+**Rationale / basis:** PM inference; retry count/backoff remain open.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-025-01**
 
-- **ZD-WEB-AC-025-01** — Given PM inference; retry count/backoff remain open. When A retry is considered after failure or interruption. Then The retry is scheduled or dispatched.: All gates and safety policies are re-evaluated; if not satisfied, zero provider calls occur.
-- **ZD-WEB-AC-025-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a retry is considered after failure or interruption
+- **When** the retry is scheduled or dispatched
+- **Then** all gates and safety policies are re-evaluated; if not satisfied, zero provider calls occur
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-026 — The cancellation is processed.
+### Requirement ZD-WEB-026 — Cancellation
 
 **P1 · functional · behavior, errors-recovery**
 
-Cancellation
+The system MUST expose cancellation where the active platform and request lifecycle can support it and MUST distinguish a cancelled request from a completed result.
 
-**Rationale / basis:** The system MUST expose cancellation where the active platform and request lifecycle can support it and MUST distinguish a cancelled request from a completed result.
+**Rationale / basis:** PM inference; actual cancellation boundary depends on provider/platform.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-026-01**
 
-- **ZD-WEB-AC-026-01** — Given PM inference; actual cancellation boundary depends on provider/platform. When A user cancels an in-progress check. Then The cancellation is processed.: No further eligible work is initiated for that request and the state is reported truthfully; already-sent requests are not falsely claimed recalled.
-- **ZD-WEB-AC-026-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a user cancels an in-progress check
+- **When** the cancellation is processed
+- **Then** no further eligible work is initiated for that request and the state is reported truthfully; already-sent requests are not falsely claimed recalled
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-027 — A new check is requested.
+### Requirement ZD-WEB-027 — Rate and quota policy
 
 **P1 · business-rule · business-rules, configuration**
 
-Rate and quota policy
+The system MUST enforce configurable per-account and service-level usage limits before provider dispatch, with limit exhaustion producing a no-call outcome.
 
-**Rationale / basis:** The system MUST enforce configurable per-account and service-level usage limits before provider dispatch, with limit exhaustion producing a no-call outcome.
+**Rationale / basis:** PM inference; numeric limits and reset semantics are open.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-027-01**
 
-- **ZD-WEB-AC-027-01** — Given PM inference; numeric limits and reset semantics are open. When A user or service has exhausted an applicable limit. Then A new check is requested.: The request is blocked before provider dispatch and the applicable limit state is communicated.
-- **ZD-WEB-AC-027-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a user or service has exhausted an applicable limit
+- **When** a new check is requested
+- **Then** the request is blocked before provider dispatch and the applicable limit state is communicated
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-028 — The service evaluates requests.
+### Requirement ZD-WEB-028 — Abuse resistance
 
 **P0 · security · security-controls, authorization-permissions**
 
-Abuse resistance
+The system MUST prevent repeated, automated, or bulk requests from bypassing account-level and service-level usage controls or either MVP-03 eligibility gate.
 
-**Rationale / basis:** The system MUST prevent repeated, automated, or bulk requests from bypassing account-level and service-level usage controls or either MVP-03 eligibility gate.
+**Rationale / basis:** PM inference; anti-abuse thresholds and controls remain open.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-028-01**
 
-- **ZD-WEB-AC-028-01** — Given PM inference; anti-abuse thresholds and controls remain open. When A client repeats requests, alters request parameters, or attempts concurrent submissions. Then The service evaluates requests.: The applicable gates and limits are enforced server-side for each provider dispatch.
-- **ZD-WEB-AC-028-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a client repeats requests, alters request parameters, or attempts concurrent submissions
+- **When** the service evaluates requests
+- **Then** the applicable gates and limits are enforced server-side for each provider dispatch
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-029 — A pending operation reaches its next dispatch boundary.
+### Requirement ZD-WEB-029 — Activation change
 
 **P0 · configuration · configuration, authorization-permissions**
 
-Activation change
+The system MUST stop initiating new provider requests when owner-controlled activation becomes disabled, including queued, retried, redirected, or not-yet-dispatched work.
 
-**Rationale / basis:** The system MUST stop initiating new provider requests when owner-controlled activation becomes disabled, including queued, retried, redirected, or not-yet-dispatched work.
+**Rationale / basis:** PM inference extending owner-approved activation gate.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-029-01**
 
-- **ZD-WEB-AC-029-01** — Given PM inference extending owner-approved kill-switch gate. When Activation is disabled while requests are pending or being prepared. Then A pending operation reaches its next dispatch boundary.: It is cancelled or blocked before any subsequent provider call.
-- **ZD-WEB-AC-029-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** activation is disabled while requests are pending or being prepared
+- **When** a pending operation reaches its next dispatch boundary
+- **Then** it is cancelled or blocked before any subsequent provider call
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-030 — A pending operation reaches its next dispatch boundary.
+### Requirement ZD-WEB-030 — Entitlement revocation
 
 **P0 · business-rule · business-rules, authorization-permissions**
 
-Entitlement revocation
+The system MUST stop initiating new provider requests when Pro entitlement expires, is revoked, or can no longer be positively verified.
 
-**Rationale / basis:** The system MUST stop initiating new provider requests when Pro entitlement expires, is revoked, or can no longer be positively verified.
+**Rationale / basis:** PM inference extending owner-approved Pro gate.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-030-01**
 
-- **ZD-WEB-AC-030-01** — Given PM inference extending owner-approved Pro gate. When Entitlement expires, is revoked, or becomes unverifiable during a workflow. Then A pending operation reaches its next dispatch boundary.: It is blocked before any subsequent provider call.
-- **ZD-WEB-AC-030-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** entitlement expires, is revoked, or becomes unverifiable during a workflow
+- **When** a pending operation reaches its next dispatch boundary
+- **Then** it is blocked before any subsequent provider call
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-031 — The system processes the request.
+### Requirement ZD-WEB-031 — Resource bounds
 
 **P1 · performance · performance-resource-behavior, security-controls**
 
-Resource bounds
+The system MUST enforce explicit limits for request duration, response size, redirect depth, concurrency, and decompressed/expanded content before those limits can cause unbounded resource consumption.
 
-**Rationale / basis:** The system MUST enforce explicit limits for request duration, response size, redirect depth, concurrency, and decompressed/expanded content before those limits can cause unbounded resource consumption.
+**Rationale / basis:** PM inference; numeric values must be established before release.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-031-01**
 
-- **ZD-WEB-AC-031-01** — Given PM inference; numeric values must be established before release. When A request approaches or exceeds a configured resource bound. Then The system processes the request.: Processing stops safely at the applicable bound and reports a bounded failure.
-- **ZD-WEB-AC-031-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a request approaches or exceeds a configured resource bound
+- **When** the system processes the request
+- **Then** processing stops safely at the applicable bound and reports a bounded failure
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-032 — The user views its status.
+### Requirement ZD-WEB-032 — Lifecycle truthfulness
 
 **P1 · functional · interface, errors-recovery**
 
-Lifecycle truthfulness
+The system MUST present distinct supported states for blocked, queued, processing, completed, inconclusive, failed, and cancelled requests, without representing a blocked or failed request as completed.
 
-**Rationale / basis:** The system MUST present distinct supported states for blocked, queued, processing, completed, inconclusive, failed, and cancelled requests, without representing a blocked or failed request as completed.
+**Rationale / basis:** PM inference.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-032-01**
 
-- **ZD-WEB-AC-032-01** — Given PM inference. When A request enters any supported lifecycle state. Then The user views its status.: The displayed state matches the recorded request outcome.
-- **ZD-WEB-AC-032-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a request enters any supported lifecycle state
+- **When** the user views its status
+- **Then** the displayed state matches the recorded request outcome
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-033 — The product offers or describes history.
+### Requirement ZD-WEB-033 — History policy
 
 **P1 · data · persistence, data**
 
-History policy
+The system MUST NOT imply that cross-device check history or durable URL retention is available unless an owner-approved retention and persistence policy has been adopted and implemented.
 
-**Rationale / basis:** The system MUST NOT imply that cross-device check history or durable URL retention is available unless an owner-approved retention and persistence policy has been adopted and implemented.
+**Rationale / basis:** PM inference; history and retention are unresolved and standalone history is not approved.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-033-01**
 
-- **ZD-WEB-AC-033-01** — Given PM inference; history and retention are unresolved and standalone history is not approved. When A result is completed or the user views prior checks. Then The product offers or describes history.: Only actually supported retention and access are represented; no unapproved history promise is made.
-- **ZD-WEB-AC-033-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a result is completed or the user views prior checks
+- **When** the product offers or describes history
+- **Then** only actually supported retention and access are represented; no unapproved history promise is made
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-034 — Persistence is enabled or a deletion request is processed.
+### Requirement ZD-WEB-034 — Retention and deletion
 
 **P1 · privacy · privacy, data**
 
-Retention and deletion
+The system MUST apply a documented owner-approved retention and deletion policy to any stored submitted URL, result, or provider response before persistent storage is enabled.
 
-**Rationale / basis:** The system MUST apply a documented owner-approved retention and deletion policy to any stored submitted URL, result, or provider response before persistent storage is enabled.
+**Rationale / basis:** PM inference; exact schedule, data classes and deletion obligations remain open.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-034-01**
 
-- **ZD-WEB-AC-034-01** — Given PM inference; exact schedule, data classes and deletion obligations remain open. When The product proposes to persist URL or result data. Then Persistence is enabled or a deletion request is processed.: Storage is not enabled without the policy; once enabled, deletion follows its documented scope and exceptions.
-- **ZD-WEB-AC-034-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** the product proposes to persist URL or result data
+- **When** persistence is enabled or a deletion request is processed
+- **Then** storage is not enabled without the policy; once enabled, deletion follows its documented scope and exceptions
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-035 — The system records its accounting event.
+### Requirement ZD-WEB-035 — Provider accounting
 
 **P1 · operational · integrations, configuration**
 
-Provider accounting
+The system MUST account for every provider dispatch against the applicable entitlement, usage and service budget, including retries and redirected requests.
 
-**Rationale / basis:** The system MUST account for every provider dispatch against the applicable entitlement, usage and service budget, including retries and redirected requests.
+**Rationale / basis:** PM inference; provider cost model and limits are unresolved.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-035-01**
 
-- **ZD-WEB-AC-035-01** — Given PM inference; provider cost model and limits are unresolved. When A provider dispatch is attempted. Then The system records its accounting event.: Every actual dispatch is counted once and correlated to its request without storing the full URL in routine logs.
-- **ZD-WEB-AC-035-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a provider dispatch is attempted
+- **When** the system records its accounting event
+- **Then** every actual dispatch is counted once and correlated to its request without storing the full URL in routine logs
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-036 — The system emits operational signals.
+### Requirement ZD-WEB-036 — Incident visibility
 
 **P1 · operational · errors-recovery, integrations**
 
-Incident visibility
+The system MUST make provider outages, abnormal error rates, unexpected usage growth, and repeated gate-denial or abuse patterns observable to authorized operators without exposing full submitted URLs by default.
 
-**Rationale / basis:** The system MUST make provider outages, abnormal error rates, unexpected usage growth, and repeated gate-denial or abuse patterns observable to authorized operators without exposing full submitted URLs by default.
+**Rationale / basis:** PM inference; exact alert thresholds and operator workflow remain open.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-036-01**
 
-- **ZD-WEB-AC-036-01** — Given PM inference; exact alert thresholds and operator workflow remain open. When Operational anomalies occur. Then The system emits operational signals.: Signals identify the anomaly and affected service/account scope while respecting URL redaction.
-- **ZD-WEB-AC-036-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** operational anomalies occur
+- **When** the system emits operational signals
+- **Then** signals identify the anomaly and affected service/account scope while respecting URL redaction
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-037 — The request is evaluated or a result is displayed.
+### Requirement ZD-WEB-037 — Platform semantics
 
 **P1 · compatibility · behavior, interface**
 
-Platform semantics
+The system MUST preserve the same eligibility, no-call, result-meaning, and privacy semantics on web and Android even when input mechanisms or supported capabilities differ.
 
-**Rationale / basis:** The system MUST preserve the same eligibility, no-call, result-meaning, and privacy semantics on web and Android even when input mechanisms or supported capabilities differ.
+**Rationale / basis:** Owner-approved cross-platform identity direction; PM inference applies shared semantics to MVP-03.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-037-01**
 
-- **ZD-WEB-AC-037-01** — Given Owner-approved cross-platform identity direction; PM inference applies shared semantics to MVP-03. When A user performs the same eligible or ineligible check on either platform. Then The request is evaluated or a result is displayed.: Both platforms apply the same product policy and explain any platform-specific limitation.
-- **ZD-WEB-AC-037-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a user performs the same eligible or ineligible check on either platform
+- **When** the request is evaluated or a result is displayed
+- **Then** both platforms apply the same product policy and explain any platform-specific limitation
+- **Verification:** automated test / manual test / inspection as appropriate.
 
-### Requirement ZD-WEB-038 — The request is processed.
+### Requirement ZD-WEB-038 — No arbitrary fetch
 
 **P0 · security · security-controls, integrations**
 
-No arbitrary fetch
+The system MUST NOT use MVP-03 as a general-purpose URL fetcher, crawler, website auditor, port scanner, or network-reconnaissance interface.
 
-**Rationale / basis:** The system MUST NOT use MVP-03 as a general-purpose URL fetcher, crawler, website auditor, port scanner, or network-reconnaissance interface.
+**Rationale / basis:** Owner-approved MVP scope and explicit Phase 6 exclusion; PM inference operationalizes boundary.
 
-**Acceptance criteria**
+**Acceptance criterion — ZD-WEB-AC-038-01**
 
-- **ZD-WEB-AC-038-01** — Given Owner-approved MVP scope and explicit Phase 6 exclusion; PM inference operationalizes boundary. When A submitted URL or provider response could trigger crawling or arbitrary resource access. Then The request is processed.: Only the bounded, selected MVP-03 lookup occurs; no page traversal or unrelated network probing is initiated.
-- **ZD-WEB-AC-038-02** — Given a request is being processed When the applicable requirement boundary is reached Then the system preserves the required outcome and does not bypass this requirement. (Verification: automated test / inspection.)
+- **Given** a submitted URL or provider response could trigger crawling or arbitrary resource access
+- **When** the request is processed
+- **Then** only the bounded, selected MVP-03 lookup occurs; no page traversal or unrelated network probing is initiated
+- **Verification:** automated test / manual test / inspection as appropriate.
 
 
 ## 5. Open product and owner questions
@@ -647,8 +723,8 @@ All 18 questions remain open. No provider, commercial terms, URL policy, numeric
 
 ## 7. Release-critical unresolved policy
 
-Before enabling provider-backed checks, the owner/product must resolve at least: supported URL forms; whether ZeroDeck fetches destinations or only asks a provider; redirect policy; provider/API and commercial/data terms; verdict taxonomy; rate/quota/spend budgets; gate propagation and in-flight behaviour; URL disclosure/consent; URL/result retention/deletion; and operational audit policy. Numeric resource limits must be established through provider/platform evidence and testing, not invented here.
+Before enabling provider-backed checks, resolve at least: supported URL forms; whether ZeroDeck fetches destinations or only asks a provider; redirect policy; provider/API and commercial/data terms; verdict taxonomy; rate/quota/spend budgets; gate propagation and in-flight behaviour; URL disclosure/consent; URL/result retention/deletion; and operational audit policy. Numeric resource limits must be established through provider/platform evidence and testing, not invented here.
 
 ## 8. Approval status
 
-The four direct scope requirements reference owner decision `ZD-SCOPE-001`. The remaining 34 requirements are PM-proposed. This contract is draft v0.1.0 and is not blanket owner approval. No implementation or provider integration is authorized by this artifact.
+ZD-WEB-001–004 directly encode owner decision `ZD-SCOPE-001`. ZD-WEB-005–038 are PM-proposed. This contract is draft v0.1.0 and is not blanket owner approval. No implementation or provider integration is authorized by this artifact.
