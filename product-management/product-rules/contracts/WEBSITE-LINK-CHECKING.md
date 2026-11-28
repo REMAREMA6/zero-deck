@@ -3,7 +3,7 @@
 **Contract ID:** `ZD-CONTRACT-WEBSITE-LINK-CHECKING`  
 **Version:** `0.1.0-draft`  
 **Author / issuer:** ZeroDeck Product Management Agent  
-**Status:** PM-authored draft; requirements ZD-WEB-001–004 directly encode owner-approved scope constraints; ZD-WEB-005–038 are PM-proposed.  
+**Status:** PM-authored draft; requirements ZD-WEB-001–004 directly encode owner-approved scope constraints; ZD-WEB-005–039 are PM-proposed.  
 **Scope:** MVP-03 website and link checking on web and Android.  
 **Owner scope decision:** `ZD-SCOPE-001` (2026-11-27).  
 **Related contracts:** Identity/authentication (supporting identity/authorization dependency only); MVP-01 and MVP-02 are not re-authored here.
