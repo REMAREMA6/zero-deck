@@ -74,7 +74,7 @@ That work is now recorded as a separate workstream. It does not restart CIRCLES 
 
 **Workstream:** [11-PM-AUTHORED-PRODUCT-RULES.md](2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md)  
 **Author:** ZeroDeck Product Management Agent  
-**Status:** [x] Phases 0–8 complete; Phase 9 owner review next  
+**Status:** [x] Phases 0–9 complete; technical architecture handoff prepared  
 **Purpose:** create implementation-ready, technology-independent product requirements aligned with Software Rules.
 
 **Profile:** [product-rules/PROFILE.md](product-rules/PROFILE.md) — Phase 1 complete. **Contract index:** [product-rules/README.md](product-rules/README.md). **Validation:** [product-rules/VALIDATION-REPORT.md](product-rules/VALIDATION-REPORT.md).
@@ -94,7 +94,7 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 | 6 | Author website/link-check requirements | [x] | [MVP-03 contract](product-rules/contracts/WEBSITE-LINK-CHECKING.md), structured projection/evidence, [CIRCLES](2026-11-28/23-PHASE-6-CIRCLES-WEBSITE-LINK-CHECKING.md), [15 facets](product-rules/PHASE-6-MVP-03-FACET-COVERAGE.md), [81 scenarios](product-rules/PHASE-6-MVP-03-NEGATIVE-FAILURE-RECOVERY-MATRIX.md), [validation](product-rules/PHASE-6-MVP-03-VALIDATION.md); 41 requirements / 41 criteria / 18 open questions. |
 | 7 | Author cross-cutting system requirements | [x] | [Cross-cutting contract](product-rules/contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.md), [structured projection](product-rules/contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.declared-contract.json), [evidence](product-rules/evidence/cross-cutting-system-requirements-contract.evidence.json), [CIRCLES](2026-11-28/24-PHASE-7-CIRCLES-CROSS-CUTTING-SYSTEM-REQUIREMENTS.md), [15 facets](product-rules/PHASE-7-CROSS-CUTTING-FACET-COVERAGE.md), [58 scenarios](product-rules/PHASE-7-CROSS-CUTTING-FAILURE-RECOVERY-MATRIX.md), [validation](product-rules/PHASE-7-CROSS-CUTTING-VALIDATION.md); 28 requirements / 28 criteria / 18 open questions. |
 | 8 | Cross-facet completeness/consistency review | [x] | [Traceability](2026-11-28/26-PHASE-8-CROSS-CONTRACT-TRACEABILITY.md), [15-facet assessment](2026-11-28/27-PHASE-8-CROSS-FACET-COMPLETENESS.md), [findings](2026-11-28/28-PHASE-8-CROSS-CONTRACT-FINDINGS.md), [lifecycle/failure matrix](2026-11-28/29-PHASE-8-CROSS-FEATURE-LIFECYCLE-FAILURE-MATRIX.md), [projection/evidence audit](2026-11-28/30-PHASE-8-PROJECTION-EVIDENCE-AUDIT.md), [validation](2026-11-28/31-PHASE-8-VALIDATION.md), [CIRCLES](2026-11-28/32-PHASE-8-CIRCLES-CROSS-FACET-REVIEW.md), [completion record](2026-11-28/33-PHASE-8-COMPLETION-RECOMMENDATION.md); 160 requirements / 259 criteria / 15 facets. Open findings carried to Phase 9. |
-| 9 | Owner review and release | [ ] | Owner decisions recorded; versioned contract package ready for engineering handoff. |
+| 9 | Owner review and product-design closure | [x] | [Owner decisions](2026-11-28/35-PHASE-9-OWNER-DECISION-REGISTER.md), [64 question dispositions](2026-11-28/37-PHASE-9-QUESTION-DISPOSITION-REGISTER.md), [validation](2026-11-28/39-PHASE-9-CLOSURE-VALIDATION.md), [architecture handoff](2026-11-28/40-ARCHITECTURE-HANDOFF.md). |
 
 ### Feature authoring order
 
