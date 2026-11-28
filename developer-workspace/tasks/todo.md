@@ -260,24 +260,31 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### B7. Account deletion
 
+**Status: Partial — immediate closure, policy gate, Web/Android confirmation and PostgreSQL scheduled-deletion executor are implemented and verified in [full CI run 46183869945](https://github.com/REMAREMA6/zero-deck/actions/runs/46183869945). Production activation remains blocked because the exact deletion schedule and legitimate retention categories are still unresolved under ZD-Q-AUTH-012.**
+
 **Description:** Implement user-confirmed account closure with immediate access disablement and session revocation; keep personal-data deletion schedule behind an approved policy.
 
 **Acceptance criteria**
-- [ ] Fresh authentication and explicit confirmation are required.
-- [ ] Account access is disabled and sessions revoked immediately.
-- [ ] Personal data is not falsely reported deleted before the documented schedule executes.
-- [ ] Any retained record requires a documented reason and retention period.
-- [ ] No deletion schedule or legal category is invented.
+- [x] Fresh authentication with the current password and explicit typed confirmation are required.
+- [x] Account access is disabled and every active session is revoked in the same PostgreSQL transaction.
+- [x] The API reports deletion as scheduled, never completed, before the documented due time; the executor deletes the disabled account only after that time.
+- [x] The retained deletion audit row requires a purpose, reason and explicit retention-until timestamp; its account reference is cleared when personal data is deleted, and the audit row is purged only after its declared retention period.
+- [x] No deletion schedule or legal retention category is invented. The production API is intentionally unavailable until an approved policy is injected.
+- [ ] The owner/legal-reviewed schedule and retention policy are not yet approved or configured; production account deletion remains a release blocker.
+- [ ] An owner-approved operational scheduler must invoke the due-deletion worker. No cadence is selected in this implementation.
 
 **Verification**
-- [ ] PostgreSQL tests prove immediate disable/revocation.
-- [ ] Retention-policy gate tests prevent premature deletion-complete claims.
+- [x] PostgreSQL tests prove wrong-password and missing-policy denial do not disable the account.
+- [x] PostgreSQL tests prove successful request immediately disables the account and revokes its sessions.
+- [x] A pre-due execution leaves the account intact; a due execution deletes the account, credentials and sessions while retaining the audit record until its declared expiry.
+- [x] Web and Android require fresh password plus typed confirmation; Web clears its cookie and Android clears secure storage only after the server accepts the request.
+- [x] Full CI passed formatting, typecheck, unit tests, PostgreSQL integration tests and API/Web/Android builds in run 46183869945.
+- [ ] Production schedule configuration and scheduled-worker operation remain unverified pending owner/legal policy approval.
 
-**Dependencies:** B3–B6.  
-**Files likely touched:** account lifecycle module, migrations, Web/Android account UI, tests.  
+**Dependencies:** B3–B6; owner/legal disposition of ZD-Q-AUTH-012.  
+**Files implemented:** `apps/api/migrations/0008_account_deletion.sql`, `apps/api/src/modules/identity/account-deletion.ts`, `apps/api/src/modules/identity/account-deletion-routes.ts`, `apps/api/src/modules/identity/account-deletion-worker.ts`, `apps/api/test/account-deletion.integration.test.ts`, `apps/web/app/account/page.tsx`, `apps/web/app/api/account/deletion/route.ts`, `apps/android/App.tsx`.  
+**Worker command:** `pnpm --filter @zerodeck/api account-deletions:execute` — invoke only through an owner-approved scheduler after policy approval; no cadence is defined here.  
 **Estimated scope:** Medium/Large.
-
-## Phase C — MVP-01 local file analysis
 
 ### C1. File access and capability adapters
 
