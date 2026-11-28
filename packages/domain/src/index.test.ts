@@ -176,7 +176,12 @@ describe('local analysis engine boundary', () => {
       }),
     };
 
-    const result = await runLocalFileAnalysis(engine, new Uint8Array([1]), clock, controller.signal);
+    const result = await runLocalFileAnalysis(
+      engine,
+      new Uint8Array([1]),
+      clock,
+      controller.signal,
+    );
 
     expect(result.lifecycle).toBe('failed');
     expect(result.outcome).toBe('could_not_decide');
