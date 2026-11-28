@@ -608,3 +608,50 @@ h3 {
     width: 100%;
   }
 }
+
+.deletion-form {
+  margin-top: 22px;
+  padding: 18px;
+  border: 1px solid rgba(219, 99, 89, 0.4);
+  border-radius: 12px;
+  background: rgba(145, 48, 42, 0.08);
+}
+.deletion-form h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: 16px;
+}
+.deletion-form p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+}
+.deletion-form label {
+  display: block;
+  margin: 14px 0 7px;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+}
+.deletion-form button[type='button'] {
+  width: 100%;
+  min-height: 44px;
+  margin-top: 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+}
+.deletion-submit {
+  width: 100%;
+  border: 1px solid rgba(219, 99, 89, 0.6);
+  background: #8f302a;
+  color: #fff;
+  cursor: pointer;
+}
+.deletion-submit:disabled,
+.deletion-form button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
