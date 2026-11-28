@@ -1,0 +1,2124 @@
+{
+  "contractId": "ZD-CONTRACT-QUARANTINE-DISPOSITION",
+  "contractType": "product-requirements-contract",
+  "title": "ZeroDeck MVP-02 Quarantine and File Disposition Product Requirements",
+  "issuer": "ZeroDeck Product Management Agent",
+  "artifact": {
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/3356950a11bef8e2d3a60a9c30ff8b850aa4e6d0/product-management/product-rules/contracts/QUARANTINE-FILE-DISPOSITION.md",
+    "version": "0.1.0-draft",
+    "revision": "3356950a11bef8e2d3a60a9c30ff8b850aa4e6d0",
+    "digest": "sha256:2ec43e658e8c55eaac6ee0a3fc0d58ec9df0238c2db95e6fe6180b7ba3e5d8f2",
+    "mediaType": "text/markdown"
+  },
+  "scope": "MVP-02 quarantine and file disposition for web and Android; eligibility, verified quarantine, source disposition, review, restore, deletion, retention and recovery; excludes MVP-01 scan-engine requirements and MVP-03 website/link checking.",
+  "statements": [
+    {
+      "statementId": "ZD-QUAR-001",
+      "text": "The system MUST apply an explicit, versioned quarantine-eligibility policy to the result of a completed MVP-01 analysis and MUST communicate whether the item is eligible, ineligible, or awaiting review before performing a disposition operation.",
+      "location": "### Requirement ZD-QUAR-001 — Apply a documented quarantine eligibility policy"
+    },
+    {
+      "statementId": "ZD-QUAR-002",
+      "text": "The system MUST perform automatic quarantine only when an owner-approved policy explicitly authorizes automatic handling for the applicable confirmed-threat class and the active platform permits the operation; otherwise it MUST require the policy-defined user action or leave the item unchanged.",
+      "location": "### Requirement ZD-QUAR-002 — Keep automatic quarantine policy explicit"
+    },
+    {
+      "statementId": "ZD-QUAR-003",
+      "text": "The system MUST NOT automatically delete, overwrite, or permanently dispose of a suspicious, inconclusive, unsupported, or unanalysed item; any review or quarantine action for such an item MUST follow an explicit policy and preserve a recoverable path where the platform permits one.",
+      "location": "### Requirement ZD-QUAR-003 — Keep suspicious and inconclusive items non-destructive"
+    },
+    {
+      "statementId": "ZD-QUAR-004",
+      "text": "When an MVP-01 result is No known threat found, the system MUST NOT quarantine, move, rename, overwrite, or delete the selected original as a consequence of that result.",
+      "location": "### Requirement ZD-QUAR-004 — Leave clean items untouched"
+    },
+    {
+      "statementId": "ZD-QUAR-005",
+      "text": "The system MUST NOT report an item as Quarantined until the quarantine artifact has been successfully created in the documented quarantine boundary, its required integrity checks have passed, and the source-file disposition status has been recorded separately.",
+      "location": "### Requirement ZD-QUAR-005 — Define quarantine as a verified artifact state"
+    },
+    {
+      "statementId": "ZD-QUAR-006",
+      "text": "The system MUST maintain an unambiguous association between each quarantine record, the source item selected by the user, the quarantined artifact, and every subsequent restore or deletion operation.",
+      "location": "### Requirement ZD-QUAR-006 — Preserve source and quarantine artifact identity"
+    },
+    {
+      "statementId": "ZD-QUAR-007",
+      "text": "The system MUST verify that the quarantined artifact matches the selected source content under a documented integrity method before it reports successful quarantine or proceeds with any source-removal step.",
+      "location": "### Requirement ZD-QUAR-007 — Verify content integrity before quarantine completion"
+    },
+    {
+      "statementId": "ZD-QUAR-008",
+      "text": "The system MUST record whether the original source was left in place, copied, moved, or successfully removed, and MUST NOT describe a copy as a move or a quarantine copy as proof that the original was removed.",
+      "location": "### Requirement ZD-QUAR-008 — Separate quarantine copy creation from source disposition"
+    },
+    {
+      "statementId": "ZD-QUAR-009",
+      "text": "If the applicable disposition policy requires removing the source after quarantine, the system MUST NOT attempt source removal until the quarantine artifact is complete and its required integrity verification has succeeded.",
+      "location": "### Requirement ZD-QUAR-009 — Do not remove the source before verified quarantine"
+    },
+    {
+      "statementId": "ZD-QUAR-010",
+      "text": "The system MUST perform file reads, writes, deletes, and other disposition operations only within the permissions and capabilities actually granted by the active platform and source provider, and MUST stop or reject an operation when the required access is absent or revoked.",
+      "location": "### Requirement ZD-QUAR-010 — Respect active file and provider permissions"
+    },
+    {
+      "statementId": "ZD-QUAR-011",
+      "text": "On platforms that expose per-item operation capabilities, the system MUST verify that the selected source or destination supports the required operation before requesting it and MUST handle unsupported operations without claiming success.",
+      "location": "### Requirement ZD-QUAR-011 — Check provider support before requesting an operation"
+    },
+    {
+      "statementId": "ZD-QUAR-012",
+      "text": "The system MUST treat quarantine and restore as potentially multi-step operations and MUST expose partial or indeterminate outcomes when the platform/provider does not guarantee an atomic operation.",
+      "location": "### Requirement ZD-QUAR-012 — Do not claim universal atomic move behaviour"
+    },
+    {
+      "statementId": "ZD-QUAR-013",
+      "text": "The system MUST NOT execute, launch, preview through an active-content handler, or automatically open quarantined content as part of quarantine, review, restore, or deletion processing.",
+      "location": "### Requirement ZD-QUAR-013 — Keep quarantined content from normal execution"
+    },
+    {
+      "statementId": "ZD-QUAR-014",
+      "text": "The system MUST require a fresh MVP-01 security analysis before restoring a quarantined item, and MUST NOT offer a completed restore when the fresh analysis is unavailable, incomplete, interrupted, or outside the documented freshness policy.",
+      "location": "### Requirement ZD-QUAR-014 — Require fresh analysis before restore"
+    },
+    {
+      "statementId": "ZD-QUAR-015",
+      "text": "The system MUST obtain an explicit user confirmation immediately before restoring a quarantined item to a user-accessible location.",
+      "location": "### Requirement ZD-QUAR-015 — Require user confirmation for restore"
+    },
+    {
+      "statementId": "ZD-QUAR-016",
+      "text": "Before reporting a restore as successful, the system MUST verify the restored content against the integrity identity recorded for the quarantined artifact using the documented integrity method.",
+      "location": "### Requirement ZD-QUAR-016 — Verify restored content integrity"
+    },
+    {
+      "statementId": "ZD-QUAR-017",
+      "text": "The system MUST NOT overwrite an existing destination file during restore unless the user has explicitly selected and confirmed a separately documented replacement action for that exact destination.",
+      "location": "### Requirement ZD-QUAR-017 — Prevent restore from overwriting unrelated files"
+    },
+    {
+      "statementId": "ZD-QUAR-018",
+      "text": "If restore fails or is interrupted before successful completion, the system MUST retain the quarantined artifact and its record whenever the platform/storage state permits, and MUST NOT mark the item as restored.",
+      "location": "### Requirement ZD-QUAR-018 — Preserve quarantine state after restore failure"
+    },
+    {
+      "statementId": "ZD-QUAR-019",
+      "text": "The system MUST require an explicit, item-specific user confirmation before permanently deleting a quarantined artifact.",
+      "location": "### Requirement ZD-QUAR-019 — Require confirmation for permanent deletion"
+    },
+    {
+      "statementId": "ZD-QUAR-020",
+      "text": "The system MUST report permanent deletion as successful only when the targeted deletion operation has returned a successful outcome under the documented platform/provider contract; failures and indeterminate results MUST remain distinguishable.",
+      "location": "### Requirement ZD-QUAR-020 — Report deletion according to actual provider outcome"
+    },
+    {
+      "statementId": "ZD-QUAR-021",
+      "text": "The system MUST NOT describe a delete operation as secure erasure, forensic irrecoverability, or guaranteed removal from every storage layer unless the selected platform/provider contract and verified implementation establish that guarantee.",
+      "location": "### Requirement ZD-QUAR-021 — Do not promise secure or forensic erasure"
+    },
+    {
+      "statementId": "ZD-QUAR-022",
+      "text": "Before MVP-02 release, the product MUST define and disclose the effective quarantine-retention period, its start point, expiry behaviour, any user-configurable choices, and the treatment of items that cannot be purged; the system MUST apply only that documented policy.",
+      "location": "### Requirement ZD-QUAR-022 — Define retention policy before release"
+    },
+    {
+      "statementId": "ZD-QUAR-023",
+      "text": "When an approved retention policy causes a quarantined item to expire, the system MUST apply the documented expiry action, preserve an accurate outcome record for the required period, and MUST NOT silently discard an item when the purge operation fails.",
+      "location": "### Requirement ZD-QUAR-023 — Handle expiry without silent data loss"
+    },
+    {
+      "statementId": "ZD-QUAR-024",
+      "text": "Before a user relies on quarantine as the only available copy or confirms a destructive action, the system MUST disclose the applicable retention, source-file, restore, deletion, and data-loss consequences that are known for that platform and operation.",
+      "location": "### Requirement ZD-QUAR-024 — Explain retention and destructive consequences before reliance"
+    },
+    {
+      "statementId": "ZD-QUAR-025",
+      "text": "Before release, the product MUST define and disclose what happens to quarantined content and its metadata when the application is uninstalled, app data is cleared, the device is reset, or app-specific storage becomes unavailable.",
+      "location": "### Requirement ZD-QUAR-025 — Disclose app uninstall and app-data-clear consequences"
+    },
+    {
+      "statementId": "ZD-QUAR-026",
+      "text": "Before release, the product MUST define whether quarantined content, encryption keys, and quarantine metadata are included in backup, device transfer, synchronization, or restore operations, and MUST disclose any mismatch that could make restored metadata refer to unavailable or undecryptable content.",
+      "location": "### Requirement ZD-QUAR-026 — Define backup, restore and device-migration treatment"
+    },
+    {
+      "statementId": "ZD-QUAR-027",
+      "text": "If the approved quarantine design encrypts stored file content, the system MUST protect the required key material using an established platform-appropriate key-protection mechanism and MUST NOT store recoverable plaintext key material alongside the quarantined content.",
+      "location": "### Requirement ZD-QUAR-027 — Protect encryption keys when encrypted quarantine is used"
+    },
+    {
+      "statementId": "ZD-QUAR-028",
+      "text": "If encrypted quarantine is used and a required key becomes unavailable, invalidated, or unusable, the system MUST report the affected item as inaccessible or recovery-required and MUST NOT claim that it can restore or decrypt the item.",
+      "location": "### Requirement ZD-QUAR-028 — Handle unavailable or invalid encryption keys"
+    },
+    {
+      "statementId": "ZD-QUAR-029",
+      "text": "By default, the system MUST keep quarantined file content on the user's device and MUST NOT upload that content to ZeroDeck services, third-party services, or remote storage unless a separate owner-approved capability and explicit user consent authorize the specific transfer.",
+      "location": "### Requirement ZD-QUAR-029 — Prevent unapproved cloud transfer of quarantined content"
+    },
+    {
+      "statementId": "ZD-QUAR-030",
+      "text": "The system MUST collect and retain only the quarantine metadata needed to identify, verify, display, restore, delete, and audit the item under the approved policy, and MUST protect that metadata from unauthorized access or disclosure.",
+      "location": "### Requirement ZD-QUAR-030 — Minimize and protect quarantine metadata"
+    },
+    {
+      "statementId": "ZD-QUAR-031",
+      "text": "The system MUST maintain an item-level lifecycle record that distinguishes pending, quarantined, review-required, restore-pending, restored, delete-pending, deleted, failed, expired, and recovery-required states where those states apply, and MUST update the record only when the corresponding operation outcome is established.",
+      "location": "### Requirement ZD-QUAR-031 — Maintain an accurate quarantine lifecycle record"
+    },
+    {
+      "statementId": "ZD-QUAR-032",
+      "text": "The system MUST prevent repeated or concurrent quarantine, restore, and deletion requests for the same item from producing duplicate artifacts, conflicting terminal states, or unintended repeated source-file operations.",
+      "location": "### Requirement ZD-QUAR-032 — Make disposition actions idempotent and concurrency-safe"
+    },
+    {
+      "statementId": "ZD-QUAR-033",
+      "text": "If a quarantine, restore, deletion, or expiry operation is interrupted by process termination, device restart, storage removal, or loss of provider access, the system MUST reconcile the actual artifact and source state before resuming or reporting a terminal outcome.",
+      "location": "### Requirement ZD-QUAR-033 — Recover truthfully after interruption or process death"
+    },
+    {
+      "statementId": "ZD-QUAR-034",
+      "text": "The system MUST enforce documented quarantine storage and file-size/resource limits, and MUST fail or defer an operation safely when capacity or resource constraints prevent completion without corrupting existing quarantined items.",
+      "location": "### Requirement ZD-QUAR-034 — Handle storage exhaustion and resource limits safely"
+    },
+    {
+      "statementId": "ZD-QUAR-035",
+      "text": "The system MUST communicate the actual quarantine, restore, and deletion capabilities available on the active platform and MUST NOT claim web and Android can perform identical file operations when their permission and storage boundaries differ.",
+      "location": "### Requirement ZD-QUAR-035 — Expose platform-specific quarantine capability"
+    },
+    {
+      "statementId": "ZD-QUAR-036",
+      "text": "The system MUST disclose any remote storage or processing boundary before it is used for quarantine content and MUST NOT treat a source document provider's own cloud hosting as a ZeroDeck upload or imply that the source file is stored locally.",
+      "location": "### Requirement ZD-QUAR-036 — Keep quarantine local unless transfer is separately authorized"
+    },
+    {
+      "statementId": "ZD-QUAR-037",
+      "text": "The system MUST retain a privacy-minimized record of each quarantine, restore, permanent-delete, and expiry outcome for the period required by the approved retention and legal policy, including failures and partial operations.",
+      "location": "### Requirement ZD-QUAR-037 — Retain an auditable disposition outcome"
+    },
+    {
+      "statementId": "ZD-QUAR-038",
+      "text": "MVP-02 MUST retain only the quarantine and disposition records necessary for the item lifecycle and MUST NOT expand those records into a standalone searchable scan-history capability without a separate owner-approved scope change.",
+      "location": "### Requirement ZD-QUAR-038 — Do not create a standalone scan-history capability"
+    }
+  ],
+  "evidenceRefs": [
+    "ZD-EV-CONTRACT-QUAR-001"
+  ],
+  "extensions": {
+    "zeroDeckProductRequirements": {
+      "profileId": "zero-deck.pm-product-requirements",
+      "profileVersion": "1.0.0-draft",
+      "productId": "zero-deck",
+      "author": {
+        "name": "ZeroDeck Product Management Agent",
+        "role": "Product Manager",
+        "organization": "ZeroDeck Product Management"
+      },
+      "softwareRulesCompatibility": {
+        "repository": "https://github.com/REMAREMA6/software-rules",
+        "commit": "5591a2e62287afc29bde002369eaf659673ec59b",
+        "specificationRelease": "0.3.0-draft",
+        "schemaVersion": "0.2.0",
+        "schemaDialect": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "contractLifecycle": "draft",
+      "capabilityId": "MVP-02",
+      "requirements": [
+        {
+          "statementId": "ZD-QUAR-001",
+          "requirementType": "business-rule",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "business-rules",
+            "data",
+            "configuration",
+            "interface"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Quarantine eligibility",
+          "rationale": "The existing working draft distinguishes confirmed threats, suspicious/inconclusive items and clean files, but the confirmed-threat threshold and automatic-versus-confirmation trigger remain unresolved.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The working product material and open-properties register describe confirmed-threat quarantine, suspicious review and clean-file non-interference as provisional baselines.",
+              "refs": [
+                "EVD-SRC-QUAR-001",
+                "EVD-PM-QUAR-RESEARCH-001"
+              ]
+            },
+            {
+              "basisType": "pm-inference",
+              "description": "A published eligibility policy is needed so a scan label alone cannot silently authorize destructive file handling.",
+              "refs": [
+                "EVD-SRC-QUAR-003"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-001-AC-01",
+              "given": "A completed scan result exists and the eligibility policy is available",
+              "when": "The system evaluates the item for quarantine",
+              "then": "The system exposes the policy outcome and does not perform a disposition outside the policy.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-001-AC-02",
+              "given": "The scan result is suspicious, inconclusive or otherwise not eligible for destructive handling",
+              "when": "The system evaluates quarantine eligibility",
+              "then": "The item is marked for review or another explicitly permitted non-destructive path; it is not silently treated as confirmed malware.",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-002",
+          "requirementType": "business-rule",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "business-rules",
+            "authorization-permissions",
+            "configuration",
+            "security-controls"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Automatic quarantine trigger",
+          "rationale": "The source working draft describes automatic quarantine when permitted, but the owner has not approved its trigger or confirmed-threat threshold.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The Software Rules open-properties register labels automatic quarantine of confirmed malware as a documented working-draft baseline while leaving threshold and permission semantics open.",
+              "refs": [
+                "EVD-SRC-QUAR-001"
+              ]
+            },
+            {
+              "basisType": "pm-inference",
+              "description": "An explicit policy gate prevents a provisional draft statement from becoming an assumed owner decision.",
+              "refs": [
+                "EVD-PM-QUAR-RESEARCH-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-002-AC-01",
+              "given": "No owner-approved automatic-quarantine policy applies",
+              "when": "A confirmed-threat result is produced",
+              "then": "The system does not infer authorization for automatic quarantine from the draft baseline alone.",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-QUAR-002-AC-02",
+              "given": "An owner-approved automatic-quarantine policy applies and the platform permits the operation",
+              "when": "A qualifying confirmed-threat result is produced",
+              "then": "The system follows that policy and reports the actual operation outcome.",
+              "verificationMethod": "operational-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-003",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "business-rules",
+            "security-controls",
+            "errors-recovery",
+            "interface"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Suspicious and inconclusive disposition",
+          "rationale": "A false positive or incomplete analysis must not trap or destroy a legitimate file.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The capability inventory and working-draft baselines route suspicious items to review and unknown/inconclusive items to rescan or review.",
+              "refs": [
+                "EVD-SRC-QUAR-001",
+                "EVD-SRC-QUAR-002"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-003-AC-01",
+              "given": "The analysis result is suspicious or inconclusive",
+              "when": "A disposition decision is evaluated",
+              "then": "No automatic permanent deletion or irreversible disposition occurs.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-003-AC-02",
+              "given": "The item cannot be analysed reliably",
+              "when": "The user opens its available actions",
+              "then": "The system identifies the uncertainty and offers only policy-permitted actions.",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-004",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "business-rules",
+            "security-controls"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "No-known-threat disposition",
+          "rationale": "A no-match result is not a reason to alter a user's file and must not be presented as a guarantee of safety.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The working-draft quarantine baseline says clean files remain untouched; MVP-01 contract keeps no-known-threat distinct from safety.",
+              "refs": [
+                "EVD-SRC-QUAR-001",
+                "EVD-SRC-FILE-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-004-AC-01",
+              "given": "A completed analysis returns No known threat found",
+              "when": "The system evaluates disposition",
+              "then": "The original file remains untouched by quarantine/disposition processing.",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-005",
+          "requirementType": "reliability",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "data",
+            "persistence",
+            "security-controls",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Quarantine completion state",
+          "rationale": "A database label or UI list entry alone does not isolate a file; copying, moving and deleting the source are separate operations.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The research report says Quarantined must represent a real verified storage state and requires explicit states for copy/write, verification and source disposition.",
+              "refs": [
+                "EVD-PM-QUAR-RESEARCH-001"
+              ]
+            },
+            {
+              "basisType": "platform-contract",
+              "description": "SAF exposes provider-mediated document operations rather than a universal atomic move contract.",
+              "refs": [
+                "EVD-DOC-ANDROID-SAF-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-005-AC-01",
+              "given": "The quarantine artifact has not been fully written or verified",
+              "when": "The system attempts to update the item state",
+              "then": "The item is not shown as successfully Quarantined.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-005-AC-02",
+              "given": "The artifact is written and verified but the original remains in place",
+              "when": "The system reports the quarantine outcome",
+              "then": "The system states that the quarantined copy exists and separately discloses that the source remains in its original location.",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-006",
+          "requirementType": "data",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "persistence",
+            "behavior",
+            "security-controls"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "File and artifact identity",
+          "rationale": "Ambiguous identity risks acting on the wrong file, confusing a copy with its source, or restoring/deleting an unrelated item.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The MVP-QUAR-001 scenario requires original and quarantined artifact identity; the open-properties register calls for a quarantine metadata/data model.",
+              "refs": [
+                "EVD-SRC-QUAR-003",
+                "EVD-SRC-QUAR-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-006-AC-01",
+              "given": "Two different source items are quarantined",
+              "when": "Their records are created",
+              "then": "Each record remains associated with the correct source and artifact identity.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-006-AC-02",
+              "given": "A restore or delete request is made for one record",
+              "when": "The operation resolves its target",
+              "then": "Only the artifact associated with that record is targeted.",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-007",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "behavior",
+            "security-controls",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Quarantine integrity verification",
+          "rationale": "Partial or altered copies must not be treated as a valid quarantine artifact; SHA-256 is a working-draft direction, not a finalized algorithm decision.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The working-draft baseline requires integrity verification and a recorded hash, while the open-properties register says SHA-256 and exact encoding/use remain to be confirmed.",
+              "refs": [
+                "EVD-SRC-QUAR-001",
+                "EVD-SRC-QUAR-004"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-007-AC-01",
+              "given": "A quarantine copy is created",
+              "when": "Integrity verification runs",
+              "then": "A mismatch or unavailable verification prevents a successful quarantine state and is reported.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-007-AC-02",
+              "given": "The selected integrity method is documented and verification passes",
+              "when": "The quarantine operation reaches its commit point",
+              "then": "The record stores the identity of the verified artifact and the verification result.",
+              "verificationMethod": "inspection"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-008",
+          "requirementType": "data",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "behavior",
+            "interface",
+            "business-rules"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Source disposition semantics",
+          "rationale": "The platform may permit copying while refusing deletion; users need to know whether the original still exists.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The research report explicitly distinguishes copying into app-private quarantine from moving or deleting the original and requires recording the source disposition.",
+              "refs": [
+                "EVD-PM-QUAR-RESEARCH-001",
+                "EVD-SRC-QUAR-004"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-008-AC-01",
+              "given": "A quarantine copy succeeds but source deletion is unsupported or fails",
+              "when": "The operation completes its available steps",
+              "then": "The item is reported as a verified quarantined copy with the original still present, not as moved.",
+              "verificationMethod": "manual-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-008-AC-02",
+              "given": "The source is successfully removed after a verified quarantine artifact exists",
+              "when": "The operation status is published",
+              "then": "The source-removal outcome is recorded separately from quarantine-copy verification.",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-009",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "business-rules",
+            "security-controls",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Safe operation ordering",
+          "rationale": "A crash or failure between source deletion and quarantine-copy completion could cause irreversible data loss.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "The source research identifies the copy-then-delete crash window as a data-loss hazard and requires a verified commit before source disposition.",
+              "refs": [
+                "EVD-PM-QUAR-RESEARCH-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-009-AC-01",
+              "given": "The quarantine artifact is incomplete or integrity verification failed",
+              "when": "A source-removal step would otherwise run",
+              "then": "The original source is not removed.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-009-AC-02",
+              "given": "The quarantine artifact is complete and verified",
+              "when": "A policy-authorized source-removal step begins",
+              "then": "Source removal occurs only after the verification point.",
+              "verificationMethod": "inspection"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-010",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "authorization-permissions",
+            "behavior",
+            "security-controls",
+            "errors-recovery",
+            "integrations"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "File permission boundary",
+          "rationale": "A selected URI does not confer unrestricted filesystem access, and permissions may expire or be revoked.",
+          "basis": [
+            {
+              "basisType": "platform-contract",
+              "description": "Android SAF mediates user-selected document access and exposes provider-supported operations and URI grants.",
+              "refs": [
+                "EVD-DOC-ANDROID-SAF-001",
+                "EVD-SRC-QUAR-004"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-010-AC-01",
+              "given": "The user has not granted the permission required for an operation",
+              "when": "The system attempts that operation",
+              "then": "The operation is denied without bypassing platform controls.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-010-AC-02",
+              "given": "A previously granted URI permission is revoked or unavailable",
+              "when": "A later restore/delete operation is requested",
+              "then": "The operation fails safely and its record remains available for recovery or explanation.",
+              "verificationMethod": "operational-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-011",
+          "requirementType": "compatibility",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "authorization-permissions",
+            "integrations",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Provider capability checks",
+          "rationale": "Android document providers advertise operations such as write and delete; virtual documents may not expose ordinary file bytes.",
+          "basis": [
+            {
+              "basisType": "platform-contract",
+              "description": "Android SAF document flags determine supported read/write/delete operations; SAF also supports virtual documents.",
+              "refs": [
+                "EVD-DOC-ANDROID-SAF-001",
+                "EVD-SRC-QUAR-004"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-011-AC-01",
+              "given": "A provider does not advertise the required delete or write capability",
+              "when": "The system evaluates a requested operation",
+              "then": "It does not issue an unsupported operation and explains the limitation.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-011-AC-02",
+              "given": "The selected item is a virtual document or has no usable byte representation",
+              "when": "A byte-copy quarantine path is requested",
+              "then": "The system reports unsupported or uses only a separately documented supported path.",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-012",
+          "requirementType": "reliability",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "errors-recovery",
+            "integrations",
+            "persistence"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Multi-step operation atomicity",
+          "rationale": "SAF is provider-mediated and does not define a universal atomic move across every provider.",
+          "basis": [
+            {
+              "basisType": "platform-contract",
+              "description": "The ZeroDeck source extraction records the absence of a universal SAF atomic-move contract as a bounded inference.",
+              "refs": [
+                "EVD-SRC-QUAR-004"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-012-AC-01",
+              "given": "A multi-step operation fails after one side effect has succeeded",
+              "when": "The system reconciles the operation state",
+              "then": "It reports partial/indeterminate state and does not claim an all-or-nothing success.",
+              "verificationMethod": "operational-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-013",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "behavior",
+            "authorization-permissions"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Quarantined content handling",
+          "rationale": "Quarantined content must not be activated by the product while it is being contained or managed.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The owner working-draft material explicitly states quarantined files are never executed.",
+              "refs": [
+                "EVD-SRC-QUAR-001",
+                "EVD-PM-QUAR-RESEARCH-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-013-AC-01",
+              "given": "A quarantined item is listed or inspected",
+              "when": "The system renders its details",
+              "then": "The system does not execute or automatically open the file content.",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-QUAR-013-AC-02",
+              "given": "A restore or deletion operation is initiated",
+              "when": "The system processes the quarantined artifact",
+              "then": "The operation does not launch the content as part of processing.",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-014",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "business-rules",
+            "behavior",
+            "security-controls",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Restore eligibility",
+          "rationale": "The working-draft baseline and source-derived intent both place a fresh scan before restore; exact acceptable result classes and freshness window remain open.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The source-derived UI rule records an intended fresh-scan restore guard; OPEN-PROPERTIES repeats fresh analysis as a baseline and leaves timing/criteria open.",
+              "refs": [
+                "EVD-SRC-QUAR-001",
+                "EVD-SRC-QUAR-005"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-014-AC-01",
+              "given": "A quarantined item has no fresh analysis result",
+              "when": "The user requests restore",
+              "then": "The system requires a fresh analysis and does not restore the item yet.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-014-AC-02",
+              "given": "Fresh analysis is interrupted or inconclusive",
+              "when": "The user requests restore",
+              "then": "The restore is blocked or remains pending review; it is not reported as completed.",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-015",
+          "requirementType": "usability",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "behavior",
+            "business-rules"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Restore confirmation",
+          "rationale": "Restore changes the item's exposure and can reintroduce a potentially harmful file to normal user access.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The working-draft baseline and source UI-derived intent require confirmation before restore.",
+              "refs": [
+                "EVD-SRC-QUAR-001",
+                "EVD-SRC-QUAR-005"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-015-AC-01",
+              "given": "The item meets the documented restore eligibility policy",
+              "when": "The user initiates restore",
+              "then": "The system presents a confirmation and does not restore until the user confirms.",
+              "verificationMethod": "manual-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-015-AC-02",
+              "given": "The user cancels the restore confirmation",
+              "when": "The confirmation is dismissed",
+              "then": "The quarantined artifact remains quarantined and unchanged.",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-016",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "behavior",
+            "security-controls",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Restore integrity",
+          "rationale": "A restore must not silently produce altered or incomplete content; the working draft requires hash verification but the algorithm remains open.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The open-properties register states that restored content is checked against its recorded hash and leaves the algorithm/format unresolved.",
+              "refs": [
+                "EVD-SRC-QUAR-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-016-AC-01",
+              "given": "The restored content does not match the recorded integrity identity",
+              "when": "The system verifies the restore",
+              "then": "The system does not report successful restore and preserves the quarantined artifact where possible.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-016-AC-02",
+              "given": "The restored content matches the recorded integrity identity",
+              "when": "The restore reaches completion",
+              "then": "The system records the successful verification and restore outcome.",
+              "verificationMethod": "inspection"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-017",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "business-rules",
+            "authorization-permissions",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Restore destination conflict",
+          "rationale": "A file may have been created at the original path after quarantine; blind restoration could destroy unrelated user data.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The working-draft baseline prohibits overwriting unrelated user files; the research report identifies restore destination conflicts as a required branch.",
+              "refs": [
+                "EVD-SRC-QUAR-001",
+                "EVD-PM-QUAR-RESEARCH-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-017-AC-01",
+              "given": "A file already exists at the intended restore destination",
+              "when": "Restore is requested",
+              "then": "The system does not overwrite it and offers a non-destructive conflict outcome.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-017-AC-02",
+              "given": "A replacement action is separately supported and documented",
+              "when": "The user selects and confirms replacement for the exact destination",
+              "then": "Only the confirmed destination is affected and the outcome is reported.",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-018",
+          "requirementType": "reliability",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "persistence",
+            "errors-recovery",
+            "data"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Restore failure recovery",
+          "rationale": "A failed restore must not lose the only recoverable quarantine copy or misstate its location.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "The failure matrix and platform evidence require explicit recovery for partial writes, provider failure and process interruption.",
+              "refs": [
+                "EVD-SRC-QUAR-003",
+                "EVD-SRC-QUAR-004"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-018-AC-01",
+              "given": "Restore fails during writing or verification",
+              "when": "The operation terminates",
+              "then": "The item remains recorded as quarantined, failed, or recovery-required according to its actual state; it is not marked restored.",
+              "verificationMethod": "operational-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-019",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "behavior",
+            "business-rules",
+            "authorization-permissions"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Permanent deletion confirmation",
+          "rationale": "Permanent deletion is destructive and must not be triggered by an ambiguous or accidental action.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The source-derived UI interaction pattern shows destructive confirmation for permanent deletion; the product working draft includes permanent deletion as a user action.",
+              "refs": [
+                "EVD-SRC-QUAR-005",
+                "EVD-SRC-QUAR-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-019-AC-01",
+              "given": "A quarantined artifact is selected for permanent deletion",
+              "when": "The user invokes delete",
+              "then": "The system presents a clear item-specific destructive confirmation before deletion.",
+              "verificationMethod": "manual-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-019-AC-02",
+              "given": "The user cancels the confirmation",
+              "when": "The confirmation is dismissed",
+              "then": "The artifact and record remain unchanged.",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-020",
+          "requirementType": "reliability",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "data",
+            "errors-recovery",
+            "interface"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Deletion result semantics",
+          "rationale": "A UI removal or confirmation dialog does not prove that underlying file bytes were deleted.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The open-properties register requires failed deletion to retain its record and report failure; source UI evidence explicitly says a placeholder action is not real deletion.",
+              "refs": [
+                "EVD-SRC-QUAR-001",
+                "EVD-SRC-QUAR-005"
+              ]
+            },
+            {
+              "basisType": "platform-contract",
+              "description": "SAF deletion depends on provider capability and provider operation outcome.",
+              "refs": [
+                "EVD-DOC-ANDROID-SAF-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-020-AC-01",
+              "given": "The provider rejects deletion or reports failure",
+              "when": "The deletion request ends",
+              "then": "The system reports failure and retains the quarantine record with its actual state.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-020-AC-02",
+              "given": "The provider reports a successful delete operation",
+              "when": "The deletion request ends",
+              "then": "The system records the provider-confirmed outcome without claiming secure erasure unless separately guaranteed.",
+              "verificationMethod": "operational-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-021",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "business-rules",
+            "interface",
+            "data"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Deletion assurance wording",
+          "rationale": "Provider deletion and ordinary file deletion do not establish that all underlying copies, snapshots, backups or flash-storage remnants are irrecoverable.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "The reviewed Android and OWASP sources do not establish a universal secure-erasure guarantee for the supported storage providers; the product must avoid claims beyond the evidence.",
+              "refs": [
+                "EVD-DOC-ANDROID-SAF-001",
+                "EVD-DOC-OWASP-002"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-021-AC-01",
+              "given": "A delete action completes on a provider that does not guarantee secure erasure",
+              "when": "The system communicates the outcome",
+              "then": "The wording describes the operation as deleted/removed according to provider semantics, not securely erased or irrecoverable.",
+              "verificationMethod": "inspection"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-022",
+          "requirementType": "policy",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "business-rules",
+            "configuration",
+            "persistence",
+            "interface",
+            "security-controls"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Quarantine retention policy",
+          "rationale": "The 30-day period is explicitly proposed rather than approved; retention affects data loss, device capacity and user expectations.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The open-properties register marks 30-day default retention and configurability as proposed, not final.",
+              "refs": [
+                "EVD-SRC-QUAR-001",
+                "EVD-PM-QUAR-RESEARCH-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-022-AC-01",
+              "given": "No owner-approved retention policy has been recorded",
+              "when": "The product is prepared for release",
+              "then": "The release gate remains unmet and no default duration is silently selected.",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-QUAR-022-AC-02",
+              "given": "A retention policy is approved and effective",
+              "when": "A quarantined item approaches or reaches its expiry condition",
+              "then": "The system applies the documented timing and outcome and communicates the result.",
+              "verificationMethod": "operational-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-023",
+          "requirementType": "reliability",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "persistence",
+            "behavior",
+            "errors-recovery",
+            "data",
+            "configuration"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Retention expiry and purge",
+          "rationale": "Expiry and physical deletion are distinct; cleanup can fail because of permissions, provider availability or storage state.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "The open-properties register identifies automatic expiry, purge guarantees and notifications as unresolved; truthful failure handling is required.",
+              "refs": [
+                "EVD-SRC-QUAR-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-023-AC-01",
+              "given": "An item reaches an approved expiry point but purge fails",
+              "when": "The expiry process runs",
+              "then": "The item is marked expiry/purge failed or pending and is not reported as deleted.",
+              "verificationMethod": "operational-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-023-AC-02",
+              "given": "An item expires and purge succeeds",
+              "when": "The expiry process completes",
+              "then": "The record reflects the actual purge outcome and any required retained audit metadata.",
+              "verificationMethod": "operational-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-024",
+          "requirementType": "usability",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "business-rules",
+            "data",
+            "security-controls"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "User disclosure",
+          "rationale": "Users must understand whether the original remains, what restore requires, and whether uninstall, data clear or key loss can remove access.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The research report and open-properties register require clear consequences for uninstall, key loss, source disposition and restore.",
+              "refs": [
+                "EVD-PM-QUAR-RESEARCH-001",
+                "EVD-SRC-QUAR-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-024-AC-01",
+              "given": "The source remains in place after a copy-based quarantine",
+              "when": "The user views the completed operation",
+              "then": "The interface states that the original remains at its source location.",
+              "verificationMethod": "manual-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-024-AC-02",
+              "given": "The user is about to confirm deletion or a policy-driven expiry",
+              "when": "The confirmation is shown",
+              "then": "The applicable irreversible or unrecoverable consequences are disclosed before confirmation.",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-025",
+          "requirementType": "policy",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "persistence",
+            "security-controls",
+            "interface",
+            "errors-recovery",
+            "data"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Uninstall and data-clear lifecycle",
+          "rationale": "Android removes app-specific files on uninstall; this directly affects whether the user can rely on quarantine as retained storage.",
+          "basis": [
+            {
+              "basisType": "platform-contract",
+              "description": "Android documents that app-specific files are removed when the application is uninstalled.",
+              "refs": [
+                "EVD-DOC-ANDROID-APPSTORAGE-001"
+              ]
+            },
+            {
+              "basisType": "source-evidence",
+              "description": "The open-properties register requires explicit uninstall consequences and says the actual lifecycle remains to be specified and tested.",
+              "refs": [
+                "EVD-SRC-QUAR-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-025-AC-01",
+              "given": "Quarantined content is stored in app-specific storage",
+              "when": "The product describes its lifecycle",
+              "then": "The uninstall/data-clear consequences are stated without implying post-uninstall retention.",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-QUAR-025-AC-02",
+              "given": "The product has not established the lifecycle for an applicable platform",
+              "when": "A release candidate is reviewed",
+              "then": "The release gate remains unmet rather than assuming the data survives.",
+              "verificationMethod": "inspection"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-026",
+          "requirementType": "policy",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "persistence",
+            "data",
+            "security-controls",
+            "configuration",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Backup and migration lifecycle",
+          "rationale": "Backing up ciphertext without usable keys, or restoring metadata without its artifact, can create inaccessible or misleading quarantine records.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The open-properties register lists backup/restore, device migration and key-loss consequences as unresolved.",
+              "refs": [
+                "EVD-SRC-QUAR-001"
+              ]
+            },
+            {
+              "basisType": "pm-inference",
+              "description": "The system must define the relation between artifact, key and metadata to avoid false recoverability claims.",
+              "refs": [
+                "EVD-DOC-ANDROID-003"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-026-AC-01",
+              "given": "Backup or device migration is available or enabled for relevant data",
+              "when": "The product defines its backup policy",
+              "then": "The policy separately accounts for quarantine bytes, metadata and keys and discloses what is not recoverable.",
+              "verificationMethod": "inspection"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-027",
+          "requirementType": "security",
+          "normativeKind": "conditional",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "persistence",
+            "configuration",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Conditional encryption key protection",
+          "rationale": "The working-draft baseline proposes encrypted quarantine and Android Keystore protection, but encryption requirement, algorithm and key design remain open.",
+          "basis": [
+            {
+              "basisType": "platform-contract",
+              "description": "Android Keystore can protect non-exportable key material and perform key operations in a system process; hardware backing is device/algorithm dependent.",
+              "refs": [
+                "EVD-DOC-ANDROID-KEYSTORE-001",
+                "EVD-SRC-QUAR-004"
+              ]
+            },
+            {
+              "basisType": "pm-inference",
+              "description": "Use mature platform mechanisms rather than inventing key protection; do not infer that Keystore alone defines the file-encryption design.",
+              "refs": [
+                "EVD-DOC-OWASP-CRYPTO-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-027-AC-01",
+              "given": "The approved design uses encrypted quarantine",
+              "when": "A key is created or used",
+              "then": "The implementation uses the approved platform key-protection mechanism and does not place recoverable plaintext key material beside the artifact.",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-QUAR-027-AC-02",
+              "given": "The device does not support a stated hardware-backed security level",
+              "when": "The encryption design is evaluated",
+              "then": "The product does not claim StrongBox/TEE protection that the device has not established.",
+              "verificationMethod": "operational-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [],
+          "conditions": [
+            "The approved quarantine design encrypts stored file content."
+          ]
+        },
+        {
+          "statementId": "ZD-QUAR-028",
+          "requirementType": "reliability",
+          "normativeKind": "conditional",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "errors-recovery",
+            "persistence",
+            "data"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "undefined",
+          "rationale": "A key-loss path can make the only quarantined copy unrecoverable; a success claim would mislead users.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The product research identifies key loss and device migration as unresolved lifecycle cases.",
+              "refs": [
+                "EVD-PM-QUAR-RESEARCH-001",
+                "EVD-SRC-QUAR-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-028-AC-01",
+              "given": "Encrypted quarantine content exists but its required key is unavailable",
+              "when": "The user requests restore or inspection",
+              "then": "The system reports that the item is inaccessible and does not claim a successful decrypt/restore.",
+              "verificationMethod": "operational-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [],
+          "conditions": [
+            "The approved quarantine design encrypts stored file content."
+          ]
+        },
+        {
+          "statementId": "ZD-QUAR-029",
+          "requirementType": "privacy",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "data",
+            "integrations",
+            "interface",
+            "configuration"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Quarantine content data flow",
+          "rationale": "The working product direction is local-first; suspicious files may contain highly sensitive data, and cloud transfer would change the privacy and operational boundary.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The product working draft and architecture assessment state local/on-device handling and no cloud upload by default; this is not a final implementation decision.",
+              "refs": [
+                "EVD-SRC-QUAR-001",
+                "EVD-PM-QUAR-RESEARCH-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-029-AC-01",
+              "given": "No separate owner-approved cloud-transfer capability and user consent exist",
+              "when": "A quarantine operation runs while network access is available",
+              "then": "Quarantined file content is not uploaded to ZeroDeck or a third party.",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-QUAR-029-AC-02",
+              "given": "A future cloud-transfer capability has been separately approved and consented to",
+              "when": "A user initiates that transfer",
+              "then": "Only the disclosed data and recipient are used for the approved purpose.",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-030",
+          "requirementType": "privacy",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "persistence",
+            "security-controls",
+            "authorization-permissions"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Quarantine metadata minimization",
+          "rationale": "File names, paths, hashes and verdict details may be sensitive; standalone scan history is outside the MVP.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The capability inventory excludes scan history as a standalone capability and the platform assessment recommends minimal local metadata by default.",
+              "refs": [
+                "EVD-SRC-QUAR-002",
+                "EVD-PM-QUAR-RESEARCH-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-030-AC-01",
+              "given": "A quarantine record is created",
+              "when": "The system persists its metadata",
+              "then": "Only fields justified by the documented item lifecycle and audit purpose are stored.",
+              "verificationMethod": "inspection"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-031",
+          "requirementType": "data",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "persistence",
+            "behavior",
+            "errors-recovery",
+            "interface"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Quarantine item state model",
+          "rationale": "A durable state model is required to prevent the interface and stored metadata from diverging from actual file operations.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The source research requires explicit operation states and auditable quarantine/restore/delete outcomes; the MVP-QUAR scenarios separate the workflows.",
+              "refs": [
+                "EVD-PM-QUAR-RESEARCH-001",
+                "EVD-SRC-QUAR-003"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-031-AC-01",
+              "given": "A quarantine, restore or delete operation changes its real state",
+              "when": "The lifecycle record is updated",
+              "then": "The record reflects the established operation outcome and does not jump to a success state early.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-031-AC-02",
+              "given": "An operation is partial or its outcome cannot be determined",
+              "when": "The system reconciles lifecycle state",
+              "then": "The record uses a partial, failed, or recovery-required state rather than a false terminal success.",
+              "verificationMethod": "operational-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-032",
+          "requirementType": "reliability",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "data",
+            "persistence",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Duplicate and concurrent actions",
+          "rationale": "Repeated taps, retries and concurrent processes can otherwise create duplicate copies or race destructive actions.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "The open-properties register identifies duplicate requests, concurrency and idempotency as unresolved product requirements.",
+              "refs": [
+                "EVD-SRC-QUAR-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-032-AC-01",
+              "given": "The same action is submitted repeatedly while an operation is active",
+              "when": "The system processes the requests",
+              "then": "Only one effective operation is applied or duplicates are safely recognized without duplicate side effects.",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-032-AC-02",
+              "given": "A terminal action is retried after success",
+              "when": "The same logical operation is submitted again",
+              "then": "The system returns the established result or safely rejects the duplicate without repeating destructive effects.",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-033",
+          "requirementType": "reliability",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "persistence",
+            "errors-recovery",
+            "background-processing",
+            "performance-resource-behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Interrupted disposition recovery",
+          "rationale": "A crash may occur between copy, verification, source deletion and record update; recovery must not assume the last step succeeded.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The open-properties register explicitly identifies process death, restart, disk-full, partial writes and provider failure as recovery cases.",
+              "refs": [
+                "EVD-SRC-QUAR-001",
+                "EVD-SRC-QUAR-004"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-033-AC-01",
+              "given": "The app process ends during a multi-step disposition operation",
+              "when": "The app or service resumes",
+              "then": "It inspects the actual source/artifact/record state and reports a truthful recovered or recovery-required outcome.",
+              "verificationMethod": "operational-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-033-AC-02",
+              "given": "The source provider or removable storage is unavailable during recovery",
+              "when": "The operation is reconciled",
+              "then": "The system does not claim completion or remove the record needed to explain the unresolved item.",
+              "verificationMethod": "operational-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-034",
+          "requirementType": "performance",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "performance-resource-behavior",
+            "configuration",
+            "errors-recovery",
+            "persistence"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Storage capacity and resource limits",
+          "rationale": "Large files and limited device storage can cause partial writes, device pressure or loss of existing quarantined items; numeric limits remain open.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The open-properties register identifies large-file performance and storage-capacity limits as unresolved.",
+              "refs": [
+                "EVD-SRC-QUAR-001"
+              ]
+            },
+            {
+              "basisType": "external-research",
+              "description": "OWASP recommends file-size limits and secure storage boundaries for file handling.",
+              "refs": [
+                "EVD-DOC-OWASP-FILE-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-034-AC-01",
+              "given": "Insufficient storage is detected before or during quarantine",
+              "when": "A new quarantine operation is attempted",
+              "then": "The operation is rejected or safely stopped and existing quarantine artifacts remain intact.",
+              "verificationMethod": "operational-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-034-AC-02",
+              "given": "A file exceeds the documented quarantine limit",
+              "when": "The user requests quarantine",
+              "then": "The system reports the applicable limit and does not begin an unbounded operation.",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-035",
+          "requirementType": "compatibility",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "behavior",
+            "authorization-permissions",
+            "configuration",
+            "integrations"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Cross-platform capability boundary",
+          "rationale": "Android SAF and browser file APIs expose user-mediated capabilities; neither grants arbitrary access to every file, and the web product cannot promise native Android quarantine semantics.",
+          "basis": [
+            {
+              "basisType": "platform-contract",
+              "description": "Android SAF operations depend on provider grants/capabilities; browser File System APIs require user-granted handles/permissions.",
+              "refs": [
+                "EVD-DOC-ANDROID-SAF-001",
+                "EVD-DOC-WEB-FS-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-035-AC-01",
+              "given": "The active platform cannot perform the requested isolation or source operation",
+              "when": "The user requests quarantine",
+              "then": "The system states the unsupported capability and does not imply that the original has been isolated or removed.",
+              "verificationMethod": "manual-test"
+            },
+            {
+              "criterionId": "ZD-QUAR-035-AC-02",
+              "given": "The platform supports only a subset of the product operation",
+              "when": "The user views available actions",
+              "then": "Only the supported subset is offered and its limitations are disclosed.",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-036",
+          "requirementType": "privacy",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "security-controls",
+            "integrations",
+            "interface"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Source-provider and ZeroDeck data-flow distinction",
+          "rationale": "A user-selected document may originate from a cloud provider; ZeroDeck must distinguish source-provider transfer from its own transfer.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The research report explicitly warns that a remote/cloud document provider may serve the file through its own infrastructure.",
+              "refs": [
+                "EVD-PM-QUAR-RESEARCH-001",
+                "EVD-SRC-QUAR-004"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-036-AC-01",
+              "given": "The selected file originates from a remote document provider",
+              "when": "The system explains its data handling",
+              "then": "It does not imply the source provider is local or claim that no remote source-provider transfer occurred.",
+              "verificationMethod": "inspection"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-037",
+          "requirementType": "operational",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "persistence",
+            "security-controls",
+            "errors-recovery",
+            "configuration"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Disposition audit record",
+          "rationale": "The working draft requires quarantine, restore and deletion to be auditable, while exact audit fields, access and retention remain unresolved.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "The open-properties register records auditable quarantine, restore and deletion as a baseline and leaves record fields/retention open.",
+              "refs": [
+                "EVD-SRC-QUAR-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-037-AC-01",
+              "given": "A disposition operation succeeds, fails, or is partial",
+              "when": "The operation reaches a reportable state",
+              "then": "A privacy-minimized outcome record is retained under the approved policy.",
+              "verificationMethod": "inspection"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        },
+        {
+          "statementId": "ZD-QUAR-038",
+          "requirementType": "policy",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "business-rules",
+            "data",
+            "persistence",
+            "configuration"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "MVP boundary for records",
+          "rationale": "The owner-approved MVP excludes scan history as a standalone feature; quarantine records remain necessary to manage quarantined artifacts.",
+          "basis": [
+            {
+              "basisType": "owner-decision",
+              "description": "Owner-approved scope excludes scan history as a standalone capability.",
+              "refs": [
+                "ZD-SCOPE-001",
+                "EVD-OWNER-SCOPE-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-QUAR-038-AC-01",
+              "given": "A quarantine item requires a lifecycle record",
+              "when": "The record is created",
+              "then": "The record contains only lifecycle/disposition information needed for MVP-02 and does not introduce standalone scan-history browsing.",
+              "verificationMethod": "inspection"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": []
+        }
+      ],
+      "openQuestions": [
+        {
+          "questionId": "ZD-Q-QUAR-001",
+          "question": "Should confirmed threats be quarantined automatically when platform capabilities permit, or only after explicit user confirmation?",
+          "impact": "Determines trigger, consent, user control, false-positive exposure and the relationship between MVP-01 scan completion and MVP-02 action.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Prefer explicit user confirmation for the first release unless the owner specifically accepts automatic quarantine after a rigorously defined confirmed-threat threshold and false-positive recovery path."
+        },
+        {
+          "questionId": "ZD-Q-QUAR-002",
+          "question": "What exact evidence threshold and analysis outcomes qualify as confirmed threats eligible for automatic or user-initiated quarantine?",
+          "impact": "Affects eligibility, false-positive risk, automatic action authorization and safe handling of suspicious/inconclusive outcomes.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Do not authorize automatic handling until the MVP-01 verdict policy and measured evidence threshold are approved."
+        },
+        {
+          "questionId": "ZD-Q-QUAR-003",
+          "question": "What does quarantine mean operationally on each platform: copy into an app-controlled area, move through a provider, or another isolation boundary?",
+          "impact": "Determines whether the original remains accessible, the strength of isolation, storage lifetime, web feasibility and user-facing promises.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Prefer a verified local quarantine copy with an explicit source-disposition step, but treat this as a recommendation pending engineering proof and owner approval."
+        },
+        {
+          "questionId": "ZD-Q-QUAR-004",
+          "question": "After a verified quarantine copy is created, should ZeroDeck attempt to remove the original, leave it in place, or ask the user?",
+          "impact": "Affects data-loss risk, duplicate copies, platform support, permissions and whether the original remains exposed.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep source removal separate and require an explicit policy/confirmation; never delete before copy verification."
+        },
+        {
+          "questionId": "ZD-Q-QUAR-005",
+          "question": "What exact fresh-scan age/window and result classes make a quarantined item eligible for restore?",
+          "impact": "Determines restore safety, scan dependency, result freshness and whether suspicious/inconclusive/no-known-threat results permit restoration.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Require a new successful scan at restore time; do not treat Suspicious, Threat found, or Could not decide as restore clearance. Define acceptable result classes and age with the MVP-01 detection policy."
+        },
+        {
+          "questionId": "ZD-Q-QUAR-006",
+          "question": "Which integrity identifier/algorithm and metadata format should bind the original, quarantine artifact and restored output?",
+          "impact": "Determines compatibility, corruption detection, exact content identity and upgrade/migration behaviour.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Evaluate SHA-256 as the leading candidate because it appears in the working draft, but approve exact use, encoding, metadata and migration separately; this is not selected here."
+        },
+        {
+          "questionId": "ZD-Q-QUAR-007",
+          "question": "What does permanent deletion guarantee across app storage, document providers, backups, snapshots and flash storage?",
+          "impact": "Determines truthful UI wording, legal/security expectations, verification and whether secure-erasure claims are supportable.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Promise only the deletion operation the selected platform/provider confirms; do not claim forensic or secure erasure without proof."
+        },
+        {
+          "questionId": "ZD-Q-QUAR-008",
+          "question": "What quarantine retention duration, start event, expiry action and exception policy should launch use?",
+          "impact": "Determines user data lifetime, storage pressure, automatic cleanup and recoverability.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Do not adopt the proposed 30-day value by default. Choose duration only after owner review of false-positive recovery, storage cost and legal needs."
+        },
+        {
+          "questionId": "ZD-Q-QUAR-009",
+          "question": "Should retention be user-configurable, and what expiry warnings or manual purge controls are required?",
+          "impact": "Changes configuration, interface, notification, storage and accidental-loss risk.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Prefer a simple owner-defined retention policy and user-initiated deletion for launch; add configurable retention only if user research justifies the complexity."
+        },
+        {
+          "questionId": "ZD-Q-QUAR-010",
+          "question": "Is encryption mandatory for all quarantine content, and what key protection, rotation, recovery and hardware-support policy is required?",
+          "impact": "Determines the security boundary, supported devices, key loss behaviour, backup/migration and recovery.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "If encryption is selected, use established authenticated encryption and platform-backed key protection; do not invent primitives. Exact algorithms and lifecycle require a security design review."
+        },
+        {
+          "questionId": "ZD-Q-QUAR-011",
+          "question": "What should happen to quarantined content and keys during backup, device transfer, app uninstall, app-data clear and device loss?",
+          "impact": "Can determine whether the only quarantined copy is lost or becomes undecryptable; affects user warnings and recovery promises.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Do not back up or synchronize quarantine bytes/keys by implication. Define and test an explicit lifecycle before release, and warn users about irreversible loss."
+        },
+        {
+          "questionId": "ZD-Q-QUAR-012",
+          "question": "Which quarantine and restore operations should the web client support, given browser file-handle and permission limits?",
+          "impact": "Determines MVP web parity, user-visible capability, storage lifetime and whether the browser can truthfully provide isolation.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Do not promise device-wide or arbitrary-file quarantine on web. Expose only operations demonstrated with user-granted browser capabilities; otherwise mark the operation unsupported."
+        },
+        {
+          "questionId": "ZD-Q-QUAR-013",
+          "question": "What file size, aggregate quarantine capacity, per-device limits and low-storage behaviour should launch enforce?",
+          "impact": "Determines supported workloads, storage exhaustion behaviour, responsiveness and user data protection.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Measure representative files on supported devices before setting numeric limits; fail safely without evicting existing quarantined items."
+        },
+        {
+          "questionId": "ZD-Q-QUAR-014",
+          "question": "What audit-record fields, access rules and retention period are required for disposition operations?",
+          "impact": "Determines data model, privacy exposure, dispute resolution and whether user-visible history becomes a separate feature.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Retain a minimal item lifecycle record and operation outcomes; avoid a separate searchable scan-history feature in MVP."
+        }
+      ]
+    }
+  }
+}
