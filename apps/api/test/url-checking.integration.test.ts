@@ -24,6 +24,7 @@ describe('MVP-03 independent URL-check authorization gates', () => {
       'INSERT INTO accounts (account_id, email, email_canonical) VALUES ($1, $2, $2)',
       [accountId, accountId + '@example.test'],
     );
+    await pool.query('INSERT INTO account_permissions (account_id, permission_key, granted) VALUES ($1, 'website.check', true)', [accountId]);
     const lookup = vi.fn(async () => ({
       verdict: 'no_match',
       explanation: 'No known match was returned.',
@@ -72,6 +73,8 @@ describe('MVP-03 independent URL-check authorization gates', () => {
       'INSERT INTO accounts (account_id, email, email_canonical) VALUES ($1, $2, $2)',
       [accountId, accountId + '@example.test'],
     );
+    await pool.query('INSERT INTO account_permissions (account_id, permission_key, granted) VALUES ($1, 'website.check', true)', [accountId]);
+    await pool.query('INSERT INTO account_permissions (account_id, permission_key, granted) VALUES ($1, 'website.check', true)', [accountId]);
     await pool.query(
       'INSERT INTO account_entitlements (account_id, pro_active) VALUES ($1, true)',
       [accountId],
