@@ -18,6 +18,10 @@ export default function AccountPage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
+  const [showDeletionForm, setShowDeletionForm] = useState(false);
+  const [deletionPassword, setDeletionPassword] = useState('');
+  const [deletionConfirmation, setDeletionConfirmation] = useState('');
+  const [deletionDueAt, setDeletionDueAt] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -68,6 +72,38 @@ export default function AccountPage() {
     }
   }
 
+  async function requestAccountDeletion(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setBusy(true);
+    setError(null);
+    setNotice(null);
+    try {
+      const response = await fetch('/api/account/deletion', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({
+          currentPassword: deletionPassword,
+          confirmation: deletionConfirmation,
+        }),
+      });
+      const data = await response.json().catch(() => null);
+      if (response.status !== 202) {
+        setError(data?.error?.message ?? 'Account deletion could not be completed.');
+        return;
+      }
+      setDeletionDueAt(data.deletionDueAt as string);
+      setProfile(null);
+      setDeletionPassword('');
+      setDeletionConfirmation('');
+      setShowDeletionForm(false);
+      setNotice('Account access is disabled and sessions are revoked. Personal data has not yet been deleted; the scheduled deletion is pending.');
+    } catch {
+      setError('The account deletion request could not be completed.');
+    } finally {
+      setBusy(false);
+    }
+  }
+
   async function signOut(
     path: '/api/sessions/current' | '/api/sessions/logout-all',
     method: 'DELETE' | 'POST',
@@ -105,6 +141,12 @@ export default function AccountPage() {
       <section className="account-card" aria-labelledby="account-title">
         <p className="eyebrow">YOUR ACCOUNT</p>
         <h1 id="account-title">Account overview.</h1>
+        {deletionDueAt ? (
+          <p className="form-message success" role="status">
+            Account access is disabled. Personal data is scheduled for deletion at{' '}
+            {new Date(deletionDueAt).toLocaleString()}; it has not yet been deleted.
+          </p>
+        ) : null}
         {loading ? <p className="account-loading">Loading your session…</p> : null}
         {!loading && profile ? (
           <>
@@ -131,8 +173,45 @@ export default function AccountPage() {
               >
                 Sign out all devices
               </button>
+              <button type="button" disabled={busy} onClick={() => setShowDeletionForm((open) => !open)}>
+                Delete account
+              </button>
             </div>
           </>
+        ) : null}
+        {showDeletionForm && profile && !deletionDueAt ? (
+          <form className="auth-form deletion-form" onSubmit={requestAccountDeletion}>
+            <h2>Close your ZeroDeck account</h2>
+            <p>
+              This immediately disables account access and revokes every session. Personal data is
+              deleted later under the approved retention schedule. A deletion date is not available
+              until that schedule is configured.
+            </p>
+            <label htmlFor="deletion-password">Current password</label>
+            <input
+              id="deletion-password"
+              type="password"
+              autoComplete="current-password"
+              required
+              value={deletionPassword}
+              onChange={(event) => setDeletionPassword(event.target.value)}
+            />
+            <label htmlFor="deletion-confirmation">Type DELETE MY ACCOUNT to confirm</label>
+            <input
+              id="deletion-confirmation"
+              type="text"
+              autoComplete="off"
+              required
+              value={deletionConfirmation}
+              onChange={(event) => setDeletionConfirmation(event.target.value)}
+            />
+            <button className="auth-submit deletion-submit" type="submit" disabled={busy}>
+              {busy ? 'Submitting…' : 'Confirm account deletion'}
+            </button>
+            <button type="button" disabled={busy} onClick={() => setShowDeletionForm(false)}>
+              Cancel
+            </button>
+          </form>
         ) : null}
         {error ? (
           <p className="form-message error" role="alert">
