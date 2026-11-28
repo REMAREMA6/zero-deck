@@ -16,13 +16,13 @@
 | PM-proposed requirements | 35 |
 | Open product/owner questions | 18 |
 | Official Software Rules facets assessed | 15 |
-| Negative/failure/recovery scenarios | 75 |
+| Negative/failure/recovery scenarios | 81 |
 
 The four owner-approved statements are ZD-WEB-001–004: active Pro gate, independent owner activation gate, no-provider-call invariant, and Pro is not unlimited. The remaining 37 requirements are PM-proposed. None of the 18 questions was silently resolved.
 
 ## 2. Targeted structural and semantic checks
 
-**19/19 checks passed on the final synchronized artifacts.**
+**21/21 checks passed on the final synchronized artifacts.**
 
 1. Markdown requirement statements and structured projection are present and in the same order.
 2. Markdown statement IDs and structured requirement metadata have one-to-one parity.
@@ -36,13 +36,15 @@ The four owner-approved statements are ZD-WEB-001–004: active Pro gate, indepe
 10. All 18 open questions remain open.
 11. Evidence source URI and source revision match the structured artifact identity.
 12. All 15 facets appear in the coverage assessment.
-13. The failure matrix contains 75 scenario rows.
+13. The failure matrix contains 81 scenario rows.
 14. All scenario requirement references resolve to canonical requirement IDs.
 15. The CIRCLES artifact contains all seven steps in order.
 16. The PM extension and declared-contract schema files parse as JSON and expose the expected definitions.
 17. The structured projection contains a SHA-256 digest recomputed from the exact canonical Markdown bytes and an immutable Markdown revision.
 18. The TLS failure requirement and certificate-verification prohibition are separate atomic requirements with matching normative metadata.
 19. The final Markdown statement text and structured statement text are byte-for-byte equal for all 41 requirements.
+20. All 81 matrix scenario identifiers are unique and sequential (W01–W81).
+21. Every acceptance-criterion identifier maps back to an existing canonical requirement identifier.
 
 Five malformed in-memory fixtures were rejected: missing acceptance criteria, invalid facet ID, duplicate requirement ID, owner-approved requirement without a decision reference, and conditional requirement without explicit conditions (**5/5 rejected**).
 
@@ -61,7 +63,7 @@ The intended invariant is explicit: no provider/API call unless both independent
 
 All 15 official Software Rules facets were assessed. Messaging is deferred because MVP-03 does not include user messaging. Persistence, API and background processing are conditional on later product/implementation choices; their conditional status does not waive assessment if those behaviours are introduced.
 
-The 75 scenario rows map to one or more of the 41 canonical requirement IDs. This is a designed conformance matrix, not an executed runtime test suite.
+The 81 scenario rows map to one or more of the 41 canonical requirement IDs. This is a designed conformance matrix, not an executed runtime test suite.
 
 ## 5. Provenance and owner authority
 
@@ -87,6 +89,6 @@ The local checks were targeted structural and semantic checks performed against 
 
 ## 7. Phase 6 validation conclusion
 
-The planned Phase 6 authoring deliverables exist and their targeted structural/traceability checks pass. Phase 6 may be marked complete as a **PM requirements-authoring phase**, with 41 requirements, 41 acceptance criteria, 18 open questions, 15-facet assessment and 75 failure/recovery scenarios.
+The planned Phase 6 authoring deliverables exist and their targeted structural/traceability checks pass. Phase 6 may be marked complete as a **PM requirements-authoring phase**, with 41 requirements, 41 acceptance criteria, 18 open questions, 15-facet assessment and 81 failure/recovery scenarios.
 
-The contract remains draft. Only four requirements directly encode the existing owner-approved scope decision; 34 remain PM-proposed. The Product Owner must review the open policy questions before implementation decisions are treated as settled.
+The contract remains draft. Only four requirements directly encode the existing owner-approved scope decision; 37 remain PM-proposed. The Product Owner must review the open policy questions before implementation decisions are treated as settled.
