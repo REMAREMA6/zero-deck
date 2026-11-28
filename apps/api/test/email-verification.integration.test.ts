@@ -208,7 +208,9 @@ describe('email verification with PostgreSQL and fake delivery', () => {
       new FailingVerificationDelivery(),
     );
 
-    await expect(verification.request(email)).rejects.toBeInstanceOf(EmailVerificationDeliveryError);
+    await expect(verification.request(email)).rejects.toBeInstanceOf(
+      EmailVerificationDeliveryError,
+    );
 
     const challenge = await pool.query<{ consumed_at: Date | null }>(
       `SELECT consumed_at
