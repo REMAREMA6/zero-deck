@@ -131,11 +131,12 @@ These are the first five of the 51 Architect-defined outcomes. The Architect's s
 | 46146024978 | Failed (formatting only) | CI stopped at Prettier because `packages/domain/src/index.ts` needed formatting; typecheck, tests, PostgreSQL integration and builds were skipped. |
 | 46146507604 | Failed (two stale assertions) | Formatting and typecheck passed. Domain tests exposed two expected-value assertions that did not reflect the canonical no-known-threat safety wording. Updated in commit `20040887`; rerun pending. |
 | 46146627115 | Failed (test formatting) | CI stopped at Prettier in `packages/domain/src/index.test.ts`; formatting corrections continued in `962e0b7c` and `882a8ebc`. |
-| 46146759071 | Failed (test formatting) | CI again stopped at Prettier in the domain test file before typecheck/tests/builds. Simplified expected-value helper in commit `882a8ebc`; replacement CI pending. |
+| 46146759071 | Failed (test formatting) | CI again stopped at Prettier in the domain test file before typecheck/tests/builds. Simplified expected-value helper in commit `882a8ebc`; formatting still failed. |
+| 46146869648 | Failed (test formatting) | CI stopped at Prettier in `packages/domain/src/index.test.ts`; the diagnostic step was present in the workflow but did not provide usable formatted output. Assertions were simplified further in `41b2c932`; replacement CI pending. |
 
 ## Next execution queue
 
-1. Verify replacement CI after test simplification `882a8ebc`; run `46146759071` still stopped at Prettier in the domain test file. Run `46146507604` passed formatting and typecheck but failed two stale domain test expectations.
+1. Verify replacement CI after assertion simplification `41b2c932`; run `46146869648` stopped at Prettier in the domain test file. Run `46146507604` passed formatting and typecheck but failed two stale domain test expectations.
 2. The domain package now has deterministic fake-engine tests for all four canonical outcomes, malformed/unsupported output, safe no-match wording and thrown engine failures. Verify these tests in green CI, then add explicit orchestration/network-boundary evidence before changing 4.2 or 4.4 status.
 3. Reconcile `todo.md` against the implemented session and URL-check code so it reflects actual verified work.
 4. Finish identity recovery, step-up authentication, credential rotation, cross-client session verification, general authorization and account closure.
