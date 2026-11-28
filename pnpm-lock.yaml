@@ -130,6 +130,9 @@ importers:
       expo-secure-store:
         specifier: ~58.0.3
         version: 58.0.3(expo@58.0.26)
+      expo-file-system:
+        specifier: ~58.0.11
+        version: 58.0.15(expo@58.0.26)(react-native@0.88.0(@babel/core@7.29.13(supports-color@8.1.1))(@types/react@19.3.3)(react@19.3.0)(supports-color@8.1.1))
       react:
         specifier: 19.3.0
         version: 19.3.0
