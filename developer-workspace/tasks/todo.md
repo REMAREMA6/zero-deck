@@ -143,19 +143,21 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### B3. Sign-in and session lifecycle
 
+**Status: Partial — PostgreSQL session service, token hashing, seven-day inactivity and thirty-day absolute expiry, multiple active sessions, current logout and Web/Android credential storage exist. Cross-client principal proof and auth/database outage coverage remain. API integration evidence for the session lifecycle passed in full CI run 46145669565; Web cookie regression also passed in that run.**
+
 **Description:** Authenticate credentials at the trusted API boundary and issue revocable server-backed sessions shared across Web and Android account identity.
 
 **Acceptance criteria**
 - [ ] Valid credentials resolve to the same stable principal across clients.
-- [ ] Session credentials are unguessable and only their hashes are persisted.
-- [ ] Server enforces 7-day inactivity and 30-day absolute expiry.
-- [ ] Concurrent sessions across devices are allowed.
+- [x] Session credentials are unguessable and only their hashes are persisted (32-byte random opaque token; PostgreSQL stores SHA-256 hash, verified in `apps/api/test/sessions.integration.test.ts`).
+- [x] Server enforces 7-day inactivity and 30-day absolute expiry (PostgreSQL clock-controlled integration test).
+- [x] Multiple active sessions are allowed for one account (integration test creates two active sessions and independently revokes one).
 - [x] Web credentials use an HttpOnly/Secure production cookie with explicit `SameSite=Lax` policy and no token in browser-readable JSON (verified in `apps/web/app/api/sessions/route.test.ts`, full green CI run 46145669565).
 - [x] Android credentials use Expo SecureStore; read/write/clear fail closed when secure storage is unavailable (unit tests in `apps/android/test/session-storage.test.ts`).
 - [ ] Database/auth dependency failure denies protected access.
 
 **Verification**
-- [ ] PostgreSQL tests cover valid/invalid sessions, inactivity expiry and absolute expiry.
+- [x] PostgreSQL tests cover valid/invalid credentials, token persistence, inactivity expiry, absolute expiry, logout and revocation in `apps/api/test/sessions.integration.test.ts` (full green CI run 46145669565).
 - [x] Web cookie attributes and token non-disclosure are tested in `apps/web/app/api/sessions/route.test.ts` (full green CI run 46145669565).
 - [x] Android secure-storage failure paths are tested in `apps/android/test/session-storage.test.ts`.
 - [ ] Cross-platform tests prove one account principal.
@@ -259,7 +261,7 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### C2. Analysis engine port and result mapping
 
-**Status: Partial — local engine port, canonical four-outcome mapping and deterministic fake-engine tests added; full CI verification pending in run 46146024978. No production engine is selected.**
+**Status: Partial — local engine port, canonical four-outcome mapping, deterministic fake-engine tests and no-known-threat safety wording are implemented. The current verification chain has been correcting stale test expectations and formatting; latest CI run 46146977405 is pending. No production engine is selected.**
 
 **Description:** Define the platform-independent engine boundary and deterministic fake used only for tests.
 
