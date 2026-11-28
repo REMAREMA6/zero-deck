@@ -11,9 +11,11 @@ import { createVerifiedEmailSecurityNotifier } from '../src/modules/identity/ver
 
 const databaseUrl = process.env.DATABASE_URL;
 const pool = databaseUrl ? new Pool({ connectionString: databaseUrl }) : null;
-const passwordPolicy = { assertAccepted: (password: string) => {
-  if (password.length < 8) throw new Error('password rejected');
-} };
+const passwordPolicy = {
+  assertAccepted: (password: string) => {
+    if (password.length < 8) throw new Error('password rejected');
+  },
+};
 
 class FakeRecoveryDelivery {
   readonly deliveries: Array<{ email: string; token: string }> = [];
@@ -191,9 +193,9 @@ describe('account recovery with PostgreSQL and fake delivery', () => {
     );
     await recovery.request(email);
     now = new Date(now.getTime() + 1_001);
-    await expect(recovery.recover(delivery.deliveries[0]!.token, 'replacement-password')).resolves.toBe(
-      false,
-    );
+    await expect(
+      recovery.recover(delivery.deliveries[0]!.token, 'replacement-password'),
+    ).resolves.toBe(false);
   });
 
   it('does not make a recovery token usable when fake delivery fails', async () => {
