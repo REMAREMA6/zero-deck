@@ -6,6 +6,11 @@ import {
   type AuthorizationRequest,
 } from './authorization.js';
 
+/**
+ * Executes an authorization-gated operation through a durable queue/dispatch
+ * state transition. Operations must honor the supplied AbortSignal before each
+ * outbound provider request and pass it to any cancellable transport.
+ */
 type ProtectedWorkDatabase = Pick<Pool, 'connect'>;
 
 export type ProtectedWorkResult<T> =
