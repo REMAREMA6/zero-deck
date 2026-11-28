@@ -9,3 +9,7 @@ Versioned SQL migrations are stored in this directory and applied in lexical ord
 - Schema rollback or forward-repair behaviour must be documented with each migration; destructive production rollback is not implied.
 
 No product tables are created in the initial bootstrap slice. Account/session and capability tables are added alongside their domain implementation.
+
+## Account deletion (0008)
+
+Migration `0008_account_deletion.sql` adds a policy-gated deletion schedule. The account-deletion request retains only the account reference until scheduled deletion and an audit purpose, reason and explicit retention-until timestamp. The account reference is cleared when the account row is deleted; the audit row is purged when its declared retention period expires. No default deletion or audit-retention duration is supplied. The API must remain unavailable until an owner/legal-reviewed policy supplies those values.
