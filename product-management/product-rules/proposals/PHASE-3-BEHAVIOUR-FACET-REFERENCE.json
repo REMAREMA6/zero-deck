@@ -1,0 +1,44 @@
+{
+  "proposalId": "ZD-PROPOSAL-AUTH-BEHAVIOUR-FACET-001",
+  "proposalType": "declared-contract-facet-reference-amendment",
+  "status": "pm-proposed",
+  "productId": "zero-deck",
+  "contractId": "ZD-CONTRACT-AUTH",
+  "currentContractVersion": "0.1.0-draft",
+  "proposedNextContractVersionIfAccepted": "0.2.0-draft",
+  "softwareRulesCompatibility": {
+    "repository": "https://github.com/REMAREMA6/software-rules",
+    "commit": "5591a2e62287afc29bde002369eaf659673ec59b",
+    "specificationRelease": "0.3.0-draft",
+    "schemaVersion": "0.2.0"
+  },
+  "facetRefAmendment": {
+    "addFacetRef": "behavior",
+    "affectedRequirementIds": [
+      "ZD-AUTH-001",
+      "ZD-AUTH-002",
+      "ZD-AUTH-003",
+      "ZD-AUTH-004",
+      "ZD-AUTH-005",
+      "ZD-AUTH-006",
+      "ZD-AUTH-007",
+      "ZD-AUTH-008",
+      "ZD-AUTH-009",
+      "ZD-AUTH-010",
+      "ZD-AUTH-011",
+      "ZD-AUTH-012",
+      "ZD-AUTH-013",
+      "ZD-AUTH-014",
+      "ZD-AUTH-015",
+      "ZD-AUTH-016",
+      "ZD-AUTH-017",
+      "ZD-AUTH-018",
+      "ZD-AUTH-019",
+      "ZD-AUTH-020",
+      "ZD-AUTH-021"
+    ],
+    "rationale": "Each authentication requirement defines an observable trigger, precondition, action, state transition, output or side effect. The upstream Behaviour facet is the primary observation perspective for those transitions. The current Phase 2 structured metadata omits this facet reference even though the Phase 3 coverage analysis identifies the behaviours.",
+    "evidence": "Software Rules facets/README.md and facets/FACET-BOUNDARIES.md at the pinned commit; Behaviour is defined by triggers, preconditions, transitions, outputs and side effects.",
+    "compatibilityNote": "This is a metadata-only proposal. It does not change requirement text, normative meaning, platform scope or owner-approval status. Add the facetRef to each listed requirement in both the canonical Markdown Facets lists and structured extension metadata in the same versioned update, then refresh the declared-contract artifact revision, digest and retained evidence."
+  }
+}
