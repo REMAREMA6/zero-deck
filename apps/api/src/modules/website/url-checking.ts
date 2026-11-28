@@ -44,7 +44,7 @@ export function createUrlCheckService(
         if (decision.reason === 'pro_required') return { status: 'blocked', reason: 'pro_required' };
         if (decision.reason === 'activation_disabled') return { status: 'blocked', reason: 'activation_disabled' };
         if (decision.reason === 'unavailable') return { status: 'unavailable' };
-        if (decision.reason === 'permission_denied') return { status: 'blocked', reason: 'permission_required' };
+        if ((decision.reason === 'permission_denied' || decision.reason === 'permission_stale')) return { status: 'blocked', reason: 'permission_required' };
         return { status: 'blocked', reason: 'eligibility_unknown' };
       }
       // Raw URLs are neither persisted nor logged; the production provider remains unconfigured.
