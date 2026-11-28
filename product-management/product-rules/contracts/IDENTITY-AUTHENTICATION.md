@@ -1,7 +1,7 @@
 # ZeroDeck Identity and Authentication Product Requirements
 
 **Contract ID:** `ZD-CONTRACT-AUTH`  
-**Contract version:** `0.2.0-draft`  
+**Contract version:** `0.3.0-draft`  
 **Capability:** `AUTH` — supporting account infrastructure  
 **Author / issuer:** ZeroDeck Product Management Agent  
 **Lifecycle:** Draft; the eight owner decisions in Section 4 are approved and recorded. Requirements ZD-AUTH-025 through ZD-AUTH-028 directly encode owner-approved account-security and launch sign-in/verification decisions; the other requirements remain PM-proposed.  
@@ -286,7 +286,7 @@ The system MUST provide a documented recovery process for users who lose access 
 When an authenticator is reset, replaced, or confirmed compromised through an authorized security process, the system MUST revoke all existing sessions after successful account recovery, MUST notify the account owner of successful recovery, and MUST require fresh authentication before protected access resumes.
 
 - Priority: P0
-- Facets: identity-authentication, security-controls, errors-recovery, persistence, messaging
+- Facets: identity-authentication, security-controls, errors-recovery, persistence, messaging, messaging
 - Acceptance:
   - Given account recovery succeeds, when the recovery operation completes, then all existing sessions for that account are revoked and a security notification is sent to the account owner.
   - Given a password or authenticator is reset outside account recovery, when the reset completes, then sessions selected by the documented revocation policy no longer authorize protected operations.
