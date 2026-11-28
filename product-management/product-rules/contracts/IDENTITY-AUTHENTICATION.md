@@ -317,7 +317,7 @@ The system MUST require fresh authentication before a user changes their passwor
 The system MUST provide a user-initiated account deletion process that immediately revokes the account's active sessions and disables further account access. It MUST delete personal data according to a documented retention schedule and MUST retain only records for which a legitimate requirement exists, with the reason and retention period documented.
 
 - Priority: P0
-- Facets: functional, data, persistence, privacy, errors-recovery
+- Facets: interface, behavior, data, persistence, errors-recovery
 - Rationale: account holders need a clear way to end their relationship with the product, while retained records must be limited, justified and time-bounded.
 - Acceptance:
   - Given an authenticated account holder who completes the required fresh authentication, when account deletion is confirmed, then all active sessions are revoked and account access is disabled immediately.
