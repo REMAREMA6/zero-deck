@@ -11,6 +11,11 @@ export const RegisterAccountInputSchema = z.object({
 export const AccountRegistrationAcceptedSchema = z.object({ status: z.literal('accepted') });
 export const RequestEmailVerificationInputSchema = z.object({ email: z.string().trim().email() });
 export const VerifyEmailInputSchema = z.object({ token: z.string().min(1) });
+export const RequestAccountRecoveryInputSchema = z.object({ email: z.string().trim().email() });
+export const CompleteAccountRecoveryInputSchema = z.object({
+  token: z.string().min(1),
+  newPassword: z.string().min(1),
+});
 export const EmailVerificationRequestAcceptedSchema = z.object({ status: z.literal('accepted') });
 export const EmailVerificationResultSchema = z.object({ verified: z.boolean() });
 export const CreateSessionInputSchema = z.object({
@@ -46,6 +51,8 @@ export type RegisterAccountInput = z.infer<typeof RegisterAccountInputSchema>;
 export type AccountRegistrationAccepted = z.infer<typeof AccountRegistrationAcceptedSchema>;
 export type RequestEmailVerificationInput = z.infer<typeof RequestEmailVerificationInputSchema>;
 export type VerifyEmailInput = z.infer<typeof VerifyEmailInputSchema>;
+export type RequestAccountRecoveryInput = z.infer<typeof RequestAccountRecoveryInputSchema>;
+export type CompleteAccountRecoveryInput = z.infer<typeof CompleteAccountRecoveryInputSchema>;
 export type EmailVerificationRequestAccepted = z.infer<
   typeof EmailVerificationRequestAcceptedSchema
 >;
