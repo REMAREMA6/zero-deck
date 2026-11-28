@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useRef, useState, type ChangeEvent } from 'react';
-import { summarizeSelectedFile, type SelectedFileMetadata } from '../../lib/file-selection';
+import { createWebFileAccessHandle, type SelectedWebFile } from '../../lib/file-selection';
 
 function formatFileSize(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
@@ -12,15 +12,15 @@ function formatFileSize(bytes: number): string {
 
 export default function FileAnalysisPage() {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [selectedFile, setSelectedFile] = useState<SelectedFileMetadata | null>(null);
+  const [selectedFile, setSelectedFile] = useState<SelectedWebFile | null>(null);
   const [status, setStatus] = useState('No file selected. Selecting a file does not start a scan.');
 
   function handleFileChange(event: ChangeEvent<HTMLInputElement>) {
     const file = event.currentTarget.files?.item(0) ?? null;
-    const metadata = summarizeSelectedFile(file);
-    setSelectedFile(metadata);
+    const selected = file ? createWebFileAccessHandle(file) : null;
+    setSelectedFile(selected);
     setStatus(
-      metadata
+      selected
         ? 'File selected. No scan has started and no file content has been read.'
         : 'No file selected. Selecting a file does not start a scan.',
     );
@@ -67,7 +67,7 @@ export default function FileAnalysisPage() {
             onChange={handleFileChange}
           />
           <span className="file-picker-action">Choose file</span>
-          <span className="file-picker-hint">One file · selected locally in this browser</span>
+          <span className="file-picker-hint">One file · selected locally in this browser · access can be lost if the browser invalidates the selection</span>
         </label>
 
         {selectedFile ? (
