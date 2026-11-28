@@ -180,7 +180,7 @@
           "statementId": "ZD-SYS-001",
           "requirementType": "policy",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "identity-authentication",
@@ -237,7 +237,7 @@
           "statementId": "ZD-SYS-002",
           "requirementType": "compatibility",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "interface",
@@ -290,7 +290,7 @@
           "statementId": "ZD-SYS-003",
           "requirementType": "security",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "api",
@@ -353,7 +353,7 @@
           "statementId": "ZD-SYS-004",
           "requirementType": "business-rule",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "authorization-permissions",
@@ -414,7 +414,7 @@
           "statementId": "ZD-SYS-005",
           "requirementType": "security",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "authorization-permissions",
@@ -477,7 +477,7 @@
           "statementId": "ZD-SYS-006",
           "requirementType": "data",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "data",
@@ -542,7 +542,7 @@
           "statementId": "ZD-SYS-007",
           "requirementType": "privacy",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "data",
@@ -603,7 +603,7 @@
           "statementId": "ZD-SYS-008",
           "requirementType": "privacy",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "data",
@@ -660,7 +660,7 @@
           "statementId": "ZD-SYS-009",
           "requirementType": "security",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "security-controls",
@@ -713,7 +713,7 @@
           "statementId": "ZD-SYS-010",
           "requirementType": "operational",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "configuration",
@@ -772,7 +772,7 @@
           "statementId": "ZD-SYS-011",
           "requirementType": "operational",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "configuration",
@@ -825,7 +825,7 @@
           "statementId": "ZD-SYS-012",
           "requirementType": "reliability",
           "normativeKind": "forbidden",
-          "priority": "P",
+          "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "errors-recovery",
@@ -886,7 +886,7 @@
           "statementId": "ZD-SYS-013",
           "requirementType": "reliability",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "errors-recovery",
@@ -947,7 +947,7 @@
           "statementId": "ZD-SYS-014",
           "requirementType": "reliability",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "persistence",
@@ -1008,7 +1008,7 @@
           "statementId": "ZD-SYS-015",
           "requirementType": "reliability",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "persistence",
@@ -1071,7 +1071,7 @@
           "statementId": "ZD-SYS-016",
           "requirementType": "operational",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "behavior",
@@ -1132,7 +1132,7 @@
           "statementId": "ZD-SYS-017",
           "requirementType": "privacy",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "data",
@@ -1191,7 +1191,7 @@
           "statementId": "ZD-SYS-018",
           "requirementType": "operational",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "behavior",
@@ -1252,7 +1252,7 @@
           "statementId": "ZD-SYS-019",
           "requirementType": "operational",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "security-controls",
@@ -1311,7 +1311,7 @@
           "statementId": "ZD-SYS-020",
           "requirementType": "performance",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "performance-resource-behavior",
@@ -1374,7 +1374,7 @@
           "statementId": "ZD-SYS-021",
           "requirementType": "reliability",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "performance-resource-behavior",
@@ -1437,7 +1437,7 @@
           "statementId": "ZD-SYS-022",
           "requirementType": "reliability",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "integrations",
@@ -1494,7 +1494,7 @@
           "statementId": "ZD-SYS-023",
           "requirementType": "security",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "integrations",
@@ -1553,7 +1553,7 @@
           "statementId": "ZD-SYS-024",
           "requirementType": "functional",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "api",
@@ -1616,7 +1616,7 @@
           "statementId": "ZD-SYS-025",
           "requirementType": "security",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "security-controls",
@@ -1669,7 +1669,7 @@
           "statementId": "ZD-SYS-026",
           "requirementType": "compatibility",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "behavior",
@@ -1728,7 +1728,7 @@
           "statementId": "ZD-SYS-027",
           "requirementType": "usability",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P1",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "interface",
@@ -1791,7 +1791,7 @@
           "statementId": "ZD-SYS-028",
           "requirementType": "operational",
           "normativeKind": "required",
-          "priority": "P",
+          "priority": "P2",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
             "data",
