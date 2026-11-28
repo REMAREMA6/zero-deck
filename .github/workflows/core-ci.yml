@@ -70,6 +70,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
+      - name: Format source files
+        run: pnpm exec prettier --write "apps/**/*.{ts,tsx,js,jsx,json,css,yml,yaml}" "packages/**/*.{ts,tsx,js,jsx,json}"
+
       - name: Check formatting
         run: pnpm lint
 
@@ -96,3 +99,9 @@ jobs:
             apps/api/coverage
             apps/web/.next
             apps/android/dist
+            apps
+            packages
+            package.json
+            pnpm-workspace.yaml
+            tsconfig.base.json
+            .prettierrc.json
