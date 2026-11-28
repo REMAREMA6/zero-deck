@@ -283,10 +283,10 @@ The system MUST provide a documented recovery process for users who lose access 
 
 #### Requirement ZD-AUTH-021 — Invalidate sessions after credential recovery or replacement
 
-When an authenticator is reset, replaced, or confirmed compromised through an authorized security process, the system MUST revoke all existing sessions after successful account recovery and MUST require fresh authentication before protected access resumes.
+When an authenticator is reset, replaced, or confirmed compromised through an authorized security process, the system MUST revoke all existing sessions after successful account recovery, MUST notify the account owner of successful recovery, and MUST require fresh authentication before protected access resumes.
 
 - Priority: P0
-- Facets: identity-authentication, security-controls, errors-recovery, persistence
+- Facets: identity-authentication, security-controls, errors-recovery, persistence, messaging
 - Acceptance:
   - Given account recovery succeeds, when the recovery operation completes, then all existing sessions for that account are revoked and a security notification is sent to the account owner.
   - Given a password or authenticator is reset outside account recovery, when the reset completes, then sessions selected by the documented revocation policy no longer authorize protected operations.
@@ -418,3 +418,15 @@ This is a product requirement proposal, not a security audit, legal opinion, arc
 Phase 2 and Phase 3 are complete. The eight owner decisions are recorded in Section 4 and the linked owner decision record. Remaining operational questions are explicit. Owner approval of those eight decisions does not imply blanket approval of the remaining PM-proposed requirements, Phase 3 candidate additions, or implementation conformance.
 
 **Phase 2 status at authoring:** requirements drafted; awaiting structural, semantic and cross-reference validation before phase close.
+
+
+## Phase 9 owner-approved policy and deferred details
+
+- Email identifier policy: trim surrounding whitespace, compare the domain case-insensitively, preserve local-part semantics, and do not apply provider-specific alias rules globally. Challenge expiry/resend mechanics remain deferred.
+- Authentication/recovery abuse controls use rate limits, progressive delays and temporary restrictions; permanent lockout is not the default. Numeric thresholds remain deferred to security testing.
+- Session renewal credentials rotate securely and replay must not revive revoked sessions; the owner-approved 7-day inactivity and 30-day absolute limits remain controlling. Exact cadence is deferred.
+- Successful recovery revokes existing sessions and notifies the account owner. Delivery failure, retry, acknowledgement and duplicate-notification mechanics remain deferred.
+- Account deletion immediately revokes sessions and disables access; personal-data deletion follows a documented schedule and justified retention exceptions. Exact schedule and legal categories remain deferred.
+- Gate revocation follows the shared Phase 9 invariant recorded in ZD-DEC-PHASE9-2026-11-28; propagation timing and implementation are deferred.
+
+Detailed question dispositions: [Phase 9 owner decision register](../../2026-11-28/35-PHASE-9-OWNER-DECISION-REGISTER.md).
