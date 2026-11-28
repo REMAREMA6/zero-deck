@@ -1,0 +1,16 @@
+{
+  "evidenceId": "ZD-EV-CONTRACT-WEB-001",
+  "evidenceClass": "declared-contract",
+  "evidenceType": "product-requirements-contract",
+  "origin": {
+    "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/d162584f48d8682d0994ffc8681702df68d39231/product-management/product-rules/contracts/WEBSITE-LINK-CHECKING.md",
+    "sourceRevision": "d162584f48d8682d0994ffc8681702df68d39231",
+    "location": "product-management/product-rules/contracts/WEBSITE-LINK-CHECKING.md"
+  },
+  "capturedAt": "2026-11-28T07:42:00+01:00",
+  "locator": "product-management/product-rules/contracts/WEBSITE-LINK-CHECKING.md",
+  "retention": {
+    "status": "retained",
+    "access": "Version-controlled ZeroDeck repository; access follows repository permissions."
+  }
+}
