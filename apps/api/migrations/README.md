@@ -13,3 +13,5 @@ No product tables are created in the initial bootstrap slice. Account/session an
 ## Account deletion (0008)
 
 Migration `0008_account_deletion.sql` adds a policy-gated deletion schedule. The account-deletion request retains only the account reference until scheduled deletion and an audit purpose, reason and explicit retention-until timestamp. The account reference is cleared when the account row is deleted; the audit row is purged when its declared retention period expires. No default deletion or audit-retention duration is supplied. The API must remain unavailable until an owner/legal-reviewed policy supplies those values.
+
+The due-deletion executor is exposed as `pnpm --filter @zerodeck/api account-deletions:execute`. Invoke it from an owner-approved operational scheduler after a deletion policy has been configured. No scheduler cadence or retention duration is selected by this repository. The worker processes only requests whose recorded `deletion_due_at` has passed and purges each completion audit row only after its recorded `audit_retain_until` timestamp.
