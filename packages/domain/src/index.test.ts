@@ -148,6 +148,40 @@ describe('local analysis engine boundary', () => {
     expect(lifecycle).toEqual(['queued', 'analyzing', 'cancelled']);
   });
 
+  it('does not relabel a completed engine result as cancelled by a late abort request', async () => {
+    const controller = new AbortController();
+    const engine = {
+      supportsCancellation: true,
+      analyze: vi.fn(async () => ({
+        outcome: 'suspicious',
+        explanation: 'The engine completed before cancellation could take effect.',
+      })),
+    };
+
+    const pending = runLocalFileAnalysis(engine, new Uint8Array([1]), clock, controller.signal);
+    controller.abort();
+    const result = await pending;
+
+    expect(result.lifecycle).toBe('completed');
+    expect(result.outcome).toBe('suspicious');
+  });
+
+  it('does not report cancellation for an unrelated engine failure after an abort request', async () => {
+    const controller = new AbortController();
+    const engine = {
+      supportsCancellation: true,
+      analyze: vi.fn(async () => {
+        controller.abort();
+        throw new Error('unrelated engine failure');
+      }),
+    };
+
+    const result = await runLocalFileAnalysis(engine, new Uint8Array([1]), clock, controller.signal);
+
+    expect(result.lifecycle).toBe('failed');
+    expect(result.outcome).toBe('could_not_decide');
+  });
+
   it('reports an engine AbortError without a user cancellation as interrupted', async () => {
     const engine = {
       analyze: vi.fn(async () => {
