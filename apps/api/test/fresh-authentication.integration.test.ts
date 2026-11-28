@@ -49,7 +49,38 @@ describe('fresh authentication guard with PostgreSQL', () => {
     expect(action).toHaveBeenCalledTimes(1);
   });
 
-  it('denies fresh authentication for a disabled account', async () => {
+  it('rolls back the protected mutation when the sensitive action fails', async () => {
+    if (!pool) throw new Error('PostgreSQL is unavailable.');
+    const email = 'FreshAuthRollback-' + randomUUID() + '@example.test';
+    await createAccountRegistrationService(pool, passwordPolicy).register({
+      email,
+      password: 'current-password',
+    });
+    const account = await pool.query<{ account_id: string; updated_at: Date }>(
+      'SELECT account_id, updated_at FROM accounts WHERE email_canonical = $1',
+      [email],
+    );
+    const accountId = account.rows[0]!.account_id;
+    const before = account.rows[0]!.updated_at;
+    const guard = createFreshAuthenticationGuard(pool);
+
+    await expect(
+      guard.execute(accountId, 'current-password', async (client) => {
+        await client.query('UPDATE accounts SET updated_at = now() WHERE account_id = $1', [
+          accountId,
+        ]);
+        throw new Error('sensitive mutation failed');
+      }),
+    ).rejects.toThrow('sensitive mutation failed');
+
+    const after = await pool.query<{ updated_at: Date }>(
+      'SELECT updated_at FROM accounts WHERE account_id = $1',
+      [accountId],
+    );
+    expect(after.rows[0]?.updated_at).toEqual(before);
+  });
+
+  it('denies fresh authentication for a disabled account', async () =>
     if (!pool) throw new Error('PostgreSQL is unavailable.');
     const email = 'FreshAuthDisabled-' + randomUUID() + '@example.test';
     await createAccountRegistrationService(pool, passwordPolicy).register({
