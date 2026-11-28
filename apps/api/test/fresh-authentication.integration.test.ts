@@ -80,7 +80,7 @@ describe('fresh authentication guard with PostgreSQL', () => {
     expect(after.rows[0]?.updated_at).toEqual(before);
   });
 
-  it('denies fresh authentication for a disabled account', async () =>
+  it('denies fresh authentication for a disabled account', async () => {
     if (!pool) throw new Error('PostgreSQL is unavailable.');
     const email = 'FreshAuthDisabled-' + randomUUID() + '@example.test';
     await createAccountRegistrationService(pool, passwordPolicy).register({
