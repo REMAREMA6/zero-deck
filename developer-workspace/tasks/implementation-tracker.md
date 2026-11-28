@@ -135,6 +135,7 @@ These are the first five of the 51 Architect-defined outcomes. The Architect's s
 | 46146869648 | Failed (test formatting) | CI stopped at Prettier in `packages/domain/src/index.test.ts`; the diagnostic step was present in the workflow but did not provide usable formatted output. Assertions were simplified further in `41b2c932`; replacement CI pending. |
 | 46147448494 | In progress | Temporary formatter diagnostic for the local-analysis lifecycle tests; use result to complete formatting, then restore the normal CI workflow. |
 | 46147320751 | Failed (test formatting) | CI stopped at Prettier in `packages/domain/src/index.test.ts`; lifecycle test formatting corrected in `2c91bd0a`. |
+| 46147448494 | Failed (test formatting) | Temporary formatter diagnostic confirmed Prettier's expected single-line invocation formatting; corrected in `f07aa8db` and removed the temporary workflow step in `61b3680e`. |
 | 46147168375 | Failed (test formatting) | CI stopped at Prettier in `apps/api/test/health.test.ts` before typecheck/tests/builds; formatting corrected in `2fafa2e1`. |
 | 46146977405 | Success | Full core CI passed formatting, typecheck, unit tests, PostgreSQL integration tests and API/Web/Android builds. Verifies MVP-01 engine port and canonical result mapping. |
 
