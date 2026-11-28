@@ -1,6 +1,6 @@
 import { loadConfig } from '../../config.js';
 import { createDatabasePool } from '../../db/pool.js';
-import { createAccountDeletionService } from './account-deletion.js';
+import { createAccountDeletionService, createApprovedAccountDeletionPolicy } from './account-deletion.js';
 import { createFreshAuthenticationGuard } from './fresh-authentication.js';
 
 const config = loadConfig();
@@ -10,7 +10,7 @@ try {
   const deletion = createAccountDeletionService(
     database,
     createFreshAuthenticationGuard(database),
-    null,
+    createApprovedAccountDeletionPolicy(),
   );
   const result = await deletion.executeDueDeletions();
   process.stdout.write(JSON.stringify(result) + '\n');
