@@ -12,7 +12,7 @@ import { registerUrlCheckRoutes } from './modules/website/url-check-routes.js';
 import { createUrlCheckService, type UrlCheckProvider } from './modules/website/url-checking.js';
 
 export interface AppDependencies {
-  database: Pick<Pool, 'query'>;
+  database: Pick<Pool, 'query' | 'connect'>;
   accountRegistration?: AccountRegistrationService;
   accountRecovery?: AccountRecoveryService;
   emailVerification?: EmailVerificationService;
