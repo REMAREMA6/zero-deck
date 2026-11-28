@@ -29,6 +29,7 @@ describe('health endpoints', () => {
     expect(response.json()).toEqual({ status: 'not_ready', reason: 'database_unavailable' });
     await app.close();
   });
+
   it('does not write exception messages or stack details to application logs', async () => {
     const app = buildApp({ database: { query: vi.fn() } as never, logger: true });
     const logError = vi.spyOn(app.log, 'error');
@@ -48,5 +49,4 @@ describe('health endpoints', () => {
     expect(JSON.stringify(logError.mock.calls)).not.toContain(secret);
     await app.close();
   });
-
 });
