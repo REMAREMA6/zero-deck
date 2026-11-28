@@ -1,0 +1,1767 @@
+{
+  "contractId": "ZD-CONTRACT-WEBSITE-LINK-CHECKING",
+  "contractType": "product-requirements-contract",
+  "title": "ZeroDeck MVP-03 Website and Link Checking Product Requirements",
+  "issuer": "ZeroDeck Product Management Agent",
+  "artifact": {
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/d162584f48d8682d0994ffc8681702df68d39231/product-management/product-rules/contracts/WEBSITE-LINK-CHECKING.md",
+    "version": "0.1.0-draft",
+    "revision": "d162584f48d8682d0994ffc8681702df68d39231",
+    "digest": "sha256:a2d479a1a56cfe01cb8a51e5b4a9253296c807635d5d69273af4a91b916091cc",
+    "mediaType": "text/markdown"
+  },
+  "scope": "MVP-03 website and link checking for web and Android; bounded user-initiated URL checks, eligibility/no-call gates, URL and destination safety, provider interaction, privacy, results, failures, usage controls and platform semantics; excludes crawling and general network reconnaissance.",
+  "statements": [
+    {
+      "statementId": "ZD-WEB-001",
+      "text": "The system MUST permit an MVP-03 provider-backed check only when the requesting account has an active Pro entitlement at the authorization point.",
+      "location": "### Requirement ZD-WEB-001 — Pro eligibility"
+    },
+    {
+      "statementId": "ZD-WEB-002",
+      "text": "The system MUST permit an MVP-03 provider-backed check only when the owner-controlled activation switch is enabled.",
+      "location": "### Requirement ZD-WEB-002 — Owner activation"
+    },
+    {
+      "statementId": "ZD-WEB-003",
+      "text": "The system MUST NOT make an external provider/API call unless both active Pro entitlement and enabled owner-controlled activation have been positively established for that request.",
+      "location": "### Requirement ZD-WEB-003 — No-call invariant"
+    },
+    {
+      "statementId": "ZD-WEB-004",
+      "text": "The system MUST apply an explicit usage policy to Pro link checking and MUST NOT represent Pro entitlement as unlimited usage.",
+      "location": "### Requirement ZD-WEB-004 — Pro is bounded"
+    },
+    {
+      "statementId": "ZD-WEB-005",
+      "text": "The system MUST initiate an MVP-03 check only in response to an explicit user action on a supported URL input.",
+      "location": "### Requirement ZD-WEB-005 — User initiation"
+    },
+    {
+      "statementId": "ZD-WEB-006",
+      "text": "The system MUST identify the submitted target as one URL and MUST NOT imply that checking it inspected the entire website, linked pages, files, or other resources.",
+      "location": "### Requirement ZD-WEB-006 — Single URL scope"
+    },
+    {
+      "statementId": "ZD-WEB-007",
+      "text": "The system MUST reject empty, malformed, unsupported, or structurally ambiguous URL inputs before any provider request.",
+      "location": "### Requirement ZD-WEB-007 — Input validation"
+    },
+    {
+      "statementId": "ZD-WEB-008",
+      "text": "The system MUST preserve the submitted URL separately from any normalized lookup representation whenever normalization changes its representation.",
+      "location": "### Requirement ZD-WEB-008 — Submitted and normalized identity"
+    },
+    {
+      "statementId": "ZD-WEB-009",
+      "text": "The system MUST NOT transmit URL-embedded username or password credentials to a reputation provider as part of an MVP-03 lookup.",
+      "location": "### Requirement ZD-WEB-009 — URL credentials"
+    },
+    {
+      "statementId": "ZD-WEB-010",
+      "text": "The system MUST prevent MVP-03 processing from causing an external fetch to loopback, private, link-local, reserved, multicast, metadata-service, or otherwise disallowed internal destinations.",
+      "location": "### Requirement ZD-WEB-010 — Destination safety"
+    },
+    {
+      "statementId": "ZD-WEB-011",
+      "text": "The system MUST ensure destination restrictions remain effective when DNS answers change between validation and connection establishment.",
+      "location": "### Requirement ZD-WEB-011 — DNS rebinding"
+    },
+    {
+      "statementId": "ZD-WEB-012",
+      "text": "The system MUST apply destination policy consistently to IPv4, IPv6, IPv4-mapped IPv6, alternate numeric representations, and internationalized hostnames.",
+      "location": "### Requirement ZD-WEB-012 — Address representation"
+    },
+    {
+      "statementId": "ZD-WEB-013",
+      "text": "The system MUST apply an explicit redirect policy and revalidate the destination and both MVP-03 gates before any subsequent outbound request caused by a redirect.",
+      "location": "### Requirement ZD-WEB-013 — Redirect control"
+    },
+    {
+      "statementId": "ZD-WEB-014",
+      "text": "The system MUST NOT follow a redirect that downgrades a secure URL scheme to an insecure scheme unless a separately owner-approved policy explicitly permits it.",
+      "location": "### Requirement ZD-WEB-014 — Scheme downgrade"
+    },
+    {
+      "statementId": "ZD-WEB-015",
+      "text": "The system MUST treat TLS negotiation or certificate validation failure on any product-controlled provider connection as a failed lookup and MUST NOT silently disable certificate verification.",
+      "location": "### Requirement ZD-WEB-015 — TLS validation"
+    },
+    {
+      "statementId": "ZD-WEB-016",
+      "text": "The system MUST disclose to an external provider only the URL representation and metadata required for the selected lookup operation, excluding account credentials and unrelated user data.",
+      "location": "### Requirement ZD-WEB-016 — Minimum disclosure"
+    },
+    {
+      "statementId": "ZD-WEB-017",
+      "text": "The system MUST treat submitted URLs, including paths and query parameters, as potentially sensitive user data.",
+      "location": "### Requirement ZD-WEB-017 — URL sensitivity"
+    },
+    {
+      "statementId": "ZD-WEB-018",
+      "text": "The system MUST NOT place full submitted URLs, query strings, embedded credentials, or provider secrets in routine logs, analytics, or diagnostics unless a separately documented and justified owner-approved exception applies.",
+      "location": "### Requirement ZD-WEB-018 — Logging redaction"
+    },
+    {
+      "statementId": "ZD-WEB-019",
+      "text": "The system MUST associate each provider-derived result with the provider identity, lookup time, and provider result/version metadata when supplied by that provider.",
+      "location": "### Requirement ZD-WEB-019 — Provider provenance"
+    },
+    {
+      "statementId": "ZD-WEB-020",
+      "text": "The system MUST validate provider responses against the selected provider's documented response contract before using them to produce a user-visible result.",
+      "location": "### Requirement ZD-WEB-020 — Provider response validation"
+    },
+    {
+      "statementId": "ZD-WEB-021",
+      "text": "The system MUST distinguish a provider-confirmed match, no known match, suspicious/ambiguous result, and unavailable or inconclusive lookup whenever the selected provider and approved result policy support those distinctions.",
+      "location": "### Requirement ZD-WEB-021 — Result uncertainty"
+    },
+    {
+      "statementId": "ZD-WEB-022",
+      "text": "The system MUST NOT describe a URL as absolutely safe, guaranteed harmless, or free of threats solely because a provider reports no known match.",
+      "location": "### Requirement ZD-WEB-022 — No absolute safety claim"
+    },
+    {
+      "statementId": "ZD-WEB-023",
+      "text": "The system MUST expose the lookup time and any provider-supplied freshness/expiry information used to determine whether a result may be reused.",
+      "location": "### Requirement ZD-WEB-023 — Freshness"
+    },
+    {
+      "statementId": "ZD-WEB-024",
+      "text": "The system MUST represent provider outage, timeout, DNS failure, connection reset, quota rejection, rate limiting, and service unavailability as failed or inconclusive states rather than a no-threat result.",
+      "location": "### Requirement ZD-WEB-024 — Provider outage"
+    },
+    {
+      "statementId": "ZD-WEB-025",
+      "text": "The system MUST apply an explicit retry policy that cannot bypass current entitlement, owner activation, URL safety, rate limits, or request budgets.",
+      "location": "### Requirement ZD-WEB-025 — Retry safety"
+    },
+    {
+      "statementId": "ZD-WEB-026",
+      "text": "The system MUST expose cancellation where the active platform and request lifecycle can support it and MUST distinguish a cancelled request from a completed result.",
+      "location": "### Requirement ZD-WEB-026 — Cancellation"
+    },
+    {
+      "statementId": "ZD-WEB-027",
+      "text": "The system MUST enforce configurable per-account and service-level usage limits before provider dispatch, with limit exhaustion producing a no-call outcome.",
+      "location": "### Requirement ZD-WEB-027 — Rate and quota policy"
+    },
+    {
+      "statementId": "ZD-WEB-028",
+      "text": "The system MUST prevent repeated, automated, or bulk requests from bypassing account-level and service-level usage controls or either MVP-03 eligibility gate.",
+      "location": "### Requirement ZD-WEB-028 — Abuse resistance"
+    },
+    {
+      "statementId": "ZD-WEB-029",
+      "text": "The system MUST stop initiating new provider requests when owner-controlled activation becomes disabled, including queued, retried, redirected, or not-yet-dispatched work.",
+      "location": "### Requirement ZD-WEB-029 — Activation change"
+    },
+    {
+      "statementId": "ZD-WEB-030",
+      "text": "The system MUST stop initiating new provider requests when Pro entitlement expires, is revoked, or can no longer be positively verified.",
+      "location": "### Requirement ZD-WEB-030 — Entitlement revocation"
+    },
+    {
+      "statementId": "ZD-WEB-031",
+      "text": "The system MUST enforce explicit limits for request duration, response size, redirect depth, concurrency, and decompressed/expanded content before those limits can cause unbounded resource consumption.",
+      "location": "### Requirement ZD-WEB-031 — Resource bounds"
+    },
+    {
+      "statementId": "ZD-WEB-032",
+      "text": "The system MUST present distinct supported states for blocked, queued, processing, completed, inconclusive, failed, and cancelled requests, without representing a blocked or failed request as completed.",
+      "location": "### Requirement ZD-WEB-032 — Lifecycle truthfulness"
+    },
+    {
+      "statementId": "ZD-WEB-033",
+      "text": "The system MUST NOT imply that cross-device check history or durable URL retention is available unless an owner-approved retention and persistence policy has been adopted and implemented.",
+      "location": "### Requirement ZD-WEB-033 — History policy"
+    },
+    {
+      "statementId": "ZD-WEB-034",
+      "text": "The system MUST apply a documented owner-approved retention and deletion policy to any stored submitted URL, result, or provider response before persistent storage is enabled.",
+      "location": "### Requirement ZD-WEB-034 — Retention and deletion"
+    },
+    {
+      "statementId": "ZD-WEB-035",
+      "text": "The system MUST account for every provider dispatch against the applicable entitlement, usage and service budget, including retries and redirected requests.",
+      "location": "### Requirement ZD-WEB-035 — Provider accounting"
+    },
+    {
+      "statementId": "ZD-WEB-036",
+      "text": "The system MUST make provider outages, abnormal error rates, unexpected usage growth, and repeated gate-denial or abuse patterns observable to authorized operators without exposing full submitted URLs by default.",
+      "location": "### Requirement ZD-WEB-036 — Incident visibility"
+    },
+    {
+      "statementId": "ZD-WEB-037",
+      "text": "The system MUST preserve the same eligibility, no-call, result-meaning, and privacy semantics on web and Android even when input mechanisms or supported capabilities differ.",
+      "location": "### Requirement ZD-WEB-037 — Platform semantics"
+    },
+    {
+      "statementId": "ZD-WEB-038",
+      "text": "The system MUST NOT use MVP-03 as a general-purpose URL fetcher, crawler, website auditor, port scanner, or network-reconnaissance interface.",
+      "location": "### Requirement ZD-WEB-038 — No arbitrary fetch"
+    }
+  ],
+  "evidenceRefs": [
+    "ZD-EV-CONTRACT-WEB-001"
+  ],
+  "extensions": {
+    "zeroDeckProductRequirements": {
+      "profileId": "zero-deck.pm-product-requirements",
+      "profileVersion": "1.0.0-draft",
+      "productId": "zero-deck",
+      "author": {
+        "name": "ZeroDeck Product Management Agent",
+        "role": "Product Manager",
+        "organization": "ZeroDeck Product Management"
+      },
+      "softwareRulesCompatibility": {
+        "repository": "https://github.com/REMAREMA6/software-rules",
+        "commit": "5591a2e62287afc29bde002369eaf659673ec59b",
+        "specificationRelease": "0.3.0-draft",
+        "schemaVersion": "0.2.0",
+        "schemaDialect": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "contractLifecycle": "draft",
+      "capabilityId": "WEBSITE-LINK-CHECKING",
+      "requirements": [
+        {
+          "statementId": "ZD-WEB-001",
+          "requirementType": "business-rule",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "owner-approved",
+          "facetRefs": [
+            "business-rules",
+            "authorization-permissions"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Pro eligibility",
+          "rationale": "Owner decision ZD-SCOPE-001: Pro entitlement is a mandatory independent gate.",
+          "basis": [
+            {
+              "basisType": "owner-decision",
+              "description": "Direct encoding or operational consequence of owner-approved decision ZD-SCOPE-001.",
+              "refs": [
+                "ZD-SCOPE-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-001-01",
+              "given": "a request is made by an account with active Pro entitlement",
+              "when": "the user submits a website/link check",
+              "then": "the request is eligible for gate evaluation only in the active case; otherwise it is blocked without a provider call",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [
+            "ZD-SCOPE-001"
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-002",
+          "requirementType": "business-rule",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "owner-approved",
+          "facetRefs": [
+            "configuration",
+            "authorization-permissions"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Owner activation",
+          "rationale": "Owner decision ZD-SCOPE-001: owner-controlled activation is a separate mandatory gate.",
+          "basis": [
+            {
+              "basisType": "owner-decision",
+              "description": "Direct encoding or operational consequence of owner-approved decision ZD-SCOPE-001.",
+              "refs": [
+                "ZD-SCOPE-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-002-01",
+              "given": "the owner activation switch is enabled or disabled",
+              "when": "a user requests an MVP-03 check",
+              "then": "the switch state is evaluated independently of Pro entitlement",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [
+            "ZD-SCOPE-001"
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-003",
+          "requirementType": "security",
+          "normativeKind": "forbidden",
+          "priority": "P0",
+          "decisionStatus": "owner-approved",
+          "facetRefs": [
+            "authorization-permissions",
+            "integrations",
+            "security-controls"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "No-call invariant",
+          "rationale": "Owner decision ZD-SCOPE-001 establishes the two mandatory gates and no-call rule; PM inference extends this invariant to unknown/unavailable states and every execution path.",
+          "basis": [
+            {
+              "basisType": "owner-decision",
+              "description": "Direct encoding or operational consequence of owner-approved decision ZD-SCOPE-001.",
+              "refs": [
+                "ZD-SCOPE-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-003-01",
+              "given": "either gate is false, unknown, stale, unavailable, revoked, or disabled before dispatch",
+              "when": "any synchronous, retry, redirect, queued, cached-refresh, batch, fallback, or background path attempts dispatch",
+              "then": "no provider/API request is emitted; the decision and reason are recorded without sensitive URL content",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [
+            "ZD-SCOPE-001"
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-004",
+          "requirementType": "business-rule",
+          "normativeKind": "forbidden",
+          "priority": "P0",
+          "decisionStatus": "owner-approved",
+          "facetRefs": [
+            "business-rules"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Pro is bounded",
+          "rationale": "Owner decision ZD-SCOPE-001 explicitly says Pro does not mean unlimited usage.",
+          "basis": [
+            {
+              "basisType": "owner-decision",
+              "description": "Direct encoding or operational consequence of owner-approved decision ZD-SCOPE-001.",
+              "refs": [
+                "ZD-SCOPE-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-004-01",
+              "given": "a Pro user has reached an applicable usage limit",
+              "when": "the user submits another check",
+              "then": "the request is denied or deferred according to configured policy; no provider call occurs",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [
+            "ZD-SCOPE-001"
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-005",
+          "requirementType": "functional",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "User initiation",
+          "rationale": "PM inference from MVP-03 scope; automatic/background checking is excluded by the Phase 6 plan.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-005-01",
+              "given": "no check is currently running",
+              "when": "the user explicitly submits one URL for checking",
+              "then": "exactly that submitted URL enters the request lifecycle",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-006",
+          "requirementType": "functional",
+          "normativeKind": "forbidden",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Single URL scope",
+          "rationale": "PM inference; existing product planning says URL checking is a single-URL lookup unless more scope is approved.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-006-01",
+              "given": "a user submits a URL on a page with links or embedded resources",
+              "when": "the check completes",
+              "then": "the result identifies the checked URL only and makes no whole-site inspection claim",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-007",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "api"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Input validation",
+          "rationale": "PM inference; parser/library and exact accepted URL policy remain open.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-007-01",
+              "given": "the submitted value is empty, malformed, or unsupported by the currently configured URL policy",
+              "when": "the user submits it",
+              "then": "the request is rejected with an actionable reason and zero provider calls",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-008",
+          "requirementType": "data",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Submitted and normalized identity",
+          "rationale": "PM inference; exact normalization semantics require evidence and owner policy.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-008-01",
+              "given": "a submitted URL is transformed for lookup",
+              "when": "the system records or displays the check",
+              "then": "the original submitted value remains distinguishable from the normalized lookup target, subject to privacy controls",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-009",
+          "requirementType": "security",
+          "normativeKind": "forbidden",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "data"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "URL credentials",
+          "rationale": "PM inference based on data-minimization and credential-exposure risk.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-009-01",
+              "given": "the submitted URL contains user-info credentials",
+              "when": "the request is prepared for provider lookup",
+              "then": "credentials are removed or the URL is rejected; no credentials are disclosed to the provider",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-010",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "integrations"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Destination safety",
+          "rationale": "PM inference; precise address classification and policy require security design and validation.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-010-01",
+              "given": "a URL resolves or redirects to a prohibited destination",
+              "when": "the system considers dispatch or follows a redirect",
+              "then": "the destination is blocked before network access to that destination",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-011",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "integrations"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "DNS rebinding",
+          "rationale": "PM inference; implementation mechanism intentionally unspecified.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-011-01",
+              "given": "a hostname resolves to an allowed address during initial validation and a prohibited address at connection time, or its answer changes during redirects/retries",
+              "when": "the system attempts a connection",
+              "then": "no connection is made to the prohibited address",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-012",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "api"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Address representation",
+          "rationale": "PM inference; precise canonicalization policy remains open.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-012-01",
+              "given": "the input uses an alternate address or hostname representation",
+              "when": "the URL is validated",
+              "then": "the same destination policy is applied; ambiguous representations are rejected rather than bypassing controls",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-013",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "integrations"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Redirect control",
+          "rationale": "PM inference; redirect support and hop limits remain open.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-013-01",
+              "given": "a provider or permitted fetch path returns a redirect",
+              "when": "the system considers following it",
+              "then": "disallowed destinations and gate failures stop the chain before another outbound request",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-014",
+          "requirementType": "security",
+          "normativeKind": "forbidden",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "integrations"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Scheme downgrade",
+          "rationale": "PM inference; no downgrade exception is currently approved.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-014-01",
+              "given": "a secure URL redirects to an insecure scheme",
+              "when": "the redirect is evaluated",
+              "then": "the redirect is rejected and no insecure destination request occurs",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-015",
+          "requirementType": "security",
+          "normativeKind": "forbidden",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "integrations"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "TLS validation",
+          "rationale": "PM inference; TLS implementation choice remains open.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-015-01",
+              "given": "a provider connection presents an invalid, expired, mismatched, or untrusted certificate",
+              "when": "the connection is established",
+              "then": "the lookup fails safely; certificate verification is not bypassed",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-016",
+          "requirementType": "privacy",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "integrations"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Minimum disclosure",
+          "rationale": "PM inference; provider-specific payload cannot be fixed until selection.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-016-01",
+              "given": "a provider lookup is eligible and a provider contract is selected",
+              "when": "the request payload is assembled",
+              "then": "only documented minimum required fields are sent",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-017",
+          "requirementType": "privacy",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "security-controls",
+            "integrations"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "URL sensitivity",
+          "rationale": "PM inference; URLs can contain tokens, identifiers or private resource names.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-017-01",
+              "given": "a URL is submitted or processed",
+              "when": "the system handles, transmits, stores, logs, or displays it",
+              "then": "the URL receives privacy protections and is not assumed public merely because it is a URL",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-018",
+          "requirementType": "privacy",
+          "normativeKind": "forbidden",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "security-controls"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Logging redaction",
+          "rationale": "PM inference; detailed telemetry policy remains open.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-018-01",
+              "given": "a check generates operational telemetry",
+              "when": "the system records the event",
+              "then": "sensitive URL components and secrets are omitted or redacted",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-019",
+          "requirementType": "data",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "integrations"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Provider provenance",
+          "rationale": "PM inference; provider selection unresolved.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-019-01",
+              "given": "a provider returns a result",
+              "when": "the result is presented or retained",
+              "then": "its provenance and lookup timestamp are available to the product's result semantics",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-020",
+          "requirementType": "reliability",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "integrations",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Provider response validation",
+          "rationale": "PM inference; provider schema depends on later provider selection.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-020-01",
+              "given": "a provider response is malformed, incomplete, unexpected, or contains untrusted fields",
+              "when": "the response is processed",
+              "then": "the response is rejected or represented as unavailable/inconclusive; it is not treated as a clean result",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-021",
+          "requirementType": "functional",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "interface"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Result uncertainty",
+          "rationale": "PM inference; exact taxonomy and mapping are unresolved.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-021-01",
+              "given": "a provider response or lookup failure is received",
+              "when": "the result is classified",
+              "then": "the user sees the supported outcome and its limitations; absence of a match is not stated as proof of safety",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-022",
+          "requirementType": "usability",
+          "normativeKind": "forbidden",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "No absolute safety claim",
+          "rationale": "PM inference grounded in honest, bounded result semantics.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-022-01",
+              "given": "a provider reports no known match",
+              "when": "the result is displayed",
+              "then": "the wording states only that no known match was returned within the stated provider/check scope",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-023",
+          "requirementType": "data",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "persistence"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Freshness",
+          "rationale": "PM inference; cache policy and freshness threshold remain open.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-023-01",
+              "given": "a result is reused or displayed after its original lookup",
+              "when": "the user views the result",
+              "then": "the lookup time and applicable freshness limitation are visible or otherwise disclosed",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-024",
+          "requirementType": "reliability",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "errors-recovery",
+            "integrations"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Provider outage",
+          "rationale": "PM inference.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-024-01",
+              "given": "any listed provider/network failure occurs",
+              "when": "the request terminates",
+              "then": "the result is not converted into a clean/no-match verdict",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-025",
+          "requirementType": "reliability",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "errors-recovery",
+            "behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Retry safety",
+          "rationale": "PM inference; retry count/backoff remain open.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-025-01",
+              "given": "a retry is considered after failure or interruption",
+              "when": "the retry is scheduled or dispatched",
+              "then": "all gates and safety policies are re-evaluated; if not satisfied, zero provider calls occur",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-026",
+          "requirementType": "functional",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Cancellation",
+          "rationale": "PM inference; actual cancellation boundary depends on provider/platform.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-026-01",
+              "given": "a user cancels an in-progress check",
+              "when": "the cancellation is processed",
+              "then": "no further eligible work is initiated for that request and the state is reported truthfully; already-sent requests are not falsely claimed recalled",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-027",
+          "requirementType": "business-rule",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "business-rules",
+            "configuration"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Rate and quota policy",
+          "rationale": "PM inference; numeric limits and reset semantics are open.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-027-01",
+              "given": "a user or service has exhausted an applicable limit",
+              "when": "a new check is requested",
+              "then": "the request is blocked before provider dispatch and the applicable limit state is communicated",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-028",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "authorization-permissions"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Abuse resistance",
+          "rationale": "PM inference; anti-abuse thresholds and controls remain open.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-028-01",
+              "given": "a client repeats requests, alters request parameters, or attempts concurrent submissions",
+              "when": "the service evaluates requests",
+              "then": "the applicable gates and limits are enforced server-side for each provider dispatch",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-029",
+          "requirementType": "configuration",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "configuration",
+            "authorization-permissions"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Activation change",
+          "rationale": "PM inference extending owner-approved activation gate.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-029-01",
+              "given": "activation is disabled while requests are pending or being prepared",
+              "when": "a pending operation reaches its next dispatch boundary",
+              "then": "it is cancelled or blocked before any subsequent provider call",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-030",
+          "requirementType": "business-rule",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "business-rules",
+            "authorization-permissions"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Entitlement revocation",
+          "rationale": "PM inference extending owner-approved Pro gate.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-030-01",
+              "given": "entitlement expires, is revoked, or becomes unverifiable during a workflow",
+              "when": "a pending operation reaches its next dispatch boundary",
+              "then": "it is blocked before any subsequent provider call",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-031",
+          "requirementType": "performance",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "performance-resource-behavior",
+            "security-controls"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Resource bounds",
+          "rationale": "PM inference; numeric values must be established before release.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-031-01",
+              "given": "a request approaches or exceeds a configured resource bound",
+              "when": "the system processes the request",
+              "then": "processing stops safely at the applicable bound and reports a bounded failure",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-032",
+          "requirementType": "functional",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Lifecycle truthfulness",
+          "rationale": "PM inference.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-032-01",
+              "given": "a request enters any supported lifecycle state",
+              "when": "the user views its status",
+              "then": "the displayed state matches the recorded request outcome",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-033",
+          "requirementType": "data",
+          "normativeKind": "forbidden",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "persistence",
+            "data"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "History policy",
+          "rationale": "PM inference; history and retention are unresolved and standalone history is not approved.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-033-01",
+              "given": "a result is completed or the user views prior checks",
+              "when": "the product offers or describes history",
+              "then": "only actually supported retention and access are represented; no unapproved history promise is made",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-034",
+          "requirementType": "privacy",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "privacy",
+            "data"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Retention and deletion",
+          "rationale": "PM inference; exact schedule, data classes and deletion obligations remain open.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-034-01",
+              "given": "the product proposes to persist URL or result data",
+              "when": "persistence is enabled or a deletion request is processed",
+              "then": "storage is not enabled without the policy; once enabled, deletion follows its documented scope and exceptions",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-035",
+          "requirementType": "operational",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "integrations",
+            "configuration"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Provider accounting",
+          "rationale": "PM inference; provider cost model and limits are unresolved.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-035-01",
+              "given": "a provider dispatch is attempted",
+              "when": "the system records its accounting event",
+              "then": "every actual dispatch is counted once and correlated to its request without storing the full URL in routine logs",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-036",
+          "requirementType": "operational",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "errors-recovery",
+            "integrations"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Incident visibility",
+          "rationale": "PM inference; exact alert thresholds and operator workflow remain open.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-036-01",
+              "given": "operational anomalies occur",
+              "when": "the system emits operational signals",
+              "then": "signals identify the anomaly and affected service/account scope while respecting URL redaction",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-037",
+          "requirementType": "compatibility",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "interface"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Platform semantics",
+          "rationale": "Owner-approved cross-platform identity direction; PM inference applies shared semantics to MVP-03.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-037-01",
+              "given": "a user performs the same eligible or ineligible check on either platform",
+              "when": "the request is evaluated or a result is displayed",
+              "then": "both platforms apply the same product policy and explain any platform-specific limitation",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        },
+        {
+          "statementId": "ZD-WEB-038",
+          "requirementType": "security",
+          "normativeKind": "forbidden",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "integrations"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "No arbitrary fetch",
+          "rationale": "Owner-approved MVP scope and explicit Phase 6 exclusion; PM inference operationalizes boundary.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; no primary user research or selected provider contract is claimed."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-WEB-AC-038-01",
+              "given": "a submitted URL or provider response could trigger crawling or arbitrary resource access",
+              "when": "the request is processed",
+              "then": "only the bounded, selected MVP-03 lookup occurs; no page traversal or unrelated network probing is initiated",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "decisionRefs": [],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-WEB-001"
+          ]
+        }
+      ],
+      "openQuestions": [
+        {
+          "questionId": "ZD-Q-WEB-001",
+          "question": "Supported URL schemes and accepted input forms?",
+          "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+        },
+        {
+          "questionId": "ZD-Q-WEB-002",
+          "question": "Provider lookup only, or direct destination fetch?",
+          "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+        },
+        {
+          "questionId": "ZD-Q-WEB-003",
+          "question": "Exact URL normalization policy?",
+          "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+        },
+        {
+          "questionId": "ZD-Q-WEB-004",
+          "question": "Redirect following, hop and cross-origin policy?",
+          "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+        },
+        {
+          "questionId": "ZD-Q-WEB-005",
+          "question": "Provider/API, commercial terms, geography and data processing?",
+          "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+        },
+        {
+          "questionId": "ZD-Q-WEB-006",
+          "question": "Verdict taxonomy and conflict mapping?",
+          "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+        },
+        {
+          "questionId": "ZD-Q-WEB-007",
+          "question": "Maximum URL length and input complexity?",
+          "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+        },
+        {
+          "questionId": "ZD-Q-WEB-008",
+          "question": "Timeout, response size, redirect and concurrency limits?",
+          "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+        },
+        {
+          "questionId": "ZD-Q-WEB-009",
+          "question": "Per-account/global rate limits, quotas and resets?",
+          "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+        },
+        {
+          "questionId": "ZD-Q-WEB-010",
+          "question": "Spend ceiling, alerts and emergency-stop policy?",
+          "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+        },
+        {
+          "questionId": "ZD-Q-WEB-011",
+          "question": "Gate propagation bounds across platforms and queued work?",
+          "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+        },
+        {
+          "questionId": "ZD-Q-WEB-012",
+          "question": "Treatment of in-flight calls after gate revocation?",
+          "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+        },
+        {
+          "questionId": "ZD-Q-WEB-013",
+          "question": "URL/result persistence purpose and retention?",
+          "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+        },
+        {
+          "questionId": "ZD-Q-WEB-014",
+          "question": "User notice/consent before provider disclosure?",
+          "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+        },
+        {
+          "questionId": "ZD-Q-WEB-015",
+          "question": "Allowed audit fields and retention?",
+          "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+        },
+        {
+          "questionId": "ZD-Q-WEB-016",
+          "question": "Supported browser/Android platform matrix?",
+          "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+        },
+        {
+          "questionId": "ZD-Q-WEB-017",
+          "question": "Whether cached results are allowed and under what freshness/terms?",
+          "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+        },
+        {
+          "questionId": "ZD-Q-WEB-018",
+          "question": "Approved user guidance for each result class?",
+          "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+        }
+      ]
+    }
+  }
+}
