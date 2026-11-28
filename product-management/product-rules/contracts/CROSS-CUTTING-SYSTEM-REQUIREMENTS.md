@@ -55,6 +55,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** identity-authentication,authorization-permissions,behavior  
 **Platforms:** web, android  
 **Basis:** owner-decision — Owner direction: one product identity across web and Android; detailed session policy remains in authentication contract.  
+**Must not:** The system MUST NOT create unrelated account principals for the same ZeroDeck account solely because the user is on a different supported platform.
+
 **Dependencies:** ZD-AUTH-001
 
 **Acceptance criterion — ZD-SYS-AC-01**
@@ -72,6 +74,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** interface,behavior,configuration  
 **Platforms:** web, android  
 **Basis:** pm-inference — Owner permits platform-specific differences; truthful disclosure is a PM inference.  
+**Must not:** The system MUST NOT imply identical platform capability or permission where a material difference exists.
+
 **Dependencies:** None identified.
 
 **Acceptance criterion — ZD-SYS-AC-02**
@@ -89,6 +93,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** api,authorization-permissions,security-controls  
 **Platforms:** web, android  
 **Basis:** pm-inference — Cross-platform security inference; MVP-03 requires independent eligibility checks.  
+**Must not:** A client-supplied entitlement, activation, role, or permission claim MUST NOT by itself authorize a protected operation.
+
 **Dependencies:** ZD-AUTH-025;ZD-WEB-001;ZD-WEB-002;ZD-WEB-003
 
 **Acceptance criterion — ZD-SYS-AC-03**
@@ -106,6 +112,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** authorization-permissions,integrations,security-controls  
 **Platforms:** web, android  
 **Basis:** owner-decision — Owner-approved scope invariant ZD-SCOPE-001 and MVP-03 ZD-WEB-001..003.  
+**Must not:** The system MUST NOT infer one eligibility gate from the other or dispatch a provider/API call while either gate is false or unknown.
+
 **Dependencies:** ZD-WEB-001;ZD-WEB-002;ZD-WEB-003
 
 **Acceptance criterion — ZD-SYS-AC-04**
@@ -123,6 +131,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** authorization-permissions,behavior,errors-recovery  
 **Platforms:** web, android  
 **Basis:** pm-inference — Propagation timing and in-flight treatment remain open in ZD-Q-AUTH-013 and ZD-Q-WEB-011/012.  
+**Must not:** A newly evaluated protected operation MUST NOT be authorized solely by stale client-side state after authoritative revocation.
+
 **Dependencies:** ZD-AUTH-025;ZD-WEB-001;ZD-WEB-002;ZD-WEB-003
 
 **Acceptance criterion — ZD-SYS-AC-05**
@@ -140,6 +150,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** data,security-controls,behavior  
 **Platforms:** web, android  
 **Basis:** pm-inference — Inferred from shared data handling across authentication and the three capability contracts.  
+**Must not:** The system MUST NOT collect, generate, or retain a data category without a documented product purpose and access boundary.
+
 **Dependencies:** ZD-AUTH-007;ZD-FILE-015;ZD-QUAR-001;ZD-WEB-016;ZD-WEB-017
 
 **Acceptance criterion — ZD-SYS-AC-06**
@@ -157,6 +169,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** data,security-controls,integrations  
 **Platforms:** web, android  
 **Basis:** pm-inference — Complements MVP-01 no-upload-by-default and MVP-03 minimum disclosure.  
+**Must not:** The system MUST NOT disclose unrelated account data, file contents, credentials, or diagnostics to an external service.
+
 **Dependencies:** ZD-FILE-008;ZD-WEB-016;ZD-WEB-017
 
 **Acceptance criterion — ZD-SYS-AC-07**
@@ -174,6 +188,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** data,persistence,behavior  
 **Platforms:** web, android  
 **Basis:** pm-inference — Exact schedules and lawful retention categories remain unresolved in existing contracts.  
+**Must not:** The system MUST NOT retain system-managed user data indefinitely by omission or without documented lifecycle rules.
+
 **Dependencies:** ZD-AUTH-007
 
 **Acceptance criterion — ZD-SYS-AC-08**
@@ -191,6 +207,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** security-controls,data,configuration  
 **Platforms:** web, android  
 **Basis:** pm-inference — Security boundary inference; owner prefers mature security libraries and first-party backend.  
+**Must not:** Server-only secrets MUST NOT be shipped in public client configuration or exposed in ordinary responses or diagnostics.
+
 **Dependencies:** None identified.
 
 **Acceptance criterion — ZD-SYS-AC-09**
@@ -208,6 +226,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** configuration,security-controls,errors-recovery  
 **Platforms:** web, android  
 **Basis:** pm-inference — MVP-03 owner activation is a protected control; no configuration mechanism selected.  
+**Must not:** A missing, malformed, or inconsistent required configuration value MUST NOT be treated as enabled or valid.
+
 **Dependencies:** ZD-WEB-002;ZD-WEB-003
 
 **Acceptance criterion — ZD-SYS-AC-10**
@@ -225,6 +245,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** configuration,security-controls,behavior  
 **Platforms:** web, android  
 **Basis:** pm-inference — Cross-cutting operational safeguard; deployment topology remains undecided.  
+**Must not:** Non-production credentials or operational controls MUST NOT authorize production operations.
+
 **Dependencies:** None identified.
 
 **Acceptance criterion — ZD-SYS-AC-11**
@@ -242,6 +264,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** errors-recovery,integrations,api  
 **Platforms:** web, android  
 **Basis:** pm-inference — Capability contracts distinguish unknown/failure from successful outcomes.  
+**Must not:** A failed, timed-out, or unusable required dependency MUST NOT be represented as a successful operation.
+
 **Dependencies:** ZD-FILE-020;ZD-QUAR-030;ZD-WEB-026
 
 **Acceptance criterion — ZD-SYS-AC-12**
@@ -259,6 +283,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** errors-recovery,behavior,interface  
 **Platforms:** web, android  
 **Basis:** pm-inference — Product-level outcome; does not prescribe microservices or topology.  
+**Must not:** A failure in one capability's optional or independent dependency MUST NOT by itself disable an unrelated capability.
+
 **Dependencies:** ZD-FILE-001;ZD-QUAR-001;ZD-WEB-005
 
 **Acceptance criterion — ZD-SYS-AC-13**
@@ -276,6 +302,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** persistence,data,errors-recovery  
 **Platforms:** web, android  
 **Basis:** pm-inference — Account, entitlement, activation and audit state; RPO/RTO and backup policy remain open.  
+**Must not:** The system MUST NOT assume that every data category is backed up or recoverable; recovery coverage and limitations must be explicit.
+
 **Dependencies:** ZD-AUTH-025;ZD-WEB-001;ZD-WEB-002
 
 **Acceptance criterion — ZD-SYS-AC-14**
@@ -293,6 +321,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** persistence,security-controls,errors-recovery  
 **Platforms:** web, android  
 **Basis:** pm-inference — No integrity mechanism or recovery topology selected.  
+**Must not:** Unverified restored state MUST NOT authorize protected operations.
+
 **Dependencies:** ZD-AUTH-025;ZD-WEB-001;ZD-WEB-002;ZD-WEB-003
 
 **Acceptance criterion — ZD-SYS-AC-15**
@@ -310,6 +340,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** behavior,messaging,security-controls  
 **Platforms:** web, android  
 **Basis:** pm-inference — Owner-controlled activation and entitlement affect provider dispatch; exact fields/retention remain open.  
+**Must not:** A security-sensitive administrative change MUST NOT become unreviewable because no attributable record was retained.
+
 **Dependencies:** ZD-WEB-001;ZD-WEB-002;ZD-WEB-003
 
 **Acceptance criterion — ZD-SYS-AC-16**
@@ -327,6 +359,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** data,security-controls,behavior  
 **Platforms:** web, android  
 **Basis:** pm-inference — Complements explicit MVP-01 and MVP-03 diagnostic privacy requirements.  
+**Must not:** Ordinary diagnostics MUST NOT contain raw credentials, secrets, unnecessary file contents, or unredacted sensitive URL components.
+
 **Dependencies:** ZD-FILE-018;ZD-WEB-017
 
 **Acceptance criterion — ZD-SYS-AC-17**
@@ -344,6 +378,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** behavior,configuration,performance-resource-behavior  
 **Platforms:** web, android  
 **Basis:** pm-inference — No monitoring vendor, topology or numeric SLO selected.  
+**Must not:** Operational health output MUST NOT expose user content or secrets, and MUST NOT conceal the affected failure class.
+
 **Dependencies:** ZD-FILE-020;ZD-QUAR-030;ZD-WEB-026
 
 **Acceptance criterion — ZD-SYS-AC-18**
@@ -361,6 +397,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** security-controls,behavior,errors-recovery  
 **Platforms:** web, android  
 **Basis:** pm-inference — Incident severity, notification duties and retention require owner/legal review.  
+**Must not:** A material security or availability incident MUST NOT be closed without a record of its scope, timeline, containment and resolution status.
+
 **Dependencies:** ZD-AUTH-007;ZD-WEB-003
 
 **Acceptance criterion — ZD-SYS-AC-19**
@@ -378,6 +416,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** performance-resource-behavior,errors-recovery,configuration  
 **Platforms:** web, android  
 **Basis:** pm-inference — MVP contracts contain resource/usage constraints; numeric limits remain open.  
+**Must not:** A resource-consuming operation MUST NOT be enabled for general use without a documented applicable resource bound.
+
 **Dependencies:** ZD-FILE-023;ZD-QUAR-035;ZD-WEB-004;ZD-WEB-009
 
 **Acceptance criterion — ZD-SYS-AC-20**
@@ -395,6 +435,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** performance-resource-behavior,errors-recovery,behavior  
 **Platforms:** web, android  
 **Basis:** pm-inference — No queue architecture or numeric limit chosen.  
+**Must not:** The system MUST NOT silently drop accepted work or report work as complete when overload prevented safe completion.
+
 **Dependencies:** ZD-FILE-023;ZD-QUAR-035;ZD-WEB-008;ZD-WEB-009
 
 **Acceptance criterion — ZD-SYS-AC-21**
@@ -412,6 +454,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** integrations,errors-recovery,configuration  
 **Platforms:** web, android  
 **Basis:** pm-inference — MVP-03 provider remains unselected; no vendor/procurement choice made.  
+**Must not:** A production-critical external dependency MUST NOT be adopted without an identified purpose, responsible owner, failure impact and exit consideration.
+
 **Dependencies:** ZD-WEB-005
 
 **Acceptance criterion — ZD-SYS-AC-22**
@@ -429,6 +473,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** integrations,security-controls,errors-recovery  
 **Platforms:** web, android  
 **Basis:** pm-inference — Provider-specific schema and verdict mapping remain in MVP-03.  
+**Must not:** Unvalidated external response data MUST NOT override trusted account state, authorization policy, or local security policy.
+
 **Dependencies:** ZD-WEB-026;ZD-WEB-027
 
 **Acceptance criterion — ZD-SYS-AC-23**
@@ -446,6 +492,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** api,behavior,errors-recovery  
 **Platforms:** web, android  
 **Basis:** pm-inference — Idempotency format and endpoint-specific rules remain implementation/API decisions.  
+**Must not:** A retry or duplicate submission MUST NOT create unintended duplicate state changes or side effects.
+
 **Dependencies:** ZD-AUTH-004;ZD-AUTH-007;ZD-WEB-001;ZD-WEB-002
 
 **Acceptance criterion — ZD-SYS-AC-24**
@@ -463,6 +511,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** security-controls,configuration,behavior  
 **Platforms:** web, android  
 **Basis:** pm-inference — Signing, distribution channels, CI/CD and rollback design are not selected.  
+**Must not:** An artifact with unverifiable or mismatched release provenance MUST NOT be accepted as a trusted product update.
+
 **Dependencies:** None identified.
 
 **Acceptance criterion — ZD-SYS-AC-25**
@@ -480,6 +530,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** behavior,configuration,errors-recovery  
 **Platforms:** web, android  
 **Basis:** pm-inference — Supported-version windows and upgrade deadlines remain open.  
+**Must not:** An incompatible client/service version MUST NOT silently execute an operation whose semantics or security assumptions are unsupported.
+
 **Dependencies:** ZD-AUTH-025;ZD-WEB-001
 
 **Acceptance criterion — ZD-SYS-AC-26**
@@ -497,6 +549,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** interface,behavior,errors-recovery  
 **Platforms:** web, android  
 **Basis:** pm-inference — Existing capability result taxonomies remain authoritative in their owning contracts.  
+**Must not:** The product MUST NOT imply a broader scan, service success, or completed action than actually occurred.
+
 **Dependencies:** ZD-FILE-001;ZD-QUAR-001;ZD-WEB-005;ZD-WEB-006
 
 **Acceptance criterion — ZD-SYS-AC-27**
@@ -514,6 +568,8 @@ No existing capability contract is modified by Phase 7.
 **Facets:** data,persistence,security-controls  
 **Platforms:** web, android  
 **Basis:** pm-inference — No export feature is added to launch scope; exact export policy remains open.  
+**Must not:** An account-data response MUST NOT expose another user's data or omit eligible categories without a documented reason.
+
 **Dependencies:** ZD-AUTH-007
 
 **Acceptance criterion — ZD-SYS-AC-28**
