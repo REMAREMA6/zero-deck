@@ -95,7 +95,10 @@ describe('local analysis engine boundary', () => {
     const engine = { supportsCancellation: true, analyze: vi.fn(async () => null) };
 
     const bytes = new Uint8Array([1]);
-    const result = await runLocalFileAnalysis(engine, bytes, clock, controller.signal);
+    const lifecycle: string[] = [];
+    const result = await runLocalFileAnalysis(engine, bytes, clock, controller.signal, {
+      onLifecycleChange: (state) => lifecycle.push(state),
+    });
 
     expect(engine.analyze).not.toHaveBeenCalled();
     expect(result).toMatchObject({
@@ -103,6 +106,7 @@ describe('local analysis engine boundary', () => {
       lifecycle: 'cancelled',
       completedAt: null,
     });
+    expect(lifecycle).toEqual(['queued', 'cancelled']);
   });
 
   it('reports cancellation only when the engine supports and receives an abort signal', async () => {
@@ -125,7 +129,10 @@ describe('local analysis engine boundary', () => {
       ),
     };
 
-    const pending = runLocalFileAnalysis(engine, new Uint8Array([1]), clock, controller.signal);
+    const lifecycle: string[] = [];
+    const pending = runLocalFileAnalysis(engine, new Uint8Array([1]), clock, controller.signal, {
+      onLifecycleChange: (state) => lifecycle.push(state),
+    });
     controller.abort();
     const result = await pending;
 
@@ -138,6 +145,7 @@ describe('local analysis engine boundary', () => {
       lifecycle: 'cancelled',
       completedAt: null,
     });
+    expect(lifecycle).toEqual(['queued', 'analyzing', 'cancelled']);
   });
 
   it('reports an engine AbortError without a user cancellation as interrupted', async () => {
