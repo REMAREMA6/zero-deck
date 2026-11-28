@@ -10,10 +10,10 @@
 
 | Item | Result |
 |---|---:|
-| Normative requirements | 38 |
+| Normative requirements | 39 |
 | Acceptance criteria | 38 |
 | Owner-approved requirements directly encoding `ZD-SCOPE-001` | 4 |
-| PM-proposed requirements | 34 |
+| PM-proposed requirements | 35 |
 | Open product/owner questions | 18 |
 | Official Software Rules facets assessed | 15 |
 | Negative/failure/recovery scenarios | 75 |
@@ -59,7 +59,7 @@ The intended invariant is explicit: no provider/API call unless both independent
 
 All 15 official Software Rules facets were assessed. Messaging is deferred because MVP-03 does not include user messaging. Persistence, API and background processing are conditional on later product/implementation choices; their conditional status does not waive assessment if those behaviours are introduced.
 
-The 75 scenario rows map to one or more of the 38 canonical requirement IDs. This is a designed conformance matrix, not an executed runtime test suite.
+The 75 scenario rows map to one or more of the 39 canonical requirement IDs. This is a designed conformance matrix, not an executed runtime test suite.
 
 ## 5. Provenance and owner authority
 
@@ -85,6 +85,6 @@ The local checks were targeted structural and semantic checks performed against 
 
 ## 7. Phase 6 validation conclusion
 
-The planned Phase 6 authoring deliverables exist and their targeted structural/traceability checks pass. Phase 6 may be marked complete as a **PM requirements-authoring phase**, with 38 requirements, 38 acceptance criteria, 18 open questions, 15-facet assessment and 75 failure/recovery scenarios.
+The planned Phase 6 authoring deliverables exist and their targeted structural/traceability checks pass. Phase 6 may be marked complete as a **PM requirements-authoring phase**, with 39 requirements, 39 acceptance criteria, 18 open questions, 15-facet assessment and 75 failure/recovery scenarios.
 
 The contract remains draft. Only four requirements directly encode the existing owner-approved scope decision; 34 remain PM-proposed. The Product Owner must review the open policy questions before implementation decisions are treated as settled.
