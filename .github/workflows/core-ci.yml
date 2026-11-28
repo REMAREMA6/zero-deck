@@ -81,6 +81,7 @@ jobs:
         run: pnpm test
 
       # Includes the account-deletion schedule, retention and immediate-revocation integration tests.
+      # The worker is exercised through the same PostgreSQL integration suite.
       - name: PostgreSQL integration tests
         run: pnpm --filter @zerodeck/api test:integration
 
