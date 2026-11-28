@@ -34,7 +34,7 @@
 | Email/password requirement is no longer conditional | PASS |
 | Contract version updated | PASS — 0.2.0-draft |
 | Evidence revision and URI point to the new canonical Markdown revision | PASS |
-| SHA-256 digest recomputed from exact canonical Markdown UTF-8 content | PASS — c44844872e6c70a1f50c17286cd9c35cd27ae0397cd09ede1c62a7135d6267ac |
+| SHA-256 digest recomputed from exact canonical Markdown UTF-8 content | PASS — 94424bd0bf5fb8d2a4f7f923d64e8475a9a65c5f68292e9026681f77f916fd55 |
 
 ## 3. Policy consistency reviewed
 
@@ -49,7 +49,7 @@
 
 ## 4. Artifact integrity
 
-- Canonical contract revision: 88e336687d4e09efebcecb2eb30287a8b62e7837
+- Canonical contract revision: 9d92423cdf801df7d6d2ec3fabf0b86ee562965c
 - Canonical contract SHA-256: c44844872e6c70a1f50c17286cd9c35cd27ae0397cd09ede1c62a7135d6267ac
 - Structured projection and retained evidence reference this exact revision and digest.
 
