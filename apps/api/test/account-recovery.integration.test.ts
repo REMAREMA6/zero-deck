@@ -235,4 +235,41 @@ describe('account recovery with PostgreSQL and fake delivery', () => {
       false,
     );
   });
+  it('keeps completed recovery successful when the security notification adapter fails', async () => {
+    if (!pool) throw new Error('PostgreSQL is unavailable.');
+    const email = 'RecoverNoticeFailure-' + randomUUID() + '@example.test';
+    await createAccountRegistrationService(pool, passwordPolicy).register({
+      email,
+      password: 'initial-password',
+    });
+    const account = await pool.query<{ account_id: string }>(
+      'SELECT account_id FROM accounts WHERE email_canonical = $1',
+      [email],
+    );
+    await pool.query('UPDATE accounts SET email_verified_at = now() WHERE account_id = $1', [
+      account.rows[0]!.account_id,
+    ]);
+    const recoveryDelivery = new FakeRecoveryDelivery();
+    const notifier = {
+      async notify() {
+        throw new Error('fake security notification failure');
+      },
+    };
+    const recovery = createAccountRecoveryService(
+      pool,
+      { challengeLifetimeMs: 60_000 },
+      recoveryDelivery,
+      passwordPolicy,
+      notifier,
+    );
+
+    await recovery.request(email);
+    await expect(
+      recovery.recover(recoveryDelivery.deliveries[0]!.token, 'replacement-password'),
+    ).resolves.toBe(true);
+    await expect(
+      recovery.recover(recoveryDelivery.deliveries[0]!.token, 'another-password'),
+    ).resolves.toBe(false);
+  });
+
 });
