@@ -62,17 +62,19 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### A4. Shared contracts and domain semantics
 
+**Status: Complete — contract/domain semantics and unit tests passed in CI run 46138520229.**
+
 **Description:** Establish shared runtime-validated contracts and canonical domain result types consumed by Web, Android and API.
 
 **Acceptance criteria**
-- [ ] API error and health response shapes are validated.
-- [ ] File-analysis outcomes remain distinct: confirmed threat, suspicious, no known threat found, could not decide.
-- [ ] Inconclusive or no-match outcomes are never converted into a claim of safety.
-- [ ] Both clients and API use the same shared package boundaries.
+- [x] API error and health response shapes are validated.
+- [x] File-analysis outcomes remain distinct: confirmed threat, suspicious, no known threat found, could not decide.
+- [x] Inconclusive or no-match outcomes are never converted into a claim of safety.
+- [x] Both clients and API use the same shared package boundaries.
 
 **Verification**
-- [ ] Contract and domain unit tests pass.
-- [ ] All workspace packages typecheck.
+- [x] Contract and domain unit tests pass.
+- [x] All workspace packages typecheck.
 
 **Dependencies:** A1.  
 **Files likely touched:** packages/contracts/src/*, packages/domain/src/*.  
@@ -88,20 +90,22 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### B1. Account creation and stable identity
 
+**Status: Complete — API, PostgreSQL integration tests, Web and Android registration surfaces built and verified in CI run 46138520229.**
+
 **Description:** Implement the shared account principal and email/password registration path across the API and both clients. Apply only the approved email canonicalization: trim surrounding whitespace, compare the domain case-insensitively, preserve local-part semantics and do not apply provider-specific alias rules.
 
 **Acceptance criteria**
-- [ ] A successful registration creates one stable account principal separate from email and password credentials.
-- [ ] Duplicate canonical email identifiers cannot create a second account.
-- [ ] Only an Argon2id verifier is stored; plaintext passwords never enter database records or logs.
-- [ ] Registration does not require phone, social login, MFA or passkeys.
-- [ ] Account creation can leave the email explicitly unverified.
-- [ ] Public registration remains disabled unless the owner-approved password acceptance and abuse-control policy is configured; tests use isolated policy fixtures, not production defaults.
+- [x] A successful registration creates one stable account principal separate from email and password credentials.
+- [x] Duplicate canonical email identifiers cannot create a second account.
+- [x] Only an Argon2id verifier is stored; plaintext passwords never enter database records or logs.
+- [x] Registration does not require phone, social login, MFA or passkeys.
+- [x] Account creation can leave the email explicitly unverified.
+- [x] Public registration remains disabled unless the owner-approved password acceptance and abuse-control policy is configured; tests use isolated policy fixtures, not production defaults.
 
 **Verification**
-- [ ] PostgreSQL integration tests cover account creation, duplicate canonical email, case-sensitive local part and domain normalization.
-- [ ] Security tests inspect persisted records and captured logs for plaintext password absence.
-- [ ] Web and Android registration journeys call the same API contract.
+- [x] PostgreSQL integration tests cover account creation, duplicate canonical email, case-sensitive local part and domain normalization.
+- [x] Security tests inspect persisted records and captured logs for plaintext password absence.
+- [x] Web and Android registration journeys call the same API contract.
 
 **Dependencies:** A1–A4.  
 **Files likely touched:** apps/api/src/modules/identity/*, apps/api/migrations/*, packages/contracts/src/auth*, packages/domain/src/identity*, apps/web/app/(auth)/*, apps/android/src/auth/*.  
