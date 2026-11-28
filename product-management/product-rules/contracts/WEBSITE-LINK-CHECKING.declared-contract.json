@@ -4,10 +4,10 @@
   "title": "ZeroDeck MVP-03 Website and Link Checking Product Requirements",
   "issuer": "ZeroDeck Product Management Agent",
   "artifact": {
-    "uri": "https://github.com/REMAREMA6/zero-deck/blob/1210f236d80972a4c877ee042cce1963da872d62/product-management/product-rules/contracts/WEBSITE-LINK-CHECKING.md",
-    "version": "0.1.0-draft",
-    "revision": "1210f236d80972a4c877ee042cce1963da872d62",
-    "digest": "sha256:d38382a6f9f90a7abdf15df243be357cdac9a2b36b0cf2a7d2e97352badc3fd6",
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/a6dd3ed7ed6f94a72f035320ffa1188b23f6aa5f/product-management/product-rules/contracts/WEBSITE-LINK-CHECKING.md",
+    "version": "0.2.0-draft",
+    "revision": "a6dd3ed7ed6f94a72f035320ffa1188b23f6aa5f",
+    "digest": "sha256:489a9001c027e13e26547d1a755a4fc05cb1b12d75266c5b3c1c64022262c898",
     "mediaType": "text/markdown"
   },
   "scope": "MVP-03 website and link checking for web and Android; bounded user-initiated URL checks, eligibility/no-call gates, URL and destination safety, provider interaction, privacy, results, failures, usage controls and platform semantics; excludes crawling and general network reconnaissance.",
@@ -74,7 +74,7 @@
     },
     {
       "statementId": "ZD-WEB-013",
-      "text": "The system MUST apply an explicit redirect policy and revalidate the destination and both MVP-03 gates before any subsequent outbound request caused by a redirect.",
+      "text": "The system MUST NOT follow arbitrary destination redirects. Provider-reported redirect information MAY be displayed, but any separately approved outbound redirect request MUST revalidate the destination and both MVP-03 gates before dispatch.",
       "location": "### Requirement ZD-WEB-013 — Redirect control"
     },
     {
@@ -204,7 +204,7 @@
     },
     {
       "statementId": "ZD-WEB-038",
-      "text": "The system MUST NOT use MVP-03 as a general-purpose URL fetcher, crawler, website auditor, port scanner, or network-reconnaissance interface.",
+      "text": "The system MUST NOT use MVP-03 as a general-purpose URL fetcher, crawler, website auditor, port scanner, or network-reconnaissance interface, and MUST use provider URL lookup rather than directly fetching the submitted destination.",
       "location": "### Requirement ZD-WEB-038 — No arbitrary fetch"
     },
     {
@@ -268,7 +268,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-001-01",
+              "criterionId": "ZD-WEB-AC-01",
               "given": "a request is made by an account with active Pro entitlement",
               "when": "the user submits a website/link check",
               "then": "the request is eligible for gate evaluation only in the active case; otherwise it is blocked without a provider call",
@@ -309,7 +309,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-002-01",
+              "criterionId": "ZD-WEB-AC-02",
               "given": "the owner activation switch is enabled or disabled",
               "when": "a user requests an MVP-03 check",
               "then": "the switch state is evaluated independently of Pro entitlement",
@@ -351,7 +351,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-003-01",
+              "criterionId": "ZD-WEB-AC-03",
               "given": "either gate is false, unknown, stale, unavailable, revoked, or disabled before dispatch",
               "when": "any synchronous, retry, redirect, queued, cached-refresh, batch, fallback, or background path attempts dispatch",
               "then": "no provider/API request is emitted; the decision and reason are recorded without sensitive URL content",
@@ -391,7 +391,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-004-01",
+              "criterionId": "ZD-WEB-AC-04",
               "given": "a Pro user has reached an applicable usage limit",
               "when": "the user submits another check",
               "then": "the request is denied or deferred according to configured policy; no provider call occurs",
@@ -429,7 +429,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-005-01",
+              "criterionId": "ZD-WEB-AC-05",
               "given": "no check is currently running",
               "when": "the user explicitly submits one URL for checking",
               "then": "exactly that submitted URL enters the request lifecycle",
@@ -465,7 +465,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-006-01",
+              "criterionId": "ZD-WEB-AC-06",
               "given": "a user submits a URL on a page with links or embedded resources",
               "when": "the check completes",
               "then": "the result identifies the checked URL only and makes no whole-site inspection claim",
@@ -501,7 +501,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-007-01",
+              "criterionId": "ZD-WEB-AC-07",
               "given": "the submitted value is empty, malformed, or unsupported by the currently configured URL policy",
               "when": "the user submits it",
               "then": "the request is rejected with an actionable reason and zero provider calls",
@@ -537,7 +537,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-008-01",
+              "criterionId": "ZD-WEB-AC-08",
               "given": "a submitted URL is transformed for lookup",
               "when": "the system records or displays the check",
               "then": "the original submitted value remains distinguishable from the normalized lookup target, subject to privacy controls",
@@ -573,7 +573,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-009-01",
+              "criterionId": "ZD-WEB-AC-09",
               "given": "the submitted URL contains user-info credentials",
               "when": "the request is prepared for provider lookup",
               "then": "credentials are removed or the URL is rejected; no credentials are disclosed to the provider",
@@ -609,7 +609,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-010-01",
+              "criterionId": "ZD-WEB-AC-10",
               "given": "a URL resolves or redirects to a prohibited destination",
               "when": "the system considers dispatch or follows a redirect",
               "then": "the destination is blocked before network access to that destination",
@@ -645,7 +645,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-011-01",
+              "criterionId": "ZD-WEB-AC-11",
               "given": "a hostname resolves to an allowed address during initial validation and a prohibited address at connection time, or its answer changes during redirects/retries",
               "when": "the system attempts a connection",
               "then": "no connection is made to the prohibited address",
@@ -681,7 +681,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-012-01",
+              "criterionId": "ZD-WEB-AC-12",
               "given": "the input uses an alternate address or hostname representation",
               "when": "the URL is validated",
               "then": "the same destination policy is applied; ambiguous representations are rejected rather than bypassing controls",
@@ -698,7 +698,7 @@
           "requirementType": "security",
           "normativeKind": "required",
           "priority": "P0",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "security-controls",
             "integrations"
@@ -713,18 +713,27 @@
             {
               "basisType": "pm-inference",
               "description": "PM inference; no primary user research or selected provider contract is claimed."
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-013-01",
+              "criterionId": "ZD-WEB-AC-13",
               "given": "a provider or permitted fetch path returns a redirect",
               "when": "the system considers following it",
               "then": "disallowed destinations and gate failures stop the chain before another outbound request",
               "verificationMethod": "mixed"
             }
           ],
-          "decisionRefs": [],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
+          ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-WEB-001"
           ]
@@ -753,7 +762,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-014-01",
+              "criterionId": "ZD-WEB-AC-14",
               "given": "a secure URL redirects to an insecure scheme",
               "when": "the redirect is evaluated",
               "then": "the redirect is rejected and no insecure destination request occurs",
@@ -789,7 +798,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-015-01",
+              "criterionId": "ZD-WEB-AC-15",
               "given": "a provider connection presents an invalid, expired, mismatched, or untrusted certificate",
               "when": "the connection is established",
               "then": "the lookup fails safely; certificate verification is not bypassed",
@@ -825,7 +834,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-039-01",
+              "criterionId": "ZD-WEB-AC-16",
               "given": "a provider connection presents an invalid, expired, mismatched, or untrusted certificate",
               "when": "the system attempts to establish the provider connection",
               "then": "certificate verification remains enabled and the connection is rejected",
@@ -861,7 +870,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-016-01",
+              "criterionId": "ZD-WEB-AC-17",
               "given": "a provider lookup is eligible and a provider contract is selected",
               "when": "the request payload is assembled",
               "then": "only documented minimum required fields are sent",
@@ -898,7 +907,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-017-01",
+              "criterionId": "ZD-WEB-AC-18",
               "given": "a URL is submitted or processed",
               "when": "the system handles, transmits, stores, logs, or displays it",
               "then": "the URL receives privacy protections and is not assumed public merely because it is a URL",
@@ -934,7 +943,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-018-01",
+              "criterionId": "ZD-WEB-AC-19",
               "given": "a check generates operational telemetry",
               "when": "the system records the event",
               "then": "sensitive URL components and secrets are omitted or redacted",
@@ -970,7 +979,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-019-01",
+              "criterionId": "ZD-WEB-AC-20",
               "given": "a provider returns a result",
               "when": "the result is presented or retained",
               "then": "its provenance and lookup timestamp are available to the product's result semantics",
@@ -1006,7 +1015,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-020-01",
+              "criterionId": "ZD-WEB-AC-21",
               "given": "a provider response is malformed, incomplete, unexpected, or contains untrusted fields",
               "when": "the response is processed",
               "then": "the response is rejected or represented as unavailable/inconclusive; it is not treated as a clean result",
@@ -1023,7 +1032,7 @@
           "requirementType": "functional",
           "normativeKind": "required",
           "priority": "P1",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "behavior",
             "interface"
@@ -1038,18 +1047,27 @@
             {
               "basisType": "pm-inference",
               "description": "PM inference; no primary user research or selected provider contract is claimed."
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-021-01",
+              "criterionId": "ZD-WEB-AC-22",
               "given": "a provider response or lookup failure is received",
               "when": "the result is classified",
               "then": "the user sees the supported outcome and its limitations; absence of a match is not stated as proof of safety",
               "verificationMethod": "mixed"
             }
           ],
-          "decisionRefs": [],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
+          ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-WEB-001"
           ]
@@ -1059,7 +1077,7 @@
           "requirementType": "usability",
           "normativeKind": "forbidden",
           "priority": "P1",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "interface",
             "behavior"
@@ -1074,18 +1092,27 @@
             {
               "basisType": "pm-inference",
               "description": "PM inference; no primary user research or selected provider contract is claimed."
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-022-01",
+              "criterionId": "ZD-WEB-AC-23",
               "given": "a provider reports no known match",
               "when": "the result is displayed",
               "then": "the wording states only that no known match was returned within the stated provider/check scope",
               "verificationMethod": "mixed"
             }
           ],
-          "decisionRefs": [],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
+          ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-WEB-001"
           ]
@@ -1114,7 +1141,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-023-01",
+              "criterionId": "ZD-WEB-AC-24",
               "given": "a result is reused or displayed after its original lookup",
               "when": "the user views the result",
               "then": "the lookup time and applicable freshness limitation are visible or otherwise disclosed",
@@ -1150,7 +1177,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-024-01",
+              "criterionId": "ZD-WEB-AC-25",
               "given": "any listed provider/network failure occurs",
               "when": "the request terminates",
               "then": "the result is not converted into a clean/no-match verdict",
@@ -1186,7 +1213,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-025-01",
+              "criterionId": "ZD-WEB-AC-26",
               "given": "a retry is considered after failure or interruption",
               "when": "the retry is scheduled or dispatched",
               "then": "all gates and safety policies are re-evaluated; if not satisfied, zero provider calls occur",
@@ -1222,7 +1249,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-026-01",
+              "criterionId": "ZD-WEB-AC-27",
               "given": "a user cancels an in-progress check",
               "when": "the cancellation is processed",
               "then": "no further eligible work is initiated for that request and the state is reported truthfully; already-sent requests are not falsely claimed recalled",
@@ -1258,7 +1285,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-027-01",
+              "criterionId": "ZD-WEB-AC-28",
               "given": "a user or service has exhausted an applicable limit",
               "when": "a new check is requested",
               "then": "the request is blocked before provider dispatch and the applicable limit state is communicated",
@@ -1294,7 +1321,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-028-01",
+              "criterionId": "ZD-WEB-AC-29",
               "given": "a client repeats requests, alters request parameters, or attempts concurrent submissions",
               "when": "the service evaluates requests",
               "then": "the applicable gates and limits are enforced server-side for each provider dispatch",
@@ -1311,7 +1338,7 @@
           "requirementType": "configuration",
           "normativeKind": "required",
           "priority": "P0",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "configuration",
             "authorization-permissions"
@@ -1326,18 +1353,27 @@
             {
               "basisType": "pm-inference",
               "description": "PM inference; no primary user research or selected provider contract is claimed."
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-029-01",
+              "criterionId": "ZD-WEB-AC-30",
               "given": "activation is disabled while requests are pending or being prepared",
               "when": "a pending operation reaches its next dispatch boundary",
               "then": "it is cancelled or blocked before any subsequent provider call",
               "verificationMethod": "mixed"
             }
           ],
-          "decisionRefs": [],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
+          ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-WEB-001"
           ]
@@ -1347,7 +1383,7 @@
           "requirementType": "business-rule",
           "normativeKind": "required",
           "priority": "P0",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "business-rules",
             "authorization-permissions"
@@ -1362,18 +1398,27 @@
             {
               "basisType": "pm-inference",
               "description": "PM inference; no primary user research or selected provider contract is claimed."
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-030-01",
+              "criterionId": "ZD-WEB-AC-31",
               "given": "entitlement expires, is revoked, or becomes unverifiable during a workflow",
               "when": "a pending operation reaches its next dispatch boundary",
               "then": "it is blocked before any subsequent provider call",
               "verificationMethod": "mixed"
             }
           ],
-          "decisionRefs": [],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
+          ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-WEB-001"
           ]
@@ -1402,7 +1447,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-031-01",
+              "criterionId": "ZD-WEB-AC-32",
               "given": "a request approaches or exceeds a configured resource bound",
               "when": "the system processes the request",
               "then": "processing stops safely at the applicable bound and reports a bounded failure",
@@ -1438,7 +1483,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-032-01",
+              "criterionId": "ZD-WEB-AC-33",
               "given": "a request enters any supported lifecycle state",
               "when": "the user views its status",
               "then": "the displayed state matches the recorded request outcome",
@@ -1455,7 +1500,7 @@
           "requirementType": "data",
           "normativeKind": "forbidden",
           "priority": "P1",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "persistence",
             "data"
@@ -1470,18 +1515,27 @@
             {
               "basisType": "pm-inference",
               "description": "PM inference; no primary user research or selected provider contract is claimed."
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-033-01",
+              "criterionId": "ZD-WEB-AC-34",
               "given": "a result is completed or the user views prior checks",
               "when": "the product offers or describes history",
               "then": "only actually supported retention and access are represented; no unapproved history promise is made",
               "verificationMethod": "mixed"
             }
           ],
-          "decisionRefs": [],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
+          ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-WEB-001"
           ]
@@ -1491,7 +1545,7 @@
           "requirementType": "privacy",
           "normativeKind": "required",
           "priority": "P1",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "data",
             "security-controls",
@@ -1507,18 +1561,27 @@
             {
               "basisType": "pm-inference",
               "description": "PM inference; no primary user research or selected provider contract is claimed."
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-034-01",
+              "criterionId": "ZD-WEB-AC-35",
               "given": "the product proposes to persist URL or result data",
               "when": "persistence is enabled or a deletion request is processed",
               "then": "storage is not enabled without the policy; once enabled, deletion follows its documented scope and exceptions",
               "verificationMethod": "mixed"
             }
           ],
-          "decisionRefs": [],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
+          ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-WEB-001"
           ]
@@ -1547,7 +1610,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-035-01",
+              "criterionId": "ZD-WEB-AC-36",
               "given": "a provider dispatch is attempted",
               "when": "the system records its accounting event",
               "then": "every actual dispatch is counted once and correlated to its request without storing the full URL in routine logs",
@@ -1583,7 +1646,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-036-01",
+              "criterionId": "ZD-WEB-AC-37",
               "given": "operational anomalies occur",
               "when": "the system emits operational signals",
               "then": "signals identify the anomaly and affected service/account scope while respecting URL redaction",
@@ -1619,7 +1682,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-037-01",
+              "criterionId": "ZD-WEB-AC-38",
               "given": "a user performs the same eligible or ineligible check on either platform",
               "when": "the request is evaluated or a result is displayed",
               "then": "both platforms apply the same product policy and explain any platform-specific limitation",
@@ -1636,7 +1699,7 @@
           "requirementType": "security",
           "normativeKind": "forbidden",
           "priority": "P0",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "security-controls",
             "integrations"
@@ -1651,18 +1714,27 @@
             {
               "basisType": "pm-inference",
               "description": "PM inference; no primary user research or selected provider contract is claimed."
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-038-01",
+              "criterionId": "ZD-WEB-AC-39",
               "given": "a submitted URL or provider response could trigger crawling or arbitrary resource access",
               "when": "the request is processed",
               "then": "only the bounded, selected MVP-03 lookup occurs; no page traversal or unrelated network probing is initiated",
               "verificationMethod": "mixed"
             }
           ],
-          "decisionRefs": [],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
+          ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-WEB-001"
           ]
@@ -1691,7 +1763,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-040-01",
+              "criterionId": "ZD-WEB-AC-40",
               "given": "an account has an applicable Pro usage allowance",
               "when": "the user submits a check that reaches or exceeds that allowance",
               "then": "the system applies the configured usage policy before provider dispatch",
@@ -1727,7 +1799,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-WEB-AC-041-01",
+              "criterionId": "ZD-WEB-AC-41",
               "given": "a user submits one URL from a website containing other pages or linked resources",
               "when": "the check result is presented",
               "then": "the product describes only the submitted URL as checked and does not claim whole-site inspection",
@@ -1745,145 +1817,181 @@
           "questionId": "ZD-Q-WEB-001",
           "question": "Supported URL schemes and accepted input forms?",
           "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+          "ownerDecisionRequired": false,
+          "status": "resolved",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision.",
+          "resolution": "MVP-03 accepts HTTP and HTTPS URLs only. Other schemes and non-URL input forms are rejected.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-WEB-002",
           "question": "Provider lookup only, or direct destination fetch?",
           "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+          "ownerDecisionRequired": false,
+          "status": "resolved",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision.",
+          "resolution": "MVP-03 uses a selected provider's URL-lookup service only. It is not a direct destination fetcher, crawler or arbitrary network probe.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-WEB-003",
           "question": "Exact URL normalization policy?",
           "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision.",
+          "resolution": "Normalize scheme and hostname consistently while preserving meaningful path/query semantics. Exact parsing, IDN and canonicalization behaviour must be set during architecture against the selected provider contract.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-WEB-004",
           "question": "Redirect following, hop and cross-origin policy?",
           "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+          "ownerDecisionRequired": false,
+          "status": "resolved",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision.",
+          "resolution": "Do not follow arbitrary destination redirects. Provider-reported redirect information may be displayed; any future outbound redirect request requires an explicit policy and fresh destination/gate checks.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-WEB-005",
           "question": "Provider/API, commercial terms, geography and data processing?",
           "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision.",
+          "resolution": "Select a provider only after reviewing detection accuracy, licensing, commercial terms, geography, privacy/data processing, availability, cost and exit options. No provider is selected in Phase 9.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-WEB-006",
           "question": "Verdict taxonomy and conflict mapping?",
           "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+          "ownerDecisionRequired": false,
+          "status": "resolved",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision.",
+          "resolution": "Preserve distinct confirmed-match, no-known-match, suspicious/ambiguous and unavailable/inconclusive outcomes where provider evidence supports them. No match is not a safety guarantee.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-WEB-007",
           "question": "Maximum URL length and input complexity?",
           "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision.",
+          "resolution": "Set maximum URL length and input complexity from selected-provider and platform constraints; reject over-limit input before provider dispatch.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-WEB-008",
           "question": "Timeout, response size, redirect and concurrency limits?",
           "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision.",
+          "resolution": "Apply bounded timeout, response-size and concurrency controls. Numeric values must be derived from provider contracts, workload and cost tests.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-WEB-009",
           "question": "Per-account/global rate limits, quotas and resets?",
           "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision.",
+          "resolution": "Apply both per-account and global rate/quota controls. Numeric limits and reset semantics require capacity, abuse and cost evidence and owner confirmation.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-WEB-010",
           "question": "Spend ceiling, alerts and emergency-stop policy?",
           "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision.",
+          "resolution": "Set a hard provider-spend ceiling, usage monitoring/alerts and an emergency stop before production activation. The numeric ceiling requires a cost model and owner approval.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-WEB-011",
           "question": "Gate propagation bounds across platforms and queued work?",
           "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision.",
+          "resolution": "Use the shared revocation invariant in ZD-Q-AUTH-013 and ZD-Q-SYS-013. A false or unknown gate blocks dispatch; queued/not-yet-dispatched calls are denied after revocation. Exact propagation bounds require architecture tests.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-WEB-012",
           "question": "Treatment of in-flight calls after gate revocation?",
           "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision.",
+          "resolution": "Queued/not-yet-dispatched work is cancelled or blocked after gate revocation. Already-dispatched calls are cancelled where supported; no subsequent provider call may be initiated. Exact cancellation mechanics are architecture-specific.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-WEB-013",
           "question": "URL/result persistence purpose and retention?",
           "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+          "ownerDecisionRequired": false,
+          "status": "resolved",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision.",
+          "resolution": "Do not persist submitted URLs, full provider responses or check results by default beyond completing the requested operation. Any future persistence requires a separate documented purpose and retention policy.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-WEB-014",
           "question": "User notice/consent before provider disclosure?",
           "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+          "ownerDecisionRequired": false,
+          "status": "resolved",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision.",
+          "resolution": "Before provider disclosure, tell the user what URL-related information is sent, the purpose and recipient/processor, and obtain the required explicit consent.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-WEB-015",
           "question": "Allowed audit fields and retention?",
           "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision.",
+          "resolution": "Keep audit metadata minimal; exclude full URLs, credentials and sensitive query parameters. Exact fields, access roles and retention are set in architecture/privacy review.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-WEB-016",
           "question": "Supported browser/Android platform matrix?",
           "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision.",
+          "resolution": "Publish a tested browser/Android compatibility matrix and disclose capability differences. Exact browser/OS versions require platform testing and owner scope confirmation.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-WEB-017",
           "question": "Whether cached results are allowed and under what freshness/terms?",
           "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+          "ownerDecisionRequired": false,
+          "status": "resolved",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision.",
+          "resolution": "Caching is off by default. Enable it only if provider terms permit it and an explicit freshness/expiry policy is defined.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-WEB-018",
           "question": "Approved user guidance for each result class?",
           "impact": "Determines a material product, security, privacy, operational or platform boundary that cannot be settled by implementation inference.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision."
+          "ownerDecisionRequired": false,
+          "status": "resolved",
+          "pmRecommendation": "Keep unresolved until evidence is available and the Product Owner records a decision.",
+          "resolution": "Explain each verdict and its limitations. Never describe a no-known-match result as proof that a URL is safe or harmless.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         }
       ]
     }
