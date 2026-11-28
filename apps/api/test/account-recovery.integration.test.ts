@@ -235,6 +235,7 @@ describe('account recovery with PostgreSQL and fake delivery', () => {
       false,
     );
   });
+
   it(
     'keeps completed recovery successful when the security notification adapter fails',
     async () => {
