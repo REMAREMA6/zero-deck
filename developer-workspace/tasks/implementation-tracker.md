@@ -130,11 +130,11 @@ These are the first five of the 51 Architect-defined outcomes. The Architect's s
 | 46145945402 | Cancelled | Run was cancelled before quality verification; no test/build evidence claimed. |
 | 46146024978 | Failed (formatting only) | CI stopped at Prettier because `packages/domain/src/index.ts` needed formatting; typecheck, tests, PostgreSQL integration and builds were skipped. |
 | 46146507604 | Failed (two stale assertions) | Formatting and typecheck passed. Domain tests exposed two expected-value assertions that did not reflect the canonical no-known-threat safety wording. Updated in commit `20040887`; rerun pending. |
-| 46146627115 | In progress | Reruns the corrected canonical analysis mapper tests and the full core CI pipeline. Do not claim completion until all steps pass. |
+| 46146627115 | Failed (test formatting) | CI stopped at Prettier because one expected no-match explanation line in `packages/domain/src/index.test.ts` exceeded formatting rules. Corrected in commit `962e0b7c`; replacement CI pending. |
 
 ## Next execution queue
 
-1. Verify replacement CI after the no-known-threat assertion correction in commit `20040887`; run `46146507604` passed formatting and typecheck but failed two domain test expectations. The earlier runs `46145945402` was cancelled and `46146024978` failed at formatting.
+1. Verify replacement CI after formatting correction `962e0b7c`; run `46146627115` stopped at formatting in the updated domain test before typecheck/tests/builds. Run `46146507604` passed formatting and typecheck but failed two stale domain test expectations.
 2. The domain package now has deterministic fake-engine tests for all four canonical outcomes, malformed/unsupported output, safe no-match wording and thrown engine failures. Verify these tests in green CI, then add explicit orchestration/network-boundary evidence before changing 4.2 or 4.4 status.
 3. Reconcile `todo.md` against the implemented session and URL-check code so it reflects actual verified work.
 4. Finish identity recovery, step-up authentication, credential rotation, cross-client session verification, general authorization and account closure.
