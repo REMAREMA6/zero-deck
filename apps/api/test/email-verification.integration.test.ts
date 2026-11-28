@@ -73,6 +73,8 @@ describe('email verification with PostgreSQL and fake delivery', () => {
       expect(delivery.deliveries[0]?.email).toBe(email);
 
       const token = delivery.deliveries[0]!.token;
+      expect(existing.body).not.toContain(token);
+      expect(unknown.body).not.toContain(token);
       const stored = await pool.query<{ token_hash: string; expires_at: Date }>(
         `SELECT token_hash, expires_at
          FROM email_verification_challenges
@@ -100,6 +102,11 @@ describe('email verification with PostgreSQL and fake delivery', () => {
       password: 'test-only-password',
     });
 
+    const accountResult = await pool.query<{ account_id: string }>(
+      'SELECT account_id FROM accounts WHERE email_canonical = $1',
+      [email],
+    );
+    const accountId = accountResult.rows[0]!.account_id;
     const delivery = new FakeVerificationDelivery();
     const verification = createEmailVerificationService(
       pool,
@@ -109,6 +116,7 @@ describe('email verification with PostgreSQL and fake delivery', () => {
     const app = buildApp({ database: pool, emailVerification: verification });
 
     try {
+      expect(await verification.getVerifiedEmail(accountId)).toBeNull();
       await app.inject({
         method: 'POST',
         url: '/v1/email-verification-challenges',
@@ -130,6 +138,7 @@ describe('email verification with PostgreSQL and fake delivery', () => {
       expect([first.statusCode, second.statusCode].sort()).toEqual([200, 400]);
       const success = first.statusCode === 200 ? first : second;
       expect(success.json()).toEqual({ verified: true });
+      expect(await verification.getVerifiedEmail(accountId)).toBe(email);
 
       const replay = await app.inject({
         method: 'POST',
