@@ -39,7 +39,7 @@ The system MUST permit an MVP-03 provider-backed check only when the requesting 
 
 **Rationale / basis:** Owner decision ZD-SCOPE-001: Pro entitlement is a mandatory independent gate.
 
-**Acceptance criterion — ZD-WEB-AC-001-01**
+**Acceptance criterion — ZD-WEB-AC-01**
 
 - **Given** a request is made by an account with active Pro entitlement
 - **When** the user submits a website/link check
@@ -54,7 +54,7 @@ The system MUST permit an MVP-03 provider-backed check only when the owner-contr
 
 **Rationale / basis:** Owner decision ZD-SCOPE-001: owner-controlled activation is a separate mandatory gate.
 
-**Acceptance criterion — ZD-WEB-AC-002-01**
+**Acceptance criterion — ZD-WEB-AC-02**
 
 - **Given** the owner activation switch is enabled or disabled
 - **When** a user requests an MVP-03 check
@@ -69,7 +69,7 @@ The system MUST NOT make an external provider/API call unless both active Pro en
 
 **Rationale / basis:** Owner decision ZD-SCOPE-001 establishes the two mandatory gates and no-call rule; PM inference extends this invariant to unknown/unavailable states and every execution path.
 
-**Acceptance criterion — ZD-WEB-AC-003-01**
+**Acceptance criterion — ZD-WEB-AC-03**
 
 - **Given** either gate is false, unknown, stale, unavailable, revoked, or disabled before dispatch
 - **When** any synchronous, retry, redirect, queued, cached-refresh, batch, fallback, or background path attempts dispatch
@@ -84,7 +84,7 @@ The system MUST NOT represent Pro entitlement as unlimited usage.
 
 **Rationale / basis:** Owner decision ZD-SCOPE-001 explicitly says Pro does not mean unlimited usage.
 
-**Acceptance criterion — ZD-WEB-AC-004-01**
+**Acceptance criterion — ZD-WEB-AC-04**
 
 - **Given** a Pro user has reached an applicable usage limit
 - **When** the user submits another check
@@ -99,7 +99,7 @@ The system MUST initiate an MVP-03 check only in response to an explicit user ac
 
 **Rationale / basis:** PM inference from MVP-03 scope; automatic/background checking is excluded by the Phase 6 plan.
 
-**Acceptance criterion — ZD-WEB-AC-005-01**
+**Acceptance criterion — ZD-WEB-AC-05**
 
 - **Given** no check is currently running
 - **When** the user explicitly submits one URL for checking
@@ -114,7 +114,7 @@ The system MUST identify the submitted target as one URL.
 
 **Rationale / basis:** PM inference; existing product planning says URL checking is a single-URL lookup unless more scope is approved.
 
-**Acceptance criterion — ZD-WEB-AC-006-01**
+**Acceptance criterion — ZD-WEB-AC-06**
 
 - **Given** a user submits a URL on a page with links or embedded resources
 - **When** the check completes
@@ -129,7 +129,7 @@ The system MUST reject empty, malformed, unsupported, or structurally ambiguous 
 
 **Rationale / basis:** PM inference; parser/library and exact accepted URL policy remain open.
 
-**Acceptance criterion — ZD-WEB-AC-007-01**
+**Acceptance criterion — ZD-WEB-AC-07**
 
 - **Given** the submitted value is empty, malformed, or unsupported by the currently configured URL policy
 - **When** the user submits it
@@ -144,7 +144,7 @@ The system MUST preserve the submitted URL separately from any normalized lookup
 
 **Rationale / basis:** PM inference; exact normalization semantics require evidence and owner policy.
 
-**Acceptance criterion — ZD-WEB-AC-008-01**
+**Acceptance criterion — ZD-WEB-AC-08**
 
 - **Given** a submitted URL is transformed for lookup
 - **When** the system records or displays the check
@@ -159,7 +159,7 @@ The system MUST NOT transmit URL-embedded username or password credentials to a 
 
 **Rationale / basis:** PM inference based on data-minimization and credential-exposure risk.
 
-**Acceptance criterion — ZD-WEB-AC-009-01**
+**Acceptance criterion — ZD-WEB-AC-09**
 
 - **Given** the submitted URL contains user-info credentials
 - **When** the request is prepared for provider lookup
@@ -174,7 +174,7 @@ The system MUST prevent MVP-03 processing from causing an external fetch to loop
 
 **Rationale / basis:** PM inference; precise address classification and policy require security design and validation.
 
-**Acceptance criterion — ZD-WEB-AC-010-01**
+**Acceptance criterion — ZD-WEB-AC-10**
 
 - **Given** a URL resolves or redirects to a prohibited destination
 - **When** the system considers dispatch or follows a redirect
@@ -189,7 +189,7 @@ The system MUST ensure destination restrictions remain effective when DNS answer
 
 **Rationale / basis:** PM inference; implementation mechanism intentionally unspecified.
 
-**Acceptance criterion — ZD-WEB-AC-011-01**
+**Acceptance criterion — ZD-WEB-AC-11**
 
 - **Given** a hostname resolves to an allowed address during initial validation and a prohibited address at connection time, or its answer changes during redirects/retries
 - **When** the system attempts a connection
@@ -204,7 +204,7 @@ The system MUST apply destination policy consistently to IPv4, IPv6, IPv4-mapped
 
 **Rationale / basis:** PM inference; precise canonicalization policy remains open.
 
-**Acceptance criterion — ZD-WEB-AC-012-01**
+**Acceptance criterion — ZD-WEB-AC-12**
 
 - **Given** the input uses an alternate address or hostname representation
 - **When** the URL is validated
@@ -215,11 +215,11 @@ The system MUST apply destination policy consistently to IPv4, IPv6, IPv4-mapped
 
 **P0 · security · security-controls, integrations**
 
-The system MUST apply an explicit redirect policy and revalidate the destination and both MVP-03 gates before any subsequent outbound request caused by a redirect.
+The system MUST NOT follow arbitrary destination redirects. Provider-reported redirect information MAY be displayed, but any separately approved outbound redirect request MUST revalidate the destination and both MVP-03 gates before dispatch.
 
 **Rationale / basis:** PM inference; redirect support and hop limits remain open.
 
-**Acceptance criterion — ZD-WEB-AC-013-01**
+**Acceptance criterion — ZD-WEB-AC-13**
 
 - **Given** a provider or permitted fetch path returns a redirect
 - **When** the system considers following it
@@ -234,7 +234,7 @@ The system MUST NOT follow a redirect that downgrades a secure URL scheme to an 
 
 **Rationale / basis:** PM inference; no downgrade exception is currently approved.
 
-**Acceptance criterion — ZD-WEB-AC-014-01**
+**Acceptance criterion — ZD-WEB-AC-14**
 
 - **Given** a secure URL redirects to an insecure scheme
 - **When** the redirect is evaluated
@@ -249,7 +249,7 @@ The system MUST treat TLS negotiation or certificate validation failure on any p
 
 **Rationale / basis:** PM inference; TLS implementation choice remains open.
 
-**Acceptance criterion — ZD-WEB-AC-015-01**
+**Acceptance criterion — ZD-WEB-AC-15**
 
 - **Given** a provider connection presents an invalid, expired, mismatched, or untrusted certificate
 - **When** the connection is established
@@ -264,7 +264,7 @@ The system MUST NOT disable or bypass TLS certificate verification on any produc
 
 **Rationale / basis:** PM inference; a provider connection without certificate verification weakens the integrity and confidentiality boundary. The TLS implementation choice remains open.
 
-**Acceptance criterion — ZD-WEB-AC-039-01**
+**Acceptance criterion — ZD-WEB-AC-16**
 
 - **Given** a provider connection presents an invalid, expired, mismatched, or untrusted certificate
 - **When** the system attempts to establish the provider connection
@@ -279,7 +279,7 @@ The system MUST disclose to an external provider only the URL representation and
 
 **Rationale / basis:** PM inference; provider-specific payload cannot be fixed until selection.
 
-**Acceptance criterion — ZD-WEB-AC-016-01**
+**Acceptance criterion — ZD-WEB-AC-17**
 
 - **Given** a provider lookup is eligible and a provider contract is selected
 - **When** the request payload is assembled
@@ -294,7 +294,7 @@ The system MUST treat submitted URLs, including paths and query parameters, as p
 
 **Rationale / basis:** PM inference; URLs can contain tokens, identifiers or private resource names.
 
-**Acceptance criterion — ZD-WEB-AC-017-01**
+**Acceptance criterion — ZD-WEB-AC-18**
 
 - **Given** a URL is submitted or processed
 - **When** the system handles, transmits, stores, logs, or displays it
@@ -309,7 +309,7 @@ The system MUST NOT place full submitted URLs, query strings, embedded credentia
 
 **Rationale / basis:** PM inference; detailed telemetry policy remains open.
 
-**Acceptance criterion — ZD-WEB-AC-018-01**
+**Acceptance criterion — ZD-WEB-AC-19**
 
 - **Given** a check generates operational telemetry
 - **When** the system records the event
@@ -324,7 +324,7 @@ The system MUST associate each provider-derived result with the provider identit
 
 **Rationale / basis:** PM inference; provider selection unresolved.
 
-**Acceptance criterion — ZD-WEB-AC-019-01**
+**Acceptance criterion — ZD-WEB-AC-20**
 
 - **Given** a provider returns a result
 - **When** the result is presented or retained
@@ -339,7 +339,7 @@ The system MUST validate provider responses against the selected provider's docu
 
 **Rationale / basis:** PM inference; provider schema depends on later provider selection.
 
-**Acceptance criterion — ZD-WEB-AC-020-01**
+**Acceptance criterion — ZD-WEB-AC-21**
 
 - **Given** a provider response is malformed, incomplete, unexpected, or contains untrusted fields
 - **When** the response is processed
@@ -354,7 +354,7 @@ The system MUST distinguish a provider-confirmed match, no known match, suspicio
 
 **Rationale / basis:** PM inference; exact taxonomy and mapping are unresolved.
 
-**Acceptance criterion — ZD-WEB-AC-021-01**
+**Acceptance criterion — ZD-WEB-AC-22**
 
 - **Given** a provider response or lookup failure is received
 - **When** the result is classified
@@ -369,7 +369,7 @@ The system MUST NOT describe a URL as absolutely safe, guaranteed harmless, or f
 
 **Rationale / basis:** PM inference grounded in honest, bounded result semantics.
 
-**Acceptance criterion — ZD-WEB-AC-022-01**
+**Acceptance criterion — ZD-WEB-AC-23**
 
 - **Given** a provider reports no known match
 - **When** the result is displayed
@@ -384,7 +384,7 @@ The system MUST expose the lookup time and any provider-supplied freshness/expir
 
 **Rationale / basis:** PM inference; cache policy and freshness threshold remain open.
 
-**Acceptance criterion — ZD-WEB-AC-023-01**
+**Acceptance criterion — ZD-WEB-AC-24**
 
 - **Given** a result is reused or displayed after its original lookup
 - **When** the user views the result
@@ -399,7 +399,7 @@ The system MUST represent provider outage, timeout, DNS failure, connection rese
 
 **Rationale / basis:** PM inference.
 
-**Acceptance criterion — ZD-WEB-AC-024-01**
+**Acceptance criterion — ZD-WEB-AC-25**
 
 - **Given** any listed provider/network failure occurs
 - **When** the request terminates
@@ -414,7 +414,7 @@ The system MUST apply an explicit retry policy that cannot bypass current entitl
 
 **Rationale / basis:** PM inference; retry count/backoff remain open.
 
-**Acceptance criterion — ZD-WEB-AC-025-01**
+**Acceptance criterion — ZD-WEB-AC-26**
 
 - **Given** a retry is considered after failure or interruption
 - **When** the retry is scheduled or dispatched
@@ -429,7 +429,7 @@ The system MUST expose cancellation where the active platform and request lifecy
 
 **Rationale / basis:** PM inference; actual cancellation boundary depends on provider/platform.
 
-**Acceptance criterion — ZD-WEB-AC-026-01**
+**Acceptance criterion — ZD-WEB-AC-27**
 
 - **Given** a user cancels an in-progress check
 - **When** the cancellation is processed
@@ -444,7 +444,7 @@ The system MUST enforce configurable per-account and service-level usage limits 
 
 **Rationale / basis:** PM inference; numeric limits and reset semantics are open.
 
-**Acceptance criterion — ZD-WEB-AC-027-01**
+**Acceptance criterion — ZD-WEB-AC-28**
 
 - **Given** a user or service has exhausted an applicable limit
 - **When** a new check is requested
@@ -459,7 +459,7 @@ The system MUST prevent repeated, automated, or bulk requests from bypassing acc
 
 **Rationale / basis:** PM inference; anti-abuse thresholds and controls remain open.
 
-**Acceptance criterion — ZD-WEB-AC-028-01**
+**Acceptance criterion — ZD-WEB-AC-29**
 
 - **Given** a client repeats requests, alters request parameters, or attempts concurrent submissions
 - **When** the service evaluates requests
@@ -474,7 +474,7 @@ The system MUST stop initiating new provider requests when owner-controlled acti
 
 **Rationale / basis:** PM inference extending owner-approved activation gate.
 
-**Acceptance criterion — ZD-WEB-AC-029-01**
+**Acceptance criterion — ZD-WEB-AC-30**
 
 - **Given** activation is disabled while requests are pending or being prepared
 - **When** a pending operation reaches its next dispatch boundary
@@ -489,7 +489,7 @@ The system MUST stop initiating new provider requests when Pro entitlement expir
 
 **Rationale / basis:** PM inference extending owner-approved Pro gate.
 
-**Acceptance criterion — ZD-WEB-AC-030-01**
+**Acceptance criterion — ZD-WEB-AC-31**
 
 - **Given** entitlement expires, is revoked, or becomes unverifiable during a workflow
 - **When** a pending operation reaches its next dispatch boundary
@@ -504,7 +504,7 @@ The system MUST enforce explicit limits for request duration, response size, red
 
 **Rationale / basis:** PM inference; numeric values must be established before release.
 
-**Acceptance criterion — ZD-WEB-AC-031-01**
+**Acceptance criterion — ZD-WEB-AC-32**
 
 - **Given** a request approaches or exceeds a configured resource bound
 - **When** the system processes the request
@@ -519,7 +519,7 @@ The system MUST present distinct supported states for blocked, queued, processin
 
 **Rationale / basis:** PM inference.
 
-**Acceptance criterion — ZD-WEB-AC-032-01**
+**Acceptance criterion — ZD-WEB-AC-33**
 
 - **Given** a request enters any supported lifecycle state
 - **When** the user views its status
@@ -534,7 +534,7 @@ The system MUST NOT imply that cross-device check history or durable URL retenti
 
 **Rationale / basis:** PM inference; history and retention are unresolved and standalone history is not approved.
 
-**Acceptance criterion — ZD-WEB-AC-033-01**
+**Acceptance criterion — ZD-WEB-AC-34**
 
 - **Given** a result is completed or the user views prior checks
 - **When** the product offers or describes history
@@ -549,7 +549,7 @@ The system MUST apply a documented owner-approved retention and deletion policy 
 
 **Rationale / basis:** PM inference; exact schedule, data classes and deletion obligations remain open.
 
-**Acceptance criterion — ZD-WEB-AC-034-01**
+**Acceptance criterion — ZD-WEB-AC-35**
 
 - **Given** the product proposes to persist URL or result data
 - **When** persistence is enabled or a deletion request is processed
@@ -564,7 +564,7 @@ The system MUST account for every provider dispatch against the applicable entit
 
 **Rationale / basis:** PM inference; provider cost model and limits are unresolved.
 
-**Acceptance criterion — ZD-WEB-AC-035-01**
+**Acceptance criterion — ZD-WEB-AC-36**
 
 - **Given** a provider dispatch is attempted
 - **When** the system records its accounting event
@@ -579,7 +579,7 @@ The system MUST make provider outages, abnormal error rates, unexpected usage gr
 
 **Rationale / basis:** PM inference; exact alert thresholds and operator workflow remain open.
 
-**Acceptance criterion — ZD-WEB-AC-036-01**
+**Acceptance criterion — ZD-WEB-AC-37**
 
 - **Given** operational anomalies occur
 - **When** the system emits operational signals
@@ -594,7 +594,7 @@ The system MUST preserve the same eligibility, no-call, result-meaning, and priv
 
 **Rationale / basis:** Owner-approved cross-platform identity direction; PM inference applies shared semantics to MVP-03.
 
-**Acceptance criterion — ZD-WEB-AC-037-01**
+**Acceptance criterion — ZD-WEB-AC-38**
 
 - **Given** a user performs the same eligible or ineligible check on either platform
 - **When** the request is evaluated or a result is displayed
@@ -605,11 +605,11 @@ The system MUST preserve the same eligibility, no-call, result-meaning, and priv
 
 **P0 · security · security-controls, integrations**
 
-The system MUST NOT use MVP-03 as a general-purpose URL fetcher, crawler, website auditor, port scanner, or network-reconnaissance interface.
+The system MUST NOT use MVP-03 as a general-purpose URL fetcher, crawler, website auditor, port scanner, or network-reconnaissance interface, and MUST use provider URL lookup rather than directly fetching the submitted destination.
 
 **Rationale / basis:** Owner-approved MVP scope and explicit Phase 6 exclusion; PM inference operationalizes boundary.
 
-**Acceptance criterion — ZD-WEB-AC-038-01**
+**Acceptance criterion — ZD-WEB-AC-39**
 
 - **Given** a submitted URL or provider response could trigger crawling or arbitrary resource access
 - **When** the request is processed
@@ -626,7 +626,7 @@ The system MUST apply an explicit usage policy to Pro link checking.
 
 **Rationale / basis:** PM inference from the owner-approved constraint that Pro is not unlimited. The actual allowance, reset period and enforcement thresholds remain owner decisions.
 
-**Acceptance criterion — ZD-WEB-AC-040-01**
+**Acceptance criterion — ZD-WEB-AC-40**
 
 - **Given** an account has an applicable Pro usage allowance
 - **When** the user submits a check that reaches or exceeds that allowance
@@ -641,7 +641,7 @@ The system MUST NOT imply that checking one submitted URL inspected the entire w
 
 **Rationale / basis:** PM inference; the MVP-03 scope is a bounded one-URL check, not crawling or site auditing.
 
-**Acceptance criterion — ZD-WEB-AC-041-01**
+**Acceptance criterion — ZD-WEB-AC-41**
 
 - **Given** a user submits one URL from a website containing other pages or linked resources
 - **When** the check result is presented
@@ -774,3 +774,16 @@ Before enabling provider-backed checks, resolve at least: supported URL forms; w
 ## 8. Approval status
 
 ZD-WEB-001–004 directly encode owner decision `ZD-SCOPE-001`. ZD-WEB-005–038 are PM-proposed. This contract is draft v0.1.0 and is not blanket owner approval. No implementation or provider integration is authorized by this artifact.
+
+
+## Phase 9 owner-approved policy and deferred details
+
+- Accept HTTP and HTTPS URLs only. MVP-03 performs provider URL lookup only; it is not a direct destination fetcher, crawler or network probe. Arbitrary redirects are not followed.
+- Preserve provider-supported confirmed-match, no-known-match, suspicious/ambiguous and unavailable/inconclusive outcomes. A no-known-match result is not a safety guarantee.
+- Do not persist submitted URLs, full provider responses or check results by default beyond completing the requested operation. Caching is off unless provider terms permit it and an explicit freshness/expiry policy exists.
+- Before provider disclosure, disclose the data, purpose and recipient/processor and obtain required explicit consent. Keep audit metadata minimal and redact full URLs, credentials and sensitive query components.
+- Enforce both per-account and global usage controls before dispatch. Numeric rate, quota, timeout, response-size, concurrency and spend limits remain deferred until provider, workload and cost evidence exists. A hard spend ceiling and emergency stop are required before production activation.
+- The shared revocation policy blocks new and queued provider calls after either gate becomes false or unknown; already-dispatched calls are cancelled where supported and cannot initiate follow-on calls. Exact timing/cancellation mechanics remain architecture work.
+- Maintain tested platform support matrices; do not claim identical browser/Android capabilities.
+
+Detailed question dispositions: [Phase 9 owner decision register](../../2026-11-28/35-PHASE-9-OWNER-DECISION-REGISTER.md).
