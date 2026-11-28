@@ -13,6 +13,7 @@ export interface VerificationDelivery {
 export interface EmailVerificationService {
   request(email: string): Promise<void>;
   verify(token: string): Promise<boolean>;
+  getVerifiedEmail(accountId: string): Promise<string | null>;
 }
 
 export class EmailVerificationUnavailableError extends Error {
@@ -119,6 +120,18 @@ export function createEmailVerificationService(
         }
         throw new EmailVerificationDeliveryError();
       }
+    },
+
+    async getVerifiedEmail(accountId) {
+      const result = await database.query<{ email: string }>(
+        `SELECT email
+         FROM accounts
+         WHERE account_id = $1
+           AND status = 'active'
+           AND email_verified_at IS NOT NULL`,
+        [accountId],
+      );
+      return result.rows[0]?.email ?? null;
     },
 
     async verify(token) {
