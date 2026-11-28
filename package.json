@@ -12,7 +12,7 @@
     "lint": "prettier --check \"apps/**/*.{ts,tsx,js,jsx,json,css,yml,yaml}\" \"packages/**/*.{ts,tsx,js,jsx,json}\"",
     "typecheck": "pnpm -r --if-present typecheck",
     "test": "pnpm -r --if-present test",
-    "build": "pnpm -r --if-present build"
+    "build": "pnpm --filter @zerodeck/api build && pnpm --filter @zerodeck/web build && pnpm --filter @zerodeck/android export"
   },
   "devDependencies": {
     "prettier": "^3.6.2",
