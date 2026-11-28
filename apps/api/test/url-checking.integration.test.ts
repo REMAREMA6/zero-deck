@@ -49,10 +49,9 @@ describe('MVP-03 independent URL-check authorization gates', () => {
     });
     expect(lookup).not.toHaveBeenCalled();
 
-    await pool.query(
-      'UPDATE account_entitlements SET pro_active = true WHERE account_id = $1',
-      [accountId],
-    );
+    await pool.query('UPDATE account_entitlements SET pro_active = true WHERE account_id = $1', [
+      accountId,
+    ]);
     await pool.query(
       `UPDATE system_feature_controls SET enabled = false
        WHERE feature_key = 'mvp03_url_check'`,
