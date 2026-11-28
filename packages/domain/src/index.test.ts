@@ -89,6 +89,79 @@ describe('local analysis engine boundary', () => {
     expect(result.explanation).toBe(noKnownThreatExplanation);
   });
 
+  it('does not read a file whose support has not been evaluated', async () => {
+    const readBytes = vi.fn(async () => new Uint8Array([1]));
+    const engine = {
+      analyze: vi.fn(async () => ({
+        outcome: 'suspicious',
+        explanation: 'The local engine returned suspicious evidence.',
+      })),
+    };
+    const result = await runLocalFileAnalysis(
+      engine,
+      { supportStatus: 'not_evaluated', readBytes },
+      clock,
+    );
+
+    expect(readBytes).not.toHaveBeenCalled();
+    expect(engine.analyze).not.toHaveBeenCalled();
+    expect(result).toEqual(createAnalysisFailureResult());
+  });
+
+  it('does not read a file explicitly marked unsupported', async () => {
+    const readBytes = vi.fn(async () => new Uint8Array([1]));
+    const engine = { analyze: vi.fn(async () => null) };
+    const result = await runLocalFileAnalysis(
+      engine,
+      { supportStatus: 'unsupported', readBytes },
+      clock,
+    );
+
+    expect(readBytes).not.toHaveBeenCalled();
+    expect(engine.analyze).not.toHaveBeenCalled();
+    expect(result.outcome).toBe('could_not_decide');
+    expect(result.lifecycle).toBe('failed');
+  });
+
+  it('maps revoked or unreadable local file access to a failed inconclusive result', async () => {
+    const engine = { analyze: vi.fn(async () => null) };
+    const result = await runLocalFileAnalysis(
+      engine,
+      {
+        supportStatus: 'supported',
+        readBytes: vi.fn(async () => {
+          throw new Error('provider permission revoked');
+        }),
+      },
+      clock,
+    );
+
+    expect(engine.analyze).not.toHaveBeenCalled();
+    expect(result).toEqual(createAnalysisFailureResult());
+  });
+
+  it('reads a supported local source only when analysis is explicitly invoked', async () => {
+    const bytes = new Uint8Array([4, 5, 6]);
+    const readBytes = vi.fn(async () => bytes);
+    const engine = {
+      analyze: vi.fn(async ({ bytes: input }: { bytes: Uint8Array }) => ({
+        outcome: 'suspicious',
+        explanation: 'The local engine returned suspicious evidence.',
+        engineId: 'local-test',
+      })),
+    };
+
+    const result = await runLocalFileAnalysis(
+      engine,
+      { supportStatus: 'supported', readBytes },
+      clock,
+    );
+
+    expect(readBytes).toHaveBeenCalledOnce();
+    expect(engine.analyze).toHaveBeenCalledWith({ bytes });
+    expect(result.outcome).toBe('suspicious');
+  });
+
   it('does not start an analysis when cancellation was requested before start', async () => {
     const controller = new AbortController();
     controller.abort();
