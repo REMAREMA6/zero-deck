@@ -125,12 +125,7 @@ describe('local analysis engine boundary', () => {
       ),
     };
 
-    const pending = runLocalFileAnalysis(
-      engine,
-      new Uint8Array([1]),
-      clock,
-      controller.signal,
-    );
+    const pending = runLocalFileAnalysis(engine, new Uint8Array([1]), clock, controller.signal);
     controller.abort();
     const result = await pending;
 
