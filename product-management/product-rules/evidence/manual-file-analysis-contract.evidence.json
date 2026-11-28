@@ -3,8 +3,8 @@
   "evidenceClass": "declared-contract",
   "evidenceType": "product-requirements-contract",
   "origin": {
-    "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/e62b46c88dc44ee935d2dff87cf519e3652eaebd/product-management/product-rules/contracts/MANUAL-FILE-ANALYSIS.md",
-    "sourceRevision": "e62b46c88dc44ee935d2dff87cf519e3652eaebd",
+    "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/431e65a6df8a8a2989ec0fcfd9ca704b2b24681b/product-management/product-rules/contracts/MANUAL-FILE-ANALYSIS.md",
+    "sourceRevision": "431e65a6df8a8a2989ec0fcfd9ca704b2b24681b",
     "location": "product-management/product-rules/contracts/MANUAL-FILE-ANALYSIS.md"
   },
   "capturedAt": "2026-11-28T00:00:00Z",
