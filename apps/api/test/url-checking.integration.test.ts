@@ -14,7 +14,15 @@ async function createAccount(accountId: string) {
 }
 async function grantWebsitePermission(accountId: string) {
   if (!pool) throw new Error('PostgreSQL is unavailable.');
-  await pool.query("INSERT INTO account_permissions (account_id, permission_key, granted) VALUES ($1, 'website.check', true, 'fresh')", [accountId]);
+  await pool.query('INSERT INTO account_permissions (account_id, permission_key, granted, state_status) VALUES ($1, $2, true, $3)',
+    [accountId, 'website.check', 'fresh']);
+}
+async function setUrlGates(accountId: string, pro: boolean, activation: boolean) {
+  if (!pool) throw new Error('PostgreSQL is unavailable.');
+  await pool.query('INSERT INTO account_entitlements (account_id, pro_active, state_status) VALUES ($1, $2, $3)',
+    [accountId, pro, 'fresh']);
+  await pool.query("INSERT INTO system_feature_controls (feature_key, enabled, state_status) VALUES ('mvp03_url_check', $1, 'fresh') ON CONFLICT (feature_key) DO UPDATE SET enabled = EXCLUDED.enabled, state_status = 'fresh'",
+    [activation]);
 }
 
 describe('MVP-03 independent URL-check authorization gates', () => {
@@ -24,7 +32,7 @@ describe('MVP-03 independent URL-check authorization gates', () => {
   });
   afterAll(async () => { await pool?.end(); });
 
-  it('does not call the provider when either gate is false or unknown', async () => {
+  it('does not call the provider when Pro or owner activation is false or unknown', async () => {
     if (!pool) throw new Error('PostgreSQL is unavailable.');
     const accountId = randomUUID();
     await createAccount(accountId);
@@ -33,8 +41,7 @@ describe('MVP-03 independent URL-check authorization gates', () => {
     const service = createUrlCheckService(pool, { lookup });
     expect(await service.check(accountId, 'https://example.com/path', true)).toEqual({ status: 'blocked', reason: 'eligibility_unknown' });
     expect(lookup).not.toHaveBeenCalled();
-    await pool.query('INSERT INTO account_entitlements (account_id, pro_active, state_status) VALUES ($1, false, 'fresh')', [accountId]);
-    await pool.query("INSERT INTO system_feature_controls (feature_key, enabled, state_status) VALUES ('mvp03_url_check', true, 'fresh') ON CONFLICT (feature_key) DO UPDATE SET enabled = true, state_status = 'fresh'");
+    await setUrlGates(accountId, false, true);
     expect(await service.check(accountId, 'https://example.com/path', true)).toEqual({ status: 'blocked', reason: 'pro_required' });
     expect(lookup).not.toHaveBeenCalled();
     await pool.query('UPDATE account_entitlements SET pro_active = true WHERE account_id = $1', [accountId]);
@@ -48,8 +55,7 @@ describe('MVP-03 independent URL-check authorization gates', () => {
     const accountId = randomUUID();
     await createAccount(accountId);
     await grantWebsitePermission(accountId);
-    await pool.query('INSERT INTO account_entitlements (account_id, pro_active, state_status) VALUES ($1, true, 'fresh')', [accountId]);
-    await pool.query("INSERT INTO system_feature_controls (feature_key, enabled) VALUES ('mvp03_url_check', true) ON CONFLICT (feature_key) DO UPDATE SET enabled = true");
+    await setUrlGates(accountId, true, true);
     const lookup = vi.fn(async () => ({ verdict: 'no_match', explanation: 'No known match was returned. This is not a safety guarantee.' }));
     const service = createUrlCheckService(pool, { lookup });
     await expect(service.check(accountId, 'https://example.com/path', false)).rejects.toThrow();
@@ -77,9 +83,8 @@ describe('MVP-03 independent URL-check authorization gates', () => {
     const accountId = randomUUID();
     await createAccount(accountId);
     await grantWebsitePermission(accountId);
-    await pool.query('INSERT INTO account_entitlements (account_id, pro_active) VALUES ($1, true)', [accountId]);
-    await pool.query("INSERT INTO system_feature_controls (feature_key, enabled) VALUES ('mvp03_url_check', true) ON CONFLICT (feature_key) DO UPDATE SET enabled = true");
+    await setUrlGates(accountId, true, true);
     const service = createUrlCheckService(pool, null);
     expect(await service.check(accountId, 'https://example.com', true)).toEqual({ status: 'unavailable' });
   });
-}
+});
