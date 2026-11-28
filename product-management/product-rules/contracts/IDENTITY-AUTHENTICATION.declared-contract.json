@@ -19,7 +19,7 @@
     },
     {
       "statementId": "ZD-AUTH-002",
-      "text": "When an account identifier is used as a unique sign-in or recovery identifier, the system MUST enforce uniqueness according to one documented canonicalization policy and MUST NOT create two accounts that resolve to the same canonical identifier.",
+      "text": "When an email address is used as the primary sign-in or recovery identifier, the system MUST enforce uniqueness according to one documented email canonicalization policy and MUST NOT create two accounts that resolve to the same canonical identifier.",
       "location": "#### Requirement ZD-AUTH-002 — Prevent duplicate account identifiers"
     },
     {
@@ -39,7 +39,7 @@
     },
     {
       "statementId": "ZD-AUTH-006",
-      "text": "If password authentication is offered, the system MUST require a minimum of 15 characters for a password used as a single-factor authenticator and a minimum of 8 characters when the password is used only as part of multi-factor authentication; MUST permit passwords of at least 64 characters; MUST accept Unicode and whitespace; MUST NOT silently truncate passwords or impose other character-composition rules; MUST compare new or changed passwords against a blocklist of commonly used, expected or compromised passwords; and MUST NOT require periodic password changes unless there is evidence of compromise.",
+      "text": "For ZeroDeck's email-and-password launch authentication, the system MUST require a minimum of 15 characters for a password used as a single-factor authenticator and a minimum of 8 characters when the password is used only as part of multi-factor authentication; MUST permit passwords of at least 64 characters; MUST accept Unicode and whitespace; MUST NOT silently truncate passwords or impose other character-composition rules; MUST compare new or changed passwords against a blocklist of commonly used, expected or compromised passwords; and MUST NOT require periodic password changes unless there is evidence of compromise.",
       "location": "#### Requirement ZD-AUTH-006 — Apply safe password acceptance rules if passwords are supported"
     },
     {
@@ -109,12 +109,12 @@
     },
     {
       "statementId": "ZD-AUTH-020",
-      "text": "The system MUST provide a documented recovery process for users who lose access to a supported authenticator, and MUST verify recovery authority using a one-time, time-bounded challenge or an equivalently secure recovery mechanism before changing authenticators or restoring account access.",
+      "text": "The system MUST provide a documented recovery process for users who lose access to a supported authenticator. At launch, it MUST deliver a single-use, time-limited recovery link or challenge to the account's verified email address and MUST verify recovery authority before changing authenticators or restoring account access. The system MUST NOT use security questions as a recovery factor.",
       "location": "#### Requirement ZD-AUTH-020 — Provide a secure authenticator recovery path"
     },
     {
       "statementId": "ZD-AUTH-021",
-      "text": "When an authenticator is reset, replaced, or confirmed compromised through an authorized security process, the system MUST revoke sessions that are no longer trusted and MUST require fresh authentication before protected access resumes.",
+      "text": "When an authenticator is reset, replaced, or confirmed compromised through an authorized security process, the system MUST revoke all existing sessions after successful account recovery and MUST require fresh authentication before protected access resumes.",
       "location": "#### Requirement ZD-AUTH-021 — Invalidate affected sessions after credential recovery or replacement"
     },
     {
