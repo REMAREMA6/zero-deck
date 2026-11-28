@@ -2,6 +2,8 @@ import Fastify, { type FastifyInstance } from 'fastify';
 import type { Pool } from 'pg';
 import type { AccountRegistrationService } from './modules/identity/account-registration.js';
 import { registerAccountRoutes } from './modules/identity/account-routes.js';
+import type { AccountRecoveryService } from './modules/identity/account-recovery.js';
+import { registerAccountRecoveryRoutes } from './modules/identity/account-recovery-routes.js';
 import type { EmailVerificationService } from './modules/identity/email-verification.js';
 import { registerEmailVerificationRoutes } from './modules/identity/email-verification-routes.js';
 import type { SessionService } from './modules/identity/sessions.js';
@@ -12,6 +14,7 @@ import { createUrlCheckService, type UrlCheckProvider } from './modules/website/
 export interface AppDependencies {
   database: Pick<Pool, 'query'>;
   accountRegistration?: AccountRegistrationService;
+  accountRecovery?: AccountRecoveryService;
   emailVerification?: EmailVerificationService;
   sessionService?: SessionService;
   urlCheckProvider?: UrlCheckProvider | null;
@@ -30,6 +33,7 @@ export function buildApp(dependencies: AppDependencies): FastifyInstance {
     }
   });
   registerAccountRoutes(app, dependencies.accountRegistration);
+  registerAccountRecoveryRoutes(app, dependencies.accountRecovery);
   registerEmailVerificationRoutes(app, dependencies.emailVerification);
   registerSessionRoutes(app, dependencies.sessionService, dependencies.database);
   registerUrlCheckRoutes(
