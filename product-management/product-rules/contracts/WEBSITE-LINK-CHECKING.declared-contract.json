@@ -758,7 +758,7 @@
         {
           "statementId": "ZD-WEB-015",
           "requirementType": "security",
-          "normativeKind": "forbidden",
+          "normativeKind": "required",
           "priority": "P0",
           "decisionStatus": "pm-proposed",
           "facetRefs": [
