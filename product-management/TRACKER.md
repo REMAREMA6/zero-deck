@@ -74,7 +74,7 @@ That work is now recorded as a separate workstream. It does not restart CIRCLES 
 
 **Workstream:** [11-PM-AUTHORED-PRODUCT-RULES.md](2026-11-27/11-PM-AUTHORED-PRODUCT-RULES.md)  
 **Author:** ZeroDeck Product Management Agent  
-**Status:** [x] Phases 0–7 complete; Phase 8 next  
+**Status:** [x] Phases 0–8 complete; Phase 9 owner review next  
 **Purpose:** create implementation-ready, technology-independent product requirements aligned with Software Rules.
 
 **Profile:** [product-rules/PROFILE.md](product-rules/PROFILE.md) — Phase 1 complete. **Contract index:** [product-rules/README.md](product-rules/README.md). **Validation:** [product-rules/VALIDATION-REPORT.md](product-rules/VALIDATION-REPORT.md).
@@ -165,4 +165,6 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 
 
 | 2026-11-28 | Owner instructed: “I have looked the plan, start now. Finish, start and finish phase 6.” | Explicit approval received; Phase 6 execution authorized for PM analysis/contract authoring only. |
-| 2026-11-28 | Completed Phase 6 MVP-03 contract, projection/evidence, CIRCLES analysis, 15-facet assessment, 81-scenario matrix and targeted validation. | Phase 6 complete: 41 requirements / 41 criteria; 4 owner-approved scope encodings / 37 PM-proposed; 18 open questions; 19/19 targeted checks and 5/5 malformed fixtures rejected. No implementation or Software Rules repo changes. Phase 7 complete; Phase 8 cross-facet consistency review is next. |
+| 2026-11-28 | Completed Phase 6 MVP-03 contract, projection/evidence, CIRCLES analysis, 15-facet assessment, 81-scenario matrix and targeted validation. | Phase 6 complete: 41 requirements / 41 criteria; 4 owner-approved scope encodings / 37 PM-proposed; 18 open questions; 19/19 targeted checks and 5/5 malformed fixtures rejected. No implementation or Software Rules repo changes. Phase 7 complete; Phase 8 cross-contract review is complete. Phase 9 owner review is next. |
+
+| 2026-11-28 | Owner authorized Phase 8 execution; completed cross-contract traceability, 15-facet assessment, findings register, lifecycle/failure matrix, projection/evidence audit, CIRCLES review and validation. | Phase 8 complete: 160 requirements / 259 criteria; 15 facets; 72 questions (8 resolved / 64 open); four authentication projection mismatches corrected. Remaining findings carried to Phase 9. No implementation/runtime conformance claimed. |
