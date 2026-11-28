@@ -62,11 +62,8 @@ export function mapAnalysisEngineResult(
   return {
     outcome: value.outcome as FileAnalysisOutcome,
     lifecycle: 'completed',
-    engineId: typeof value.engineId === 'string' && value.engineId.trim() ? value.engineId : null,
-    engineVersion:
-      typeof value.engineVersion === 'string' && value.engineVersion.trim()
-        ? value.engineVersion
-        : null,
+    engineId: optionalMetadata(value.engineId),
+    engineVersion: optionalMetadata(value.engineVersion),
     completedAt: clock().toISOString(),
     explanation:
       value.outcome === 'no_known_threat_found'
