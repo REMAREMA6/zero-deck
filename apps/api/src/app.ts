@@ -4,11 +4,14 @@ import type { AccountRegistrationService } from './modules/identity/account-regi
 import { registerAccountRoutes } from './modules/identity/account-routes.js';
 import type { EmailVerificationService } from './modules/identity/email-verification.js';
 import { registerEmailVerificationRoutes } from './modules/identity/email-verification-routes.js';
+import type { SessionService } from './modules/identity/sessions.js';
+import { registerSessionRoutes } from './modules/identity/session-routes.js';
 
 export interface AppDependencies {
   database: Pick<Pool, 'query'>;
   accountRegistration?: AccountRegistrationService;
   emailVerification?: EmailVerificationService;
+  sessionService?: SessionService;
   logger?: boolean;
 }
 
@@ -25,6 +28,7 @@ export function buildApp(dependencies: AppDependencies): FastifyInstance {
   });
   registerAccountRoutes(app, dependencies.accountRegistration);
   registerEmailVerificationRoutes(app, dependencies.emailVerification);
+  registerSessionRoutes(app, dependencies.sessionService, dependencies.database);
   app.setErrorHandler((error, _request, reply) => {
     app.log.error({ err: error }, 'Unhandled request error');
     return reply.code(500).send({

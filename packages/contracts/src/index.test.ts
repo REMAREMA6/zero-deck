@@ -6,6 +6,9 @@ import {
   RegisterAccountInputSchema,
   RequestEmailVerificationInputSchema,
   VerifyEmailInputSchema,
+  CreateSessionInputSchema,
+  SessionCreatedSchema,
+  SessionProfileSchema,
 } from './index.js';
 
 describe('shared API contracts', () => {
@@ -41,6 +44,28 @@ describe('shared API contracts', () => {
     expect(RequestEmailVerificationInputSchema.safeParse({ email: 'invalid' }).success).toBe(false);
     expect(VerifyEmailInputSchema.safeParse({ token: 'opaque-token' }).success).toBe(true);
     expect(VerifyEmailInputSchema.safeParse({ token: '' }).success).toBe(false);
+  });
+
+  it('validates session credentials and public session response contracts', () => {
+    expect(
+      CreateSessionInputSchema.safeParse({ email: 'owner@example.com', password: 'test' }).success,
+    ).toBe(true);
+    expect(
+      SessionCreatedSchema.safeParse({
+        sessionToken: 'opaque-token',
+        sessionId: '123e4567-e89b-42d3-a456-426614174000',
+        accountId: '123e4567-e89b-42d3-a456-426614174001',
+        absoluteExpiresAt: '2026-12-28T12:00:00.000Z',
+      }).success,
+    ).toBe(true);
+    expect(
+      SessionProfileSchema.safeParse({
+        accountId: '123e4567-e89b-42d3-a456-426614174001',
+        sessionId: '123e4567-e89b-42d3-a456-426614174000',
+        email: 'owner@example.com',
+        emailVerified: false,
+      }).success,
+    ).toBe(true);
   });
 
   it('accepts only the generic registration acknowledgement', () => {
