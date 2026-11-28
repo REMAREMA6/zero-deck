@@ -4,9 +4,9 @@
 **Workspace:** `product-management/`  
 **Started:** 2026-11-27  
 **Method:** CIRCLES — seven steps, followed by supporting product-definition work  
-**Overall status:** [~] CIRCLES completed provisionally; blueprint, architecture follow-up, customer validation and owner decisions remain open; PM-authored product-rules Phases 0–7 are complete  
-**Current position:** PM-authored rules Phases 0–7 complete; Phase 8 cross-facet completeness/consistency review is next  
-**Last reconciled:** 2026-11-28 — Phase 7 complete
+**Overall status:** [~] CIRCLES completed provisionally; blueprint, architecture follow-up, customer validation and owner decisions remain open; PM-authored product-rules Phases 0–8 are complete; Phase 9 owner review is next  
+**Current position:** PM-authored rules Phases 0–8 complete; Phase 9 owner review and release is next  
+**Last reconciled:** 2026-11-28 — Phase 8 review complete
 
 > Operational source of truth. Update this tracker whenever work starts, changes status, becomes blocked, or completes. A new session must resume from this file and linked records without relying on chat history.
 
@@ -26,7 +26,7 @@ During that work, the owner added a distinct requirement: the Product Management
 
 That work is now recorded as a separate workstream. It does not restart CIRCLES or change the three-capability MVP.
 
-**Completed most recently:** Phase 7 cross-cutting system requirements: 28 PM-proposed requirements / 28 acceptance criteria; 18 open questions; all 15 facets assessed; 58 failure/recovery scenarios; synchronized structured projection/evidence; seven-step CIRCLES analysis; 30/30 targeted checks and 5/5 malformed fixtures rejected. Phase 7 is complete as PM requirements authoring only; owner review, implementation and runtime verification remain open. **Next task:** Phase 8 cross-facet completeness/consistency review.
+**Completed most recently:** Phase 8 cross-facet completeness/consistency review across all five contracts. Reconciled 160 requirements / 259 acceptance criteria, 72 owner questions (8 resolved / 64 open), all 15 official facets, five projection/evidence pairs and cross-feature lifecycle/failure interactions. Corrected four authentication projection statement mismatches. Recorded remaining profile, dependency, notification, revocation and data-lifecycle findings. Phase 8 is complete as a PM review only; Phase 9 owner review is next. No implementation or runtime conformance is claimed.
 
 ### Current product authority
 
@@ -93,7 +93,7 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 | 5 | Author quarantine/disposition requirements | [MVP-02 contract](product-rules/contracts/QUARANTINE-FILE-DISPOSITION.md), structured projection/evidence, 15-facet assessment, 58-scenario matrix, CIRCLES analysis and validation; 38 requirements / 68 criteria / 14 open questions | [x] |
 | 6 | Author website/link-check requirements | [x] | [MVP-03 contract](product-rules/contracts/WEBSITE-LINK-CHECKING.md), structured projection/evidence, [CIRCLES](2026-11-28/23-PHASE-6-CIRCLES-WEBSITE-LINK-CHECKING.md), [15 facets](product-rules/PHASE-6-MVP-03-FACET-COVERAGE.md), [81 scenarios](product-rules/PHASE-6-MVP-03-NEGATIVE-FAILURE-RECOVERY-MATRIX.md), [validation](product-rules/PHASE-6-MVP-03-VALIDATION.md); 41 requirements / 41 criteria / 18 open questions. |
 | 7 | Author cross-cutting system requirements | [x] | [Cross-cutting contract](product-rules/contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.md), [structured projection](product-rules/contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.declared-contract.json), [evidence](product-rules/evidence/cross-cutting-system-requirements-contract.evidence.json), [CIRCLES](2026-11-28/24-PHASE-7-CIRCLES-CROSS-CUTTING-SYSTEM-REQUIREMENTS.md), [15 facets](product-rules/PHASE-7-CROSS-CUTTING-FACET-COVERAGE.md), [58 scenarios](product-rules/PHASE-7-CROSS-CUTTING-FAILURE-RECOVERY-MATRIX.md), [validation](product-rules/PHASE-7-CROSS-CUTTING-VALIDATION.md); 28 requirements / 28 criteria / 18 open questions. |
-| 8 | Cross-facet completeness/consistency review | [ ] | Traceability complete; contradictions and missing states resolved or explicitly open. |
+| 8 | Cross-facet completeness/consistency review | [x] | [Traceability](2026-11-28/26-PHASE-8-CROSS-CONTRACT-TRACEABILITY.md), [15-facet assessment](2026-11-28/27-PHASE-8-CROSS-FACET-COMPLETENESS.md), [findings](2026-11-28/28-PHASE-8-CROSS-CONTRACT-FINDINGS.md), [lifecycle/failure matrix](2026-11-28/29-PHASE-8-CROSS-FEATURE-LIFECYCLE-FAILURE-MATRIX.md), [projection/evidence audit](2026-11-28/30-PHASE-8-PROJECTION-EVIDENCE-AUDIT.md), [validation](2026-11-28/31-PHASE-8-VALIDATION.md), [CIRCLES](2026-11-28/32-PHASE-8-CIRCLES-CROSS-FACET-REVIEW.md), [completion record](2026-11-28/33-PHASE-8-COMPLETION-RECOMMENDATION.md); 160 requirements / 259 criteria / 15 facets. Open findings carried to Phase 9. |
 | 9 | Owner review and release | [ ] | Owner decisions recorded; versioned contract package ready for engineering handoff. |
 
 ### Feature authoring order
@@ -104,7 +104,7 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 4. MVP-03 website and link checking.
 5. Cross-cutting system requirements.
 
-**Important:** The authentication/account contract is a draft supporting-infrastructure contract. The owner approved eight policy decisions; the original 21 requirements remain PM-proposed and only ZD-AUTH-025 through ZD-AUTH-028 are directly owner-approved. Five operational questions remain open. No PM-authored contract for the three user-facing MVP capabilities has yet been completed. The Software Rules identity/authentication facet is Draft and not exhaustive. Existing JWT and Express-session cases cover bounded behaviour only. Uncovered properties are a checklist, not proof that ZeroDeck needs every mechanism; each must be classified as required, not applicable, deferred or unresolved.
+**Important:** The authentication/account contract is a draft supporting-infrastructure contract. The owner approved eight policy decisions; the original 21 requirements remain PM-proposed and only ZD-AUTH-025 through ZD-AUTH-028 are directly owner-approved. Five operational questions remain open. All three user-facing MVP capability contracts have been authored as PM-proposed drafts; cross-contract review is complete, while owner review and operational decisions remain open. The Software Rules identity/authentication facet is Draft and not exhaustive. Existing JWT and Express-session cases cover bounded behaviour only. Uncovered properties are a checklist, not proof that ZeroDeck needs every mechanism; each must be classified as required, not applicable, deferred or unresolved.
 
 ## 5. Remaining product-planning work outside the rules workstream
 
@@ -124,8 +124,10 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 
 1. [x] Obtain owner approval for the Phase 6 plan and complete MVP-03 authoring.
 2. [x] Complete Phase 7 cross-cutting system requirements; 28 requirements, 28 criteria, 18 questions, 15 facets, 58 scenarios, CIRCLES, synchronized projection/evidence and targeted validation committed.
-3. Keep architecture follow-up and blueprint gaps visible; do not mark them complete without evidence.
-4. Update this tracker at each phase transition and link every deliverable.
+3. [x] Complete Phase 8 cross-contract review; 160 requirements / 259 criteria inventoried, all 15 facets assessed, projection drift corrected, findings recorded and validation committed.
+4. [ ] Start Phase 9 owner review and release; resolve or explicitly defer the Phase 8 findings and remaining owner questions.
+5. Keep architecture follow-up and blueprint gaps visible; do not mark them complete without evidence.
+6. Update this tracker at each phase transition and link every deliverable.
 
 ## 7. Session log
 
