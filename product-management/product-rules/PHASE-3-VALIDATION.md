@@ -41,6 +41,7 @@ The upstream facet catalogue confirms 15 observation perspectives and says facet
 | Negative/failure/recovery scenario matrix | **PASS** — 23 scenarios classified |
 | Scenario requirement/criterion references | **PASS** — all current references resolve; candidate IDs resolve to the proposal record |
 | Proposed additions | **PASS** — 3 unique candidate requirement IDs and 6 unique, complete acceptance-criterion IDs |
+| Behaviour facet reference amendment | **PASS (proposal audit)** — all 21 existing requirement IDs listed once; pinned taxonomy reference and compatibility/update instructions present |
 | Proposal metadata | **PASS (targeted structural audit)** — author/profile/pinned compatibility, requirement types, priorities, normative kinds, platform values, facet IDs, conditions, basis and verification methods checked |
 | Proposal dependency references | **PASS** — references resolve to existing requirements or the open owner question |
 | Owner approval gate | **PASS** — Phase 3 plan status updated to owner-approved on 2026-11-28 before analysis |
@@ -54,7 +55,7 @@ The three Phase 3 candidates are kept in a separate proposal record. They are **
 ## 4. Coverage and scenario outcome
 
 - All 15 facets have an explicit applicability/coverage assessment.
-- Ten facets have direct authentication-related requirement mappings.
+- The canonical Phase 2 projection currently declares authentication-related facet references across 11 facets. Behaviour is also relevant to all 21 requirements but is omitted from their current facetRefs; a separate metadata-only amendment proposes adding it.
 - Messaging and Background Processing are currently not applicable to the selected authentication design, with explicit conditions that would make them relevant.
 - Performance and Resource Behaviour is deferred until workload, hosting and service targets are known.
 - The remaining partial/deferred/unresolved properties are named in the facet matrix.
@@ -76,7 +77,7 @@ The proposal metadata was checked against the declared PM extension vocabulary a
 
 ## 6. Phase 3 exit decision
 
-**Phase 3 is complete for the planned PM-authored authentication coverage assessment.** Its exit conditions are satisfied: all 15 facets are assessed; applicable requirement mappings and gaps are explicit; 23 negative/failure/recovery scenarios are traceable; cross-facet and platform interactions are reviewed; three candidate additions have stable IDs and complete structured metadata/acceptance criteria; the Phase 2 canonical contract/evidence revision and digest remain consistent; and validation limits are recorded.
+**Phase 3 is complete for the planned PM-authored authentication coverage assessment.** Its exit conditions are satisfied: all 15 facets are assessed; applicable requirement mappings and gaps are explicit; 23 negative/failure/recovery scenarios are traceable; cross-facet and platform interactions are reviewed; three candidate additions have stable IDs and complete structured metadata/acceptance criteria; the missing Behaviour facet references are recorded in a separate metadata amendment proposal; the Phase 2 canonical contract/evidence revision and digest remain consistent; and validation limits are recorded.
 
 This completion does not mean:
 - the authentication contract is owner-approved;
