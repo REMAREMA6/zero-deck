@@ -1,7 +1,7 @@
 # Developer Implementation Tracker — ZeroDeck Core
 
 **Owner:** Developer Agent  
-**Branch:** `developer/core-product`  
+**Branch:** `main`  
 **Last reconciled:** 2026-11-28  
 **Purpose:** This is the Developer Agent's own implementation and verification tracker. It is maintained in `developer-workspace/` and does not edit, replace, or control Architect-owned OpenSpec documents.
 
