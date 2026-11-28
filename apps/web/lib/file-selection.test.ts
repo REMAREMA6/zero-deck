@@ -19,6 +19,7 @@ describe('Web file selection and access', () => {
       name: 'sample.pdf',
       sizeBytes: 3,
       declaredType: 'application/pdf',
+      supportStatus: 'not_evaluated',
     });
     expect(file.arrayBuffer).not.toHaveBeenCalled();
     await expect(selected.readBytes()).resolves.toEqual(bytes);
@@ -32,6 +33,7 @@ describe('Web file selection and access', () => {
       name: 'sample.unknown',
       sizeBytes: 12,
       declaredType: 'Not reported by the browser',
+      supportStatus: 'not_evaluated',
     });
   });
 
