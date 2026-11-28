@@ -27,27 +27,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
-          cache: npm
 
       - name: Install OpenSpec CLI
         run: |
           npm install --global @fission-ai/openspec@latest
           openspec --version
 
-      - name: Validate all OpenSpec artifacts
+      - name: Validate all OpenSpec artifacts and inspect workspace
         run: |
           set -o pipefail
           openspec validate --all 2>&1 | tee openspec-validation.log
-
-      - name: Verify change status
-        if: always()
-        run: |
           openspec status --change core-product-architecture --json | tee openspec-change-status.json
-
-      - name: Check workspace health
-        if: always()
-        run: |
-          set -o pipefail
           openspec doctor 2>&1 | tee openspec-doctor.log
 
       - name: Upload validation evidence
