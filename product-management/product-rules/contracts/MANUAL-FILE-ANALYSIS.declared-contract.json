@@ -4,10 +4,10 @@
   "title": "ZeroDeck MVP-01 Manual File Security Analysis Product Requirements",
   "issuer": "ZeroDeck Product Management Agent",
   "artifact": {
-    "uri": "https://github.com/REMAREMA6/zero-deck/blob/e62b46c88dc44ee935d2dff87cf519e3652eaebd/product-management/product-rules/contracts/MANUAL-FILE-ANALYSIS.md",
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/431e65a6df8a8a2989ec0fcfd9ca704b2b24681b/product-management/product-rules/contracts/MANUAL-FILE-ANALYSIS.md",
     "version": "0.2.0-draft",
-    "revision": "e62b46c88dc44ee935d2dff87cf519e3652eaebd",
-    "digest": "sha256:bee22c841c7f3fb05059b2841ddd0cfcc70d0150fc8118985109af2a020e8422",
+    "revision": "431e65a6df8a8a2989ec0fcfd9ca704b2b24681b",
+    "digest": "sha256:cadcb991954f8892b39fed343afc7f7bc239596724cf800832533fb929e155bc",
     "mediaType": "text/markdown"
   },
   "scope": "MVP-01 manual file security analysis for web and Android; user-selected files, explicit scan requests, bounded result semantics and truthful failure handling; excludes quarantine/disposition and website/link checking.",
@@ -442,7 +442,7 @@
           "requirementType": "privacy",
           "normativeKind": "required",
           "priority": "P0",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "security-controls",
             "integrations",
@@ -459,6 +459,13 @@
             {
               "basisType": "source-evidence",
               "description": "PM-FILE-005 records on-device analysis and no cloud upload by default (EVD-SRC-PRODUCT-001)."
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
@@ -479,6 +486,9 @@
           ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-FILE-001"
+          ],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
           ]
         },
         {
@@ -486,7 +496,7 @@
           "requirementType": "privacy",
           "normativeKind": "conditional",
           "priority": "P1",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "interface",
             "behavior",
@@ -506,6 +516,13 @@
             {
               "basisType": "source-evidence",
               "description": "PM-FILE-006 specifies separate disclosure and consent; cloud analysis is not approved by this contract."
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
@@ -526,6 +543,9 @@
           ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-FILE-001"
+          ],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
           ]
         },
         {
@@ -662,7 +682,7 @@
           "requirementType": "business-rule",
           "normativeKind": "required",
           "priority": "P0",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "business-rules",
             "data",
@@ -679,6 +699,13 @@
             {
               "basisType": "source-evidence",
               "description": "PM-FILE-002 defines the four-way result model (EVD-SRC-PRODUCT-001)."
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
@@ -699,6 +726,9 @@
           ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-FILE-001"
+          ],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
           ]
         },
         {
@@ -706,7 +736,7 @@
           "requirementType": "policy",
           "normativeKind": "required",
           "priority": "P0",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "interface",
             "business-rules",
@@ -722,6 +752,13 @@
             {
               "basisType": "source-evidence",
               "description": "PM-FILE-003 prohibits presenting a no-known-threat result as a guarantee that the file is safe."
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
@@ -742,6 +779,9 @@
           ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-FILE-001"
+          ],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
           ]
         },
         {
@@ -792,7 +832,7 @@
           "requirementType": "reliability",
           "normativeKind": "required",
           "priority": "P0",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "business-rules",
             "data",
@@ -809,6 +849,13 @@
             {
               "basisType": "pm-inference",
               "description": "PM inference grounded in MVP-FILE-002's inconclusive/interruption branches and OPEN-PROPERTIES."
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
@@ -829,6 +876,9 @@
           ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-FILE-001"
+          ],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
           ]
         },
         {
@@ -1009,7 +1059,7 @@
           "requirementType": "privacy",
           "normativeKind": "required",
           "priority": "P0",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "data",
             "security-controls",
@@ -1025,6 +1075,13 @@
             {
               "basisType": "pm-inference",
               "description": "PM privacy recommendation; no separate analytics or remote-processing feature is approved by MVP scope."
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
@@ -1045,6 +1102,9 @@
           ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-FILE-001"
+          ],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
           ]
         },
         {
@@ -1052,7 +1112,7 @@
           "requirementType": "privacy",
           "normativeKind": "required",
           "priority": "P0",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "security-controls",
             "data",
@@ -1068,6 +1128,13 @@
             {
               "basisType": "pm-inference",
               "description": "PM privacy/security recommendation based on the on-device default and minimization principle."
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted this product-level policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
@@ -1088,6 +1155,9 @@
           ],
           "evidenceRefs": [
             "ZD-EV-CONTRACT-FILE-001"
+          ],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
           ]
         },
         {
