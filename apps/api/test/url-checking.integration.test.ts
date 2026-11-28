@@ -128,4 +128,142 @@ describe('MVP-03 independent URL-check authorization gates', () => {
       status: 'unavailable',
     });
   });
+
+  it('cancels queued work before dispatch when permission is revoked in the admission-dispatch gap', async () => {
+    if (!pool) throw new Error('PostgreSQL is unavailable.');
+    const accountId = randomUUID();
+    await createAccount(accountId);
+    await grantWebsitePermission(accountId);
+
+    let releaseDispatch: (() => void) | undefined;
+    let signalDispatch: (() => void) | undefined;
+    const dispatchReached = new Promise<void>((resolve) => {
+      signalDispatch = resolve;
+    });
+    const dispatchGate = new Promise<void>((resolve) => {
+      releaseDispatch = resolve;
+    });
+    let connectionCount = 0;
+    const gatedDatabase = {
+      connect: async () => {
+        connectionCount += 1;
+        if (connectionCount === 3) {
+          signalDispatch?.();
+          await dispatchGate;
+        }
+        return pool!.connect();
+      },
+    };
+    const work = createProtectedWorkService(gatedDatabase);
+    const providerOperation = vi.fn(async () => 'should-not-run');
+    const pending = work.execute(
+      { accountId, permission: 'website.check' },
+      providerOperation,
+    );
+
+    await dispatchReached;
+    await pool.query(
+      "UPDATE account_permissions SET granted = false WHERE account_id = $1 AND permission_key = 'website.check'",
+      [accountId],
+    );
+    releaseDispatch?.();
+
+    await expect(pending).resolves.toEqual({
+      status: 'blocked',
+      decision: { allowed: false, reason: 'permission_denied' },
+    });
+    expect(providerOperation).not.toHaveBeenCalled();
+    const workRows = await pool.query<{ status: string }>(
+      'SELECT status FROM protected_work_items WHERE account_id = $1',
+      [accountId],
+    );
+    expect(workRows.rows).toEqual([{ status: 'cancelled' }]);
+  });
+
+  it('aborts dispatched provider work when permission is revoked and never returns its result', async () => {
+    if (!pool) throw new Error('PostgreSQL is unavailable.');
+    const accountId = randomUUID();
+    await createAccount(accountId);
+    await grantWebsitePermission(accountId);
+    await setUrlGates(accountId, true, true);
+
+    let providerStarted: (() => void) | undefined;
+    const started = new Promise<void>((resolve) => {
+      providerStarted = resolve;
+    });
+    const lookup = vi.fn(
+      ({ signal }: { url: string; signal: AbortSignal }) =>
+        new Promise<never>((_resolve, reject) => {
+          providerStarted?.();
+          signal.addEventListener('abort', () => reject(new Error('provider aborted')), {
+            once: true,
+          });
+        }),
+    );
+    const service = createUrlCheckService(pool, { lookup });
+    const pending = service.check(accountId, 'https://example.com/path', true);
+
+    await started;
+    await pool.query(
+      "UPDATE account_permissions SET granted = false WHERE account_id = $1 AND permission_key = 'website.check'",
+      [accountId],
+    );
+
+    await expect(pending).resolves.toEqual({ status: 'cancelled' });
+    expect(lookup).toHaveBeenCalledTimes(1);
+    expect(lookup.mock.calls[0]?.[0].signal.aborted).toBe(true);
+    const workRows = await pool.query<{ status: string }>(
+      'SELECT status FROM protected_work_items WHERE account_id = $1',
+      [accountId],
+    );
+    expect(workRows.rows).toEqual([{ status: 'cancelled' }]);
+  });
+
+  it('revokes queued and dispatched records for every independent authorization gate', async () => {
+    if (!pool) throw new Error('PostgreSQL is unavailable.');
+    const cases = [
+      { gate: 'account', reason: 'account_disabled' },
+      { gate: 'permission', reason: 'permission_revoked' },
+      { gate: 'entitlement', reason: 'entitlement_revoked' },
+      { gate: 'activation', reason: 'owner_activation_revoked' },
+    ] as const;
+
+    for (const testCase of cases) {
+      const accountId = randomUUID();
+      await createAccount(accountId);
+      await grantWebsitePermission(accountId);
+      await setUrlGates(accountId, true, true);
+      await pool.query(
+        "INSERT INTO protected_work_items (account_id, permission_key, require_pro, feature_key, status) VALUES ($1, 'website.check', true, 'mvp03_url_check', 'queued'), ($1, 'website.check', true, 'mvp03_url_check', 'dispatched')",
+        [accountId],
+      );
+
+      if (testCase.gate === 'account') {
+        await pool.query("UPDATE accounts SET status = 'disabled' WHERE account_id = $1", [
+          accountId,
+        ]);
+      } else if (testCase.gate === 'permission') {
+        await pool.query(
+          "UPDATE account_permissions SET granted = false WHERE account_id = $1 AND permission_key = 'website.check'",
+          [accountId],
+        );
+      } else if (testCase.gate === 'entitlement') {
+        await pool.query('UPDATE account_entitlements SET pro_active = false WHERE account_id = $1', [
+          accountId,
+        ]);
+      } else {
+        await pool.query(
+          "UPDATE system_feature_controls SET enabled = false WHERE feature_key = 'mvp03_url_check'",
+        );
+      }
+
+      const rows = await pool.query<{ status: string; cancellation_reason: string }>(
+        'SELECT status, cancellation_reason FROM protected_work_items WHERE account_id = $1 ORDER BY created_at, work_id',
+        [accountId],
+      );
+      expect(rows.rows.map((row) => row.status).sort()).toEqual(['cancel_requested', 'cancelled']);
+      expect(rows.rows.every((row) => row.cancellation_reason === testCase.reason)).toBe(true);
+    }
+  });
+
 });
