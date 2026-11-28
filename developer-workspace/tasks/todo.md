@@ -121,7 +121,7 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### B2. Email verification boundary and fake delivery
 
-**Status: Partial — challenge lifecycle, verified-only account-email lookup, response-secret assertions and captured-log exception-secret redaction passed full CI run [46147584370](https://github.com/REMAREMA6/zero-deck/actions/runs/46147584370). Recovery/security-notification integration remains part of B5.**
+**Status: Complete — verified-only recovery/security-notification boundaries, challenge lifecycle, response-secret assertions and captured-log redaction are covered by unit and PostgreSQL tests. Clean full CI passed in [run 46150614089](https://github.com/REMAREMA6/zero-deck/actions/runs/46150614089). The full recovery challenge flow remains the separate B5 outcome.**
 
 **Description:** Implement single-use verification challenges and a delivery port with a deterministic fake adapter only.
 
@@ -143,7 +143,7 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### B3. Sign-in and session lifecycle
 
-**Status: Partial — added atomic server-side credential rotation, Web BFF cookie replacement, Android SecureStore rotation client, cross-client same-principal and auth-database outage tests. Full CI for this increment is pending.**
+**Status: Complete — shared principal, server-backed sessions, expiry and fail-closed auth/database outage behavior are verified across the Web/Android API boundary. Clean full CI passed in [run 46150614089](https://github.com/REMAREMA6/zero-deck/actions/runs/46150614089).**
 
 **Description:** Authenticate credentials at the trusted API boundary and issue revocable server-backed sessions shared across Web and Android account identity.
 
@@ -168,7 +168,7 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### B4. Logout, rotation and revocation
 
-**Status: Partial — server-side atomic token rotation, replay rejection, concurrent-rotation serialization, Web HttpOnly cookie replacement and Android SecureStore replacement are implemented. Full CI verification is pending.**
+**Status: Complete — current logout, logout-all, individual revocation, atomic credential rotation and client credential replacement/clearing are implemented and tested. Concurrent rotation replay is rejected. Clean full CI passed in [run 46150614089](https://github.com/REMAREMA6/zero-deck/actions/runs/46150614089).**
 
 **Description:** Implement current-session logout, logout-all, individual-session revocation service support and credential rotation at trust-boundary changes.
 
@@ -248,15 +248,15 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### C1. File access and capability adapters
 
-**Status: Partial — Web file input and Android Expo File picker are wired to local access adapters. Selection retains metadata only; bytes are exposed only through explicit local read methods. Tests cover picker cancellation, revoked/unavailable handles, unreadable reads, changed file snapshots, unknown file types and no network calls. Support remains explicitly `not_evaluated` because no support matrix is approved. Full CI is pending.**
+**Status: Complete — Web and Android selectors/access adapters, cancellation, unavailable/revoked handles, unreadable access, unsupported/unassessed input handling and network-boundary tests are verified. File-type support remains `not_evaluated`; the product does not invent formats or limits and does not start a scan on selection. Clean full CI passed in [run 46150614089](https://github.com/REMAREMA6/zero-deck/actions/runs/46150614089).**
 
 **Description:** Add explicit user-selected file access for Web and Android and truthfully handle revoked/unreadable/unsupported inputs.
 
 **Acceptance criteria**
-- [ ] Analysis starts only after explicit user action.
-- [ ] Original file is not modified.
-- [ ] Permission loss, unreadable and unsupported files produce could-not-decide outcomes.
-- [ ] File bytes never cross the backend/network boundary.
+- [x] Analysis does not start on file selection; a scan can only be initiated by a later explicit user action when a supported engine is configured.
+- [x] Original file is not modified; adapters expose read-only access and contain no write/move/delete operation.
+- [x] Permission loss/unreadable reads map to failed `could_not_decide`; unsupported and `not_evaluated` sources fail closed without reading bytes.
+- [x] File bytes never cross the backend/network boundary in the current local path; Web/Android adapter and domain tests stub `fetch` and assert no request.
 
 **Verification:** Web/Android adapter tests, permission-loss tests and network-boundary tests.  
 **Dependencies:** A1, A4.  
@@ -282,12 +282,12 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### C3. Local analysis orchestration
 
-**Status: Partial — `runLocalFileAnalysis` invokes the local engine in memory, fails closed on engine errors, emits lifecycle state changes and accepts progress only when explicitly supported and valid. Cancellation, interruption and retry are tested. Web and Android local file-access adapter tests also stub network fetches and verify reads remain local. No production engine is selected, so no percentage/progress is fabricated. Full CI is pending.**
+**Status: Complete — local orchestration emits lifecycle events, accepts only engine-supported valid progress, handles cancellation/interruption/retry truthfully, and fails closed for unassessed, unsupported or unreadable file sources. Domain and both platform adapter tests verify no network fetch is initiated. No production engine is selected, so the UI does not fabricate progress or a verdict. Clean full CI passed in [run 46150614089](https://github.com/REMAREMA6/zero-deck/actions/runs/46150614089).**
 
 **Description:** Orchestrate analysis lifecycle, cancellation where supported, interruption, retry and local-only processing.
 
 **Acceptance criteria**
-- [ ] File bytes are never uploaded or backend-persisted.
+- [x] File bytes are never uploaded or backend-persisted by the local orchestration path; source and platform adapter tests assert no network fetch.
 - [x] Cancellation/interruption are represented only when observed (pre-start cancellation, engine-supported cancellation and unsignalled `AbortError` interruption are tested).
 - [x] Inconclusive/failure remains distinct from no-known-threat (engine exceptions and malformed output map to failed/could-not-decide).
 - [x] No default scan history or content persistence is introduced by the domain orchestrator.
