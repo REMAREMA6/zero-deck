@@ -179,18 +179,11 @@ export async function runLocalFileAnalysis(
           }
         : { bytes },
     );
-    if (engine.supportsCancellation && signal?.aborted) {
-      notifyLifecycle(observer, 'cancelled');
-      return createAnalysisLifecycleResult(
-        'cancelled',
-        'The analysis was cancelled before a reliable result was available.',
-      );
-    }
     const result = mapAnalysisEngineResult(response, clock);
     notifyLifecycle(observer, result.lifecycle);
     return result;
   } catch (error) {
-    if (engine.supportsCancellation && signal?.aborted) {
+    if (engine.supportsCancellation && signal?.aborted && isAbortError(error)) {
       notifyLifecycle(observer, 'cancelled');
       return createAnalysisLifecycleResult(
         'cancelled',
