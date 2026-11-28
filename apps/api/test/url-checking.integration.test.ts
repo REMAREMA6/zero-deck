@@ -125,7 +125,9 @@ describe('MVP-03 independent URL-check authorization gates', () => {
       [accountId],
     );
     await pool.query(
-      "INSERT INTO system_feature_controls (feature_key, enabled) VALUES ('mvp03_url_check', true) ON CONFLICT (feature_key) DO UPDATE SET enabled = true",
+      `INSERT INTO system_feature_controls (feature_key, enabled)
+       VALUES ('mvp03_url_check', true)
+       ON CONFLICT (feature_key) DO UPDATE SET enabled = true`,
     );
     const service = createUrlCheckService(pool, null);
     expect(await service.check(accountId, 'https://example.com', true)).toEqual({
