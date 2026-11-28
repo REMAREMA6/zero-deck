@@ -5,7 +5,7 @@
 **Started:** 2026-11-27  
 **Method:** CIRCLES — seven steps, followed by supporting product-definition work  
 **Overall status:** [~] CIRCLES completed provisionally; blueprint, architecture follow-up, customer validation and owner decisions remain open; PM-authored product-rules Phases 0–5 are complete  
-**Current position:** PM-authored rules Phases 0–5 complete; MVP-02 quarantine/disposition contract drafted and validated; Phase 6 (MVP-03 website/link checking) is next  
+**Current position:** PM-authored rules Phases 0–5 complete; Phase 6 plan committed and awaiting explicit owner approval; execution has not started  
 **Last reconciled:** 2026-11-28
 
 > Operational source of truth. Update this tracker whenever work starts, changes status, becomes blocked, or completes. A new session must resume from this file and linked records without relying on chat history.
@@ -26,7 +26,7 @@ During that work, the owner added a distinct requirement: the Product Management
 
 That work is now recorded as a separate workstream. It does not restart CIRCLES or change the three-capability MVP.
 
-**Completed most recently:** completed Phase 5 MVP-02 requirements: 38 PM-proposed requirements, 68 acceptance criteria, 14 open questions, all 15 facets assessed, 58 failure/recovery scenarios, synchronized projection/evidence, CIRCLES analysis and targeted validation. **Next task:** prepare the Phase 6 MVP-03 plan, commit it under `product-management/`, and wait for explicit owner approval before execution.
+**Completed most recently:** completed Phase 5 MVP-02 requirements: 38 PM-proposed requirements, 68 acceptance criteria, 14 open questions, all 15 facets assessed, 58 failure/recovery scenarios, synchronized projection/evidence, CIRCLES analysis and targeted validation. **Next task:** obtain explicit owner approval of [the Phase 6 plan](2026-11-28/22-PHASE-6-MVP-03-WEBSITE-LINK-CHECKING-PLAN.md); do not begin execution before approval.
 
 ### Current product authority
 
@@ -122,7 +122,7 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 
 ## 6. Immediate next actions
 
-1. Prepare the Phase 6 plan for MVP-03 website/link checking, commit it under `product-management/`, and wait for explicit owner approval before execution.
+1. [x] Prepare and commit the Phase 6 MVP-03 plan: `2026-11-28/22-PHASE-6-MVP-03-WEBSITE-LINK-CHECKING-PLAN.md`. Await explicit owner approval; execution has not started.
 2. Keep architecture follow-up and blueprint gaps visible; do not mark them complete without evidence.
 3. Update this tracker at each phase transition and link every deliverable.
 4. Do not start Phase 6 until its plan is approved.
@@ -157,3 +157,6 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 | 2026-11-28 | Prepared Phase 5 MVP-02 plan and committed it. | Awaiting explicit owner approval; execution has not started. |
 
 | 2026-11-28 | Owner approved Phase 5 plan; completed MVP-02 CIRCLES analysis, 38-requirement contract, 68 acceptance criteria, 14 open questions, 15-facet assessment, 58-scenario matrix, synchronized projection/evidence and targeted validation. | Phase 5 complete within approved PM scope; all requirements remain PM-proposed; 16/16 targeted checks and 5/5 negative fixtures passed; no full Draft 2020-12, upstream CI, runtime or security-audit claim. Phase 6 plan is next. |
+
+
+| 2026-11-28 | Prepared and committed the Phase 6 MVP-03 website/link-checking execution plan. | Plan committed as `9b65fd7d9b565cf54b1bd2d924b82e0638b70068`; awaiting explicit owner approval. No CIRCLES analysis or contract authoring has started. |
