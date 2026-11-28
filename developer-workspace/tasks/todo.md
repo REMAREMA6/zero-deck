@@ -278,13 +278,13 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### C3. Local analysis orchestration
 
-**Status: Partial — `runLocalFileAnalysis` invokes the local engine in memory, fails closed on engine errors, passes `AbortSignal` only to engines that declare cancellation support, and distinguishes observed cancellation from interruption. Added tests for pre-start and engine-supported cancellation, interruption, independent retry invocation and no network calls. Verification is pending in CI run [46147320751](https://github.com/REMAREMA6/zero-deck/actions/runs/46147320751). Platform adapters, meaningful progress and explicit selected-bytes backend/network-boundary verification remain.**
+**Status: Partial — `runLocalFileAnalysis` invokes the local engine in memory, fails closed on engine errors, passes `AbortSignal` only to engines that declare cancellation support, and distinguishes observed cancellation from interruption. Tests for pre-start and engine-supported cancellation, interruption, independent retry invocation and no network calls passed full CI run [46147584370](https://github.com/REMAREMA6/zero-deck/actions/runs/46147584370). Platform adapters, meaningful progress and explicit selected-bytes backend/network-boundary verification remain.**
 
 **Description:** Orchestrate analysis lifecycle, cancellation where supported, interruption, retry and local-only processing.
 
 **Acceptance criteria**
 - [ ] File bytes are never uploaded or backend-persisted.
-- [ ] Cancellation/interruption are represented only when observed.
+- [x] Cancellation/interruption are represented only when observed (pre-start cancellation, engine-supported cancellation and unsignalled `AbortError` interruption are tested).
 - [x] Inconclusive/failure remains distinct from no-known-threat (engine exceptions and malformed output map to failed/could-not-decide).
 - [x] No default scan history or content persistence is introduced by the domain orchestrator.
 
