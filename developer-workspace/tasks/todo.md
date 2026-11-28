@@ -259,6 +259,8 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### C2. Analysis engine port and result mapping
 
+**Status: Partial — local engine port, canonical four-outcome mapping and deterministic fake-engine tests added; full CI verification pending in run 46146024978. No production engine is selected.**
+
 **Description:** Define the platform-independent engine boundary and deterministic fake used only for tests.
 
 **Acceptance criteria**
