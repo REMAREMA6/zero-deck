@@ -4,8 +4,8 @@
 **Workspace:** `product-management/`  
 **Started:** 2026-11-27  
 **Method:** CIRCLES — seven steps, followed by supporting product-definition work  
-**Overall status:** [~] CIRCLES completed provisionally; blueprint, architecture follow-up, customer validation and owner decisions remain open; PM-authored product-rules Phase 5 plan is awaiting owner approval  
-**Current position:** PM-authored rules Phases 0–4 complete; Phase 5 (MVP-02 quarantine/disposition) plan written and committed; awaiting explicit owner approval before execution  
+**Overall status:** [~] CIRCLES completed provisionally; blueprint, architecture follow-up, customer validation and owner decisions remain open; PM-authored product-rules Phases 0–5 are complete  
+**Current position:** PM-authored rules Phases 0–5 complete; MVP-02 quarantine/disposition contract drafted and validated; Phase 6 (MVP-03 website/link checking) is next  
 **Last reconciled:** 2026-11-28
 
 > Operational source of truth. Update this tracker whenever work starts, changes status, becomes blocked, or completes. A new session must resume from this file and linked records without relying on chat history.
@@ -26,7 +26,7 @@ During that work, the owner added a distinct requirement: the Product Management
 
 That work is now recorded as a separate workstream. It does not restart CIRCLES or change the three-capability MVP.
 
-**Completed most recently:** prepared and committed the Phase 5 MVP-02 quarantine/disposition execution plan. **Current gate:** owner approval of that exact plan; no Phase 5 analysis or requirements authoring has started.
+**Completed most recently:** completed Phase 5 MVP-02 requirements: 38 PM-proposed requirements, 68 acceptance criteria, 14 open questions, all 15 facets assessed, 58 failure/recovery scenarios, synchronized projection/evidence, CIRCLES analysis and targeted validation. **Next task:** prepare the Phase 6 MVP-03 plan, commit it under `product-management/`, and wait for explicit owner approval before execution.
 
 ### Current product authority
 
@@ -90,7 +90,7 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 | 2 | Research and author authentication requirements | [x] | [IDENTITY-AUTHENTICATION.md](product-rules/contracts/IDENTITY-AUTHENTICATION.md), structured projection, evidence, [CIRCLES analysis](2026-11-27/13-PHASE-2-CIRCLES-AUTHENTICATION.md) and [Phase 2 validation](product-rules/PHASE-2-VALIDATION.md); 25 requirements, 66 acceptance criteria; eight decisions resolved, five operational questions open. |
 | 3 | Validate authentication coverage | [x] | [15-facet assessment](product-rules/PHASE-3-15-FACET-COVERAGE.md), [23-scenario matrix](product-rules/PHASE-3-NEGATIVE-FAILURE-RECOVERY-MATRIX.md), [structured proposals](product-rules/proposals/PHASE-3-AUTHENTICATION-COVERAGE-ADDITIONS.json), [Behaviour facet-reference amendment](product-rules/proposals/PHASE-3-BEHAVIOUR-FACET-REFERENCE.json), [CIRCLES analysis](2026-11-28/15-PHASE-3-CIRCLES-COVERAGE.md) and [validation](product-rules/PHASE-3-VALIDATION.md). All 15 facets assessed; 21 existing requirements/46 criteria preserved at Phase 3 close; 8 owner questions were then open. |
 | 4 | Author manual file-analysis requirements | [x] | [MVP-01 contract](product-rules/contracts/MANUAL-FILE-ANALYSIS.md), [structured projection](product-rules/contracts/MANUAL-FILE-ANALYSIS.declared-contract.json), [15-facet assessment](product-rules/PHASE-4-MVP-01-FACET-COVERAGE.md), [35-scenario matrix](product-rules/PHASE-4-MVP-01-NEGATIVE-FAILURE-RECOVERY-MATRIX.md), [CIRCLES analysis](2026-11-28/19-PHASE-4-CIRCLES-MANUAL-FILE-ANALYSIS.md), [validation](product-rules/PHASE-4-MVP-01-VALIDATION.md); 28 PM-proposed requirements / 56 criteria; nine open questions. |
-| 5 | Author quarantine/disposition requirements | [?] Awaiting owner approval | [Phase 5 plan](2026-11-28/20-PHASE-5-MVP-02-QUARANTINE-DISPOSITION-PLAN.md); quarantine, integrity, restore, deletion, retention and recovery. |
+| 5 | Author quarantine/disposition requirements | [MVP-02 contract](product-rules/contracts/QUARANTINE-FILE-DISPOSITION.md), structured projection/evidence, 15-facet assessment, 58-scenario matrix, CIRCLES analysis and validation; 38 requirements / 68 criteria / 14 open questions | [x] |
 | 6 | Author website/link-check requirements | [ ] | URL semantics, provider failure, privacy, Pro + activation gates, quotas and budget controls. |
 | 7 | Author cross-cutting system requirements | [ ] | Accounts, entitlement, configuration, platform differences, data lifecycle, security and operations. |
 | 8 | Cross-facet completeness/consistency review | [ ] | Traceability complete; contradictions and missing states resolved or explicitly open. |
@@ -122,10 +122,10 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 
 ## 6. Immediate next actions
 
-1. Phase 5 plan is committed at `2026-11-28/20-PHASE-5-MVP-02-QUARANTINE-DISPOSITION-PLAN.md`; obtain explicit owner approval before execution.
+1. Prepare the Phase 6 plan for MVP-03 website/link checking, commit it under `product-management/`, and wait for explicit owner approval before execution.
 2. Keep architecture follow-up and blueprint gaps visible; do not mark them complete without evidence.
 3. Update this tracker at each phase transition and link every deliverable.
-4. Do not start Phase 5 until its plan is approved.
+4. Do not start Phase 6 until its plan is approved.
 
 ## 7. Session log
 
@@ -155,3 +155,5 @@ The current Software Rules 0.3.0 Draft includes a `declaredContract` record and 
 
 
 | 2026-11-28 | Prepared Phase 5 MVP-02 plan and committed it. | Awaiting explicit owner approval; execution has not started. |
+
+| 2026-11-28 | Owner approved Phase 5 plan; completed MVP-02 CIRCLES analysis, 38-requirement contract, 68 acceptance criteria, 14 open questions, 15-facet assessment, 58-scenario matrix, synchronized projection/evidence and targeted validation. | Phase 5 complete within approved PM scope; all requirements remain PM-proposed; 16/16 targeted checks and 5/5 negative fixtures passed; no full Draft 2020-12, upstream CI, runtime or security-audit claim. Phase 6 plan is next. |
