@@ -43,6 +43,22 @@ describe('Android document access adapter', () => {
     expect(handle.arrayBuffer).toHaveBeenCalledOnce();
   });
 
+  it('reads selected bytes locally without initiating a network request', async () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal('fetch', fetchMock);
+    try {
+      const handle = createHandle();
+      const adapter = createAndroidFileSelectionAdapter({
+        pickFileAsync: vi.fn(async () => ({ canceled: false as const, result: handle })),
+      });
+      const selected = await adapter.select();
+      await selected!.readBytes();
+      expect(fetchMock).not.toHaveBeenCalled();
+    } finally {
+      vi.unstubAllGlobals();
+    }
+  });
+
   it('reports a revoked or missing document handle without reading it', async () => {
     const handle = createHandle({ exists: false });
     const adapter = createAndroidFileSelectionAdapter({
