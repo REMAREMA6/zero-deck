@@ -4,7 +4,7 @@
 **Author:** ZeroDeck Product Management Agent  
 **Owner authority:** Product owner retains final authority  
 **Opened:** 2026-11-27  
-**Status:** [x] Phases 0–3 complete; eight authentication owner decisions recorded; Phase 4 next  
+**Status:** [x] Phases 0–4 complete; eight authentication owner decisions recorded; Phase 4 MVP-01 contract complete; Phase 5 next  
 **Tracker:** [../TRACKER.md](../TRACKER.md)
 
 ## Purpose
@@ -55,14 +55,14 @@ Every requirement must:
 | 1 | Design PM contract profile | Exact mapping, complete-record and extension schemas, ID convention, author identity, and validation approach documented and checked without unauthorized core changes | [x] |
 | 2 | Research and author authentication requirements | Stack-agnostic account/auth contract, structured projection, retained evidence, sources, acceptance criteria and unresolved owner decisions | [x] |
 | 3 | Validate authentication coverage | [15-facet assessment](../product-rules/PHASE-3-15-FACET-COVERAGE.md), [23-scenario matrix](../product-rules/PHASE-3-NEGATIVE-FAILURE-RECOVERY-MATRIX.md), [structured proposals](../product-rules/proposals/PHASE-3-AUTHENTICATION-COVERAGE-ADDITIONS.json), [CIRCLES analysis](15-PHASE-3-CIRCLES-COVERAGE.md), and [validation](../product-rules/PHASE-3-VALIDATION.md); all 15 facets assessed, 23 scenarios classified, three candidate additions recorded; eight owner questions remain open | [x] |
-| 4 | Author manual file-analysis requirements | File selection, input scope, verdicts, limitations, privacy, failure and result semantics drafted | [ ] |
+| 4 | Author manual file-analysis requirements | [MVP-01 contract](../product-rules/contracts/MANUAL-FILE-ANALYSIS.md), structured projection/evidence, 15-facet assessment, 35-scenario negative/failure/recovery matrix, CIRCLES analysis and validation; 28 requirements / 56 criteria / 9 open questions | [x] |
 | 5 | Author quarantine/disposition requirements | Quarantine, integrity, restore, deletion, retention, key loss, interruption and recovery drafted | [ ] |
 | 6 | Author website/link-check requirements | URL handling, privacy, provider failure, inconclusive results, Pro + activation gates, quotas and spend controls drafted | [ ] |
 | 7 | Author cross-cutting system requirements | Accounts, entitlement, configuration, platform differences, data lifecycle, security, reliability and operations reconciled | [ ] |
 | 8 | Cross-facet completeness and consistency review | Traceability complete; contradictions, missing states and untestable claims resolved or explicitly open | [ ] |
 | 9 | Owner review and release | Owner decisions recorded; versioned contract package ready for engineering handoff | [ ] |
 
-Phases 0–3 are complete. On 2026-11-28 the owner accepted all eight PM recommendations for identity/authentication decisions. The dated decision record is 2026-11-28/17-AUTHENTICATION-OWNER-DECISIONS.md; the canonical contract is now v0.2.0-draft with 25 requirements and 66 acceptance criteria in the synchronized structured projection/evidence. The original 21 requirements remain PM-proposed; only ZD-AUTH-025 through ZD-AUTH-028 directly encode owner-approved decisions and are marked owner-approved. The eight original questions are resolved; five additional operational questions remain open. Phase 3 candidate additions (ZD-AUTH-022–024) and the Behaviour facet-reference amendment remain unaccepted proposals. Decision recording validation is in product-rules/PHASE-4-AUTH-DECISION-VALIDATION.md. Phase 4 is next. Other feature requirement sets have not yet been authored.
+Phases 0–3 are complete. On 2026-11-28 the owner accepted all eight PM recommendations for identity/authentication decisions. The dated decision record is 2026-11-28/17-AUTHENTICATION-OWNER-DECISIONS.md; the canonical contract is now v0.2.0-draft with 25 requirements and 66 acceptance criteria in the synchronized structured projection/evidence. The original 21 requirements remain PM-proposed; only ZD-AUTH-025 through ZD-AUTH-028 directly encode owner-approved decisions and are marked owner-approved. The eight original questions are resolved; five additional operational questions remain open. Phase 3 candidate additions (ZD-AUTH-022–024) and the Behaviour facet-reference amendment remain unaccepted proposals. Decision recording validation is in product-rules/PHASE-4-AUTH-DECISION-VALIDATION.md. Phase 4 is complete. The MVP-01 contract remains a PM-proposed draft; the owner approved the plan, not the 28 normative statements. Nine MVP-01 product questions remain open. Phase 5 (MVP-02 quarantine/disposition) is next and requires a separate written plan and owner approval. Other feature requirement sets have not yet been authored.
 
 ## Recorded authentication owner decisions
 
@@ -120,7 +120,13 @@ These are architecture directions, not a complete authentication contract. Do no
 - `2026-11-28/14-PHASE-3-COMPLETION-PLAN.md` — owner-approved Phase 3 plan.
 - `2026-11-28/15-PHASE-3-CIRCLES-COVERAGE.md` — seven-step Phase 3 CIRCLES analysis and recommendation.
 - `2026-11-27/13-PHASE-2-CIRCLES-AUTHENTICATION.md` — the seven-step CIRCLES analysis, alternatives, trade-offs and PM recommendation.
-- `product-rules/contracts/MANUAL-FILE-ANALYSIS.md`
+- `product-rules/contracts/MANUAL-FILE-ANALYSIS.md` — Phase 4 canonical draft (28 requirements / 56 criteria).
+- `product-rules/contracts/MANUAL-FILE-ANALYSIS.declared-contract.json` — synchronized Software Rules projection.
+- `product-rules/evidence/manual-file-analysis-contract.evidence.json` — retained declared-contract provenance.
+- `product-rules/PHASE-4-MVP-01-FACET-COVERAGE.md` — all 15 facets assessed.
+- `product-rules/PHASE-4-MVP-01-NEGATIVE-FAILURE-RECOVERY-MATRIX.md` — 35 distinct scenarios.
+- `product-rules/PHASE-4-MVP-01-VALIDATION.md` — targeted checks and limitations.
+- `2026-11-28/19-PHASE-4-CIRCLES-MANUAL-FILE-ANALYSIS.md` — seven-step CIRCLES analysis.
 - `product-rules/contracts/QUARANTINE-DISPOSITION.md`
 - `product-rules/contracts/WEBSITE-LINK-CHECKING.md`
 - `product-rules/contracts/CROSS-CUTTING-SYSTEM.md`
