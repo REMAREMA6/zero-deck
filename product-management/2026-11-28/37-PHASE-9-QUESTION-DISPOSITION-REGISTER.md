@@ -1,5 +1,7 @@
 # Phase 9 — Question Disposition Register
 
+**Status:** [x] Complete — 64/64 Phase 8 questions explicitly dispositioned (15 resolved; 49 deferred).
+
 **Decision reference:** ZD-DEC-PHASE9-2026-11-28  
 **Total Phase 8 questions:** 64  
 **Disposition:** 15 resolved at product-policy level; 49 deferred to architecture, evidence or specialist review.
