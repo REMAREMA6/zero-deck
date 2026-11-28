@@ -72,7 +72,7 @@ describe('policy-gated account deletion with PostgreSQL', () => {
     expect(issued).not.toBeNull();
 
     const deletionDueAt = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
-    const auditRetainUntil = new Date(now.getTime() + 90 * 24 * 60 * 60 * 1000);
+    const scheduledAuditRetainUntil = new Date(now.getTime() + 90 * 24 * 60 * 60 * 1000);
     const deletion = createAccountDeletionService(
       pool,
       createFreshAuthenticationGuard(pool),
@@ -82,7 +82,7 @@ describe('policy-gated account deletion with PostgreSQL', () => {
           auditRetention: {
             purpose: 'Test-only deletion audit',
             reason: 'Verify scheduled account closure in integration tests',
-            retainUntil: auditRetainUntil,
+            retainUntil: scheduledAuditRetainUntil,
           },
         }),
       },
@@ -140,7 +140,7 @@ describe('policy-gated account deletion with PostgreSQL', () => {
         deletion_due_at: deletionDueAt,
         audit_retention_purpose: 'Test-only deletion audit',
         audit_retention_reason: 'Verify scheduled account closure in integration tests',
-        audit_retain_until: auditRetainUntil,
+        audit_retain_until: scheduledAuditRetainUntil,
       });
 
       const beforeDue = await deletion.executeDueDeletions();
@@ -151,7 +151,10 @@ describe('policy-gated account deletion with PostgreSQL', () => {
       ]);
       expect(accountBeforeDue.rowCount).toBe(1);
 
-      now = deletionDueAt;
+      // Simulate a delayed daily scheduler: the audit period starts at actual deletion,
+      // not at the earlier scheduled due time.
+      now = new Date(deletionDueAt.getTime() + 36 * 60 * 60 * 1000);
+      const expectedAuditRetainUntil = new Date('2027-12-30T00:00:00.000Z');
       const executed = await deletion.executeDueDeletions();
       expect(executed.deletedAccounts).toBe(1);
       expect(executed.expiredAuditRecords).toBe(0);
@@ -174,6 +177,7 @@ describe('policy-gated account deletion with PostgreSQL', () => {
         status: string;
         completed_at: Date | null;
         audit_retention_reason: string;
+        audit_retain_until: Date;
       }>(
         `SELECT account_id, status, completed_at, audit_retention_reason
          FROM account_deletion_requests WHERE deletion_due_at = $1`,
@@ -183,10 +187,11 @@ describe('policy-gated account deletion with PostgreSQL', () => {
         account_id: null,
         status: 'completed',
         audit_retention_reason: 'Verify scheduled account closure in integration tests',
+        audit_retain_until: expectedAuditRetainUntil,
       });
       expect(retainedAudit.rows[0]?.completed_at).toBeInstanceOf(Date);
 
-      now = auditRetainUntil;
+      now = expectedAuditRetainUntil;
       const expired = await deletion.executeDueDeletions();
       expect(expired.deletedAccounts).toBe(0);
       expect(expired.expiredAuditRecords).toBe(1);
