@@ -11,7 +11,9 @@ describe('PostgreSQL integration', () => {
     if (!pool) throw new Error('DATABASE_URL is required for PostgreSQL integration tests.');
     await applyMigrations(pool, new URL('../migrations/', import.meta.url).pathname);
   });
-  afterAll(async () => { await pool?.end(); });
+  afterAll(async () => {
+    await pool?.end();
+  });
   it('applies migrations to PostgreSQL and serves readiness', async () => {
     if (!pool) throw new Error('DATABASE_URL is required.');
     const app = buildApp({ database: pool });

@@ -10,7 +10,9 @@ export async function applyMigrations(pool: Pool, migrationsDirectory: string): 
     applied_at timestamptz NOT NULL DEFAULT now()
   )`);
 
-  const migrationNames = (await readdir(migrationsDirectory)).filter((name) => name.endsWith('.sql')).sort();
+  const migrationNames = (await readdir(migrationsDirectory))
+    .filter((name) => name.endsWith('.sql'))
+    .sort();
   for (const migrationName of migrationNames) {
     const sql = await readFile(join(migrationsDirectory, migrationName), 'utf8');
     const checksum = createHash('sha256').update(sql).digest('hex');
@@ -18,7 +20,8 @@ export async function applyMigrations(pool: Pool, migrationsDirectory: string): 
     try {
       await client.query('BEGIN');
       const existing = await client.query<{ checksum: string }>(
-        'SELECT checksum FROM schema_migrations WHERE migration_name = $1', [migrationName],
+        'SELECT checksum FROM schema_migrations WHERE migration_name = $1',
+        [migrationName],
       );
       if (existing.rowCount) {
         if (existing.rows[0]?.checksum !== checksum) {
@@ -28,7 +31,10 @@ export async function applyMigrations(pool: Pool, migrationsDirectory: string): 
         continue;
       }
       await client.query(sql);
-      await client.query('INSERT INTO schema_migrations (migration_name, checksum) VALUES ($1, $2)', [migrationName, checksum]);
+      await client.query(
+        'INSERT INTO schema_migrations (migration_name, checksum) VALUES ($1, $2)',
+        [migrationName, checksum],
+      );
       await client.query('COMMIT');
     } catch (error) {
       await client.query('ROLLBACK');

@@ -5,7 +5,9 @@ import { createDatabasePool } from './db/pool.js';
 const config = loadConfig();
 const database = createDatabasePool(config.DATABASE_URL);
 const app = buildApp({ database, logger: config.NODE_ENV !== 'test' });
-app.addHook('onClose', async () => { await database.end(); });
+app.addHook('onClose', async () => {
+  await database.end();
+});
 
 try {
   await app.listen({ host: config.HOST, port: config.PORT });

@@ -12,7 +12,10 @@ export type AppConfig = z.infer<typeof ConfigSchema>;
 export function loadConfig(env: NodeJS.ProcessEnv = process.env): AppConfig {
   const parsed = ConfigSchema.safeParse(env);
   if (!parsed.success) {
-    const details = parsed.error.issues.map((issue) => ({ path: issue.path.join('.'), code: issue.code }));
+    const details = parsed.error.issues.map((issue) => ({
+      path: issue.path.join('.'),
+      code: issue.code,
+    }));
     throw new Error('Invalid application configuration: ' + JSON.stringify(details));
   }
   return parsed.data;
