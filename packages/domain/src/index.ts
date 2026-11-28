@@ -12,9 +12,25 @@ export interface FileAnalysisResult {
   explanation: string;
 }
 
+export interface AnalysisProgress {
+  completed: number;
+  total: number;
+  unit: string;
+}
+
+export interface LocalAnalysisObserver {
+  onLifecycleChange?: (lifecycle: AnalysisLifecycle) => void;
+  onProgress?: (progress: AnalysisProgress) => void;
+}
+
 export interface LocalAnalysisEnginePort {
   supportsCancellation?: boolean;
-  analyze(input: { bytes: Uint8Array; signal?: AbortSignal }): Promise<unknown>;
+  supportsProgress?: boolean;
+  analyze(input: {
+    bytes: Uint8Array;
+    signal?: AbortSignal;
+    onProgress?: (progress: AnalysisProgress) => void;
+  }): Promise<unknown>;
 }
 
 const fileAnalysisOutcomes: readonly FileAnalysisOutcome[] = [
@@ -91,43 +107,99 @@ export function mapAnalysisEngineResult(
   };
 }
 
+function notifyLifecycle(observer: LocalAnalysisObserver | undefined, lifecycle: AnalysisLifecycle) {
+  try {
+    observer?.onLifecycleChange?.(lifecycle);
+  } catch {
+    // Observer failures must never change the analysis outcome.
+  }
+}
+
 export async function runLocalFileAnalysis(
   engine: LocalAnalysisEnginePort,
   bytes: Uint8Array,
   clock: () => Date = () => new Date(),
   signal?: AbortSignal,
+  observer?: LocalAnalysisObserver,
 ): Promise<FileAnalysisResult> {
+  notifyLifecycle(observer, 'queued');
   if (signal?.aborted) {
+    notifyLifecycle(observer, 'cancelled');
     return createAnalysisLifecycleResult(
       'cancelled',
       'The analysis was cancelled before a reliable result was available.',
     );
   }
 
+  notifyLifecycle(observer, 'analyzing');
+  let lastProgress: AnalysisProgress | null = null;
+  const reportProgress = (progress: AnalysisProgress) => {
+    if (
+      !engine.supportsProgress ||
+      !observer?.onProgress ||
+      !Number.isFinite(progress.completed) ||
+      !Number.isFinite(progress.total) ||
+      progress.total <= 0 ||
+      progress.completed < 0 ||
+      progress.completed > progress.total ||
+      !progress.unit.trim()
+    ) {
+      return;
+    }
+    if (
+      lastProgress &&
+      (progress.unit !== lastProgress.unit ||
+        progress.total !== lastProgress.total ||
+        progress.completed < lastProgress.completed)
+    ) {
+      return;
+    }
+    lastProgress = progress;
+    try {
+      observer.onProgress(progress);
+    } catch {
+      // Progress observers are presentation-only and cannot affect the result.
+    }
+  };
+
   try {
     const response = await engine.analyze(
-      engine.supportsCancellation && signal ? { bytes, signal } : { bytes },
+      engine.supportsCancellation || engine.supportsProgress
+        ? {
+            bytes,
+            ...(engine.supportsCancellation && signal ? { signal } : {}),
+            ...(engine.supportsProgress && observer?.onProgress
+              ? { onProgress: reportProgress }
+              : {}),
+          }
+        : { bytes },
     );
     if (engine.supportsCancellation && signal?.aborted) {
+      notifyLifecycle(observer, 'cancelled');
       return createAnalysisLifecycleResult(
         'cancelled',
         'The analysis was cancelled before a reliable result was available.',
       );
     }
-    return mapAnalysisEngineResult(response, clock);
+    const result = mapAnalysisEngineResult(response, clock);
+    notifyLifecycle(observer, result.lifecycle);
+    return result;
   } catch (error) {
     if (engine.supportsCancellation && signal?.aborted) {
+      notifyLifecycle(observer, 'cancelled');
       return createAnalysisLifecycleResult(
         'cancelled',
         'The analysis was cancelled before a reliable result was available.',
       );
     }
     if (isAbortError(error)) {
+      notifyLifecycle(observer, 'interrupted');
       return createAnalysisLifecycleResult(
         'interrupted',
         'The analysis was interrupted before a reliable result was available.',
       );
     }
+    notifyLifecycle(observer, 'failed');
     return createAnalysisFailureResult();
   }
 }
