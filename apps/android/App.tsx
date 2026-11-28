@@ -71,6 +71,7 @@ export default function App() {
   const [selectedFile, setSelectedFile] = useState<SelectedAndroidFile | null>(null);
   const [fileStatus, setFileStatus] = useState('No file selected. Selecting a file does not start analysis.');
   const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -227,6 +228,7 @@ export default function App() {
 
   async function handleRotateSession() {
     setError(null);
+    setNotice(null);
     setSubmitting(true);
     try {
       const token = await sessionStorage.read();
@@ -237,7 +239,7 @@ export default function App() {
       }
       const rotated = await rotateSessionCredential(apiBase, token, sessionStorage);
       if (profile) setProfile({ ...profile, sessionId: rotated.sessionId });
-      setError('Session credential rotated. The previous credential can no longer be used.');
+      setNotice('Session credential rotated. The previous credential can no longer be used.');
     } catch (rotationError) {
       setError(
         rotationError instanceof Error
@@ -493,6 +495,11 @@ export default function App() {
           {error ? (
             <Text accessibilityRole="alert" style={styles.errorMessage}>
               {error}
+            </Text>
+          ) : null}
+          {notice ? (
+            <Text accessibilityRole="alert" style={styles.successMessage}>
+              {notice}
             </Text>
           ) : null}
           <View style={styles.form}>
