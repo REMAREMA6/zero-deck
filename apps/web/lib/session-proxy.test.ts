@@ -10,17 +10,22 @@ import {
 
 const originalNodeEnv = process.env.NODE_ENV;
 
-afterEach(() => {
-  if (originalNodeEnv === undefined) {
-    delete process.env.NODE_ENV;
+function setNodeEnvironment(value: string | undefined): void {
+  const environment = process.env as unknown as Record<string, string | undefined>;
+  if (value === undefined) {
+    delete environment.NODE_ENV;
   } else {
-    process.env.NODE_ENV = originalNodeEnv;
+    environment.NODE_ENV = value;
   }
+}
+
+afterEach(() => {
+  setNodeEnvironment(originalNodeEnv);
 });
 
 describe('Web session cookie boundary', () => {
   it('stores the session in an HttpOnly, SameSite=Lax cookie with a 30-day cap', () => {
-    process.env.NODE_ENV = 'development';
+    setNodeEnvironment('development');
     const response = NextResponse.json({ accepted: true });
 
     setSessionCookie(response, 'opaque-session-token');
@@ -35,7 +40,7 @@ describe('Web session cookie boundary', () => {
   });
 
   it('marks the session cookie Secure in production', () => {
-    process.env.NODE_ENV = 'production';
+    setNodeEnvironment('production');
     const response = NextResponse.json({ accepted: true });
 
     setSessionCookie(response, 'opaque-session-token');
