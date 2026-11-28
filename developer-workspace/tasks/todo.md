@@ -189,18 +189,21 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### B5. Recovery and fresh-authentication boundaries
 
+**Recovery sub-slice (Architect outcome 3.3): Complete.** Verified-email challenge issuance, expiry, one-time consumption, password replacement, session revocation and fake security notification are implemented and passed full CI run [46152754260](https://github.com/REMAREMA6/zero-deck/actions/runs/46152754260). Fresh-authentication/step-up for sensitive account actions remains outstanding under 3.5.
+
 **Description:** Implement verified-email recovery, fake security notifications and fresh authentication for sensitive account-security actions.
 
 **Acceptance criteria**
-- [ ] Recovery uses a single-use, time-limited verified-email challenge.
-- [ ] Successful recovery revokes existing sessions and emits a security notification through the fake delivery adapter.
-- [ ] Unverified email is never used for recovery or security notifications.
+- [x] Recovery uses a single-use, time-limited verified-email challenge; challenge lifetime is explicitly injected and no production expiry default is invented.
+- [x] Successful recovery revokes existing sessions and emits a security notification through the fake delivery adapter.
+- [x] Unverified email is never used for recovery or security notifications.
 - [ ] Fresh authentication is required before password/passkey changes, verified recovery-email changes and account deletion.
 - [ ] Ordinary use does not trigger unnecessary repeated authentication.
 - [ ] Expiry, resend, rate and notification retry policy values are not invented.
 
 **Verification**
-- [ ] Tests cover invalid/expired/consumed challenges, replay, revocation, notification failure and step-up authentication.
+- [x] PostgreSQL integration tests cover expiry, consumed/replayed challenges, revocation, verified-recipient notification and recovery-delivery failure.
+- [ ] Notification transport failure and step-up authentication tests remain.
 - [ ] No challenge/token is exposed in logs or URLs.
 
 **Dependencies:** B2–B4.  
