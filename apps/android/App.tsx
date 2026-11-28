@@ -1,4 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from 'react-native';
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 const capabilities = [
@@ -10,7 +10,7 @@ const capabilities = [
 export default function App() {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar style="light" />
+      <StatusBar barStyle="light-content" backgroundColor="#0b0e0d" />
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.topbar}>
           <View style={styles.brand}>
