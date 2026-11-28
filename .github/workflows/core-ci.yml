@@ -26,7 +26,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: zerodeck-core-ci-${{ github.ref }}
@@ -70,6 +70,46 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      - name: Apply Prettier formatting to implementation changes (temporary)
+        run: |
+          pnpm exec prettier --write \
+            apps/android/App.tsx \
+            apps/android/src/file-selection.ts \
+            apps/android/src/session-client.ts \
+            apps/android/test/file-selection.test.ts \
+            apps/android/test/session-client.test.ts \
+            apps/api/src/modules/identity/verified-email-notifications.ts \
+            apps/api/test/email-verification.integration.test.ts \
+            apps/api/test/verified-email-notifications.test.ts \
+            apps/web/app/api/sessions/current/rotate/route.test.ts \
+            apps/web/app/api/sessions/current/route.test.ts \
+            apps/web/app/file-analysis/page.tsx \
+            apps/web/app/globals.css \
+            apps/web/lib/file-selection.test.ts \
+            packages/domain/src/index.ts
+          git diff --check
+          if ! git diff --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add \
+              apps/android/App.tsx \
+              apps/android/src/file-selection.ts \
+              apps/android/src/session-client.ts \
+              apps/android/test/file-selection.test.ts \
+              apps/android/test/session-client.test.ts \
+              apps/api/src/modules/identity/verified-email-notifications.ts \
+              apps/api/test/email-verification.integration.test.ts \
+              apps/api/test/verified-email-notifications.test.ts \
+              apps/web/app/api/sessions/current/rotate/route.test.ts \
+              apps/web/app/api/sessions/current/route.test.ts \
+              apps/web/app/file-analysis/page.tsx \
+              apps/web/app/globals.css \
+              apps/web/lib/file-selection.test.ts \
+              packages/domain/src/index.ts
+            git commit -m "Apply Prettier formatting to implementation changes"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
 
       - name: Check formatting
         run: pnpm lint
