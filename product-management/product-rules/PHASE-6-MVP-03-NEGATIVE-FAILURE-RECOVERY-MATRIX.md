@@ -45,7 +45,7 @@
 | W38 | Redirect exceeds configured hop limit | Stop; no further request | WEB-013, 031 |
 | W39 | Redirect crosses to disallowed destination | Block before request | WEB-010, 013 |
 | W40 | HTTPS redirects to HTTP | Reject downgrade; no insecure request | WEB-014 |
-| W41 | Provider TLS certificate is invalid/expired/mismatched | Fail lookup; do not disable verification | WEB-015, 024 |
+| W41 | Provider TLS certificate is invalid/expired/mismatched | Fail lookup; do not disable verification | WEB-015, 024, 039 |
 | W42 | Provider DNS lookup fails | Failed/inconclusive; never no-match | WEB-024 |
 | W43 | Provider times out or resets connection | Failed/inconclusive; retry only under policy | WEB-024, 025 |
 | W44 | Provider returns rate limit or quota exhaustion | Report unavailable/limited; account for usage correctly | WEB-024, 027, 035 |
