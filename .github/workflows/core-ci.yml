@@ -71,9 +71,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Print formatter output for domain implementation (temporary diagnostic)
-        run: pnpm exec prettier "packages/domain/src/index.ts"
-
       - name: Check formatting
         run: pnpm lint
 
