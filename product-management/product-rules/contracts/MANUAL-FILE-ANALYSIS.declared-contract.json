@@ -4,10 +4,10 @@
   "title": "ZeroDeck MVP-01 Manual File Security Analysis Product Requirements",
   "issuer": "ZeroDeck Product Management Agent",
   "artifact": {
-    "uri": "https://github.com/REMAREMA6/zero-deck/blob/298ba0e6b31ff8ebdc3163a2c6366dcf31ae06f3/product-management/product-rules/contracts/MANUAL-FILE-ANALYSIS.md",
-    "version": "0.1.0-draft",
-    "revision": "298ba0e6b31ff8ebdc3163a2c6366dcf31ae06f3",
-    "digest": "sha256:9fd4e80beebb672a9281485334b8671f255e9dbe98df2e9c61ed62824906401b",
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/e62b46c88dc44ee935d2dff87cf519e3652eaebd/product-management/product-rules/contracts/MANUAL-FILE-ANALYSIS.md",
+    "version": "0.2.0-draft",
+    "revision": "e62b46c88dc44ee935d2dff87cf519e3652eaebd",
+    "digest": "sha256:bee22c841c7f3fb05059b2841ddd0cfcc70d0150fc8118985109af2a020e8422",
     "mediaType": "text/markdown"
   },
   "scope": "MVP-01 manual file security analysis for web and Android; user-selected files, explicit scan requests, bounded result semantics and truthful failure handling; excludes quarantine/disposition and website/link checking.",
@@ -201,14 +201,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-001-AC-01",
+              "criterionId": "ZD-FILE-AC-01",
               "given": "no scan request exists",
               "when": "a file becomes available",
               "then": "no analysis is initiated",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-FILE-001-AC-02",
+              "criterionId": "ZD-FILE-AC-02",
               "given": "an eligible file is selected",
               "when": "the user requests a scan",
               "then": "one scan attempt is initiated and its accepted or rejected state is communicated",
@@ -245,14 +245,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-002-AC-01",
+              "criterionId": "ZD-FILE-AC-03",
               "given": "the user selected one file and access was granted",
               "when": "the scan reads input",
               "then": "no unrelated file is read as part of that scan",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-FILE-002-AC-02",
+              "criterionId": "ZD-FILE-AC-04",
               "given": "the platform has not granted access to a selected file",
               "when": "analysis is requested",
               "then": "the system does not bypass the platform boundary and reports the access failure",
@@ -288,14 +288,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-003-AC-01",
+              "criterionId": "ZD-FILE-AC-05",
               "given": "access to the selected file has been revoked",
               "when": "the scan attempts to read it",
               "then": "the attempt ends as an access failure and no completed verdict is presented",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-FILE-003-AC-02",
+              "criterionId": "ZD-FILE-AC-06",
               "given": "access is restored through a valid user/platform action",
               "when": "the user retries",
               "then": "a new attempt may proceed using the newly granted access",
@@ -332,14 +332,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-004-AC-01",
+              "criterionId": "ZD-FILE-AC-07",
               "given": "the supported-input policy is published",
               "when": "the user views or invokes file selection",
               "then": "accepted types and applicable limits are discoverable before a scan is accepted",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-FILE-004-AC-02",
+              "criterionId": "ZD-FILE-AC-08",
               "given": "an input is outside a documented constraint",
               "when": "analysis is requested",
               "then": "the system rejects it with a specific unsupported-input outcome",
@@ -376,14 +376,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-005-AC-01",
+              "criterionId": "ZD-FILE-AC-09",
               "given": "an input is invalid under the published policy",
               "when": "analysis is requested",
               "then": "the system returns the corresponding invalid-input outcome without a successful verdict",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-FILE-005-AC-02",
+              "criterionId": "ZD-FILE-AC-10",
               "given": "an encrypted input has no approved analysis path",
               "when": "analysis is requested",
               "then": "the system reports that it could not analyse the file rather than inferring a threat or clean result",
@@ -419,14 +419,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-006-AC-01",
+              "criterionId": "ZD-FILE-AC-11",
               "given": "a readable file is selected",
               "when": "the scan completes or fails",
               "then": "the original file content and location remain unchanged by the scan",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-FILE-006-AC-02",
+              "criterionId": "ZD-FILE-AC-12",
               "given": "a scan is cancelled or interrupted",
               "when": "the user inspects the original file",
               "then": "the scan has not deleted or replaced it",
@@ -463,14 +463,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-007-AC-01",
+              "criterionId": "ZD-FILE-AC-13",
               "given": "a user starts a scan under default configuration",
               "when": "the system analyses the file",
               "then": "file content is not transmitted to a cloud service",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-FILE-007-AC-02",
+              "criterionId": "ZD-FILE-AC-14",
               "given": "a network connection is available",
               "when": "a default local analysis is performed",
               "then": "network availability alone does not cause file-content upload",
@@ -510,14 +510,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-008-AC-01",
+              "criterionId": "ZD-FILE-AC-15",
               "given": "a separately approved cloud-analysis option is offered",
               "when": "the user is asked to enable it",
               "then": "the disclosure identifies data sent, purpose and recipient or processor",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-FILE-008-AC-02",
+              "criterionId": "ZD-FILE-AC-16",
               "given": "the user declines or has not consented",
               "when": "a scan is requested",
               "then": "no file content is sent to the cloud",
@@ -553,14 +553,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-009-AC-01",
+              "criterionId": "ZD-FILE-AC-17",
               "given": "a user-selected file is submitted",
               "when": "the analysis workflow processes it",
               "then": "the file is not launched or executed as a program, script, macro or active document",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-FILE-009-AC-02",
+              "criterionId": "ZD-FILE-AC-18",
               "given": "the selected engine would require execution to produce a result",
               "when": "execution would be required",
               "then": "the system does not silently execute the file and reports the limitation",
@@ -596,14 +596,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-010-AC-01",
+              "criterionId": "ZD-FILE-AC-19",
               "given": "a scan is accepted and processing has begun",
               "when": "the user checks its state",
               "then": "it is distinguishable from rejected and terminal attempts",
               "verificationMethod": "manual-test"
             },
             {
-              "criterionId": "ZD-FILE-010-AC-02",
+              "criterionId": "ZD-FILE-AC-20",
               "given": "a scan reaches cancellation, interruption or failure",
               "when": "the attempt terminates",
               "then": "its terminal state is not reported as completed",
@@ -639,14 +639,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-011-AC-01",
+              "criterionId": "ZD-FILE-AC-21",
               "given": "a scan is active and cancellation is supported",
               "when": "the user requests cancellation",
               "then": "the system stops further analysis as soon as the process can safely stop and reports cancellation",
               "verificationMethod": "manual-test"
             },
             {
-              "criterionId": "ZD-FILE-011-AC-02",
+              "criterionId": "ZD-FILE-AC-22",
               "given": "cancellation is unavailable or cannot stop an operation",
               "when": "the user requests cancellation",
               "then": "the system does not claim cancellation succeeded and communicates the actual state",
@@ -683,14 +683,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-012-AC-01",
+              "criterionId": "ZD-FILE-AC-23",
               "given": "evidence meets documented confirmed-threat criteria",
               "when": "the result is presented",
               "then": "it is classified as Threat found",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-FILE-012-AC-02",
+              "criterionId": "ZD-FILE-AC-24",
               "given": "analysis is incomplete, unsupported or lacks sufficient evidence",
               "when": "the result is presented",
               "then": "it is Could not decide or Could not analyse rather than No known threat found",
@@ -726,14 +726,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-013-AC-01",
+              "criterionId": "ZD-FILE-AC-25",
               "given": "available analysis finds no known threat",
               "when": "the result is displayed",
               "then": "wording communicates only that no known threat was found",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-FILE-013-AC-02",
+              "criterionId": "ZD-FILE-AC-26",
               "given": "the result is No known threat found",
               "when": "summary or follow-up text is rendered",
               "then": "no part guarantees safety or absence of all malware",
@@ -769,14 +769,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-014-AC-01",
+              "criterionId": "ZD-FILE-AC-27",
               "given": "a completed scan has a known engine or detection-source identity and version",
               "when": "its result is retrieved",
               "then": "that provenance is associated with the result",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-FILE-014-AC-02",
+              "criterionId": "ZD-FILE-AC-28",
               "given": "a provenance field is unavailable",
               "when": "the result is presented",
               "then": "the system does not fabricate an engine, source or version",
@@ -813,14 +813,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-015-AC-01",
+              "criterionId": "ZD-FILE-AC-29",
               "given": "only part of a file was analysed or required detection data was unavailable",
               "when": "a result is returned",
               "then": "the result is marked partial or inconclusive and the limitation is explained",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-FILE-015-AC-02",
+              "criterionId": "ZD-FILE-AC-30",
               "given": "analysis is interrupted before its completion condition",
               "when": "the attempt terminates",
               "then": "no complete verdict is issued from the incomplete attempt",
@@ -856,14 +856,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-016-AC-01",
+              "criterionId": "ZD-FILE-AC-31",
               "given": "a Threat found or Suspicious result includes detection evidence",
               "when": "the user opens the result",
               "then": "available evidence or detection reason is presented without inventing unavailable detail",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-FILE-016-AC-02",
+              "criterionId": "ZD-FILE-AC-32",
               "given": "the engine cannot provide a meaningful explanation",
               "when": "the result is displayed",
               "then": "the system states the limitation rather than fabricating a reason",
@@ -899,14 +899,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-017-AC-01",
+              "criterionId": "ZD-FILE-AC-33",
               "given": "a Suspicious or Could not decide result is shown",
               "when": "the user views its guidance",
               "then": "the guidance preserves uncertainty and does not label the file confirmed safe or malicious",
               "verificationMethod": "manual-test"
             },
             {
-              "criterionId": "ZD-FILE-017-AC-02",
+              "criterionId": "ZD-FILE-AC-34",
               "given": "a Threat found result is shown",
               "when": "the user views its guidance",
               "then": "it explains the result and does not instruct execution of the file",
@@ -943,14 +943,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-018-AC-01",
+              "criterionId": "ZD-FILE-AC-35",
               "given": "a required analysis engine or detection source is unavailable",
               "when": "a scan is requested",
               "then": "the system reports unavailable or inconclusive and does not issue a clean verdict",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-FILE-018-AC-02",
+              "criterionId": "ZD-FILE-AC-36",
               "given": "a dependency returns an invalid or unusable response",
               "when": "the result is evaluated",
               "then": "the attempt fails safely and the response is not treated as detection evidence",
@@ -986,14 +986,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-019-AC-01",
+              "criterionId": "ZD-FILE-AC-37",
               "given": "a prior attempt failed or was interrupted and the file remains eligible",
               "when": "the user requests a retry",
               "then": "a new attempt is created and distinguishable from the prior attempt",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-FILE-019-AC-02",
+              "criterionId": "ZD-FILE-AC-38",
               "given": "a prior attempt produced a partial result",
               "when": "a retry begins",
               "then": "the prior result is not relabelled as the retry's completed result",
@@ -1029,14 +1029,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-020-AC-01",
+              "criterionId": "ZD-FILE-AC-39",
               "given": "a file is selected for analysis",
               "when": "the system reads content and metadata",
               "then": "access is limited to information necessary for analysis and result communication",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-FILE-020-AC-02",
+              "criterionId": "ZD-FILE-AC-40",
               "given": "a metadata field is not required for analysis or result interpretation",
               "when": "the scan is processed",
               "then": "that field is not collected solely by default",
@@ -1072,14 +1072,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-021-AC-01",
+              "criterionId": "ZD-FILE-AC-41",
               "given": "a scan encounters a parsing or engine error",
               "when": "diagnostic information is recorded",
               "then": "file contents and sensitive metadata are absent from ordinary diagnostic output",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-FILE-021-AC-02",
+              "criterionId": "ZD-FILE-AC-42",
               "given": "a diagnostic workflow requests additional file data",
               "when": "no specific disclosure purpose and consent exist",
               "then": "that data is not transmitted or retained for diagnostics",
@@ -1119,14 +1119,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-022-AC-01",
+              "criterionId": "ZD-FILE-AC-43",
               "given": "scan results are persisted beyond the active interaction",
               "when": "the retention policy is applied",
               "then": "scan-result retention is documented separately from quarantine-item retention",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-FILE-022-AC-02",
+              "criterionId": "ZD-FILE-AC-44",
               "given": "a scan record reaches its documented deletion condition",
               "when": "the record is deleted",
               "then": "the policy does not imply deletion or modification of a separate quarantine artifact",
@@ -1162,14 +1162,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-023-AC-01",
+              "criterionId": "ZD-FILE-AC-45",
               "given": "a user opens the MVP-01 workflow",
               "when": "the user selects, scans and views a result",
               "then": "those actions do not depend on a standalone scan-history feature",
               "verificationMethod": "manual-test"
             },
             {
-              "criterionId": "ZD-FILE-023-AC-02",
+              "criterionId": "ZD-FILE-AC-46",
               "given": "a minimal record is required for another in-scope operation",
               "when": "the record is retained",
               "then": "it is not expanded into standalone history without owner approval",
@@ -1206,14 +1206,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-024-AC-01",
+              "criterionId": "ZD-FILE-AC-47",
               "given": "equivalent analysis evidence is available on web and Android",
               "when": "each platform presents the result",
               "then": "the same product-level outcome class and safety limitation are communicated",
               "verificationMethod": "manual-test"
             },
             {
-              "criterionId": "ZD-FILE-024-AC-02",
+              "criterionId": "ZD-FILE-AC-48",
               "given": "a file cannot be accessed on one platform due to platform constraints",
               "when": "the user requests a scan",
               "then": "that platform reports its limitation rather than pretending to provide equivalent analysis",
@@ -1249,14 +1249,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-025-AC-01",
+              "criterionId": "ZD-FILE-AC-49",
               "given": "a file exceeds a documented analysis boundary",
               "when": "the user requests analysis",
               "then": "the system identifies the applicable limitation",
               "verificationMethod": "manual-test"
             },
             {
-              "criterionId": "ZD-FILE-025-AC-02",
+              "criterionId": "ZD-FILE-AC-50",
               "given": "an archive or nested content is only partially covered",
               "when": "a result is presented",
               "then": "the uncovered portion is disclosed and the result is not represented as complete coverage",
@@ -1292,14 +1292,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-026-AC-01",
+              "criterionId": "ZD-FILE-AC-51",
               "given": "supported workload and resource limits are documented",
               "when": "an input or concurrent workload exceeds a limit",
               "then": "the system rejects, defers or terminates the scan with an explicit bounded outcome",
               "verificationMethod": "operational-test"
             },
             {
-              "criterionId": "ZD-FILE-026-AC-02",
+              "criterionId": "ZD-FILE-AC-52",
               "given": "the system is under resource pressure",
               "when": "a scan cannot safely continue",
               "then": "it fails or pauses according to documented policy without reporting a completed verdict",
@@ -1339,14 +1339,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-027-AC-01",
+              "criterionId": "ZD-FILE-AC-53",
               "given": "an updateable engine or detection dataset is selected",
               "when": "an update is received",
               "then": "its authenticity and integrity are verified before activation",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-FILE-027-AC-02",
+              "criterionId": "ZD-FILE-AC-54",
               "given": "update verification fails or the update is incomplete",
               "when": "a scan would depend on that update",
               "then": "the invalid update is not used and the scan is unavailable or inconclusive as applicable",
@@ -1385,14 +1385,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-FILE-028-AC-01",
+              "criterionId": "ZD-FILE-AC-55",
               "given": "a scan uses detection data with a known update timestamp or freshness state",
               "when": "the result is displayed",
               "then": "the known relevant freshness information is available with the result",
               "verificationMethod": "inspection"
             },
             {
-              "criterionId": "ZD-FILE-028-AC-02",
+              "criterionId": "ZD-FILE-AC-56",
               "given": "no reliable freshness information exists",
               "when": "the result is displayed",
               "then": "the system does not invent an update date or freshness guarantee",
@@ -1409,73 +1409,91 @@
           "questionId": "ZD-Q-FILE-001",
           "question": "Which file types, size/count limits, archive recursion depth, and encrypted/password-protected inputs will MVP-01 support?",
           "impact": "Determines eligibility, disclosure, test boundaries and workload limits.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Publish a versioned support matrix before release; reject unsupported inputs truthfully."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Publish a versioned support matrix before release; reject unsupported inputs truthfully.",
+          "resolution": "Publish a tested support matrix covering file types and input constraints. Unsupported inputs are rejected truthfully. Exact size/count/archive/encrypted-file limits depend on engine and platform evidence.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-FILE-002",
           "question": "Which analysis engine, detection method and threat-intelligence sources will be used, and what licensing, redistribution and update constraints apply?",
           "impact": "Determines coverage, privacy, offline behaviour, update trust, cost and operational ownership.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Compare local and remote approaches against coverage, privacy, licensing, update trust, false positives/negatives and cost."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Compare local and remote approaches against coverage, privacy, licensing, update trust, false positives/negatives and cost.",
+          "resolution": "Prefer on-device/local analysis. No cloud analysis or remote file-content transfer is part of MVP-01 unless a separate capability is explicitly approved. Select an engine and threat-intelligence sources only after accuracy, privacy, licensing, update trust and cost review.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-FILE-003",
           "question": "What evidence thresholds and confidence policy distinguish the four result classes?",
           "impact": "Without explicit criteria, verdict labels cannot be tested consistently.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Define a documented classification policy and representative validation set before release."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Define a documented classification policy and representative validation set before release.",
+          "resolution": "Keep the four distinct result classes. Suspicious, partial, unavailable or inconclusive evidence must never be represented as safe. Exact evidence thresholds and confidence calibration require a representative validation corpus and engine evaluation.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-FILE-004",
           "question": "Will a separately approved optional cloud-analysis capability ever be offered, and what consent, processor, data, purpose and retention policy would apply?",
           "impact": "The default is no cloud upload; optional cloud analysis is not approved and would change the data boundary.",
           "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep cloud analysis absent unless separately approved; require explicit disclosure and consent before transmission."
+          "status": "deferred",
+          "pmRecommendation": "Keep cloud analysis absent unless separately approved; require explicit disclosure and consent before transmission.",
+          "resolution": "Optional cloud analysis is not part of MVP-01. Any future cloud-analysis capability requires separate owner approval, disclosure of data/purpose/recipient and explicit user consent before transmission.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-FILE-005",
           "question": "What file content, metadata or result data may be retained after the active scan, for what purpose and duration, and how can users delete it?",
           "impact": "Affects privacy, persistence, diagnostics and user expectations.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Minimize by default; document any necessary retention separately from quarantine retention."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Minimize by default; document any necessary retention separately from quarantine retention.",
+          "resolution": "Minimize file content and metadata processing. Do not retain file content after the active scan by default; any retained result/metadata requires a documented purpose, retention rule and user deletion path. Exact durations remain for policy/legal review.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-FILE-006",
           "question": "What device/server resource budgets, concurrency limits and representative workload targets define supported scanning?",
           "impact": "Needed to define bounded performance and safe failure behaviour.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Benchmark representative supported workloads on intended platforms before setting numeric limits."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Benchmark representative supported workloads on intended platforms before setting numeric limits.",
+          "resolution": "Set device/server resource budgets, concurrency and workload targets only after representative benchmarks on intended platforms. Do not invent numeric limits.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-FILE-007",
           "question": "Which web browsers, Android versions and file-selection/access capabilities are in launch scope?",
           "impact": "Determines platform-specific access and eligibility boundaries.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Publish a tested platform support matrix; do not infer parity where capabilities differ."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Publish a tested platform support matrix; do not infer parity where capabilities differ.",
+          "resolution": "Maintain a tested web/Android support matrix and disclose material capability differences. Exact browser, OS and device versions depend on compatibility testing and owner scope confirmation.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-FILE-008",
           "question": "What file fingerprint/hash algorithm, encoding and exact purpose will the product use, if any?",
           "impact": "SHA-256 is only a planned direction in product material; integrity and identity semantics depend on final policy.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep algorithm-specific claims out until purpose and exact policy are approved."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep algorithm-specific claims out until purpose and exact policy are approved.",
+          "resolution": "Use a file fingerprint only where needed for content identity or integrity; it is not evidence that a file is safe. Algorithm, encoding and exact uses remain architecture decisions.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-FILE-009",
           "question": "What progress granularity and cancellation guarantee can the chosen engine provide?",
           "impact": "Affects lifecycle UI and user expectations.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Expose only progress and cancellation guarantees the selected engine can substantiate."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Expose only progress and cancellation guarantees the selected engine can substantiate.",
+          "resolution": "Show progress only when the analysis engine provides meaningful progress. Cancellation must stop safely at supported boundaries; exact progress granularity and cancellation guarantees depend on engine/platform capabilities.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         }
       ]
     }
