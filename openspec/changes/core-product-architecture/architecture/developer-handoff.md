@@ -2,7 +2,7 @@
 
 **Handoff status:** Prepared by Architect; awaiting Product Owner architecture approval and implementation authorization.  
 **Implementation status:** Not started.  
-**Canonical plan:** [tasks.md](../tasks.md)  
+**Canonical outcome-level implementation plans:** [tasks.md](../tasks.md)  
 **Architecture:** [design.md](../design.md)  
 **Traceability:** [requirement-traceability.md](requirement-traceability.md)  
 **Decision state:** [decision-log.md](decision-log.md) and [open-decision-register.md](open-decision-register.md)
@@ -72,3 +72,20 @@ Implementation may start only after:
 3. The Product Owner explicitly authorizes the Developer to begin core implementation.
 
 The Developer must not start Neon, Vercel, production-provider or deployment work under this handoff. Those require a later architecture update after the core product is implemented and tested.
+
+
+## Required Developer planning step — Developer owns decomposition
+
+The entries in `tasks.md` are Architect-authored outcome-level implementation plans. They state the required goals, scope, constraints, observable outcomes and acceptance criteria. They are intentionally not broken into coding steps.
+
+After the owner authorizes implementation, the Developer Agent—not the Architect—must:
+1. Select the authorized outcome-level plan and restate the intended outcome.
+2. Inspect the current repository and relevant project records.
+3. Use the installed `planning-and-task-breakdown` skill to create its own execution plan and small, verifiable task breakdown.
+4. Map dependencies, choose implementation order and checkpoints, and identify risks and unknowns.
+5. Decide the concrete engineering approach within the approved architecture.
+6. Implement and test continuously, then report evidence against the Architect's acceptance criteria.
+
+The Developer's detailed breakdown belongs in its own `developer-workspace/` (or the project's designated Developer planning location), not by expanding the Architect's `tasks.md` into step-by-step subtasks.
+
+The Architect does not perform or pre-write that breakdown. The Architect's responsibility resumes when architectural clarification, an architecture update, or assessment of reported outcome evidence is needed.
