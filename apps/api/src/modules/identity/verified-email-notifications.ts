@@ -30,3 +30,21 @@ export function createVerifiedEmailSecurityNotifier(
     },
   };
 }
+
+export interface VerifiedEmailRecoveryDelivery {
+  sendRecoveryChallenge(email: string): Promise<void>;
+}
+
+export function createVerifiedEmailRecoveryBoundary(
+  lookup: VerifiedEmailLookup,
+  delivery: VerifiedEmailRecoveryDelivery,
+) {
+  return {
+    async request(accountId: string): Promise<boolean> {
+      const verifiedEmail = await lookup.getVerifiedEmail(accountId);
+      if (!verifiedEmail) return false;
+      await delivery.sendRecoveryChallenge(verifiedEmail);
+      return true;
+    },
+  };
+}
