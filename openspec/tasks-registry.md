@@ -1,6 +1,6 @@
 # ZeroDeck OpenSpec Tasks Registry
 
-**Purpose:** Project-level index of architecture and implementation work recorded in OpenSpec. Detailed acceptance criteria and task checkboxes remain in each change's `tasks.md`.
+**Purpose:** Project-level index of architecture and implementation work recorded in OpenSpec. Outcome-level implementation plans and their acceptance criteria remain in each change's `tasks.md`. Detailed executable breakdowns are owned by the Developer Agent.
 
 **Current branch:** `automation/openspec-bootstrap`  
 **Current change:** `core-product-architecture`  
@@ -26,3 +26,11 @@
 - The Architect owns architectural changes discovered during implementation; the Developer raises material conflicts rather than silently changing architecture.
 - Hosted integrations do not begin until core-stage exit evidence exists and the owner authorizes the next stage.
 - Do not merge the architecture branch to `main` or begin implementation without the owner's explicit authorization.
+
+
+## Role-boundary clarification
+
+- Architect-authored entries in OpenSpec are outcome-level implementation plans: goals, scope, constraints, dependencies, observable results and acceptance criteria.
+- The Architect does not decompose those plans into small coding tasks or prescribe the Developer's execution sequence.
+- The Developer Agent owns repository inspection, use of the planning-and-task-breakdown skill, detailed task decomposition, dependency ordering, checkpoints, engineering choices, implementation and continuous testing.
+- Developer breakdowns belong in the Developer's own workspace. They do not replace or rewrite the Architect's outcome-level plans.
