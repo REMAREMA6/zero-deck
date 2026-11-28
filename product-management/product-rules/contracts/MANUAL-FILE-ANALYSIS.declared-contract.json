@@ -1,0 +1,1484 @@
+{
+  "contractId": "ZD-CONTRACT-FILE-ANALYSIS",
+  "contractType": "product-requirements-contract",
+  "title": "ZeroDeck MVP-01 Manual File Security Analysis Product Requirements",
+  "issuer": "ZeroDeck Product Management Agent",
+  "artifact": {
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/6d8e4bf85b50e013ab592634ca237fb7836a249b/product-management/product-rules/contracts/MANUAL-FILE-ANALYSIS.md",
+    "version": "0.1.0-draft",
+    "revision": "6d8e4bf85b50e013ab592634ca237fb7836a249b",
+    "digest": "sha256:859a8913cd831da9334a1e0b1755f5635b18f2989ab9efb7e10d1c9dbd5fd73e",
+    "mediaType": "text/markdown"
+  },
+  "scope": "MVP-01 manual file security analysis for web and Android; user-selected files, explicit scan requests, bounded result semantics and truthful failure handling; excludes quarantine/disposition and website/link checking.",
+  "statements": [
+    {
+      "statementId": "ZD-FILE-001",
+      "text": "The system MUST initiate file security analysis only after the user explicitly selects or identifies a file and requests a scan.",
+      "location": "### Requirement ZD-FILE-001 — Require an explicit manual scan request"
+    },
+    {
+      "statementId": "ZD-FILE-002",
+      "text": "The system MUST analyse only the file selected by the user and only to the extent that the active platform grants the application access to that file.",
+      "location": "### Requirement ZD-FILE-002 — Respect the selected file's access boundary"
+    },
+    {
+      "statementId": "ZD-FILE-003",
+      "text": "If access to the selected file is unavailable, revoked, expired, or insufficient when required for analysis, the system MUST stop or reject the affected operation and MUST NOT report a completed scan.",
+      "location": "### Requirement ZD-FILE-003 — Reject revoked or unavailable file access"
+    },
+    {
+      "statementId": "ZD-FILE-004",
+      "text": "Before release, the product MUST define and communicate the file types and input constraints accepted for MVP-01, including applicable size, count, archive, encryption, and malformed-input limits.",
+      "location": "### Requirement ZD-FILE-004 — Publish the supported-input boundary"
+    },
+    {
+      "statementId": "ZD-FILE-005",
+      "text": "The system MUST classify empty, malformed, corrupt, encrypted or password-protected, oversized, unsupported, and unreadable inputs according to the documented input policy, and MUST NOT represent an input that was not successfully analysed as a successful scan.",
+      "location": "### Requirement ZD-FILE-005 — Reject unreadable and invalid inputs truthfully"
+    },
+    {
+      "statementId": "ZD-FILE-006",
+      "text": "The system MUST NOT modify, replace, rename, move, or delete the user-selected original file as a side effect of manual analysis.",
+      "location": "### Requirement ZD-FILE-006 — Preserve the original file during analysis"
+    },
+    {
+      "statementId": "ZD-FILE-007",
+      "text": "By default, the system MUST perform MVP-01 file analysis without uploading the selected file's content to a cloud service.",
+      "location": "### Requirement ZD-FILE-007 — Keep file analysis on-device by default"
+    },
+    {
+      "statementId": "ZD-FILE-008",
+      "text": "If a future, separately approved cloud-analysis capability is introduced, the system MUST obtain explicit user consent after disclosing the data sent, purpose, recipient or processor, and the choice to proceed or decline.",
+      "location": "### Requirement ZD-FILE-008 — Gate any future cloud analysis behind separate consent"
+    },
+    {
+      "statementId": "ZD-FILE-009",
+      "text": "The system MUST NOT execute a user-selected file as part of manual security analysis.",
+      "location": "### Requirement ZD-FILE-009 — Do not execute selected files as part of analysis"
+    },
+    {
+      "statementId": "ZD-FILE-010",
+      "text": "The system MUST expose whether a requested scan is rejected, accepted, in progress, completed, cancelled, interrupted, or failed, using states that distinguish active attempts from terminal outcomes.",
+      "location": "### Requirement ZD-FILE-010 — Expose an honest scan lifecycle"
+    },
+    {
+      "statementId": "ZD-FILE-011",
+      "text": "While a scan is active, the system MUST provide a cancellation action when the selected platform and analysis process support cancellation, and MUST communicate whether cancellation completed or could not be completed.",
+      "location": "### Requirement ZD-FILE-011 — Support truthful cancellation"
+    },
+    {
+      "statementId": "ZD-FILE-012",
+      "text": "The system MUST distinguish at least the outcomes Threat found, Suspicious, No known threat found, and Could not decide or Could not analyse.",
+      "location": "### Requirement ZD-FILE-012 — Use distinct security-analysis outcome classes"
+    },
+    {
+      "statementId": "ZD-FILE-013",
+      "text": "When no matching threat is identified, the system MUST describe the outcome as No known threat found or equivalent wording and MUST NOT claim or imply that the file is safe, harmless, or guaranteed free of malware.",
+      "location": "### Requirement ZD-FILE-013 — Do not equate no known threat with safety"
+    },
+    {
+      "statementId": "ZD-FILE-014",
+      "text": "For each completed analysis result, the system MUST make available the scan-attempt identity and the analysis context needed to interpret the result, including detection-source or engine identity and version when that information exists.",
+      "location": "### Requirement ZD-FILE-014 — Record result provenance and analysis context"
+    },
+    {
+      "statementId": "ZD-FILE-015",
+      "text": "If analysis is partial, interrupted, inconclusive, or based on unavailable detection data, the system MUST communicate the limitation and MUST NOT present the result as a complete analysis.",
+      "location": "### Requirement ZD-FILE-015 — Represent uncertainty and partial analysis explicitly"
+    },
+    {
+      "statementId": "ZD-FILE-016",
+      "text": "For a Threat found or Suspicious outcome, the system MUST provide the available finding explanation and MUST distinguish observed detection evidence from interpretation or uncertainty.",
+      "location": "### Requirement ZD-FILE-016 — Explain detections without inventing evidence"
+    },
+    {
+      "statementId": "ZD-FILE-017",
+      "text": "The system MUST provide next-step guidance consistent with the returned outcome and MUST NOT direct users to treat Suspicious, inconclusive, or No known threat found as a confirmed safety determination.",
+      "location": "### Requirement ZD-FILE-017 — Provide outcome-consistent next-step guidance"
+    },
+    {
+      "statementId": "ZD-FILE-018",
+      "text": "If the analysis engine, detection data, or a required dependency is unavailable or fails, the system MUST return a failure or Could not decide outcome and MUST NOT convert the failure into Threat found or No known threat found.",
+      "location": "### Requirement ZD-FILE-018 — Keep engine failures separate from verdicts"
+    },
+    {
+      "statementId": "ZD-FILE-019",
+      "text": "When a scan attempt fails or is interrupted, the system MUST allow the user to initiate a new attempt when the input remains accessible and eligible, and MUST keep the new attempt distinguishable from the prior attempt.",
+      "location": "### Requirement ZD-FILE-019 — Make retry a distinguishable new attempt"
+    },
+    {
+      "statementId": "ZD-FILE-020",
+      "text": "The system MUST access and process only the file content and metadata necessary to perform the requested analysis and communicate its result.",
+      "location": "### Requirement ZD-FILE-020 — Minimize file and metadata collection"
+    },
+    {
+      "statementId": "ZD-FILE-021",
+      "text": "The system MUST NOT expose file content, secrets extracted from files, or sensitive file metadata in ordinary logs, analytics, crash reports, or user-visible error details unless a separately documented and consented diagnostic purpose authorizes that specific disclosure.",
+      "location": "### Requirement ZD-FILE-021 — Protect file data in diagnostics"
+    },
+    {
+      "statementId": "ZD-FILE-022",
+      "text": "If the product retains a scan result or scan history, it MUST define and apply a separate retention and deletion policy for that record rather than inheriting MVP-02 quarantine retention.",
+      "location": "### Requirement ZD-FILE-022 — Separate retained scan-result policy from quarantine retention"
+    },
+    {
+      "statementId": "ZD-FILE-023",
+      "text": "The MVP-01 workflow MUST NOT require a standalone scan-history feature as a prerequisite for selecting a file, requesting a scan, or viewing the current result.",
+      "location": "### Requirement ZD-FILE-023 — Do not require a standalone scan-history feature"
+    },
+    {
+      "statementId": "ZD-FILE-024",
+      "text": "The system MUST use the same product-level scan outcome meanings and no-guarantee semantics on web and Android, while communicating platform-specific file-access limitations and supported-input differences.",
+      "location": "### Requirement ZD-FILE-024 — Maintain shared outcome semantics across platforms"
+    },
+    {
+      "statementId": "ZD-FILE-025",
+      "text": "The system MUST communicate when a file type, file size, archive structure, encryption state, or platform access condition is outside the documented analysis coverage.",
+      "location": "### Requirement ZD-FILE-025 — Disclose unsupported analysis coverage"
+    },
+    {
+      "statementId": "ZD-FILE-026",
+      "text": "Before release, the product MUST define the resource and workload limits under which MVP-01 analysis is supported, and the system MUST handle an exceeded limit as a bounded rejection or failure rather than exhausting resources without control.",
+      "location": "### Requirement ZD-FILE-026 — Define and enforce bounded resource limits"
+    },
+    {
+      "statementId": "ZD-FILE-027",
+      "text": "If MVP-01 relies on updateable detection data or an updateable analysis engine, the system MUST verify the authenticity and integrity of each update before it is used for file classification.",
+      "location": "### Requirement ZD-FILE-027 — Verify integrity of conditional engine or detection updates"
+    },
+    {
+      "statementId": "ZD-FILE-028",
+      "text": "If a result depends on updateable detection data, the system MUST make relevant detection-data freshness or update status available to the user when that information is known and material to interpreting the result.",
+      "location": "### Requirement ZD-FILE-028 — Disclose known detection-data freshness"
+    }
+  ],
+  "evidenceRefs": [
+    "ZD-EV-CONTRACT-FILE-001"
+  ],
+  "extensions": {
+    "zeroDeckProductRequirements": {
+      "profileId": "zero-deck.pm-product-requirements",
+      "profileVersion": "1.0.0-draft",
+      "productId": "zero-deck",
+      "author": {
+        "name": "ZeroDeck Product Management Agent",
+        "role": "Product Manager",
+        "organization": "ZeroDeck Product Management"
+      },
+      "softwareRulesCompatibility": {
+        "repository": "https://github.com/REMAREMA6/software-rules",
+        "commit": "5591a2e62287afc29bde002369eaf659673ec59b",
+        "specificationRelease": "0.3.0-draft",
+        "schemaVersion": "0.2.0",
+        "schemaDialect": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "contractLifecycle": "draft",
+      "capabilityId": "MVP-01",
+      "requirements": [
+        {
+          "statementId": "ZD-FILE-001",
+          "requirementType": "functional",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "behavior",
+            "business-rules"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "User-initiated scan trigger",
+          "rationale": "MVP-01 is expressly manual; automatic/background protection is excluded.",
+          "basis": [
+            {
+              "basisType": "owner-decision",
+              "description": "Owner-approved MVP scope defines manual file security analysis (ZD-SCOPE-001)."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-001-AC-01",
+              "given": "no scan request exists",
+              "when": "a file becomes available",
+              "then": "no analysis is initiated",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-FILE-001-AC-02",
+              "given": "an eligible file is selected",
+              "when": "the user requests a scan",
+              "then": "one scan attempt is initiated and its accepted or rejected state is communicated",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-002",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "authorization-permissions",
+            "behavior",
+            "security-controls",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "File access boundary",
+          "rationale": "Web and Android expose different file-access capabilities; selection is not blanket permission to read unrelated files.",
+          "basis": [
+            {
+              "basisType": "platform-contract",
+              "description": "Platform file selection and Android SAF grant access to selected resources subject to platform permissions (EVD-DOC-ANDROID-001)."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-002-AC-01",
+              "given": "the user selected one file and access was granted",
+              "when": "the scan reads input",
+              "then": "no unrelated file is read as part of that scan",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-FILE-002-AC-02",
+              "given": "the platform has not granted access to a selected file",
+              "when": "analysis is requested",
+              "then": "the system does not bypass the platform boundary and reports the access failure",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-003",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "authorization-permissions",
+            "behavior",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "File permission lifecycle",
+          "rationale": "A file reference is not proof that its content remains readable.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference based on platform-controlled file access and MVP-FILE-001/002."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-003-AC-01",
+              "given": "access to the selected file has been revoked",
+              "when": "the scan attempts to read it",
+              "then": "the attempt ends as an access failure and no completed verdict is presented",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-FILE-003-AC-02",
+              "given": "access is restored through a valid user/platform action",
+              "when": "the user retries",
+              "then": "a new attempt may proceed using the newly granted access",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-004",
+          "requirementType": "policy",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "business-rules",
+            "configuration",
+            "data"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Supported file and input boundary",
+          "rationale": "Supported formats and limits are explicitly open; users need an authoritative eligibility boundary.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "PM-FILE-008 and OPEN-PROPERTIES identify these constraints as unresolved (EVD-SRC-PRODUCT-001)."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-004-AC-01",
+              "given": "the supported-input policy is published",
+              "when": "the user views or invokes file selection",
+              "then": "accepted types and applicable limits are discoverable before a scan is accepted",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-FILE-004-AC-02",
+              "given": "an input is outside a documented constraint",
+              "when": "analysis is requested",
+              "then": "the system rejects it with a specific unsupported-input outcome",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-005",
+          "requirementType": "reliability",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "business-rules",
+            "data",
+            "behavior",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Input validation and rejection",
+          "rationale": "A failure to analyse must remain distinct from a threat verdict.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "PM-FILE-004 and OPEN-PROPERTIES enumerate unsupported, inaccessible, malformed, encrypted, oversized and unreadable cases."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-005-AC-01",
+              "given": "an input is invalid under the published policy",
+              "when": "analysis is requested",
+              "then": "the system returns the corresponding invalid-input outcome without a successful verdict",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-FILE-005-AC-02",
+              "given": "an encrypted input has no approved analysis path",
+              "when": "analysis is requested",
+              "then": "the system reports that it could not analyse the file rather than inferring a threat or clean result",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-006",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "data",
+            "security-controls"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Original file integrity during scan",
+          "rationale": "Scanning is distinct from MVP-02 disposition; analysis must not silently alter the source file.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference from the owner-approved separation of MVP-01 analysis and MVP-02 disposition (ZD-SCOPE-001)."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-006-AC-01",
+              "given": "a readable file is selected",
+              "when": "the scan completes or fails",
+              "then": "the original file content and location remain unchanged by the scan",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-FILE-006-AC-02",
+              "given": "a scan is cancelled or interrupted",
+              "when": "the user inspects the original file",
+              "then": "the scan has not deleted or replaced it",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-007",
+          "requirementType": "privacy",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "integrations",
+            "data",
+            "configuration"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Default file-content data flow",
+          "rationale": "The working product material states on-device analysis and no cloud upload by default; this remains PM-proposed because the source is a working draft.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "PM-FILE-005 records on-device analysis and no cloud upload by default (EVD-SRC-PRODUCT-001)."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-007-AC-01",
+              "given": "a user starts a scan under default configuration",
+              "when": "the system analyses the file",
+              "then": "file content is not transmitted to a cloud service",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-FILE-007-AC-02",
+              "given": "a network connection is available",
+              "when": "a default local analysis is performed",
+              "then": "network availability alone does not cause file-content upload",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-008",
+          "requirementType": "privacy",
+          "normativeKind": "conditional",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "behavior",
+            "privacy",
+            "integrations",
+            "security-controls"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Optional future cloud analysis",
+          "conditions": [
+            "Only if a separate cloud-analysis capability is approved and made available; none is approved by this contract."
+          ],
+          "rationale": "The working product material specifies disclosure and consent if cloud analysis exists, while its existence remains open.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "PM-FILE-006 specifies separate disclosure and consent; cloud analysis is not approved by this contract."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-008-AC-01",
+              "given": "a separately approved cloud-analysis option is offered",
+              "when": "the user is asked to enable it",
+              "then": "the disclosure identifies data sent, purpose and recipient or processor",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-FILE-008-AC-02",
+              "given": "the user declines or has not consented",
+              "when": "a scan is requested",
+              "then": "no file content is sent to the cloud",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-009",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "behavior",
+            "integrations"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "File execution boundary",
+          "rationale": "Executing potentially malicious input creates avoidable risk; this is a PM safety recommendation, not an observation.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; safe parsing/isolation and execution boundaries remain open in OPEN-PROPERTIES."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-009-AC-01",
+              "given": "a user-selected file is submitted",
+              "when": "the analysis workflow processes it",
+              "then": "the file is not launched or executed as a program, script, macro or active document",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-FILE-009-AC-02",
+              "given": "the selected engine would require execution to produce a result",
+              "when": "execution would be required",
+              "then": "the system does not silently execute the file and reports the limitation",
+              "verificationMethod": "analysis"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-010",
+          "requirementType": "functional",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "behavior",
+            "data"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Scan attempt lifecycle",
+          "rationale": "Failure, cancellation and interruption must not collapse into completion.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "MVP-FILE-001/002 require scan start, progress, termination and truthful terminal state (software-rules/SCENARIOS.md)."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-010-AC-01",
+              "given": "a scan is accepted and processing has begun",
+              "when": "the user checks its state",
+              "then": "it is distinguishable from rejected and terminal attempts",
+              "verificationMethod": "manual-test"
+            },
+            {
+              "criterionId": "ZD-FILE-010-AC-02",
+              "given": "a scan reaches cancellation, interruption or failure",
+              "when": "the attempt terminates",
+              "then": "its terminal state is not reported as completed",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-011",
+          "requirementType": "functional",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "behavior",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Active scan cancellation",
+          "rationale": "Cancellation guarantees and progress granularity are open; do not promise engine-specific interruption guarantees.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; cancellation and interruption are explicit open dimensions in OPEN-PROPERTIES."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-011-AC-01",
+              "given": "a scan is active and cancellation is supported",
+              "when": "the user requests cancellation",
+              "then": "the system stops further analysis as soon as the process can safely stop and reports cancellation",
+              "verificationMethod": "manual-test"
+            },
+            {
+              "criterionId": "ZD-FILE-011-AC-02",
+              "given": "cancellation is unavailable or cannot stop an operation",
+              "when": "the user requests cancellation",
+              "then": "the system does not claim cancellation succeeded and communicates the actual state",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-012",
+          "requirementType": "business-rule",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "business-rules",
+            "data",
+            "interface",
+            "behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "File scan result taxonomy",
+          "rationale": "These four result classes are in the product-material draft; exact detection criteria remain open.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "PM-FILE-002 defines the four-way result model (EVD-SRC-PRODUCT-001)."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-012-AC-01",
+              "given": "evidence meets documented confirmed-threat criteria",
+              "when": "the result is presented",
+              "then": "it is classified as Threat found",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-FILE-012-AC-02",
+              "given": "analysis is incomplete, unsupported or lacks sufficient evidence",
+              "when": "the result is presented",
+              "then": "it is Could not decide or Could not analyse rather than No known threat found",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-013",
+          "requirementType": "policy",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "business-rules",
+            "security-controls"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "No-known-threat result semantics",
+          "rationale": "This is explicit product-material wording and a core trust boundary.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "PM-FILE-003 prohibits presenting a no-known-threat result as a guarantee that the file is safe."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-013-AC-01",
+              "given": "available analysis finds no known threat",
+              "when": "the result is displayed",
+              "then": "wording communicates only that no known threat was found",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-FILE-013-AC-02",
+              "given": "the result is No known threat found",
+              "when": "summary or follow-up text is rendered",
+              "then": "no part guarantees safety or absence of all malware",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-014",
+          "requirementType": "data",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "behavior",
+            "security-controls"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Result provenance",
+          "rationale": "A result without its analysis context cannot be meaningfully interpreted; the engine and update source remain unselected.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference for explainability and reproducibility; engine and feed details remain open."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-014-AC-01",
+              "given": "a completed scan has a known engine or detection-source identity and version",
+              "when": "its result is retrieved",
+              "then": "that provenance is associated with the result",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-FILE-014-AC-02",
+              "given": "a provenance field is unavailable",
+              "when": "the result is presented",
+              "then": "the system does not fabricate an engine, source or version",
+              "verificationMethod": "inspection"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-015",
+          "requirementType": "reliability",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "business-rules",
+            "data",
+            "interface",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Incomplete and uncertain result semantics",
+          "rationale": "Partial-result policy and confidence are unresolved; uncertainty must not silently become a clean verdict.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference grounded in MVP-FILE-002's inconclusive/interruption branches and OPEN-PROPERTIES."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-015-AC-01",
+              "given": "only part of a file was analysed or required detection data was unavailable",
+              "when": "a result is returned",
+              "then": "the result is marked partial or inconclusive and the limitation is explained",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-FILE-015-AC-02",
+              "given": "analysis is interrupted before its completion condition",
+              "when": "the attempt terminates",
+              "then": "no complete verdict is issued from the incomplete attempt",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-016",
+          "requirementType": "usability",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "data",
+            "business-rules"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "User-facing result explanation",
+          "rationale": "The workflow needs understandable explanations without overstating the underlying evidence.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "MVP-FILE-002 requires classification basis where exposed and a user-facing explanation."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-016-AC-01",
+              "given": "a Threat found or Suspicious result includes detection evidence",
+              "when": "the user opens the result",
+              "then": "available evidence or detection reason is presented without inventing unavailable detail",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-FILE-016-AC-02",
+              "given": "the engine cannot provide a meaningful explanation",
+              "when": "the result is displayed",
+              "then": "the system states the limitation rather than fabricating a reason",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-017",
+          "requirementType": "usability",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "business-rules",
+            "behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Post-result user guidance",
+          "rationale": "Guidance must preserve the distinction between detection and assurance.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference grounded in the four-way result model and no-guarantee rule."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-017-AC-01",
+              "given": "a Suspicious or Could not decide result is shown",
+              "when": "the user views its guidance",
+              "then": "the guidance preserves uncertainty and does not label the file confirmed safe or malicious",
+              "verificationMethod": "manual-test"
+            },
+            {
+              "criterionId": "ZD-FILE-017-AC-02",
+              "given": "a Threat found result is shown",
+              "when": "the user views its guidance",
+              "then": "it explains the result and does not instruct execution of the file",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-018",
+          "requirementType": "reliability",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "integrations",
+            "errors-recovery",
+            "business-rules",
+            "behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Analysis dependency failure",
+          "rationale": "Engine/database unavailability and update failures are explicit failure cases; absence cannot be treated as a clean result.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "PM-FILE-004 and OPEN-PROPERTIES identify engine/database unavailable and update failure."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-018-AC-01",
+              "given": "a required analysis engine or detection source is unavailable",
+              "when": "a scan is requested",
+              "then": "the system reports unavailable or inconclusive and does not issue a clean verdict",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-FILE-018-AC-02",
+              "given": "a dependency returns an invalid or unusable response",
+              "when": "the result is evaluated",
+              "then": "the attempt fails safely and the response is not treated as detection evidence",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-019",
+          "requirementType": "functional",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "data",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Retry and attempt identity",
+          "rationale": "Distinct attempts prevent stale or partial results being mistaken for the new result.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference based on explicit retry/interruption gaps in OPEN-PROPERTIES."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-019-AC-01",
+              "given": "a prior attempt failed or was interrupted and the file remains eligible",
+              "when": "the user requests a retry",
+              "then": "a new attempt is created and distinguishable from the prior attempt",
+              "verificationMethod": "automated-test"
+            },
+            {
+              "criterionId": "ZD-FILE-019-AC-02",
+              "given": "a prior attempt produced a partial result",
+              "when": "a retry begins",
+              "then": "the prior result is not relabelled as the retry's completed result",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-020",
+          "requirementType": "privacy",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "security-controls",
+            "behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "File and metadata minimization",
+          "rationale": "File content can contain sensitive information; no broader collection purpose is established for MVP-01.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM privacy recommendation; no separate analytics or remote-processing feature is approved by MVP scope."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-020-AC-01",
+              "given": "a file is selected for analysis",
+              "when": "the system reads content and metadata",
+              "then": "access is limited to information necessary for analysis and result communication",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-FILE-020-AC-02",
+              "given": "a metadata field is not required for analysis or result interpretation",
+              "when": "the scan is processed",
+              "then": "that field is not collected solely by default",
+              "verificationMethod": "inspection"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-021",
+          "requirementType": "privacy",
+          "normativeKind": "required",
+          "priority": "P0",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "data",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Diagnostic disclosure boundary",
+          "rationale": "Diagnostics must not become an unintended disclosure channel for selected file contents.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM privacy/security recommendation based on the on-device default and minimization principle."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-021-AC-01",
+              "given": "a scan encounters a parsing or engine error",
+              "when": "diagnostic information is recorded",
+              "then": "file contents and sensitive metadata are absent from ordinary diagnostic output",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-FILE-021-AC-02",
+              "given": "a diagnostic workflow requests additional file data",
+              "when": "no specific disclosure purpose and consent exist",
+              "then": "that data is not transmitted or retained for diagnostics",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-022",
+          "requirementType": "privacy",
+          "normativeKind": "conditional",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "persistence",
+            "configuration",
+            "privacy"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Optional scan-result persistence",
+          "conditions": [
+            "Only if scan results are retained beyond the active analysis interaction; scan history is not a standalone MVP feature."
+          ],
+          "rationale": "Product material separates scan history from quarantine retention; actual persistence remains conditional and unresolved.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "PM-FILE-009 and PM-QUAR-013 state separate retention; OPEN-PROPERTIES makes persistence conditional."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-022-AC-01",
+              "given": "scan results are persisted beyond the active interaction",
+              "when": "the retention policy is applied",
+              "then": "scan-result retention is documented separately from quarantine-item retention",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-FILE-022-AC-02",
+              "given": "a scan record reaches its documented deletion condition",
+              "when": "the record is deleted",
+              "then": "the policy does not imply deletion or modification of a separate quarantine artifact",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-023",
+          "requirementType": "policy",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "business-rules",
+            "behavior",
+            "interface"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "MVP boundary for scan history",
+          "rationale": "Standalone scan history is explicitly excluded from the approved MVP.",
+          "basis": [
+            {
+              "basisType": "owner-decision",
+              "description": "The approved MVP exclusions list scan history as a standalone capability (ZD-SCOPE-001)."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-023-AC-01",
+              "given": "a user opens the MVP-01 workflow",
+              "when": "the user selects, scans and views a result",
+              "then": "those actions do not depend on a standalone scan-history feature",
+              "verificationMethod": "manual-test"
+            },
+            {
+              "criterionId": "ZD-FILE-023-AC-02",
+              "given": "a minimal record is required for another in-scope operation",
+              "when": "the record is retained",
+              "then": "it is not expanded into standalone history without owner approval",
+              "verificationMethod": "inspection"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-024",
+          "requirementType": "compatibility",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "behavior",
+            "business-rules",
+            "authorization-permissions"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Cross-platform MVP-01 semantics",
+          "rationale": "The owner selected web and Android; platform-specific capability differences are allowed.",
+          "basis": [
+            {
+              "basisType": "owner-decision",
+              "description": "Owner selected web and Android platforms with platform-specific capability differences allowed (product-management/TRACKER.md)."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-024-AC-01",
+              "given": "equivalent analysis evidence is available on web and Android",
+              "when": "each platform presents the result",
+              "then": "the same product-level outcome class and safety limitation are communicated",
+              "verificationMethod": "manual-test"
+            },
+            {
+              "criterionId": "ZD-FILE-024-AC-02",
+              "given": "a file cannot be accessed on one platform due to platform constraints",
+              "when": "the user requests a scan",
+              "then": "that platform reports its limitation rather than pretending to provide equivalent analysis",
+              "verificationMethod": "manual-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-025",
+          "requirementType": "policy",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "business-rules",
+            "data"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Coverage disclosure",
+          "rationale": "Coverage must not be implied beyond what the selected engine actually supports.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "OPEN-PROPERTIES lists these coverage questions as unresolved."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-025-AC-01",
+              "given": "a file exceeds a documented analysis boundary",
+              "when": "the user requests analysis",
+              "then": "the system identifies the applicable limitation",
+              "verificationMethod": "manual-test"
+            },
+            {
+              "criterionId": "ZD-FILE-025-AC-02",
+              "given": "an archive or nested content is only partially covered",
+              "when": "a result is presented",
+              "then": "the uncovered portion is disclosed and the result is not represented as complete coverage",
+              "verificationMethod": "inspection"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-026",
+          "requirementType": "performance",
+          "normativeKind": "required",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "performance-resource-behavior",
+            "configuration",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Scan resource and workload bounds",
+          "rationale": "Numeric file and resource limits are not established; do not invent them.",
+          "basis": [
+            {
+              "basisType": "source-evidence",
+              "description": "OPEN-PROPERTIES identifies file limits and performance/resource targets as unresolved."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-026-AC-01",
+              "given": "supported workload and resource limits are documented",
+              "when": "an input or concurrent workload exceeds a limit",
+              "then": "the system rejects, defers or terminates the scan with an explicit bounded outcome",
+              "verificationMethod": "operational-test"
+            },
+            {
+              "criterionId": "ZD-FILE-026-AC-02",
+              "given": "the system is under resource pressure",
+              "when": "a scan cannot safely continue",
+              "then": "it fails or pauses according to documented policy without reporting a completed verdict",
+              "verificationMethod": "operational-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-027",
+          "requirementType": "security",
+          "normativeKind": "conditional",
+          "priority": "P1",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "integrations",
+            "security-controls",
+            "configuration",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Conditional engine and detection-data updates",
+          "conditions": [
+            "Only if the selected analysis approach consumes updateable engine components or detection data."
+          ],
+          "rationale": "Engine and update mechanisms are unresolved; this does not select a particular update design.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM security recommendation; OPEN-PROPERTIES identifies update/freshness and trust verification as open."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-027-AC-01",
+              "given": "an updateable engine or detection dataset is selected",
+              "when": "an update is received",
+              "then": "its authenticity and integrity are verified before activation",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-FILE-027-AC-02",
+              "given": "update verification fails or the update is incomplete",
+              "when": "a scan would depend on that update",
+              "then": "the invalid update is not used and the scan is unavailable or inconclusive as applicable",
+              "verificationMethod": "automated-test"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        },
+        {
+          "statementId": "ZD-FILE-028",
+          "requirementType": "data",
+          "normativeKind": "conditional",
+          "priority": "P2",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "interface",
+            "configuration"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Detection-data freshness disclosure",
+          "conditions": [
+            "Only if the selected engine uses updateable detection data and supplies reliable freshness information."
+          ],
+          "rationale": "Freshness should be disclosed only when the selected engine supplies reliable information.",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "PM inference; detection-source freshness remains unresolved in OPEN-PROPERTIES."
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-FILE-028-AC-01",
+              "given": "a scan uses detection data with a known update timestamp or freshness state",
+              "when": "the result is displayed",
+              "then": "the known relevant freshness information is available with the result",
+              "verificationMethod": "inspection"
+            },
+            {
+              "criterionId": "ZD-FILE-028-AC-02",
+              "given": "no reliable freshness information exists",
+              "when": "the result is displayed",
+              "then": "the system does not invent an update date or freshness guarantee",
+              "verificationMethod": "inspection"
+            }
+          ],
+          "evidenceRefs": [
+            "ZD-EV-CONTRACT-FILE-001"
+          ]
+        }
+      ],
+      "openQuestions": [
+        {
+          "questionId": "ZD-Q-FILE-001",
+          "question": "Which file types, size/count limits, archive recursion depth, and encrypted/password-protected inputs will MVP-01 support?",
+          "impact": "Determines eligibility, disclosure, test boundaries and workload limits.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Publish a versioned support matrix before release; reject unsupported inputs truthfully."
+        },
+        {
+          "questionId": "ZD-Q-FILE-002",
+          "question": "Which analysis engine, detection method and threat-intelligence sources will be used, and what licensing, redistribution and update constraints apply?",
+          "impact": "Determines coverage, privacy, offline behaviour, update trust, cost and operational ownership.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Compare local and remote approaches against coverage, privacy, licensing, update trust, false positives/negatives and cost."
+        },
+        {
+          "questionId": "ZD-Q-FILE-003",
+          "question": "What evidence thresholds and confidence policy distinguish the four result classes?",
+          "impact": "Without explicit criteria, verdict labels cannot be tested consistently.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Define a documented classification policy and representative validation set before release."
+        },
+        {
+          "questionId": "ZD-Q-FILE-004",
+          "question": "Will a separately approved optional cloud-analysis capability ever be offered, and what consent, processor, data, purpose and retention policy would apply?",
+          "impact": "The default is no cloud upload; optional cloud analysis is not approved and would change the data boundary.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep cloud analysis absent unless separately approved; require explicit disclosure and consent before transmission."
+        },
+        {
+          "questionId": "ZD-Q-FILE-005",
+          "question": "What file content, metadata or result data may be retained after the active scan, for what purpose and duration, and how can users delete it?",
+          "impact": "Affects privacy, persistence, diagnostics and user expectations.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Minimize by default; document any necessary retention separately from quarantine retention."
+        },
+        {
+          "questionId": "ZD-Q-FILE-006",
+          "question": "What device/server resource budgets, concurrency limits and representative workload targets define supported scanning?",
+          "impact": "Needed to define bounded performance and safe failure behaviour.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Benchmark representative supported workloads on intended platforms before setting numeric limits."
+        },
+        {
+          "questionId": "ZD-Q-FILE-007",
+          "question": "Which web browsers, Android versions and file-selection/access capabilities are in launch scope?",
+          "impact": "Determines platform-specific access and eligibility boundaries.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Publish a tested platform support matrix; do not infer parity where capabilities differ."
+        },
+        {
+          "questionId": "ZD-Q-FILE-008",
+          "question": "What file fingerprint/hash algorithm, encoding and exact purpose will the product use, if any?",
+          "impact": "SHA-256 is only a planned direction in product material; integrity and identity semantics depend on final policy.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep algorithm-specific claims out until purpose and exact policy are approved."
+        },
+        {
+          "questionId": "ZD-Q-FILE-009",
+          "question": "What progress granularity and cancellation guarantee can the chosen engine provide?",
+          "impact": "Affects lifecycle UI and user expectations.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Expose only progress and cancellation guarantees the selected engine can substantiate."
+        }
+      ]
+    }
+  }
+}
