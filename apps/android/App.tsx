@@ -1,5 +1,10 @@
 import { useEffect, useState } from 'react';
 import * as SecureStore from 'expo-secure-store';
+import { File } from 'expo-file-system';
+import {
+  createAndroidFileSelectionAdapter,
+  type SelectedAndroidFile,
+} from './src/file-selection';
 import {
   ActivityIndicator,
   Pressable,
@@ -14,6 +19,9 @@ import {
 import { createSessionStorage } from './src/session-storage';
 
 const sessionStorage = createSessionStorage(SecureStore);
+const fileSelection = createAndroidFileSelectionAdapter({
+  pickFileAsync: () => File.pickFileAsync(),
+});
 
 const capabilities = [
   {
@@ -36,7 +44,7 @@ const capabilities = [
   },
 ];
 
-type Screen = 'home' | 'register' | 'login' | 'account';
+type Screen = 'home' | 'register' | 'login' | 'account' | 'file-analysis';
 
 interface SessionProfile {
   accountId: string;
@@ -59,6 +67,8 @@ export default function App() {
   const [profile, setProfile] = useState<SessionProfile | null>(null);
   const [submitting, setSubmitting] = useState(false);
   const [accepted, setAccepted] = useState(false);
+  const [selectedFile, setSelectedFile] = useState<SelectedAndroidFile | null>(null);
+  const [fileStatus, setFileStatus] = useState('No file selected. Selecting a file does not start analysis.');
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -103,6 +113,27 @@ export default function App() {
       active = false;
     };
   }, []);
+
+  async function handlePickFile() {
+    setFileStatus('Opening the Android document picker…');
+    try {
+      const selected = await fileSelection.select();
+      setSelectedFile(selected);
+      setFileStatus(
+        selected
+          ? 'File selected. No file content has been read and no analysis has started.'
+          : 'Selection cancelled. No file content was read.',
+      );
+    } catch {
+      setSelectedFile(null);
+      setFileStatus('The selected file is unavailable or could not be accessed. Select it again.');
+    }
+  }
+
+  function clearSelectedFile() {
+    setSelectedFile(null);
+    setFileStatus('Selection cleared. No file content was read.');
+  }
 
   async function handleRegistration() {
     setError(null);
@@ -358,6 +389,58 @@ export default function App() {
     );
   }
 
+  if (screen === 'file-analysis') {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <StatusBar barStyle="light-content" />
+        <ScrollView contentContainerStyle={styles.container}>
+          <View style={styles.topbar}>
+            <Brand />
+            <Pressable accessibilityRole="button" onPress={() => setScreen('home')}>
+              <Text style={styles.backAction}>Back</Text>
+            </Pressable>
+          </View>
+          <View style={styles.registerHero}>
+            <Text style={styles.eyebrow}>MVP-01 · MANUAL FILE ANALYSIS</Text>
+            <Text style={styles.registerTitle}>Choose a file to review.</Text>
+            <Text style={styles.heroCopy}>
+              Select one file explicitly. Selection does not start a scan or read file contents.
+            </Text>
+          </View>
+          <Pressable
+            accessibilityRole="button"
+            onPress={handlePickFile}
+            style={styles.createAccountButton}
+          >
+            <Text style={styles.submitText}>Choose file</Text>
+          </Pressable>
+          {selectedFile ? (
+            <View style={styles.card}>
+              <Text style={styles.cardNumber}>SELECTED FILE</Text>
+              <Text style={styles.cardTitle}>{selectedFile.name}</Text>
+              <Text style={styles.cardCopy}>
+                {selectedFile.sizeBytes} bytes · {selectedFile.declaredType}
+              </Text>
+              <Pressable accessibilityRole="button" onPress={clearSelectedFile}>
+                <Text style={styles.backAction}>Remove selection</Text>
+              </Pressable>
+            </View>
+          ) : null}
+          <Text accessibilityRole="alert" style={styles.fileStatus}>
+            {fileStatus}
+          </Text>
+          <Pressable accessibilityRole="button" disabled style={styles.disabledFileButton}>
+            <Text style={styles.disabledFileButtonText}>Analysis engine not configured</Text>
+          </Pressable>
+          <Text style={styles.footnote}>
+            The selected file stays on this device. ZeroDeck has not read or uploaded its contents.
+            File-type coverage and size limits are not yet approved; no security verdict is available.
+          </Text>
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
+
   if (screen === 'account' && profile) {
     return (
       <SafeAreaView style={styles.safeArea}>
@@ -375,6 +458,13 @@ export default function App() {
               {profile.emailVerified ? 'EMAIL VERIFIED' : 'EMAIL NOT VERIFIED'}
             </Text>
           </View>
+          <Pressable
+            accessibilityRole="button"
+            onPress={() => setScreen('file-analysis')}
+            style={styles.fileHomeAction}
+          >
+            <Text style={styles.fileHomeActionText}>Open file analysis</Text>
+          </Pressable>
           {error ? (
             <Text accessibilityRole="alert" style={styles.errorMessage}>
               {error}
@@ -623,4 +713,34 @@ const styles = StyleSheet.create({
   verified: { color: '#c8f169', fontSize: 10, letterSpacing: 1.5, marginTop: 20 },
   unverified: { color: '#e7c77b', fontSize: 10, letterSpacing: 1.5, marginTop: 20 },
   footer: { color: '#9aa79e', fontSize: 9, letterSpacing: 1.2, marginTop: 24 },
+  fileHomeAction: {
+    alignSelf: 'flex-start',
+    marginTop: 14,
+    borderWidth: 1,
+    borderColor: '#52633d',
+    borderRadius: 10,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+  fileHomeActionText: { color: '#c8f169', fontSize: 12, fontWeight: '800' },
+  fileStatus: {
+    color: '#f2f5f1',
+    backgroundColor: '#121715',
+    borderWidth: 1,
+    borderColor: '#29342e',
+    borderRadius: 10,
+    padding: 14,
+    marginTop: 20,
+    fontSize: 12,
+    lineHeight: 19,
+  },
+  disabledFileButton: {
+    minHeight: 48,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    backgroundColor: '#222a25',
+    marginTop: 14,
+  },
+  disabledFileButtonText: { color: '#9aa79e', fontSize: 12, fontWeight: '700' },
 });
