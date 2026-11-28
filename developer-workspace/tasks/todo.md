@@ -278,13 +278,15 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### C3. Local analysis orchestration
 
+**Status: Partial — minimal in-memory local-engine invocation and safe failure mapping passed full CI run 46146977405. Progress, cancellation, retry, interrupted states and explicit network-boundary verification remain.**
+
 **Description:** Orchestrate analysis lifecycle, cancellation where supported, interruption, retry and local-only processing.
 
 **Acceptance criteria**
 - [ ] File bytes are never uploaded or backend-persisted.
 - [ ] Cancellation/interruption are represented only when observed.
-- [ ] Inconclusive/failure remains distinct from no-known-threat.
-- [ ] No default scan history or content persistence is introduced.
+- [x] Inconclusive/failure remains distinct from no-known-threat (engine exceptions and malformed output map to failed/could-not-decide).
+- [x] No default scan history or content persistence is introduced by the domain orchestrator.
 
 **Verification:** lifecycle, cancellation, interruption and network-boundary tests.  
 **Dependencies:** C1, C2.  
