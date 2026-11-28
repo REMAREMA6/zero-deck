@@ -7,7 +7,7 @@
     "uri": "https://github.com/REMAREMA6/zero-deck/blob/ef98e91d6bc72bf09840d9fbd67175ea2e868b90/product-management/product-rules/contracts/QUARANTINE-FILE-DISPOSITION.md",
     "version": "0.1.0-draft",
     "revision": "ef98e91d6bc72bf09840d9fbd67175ea2e868b90",
-    "digest": "sha256:3c2d3d303c05d7752dda87f08a080d691f5470c5fe39532013b9e9d09c77f591",
+    "digest": "sha256:e76291f7635b89221a785056af0912858225d278ee431495c1f118e96e508e9e",
     "mediaType": "text/markdown"
   },
   "scope": "MVP-02 quarantine and file disposition for web and Android; eligibility, verified quarantine, source disposition, review, restore, deletion, retention and recovery; excludes MVP-01 scan-engine requirements and MVP-03 website/link checking.",
