@@ -45,3 +45,23 @@ All 15 official Software Rules facets were assessed. Ten are applicable to the M
 - No actual file-copy, move, delete, restore, integrity, key-loss, uninstall, backup, or crash-recovery runtime test was performed.
 - API, Messaging, Identity/Authentication, Background Processing and Integrations remain conditional because no such ZeroDeck implementation boundary is selected. They must not be marked absent merely because no implementation was inspected.
 - Interface coverage concerns observable product communication and action states; visual hierarchy, exact styles and geometry belong to separate interface reverse-engineering work.
+
+## Requirement-to-facet traceability
+
+This explicit index supplements the facet-level rationale above. Each listed ID is PM-proposed; the mapping expresses intended contract coverage, not runtime observation.
+
+- **Interface (`interface`):** ZD-QUAR-001, ZD-QUAR-003, ZD-QUAR-008, ZD-QUAR-015, ZD-QUAR-019, ZD-QUAR-020, ZD-QUAR-021, ZD-QUAR-022, ZD-QUAR-024, ZD-QUAR-025, ZD-QUAR-029, ZD-QUAR-031, ZD-QUAR-035, ZD-QUAR-036
+- **Behaviour (`behavior`):** ZD-QUAR-001, ZD-QUAR-002, ZD-QUAR-003, ZD-QUAR-004, ZD-QUAR-005, ZD-QUAR-006, ZD-QUAR-007, ZD-QUAR-008, ZD-QUAR-009, ZD-QUAR-010, ZD-QUAR-011, ZD-QUAR-012, ZD-QUAR-013, ZD-QUAR-014, ZD-QUAR-015, ZD-QUAR-016, ZD-QUAR-017, ZD-QUAR-018, ZD-QUAR-019, ZD-QUAR-020, ZD-QUAR-023, ZD-QUAR-031, ZD-QUAR-032, ZD-QUAR-033, ZD-QUAR-035
+- **Business Rules (`business-rules`):** ZD-QUAR-001, ZD-QUAR-002, ZD-QUAR-003, ZD-QUAR-004, ZD-QUAR-008, ZD-QUAR-009, ZD-QUAR-014, ZD-QUAR-015, ZD-QUAR-017, ZD-QUAR-019, ZD-QUAR-021, ZD-QUAR-022, ZD-QUAR-024, ZD-QUAR-038
+- **Data (`data`):** ZD-QUAR-001, ZD-QUAR-005, ZD-QUAR-006, ZD-QUAR-007, ZD-QUAR-008, ZD-QUAR-016, ZD-QUAR-018, ZD-QUAR-020, ZD-QUAR-021, ZD-QUAR-023, ZD-QUAR-024, ZD-QUAR-025, ZD-QUAR-026, ZD-QUAR-028, ZD-QUAR-029, ZD-QUAR-030, ZD-QUAR-031, ZD-QUAR-032, ZD-QUAR-036, ZD-QUAR-037, ZD-QUAR-038
+- **Persistence (`persistence`):** ZD-QUAR-005, ZD-QUAR-006, ZD-QUAR-012, ZD-QUAR-018, ZD-QUAR-022, ZD-QUAR-023, ZD-QUAR-025, ZD-QUAR-026, ZD-QUAR-027, ZD-QUAR-028, ZD-QUAR-030, ZD-QUAR-031, ZD-QUAR-032, ZD-QUAR-033, ZD-QUAR-034, ZD-QUAR-037, ZD-QUAR-038
+- **API (`api`):** No direct Phase 5 requirement; conditional applicability remains open.
+- **Messaging (`messaging`):** No direct Phase 5 requirement; conditional applicability remains open.
+- **Identity and Authentication (`identity-authentication`):** No direct Phase 5 requirement; conditional applicability remains open.
+- **Authorization and Permissions (`authorization-permissions`):** ZD-QUAR-002, ZD-QUAR-010, ZD-QUAR-011, ZD-QUAR-013, ZD-QUAR-017, ZD-QUAR-019, ZD-QUAR-030, ZD-QUAR-035
+- **Security Controls (`security-controls`):** ZD-QUAR-002, ZD-QUAR-003, ZD-QUAR-004, ZD-QUAR-005, ZD-QUAR-006, ZD-QUAR-007, ZD-QUAR-009, ZD-QUAR-010, ZD-QUAR-013, ZD-QUAR-014, ZD-QUAR-016, ZD-QUAR-021, ZD-QUAR-022, ZD-QUAR-024, ZD-QUAR-025, ZD-QUAR-026, ZD-QUAR-027, ZD-QUAR-028, ZD-QUAR-029, ZD-QUAR-030, ZD-QUAR-036, ZD-QUAR-037
+- **Background Processing (`background-processing`):** ZD-QUAR-033
+- **Errors and Recovery (`errors-recovery`):** ZD-QUAR-003, ZD-QUAR-005, ZD-QUAR-007, ZD-QUAR-009, ZD-QUAR-010, ZD-QUAR-011, ZD-QUAR-012, ZD-QUAR-014, ZD-QUAR-016, ZD-QUAR-017, ZD-QUAR-018, ZD-QUAR-020, ZD-QUAR-023, ZD-QUAR-025, ZD-QUAR-026, ZD-QUAR-027, ZD-QUAR-028, ZD-QUAR-031, ZD-QUAR-032, ZD-QUAR-033, ZD-QUAR-034, ZD-QUAR-037
+- **Integrations (`integrations`):** ZD-QUAR-010, ZD-QUAR-011, ZD-QUAR-012, ZD-QUAR-029, ZD-QUAR-035, ZD-QUAR-036
+- **Configuration (`configuration`):** ZD-QUAR-001, ZD-QUAR-002, ZD-QUAR-022, ZD-QUAR-023, ZD-QUAR-026, ZD-QUAR-027, ZD-QUAR-029, ZD-QUAR-034, ZD-QUAR-035, ZD-QUAR-037, ZD-QUAR-038
+- **Performance and Resource Behaviour (`performance-resource-behavior`):** ZD-QUAR-033, ZD-QUAR-034
