@@ -22,8 +22,8 @@ These counts cover **all 51 numbered Architect outcomes (1.1–7.7)**. They are 
 
 | Status | Count |
 |---|---:|
-| Done | 3 |
-| Partial | 20 |
+| Done | 4 |
+| Partial | 19 |
 | Blocked | 2 |
 | Not started | 26 |
 | **Total Architect outcomes tracked** | **51** |
