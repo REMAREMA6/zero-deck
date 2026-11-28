@@ -4,6 +4,8 @@ import {
   ApiErrorSchema,
   HealthResponseSchema,
   RegisterAccountInputSchema,
+  RequestEmailVerificationInputSchema,
+  VerifyEmailInputSchema,
 } from './index.js';
 
 describe('shared API contracts', () => {
@@ -30,6 +32,13 @@ describe('shared API contracts', () => {
     expect(
       RegisterAccountInputSchema.safeParse({ email: 'owner@example.com', password: '' }).success,
     ).toBe(false);
+  });
+
+  it('validates email verification inputs without exposing challenge details', () => {
+    expect(RequestEmailVerificationInputSchema.safeParse({ email: 'owner@example.com' }).success).toBe(true);
+    expect(RequestEmailVerificationInputSchema.safeParse({ email: 'invalid' }).success).toBe(false);
+    expect(VerifyEmailInputSchema.safeParse({ token: 'opaque-token' }).success).toBe(true);
+    expect(VerifyEmailInputSchema.safeParse({ token: '' }).success).toBe(false);
   });
 
   it('accepts only the generic registration acknowledgement', () => {
