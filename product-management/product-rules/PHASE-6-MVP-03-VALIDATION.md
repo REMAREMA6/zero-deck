@@ -61,7 +61,7 @@ The intended invariant is explicit: no provider/API call unless both independent
 
 All 15 official Software Rules facets were assessed. Messaging is deferred because MVP-03 does not include user messaging. Persistence, API and background processing are conditional on later product/implementation choices; their conditional status does not waive assessment if those behaviours are introduced.
 
-The 75 scenario rows map to one or more of the 39 canonical requirement IDs. This is a designed conformance matrix, not an executed runtime test suite.
+The 75 scenario rows map to one or more of the 41 canonical requirement IDs. This is a designed conformance matrix, not an executed runtime test suite.
 
 ## 5. Provenance and owner authority
 
