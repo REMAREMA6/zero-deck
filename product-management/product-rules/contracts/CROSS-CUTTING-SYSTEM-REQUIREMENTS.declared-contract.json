@@ -1,0 +1,1996 @@
+{
+  "contractId": "ZD-CONTRACT-CROSS-CUTTING-SYSTEM",
+  "contractType": "product-requirements-contract",
+  "title": "ZeroDeck Cross-Cutting System Requirements",
+  "issuer": "ZeroDeck Product Management Agent",
+  "artifact": {
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/8ad461896994f58632a570faee9b2c82c9945806/product-management/product-rules/contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.md",
+    "version": "0.1.0-draft",
+    "revision": "8ad461896994f58632a570faee9b2c82c9945806",
+    "digest": "sha256:6de28670247210f80ae7835633d9fdadf771db926af26ad102c76a3afd9b34c4",
+    "mediaType": "text/markdown"
+  },
+  "scope": "Cross-capability system and operational product requirements applying across ZeroDeck web and Android; excludes capability-specific implementation details and technology/architecture selection.",
+  "statements": [
+    {
+      "statementId": "ZD-SYS-001",
+      "text": "The system MUST resolve the same ZeroDeck account principal across supported web and Android sessions when the user signs into the same account.",
+      "location": "### Requirement ZD-SYS-001 — Shared account identity"
+    },
+    {
+      "statementId": "ZD-SYS-002",
+      "text": "The system MUST communicate material differences in capability, permission, availability, or data access between web and Android before the user relies on an affected operation.",
+      "location": "### Requirement ZD-SYS-002 — Platform capability boundary"
+    },
+    {
+      "statementId": "ZD-SYS-003",
+      "text": "The system MUST enforce protected account, entitlement, owner-activation, and administrative authorization decisions at a trusted service boundary rather than relying solely on client-supplied state.",
+      "location": "### Requirement ZD-SYS-003 — Authoritative authorization"
+    },
+    {
+      "statementId": "ZD-SYS-004",
+      "text": "The system MUST preserve active Pro entitlement and owner-controlled activation as independent prerequisites for every MVP-03 provider/API call.",
+      "location": "### Requirement ZD-SYS-004 — Independent MVP-03 gates"
+    },
+    {
+      "statementId": "ZD-SYS-005",
+      "text": "The system MUST deny newly evaluated protected operations after the authoritative service has recorded revocation of the relevant access, entitlement, permission, or owner activation.",
+      "location": "### Requirement ZD-SYS-005 — Authorization revocation"
+    },
+    {
+      "statementId": "ZD-SYS-006",
+      "text": "The system MUST associate each category of personal, file-derived, URL-derived, account, and operational data it processes with a documented product purpose and authorized access boundary.",
+      "location": "### Requirement ZD-SYS-006 — Cross-capability data purpose"
+    },
+    {
+      "statementId": "ZD-SYS-007",
+      "text": "The system MUST disclose data to an external service only to the extent required for the user-requested operation and permitted by the applicable product contract and user notice.",
+      "location": "### Requirement ZD-SYS-007 — Minimum necessary disclosure"
+    },
+    {
+      "statementId": "ZD-SYS-008",
+      "text": "The system MUST provide a documented lifecycle policy for each category of system-managed user data, including purpose, retention trigger, deletion behaviour, and exceptions.",
+      "location": "### Requirement ZD-SYS-008 — Data lifecycle transparency"
+    },
+    {
+      "statementId": "ZD-SYS-009",
+      "text": "The system MUST prevent private credentials, signing material, provider secrets, and other server-only secrets from exposure through public client configuration, user-facing responses, or ordinary diagnostics.",
+      "location": "### Requirement ZD-SYS-009 — Secret isolation"
+    },
+    {
+      "statementId": "ZD-SYS-010",
+      "text": "The system MUST validate required operational configuration before enabling the affected capability and fail closed when that configuration is missing, malformed, or inconsistent.",
+      "location": "### Requirement ZD-SYS-010 — Configuration validation"
+    },
+    {
+      "statementId": "ZD-SYS-011",
+      "text": "The system MUST keep development, test, and production credentials, data, and operational controls distinguishable and prevent non-production values from authorizing production operations.",
+      "location": "### Requirement ZD-SYS-011 — Environment separation"
+    },
+    {
+      "statementId": "ZD-SYS-012",
+      "text": "The system MUST NOT report a dependent operation as successful when a required service or dependency has failed, timed out, or returned unusable data.",
+      "location": "### Requirement ZD-SYS-012 — Dependency failure truthfulness"
+    },
+    {
+      "statementId": "ZD-SYS-013",
+      "text": "The system MUST limit the user-visible impact of a failed optional or independent dependency to capabilities that require that dependency.",
+      "location": "### Requirement ZD-SYS-013 — Degraded capability isolation"
+    },
+    {
+      "statementId": "ZD-SYS-014",
+      "text": "The system MUST define which backend-managed records are recoverable from service or storage failure and identify consequences when recovery is not possible.",
+      "location": "### Requirement ZD-SYS-014 — Recoverable backend state"
+    },
+    {
+      "statementId": "ZD-SYS-015",
+      "text": "The system MUST verify integrity and authorization context of restored backend-managed state before using it to authorize protected operations.",
+      "location": "### Requirement ZD-SYS-015 — Restore integrity"
+    },
+    {
+      "statementId": "ZD-SYS-016",
+      "text": "The system MUST retain an appropriately access-controlled record of administrative changes affecting account access, entitlement, owner activation, or protected capability availability.",
+      "location": "### Requirement ZD-SYS-016 — Audit security-sensitive changes"
+    },
+    {
+      "statementId": "ZD-SYS-017",
+      "text": "The system MUST exclude raw credentials, secret values, unnecessary file contents, and unredacted sensitive URL components from ordinary application diagnostics.",
+      "location": "### Requirement ZD-SYS-017 — Diagnostic minimization"
+    },
+    {
+      "statementId": "ZD-SYS-018",
+      "text": "The system MUST expose sufficient operational health information for an authorized operator to distinguish service unavailability, dependency failure, and capability-specific degradation without exposing user content or secrets.",
+      "location": "### Requirement ZD-SYS-018 — Operational health visibility"
+    },
+    {
+      "statementId": "ZD-SYS-019",
+      "text": "The system MUST support recording the scope, timeline, affected capabilities, containment action, and resolution status of a material security or availability incident.",
+      "location": "### Requirement ZD-SYS-019 — Incident record"
+    },
+    {
+      "statementId": "ZD-SYS-020",
+      "text": "The system MUST enforce documented bounds for resource-consuming operations and storage categories before enabling them for general use.",
+      "location": "### Requirement ZD-SYS-020 — Bounded shared resource use"
+    },
+    {
+      "statementId": "ZD-SYS-021",
+      "text": "The system MUST respond to resource exhaustion or overload with an explicit bounded rejection, deferral, or degraded state rather than silently accepting work it cannot safely complete.",
+      "location": "### Requirement ZD-SYS-021 — Overload behaviour"
+    },
+    {
+      "statementId": "ZD-SYS-022",
+      "text": "The system MUST identify each production-critical external dependency, its purpose, owner, failure impact, and replacement or exit consideration before production reliance.",
+      "location": "### Requirement ZD-SYS-022 — External dependency lifecycle"
+    },
+    {
+      "statementId": "ZD-SYS-023",
+      "text": "The system MUST treat data returned by an external dependency as untrusted input and validate it before using it to affect account state, security outcomes, or subsequent operations.",
+      "location": "### Requirement ZD-SYS-023 — External response trust"
+    },
+    {
+      "statementId": "ZD-SYS-024",
+      "text": "The system MUST define duplicate-request behaviour for each cross-platform state-changing operation so retries do not create unintended duplicate effects.",
+      "location": "### Requirement ZD-SYS-024 — Idempotent state-changing operations"
+    },
+    {
+      "statementId": "ZD-SYS-025",
+      "text": "The system MUST make provenance and intended release identity of production software artifacts verifiable before accepting them as product updates.",
+      "location": "### Requirement ZD-SYS-025 — Release provenance"
+    },
+    {
+      "statementId": "ZD-SYS-026",
+      "text": "The system MUST identify and handle unsupported or incompatible client/service version combinations before executing operations with unsupported semantics or security assumptions.",
+      "location": "### Requirement ZD-SYS-026 — Version compatibility"
+    },
+    {
+      "statementId": "ZD-SYS-027",
+      "text": "The system MUST communicate whether a requested capability is available, unavailable, degraded, incomplete, or completed without implying another capability was also performed.",
+      "location": "### Requirement ZD-SYS-027 — Truthful cross-capability status"
+    },
+    {
+      "statementId": "ZD-SYS-028",
+      "text": "The system MUST identify which system-managed account data can be exported or made available to the account holder and which categories are excluded with a documented reason.",
+      "location": "### Requirement ZD-SYS-028 — Data portability and account closure"
+    }
+  ],
+  "evidenceRefs": [
+    "ZD-EV-CONTRACT-SYS-001"
+  ],
+  "extensions": {
+    "zeroDeckProductRequirements": {
+      "profileId": "zero-deck.pm-product-requirements",
+      "profileVersion": "1.0.0-draft",
+      "productId": "zero-deck",
+      "author": {
+        "name": "ZeroDeck Product Management Agent",
+        "role": "Product Manager",
+        "organization": "ZeroDeck Product Management"
+      },
+      "softwareRulesCompatibility": {
+        "repository": "https://github.com/REMAREMA6/software-rules",
+        "commit": "5591a2e62287afc29bde002369eaf659673ec59b",
+        "specificationRelease": "0.3.0-draft",
+        "schemaVersion": "0.2.0",
+        "schemaDialect": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "contractLifecycle": "draft",
+      "capabilityId": "CROSS-CUTTING-SYSTEM",
+      "requirements": [
+        {
+          "statementId": "ZD-SYS-001",
+          "requirementType": "policy",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "identity-authentication",
+            "authorization-permissions",
+            "behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Shared account identity",
+          "preconditions": [
+            "Same account is used on both platforms"
+          ],
+          "inputs": [
+            "User signs in on each platform"
+          ],
+          "outcomes": [
+            "Both sessions resolve to the same account principal; session credentials remain independently controlled."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Shared account identity."
+          ],
+          "rationale": "Owner direction: one product identity across web and Android; detailed session policy remains in authentication contract.  ",
+          "basis": [
+            {
+              "basisType": "owner-decision",
+              "description": "Owner direction: one product identity across web and Android; detailed session policy remains in authentication contract.  ",
+              "refs": [
+                "ZD-AUTH-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-01",
+              "given": "Same account is used on both platforms",
+              "when": "User signs in on each platform",
+              "then": "Both sessions resolve to the same account principal; session credentials remain independently controlled.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-AUTH-001"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-002",
+          "requirementType": "compatibility",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "behavior",
+            "configuration"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Platform capability boundary",
+          "preconditions": [
+            "A capability differs by platform"
+          ],
+          "inputs": [
+            "User encounters or attempts it"
+          ],
+          "outcomes": [
+            "The platform limitation and consequence are clear; unsupported parity is not implied."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Platform capability boundary."
+          ],
+          "rationale": "Owner permits platform-specific differences; truthful disclosure is a PM inference.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Owner permits platform-specific differences; truthful disclosure is a PM inference.  ",
+              "refs": []
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-02",
+              "given": "A capability differs by platform",
+              "when": "User encounters or attempts it",
+              "then": "The platform limitation and consequence are clear; unsupported parity is not implied.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-003",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "api",
+            "authorization-permissions",
+            "security-controls"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Authoritative authorization",
+          "preconditions": [
+            "A protected operation is requested"
+          ],
+          "inputs": [
+            "Request reaches the authorization boundary"
+          ],
+          "outcomes": [
+            "Operation is allowed only after applicable authoritative checks pass."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Authoritative authorization."
+          ],
+          "rationale": "Cross-platform security inference; MVP-03 requires independent eligibility checks.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Cross-platform security inference; MVP-03 requires independent eligibility checks.  ",
+              "refs": [
+                "ZD-AUTH-025",
+                "ZD-WEB-001",
+                "ZD-WEB-002",
+                "ZD-WEB-003"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-03",
+              "given": "A protected operation is requested",
+              "when": "Request reaches the authorization boundary",
+              "then": "Operation is allowed only after applicable authoritative checks pass.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-AUTH-025",
+            "ZD-WEB-001",
+            "ZD-WEB-002",
+            "ZD-WEB-003"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-004",
+          "requirementType": "business-rule",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "authorization-permissions",
+            "integrations",
+            "security-controls"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Independent MVP-03 gates",
+          "preconditions": [
+            "MVP-03 provider/API call is considered"
+          ],
+          "inputs": [
+            "Request is prepared for dispatch"
+          ],
+          "outcomes": [
+            "Both gates are independently positive; neither substitutes for the other."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Independent MVP-03 gates."
+          ],
+          "rationale": "Owner-approved scope invariant ZD-SCOPE-001 and MVP-03 ZD-WEB-001..003.  ",
+          "basis": [
+            {
+              "basisType": "owner-decision",
+              "description": "Owner-approved scope invariant ZD-SCOPE-001 and MVP-03 ZD-WEB-001..003.  ",
+              "refs": [
+                "ZD-WEB-001",
+                "ZD-WEB-002",
+                "ZD-WEB-003"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-04",
+              "given": "MVP-03 provider/API call is considered",
+              "when": "Request is prepared for dispatch",
+              "then": "Both gates are independently positive; neither substitutes for the other.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-WEB-001",
+            "ZD-WEB-002",
+            "ZD-WEB-003"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-005",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "authorization-permissions",
+            "behavior",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Authorization revocation",
+          "preconditions": [
+            "Relevant authorization state is revoked"
+          ],
+          "inputs": [
+            "A subsequent protected operation is evaluated"
+          ],
+          "outcomes": [
+            "Operation is denied according to updated authoritative state."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Authorization revocation."
+          ],
+          "rationale": "Propagation timing and in-flight treatment remain open in ZD-Q-AUTH-013 and ZD-Q-WEB-011/012.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Propagation timing and in-flight treatment remain open in ZD-Q-AUTH-013 and ZD-Q-WEB-011/012.  ",
+              "refs": [
+                "ZD-AUTH-025",
+                "ZD-WEB-001",
+                "ZD-WEB-002",
+                "ZD-WEB-003"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-05",
+              "given": "Relevant authorization state is revoked",
+              "when": "A subsequent protected operation is evaluated",
+              "then": "Operation is denied according to updated authoritative state.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-AUTH-025",
+            "ZD-WEB-001",
+            "ZD-WEB-002",
+            "ZD-WEB-003"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-006",
+          "requirementType": "data",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "security-controls",
+            "behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Cross-capability data purpose",
+          "preconditions": [
+            "A data category is collected, generated, or retained"
+          ],
+          "inputs": [
+            "Its handling is defined or changed"
+          ],
+          "outcomes": [
+            "Its purpose and authorized access boundary are documented."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Cross-capability data purpose."
+          ],
+          "rationale": "Inferred from shared data handling across authentication and the three capability contracts.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Inferred from shared data handling across authentication and the three capability contracts.  ",
+              "refs": [
+                "ZD-AUTH-007",
+                "ZD-FILE-015",
+                "ZD-QUAR-001",
+                "ZD-WEB-016",
+                "ZD-WEB-017"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-06",
+              "given": "A data category is collected, generated, or retained",
+              "when": "Its handling is defined or changed",
+              "then": "Its purpose and authorized access boundary are documented.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-AUTH-007",
+            "ZD-FILE-015",
+            "ZD-QUAR-001",
+            "ZD-WEB-016",
+            "ZD-WEB-017"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-007",
+          "requirementType": "privacy",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "security-controls",
+            "integrations"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Minimum necessary disclosure",
+          "preconditions": [
+            "An operation uses an external service"
+          ],
+          "inputs": [
+            "Outbound payload is prepared"
+          ],
+          "outcomes": [
+            "Only required and permitted data is disclosed."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Minimum necessary disclosure."
+          ],
+          "rationale": "Complements MVP-01 no-upload-by-default and MVP-03 minimum disclosure.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Complements MVP-01 no-upload-by-default and MVP-03 minimum disclosure.  ",
+              "refs": [
+                "ZD-FILE-008",
+                "ZD-WEB-016",
+                "ZD-WEB-017"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-07",
+              "given": "An operation uses an external service",
+              "when": "Outbound payload is prepared",
+              "then": "Only required and permitted data is disclosed.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-FILE-008",
+            "ZD-WEB-016",
+            "ZD-WEB-017"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-008",
+          "requirementType": "privacy",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "persistence",
+            "behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Data lifecycle transparency",
+          "preconditions": [
+            "System-managed user data is persisted"
+          ],
+          "inputs": [
+            "Category is introduced or lifecycle changes"
+          ],
+          "outcomes": [
+            "A reviewable lifecycle policy records purpose, trigger, deletion behaviour and exceptions."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Data lifecycle transparency."
+          ],
+          "rationale": "Exact schedules and lawful retention categories remain unresolved in existing contracts.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Exact schedules and lawful retention categories remain unresolved in existing contracts.  ",
+              "refs": [
+                "ZD-AUTH-007"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-08",
+              "given": "System-managed user data is persisted",
+              "when": "Category is introduced or lifecycle changes",
+              "then": "A reviewable lifecycle policy records purpose, trigger, deletion behaviour and exceptions.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-AUTH-007"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-009",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "data",
+            "configuration"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Secret isolation",
+          "preconditions": [
+            "A server-only secret is configured or used"
+          ],
+          "inputs": [
+            "Client artifact, response, or diagnostic is produced"
+          ],
+          "outcomes": [
+            "The secret is not disclosed through that channel."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Secret isolation."
+          ],
+          "rationale": "Security boundary inference; owner prefers mature security libraries and first-party backend.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Security boundary inference; owner prefers mature security libraries and first-party backend.  ",
+              "refs": []
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-09",
+              "given": "A server-only secret is configured or used",
+              "when": "Client artifact, response, or diagnostic is produced",
+              "then": "The secret is not disclosed through that channel.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-010",
+          "requirementType": "operational",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "configuration",
+            "security-controls",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Configuration validation",
+          "preconditions": [
+            "Capability depends on required configuration"
+          ],
+          "inputs": [
+            "Capability initializes or operation is attempted"
+          ],
+          "outcomes": [
+            "Unsafe operation is blocked and an actionable operator signal is produced."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Configuration validation."
+          ],
+          "rationale": "MVP-03 owner activation is a protected control; no configuration mechanism selected.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "MVP-03 owner activation is a protected control; no configuration mechanism selected.  ",
+              "refs": [
+                "ZD-WEB-002",
+                "ZD-WEB-003"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-10",
+              "given": "Capability depends on required configuration",
+              "when": "Capability initializes or operation is attempted",
+              "then": "Unsafe operation is blocked and an actionable operator signal is produced.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-WEB-002",
+            "ZD-WEB-003"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-011",
+          "requirementType": "operational",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "configuration",
+            "security-controls",
+            "behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Environment separation",
+          "preconditions": [
+            "Multiple environments exist"
+          ],
+          "inputs": [
+            "Configuration or credentials are applied"
+          ],
+          "outcomes": [
+            "Each environment uses only its intended authority and values."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Environment separation."
+          ],
+          "rationale": "Cross-cutting operational safeguard; deployment topology remains undecided.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Cross-cutting operational safeguard; deployment topology remains undecided.  ",
+              "refs": []
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-11",
+              "given": "Multiple environments exist",
+              "when": "Configuration or credentials are applied",
+              "then": "Each environment uses only its intended authority and values.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-012",
+          "requirementType": "reliability",
+          "normativeKind": "forbidden",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "errors-recovery",
+            "integrations",
+            "api"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Dependency failure truthfulness",
+          "preconditions": [
+            "Operation depends on a service"
+          ],
+          "inputs": [
+            "Dependency fails or returns unusable data"
+          ],
+          "outcomes": [
+            "Operation is reported failed, incomplete, or unavailable with known limitation."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Dependency failure truthfulness."
+          ],
+          "rationale": "Capability contracts distinguish unknown/failure from successful outcomes.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Capability contracts distinguish unknown/failure from successful outcomes.  ",
+              "refs": [
+                "ZD-FILE-020",
+                "ZD-QUAR-030",
+                "ZD-WEB-026"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-12",
+              "given": "Operation depends on a service",
+              "when": "Dependency fails or returns unusable data",
+              "then": "Operation is reported failed, incomplete, or unavailable with known limitation.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-FILE-020",
+            "ZD-QUAR-030",
+            "ZD-WEB-026"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-013",
+          "requirementType": "reliability",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "errors-recovery",
+            "behavior",
+            "interface"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Degraded capability isolation",
+          "preconditions": [
+            "Capability-specific dependency fails"
+          ],
+          "inputs": [
+            "User accesses another capability"
+          ],
+          "outcomes": [
+            "Unaffected capability remains available if its own dependencies permit."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Degraded capability isolation."
+          ],
+          "rationale": "Product-level outcome; does not prescribe microservices or topology.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Product-level outcome; does not prescribe microservices or topology.  ",
+              "refs": [
+                "ZD-FILE-001",
+                "ZD-QUAR-001",
+                "ZD-WEB-005"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-13",
+              "given": "Capability-specific dependency fails",
+              "when": "User accesses another capability",
+              "then": "Unaffected capability remains available if its own dependencies permit.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-FILE-001",
+            "ZD-QUAR-001",
+            "ZD-WEB-005"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-014",
+          "requirementType": "reliability",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "persistence",
+            "data",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Recoverable backend state",
+          "preconditions": [
+            "Backend-managed state is operationally important"
+          ],
+          "inputs": [
+            "Recovery policy is defined or failure occurs"
+          ],
+          "outcomes": [
+            "Recoverable records and limitations are documented for operators."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Recoverable backend state."
+          ],
+          "rationale": "Account, entitlement, activation and audit state; RPO/RTO and backup policy remain open.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Account, entitlement, activation and audit state; RPO/RTO and backup policy remain open.  ",
+              "refs": [
+                "ZD-AUTH-025",
+                "ZD-WEB-001",
+                "ZD-WEB-002"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-14",
+              "given": "Backend-managed state is operationally important",
+              "when": "Recovery policy is defined or failure occurs",
+              "then": "Recoverable records and limitations are documented for operators.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-AUTH-025",
+            "ZD-WEB-001",
+            "ZD-WEB-002"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-015",
+          "requirementType": "reliability",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "persistence",
+            "security-controls",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Restore integrity",
+          "preconditions": [
+            "Backend-managed state has been restored"
+          ],
+          "inputs": [
+            "Protected operations resume"
+          ],
+          "outcomes": [
+            "Restored authorization state is verified before use."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Restore integrity."
+          ],
+          "rationale": "No integrity mechanism or recovery topology selected.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "No integrity mechanism or recovery topology selected.  ",
+              "refs": [
+                "ZD-AUTH-025",
+                "ZD-WEB-001",
+                "ZD-WEB-002",
+                "ZD-WEB-003"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-15",
+              "given": "Backend-managed state has been restored",
+              "when": "Protected operations resume",
+              "then": "Restored authorization state is verified before use.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-AUTH-025",
+            "ZD-WEB-001",
+            "ZD-WEB-002",
+            "ZD-WEB-003"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-016",
+          "requirementType": "operational",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "messaging",
+            "security-controls"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Audit security-sensitive changes",
+          "preconditions": [
+            "Security-sensitive administrative change occurs"
+          ],
+          "inputs": [
+            "Change is accepted"
+          ],
+          "outcomes": [
+            "Actor, action, target, time and outcome are reviewable subject to approved minimization and retention."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Audit security-sensitive changes."
+          ],
+          "rationale": "Owner-controlled activation and entitlement affect provider dispatch; exact fields/retention remain open.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Owner-controlled activation and entitlement affect provider dispatch; exact fields/retention remain open.  ",
+              "refs": [
+                "ZD-WEB-001",
+                "ZD-WEB-002",
+                "ZD-WEB-003"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-16",
+              "given": "Security-sensitive administrative change occurs",
+              "when": "Change is accepted",
+              "then": "Actor, action, target, time and outcome are reviewable subject to approved minimization and retention.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-WEB-001",
+            "ZD-WEB-002",
+            "ZD-WEB-003"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-017",
+          "requirementType": "privacy",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "security-controls",
+            "behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Diagnostic minimization",
+          "preconditions": [
+            "Sensitive data is present in operation context"
+          ],
+          "inputs": [
+            "Diagnostic is emitted"
+          ],
+          "outcomes": [
+            "Only minimized or redacted fields are included."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Diagnostic minimization."
+          ],
+          "rationale": "Complements explicit MVP-01 and MVP-03 diagnostic privacy requirements.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Complements explicit MVP-01 and MVP-03 diagnostic privacy requirements.  ",
+              "refs": [
+                "ZD-FILE-018",
+                "ZD-WEB-017"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-17",
+              "given": "Sensitive data is present in operation context",
+              "when": "Diagnostic is emitted",
+              "then": "Only minimized or redacted fields are included.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-FILE-018",
+            "ZD-WEB-017"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-018",
+          "requirementType": "operational",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "configuration",
+            "performance-resource-behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Operational health visibility",
+          "preconditions": [
+            "Service or dependency is unhealthy"
+          ],
+          "inputs": [
+            "Authorized operator checks health"
+          ],
+          "outcomes": [
+            "Affected capability and failure class are distinguishable with privacy-safe detail."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Operational health visibility."
+          ],
+          "rationale": "No monitoring vendor, topology or numeric SLO selected.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "No monitoring vendor, topology or numeric SLO selected.  ",
+              "refs": [
+                "ZD-FILE-020",
+                "ZD-QUAR-030",
+                "ZD-WEB-026"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-18",
+              "given": "Service or dependency is unhealthy",
+              "when": "Authorized operator checks health",
+              "then": "Affected capability and failure class are distinguishable with privacy-safe detail.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-FILE-020",
+            "ZD-QUAR-030",
+            "ZD-WEB-026"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-019",
+          "requirementType": "operational",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "behavior",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Incident record",
+          "preconditions": [
+            "Material security or availability incident is identified"
+          ],
+          "inputs": [
+            "Incident is handled"
+          ],
+          "outcomes": [
+            "A reviewable record captures scope, timeline, containment and resolution."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Incident record."
+          ],
+          "rationale": "Incident severity, notification duties and retention require owner/legal review.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Incident severity, notification duties and retention require owner/legal review.  ",
+              "refs": [
+                "ZD-AUTH-007",
+                "ZD-WEB-003"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-19",
+              "given": "Material security or availability incident is identified",
+              "when": "Incident is handled",
+              "then": "A reviewable record captures scope, timeline, containment and resolution.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-AUTH-007",
+            "ZD-WEB-003"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-020",
+          "requirementType": "performance",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "performance-resource-behavior",
+            "errors-recovery",
+            "configuration"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Bounded shared resource use",
+          "preconditions": [
+            "Capability consumes compute, memory, network, provider quota, or storage"
+          ],
+          "inputs": [
+            "Limits are configured and operation is used"
+          ],
+          "outcomes": [
+            "Operation respects an explicit applicable bound."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Bounded shared resource use."
+          ],
+          "rationale": "MVP contracts contain resource/usage constraints; numeric limits remain open.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "MVP contracts contain resource/usage constraints; numeric limits remain open.  ",
+              "refs": [
+                "ZD-FILE-023",
+                "ZD-QUAR-035",
+                "ZD-WEB-004",
+                "ZD-WEB-009"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-20",
+              "given": "Capability consumes compute, memory, network, provider quota, or storage",
+              "when": "Limits are configured and operation is used",
+              "then": "Operation respects an explicit applicable bound.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-FILE-023",
+            "ZD-QUAR-035",
+            "ZD-WEB-004",
+            "ZD-WEB-009"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-021",
+          "requirementType": "reliability",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "performance-resource-behavior",
+            "errors-recovery",
+            "behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Overload behaviour",
+          "preconditions": [
+            "System reaches documented capacity limit"
+          ],
+          "inputs": [
+            "New operation is requested"
+          ],
+          "outcomes": [
+            "Request receives explicit non-success or bounded queue state; it is not falsely completed."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Overload behaviour."
+          ],
+          "rationale": "No queue architecture or numeric limit chosen.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "No queue architecture or numeric limit chosen.  ",
+              "refs": [
+                "ZD-FILE-023",
+                "ZD-QUAR-035",
+                "ZD-WEB-008",
+                "ZD-WEB-009"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-21",
+              "given": "System reaches documented capacity limit",
+              "when": "New operation is requested",
+              "then": "Request receives explicit non-success or bounded queue state; it is not falsely completed.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-FILE-023",
+            "ZD-QUAR-035",
+            "ZD-WEB-008",
+            "ZD-WEB-009"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-022",
+          "requirementType": "reliability",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "integrations",
+            "errors-recovery",
+            "configuration"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "External dependency lifecycle",
+          "preconditions": [
+            "External provider becomes production-critical"
+          ],
+          "inputs": [
+            "Dependency is adopted or materially changed"
+          ],
+          "outcomes": [
+            "Role, failure impact, responsible owner and exit consideration are documented."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for External dependency lifecycle."
+          ],
+          "rationale": "MVP-03 provider remains unselected; no vendor/procurement choice made.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "MVP-03 provider remains unselected; no vendor/procurement choice made.  ",
+              "refs": [
+                "ZD-WEB-005"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-22",
+              "given": "External provider becomes production-critical",
+              "when": "Dependency is adopted or materially changed",
+              "then": "Role, failure impact, responsible owner and exit consideration are documented.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-WEB-005"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-023",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "integrations",
+            "security-controls",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "External response trust",
+          "preconditions": [
+            "External dependency returns data"
+          ],
+          "inputs": [
+            "Response is consumed"
+          ],
+          "outcomes": [
+            "Response is validated and cannot override trusted local policy."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for External response trust."
+          ],
+          "rationale": "Provider-specific schema and verdict mapping remain in MVP-03.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Provider-specific schema and verdict mapping remain in MVP-03.  ",
+              "refs": [
+                "ZD-WEB-026",
+                "ZD-WEB-027"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-23",
+              "given": "External dependency returns data",
+              "when": "Response is consumed",
+              "then": "Response is validated and cannot override trusted local policy.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-WEB-026",
+            "ZD-WEB-027"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-024",
+          "requirementType": "functional",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "api",
+            "behavior",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Idempotent state-changing operations",
+          "preconditions": [
+            "State-changing operation is retried or concurrent"
+          ],
+          "inputs": [
+            "Same logical operation is received more than once"
+          ],
+          "outcomes": [
+            "Documented duplicate-request policy prevents unintended duplicate effects."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Idempotent state-changing operations."
+          ],
+          "rationale": "Idempotency format and endpoint-specific rules remain implementation/API decisions.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Idempotency format and endpoint-specific rules remain implementation/API decisions.  ",
+              "refs": [
+                "ZD-AUTH-004",
+                "ZD-AUTH-007",
+                "ZD-WEB-001",
+                "ZD-WEB-002"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-24",
+              "given": "State-changing operation is retried or concurrent",
+              "when": "Same logical operation is received more than once",
+              "then": "Documented duplicate-request policy prevents unintended duplicate effects.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-AUTH-004",
+            "ZD-AUTH-007",
+            "ZD-WEB-001",
+            "ZD-WEB-002"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-025",
+          "requirementType": "security",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "security-controls",
+            "configuration",
+            "behavior"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Release provenance",
+          "preconditions": [
+            "Production software update is offered or installed"
+          ],
+          "inputs": [
+            "Artifact is verified"
+          ],
+          "outcomes": [
+            "Only artifacts satisfying the approved release policy are accepted."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Release provenance."
+          ],
+          "rationale": "Signing, distribution channels, CI/CD and rollback design are not selected.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Signing, distribution channels, CI/CD and rollback design are not selected.  ",
+              "refs": []
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-25",
+              "given": "Production software update is offered or installed",
+              "when": "Artifact is verified",
+              "then": "Only artifacts satisfying the approved release policy are accepted.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-026",
+          "requirementType": "compatibility",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "behavior",
+            "configuration",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Version compatibility",
+          "preconditions": [
+            "Client/service versions are incompatible"
+          ],
+          "inputs": [
+            "Protected or data-changing operation is requested"
+          ],
+          "outcomes": [
+            "Operation is blocked or safely constrained with actionable compatibility guidance."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Version compatibility."
+          ],
+          "rationale": "Supported-version windows and upgrade deadlines remain open.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Supported-version windows and upgrade deadlines remain open.  ",
+              "refs": [
+                "ZD-AUTH-025",
+                "ZD-WEB-001"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-26",
+              "given": "Client/service versions are incompatible",
+              "when": "Protected or data-changing operation is requested",
+              "then": "Operation is blocked or safely constrained with actionable compatibility guidance.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-AUTH-025",
+            "ZD-WEB-001"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-027",
+          "requirementType": "usability",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "interface",
+            "behavior",
+            "errors-recovery"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Truthful cross-capability status",
+          "preconditions": [
+            "User requests or views capability result"
+          ],
+          "inputs": [
+            "Capability has known lifecycle or dependency state"
+          ],
+          "outcomes": [
+            "Status accurately describes only the operation and scope that occurred."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Truthful cross-capability status."
+          ],
+          "rationale": "Existing capability result taxonomies remain authoritative in their owning contracts.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "Existing capability result taxonomies remain authoritative in their owning contracts.  ",
+              "refs": [
+                "ZD-FILE-001",
+                "ZD-QUAR-001",
+                "ZD-WEB-005",
+                "ZD-WEB-006"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-27",
+              "given": "User requests or views capability result",
+              "when": "Capability has known lifecycle or dependency state",
+              "then": "Status accurately describes only the operation and scope that occurred.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-FILE-001",
+            "ZD-QUAR-001",
+            "ZD-WEB-005",
+            "ZD-WEB-006"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        },
+        {
+          "statementId": "ZD-SYS-028",
+          "requirementType": "operational",
+          "normativeKind": "required",
+          "priority": "P",
+          "decisionStatus": "pm-proposed",
+          "facetRefs": [
+            "data",
+            "persistence",
+            "security-controls"
+          ],
+          "platforms": [
+            "web",
+            "android"
+          ],
+          "subject": "Data portability and account closure",
+          "preconditions": [
+            "Account holder requests data or account closure"
+          ],
+          "inputs": [
+            "Request is handled"
+          ],
+          "outcomes": [
+            "Category-level disclosure policy is followed without exposing secrets or another user's data."
+          ],
+          "forbiddenBehaviors": [
+            "Do not violate the stated outcome for Data portability and account closure."
+          ],
+          "rationale": "No export feature is added to launch scope; exact export policy remains open.  ",
+          "basis": [
+            {
+              "basisType": "pm-inference",
+              "description": "No export feature is added to launch scope; exact export policy remains open.  ",
+              "refs": [
+                "ZD-AUTH-007"
+              ]
+            }
+          ],
+          "acceptanceCriteria": [
+            {
+              "criterionId": "ZD-SYS-AC-28",
+              "given": "Account holder requests data or account closure",
+              "when": "Request is handled",
+              "then": "Category-level disclosure policy is followed without exposing secrets or another user's data.",
+              "verificationMethod": "mixed"
+            }
+          ],
+          "dependencies": [
+            "ZD-AUTH-007"
+          ],
+          "assumptions": [
+            "Product-level outcome; implementation mechanism remains undecided."
+          ],
+          "constraints": [
+            "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ]
+        }
+      ],
+      "openQuestions": [
+        {
+          "questionId": "ZD-Q-SYS-001",
+          "question": "What availability objective, if any, is required for the MVP and each capability?",
+          "impact": "Cannot define service acceptance or commitments without an agreed target.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+        },
+        {
+          "questionId": "ZD-Q-SYS-002",
+          "question": "What recovery time and recovery point objectives apply to backend-managed account, entitlement, activation and audit state?",
+          "impact": "Determines backup frequency, recovery design and user impact.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+        },
+        {
+          "questionId": "ZD-Q-SYS-003",
+          "question": "Which backend-managed data categories require backup, and which must never be backed up?",
+          "impact": "Prevents assuming user file bytes or quarantine contents belong in backend backups.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+        },
+        {
+          "questionId": "ZD-Q-SYS-004",
+          "question": "What retention and expiry rules apply to backups, audit events, diagnostics and incident records?",
+          "impact": "Requires policy and legal review.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+        },
+        {
+          "questionId": "ZD-Q-SYS-005",
+          "question": "What data classification scheme and access roles govern account, file-derived, URL-derived and operational data?",
+          "impact": "Determines access boundaries and handling obligations.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+        },
+        {
+          "questionId": "ZD-Q-SYS-006",
+          "question": "Which jurisdictions and legal/privacy obligations apply at launch?",
+          "impact": "Legal basis, notice, retention and notification depend on geography and service model.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+        },
+        {
+          "questionId": "ZD-Q-SYS-007",
+          "question": "Which operational events may be logged, at what detail, and who may access them?",
+          "impact": "Balances debugging/audit needs against privacy and abuse risk.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+        },
+        {
+          "questionId": "ZD-Q-SYS-008",
+          "question": "What incident severity levels, escalation owners and notification rules are required?",
+          "impact": "Cannot define response timing or notification commitments.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+        },
+        {
+          "questionId": "ZD-Q-SYS-009",
+          "question": "What numeric limits apply to concurrency, request rates, storage, timeouts and resource consumption?",
+          "impact": "Bounded behaviour is required, but values are not invented.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+        },
+        {
+          "questionId": "ZD-Q-SYS-010",
+          "question": "What supported browser, Android OS/device and backend compatibility windows apply?",
+          "impact": "Determines safe compatibility and end-of-support behaviour.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+        },
+        {
+          "questionId": "ZD-Q-SYS-011",
+          "question": "What release/update channels, provenance trust roots, rollback policy and emergency withdrawal process are approved?",
+          "impact": "Concrete trust and recovery policy remains unresolved.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+        },
+        {
+          "questionId": "ZD-Q-SYS-012",
+          "question": "Which external dependencies are approved for production, and who owns provider review/exit decisions?",
+          "impact": "Production reliance, commercial exposure and data processing cannot be assumed.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+        },
+        {
+          "questionId": "ZD-Q-SYS-013",
+          "question": "What authorization/entitlement/activation propagation bound applies across web, Android and in-flight operations?",
+          "impact": "Explicitly unresolved in authentication and MVP-03 contracts.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+        },
+        {
+          "questionId": "ZD-Q-SYS-014",
+          "question": "What account-data export categories and formats, if any, are in launch scope?",
+          "impact": "No unapproved export feature is added.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+        },
+        {
+          "questionId": "ZD-Q-SYS-015",
+          "question": "How should conflicting cross-platform updates to shared account state be resolved?",
+          "impact": "Avoids inconsistent account, subscription or settings state.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+        },
+        {
+          "questionId": "ZD-Q-SYS-016",
+          "question": "What maintenance windows and user-notice expectations apply?",
+          "impact": "Affects availability communication.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+        },
+        {
+          "questionId": "ZD-Q-SYS-017",
+          "question": "How does account deletion propagate into backups and immutable audit records?",
+          "impact": "Must reconcile deletion, justified retention and recoverability.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+        },
+        {
+          "questionId": "ZD-Q-SYS-018",
+          "question": "What service ownership and support response expectations apply after launch?",
+          "impact": "Determines operational accountability and support promises.",
+          "ownerDecisionRequired": true,
+          "status": "open",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+        }
+      ]
+    }
+  }
+}
