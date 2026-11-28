@@ -32,7 +32,7 @@ The owner approved the Phase 5 authoring plan. That approval does not approve th
 
 ## 3. Targeted validation results
 
-<badge color="success">16/16 checks passed</badge>
+**16/16 targeted checks passed.**
 
 The following checks were run against the committed Markdown contract, structured projection, evidence record, facet assessment, scenario matrix and CIRCLES analysis:
 
@@ -55,7 +55,7 @@ The following checks were run against the committed Markdown contract, structure
 
 ### Negative-fixture checks
 
-<badge color="success">5/5 rejected</badge>
+**5/5 malformed fixtures rejected.**
 
 Five malformed in-memory fixtures were checked against the targeted PM-profile constraints:
 
