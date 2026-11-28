@@ -4,10 +4,10 @@
   "title": "ZeroDeck Cross-Cutting System Requirements",
   "issuer": "ZeroDeck Product Management Agent",
   "artifact": {
-    "uri": "https://github.com/REMAREMA6/zero-deck/blob/4b4d32b939e627fe84b4120ab43df6b5c733d421/product-management/product-rules/contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.md",
-    "version": "0.1.0-draft",
-    "revision": "4b4d32b939e627fe84b4120ab43df6b5c733d421",
-    "digest": "sha256:f0b491d4ce97b7286ad9f56d35f61761204fffb36e0700f1778eae27da7dc06a",
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/c679aa22a8f76419de550fbd0acf248c350ac2a8/product-management/product-rules/contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.md",
+    "version": "0.2.0-draft",
+    "revision": "c679aa22a8f76419de550fbd0acf248c350ac2a8",
+    "digest": "sha256:ee3c9eddd54aea5640114178c207586414c8c21c46c60b46503e7d3693781e18",
     "mediaType": "text/markdown"
   },
   "scope": "Cross-capability system and operational product requirements applying across ZeroDeck web and Android; excludes capability-specific implementation details and technology/architecture selection.",
@@ -34,7 +34,7 @@
     },
     {
       "statementId": "ZD-SYS-005",
-      "text": "The system MUST deny newly evaluated protected operations after the authoritative service has recorded revocation of the relevant access, entitlement, permission, or owner activation.",
+      "text": "The system MUST deny newly evaluated protected operations and MUST prevent queued or not-yet-dispatched provider work after the authoritative service records revocation of the relevant access, entitlement, permission, or owner activation. Already-dispatched work MUST be cancelled where supported and MUST NOT initiate subsequent provider calls.",
       "location": "### Requirement ZD-SYS-005 — Authorization revocation"
     },
     {
@@ -278,7 +278,12 @@
               "verificationMethod": "mixed"
             }
           ],
-          "dependencies": [],
+          "dependencies": [
+            "ZD-AUTH-017",
+            "ZD-FILE-024",
+            "ZD-QUAR-035",
+            "ZD-WEB-037"
+          ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
           ],
@@ -337,7 +342,7 @@
             }
           ],
           "dependencies": [
-            "ZD-AUTH-025",
+            "ZD-AUTH-016",
             "ZD-WEB-001",
             "ZD-WEB-002",
             "ZD-WEB-003"
@@ -415,7 +420,7 @@
           "requirementType": "security",
           "normativeKind": "required",
           "priority": "P0",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "authorization-permissions",
             "behavior",
@@ -449,6 +454,13 @@
                 "ZD-WEB-002",
                 "ZD-WEB-003"
               ]
+            },
+            {
+              "basisType": "owner-decision",
+              "description": "Product Owner accepted the shared revocation product policy in Phase 9.",
+              "refs": [
+                "ZD-DEC-PHASE9-2026-11-28"
+              ]
             }
           ],
           "acceptanceCriteria": [
@@ -461,16 +473,18 @@
             }
           ],
           "dependencies": [
-            "ZD-AUTH-025",
-            "ZD-WEB-001",
-            "ZD-WEB-002",
-            "ZD-WEB-003"
+            "ZD-AUTH-012",
+            "ZD-WEB-029",
+            "ZD-WEB-030"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
           ],
           "constraints": [
             "No architecture, vendor, numeric service target, or legal policy is selected by this requirement."
+          ],
+          "decisionRefs": [
+            "ZD-DEC-PHASE9-2026-11-28"
           ]
         },
         {
@@ -525,9 +539,9 @@
             }
           ],
           "dependencies": [
-            "ZD-AUTH-007",
-            "ZD-FILE-015",
-            "ZD-QUAR-001",
+            "ZD-AUTH-026",
+            "ZD-FILE-020",
+            "ZD-QUAR-030",
             "ZD-WEB-016",
             "ZD-WEB-017"
           ],
@@ -588,7 +602,8 @@
             }
           ],
           "dependencies": [
-            "ZD-FILE-008",
+            "ZD-FILE-007",
+            "ZD-QUAR-029",
             "ZD-WEB-016",
             "ZD-WEB-017"
           ],
@@ -647,7 +662,12 @@
             }
           ],
           "dependencies": [
-            "ZD-AUTH-007"
+            "ZD-AUTH-026",
+            "ZD-FILE-022",
+            "ZD-QUAR-022",
+            "ZD-QUAR-023",
+            "ZD-WEB-033",
+            "ZD-WEB-034"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
@@ -758,8 +778,7 @@
             }
           ],
           "dependencies": [
-            "ZD-WEB-002",
-            "ZD-WEB-003"
+            "ZD-WEB-002"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
@@ -871,9 +890,9 @@
             }
           ],
           "dependencies": [
-            "ZD-FILE-020",
-            "ZD-QUAR-030",
-            "ZD-WEB-026"
+            "ZD-FILE-018",
+            "ZD-QUAR-033",
+            "ZD-WEB-024"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
@@ -932,9 +951,9 @@
             }
           ],
           "dependencies": [
-            "ZD-FILE-001",
-            "ZD-QUAR-001",
-            "ZD-WEB-005"
+            "ZD-FILE-018",
+            "ZD-QUAR-033",
+            "ZD-WEB-024"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
@@ -993,9 +1012,8 @@
             }
           ],
           "dependencies": [
-            "ZD-AUTH-025",
-            "ZD-WEB-001",
-            "ZD-WEB-002"
+            "ZD-AUTH-001",
+            "ZD-SYS-008"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
@@ -1055,10 +1073,9 @@
             }
           ],
           "dependencies": [
-            "ZD-AUTH-025",
-            "ZD-WEB-001",
-            "ZD-WEB-002",
-            "ZD-WEB-003"
+            "ZD-SYS-003",
+            "ZD-SYS-014",
+            "ZD-AUTH-016"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
@@ -1117,9 +1134,10 @@
             }
           ],
           "dependencies": [
-            "ZD-WEB-001",
-            "ZD-WEB-002",
-            "ZD-WEB-003"
+            "ZD-AUTH-012",
+            "ZD-WEB-029",
+            "ZD-WEB-030",
+            "ZD-SYS-005"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
@@ -1177,8 +1195,9 @@
             }
           ],
           "dependencies": [
-            "ZD-FILE-018",
-            "ZD-WEB-017"
+            "ZD-FILE-021",
+            "ZD-WEB-018",
+            "ZD-SYS-009"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
@@ -1237,9 +1256,9 @@
             }
           ],
           "dependencies": [
-            "ZD-FILE-020",
-            "ZD-QUAR-030",
-            "ZD-WEB-026"
+            "ZD-FILE-018",
+            "ZD-QUAR-033",
+            "ZD-WEB-024"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
@@ -1297,8 +1316,8 @@
             }
           ],
           "dependencies": [
-            "ZD-AUTH-007",
-            "ZD-WEB-003"
+            "ZD-SYS-016",
+            "ZD-SYS-018"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
@@ -1358,10 +1377,9 @@
             }
           ],
           "dependencies": [
-            "ZD-FILE-023",
-            "ZD-QUAR-035",
-            "ZD-WEB-004",
-            "ZD-WEB-009"
+            "ZD-FILE-026",
+            "ZD-QUAR-034",
+            "ZD-WEB-031"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
@@ -1421,10 +1439,9 @@
             }
           ],
           "dependencies": [
-            "ZD-FILE-023",
-            "ZD-QUAR-035",
-            "ZD-WEB-008",
-            "ZD-WEB-009"
+            "ZD-FILE-026",
+            "ZD-QUAR-034",
+            "ZD-WEB-031"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
@@ -1481,7 +1498,10 @@
             }
           ],
           "dependencies": [
-            "ZD-WEB-005"
+            "ZD-FILE-018",
+            "ZD-QUAR-011",
+            "ZD-WEB-019",
+            "ZD-WEB-024"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
@@ -1539,8 +1559,9 @@
             }
           ],
           "dependencies": [
-            "ZD-WEB-026",
-            "ZD-WEB-027"
+            "ZD-WEB-020",
+            "ZD-QUAR-011",
+            "ZD-FILE-027"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
@@ -1600,10 +1621,10 @@
             }
           ],
           "dependencies": [
-            "ZD-AUTH-004",
-            "ZD-AUTH-007",
-            "ZD-WEB-001",
-            "ZD-WEB-002"
+            "ZD-AUTH-026",
+            "ZD-QUAR-012",
+            "ZD-QUAR-032",
+            "ZD-WEB-025"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
@@ -1714,8 +1735,10 @@
             }
           ],
           "dependencies": [
-            "ZD-AUTH-025",
-            "ZD-WEB-001"
+            "ZD-AUTH-017",
+            "ZD-FILE-024",
+            "ZD-QUAR-035",
+            "ZD-WEB-037"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
@@ -1775,10 +1798,11 @@
             }
           ],
           "dependencies": [
-            "ZD-FILE-001",
-            "ZD-QUAR-001",
-            "ZD-WEB-005",
-            "ZD-WEB-006"
+            "ZD-FILE-012",
+            "ZD-FILE-015",
+            "ZD-QUAR-031",
+            "ZD-WEB-021",
+            "ZD-WEB-032"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
@@ -1835,7 +1859,8 @@
             }
           ],
           "dependencies": [
-            "ZD-AUTH-007"
+            "ZD-AUTH-026",
+            "ZD-SYS-008"
           ],
           "assumptions": [
             "Product-level outcome; implementation mechanism remains undecided."
@@ -1850,145 +1875,181 @@
           "questionId": "ZD-Q-SYS-001",
           "question": "What availability objective, if any, is required for the MVP and each capability?",
           "impact": "Cannot define service acceptance or commitments without an agreed target.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence.",
+          "resolution": "Set internal availability targets before launch, but do not publish uptime commitments until reliability and operating-cost evidence supports them.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-SYS-002",
           "question": "What recovery time and recovery point objectives apply to backend-managed account, entitlement, activation and audit state?",
           "impact": "Determines backup frequency, recovery design and user impact.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence.",
+          "resolution": "Define RTO/RPO for backend-managed account, entitlement, activation and audit state after data criticality and recovery analysis. No numeric values are selected in product design.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-SYS-003",
           "question": "Which backend-managed data categories require backup, and which must never be backed up?",
           "impact": "Prevents assuming user file bytes or quarantine contents belong in backend backups.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+          "ownerDecisionRequired": false,
+          "status": "resolved",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence.",
+          "resolution": "Back up only necessary backend-managed data. User file bytes and quarantine content/keys are not included in backend backups by default.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-SYS-004",
           "question": "What retention and expiry rules apply to backups, audit events, diagnostics and incident records?",
           "impact": "Requires policy and legal review.",
           "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence.",
+          "resolution": "Maintain separate retention/expiry policies for backups, audit events, diagnostics and incident records. Exact durations and statutory exceptions require legal and architecture review.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-SYS-005",
           "question": "What data classification scheme and access roles govern account, file-derived, URL-derived and operational data?",
           "impact": "Determines access boundaries and handling obligations.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence.",
+          "resolution": "Classify account, file-derived, URL-derived and operational data by sensitivity and define least-privilege access. Exact classification taxonomy and role mapping belong to architecture/security design.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-SYS-006",
           "question": "Which jurisdictions and legal/privacy obligations apply at launch?",
           "impact": "Legal basis, notice, retention and notification depend on geography and service model.",
           "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence.",
+          "resolution": "Confirm launch jurisdictions and applicable privacy/legal obligations with qualified review before release. No jurisdiction-specific legal conclusion is made in Phase 9.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-SYS-007",
           "question": "Which operational events may be logged, at what detail, and who may access them?",
           "impact": "Balances debugging/audit needs against privacy and abuse risk.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence.",
+          "resolution": "Log only necessary operational/security events. Exclude passwords, secrets, file contents and sensitive URL components from ordinary diagnostics. Exact event fields and access permissions belong to architecture.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-SYS-008",
           "question": "What incident severity levels, escalation owners and notification rules are required?",
           "impact": "Cannot define response timing or notification commitments.",
           "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence.",
+          "resolution": "Define incident severity, accountable escalation owners and user/regulatory notification rules before production. Exact roles, response times and statutory duties require operations/legal review.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-SYS-009",
           "question": "What numeric limits apply to concurrency, request rates, storage, timeouts and resource consumption?",
           "impact": "Bounded behaviour is required, but values are not invented.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence.",
+          "resolution": "Set concurrency, request, storage, timeout and resource limits from workload, platform, safety and cost testing. No arbitrary numeric defaults are approved.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-SYS-010",
           "question": "What supported browser, Android OS/device and backend compatibility windows apply?",
           "impact": "Determines safe compatibility and end-of-support behaviour.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence.",
+          "resolution": "Publish a tested compatibility matrix and end-of-support policy. Exact browser, Android OS/device and backend version windows require testing and owner scope confirmation.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-SYS-011",
           "question": "What release/update channels, provenance trust roots, rollback policy and emergency withdrawal process are approved?",
           "impact": "Concrete trust and recovery policy remains unresolved.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence.",
+          "resolution": "Production updates must have verifiable provenance, signed release artifacts, rollback capability and emergency withdrawal procedures. Trust roots, release channels and operational mechanisms are architecture decisions.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-SYS-012",
           "question": "Which external dependencies are approved for production, and who owns provider review/exit decisions?",
           "impact": "Production reliance, commercial exposure and data processing cannot be assumed.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence.",
+          "resolution": "Approve external dependencies individually only after purpose, terms, privacy/security, cost, failure impact and exit options are reviewed; each production-critical dependency must have a named accountable owner. Specific vendors remain unselected.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-SYS-013",
           "question": "What authorization/entitlement/activation propagation bound applies across web, Android and in-flight operations?",
           "impact": "Explicitly unresolved in authentication and MVP-03 contracts.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence.",
+          "resolution": "Use the shared gate-revocation invariant in ZD-Q-AUTH-013 and ZD-Q-WEB-011/012. Newly evaluated and queued/not-yet-dispatched protected work is denied after revocation; already-dispatched work is cancelled where supported. Exact propagation bounds require architecture testing.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-SYS-014",
           "question": "What account-data export categories and formats, if any, are in launch scope?",
           "impact": "No unapproved export feature is added.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+          "ownerDecisionRequired": false,
+          "status": "resolved",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence.",
+          "resolution": "A dedicated account-data export feature is out of MVP unless a confirmed legal requirement makes it necessary. This does not remove any applicable legal access right.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-SYS-015",
           "question": "How should conflicting cross-platform updates to shared account state be resolved?",
           "impact": "Avoids inconsistent account, subscription or settings state.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence.",
+          "resolution": "Server-authoritative account, entitlement and activation state prevails over stale client state. Conflict/version resolution and synchronization mechanics are architecture decisions.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-SYS-016",
           "question": "What maintenance windows and user-notice expectations apply?",
           "impact": "Affects availability communication.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+          "ownerDecisionRequired": false,
+          "status": "resolved",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence.",
+          "resolution": "Give users advance notice of planned maintenance where practical. Exact windows, channels and notice periods are deferred to operations planning.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-SYS-017",
           "question": "How does account deletion propagate into backups and immutable audit records?",
           "impact": "Must reconcile deletion, justified retention and recoverability.",
           "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence.",
+          "resolution": "Account deletion must propagate through backup lifecycle. Immutable audit data may be retained only where justified, minimized and documented with reason and retention period. Exact expiry and legal exceptions require legal/architecture review.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-SYS-018",
           "question": "What service ownership and support response expectations apply after launch?",
           "impact": "Determines operational accountability and support promises.",
           "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence."
+          "status": "deferred",
+          "pmRecommendation": "Keep unresolved until the Product Owner records a decision supported by applicable evidence.",
+          "resolution": "Do not promise a support SLA until a real support channel, accountable owner and operating capacity exist. Define the channel and realistic response expectations before production commitments.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         }
       ]
     }
