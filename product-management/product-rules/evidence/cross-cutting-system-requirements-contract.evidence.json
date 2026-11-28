@@ -1,0 +1,16 @@
+{
+  "evidenceId": "ZD-EV-CONTRACT-SYS-001",
+  "evidenceClass": "declared-contract",
+  "evidenceType": "product-requirements-contract",
+  "origin": {
+    "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/8ad461896994f58632a570faee9b2c82c9945806/product-management/product-rules/contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.md",
+    "sourceRevision": "8ad461896994f58632a570faee9b2c82c9945806",
+    "location": "product-management/product-rules/contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.md"
+  },
+  "capturedAt": "2026-11-28T21:00:00+01:00",
+  "locator": "product-management/product-rules/contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.md",
+  "retention": {
+    "status": "retained",
+    "access": "Version-controlled ZeroDeck repository; access follows repository permissions."
+  }
+}
