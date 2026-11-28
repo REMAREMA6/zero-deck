@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import type { FormEvent } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -72,7 +73,7 @@ export default function AccountPage() {
     }
   }
 
-  async function requestAccountDeletion(event: React.FormEvent<HTMLFormElement>) {
+  async function requestAccountDeletion(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setBusy(true);
     setError(null);
