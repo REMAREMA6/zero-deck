@@ -3,7 +3,9 @@ name: Validate ZeroDeck OpenSpec architecture
 on:
   push:
     branches: [automation/openspec-bootstrap]
-    paths: [.github/workflows/openspec-architecture-prepare.yml]
+    paths:
+        - .github/workflows/openspec-architecture-prepare.yml
+        - openspec/**
   workflow_dispatch:
 
 permissions:
