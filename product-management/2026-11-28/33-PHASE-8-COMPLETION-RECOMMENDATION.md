@@ -2,7 +2,7 @@
 
 **Status:** [x] Phase 8 review complete  
 **Next phase:** Phase 9 — Owner review and release  
-**Completion commit:** pending final repository reconciliation
+**Completion record:** committed; see product-management/TRACKER.md and the Phase 8 workstream record
 
 ## 1. What Phase 8 completed
 
