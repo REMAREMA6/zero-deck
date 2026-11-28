@@ -38,7 +38,7 @@ The Phase 3 assessment explicitly records a metadata mapping gap: authentication
 
 ### Messaging — authentication recovery
 
-The original Phase 3 Messaging assessment said no out-of-band message channel was selected and classified Messaging as not applicable/conditional. The later owner decision changed the situation: successful recovery revokes existing sessions and notifies the account owner; the owner decision also says verified email must be verified before it is used for security notifications. The Phase 3 statement is therefore stale for the current contract state.
+The original Phase 3 Messaging assessment said no out-of-band message channel was selected and classified Messaging as not applicable/conditional. The later owner decision changed the situation: successful recovery revokes existing sessions and notifies the account owner; the owner decision also says verified email must be verified before it is used for security notifications. The Phase 3 statement is therefore stale for the current contract state. See the [post-decision reconciliation addendum](../product-rules/PHASE-3-AUTHENTICATION-POST-DECISION-RECONCILIATION.md), which preserves the historical assessment and records the current policy.
 
 AUTH-021's acceptance criterion includes a security notification, but its normative statement and facetRefs omit that outcome. The owner decision establishes the notification outcome, but the contract does not define delivery failure, retry, acknowledgement, duplicate suppression or user-facing delivery status. This is a traceability/completeness finding, not permission to invent those policies.
 
