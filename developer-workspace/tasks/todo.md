@@ -121,7 +121,7 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### B2. Email verification boundary and fake delivery
 
-**Status: Core challenge lifecycle complete — verified in CI run 46139448216. Added a verified-only account-email lookup and response-secret assertions; all 4 email-verification PostgreSQL integration tests passed in full green run 46145316979. Recovery/security-notification integration remains part of B5.**
+**Status: Partial — challenge lifecycle, verified-only account-email lookup and response-secret assertions passed in full green run 46145316979. API unhandled-error logging was changed to emit only a fixed error code; captured-log secret-redaction regression test was added and awaits CI run 46147168375. Recovery/security-notification integration remains part of B5.**
 
 **Description:** Implement single-use verification challenges and a delivery port with a deterministic fake adapter only.
 
