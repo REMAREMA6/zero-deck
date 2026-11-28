@@ -201,6 +201,76 @@ describe('local analysis engine boundary', () => {
     }
   });
 
+  it('reports lifecycle changes and only forwards meaningful engine-supported progress', async () => {
+    const lifecycle: string[] = [];
+    const progress: Array<{ completed: number; total: number; unit: string }> = [];
+    const engine = {
+      supportsProgress: true,
+      analyze: vi.fn(
+        async ({
+          onProgress,
+        }: {
+          bytes: Uint8Array;
+          onProgress?: (value: { completed: number; total: number; unit: string }) => void;
+        }) => {
+          onProgress?.({ completed: 1, total: 4, unit: 'files' });
+          onProgress?.({ completed: 0, total: 4, unit: 'files' });
+          onProgress?.({ completed: 2, total: 4, unit: 'files' });
+          onProgress?.({ completed: 5, total: 4, unit: 'files' });
+          onProgress?.({ completed: 3, total: 4, unit: 'bytes' });
+          return {
+            outcome: 'suspicious',
+            explanation: 'The local engine returned suspicious evidence.',
+          };
+        },
+      ),
+    };
+
+    const result = await runLocalFileAnalysis(engine, new Uint8Array([1]), clock, undefined, {
+      onLifecycleChange: (state) => lifecycle.push(state),
+      onProgress: (value) => progress.push(value),
+    });
+
+    expect(result.lifecycle).toBe('completed');
+    expect(lifecycle).toEqual(['queued', 'analyzing', 'completed']);
+    expect(progress).toEqual([
+      { completed: 1, total: 4, unit: 'files' },
+      { completed: 2, total: 4, unit: 'files' },
+    ]);
+  });
+
+  it('does not expose progress when the engine does not declare progress support', async () => {
+    const onProgress = vi.fn();
+    const engine = {
+      analyze: vi.fn(async () => ({
+        outcome: 'suspicious',
+        explanation: 'The engine returned suspicious evidence.',
+      })),
+    };
+
+    await runLocalFileAnalysis(engine, new Uint8Array([1]), clock, undefined, { onProgress });
+
+    expect(engine.analyze).toHaveBeenCalledWith({ bytes: new Uint8Array([1]) });
+    expect(onProgress).not.toHaveBeenCalled();
+  });
+
+  it('keeps observer failures separate from analysis results', async () => {
+    const engine = {
+      analyze: vi.fn(async () => ({
+        outcome: 'no_known_threat_found',
+        explanation: 'No known threat was found.',
+      })),
+    };
+    const result = await runLocalFileAnalysis(engine, new Uint8Array([1]), clock, undefined, {
+      onLifecycleChange: () => {
+        throw new Error('UI observer failed');
+      },
+    });
+
+    expect(result.lifecycle).toBe('completed');
+    expect(result.outcome).toBe('no_known_threat_found');
+  });
+
   it('maps malformed engine output to a failed inconclusive result', () => {
     expect(mapAnalysisEngineResult({ outcome: 'safe', explanation: 'Safe.' }, clock)).toEqual(
       createAnalysisFailureResult(),
