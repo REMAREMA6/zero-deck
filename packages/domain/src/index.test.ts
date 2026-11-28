@@ -48,7 +48,10 @@ describe('local analysis engine boundary', () => {
       engineId: 'test-engine',
       engineVersion: 'test-version',
       completedAt,
-      explanation: 'The test engine returned this outcome.',
+      explanation:
+        outcome === 'no_known_threat_found'
+          ? 'No known threat was found. This is not a guarantee that the file is safe.'
+          : 'The test engine returned this outcome.',
     });
   });
 
@@ -79,7 +82,7 @@ describe('local analysis engine boundary', () => {
       engineId: null,
       engineVersion: null,
       completedAt,
-      explanation: 'No known threat was found.',
+      explanation: 'No known threat was found. This is not a guarantee that the file is safe.',
     });
   });
 
