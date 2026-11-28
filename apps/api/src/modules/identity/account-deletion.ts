@@ -159,3 +159,48 @@ export function createAccountDeletionService(
     },
   };
 }
+
+
+/**
+ * Owner-approved initial account-deletion policy.
+ *
+ * Personal data is deleted 30 days after a confirmed request. The minimal
+ * deletion audit record is retained for 12 calendar months after deletion.
+ * Legal review remains a production-readiness check for the applicable markets.
+ */
+export const ACCOUNT_DELETION_GRACE_PERIOD_DAYS = 30;
+export const ACCOUNT_DELETION_AUDIT_RETENTION_MONTHS = 12;
+
+function addUtcCalendarMonths(date: Date, months: number): Date {
+  const result = new Date(date.getTime());
+  const dayOfMonth = result.getUTCDate();
+  result.setUTCDate(1);
+  result.setUTCMonth(result.getUTCMonth() + months);
+  const lastDayOfTargetMonth = new Date(
+    Date.UTC(result.getUTCFullYear(), result.getUTCMonth() + 1, 0),
+  ).getUTCDate();
+  result.setUTCDate(Math.min(dayOfMonth, lastDayOfTargetMonth));
+  return result;
+}
+
+export function createApprovedAccountDeletionPolicy(): AccountDeletionPolicy {
+  return {
+    async resolveSchedule(_accountId, requestedAt) {
+      const deletionDueAt = new Date(
+        requestedAt.getTime() + ACCOUNT_DELETION_GRACE_PERIOD_DAYS * 24 * 60 * 60 * 1000,
+      );
+      return {
+        deletionDueAt,
+        auditRetention: {
+          purpose: 'Minimal account-deletion security and compliance audit evidence',
+          reason:
+            'Retain the deletion event and its approved schedule for 12 months after personal-data deletion',
+          retainUntil: addUtcCalendarMonths(
+            deletionDueAt,
+            ACCOUNT_DELETION_AUDIT_RETENTION_MONTHS,
+          ),
+        },
+      };
+    },
+  };
+}
