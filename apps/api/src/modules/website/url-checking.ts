@@ -1,4 +1,3 @@
-
 import type { Pool } from 'pg';
 import { URLCheckProviderResultSchema } from '@zerodeck/contracts';
 import { createAuthorizationService } from '../authorization/authorization.js';
