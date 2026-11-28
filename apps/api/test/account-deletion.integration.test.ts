@@ -42,11 +42,7 @@ describe('policy-gated account deletion with PostgreSQL', () => {
     const issued = await sessions.authenticate(email, 'current-password');
     expect(issued).not.toBeNull();
 
-    const deletion = createAccountDeletionService(
-      pool,
-      createFreshAuthenticationGuard(pool),
-      null,
-    );
+    const deletion = createAccountDeletionService(pool, createFreshAuthenticationGuard(pool), null);
     await expect(
       deletion.requestDeletion({
         accountId,
@@ -150,10 +146,9 @@ describe('policy-gated account deletion with PostgreSQL', () => {
       const beforeDue = await deletion.executeDueDeletions();
       expect(beforeDue.deletedAccounts).toBe(0);
       expect(beforeDue.expiredAuditRecords).toBe(0);
-      const accountBeforeDue = await pool.query(
-        'SELECT 1 FROM accounts WHERE account_id = $1',
-        [issued!.accountId],
-      );
+      const accountBeforeDue = await pool.query('SELECT 1 FROM accounts WHERE account_id = $1', [
+        issued!.accountId,
+      ]);
       expect(accountBeforeDue.rowCount).toBe(1);
 
       now = deletionDueAt;
@@ -161,10 +156,9 @@ describe('policy-gated account deletion with PostgreSQL', () => {
       expect(executed.deletedAccounts).toBe(1);
       expect(executed.expiredAuditRecords).toBe(0);
 
-      const accountAfterDue = await pool.query(
-        'SELECT 1 FROM accounts WHERE account_id = $1',
-        [issued!.accountId],
-      );
+      const accountAfterDue = await pool.query('SELECT 1 FROM accounts WHERE account_id = $1', [
+        issued!.accountId,
+      ]);
       expect(accountAfterDue.rowCount).toBe(0);
       const retainedAudit = await pool.query<{
         account_id: string | null;
@@ -201,20 +195,16 @@ describe('policy-gated account deletion with PostgreSQL', () => {
     });
     const sessions = createSessionService(pool);
     const issued = await sessions.authenticate(email, 'current-password');
-    const deletion = createAccountDeletionService(
-      pool,
-      createFreshAuthenticationGuard(pool),
-      {
-        resolveSchedule: async (_accountId, requestedAt) => ({
-          deletionDueAt: new Date(requestedAt.getTime() + 60_000),
-          auditRetention: {
-            purpose: 'Test-only',
-            reason: 'Test confirmation boundary',
-            retainUntil: new Date(requestedAt.getTime() + 120_000),
-          },
-        }),
-      },
-    );
+    const deletion = createAccountDeletionService(pool, createFreshAuthenticationGuard(pool), {
+      resolveSchedule: async (_accountId, requestedAt) => ({
+        deletionDueAt: new Date(requestedAt.getTime() + 60_000),
+        auditRetention: {
+          purpose: 'Test-only',
+          reason: 'Test confirmation boundary',
+          retainUntil: new Date(requestedAt.getTime() + 120_000),
+        },
+      }),
+    });
     const app = buildApp({ database: pool, sessionService: sessions, accountDeletion: deletion });
 
     try {

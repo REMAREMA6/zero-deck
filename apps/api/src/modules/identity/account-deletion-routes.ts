@@ -67,7 +67,10 @@ export function registerAccountDeletionRoutes(
       });
       if (!result) {
         return reply.code(401).send({
-          error: { code: 'FRESH_AUTHENTICATION_REQUIRED', message: 'The current password is incorrect.' },
+          error: {
+            code: 'FRESH_AUTHENTICATION_REQUIRED',
+            message: 'The current password is incorrect.',
+          },
         });
       }
       return reply.code(202).send({

@@ -348,13 +348,16 @@ export default function App() {
       <SafeAreaView style={styles.safeArea}>
         <StatusBar barStyle="light-content" />
         <ScrollView contentContainerStyle={styles.container}>
-          <View style={styles.topbar}><Brand /></View>
+          <View style={styles.topbar}>
+            <Brand />
+          </View>
           <View style={styles.registerHero}>
             <Text style={styles.eyebrow}>ACCOUNT CLOSURE</Text>
             <Text style={styles.registerTitle}>Account access disabled.</Text>
             <Text style={styles.heroCopy}>{deletionNotice}</Text>
             <Text style={styles.footnote}>
-              Personal data has not yet been deleted. Scheduled deletion: {deletionDueAt ? new Date(deletionDueAt).toLocaleString() : 'pending'}.
+              Personal data has not yet been deleted. Scheduled deletion:{' '}
+              {deletionDueAt ? new Date(deletionDueAt).toLocaleString() : 'pending'}.
             </Text>
           </View>
         </ScrollView>
@@ -610,7 +613,9 @@ export default function App() {
               <View style={styles.card}>
                 <Text style={styles.cardTitle}>Close your ZeroDeck account</Text>
                 <Text style={styles.cardCopy}>
-                  This immediately disables access and revokes sessions. Personal data is deleted later under an approved retention schedule. A schedule must be configured before this action can proceed.
+                  This immediately disables access and revokes sessions. Personal data is deleted
+                  later under an approved retention schedule. A schedule must be configured before
+                  this action can proceed.
                 </Text>
                 <Text style={styles.fieldLabel}>Current password</Text>
                 <TextInput
@@ -632,13 +637,21 @@ export default function App() {
                 />
                 <Pressable
                   accessibilityRole="button"
-                  disabled={submitting || !deletionPassword || deletionConfirmation !== 'DELETE MY ACCOUNT'}
+                  disabled={
+                    submitting || !deletionPassword || deletionConfirmation !== 'DELETE MY ACCOUNT'
+                  }
                   onPress={handleAccountDeletion}
                   style={[styles.createAccountButton, submitting && styles.submitDisabled]}
                 >
-                  <Text style={styles.submitText}>{submitting ? 'Submitting…' : 'Confirm account deletion'}</Text>
+                  <Text style={styles.submitText}>
+                    {submitting ? 'Submitting…' : 'Confirm account deletion'}
+                  </Text>
                 </Pressable>
-                <Pressable accessibilityRole="button" disabled={submitting} onPress={() => setShowDeletionForm(false)}>
+                <Pressable
+                  accessibilityRole="button"
+                  disabled={submitting}
+                  onPress={() => setShowDeletionForm(false)}
+                >
                   <Text style={styles.backAction}>Cancel</Text>
                 </Pressable>
               </View>

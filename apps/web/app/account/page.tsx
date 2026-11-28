@@ -97,7 +97,9 @@ export default function AccountPage() {
       setDeletionPassword('');
       setDeletionConfirmation('');
       setShowDeletionForm(false);
-      setNotice('Account access is disabled and sessions are revoked. Personal data has not yet been deleted; the scheduled deletion is pending.');
+      setNotice(
+        'Account access is disabled and sessions are revoked. Personal data has not yet been deleted; the scheduled deletion is pending.',
+      );
     } catch {
       setError('The account deletion request could not be completed.');
     } finally {
@@ -174,7 +176,11 @@ export default function AccountPage() {
               >
                 Sign out all devices
               </button>
-              <button type="button" disabled={busy} onClick={() => setShowDeletionForm((open) => !open)}>
+              <button
+                type="button"
+                disabled={busy}
+                onClick={() => setShowDeletionForm((open) => !open)}
+              >
                 Delete account
               </button>
             </div>
