@@ -26,7 +26,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: zerodeck-core-ci-${{ github.ref }}
@@ -70,6 +70,15 @@ jobs:
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
+      - name: Persist generated lockfile
+        if: github.event_name == 'push' && hashFiles('pnpm-lock.yaml') == ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add pnpm-lock.yaml
+          git commit -m "chore: add reproducible pnpm lockfile"
+          git push
+
       - name: Format source files
         run: pnpm exec prettier --write "apps/**/*.{ts,tsx,js,jsx,json,css,yml,yaml}" "packages/**/*.{ts,tsx,js,jsx,json}"
 
@@ -96,11 +105,18 @@ jobs:
           if-no-files-found: warn
           path: |
             pnpm-lock.yaml
-            apps/api/coverage
-            apps/web/.next
-            apps/android/dist
-            apps
-            packages
+            apps/api/src
+            apps/api/test
+            apps/api/migrations/README.md
+            apps/web/app
+            apps/web/next.config.ts
+            apps/web/tsconfig.json
+            apps/android/App.tsx
+            apps/android/app.json
+            apps/android/index.ts
+            apps/android/tsconfig.json
+            packages/contracts/src
+            packages/domain/src
             package.json
             pnpm-workspace.yaml
             tsconfig.base.json

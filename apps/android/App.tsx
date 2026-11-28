@@ -10,7 +10,7 @@ const capabilities = [
 export default function App() {
   return (
     <SafeAreaView style={styles.safeArea}>
-      <StatusBar barStyle="light-content" backgroundColor="#0b0e0d" />
+      <StatusBar barStyle="light-content" />
       <ScrollView contentContainerStyle={styles.container}>
         <View style={styles.topbar}>
           <View style={styles.brand}>
