@@ -27,7 +27,7 @@ Identity establishes who is acting. Authorization determines what that identity 
 - **Owner-approved decisions:** email/password sign-in; verified-email use and verification boundaries; optional MFA with passkeys deferred; verified-email recovery; 7-day inactivity and 30-day absolute session limits; current-session and logout-all controls with no launch session-list UI; user-initiated account deletion with a documented retention schedule; and risk-based step-up authentication for sensitive account actions.
 - **Still unresolved:** exact email canonicalization, verification message/expiry details, numeric abuse-control thresholds, session renewal cadence and concurrency edge cases, exact deletion/retention schedule and legally required retention categories, entitlement/activation propagation bounds, and operational assurance thresholds.
 
-Every requirement below is **PM-proposed**, not owner-approved. Normative language expresses the proposed product contract, not a claim about current implementation behaviour.
+Requirement approval is recorded per requirement. Owner approval of the decisions listed here does not blanket-approve every PM-authored requirement. Normative language expresses intended product behaviour, not a claim about current implementation behaviour.
 
 ## 3. Normative requirements
 
@@ -41,8 +41,8 @@ When an account is successfully created, the system MUST establish one stable, u
 - Facets: identity-authentication, data, persistence
 - Rationale: a stable principal prevents identity from being coupled to a device, session or mutable sign-in identifier.
 - Acceptance:
-  - Given a successful account creation, when the account is retrieved through an authenticated session, then the same stable principal is returned.
-  - Given two distinct accounts, when their principal references are compared, then they are distinct.
+  - ZD-AUTH-AC-01 — Given a successful account creation, when the account is retrieved through an authenticated session, then the same stable principal is returned.
+  - ZD-AUTH-AC-02 — Given two distinct accounts, when their principal references are compared, then they are distinct.
 - Basis: PM inference; OWASP Authentication Cheat Sheet (user IDs).
 
 #### Requirement ZD-AUTH-002 — Prevent duplicate account identifiers
@@ -53,8 +53,8 @@ When an email address is used as the primary sign-in or recovery identifier, the
 - Facets: identity-authentication, data, persistence, errors-recovery
 - Rationale: identifier ambiguity can route authentication or recovery to the wrong principal.
 - Acceptance:
-  - Given an existing account identifier, when another account attempts to claim an identifier that canonicalizes to the same value, then the second claim is rejected without changing the first account.
-  - Given identifiers that differ only in forms the documented canonicalization treats as equivalent, when submitted, then the uniqueness check treats them consistently.
+  - ZD-AUTH-AC-03 — Given an existing account identifier, when another account attempts to claim an identifier that canonicalizes to the same value, then the second claim is rejected without changing the first account.
+  - ZD-AUTH-AC-04 — Given identifiers that differ only in forms the documented canonicalization treats as equivalent, when submitted, then the uniqueness check treats them consistently.
 - Basis: PM inference.
 - Owner decision: email is the primary sign-in identifier. The exact canonicalization policy remains to be documented and tested before launch.
 
@@ -65,7 +65,7 @@ The system MUST keep the account principal distinct from the credential or authe
 - Priority: P1
 - Facets: identity-authentication, data, persistence
 - Acceptance:
-  - Given an account with an existing principal, when its supported authenticator is changed, then the principal remains unchanged.
+  - ZD-AUTH-AC-05 — Given an account with an existing principal, when its supported authenticator is changed, then the principal remains unchanged.
 - Basis: PM inference; NIST SP 800-63B-4 authenticator lifecycle model.
 
 ### Credential verification and protection
@@ -78,8 +78,8 @@ When a user attempts to authenticate, the system MUST verify the presented authe
 - Facets: identity-authentication, api, security-controls, authorization-permissions
 - Forbidden: treating a client-side success flag, locally stored role, or client-supplied entitlement claim as proof of identity.
 - Acceptance:
-  - Given an unauthenticated client, when it submits fabricated client-side authentication state without valid server-verifiable proof, then protected operations are denied.
-  - Given valid credentials, when the trusted verifier accepts them, then an authenticated session may be established for the corresponding principal.
+  - ZD-AUTH-AC-06 — Given an unauthenticated client, when it submits fabricated client-side authentication state without valid server-verifiable proof, then protected operations are denied.
+  - ZD-AUTH-AC-07 — Given valid credentials, when the trusted verifier accepts them, then an authenticated session may be established for the corresponding principal.
 - Basis: owner direction for first-party backend; PM inference; Android Security Tips.
 
 #### Requirement ZD-AUTH-005 — Protect stored authentication secrets
@@ -89,8 +89,8 @@ If the system stores a password or other reusable authenticator secret, it MUST 
 - Priority: P0
 - Facets: identity-authentication, security-controls, data, persistence
 - Acceptance:
-  - Given a newly registered password, when persisted records and application logs are inspected, then the plaintext password is absent and only the approved verifier representation is present.
-  - Given a credential verification request, when the verifier checks the credential, then it does not need to retrieve a plaintext password.
+  - ZD-AUTH-AC-08 — Given a newly registered password, when persisted records and application logs are inspected, then the plaintext password is absent and only the approved verifier representation is present.
+  - ZD-AUTH-AC-09 — Given a credential verification request, when the verifier checks the credential, then it does not need to retrieve a plaintext password.
 - Basis: external research; OWASP Password Storage Cheat Sheet.
 - Constraint: use a maintained security library; do not design a password-hashing or cryptographic primitive in product code.
 
@@ -101,11 +101,11 @@ For ZeroDeck's email-and-password launch authentication, the system MUST require
 - Priority: P1
 - Facets: identity-authentication, interface, security-controls, errors-recovery
 - Acceptance:
-  - Given password authentication is offered without MFA, when a password shorter than 15 characters is submitted, then it is rejected; when a password of at least 15 characters is submitted, it is eligible for further checks.
-  - Given password authentication is offered only as one factor in MFA, when a password shorter than 8 characters is submitted, then it is rejected.
-  - Given a password of at least 64 characters containing Unicode or whitespace, when submitted within the product's documented input limit, then it is accepted for evaluation and is not silently truncated.
-  - Given a password on the blocklist, when submitted for creation or change, then it is rejected with an actionable reason.
-  - Given no evidence of compromise, when the account remains in good standing, then the system does not force a periodic password change.
+  - ZD-AUTH-AC-10 — Given password authentication is offered without MFA, when a password shorter than 15 characters is submitted, then it is rejected; when a password of at least 15 characters is submitted, it is eligible for further checks.
+  - ZD-AUTH-AC-11 — Given password authentication is offered only as one factor in MFA, when a password shorter than 8 characters is submitted, then it is rejected.
+  - ZD-AUTH-AC-12 — Given a password of at least 64 characters containing Unicode or whitespace, when submitted within the product's documented input limit, then it is accepted for evaluation and is not silently truncated.
+  - ZD-AUTH-AC-13 — Given a password on the blocklist, when submitted for creation or change, then it is rejected with an actionable reason.
+  - ZD-AUTH-AC-14 — Given no evidence of compromise, when the account remains in good standing, then the system does not force a periodic password change.
 - Basis: external research; NIST SP 800-63B-4 and OWASP Authentication Cheat Sheet.
 - Applicability: email-and-password authentication is an owner-approved launch choice. The password-length and verifier controls in this requirement remain PM-proposed security requirements based on the cited guidance.
 
@@ -116,9 +116,9 @@ The system MUST limit repeated failed authentication and recovery attempts using
 - Priority: P0
 - Facets: identity-authentication, security-controls, api, errors-recovery, configuration
 - Acceptance:
-  - Given repeated failed attempts against one account, when the configured threshold is reached, then further attempts are delayed or rejected according to the documented policy.
-  - Given throttling is active, when a legitimate user attempts authentication, then the response communicates the restriction without revealing whether another person's account exists.
-  - Given a distributed attempt pattern, when requests originate from multiple clients, then per-account protection remains effective.
+  - ZD-AUTH-AC-15 — Given repeated failed attempts against one account, when the configured threshold is reached, then further attempts are delayed or rejected according to the documented policy.
+  - ZD-AUTH-AC-16 — Given throttling is active, when a legitimate user attempts authentication, then the response communicates the restriction without revealing whether another person's account exists.
+  - ZD-AUTH-AC-17 — Given a distributed attempt pattern, when requests originate from multiple clients, then per-account protection remains effective.
 - Basis: external research; NIST SP 800-63B-4 rate limiting; OWASP Authentication Cheat Sheet.
 - Open dependency: numeric thresholds, progressive delay, and any temporary lockout duration require a risk and usability decision. Avoid permanent lockout that enables denial of service.
 
@@ -129,7 +129,7 @@ The system MUST NOT reveal through authentication, registration or recovery resp
 - Priority: P1
 - Facets: identity-authentication, interface, api, security-controls, errors-recovery
 - Acceptance:
-  - Given an identifier that exists and one that does not, when equivalent unauthenticated sign-in or recovery requests are submitted, then externally observable responses do not disclose account existence through message content or materially distinguishable response behaviour.
+  - ZD-AUTH-AC-18 — Given an identifier that exists and one that does not, when equivalent unauthenticated sign-in or recovery requests are submitted, then externally observable responses do not disclose account existence through message content or materially distinguishable response behaviour.
 - Basis: external research; OWASP Authentication and Forgot Password Cheat Sheets.
 
 ### Session and authenticated-state lifecycle
@@ -141,8 +141,8 @@ When credential verification succeeds, the system MUST establish an authenticate
 - Priority: P0
 - Facets: identity-authentication, security-controls, api, persistence
 - Acceptance:
-  - Given successful authentication, when the client accesses a protected operation with the issued session credential, then the server resolves it to the authenticated principal.
-  - Given a random or fabricated session credential, when presented, then it does not resolve to an authenticated principal.
+  - ZD-AUTH-AC-19 — Given successful authentication, when the client accesses a protected operation with the issued session credential, then the server resolves it to the authenticated principal.
+  - ZD-AUTH-AC-20 — Given a random or fabricated session credential, when presented, then it does not resolve to an authenticated principal.
 - Basis: external research; OWASP Session Management Cheat Sheet.
 
 #### Requirement ZD-AUTH-010 — Rotate session credentials at trust-boundary changes
@@ -152,8 +152,8 @@ The system MUST replace the active session credential when authentication is est
 - Priority: P0
 - Facets: identity-authentication, security-controls, api, errors-recovery
 - Acceptance:
-  - Given an unauthenticated session, when authentication succeeds, then the prior unauthenticated session credential cannot be used as the authenticated session.
-  - Given a session is rotated, when the superseded credential is replayed, then it is rejected.
+  - ZD-AUTH-AC-21 — Given an unauthenticated session, when authentication succeeds, then the prior unauthenticated session credential cannot be used as the authenticated session.
+  - ZD-AUTH-AC-22 — Given a session is rotated, when the superseded credential is replayed, then it is rejected.
 - Basis: external research; OWASP Authentication and Session Management Cheat Sheets; bounded SESSION-EXPRESS-001 evidence.
 
 #### Requirement ZD-AUTH-011 — Enforce session expiry
@@ -163,10 +163,10 @@ The system MUST enforce both an inactivity-based expiry policy and an absolute m
 - Priority: P0
 - Facets: identity-authentication, security-controls, configuration, errors-recovery
 - Acceptance:
-  - Given a session exceeds its configured inactivity limit, when its credential is presented, then protected access is denied.
-  - Given a session exceeds its configured absolute lifetime despite continued activity, when its credential is presented, then protected access is denied.
-  - Given an authenticated session has had no qualifying activity for 7 days, when its credential is presented, then protected access is denied.
-  - Given an authenticated session reaches 30 days from establishment, when its credential is presented, then protected access is denied even if it has remained active.
+  - ZD-AUTH-AC-23 — Given a session exceeds its configured inactivity limit, when its credential is presented, then protected access is denied.
+  - ZD-AUTH-AC-24 — Given a session exceeds its configured absolute lifetime despite continued activity, when its credential is presented, then protected access is denied.
+  - ZD-AUTH-AC-25 — Given an authenticated session has had no qualifying activity for 7 days, when its credential is presented, then protected access is denied.
+  - ZD-AUTH-AC-26 — Given an authenticated session reaches 30 days from establishment, when its credential is presented, then protected access is denied even if it has remained active.
 - Basis: external research; OWASP Session Management Cheat Sheet; NIST SP 800-63B-4 session management.
 - Owner-approved duration policy: inactivity expiry is 7 days; absolute session lifetime is 30 days. The system must enforce both limits server-side. Exact renewal cadence and remembered-device behaviour remain unresolved and must be specified before release.
 
@@ -177,10 +177,10 @@ The system MUST provide a trusted mechanism to revoke an individual session and 
 - Priority: P0
 - Facets: identity-authentication, security-controls, api, persistence, errors-recovery
 - Acceptance:
-  - Given a session is revoked, when its credential is replayed, then the request is denied.
-  - Given all sessions for an account are revoked, when any previously issued session credential for that account is replayed, then each is denied.
-  - Given an account holder selects logout all devices, when the operation completes, then every active session for that account is revoked.
-  - Given the launch account interface is inspected, when session-management capabilities are reviewed, then current-session logout and logout-all-devices are available but a detailed device/session list is not required.
+  - ZD-AUTH-AC-27 — Given a session is revoked, when its credential is replayed, then the request is denied.
+  - ZD-AUTH-AC-28 — Given all sessions for an account are revoked, when any previously issued session credential for that account is replayed, then each is denied.
+  - ZD-AUTH-AC-29 — Given an account holder selects logout all devices, when the operation completes, then every active session for that account is revoked.
+  - ZD-AUTH-AC-30 — Given the launch account interface is inspected, when session-management capabilities are reviewed, then current-session logout and logout-all-devices are available but a detailed device/session list is not required.
 - Basis: external research; OWASP Session Management Cheat Sheet.
 - Owner-approved launch policy: provide current-session logout and a logout-all-devices action. Do not include a detailed device/session-management screen at launch. The service must still support individual-session revocation so a management screen can be added later.
 
@@ -191,8 +191,8 @@ When a user logs out, the system MUST invalidate the current session at the trus
 - Priority: P0
 - Facets: identity-authentication, security-controls, api, errors-recovery
 - Acceptance:
-  - Given an authenticated session, when logout completes, then replaying its former credential does not authorize a protected request.
-  - Given logout is repeated or the session has already expired, when the request is processed, then the operation completes safely without restoring the session.
+  - ZD-AUTH-AC-31 — Given an authenticated session, when logout completes, then replaying its former credential does not authorize a protected request.
+  - ZD-AUTH-AC-32 — Given logout is repeated or the session has already expired, when the request is processed, then the operation completes safely without restoring the session.
 - Basis: external research; bounded SESSION-EXPRESS-001 evidence.
 
 #### Requirement ZD-AUTH-014 — Protect web session credentials
@@ -202,8 +202,8 @@ When web authentication uses browser-managed sessions, the system MUST transmit 
 - Priority: P0
 - Facets: identity-authentication, security-controls, api, configuration
 - Acceptance:
-  - Given a production web session, when its cookie attributes are inspected, then secure transport and script-access restrictions are applied and the cross-site policy is explicit.
-  - Given a cross-site forged state-changing request without the required anti-CSRF proof, when it reaches the service, then it is rejected.
+  - ZD-AUTH-AC-33 — Given a production web session, when its cookie attributes are inspected, then secure transport and script-access restrictions are applied and the cross-site policy is explicit.
+  - ZD-AUTH-AC-34 — Given a cross-site forged state-changing request without the required anti-CSRF proof, when it reaches the service, then it is rejected.
 - Basis: external research; OWASP Session Management Cheat Sheet and ASVS.
 - Constraint: cookie attributes and CSRF mechanism must be selected to fit the eventual web architecture; this contract does not prescribe a framework.
 
@@ -214,9 +214,9 @@ When Android must retain a session credential between requests, the application 
 - Priority: P0
 - Facets: identity-authentication, security-controls, data, persistence
 - Acceptance:
-  - Given an Android user has authenticated, when the app persists the credential, then it is stored using a protected mechanism appropriate to the supported Android versions.
-  - Given ordinary application data or logs are inspected, when the credential is at rest or after an error, then the raw credential is not exposed there.
-  - Given protected storage becomes unavailable or its key is invalidated, when the app attempts to use the credential, then it fails closed and requires a safe re-authentication or recovery path.
+  - ZD-AUTH-AC-35 — Given an Android user has authenticated, when the app persists the credential, then it is stored using a protected mechanism appropriate to the supported Android versions.
+  - ZD-AUTH-AC-36 — Given ordinary application data or logs are inspected, when the credential is at rest or after an error, then the raw credential is not exposed there.
+  - ZD-AUTH-AC-37 — Given protected storage becomes unavailable or its key is invalidated, when the app attempts to use the credential, then it fails closed and requires a safe re-authentication or recovery path.
 - Basis: platform contract; Android Security Tips and Android Keystore documentation.
 - Constraint: Android Keystore protects key material and does not automatically make every token-storage design secure. The concrete design and supported-device behaviour require engineering validation.
 
@@ -229,8 +229,8 @@ For every protected operation, the trusted service MUST determine the principal 
 - Priority: P0
 - Facets: authorization-permissions, identity-authentication, api, security-controls, business-rules
 - Acceptance:
-  - Given a client alters a local role, Pro flag or activation flag, when it requests a protected operation, then the trusted service applies the server-side state and denies any unauthorized action.
-  - Given a user's entitlement or permission is revoked, when an existing session requests a protected operation, then the latest applicable authorization state is enforced within the documented propagation bound.
+  - ZD-AUTH-AC-38 — Given a client alters a local role, Pro flag or activation flag, when it requests a protected operation, then the trusted service applies the server-side state and denies any unauthorized action.
+  - ZD-AUTH-AC-39 — Given a user's entitlement or permission is revoked, when an existing session requests a protected operation, then the latest applicable authorization state is enforced within the documented propagation bound.
 - Basis: owner direction for first-party backend and MVP-03 gates; PM inference.
 - Dependency: entitlement and activation policy will be fully specified in later cross-cutting and link-check contracts.
 
@@ -241,8 +241,8 @@ When the same account is authenticated on web and Android, the system MUST resol
 - Priority: P1
 - Facets: identity-authentication, authorization-permissions, api, data
 - Acceptance:
-  - Given one account authenticates on both platforms, when each session accesses account-scoped resources, then both resolve to the same principal.
-  - Given account-level authorization or entitlement changes, when either platform next performs a protected operation, then the same current policy is applied.
+  - ZD-AUTH-AC-40 — Given one account authenticates on both platforms, when each session accesses account-scoped resources, then both resolve to the same principal.
+  - ZD-AUTH-AC-41 — Given account-level authorization or entitlement changes, when either platform next performs a protected operation, then the same current policy is applied.
 - Basis: owner decision: web and Android are the same product identity, though capabilities may differ.
 
 #### Requirement ZD-AUTH-018 — Handle authentication dependency failures safely
@@ -252,8 +252,8 @@ When a required authentication, session or account-state dependency is unavailab
 - Priority: P0
 - Facets: identity-authentication, api, integrations, errors-recovery, security-controls
 - Acceptance:
-  - Given the trusted authentication state cannot be verified, when a protected request is processed, then access is denied rather than granted from stale client state.
-  - Given an authentication dependency fails, when the user receives the result, then it explains that authentication is temporarily unavailable and does not expose tokens, credentials or internal stack details.
+  - ZD-AUTH-AC-42 — Given the trusted authentication state cannot be verified, when a protected request is processed, then access is denied rather than granted from stale client state.
+  - ZD-AUTH-AC-43 — Given an authentication dependency fails, when the user receives the result, then it explains that authentication is temporarily unavailable and does not expose tokens, credentials or internal stack details.
 - Basis: PM inference; owner direction to own backend; NIST and OWASP security guidance.
 
 #### Requirement ZD-AUTH-019 — Avoid unnecessary credential exposure
@@ -263,8 +263,8 @@ The system MUST request only the credential information required for the current
 - Priority: P0
 - Facets: identity-authentication, security-controls, api, data
 - Acceptance:
-  - Given authentication and recovery flows are exercised with instrumented logs, when records are inspected, then credential and session secrets are absent.
-  - Given a secret-bearing request is generated, when its URL and diagnostic output are inspected, then the secret is not included.
+  - ZD-AUTH-AC-44 — Given authentication and recovery flows are exercised with instrumented logs, when records are inspected, then credential and session secrets are absent.
+  - ZD-AUTH-AC-45 — Given a secret-bearing request is generated, when its URL and diagnostic output are inspected, then the secret is not included.
 - Basis: external research; Android Security Tips and OWASP guidance.
 
 #### Requirement ZD-AUTH-020 — Provide a secure verified-email recovery path
@@ -274,10 +274,10 @@ The system MUST provide a documented recovery process for users who lose access 
 - Priority: P0
 - Facets: identity-authentication, security-controls, api, errors-recovery, data
 - Acceptance:
-  - Given a valid recovery challenge delivered to the account's verified email address, when it is successfully used, then it cannot be used again.
-  - Given an account has no verified email address, when recovery is requested, then the unverified address is not used as the recovery channel.
-  - Given an expired, invalid, already-used or altered recovery challenge, when submitted, then no authenticator or account security state is changed.
-  - Given a recovery attempt for an identifier, when the requester is unauthenticated, then the response does not reveal whether the account exists.
+  - ZD-AUTH-AC-46 — Given a valid recovery challenge delivered to the account's verified email address, when it is successfully used, then it cannot be used again.
+  - ZD-AUTH-AC-47 — Given an account has no verified email address, when recovery is requested, then the unverified address is not used as the recovery channel.
+  - ZD-AUTH-AC-48 — Given an expired, invalid, already-used or altered recovery challenge, when submitted, then no authenticator or account security state is changed.
+  - ZD-AUTH-AC-49 — Given a recovery attempt for an identifier, when the requester is unauthenticated, then the response does not reveal whether the account exists.
 - Basis: external research; OWASP Forgot Password Cheat Sheet.
 - Owner decision: verified email is the recovery channel at launch. Exact challenge expiry/resend limits and operational notification details remain unresolved.
 
@@ -288,9 +288,9 @@ When an authenticator is reset, replaced, or confirmed compromised through an au
 - Priority: P0
 - Facets: identity-authentication, security-controls, errors-recovery, persistence, messaging, messaging
 - Acceptance:
-  - Given account recovery succeeds, when the recovery operation completes, then all existing sessions for that account are revoked and a security notification is sent to the account owner.
-  - Given a password or authenticator is reset outside account recovery, when the reset completes, then sessions selected by the documented revocation policy no longer authorize protected operations.
-  - Given a former session is replayed after required revocation, then access is denied.
+  - ZD-AUTH-AC-50 — Given account recovery succeeds, when the recovery operation completes, then all existing sessions for that account are revoked and a security notification is sent to the account owner.
+  - ZD-AUTH-AC-51 — Given a password or authenticator is reset outside account recovery, when the reset completes, then sessions selected by the documented revocation policy no longer authorize protected operations.
+  - ZD-AUTH-AC-52 — Given a former session is replayed after required revocation, then access is denied.
 - Basis: external research; OWASP Authentication and Forgot Password Cheat Sheets.
 
 
@@ -305,10 +305,10 @@ The system MUST require fresh authentication before a user changes their passwor
 - Facets: identity-authentication, security-controls, authorization-permissions, errors-recovery
 - Rationale: sensitive changes can transfer control of an account or permanently remove it; a recent proof of account control reduces the impact of a stolen or unattended session.
 - Acceptance:
-  - Given an authenticated session, when the user attempts to change the password or a passkey, then fresh authentication is required before the change is accepted.
-  - Given an authenticated session, when the user attempts to change the verified recovery email address, then fresh authentication is required before the change is accepted.
-  - Given an authenticated session, when the user confirms account deletion, then fresh authentication is required before deletion proceeds.
-  - Given an authenticated session, when the user performs ordinary account actions that are not designated sensitive, then the system does not repeatedly require fresh authentication solely because the session is active.
+  - ZD-AUTH-AC-53 — Given an authenticated session, when the user attempts to change the password or a passkey, then fresh authentication is required before the change is accepted.
+  - ZD-AUTH-AC-54 — Given an authenticated session, when the user attempts to change the verified recovery email address, then fresh authentication is required before the change is accepted.
+  - ZD-AUTH-AC-55 — Given an authenticated session, when the user confirms account deletion, then fresh authentication is required before deletion proceeds.
+  - ZD-AUTH-AC-56 — Given an authenticated session, when the user performs ordinary account actions that are not designated sensitive, then the system does not repeatedly require fresh authentication solely because the session is active.
 - Basis: owner decision; PM recommendation accepted by the owner.
 - Decision reference: ZD-DEC-AUTH-2026-11-28.
 
@@ -320,9 +320,9 @@ The system MUST provide a user-initiated account deletion process that immediate
 - Facets: interface, behavior, data, persistence, errors-recovery
 - Rationale: account holders need a clear way to end their relationship with the product, while retained records must be limited, justified and time-bounded.
 - Acceptance:
-  - Given an authenticated account holder who completes the required fresh authentication, when account deletion is confirmed, then all active sessions are revoked and account access is disabled immediately.
-  - Given account deletion has been confirmed, when the documented deletion schedule is applied, then personal data is deleted according to that schedule.
-  - Given a record must be retained for a legitimate requirement, when deletion is processed, then the record, retention reason and retention period are documented and access is restricted to the justified purpose.
+  - ZD-AUTH-AC-57 — Given an authenticated account holder who completes the required fresh authentication, when account deletion is confirmed, then all active sessions are revoked and account access is disabled immediately.
+  - ZD-AUTH-AC-58 — Given account deletion has been confirmed, when the documented deletion schedule is applied, then personal data is deleted according to that schedule.
+  - ZD-AUTH-AC-59 — Given a record must be retained for a legitimate requirement, when deletion is processed, then the record, retention reason and retention period are documented and access is restricted to the justified purpose.
 - Basis: owner decision; PM recommendation accepted by the owner.
 - Decision reference: ZD-DEC-AUTH-2026-11-28.
 - Open dependency: exact retention schedules, lawful retention categories and launch-market obligations must be established before release.
@@ -337,9 +337,9 @@ At launch, the system MUST allow a user to create and access a ZeroDeck account 
 - Facets: identity-authentication, interface, api, behavior
 - Rationale: the owner selected a direct email-and-password launch path and did not make phone or social sign-in prerequisites.
 - Acceptance:
-  - Given a person does not yet have a ZeroDeck account, when they register with a valid email address and password, then an account is created with a stable account principal.
-  - Given an account has been created with an email address and password, when the user submits valid credentials, then the system authenticates the corresponding account.
-  - Given a person is completing the launch registration or sign-in journey, when the flow is used, then a phone number or social-login account is not required to complete it.
+  - ZD-AUTH-AC-60 — Given a person does not yet have a ZeroDeck account, when they register with a valid email address and password, then an account is created with a stable account principal.
+  - ZD-AUTH-AC-61 — Given an account has been created with an email address and password, when the user submits valid credentials, then the system authenticates the corresponding account.
+  - ZD-AUTH-AC-62 — Given a person is completing the launch registration or sign-in journey, when the flow is used, then a phone number or social-login account is not required to complete it.
 - Basis: owner decision; PM recommendation accepted by the owner.
 - Decision reference: ZD-DEC-AUTH-2026-11-28.
 
@@ -351,10 +351,10 @@ The system MUST allow account creation while the email address is explicitly unv
 - Facets: identity-authentication, interface, api, security-controls, errors-recovery
 - Rationale: allowing initial account creation without verification reduces onboarding friction while preventing an unverified address from being treated as a trusted recovery or security channel.
 - Acceptance:
-  - Given a person registers with a valid email address and password, when account creation completes before email verification, then the account is explicitly marked as having an unverified email address.
-  - Given an account's email address is unverified, when recovery or a security notification must be sent, then the system does not rely on that unverified address as the trusted channel.
-  - Given a feature or action has a documented verified-email precondition, when an account with an unverified email attempts it, then the precondition is not satisfied.
-  - Given an account holder changes the primary email address, when the new address has not completed verification, then it is not treated as the verified primary address.
+  - ZD-AUTH-AC-63 — Given a person registers with a valid email address and password, when account creation completes before email verification, then the account is explicitly marked as having an unverified email address.
+  - ZD-AUTH-AC-64 — Given an account's email address is unverified, when recovery or a security notification must be sent, then the system does not rely on that unverified address as the trusted channel.
+  - ZD-AUTH-AC-65 — Given a feature or action has a documented verified-email precondition, when an account with an unverified email attempts it, then the precondition is not satisfied.
+  - ZD-AUTH-AC-66 — Given an account holder changes the primary email address, when the new address has not completed verification, then it is not treated as the verified primary address.
 - Basis: owner decision; PM recommendation accepted by the owner.
 - Decision reference: ZD-DEC-AUTH-2026-11-28.
 
