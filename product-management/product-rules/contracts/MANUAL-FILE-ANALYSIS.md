@@ -168,7 +168,7 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 
 **Type:** privacy | **Priority:** P1 | **Status:** PM-proposed | **Normative kind:** conditional
 **Condition:** Only if a separate cloud-analysis capability is approved and made available; none is approved by this contract.
-**Facets:** interface, behavior, privacy, integrations, security-controls
+**Facets:** interface, behavior, data, integrations, security-controls
 **Platforms:** web, android
 **Subject:** Optional future cloud analysis
 **Rationale:** The working product material specifies disclosure and consent if cloud analysis exists, while its existence remains open.
@@ -379,7 +379,7 @@ Exact detection criteria, confidence thresholds, source coverage and wording rem
 
 **Type:** privacy | **Priority:** P1 | **Status:** PM-proposed | **Normative kind:** conditional
 **Condition:** Only if scan results are retained beyond the active analysis interaction; scan history is not a standalone MVP feature.
-**Facets:** data, persistence, configuration, privacy
+**Facets:** data, persistence, configuration, security-controls
 **Platforms:** web, android
 **Subject:** Optional scan-result persistence
 **Rationale:** Product material separates scan history from quarantine retention; actual persistence remains conditional and unresolved.
