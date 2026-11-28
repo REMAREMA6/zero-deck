@@ -81,15 +81,16 @@
 | W74 | User switches platform while a result is available | Apply approved persistence policy; do not imply cross-device history if unsupported | WEB-033, 037 |
 | W75 | Resource budget is not configured for a required bound | Do not enable the affected request path until a defensible bound is established | WEB-031 |
 
-## Scenario coverage notes
-
-- 75 distinct scenarios are listed; each maps to one or more canonical requirement IDs.
-- Gate/no-call cases are deliberately decomposed so Pro, activation, stale/unknown state, revocation, queued work, retries, redirects, cache refresh, fallback and concurrency are not collapsed into a single happy-path assertion.
-- Scenarios involving direct destination fetch are conditional: the preferred PM recommendation is provider-only lookup. If direct fetch is not selected, the corresponding SSRF/redirect requirements still constrain any future fetch path and must not be mistaken for evidence that ZeroDeck currently fetches URLs.
-- This matrix is a planned conformance corpus. It has not been executed against a ZeroDeck runtime or provider integration.
 | W76 | A check is initiated without an explicit user submission | Do not create a check or dispatch a provider request | WEB-005 |
 | W77 | Provider reports no known match | Display bounded wording; never claim the URL is absolutely safe or harmless | WEB-022 |
 | W78 | Provider outage, abnormal errors or usage spike occurs | Emit operator-visible anomaly signal with URL redaction by default | WEB-036 |
 | W79 | Pro account reaches or exceeds its configured usage allowance | Apply the configured usage policy before any provider dispatch | WEB-040 |
 | W80 | Provider connection presents an invalid, expired, mismatched or untrusted certificate | Reject the connection; do not disable certificate verification | WEB-039 |
 | W81 | User checks one URL on a multi-page website | Report only the submitted URL as checked; do not imply whole-site inspection | WEB-041 |
+
+## Scenario coverage notes
+
+- 81 distinct scenarios are listed; each maps to one or more canonical requirement IDs.
+- Gate/no-call cases are deliberately decomposed so Pro, activation, stale/unknown state, revocation, queued work, retries, redirects, cache refresh, fallback and concurrency are not collapsed into a single happy-path assertion.
+- Scenarios involving direct destination fetch are conditional: the preferred PM recommendation is provider-only lookup. If direct fetch is not selected, the corresponding SSRF/redirect requirements still constrain any future fetch path and must not be mistaken for evidence that ZeroDeck currently fetches URLs.
+- This matrix is a planned conformance corpus. It has not been executed against a ZeroDeck runtime or provider integration.
