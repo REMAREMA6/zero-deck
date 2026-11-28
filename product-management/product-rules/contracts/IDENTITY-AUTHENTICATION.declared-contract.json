@@ -4,10 +4,10 @@
   "title": "ZeroDeck Identity and Authentication Product Requirements",
   "issuer": "ZeroDeck Product Management Agent",
   "artifact": {
-    "uri": "https://github.com/REMAREMA6/zero-deck/blob/4dc36c058a7d0f2a859b3b1ea5db3149f09864ad/product-management/product-rules/contracts/IDENTITY-AUTHENTICATION.md",
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/d334ddfdbb6210ffbbeda926197990714d28a5d7/product-management/product-rules/contracts/IDENTITY-AUTHENTICATION.md",
     "version": "0.3.0-draft",
-    "revision": "4dc36c058a7d0f2a859b3b1ea5db3149f09864ad",
-    "digest": "sha256:631185dcf2af5420797cd9b8904ddf16506701ad2e732ab1b5c35a95b20c7cce",
+    "revision": "d334ddfdbb6210ffbbeda926197990714d28a5d7",
+    "digest": "sha256:8405aa946726203141a0c152e376d17671bf69b8ec6c87bb5785946706831c2b",
     "mediaType": "text/markdown"
   },
   "scope": "Identity and account lifecycle requirements for ZeroDeck; supporting infrastructure for web and Android, not a fourth user-facing MVP capability.",
