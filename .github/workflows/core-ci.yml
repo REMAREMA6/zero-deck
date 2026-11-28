@@ -12,17 +12,6 @@ on:
       - 'tsconfig.base.json'
       - '.npmrc'
       - '.github/workflows/core-ci.yml'
-  pull_request:
-    branches: [main]
-    paths:
-      - 'apps/**'
-      - 'packages/**'
-      - 'package.json'
-      - 'pnpm-workspace.yaml'
-      - 'pnpm-lock.yaml'
-      - 'tsconfig.base.json'
-      - '.npmrc'
-      - '.github/workflows/core-ci.yml'
   workflow_dispatch:
 
 permissions:
