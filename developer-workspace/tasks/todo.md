@@ -6,18 +6,20 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### A1. Monorepo and toolchain
 
+**Status: Complete — frozen-lockfile CI, typecheck, formatting, Web build and Android export passed in run 46138639267.**
+
 **Description:** Establish the TypeScript workspace and buildable Web, Android and API package boundaries.
 
 **Acceptance criteria**
-- [ ] pnpm resolves one workspace and one committed lockfile from a clean checkout.
-- [ ] TypeScript strict configuration is shared without merging platform-specific build settings.
-- [ ] Web, Android, API, contracts and domain packages each expose their own build/typecheck commands.
-- [ ] No hosted integration credentials are required.
+- [x] pnpm resolves one workspace and one committed lockfile from a clean checkout.
+- [x] TypeScript strict configuration is shared without merging platform-specific build settings.
+- [x] Web, Android, API, contracts and domain packages each expose their own build/typecheck commands.
+- [x] No hosted integration credentials are required.
 
 **Verification**
-- [ ] Clean GitHub Actions dependency install succeeds with frozen lockfile.
-- [ ] Workspace typecheck and formatting pass.
-- [ ] Next.js production build and Expo Android export pass.
+- [x] Clean GitHub Actions dependency install succeeds with frozen lockfile.
+- [x] Workspace typecheck and formatting pass.
+- [x] Next.js production build and Expo Android export pass.
 
 **Dependencies:** None.  
 **Files likely touched:** package.json, pnpm-workspace.yaml, pnpm-lock.yaml, tsconfig.base.json, apps/*/package.json, app entry points.  
