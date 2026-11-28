@@ -17,10 +17,7 @@ export type UrlCheckDecision =
   | {
       status: 'blocked';
       reason:
-        | 'pro_required'
-        | 'activation_disabled'
-        | 'permission_required'
-        | 'eligibility_unknown';
+        'pro_required' | 'activation_disabled' | 'permission_required' | 'eligibility_unknown';
     }
   | { status: 'unavailable' }
   | { status: 'cancelled' }

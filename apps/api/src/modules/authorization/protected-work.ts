@@ -136,7 +136,11 @@ export function createProtectedWorkService(database: ProtectedWorkDatabase): {
             'SELECT status FROM protected_work_items WHERE work_id = $1 FOR UPDATE',
             [workId],
           );
-          if (!decision.allowed || current.rows[0]?.status !== 'queued' || controller.signal.aborted) {
+          if (
+            !decision.allowed ||
+            current.rows[0]?.status !== 'queued' ||
+            controller.signal.aborted
+          ) {
             await dispatchClient.query(
               "UPDATE protected_work_items SET status = 'cancelled', cancellation_reason = COALESCE(cancellation_reason, 'dispatch_denied'), finished_at = now() WHERE work_id = $1 AND status = 'queued'",
               [workId],

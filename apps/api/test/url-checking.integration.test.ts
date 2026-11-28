@@ -156,10 +156,7 @@ describe('MVP-03 independent URL-check authorization gates', () => {
     };
     const work = createProtectedWorkService(gatedDatabase);
     const providerOperation = vi.fn(async () => 'should-not-run');
-    const pending = work.execute(
-      { accountId, permission: 'website.check' },
-      providerOperation,
-    );
+    const pending = work.execute({ accountId, permission: 'website.check' }, providerOperation);
 
     await dispatchReached;
     await pool.query(
@@ -248,9 +245,10 @@ describe('MVP-03 independent URL-check authorization gates', () => {
           [accountId],
         );
       } else if (testCase.gate === 'entitlement') {
-        await pool.query('UPDATE account_entitlements SET pro_active = false WHERE account_id = $1', [
-          accountId,
-        ]);
+        await pool.query(
+          'UPDATE account_entitlements SET pro_active = false WHERE account_id = $1',
+          [accountId],
+        );
       } else {
         await pool.query(
           "UPDATE system_feature_controls SET enabled = false WHERE feature_key = 'mvp03_url_check'",
@@ -265,5 +263,4 @@ describe('MVP-03 independent URL-check authorization gates', () => {
       expect(rows.rows.every((row) => row.cancellation_reason === testCase.reason)).toBe(true);
     }
   });
-
 });

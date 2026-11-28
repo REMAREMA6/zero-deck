@@ -32,9 +32,9 @@ const KEY_PATTERN = /^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$/;
 export function isValidAuthorizationRequest(request: AuthorizationRequest): boolean {
   return Boolean(
     request.accountId &&
-      request.permission &&
-      KEY_PATTERN.test(request.permission) &&
-      (request.featureKey === undefined || KEY_PATTERN.test(request.featureKey)),
+    request.permission &&
+    KEY_PATTERN.test(request.permission) &&
+    (request.featureKey === undefined || KEY_PATTERN.test(request.featureKey)),
   );
 }
 
