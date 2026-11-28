@@ -278,7 +278,7 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### C3. Local analysis orchestration
 
-**Status: Partial — minimal in-memory local-engine invocation and safe failure mapping passed full CI run 46146977405. Progress, cancellation, retry, interrupted states and explicit network-boundary verification remain.**
+**Status: Partial — `runLocalFileAnalysis` invokes the local engine in memory, fails closed on engine errors, passes `AbortSignal` only to engines that declare cancellation support, and distinguishes observed cancellation from interruption. Implementation is in `packages/domain/src/index.ts` (commit `c4f23972`); dedicated lifecycle tests, retry semantics, platform adapters and explicit network-boundary verification remain. CI run 46147277516 is pending.**
 
 **Description:** Orchestrate analysis lifecycle, cancellation where supported, interruption, retry and local-only processing.
 
