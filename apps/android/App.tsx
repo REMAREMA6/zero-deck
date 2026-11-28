@@ -42,7 +42,7 @@ const capabilities = [
   },
 ];
 
-type Screen = 'home' | 'register' | 'login' | 'account' | 'file-analysis';
+type Screen = 'home' | 'register' | 'login' | 'account' | 'file-analysis' | 'deletion-scheduled';
 
 interface SessionProfile {
   accountId: string;
@@ -71,6 +71,11 @@ export default function App() {
   );
   const [error, setError] = useState<string | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
+  const [showDeletionForm, setShowDeletionForm] = useState(false);
+  const [deletionPassword, setDeletionPassword] = useState('');
+  const [deletionConfirmation, setDeletionConfirmation] = useState('');
+  const [deletionDueAt, setDeletionDueAt] = useState<string | null>(null);
+  const [deletionNotice, setDeletionNotice] = useState('');
 
   useEffect(() => {
     let active = true;
@@ -286,6 +291,75 @@ export default function App() {
     } finally {
       setSubmitting(false);
     }
+  }
+
+  async function handleAccountDeletion() {
+    setError(null);
+    setSubmitting(true);
+    try {
+      const token = await sessionStorage.read();
+      const apiBase = getApiBaseUrl();
+      if (!token || !apiBase) {
+        setError('A valid session and account service are required to delete this account.');
+        return;
+      }
+      const response = await fetch(apiBase + '/v1/account/deletion', {
+        method: 'POST',
+        headers: {
+          authorization: 'Bearer ' + token,
+          'content-type': 'application/json',
+        },
+        body: JSON.stringify({
+          currentPassword: deletionPassword,
+          confirmation: deletionConfirmation,
+        }),
+      });
+      const payload = await response.json().catch(() => null);
+      if (response.status !== 202) {
+        setError(payload?.error?.message ?? 'Account deletion could not be completed.');
+        return;
+      }
+
+      let localCredentialCleared = true;
+      try {
+        await sessionStorage.clear();
+      } catch {
+        localCredentialCleared = false;
+      }
+      setDeletionDueAt(payload.deletionDueAt as string);
+      setDeletionNotice(
+        localCredentialCleared
+          ? 'Account access is disabled and all sessions are revoked.'
+          : 'Account access is disabled and all sessions are revoked. The server will reject the credential if local secure storage could not be cleared.',
+      );
+      setDeletionPassword('');
+      setDeletionConfirmation('');
+      setProfile(null);
+      setScreen('deletion-scheduled');
+    } catch {
+      setError('The account deletion request could not be completed.');
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  if (screen === 'deletion-scheduled') {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <StatusBar barStyle="light-content" />
+        <ScrollView contentContainerStyle={styles.container}>
+          <View style={styles.topbar}><Brand /></View>
+          <View style={styles.registerHero}>
+            <Text style={styles.eyebrow}>ACCOUNT CLOSURE</Text>
+            <Text style={styles.registerTitle}>Account access disabled.</Text>
+            <Text style={styles.heroCopy}>{deletionNotice}</Text>
+            <Text style={styles.footnote}>
+              Personal data has not yet been deleted. Scheduled deletion: {deletionDueAt ? new Date(deletionDueAt).toLocaleString() : 'pending'}.
+            </Text>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    );
   }
 
   if (screen === 'register') {
