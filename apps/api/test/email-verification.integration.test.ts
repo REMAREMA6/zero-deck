@@ -6,6 +6,7 @@ import { buildApp } from '../src/app.js';
 import { createAccountRegistrationService } from '../src/modules/identity/account-registration.js';
 import {
   createEmailVerificationService,
+  EmailVerificationDeliveryError,
   type VerificationDelivery,
 } from '../src/modules/identity/email-verification.js';
 
@@ -14,6 +15,12 @@ class FakeVerificationDelivery implements VerificationDelivery {
 
   async sendVerification(email: string, token: string): Promise<void> {
     this.deliveries.push({ email, token });
+  }
+}
+
+class FailingVerificationDelivery implements VerificationDelivery {
+  async sendVerification(): Promise<void> {
+    throw new Error('Fake delivery failure');
   }
 }
 
@@ -67,7 +74,11 @@ describe('email verification with PostgreSQL and fake delivery', () => {
 
       const token = delivery.deliveries[0]!.token;
       const stored = await pool.query<{ token_hash: string; expires_at: Date }>(
-        'SELECT token_hash, expires_at FROM email_verification_challenges WHERE account_id = (SELECT account_id FROM accounts WHERE email_canonical = $1)',
+        `SELECT token_hash, expires_at
+         FROM email_verification_challenges
+         WHERE account_id = (
+           SELECT account_id FROM accounts WHERE email_canonical = $1
+         )`,
         [email.slice(0, email.lastIndexOf('@')) + '@example.com'],
       );
 
@@ -80,7 +91,7 @@ describe('email verification with PostgreSQL and fake delivery', () => {
     }
   });
 
-  it('verifies a challenge once and rejects replay', async () => {
+  it('verifies a challenge once, rejects altered tokens and serializes concurrent verification', async () => {
     if (!pool) throw new Error('PostgreSQL test dependency is unavailable.');
 
     const email = 'SingleUse-' + randomUUID() + '@example.com';
@@ -105,19 +116,26 @@ describe('email verification with PostgreSQL and fake delivery', () => {
       });
       const token = delivery.deliveries[0]!.token;
 
-      const first = await app.inject({
+      const altered = await app.inject({
         method: 'POST',
         url: '/v1/email-verification',
-        payload: { token },
+        payload: { token: token + 'altered' },
       });
+      expect(altered.statusCode).toBe(400);
+
+      const [first, second] = await Promise.all([
+        app.inject({ method: 'POST', url: '/v1/email-verification', payload: { token } }),
+        app.inject({ method: 'POST', url: '/v1/email-verification', payload: { token } }),
+      ]);
+      expect([first.statusCode, second.statusCode].sort()).toEqual([200, 400]);
+      const success = first.statusCode === 200 ? first : second;
+      expect(success.json()).toEqual({ verified: true });
+
       const replay = await app.inject({
         method: 'POST',
         url: '/v1/email-verification',
         payload: { token },
       });
-
-      expect(first.statusCode).toBe(200);
-      expect(first.json()).toEqual({ verified: true });
       expect(replay.statusCode).toBe(400);
 
       const account = await pool.query<{ email_verified_at: Date | null }>(
@@ -173,5 +191,34 @@ describe('email verification with PostgreSQL and fake delivery', () => {
     } finally {
       await app.close();
     }
+  });
+
+  it('invalidates a challenge when fake delivery fails', async () => {
+    if (!pool) throw new Error('PostgreSQL test dependency is unavailable.');
+
+    const email = 'DeliveryFailure-' + randomUUID() + '@example.com';
+    await createAccountRegistrationService(pool, testPasswordPolicy).register({
+      email,
+      password: 'test-only-password',
+    });
+
+    const verification = createEmailVerificationService(
+      pool,
+      { challengeLifetimeMs: 60_000 },
+      new FailingVerificationDelivery(),
+    );
+
+    await expect(verification.request(email)).rejects.toBeInstanceOf(EmailVerificationDeliveryError);
+
+    const challenge = await pool.query<{ consumed_at: Date | null }>(
+      `SELECT consumed_at
+       FROM email_verification_challenges
+       WHERE account_id = (
+         SELECT account_id FROM accounts WHERE email_canonical = $1
+       )`,
+      [email],
+    );
+    expect(challenge.rowCount).toBe(1);
+    expect(challenge.rows[0]?.consumed_at).toBeInstanceOf(Date);
   });
 });

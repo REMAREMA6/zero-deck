@@ -128,32 +128,57 @@ export function createEmailVerificationService(
       try {
         await client.query('BEGIN');
         const now = clock();
-        const challengeResult = await client.query<{
-          challenge_id: string;
-          account_id: string;
-        }>(
-          `SELECT challenge_id, account_id
+        const tokenHash = hashToken(token);
+        const candidate = await client.query<{ account_id: string }>(
+          `SELECT account_id
            FROM email_verification_challenges
-           WHERE token_hash = $1 AND consumed_at IS NULL AND expires_at > $2
-           FOR UPDATE`,
-          [hashToken(token), now],
+           WHERE token_hash = $1 AND consumed_at IS NULL AND expires_at > $2`,
+          [tokenHash, now],
         );
-        const challenge = challengeResult.rows[0];
+        const accountId = candidate.rows[0]?.account_id;
 
-        if (!challenge) {
+        if (!accountId) {
+          await client.query('COMMIT');
+          return false;
+        }
+
+        // All challenge operations lock the account before challenge rows to avoid lock-order deadlocks.
+        const account = await client.query(
+          'SELECT account_id FROM accounts WHERE account_id = $1 FOR UPDATE',
+          [accountId],
+        );
+        if (!account.rowCount) {
+          await client.query('COMMIT');
+          return false;
+        }
+
+        const challenge = await client.query<{ challenge_id: string }>(
+          `SELECT challenge_id
+           FROM email_verification_challenges
+           WHERE token_hash = $1
+             AND account_id = $2
+             AND consumed_at IS NULL
+             AND expires_at > $3
+           FOR UPDATE`,
+          [tokenHash, accountId, now],
+        );
+
+        if (!challenge.rowCount) {
           await client.query('COMMIT');
           return false;
         }
 
         await client.query(
-          'UPDATE email_verification_challenges SET consumed_at = $2 WHERE challenge_id = $1',
-          [challenge.challenge_id, now],
+          `UPDATE email_verification_challenges
+           SET consumed_at = $2
+           WHERE account_id = $1 AND consumed_at IS NULL`,
+          [accountId, now],
         );
         await client.query(
           `UPDATE accounts
            SET email_verified_at = COALESCE(email_verified_at, $2), updated_at = $2
            WHERE account_id = $1`,
-          [challenge.account_id, now],
+          [accountId, now],
         );
         await client.query('COMMIT');
         return true;
