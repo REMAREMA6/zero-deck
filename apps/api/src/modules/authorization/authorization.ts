@@ -9,19 +9,12 @@ export interface AuthorizationRequest {
 
 export type AuthorizationDecision =
   | { allowed: true }
-  | {
-      allowed: false;
-      reason:
-        | 'account_unknown'
-        | 'account_disabled'
-        | 'permission_unknown'
-        | 'permission_denied'
-        | 'entitlement_unknown'
-        | 'pro_required'
-        | 'activation_unknown'
-        | 'activation_disabled'
-        | 'unavailable';
-    };
+  | { allowed: false; reason:
+      | 'account_unknown' | 'account_disabled'
+      | 'permission_unknown' | 'permission_stale' | 'permission_denied'
+      | 'entitlement_unknown' | 'entitlement_stale' | 'pro_required'
+      | 'activation_unknown' | 'activation_stale' | 'activation_disabled'
+      | 'unavailable' };
 
 type AuthorizationDatabase = Pick<Pool, 'connect'>;
 const KEY_PATTERN = /^[a-z][a-z0-9]*(?:[._-][a-z0-9]+)*$/;
@@ -35,7 +28,6 @@ export function createAuthorizationService(database: AuthorizationDatabase): {
         (request.featureKey !== undefined && !KEY_PATTERN.test(request.featureKey))) {
         return { allowed: false, reason: 'permission_unknown' };
       }
-
       let client;
       try {
         client = await database.connect();
@@ -51,12 +43,16 @@ export function createAuthorizationService(database: AuthorizationDatabase): {
           return { allowed: false, reason: 'account_disabled' };
         }
 
-        const permission = await client.query<{ granted: boolean }>(
-          'SELECT granted FROM account_permissions WHERE account_id = $1 AND permission_key = $2 FOR SHARE',
+        const permission = await client.query<{ granted: boolean; state_status: string }>(
+          'SELECT granted, state_status FROM account_permissions WHERE account_id = $1 AND permission_key = $2 FOR SHARE',
           [request.accountId, request.permission]);
-        if (!permission.rowCount) {
+        if (!permission.rowCount || permission.rows[0]?.state_status === 'unknown') {
           await client.query('COMMIT');
           return { allowed: false, reason: 'permission_unknown' };
+        }
+        if (permission.rows[0]?.state_status !== 'fresh') {
+          await client.query('COMMIT');
+          return { allowed: false, reason: 'permission_stale' };
         }
         if (permission.rows[0]?.granted !== true) {
           await client.query('COMMIT');
@@ -64,12 +60,16 @@ export function createAuthorizationService(database: AuthorizationDatabase): {
         }
 
         if (request.requirePro) {
-          const entitlement = await client.query<{ pro_active: boolean }>(
-            'SELECT pro_active FROM account_entitlements WHERE account_id = $1 FOR SHARE',
+          const entitlement = await client.query<{ pro_active: boolean; state_status: string }>(
+            'SELECT pro_active, state_status FROM account_entitlements WHERE account_id = $1 FOR SHARE',
             [request.accountId]);
-          if (!entitlement.rowCount) {
+          if (!entitlement.rowCount || entitlement.rows[0]?.state_status === 'unknown') {
             await client.query('COMMIT');
             return { allowed: false, reason: 'entitlement_unknown' };
+          }
+          if (entitlement.rows[0]?.state_status !== 'fresh') {
+            await client.query('COMMIT');
+            return { allowed: false, reason: 'entitlement_stale' };
           }
           if (entitlement.rows[0]?.pro_active !== true) {
             await client.query('COMMIT');
@@ -78,12 +78,16 @@ export function createAuthorizationService(database: AuthorizationDatabase): {
         }
 
         if (request.featureKey) {
-          const activation = await client.query<{ enabled: boolean }>(
-            'SELECT enabled FROM system_feature_controls WHERE feature_key = $1 FOR SHARE',
+          const activation = await client.query<{ enabled: boolean; state_status: string }>(
+            'SELECT enabled, state_status FROM system_feature_controls WHERE feature_key = $1 FOR SHARE',
             [request.featureKey]);
-          if (!activation.rowCount) {
+          if (!activation.rowCount || activation.rows[0]?.state_status === 'unknown') {
             await client.query('COMMIT');
             return { allowed: false, reason: 'activation_unknown' };
+          }
+          if (activation.rows[0]?.state_status !== 'fresh') {
+            await client.query('COMMIT');
+            return { allowed: false, reason: 'activation_stale' };
           }
           if (activation.rows[0]?.enabled !== true) {
             await client.query('COMMIT');
@@ -94,9 +98,7 @@ export function createAuthorizationService(database: AuthorizationDatabase): {
         await client.query('COMMIT');
         return { allowed: true };
       } catch {
-        if (client) {
-          try { await client.query('ROLLBACK'); } catch { /* remain fail-closed */ }
-        }
+        if (client) { try { await client.query('ROLLBACK'); } catch { /* remain fail-closed */ } }
         return { allowed: false, reason: 'unavailable' };
       } finally {
         client?.release();
