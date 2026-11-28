@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getApiBaseUrl, setSessionCookie, unavailableResponse } from '../../lib/session-proxy';
+import { getApiBaseUrl, setSessionCookie, unavailableResponse } from '../../../lib/session-proxy';
 
 export async function POST(request: Request) {
   let payload: unknown;

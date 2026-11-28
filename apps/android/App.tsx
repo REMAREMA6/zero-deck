@@ -248,8 +248,8 @@ export default function App() {
           </View>
           {accepted ? (
             <Text accessibilityRole="alert" style={styles.successMessage}>
-              Your request was accepted. Email verification and sign-in are not enabled for new
-              accounts until the owner-approved password policy is configured.
+              Your request was accepted. New account creation remains disabled until the owner-approved
+              password policy is configured.
             </Text>
           ) : (
             <View style={styles.form}>

@@ -4,7 +4,7 @@ import {
   getApiBaseUrl,
   getSessionToken,
   unavailableResponse,
-} from '../../lib/session-proxy';
+} from '../../../lib/session-proxy';
 
 export async function GET(request: NextRequest) {
   const token = getSessionToken(request);

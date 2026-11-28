@@ -60,8 +60,8 @@ export default function RegisterPage() {
 
         {state === 'accepted' ? (
           <div className="form-message success" role="status">
-            Your request was accepted. Email verification and sign-in are not enabled in this core
-            build yet.
+            Your request was accepted. New account creation remains disabled until the owner-approved
+            password policy is configured.
           </div>
         ) : (
           <form className="auth-form" onSubmit={handleSubmit}>
