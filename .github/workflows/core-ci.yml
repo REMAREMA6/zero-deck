@@ -1,0 +1,99 @@
+name: ZeroDeck Core CI
+
+on:
+  push:
+    branches: [developer/core-product]
+    paths:
+      - 'apps/**'
+      - 'packages/**'
+      - 'package.json'
+      - 'pnpm-workspace.yaml'
+      - 'pnpm-lock.yaml'
+      - 'tsconfig.base.json'
+      - '.npmrc'
+      - '.github/workflows/core-ci.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'apps/**'
+      - 'packages/**'
+      - 'package.json'
+      - 'pnpm-workspace.yaml'
+      - 'pnpm-lock.yaml'
+      - 'tsconfig.base.json'
+      - '.npmrc'
+      - '.github/workflows/core-ci.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: zerodeck-core-ci-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  quality:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: zerodeck_test
+          POSTGRES_USER: zerodeck
+          POSTGRES_PASSWORD: zerodeck_ci_only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U zerodeck -d zerodeck_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://zerodeck:zerodeck_ci_only@localhost:5432/zerodeck_test
+      NODE_ENV: test
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 12.0.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --no-frozen-lockfile
+
+      - name: Check formatting
+        run: pnpm lint
+
+      - name: Type check
+        run: pnpm typecheck
+
+      - name: Unit tests
+        run: pnpm test
+
+      - name: PostgreSQL integration tests
+        run: pnpm --filter @zerodeck/api test:integration
+
+      - name: Build all clients and backend
+        run: pnpm build
+
+      - name: Upload generated lockfile and reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zerodeck-core-ci-evidence
+          if-no-files-found: warn
+          path: |
+            pnpm-lock.yaml
+            apps/api/coverage
+            apps/web/.next
+            apps/android/dist
