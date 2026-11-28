@@ -20,7 +20,7 @@ ZD-Q-AUTH-001 through ZD-Q-AUTH-008 are resolved by the owner decision record:
 - user-initiated deletion, immediate session revocation/access disable, documented personal-data deletion schedule and justified retained records;
 - risk-based assurance and fresh authentication before sensitive account-security changes/deletion, without repeated re-authentication for ordinary use.
 
-Five operational questions remain open: ZD-Q-AUTH-009–013.
+Five operational questions ZD-Q-AUTH-009–013 are now explicitly deferred under ZD-DEC-PHASE9-2026-11-28; product-level direction is recorded, while operational/security/legal details remain for architecture or specialist review.
 
 ## 3. Messaging facet changed
 
@@ -32,12 +32,7 @@ The later owner decision now requires:
 
 Therefore Messaging is relevant to authentication notification delivery. The original Phase 3 classification is stale for the current policy state.
 
-The current AUTH-021 acceptance criterion states that a security notification is sent, but:
-- AUTH-021's normative requirement statement does not include the notification outcome;
-- AUTH-021's facetRefs do not include the official Messaging facet;
-- the contract does not define delivery failure, retry, acknowledgement, duplicate suppression or delivery-status behaviour.
-
-These gaps are recorded in Phase 8 finding P8-F05. This addendum does not invent those policies or silently amend the canonical contract.
+Phase 9 reconciled AUTH-021: its normative statement now requires notifying the account owner after successful recovery, and its structured facetRefs include Messaging. Delivery failure, retry, acknowledgement, duplicate suppression and delivery-status mechanics remain deferred to architecture; no delivery guarantee beyond the product policy is claimed.
 
 ## 4. Behaviour facet mapping remains open
 
@@ -53,7 +48,7 @@ The original Phase 3 assessment identified a Behaviour facet-reference gap for A
 | Data | Required, partial; email canonicalization and data lifecycle remain open |
 | Persistence | Required, partial; atomicity, recovery, deletion and retention remain open |
 | API | Required, partial; concrete endpoint/error contracts remain architecture/feature work |
-| Messaging | Relevant for verified-email recovery and security notification; delivery semantics incomplete |
+| Messaging | Required for the owner notification after successful recovery; delivery/retry/acknowledgement mechanics remain deferred |
 | Identity and authentication | Required, partial; five operational questions remain open |
 | Authorization and permissions | Required, partial; broader role/resource policy and propagation remain open |
 | Security controls | Required, partial; no implementation effectiveness or audit is claimed |
