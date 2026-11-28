@@ -22,8 +22,8 @@ These counts cover **all 51 numbered Architect outcomes (1.1–7.7)**. They are 
 
 | Status | Count |
 |---|---:|
-| Done | 2 |
-| Partial | 19 |
+| Done | 3 |
+| Partial | 18 |
 | Blocked | 2 |
 | Not started | 28 |
 | **Total Architect outcomes tracked** | **51** |
@@ -49,7 +49,7 @@ These are the first five of the 51 Architect-defined outcomes. The Architect's s
 | 2.1 | Application workspace and module boundaries | **Partial** | pnpm monorepo and Web, Android, API, contracts and domain boundaries exist. Client/API dependency rules and complete platform adapter boundaries still need verification. |
 | 2.2 | Environment/configuration separation and safe startup validation | **Done** | `apps/api/src/config.ts`, `apps/api/test/config.test.ts`; missing/invalid configuration and secret redaction tests passed in CI run [46138912170](https://github.com/REMAREMA6/zero-deck/actions/runs/46138912170). |
 | 2.3 | PostgreSQL schema, migrations and data-access boundaries | **Partial** | Real PostgreSQL 17 migration runner, checksum enforcement and transactional rollback tests exist. Identity/session and URL gate migrations exist; complete account, entitlement, operational data boundaries and recovery/forward-repair evidence remain. |
-| 2.4 | Repeatable GitHub Actions CI with real PostgreSQL | **Partial** | `.github/workflows/core-ci.yml` runs install, formatting, typecheck, tests, PostgreSQL integration and builds. Earlier green run [46139448216](https://github.com/REMAREMA6/zero-deck/actions/runs/46139448216). The URL-check formatting defect was corrected. Run [46145179403](https://github.com/REMAREMA6/zero-deck/actions/runs/46145179403) passed formatting, typecheck and unit tests; PostgreSQL integration exposed a duplicate-key fixture in the URL-check test. The fixture was changed to an idempotent upsert and is being rerun. Keep Partial until the entire workflow is green. |
+| 2.4 | Repeatable GitHub Actions CI with real PostgreSQL | **Done** | `.github/workflows/core-ci.yml` completed a clean end-to-end run [46145316979](https://github.com/REMAREMA6/zero-deck/actions/runs/46145316979): frozen dependency install, formatting, typecheck, unit tests, PostgreSQL 17 integration tests and API/Web/Android builds all passed. The URL-check test fixture now uses an idempotent feature-control upsert. |
 | 2.5 | Deterministic adapters and fixtures for external boundaries | **Partial** | Fake email delivery and injected URL-check provider/test doubles exist. Full deterministic adapters/fixtures for every external boundary and proof of no live calls remain. |
 | 2.6 | Module contracts, CI-based development and environment documentation | **Partial** | Workspace README, Developer execution plan and migration notes exist. Reproducible module/API/environment documentation and independent handover validation remain. |
 
