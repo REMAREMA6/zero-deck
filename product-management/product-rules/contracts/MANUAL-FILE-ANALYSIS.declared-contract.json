@@ -4,10 +4,10 @@
   "title": "ZeroDeck MVP-01 Manual File Security Analysis Product Requirements",
   "issuer": "ZeroDeck Product Management Agent",
   "artifact": {
-    "uri": "https://github.com/REMAREMA6/zero-deck/blob/6d8e4bf85b50e013ab592634ca237fb7836a249b/product-management/product-rules/contracts/MANUAL-FILE-ANALYSIS.md",
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/298ba0e6b31ff8ebdc3163a2c6366dcf31ae06f3/product-management/product-rules/contracts/MANUAL-FILE-ANALYSIS.md",
     "version": "0.1.0-draft",
-    "revision": "6d8e4bf85b50e013ab592634ca237fb7836a249b",
-    "digest": "sha256:859a8913cd831da9334a1e0b1755f5635b18f2989ab9efb7e10d1c9dbd5fd73e",
+    "revision": "298ba0e6b31ff8ebdc3163a2c6366dcf31ae06f3",
+    "digest": "sha256:9fd4e80beebb672a9281485334b8671f255e9dbe98df2e9c61ed62824906401b",
     "mediaType": "text/markdown"
   },
   "scope": "MVP-01 manual file security analysis for web and Android; user-selected files, explicit scan requests, bounded result semantics and truthful failure handling; excludes quarantine/disposition and website/link checking.",
@@ -490,7 +490,6 @@
           "facetRefs": [
             "interface",
             "behavior",
-            "privacy",
             "integrations",
             "security-controls"
           ],
@@ -1101,7 +1100,7 @@
             "data",
             "persistence",
             "configuration",
-            "privacy"
+            "security-controls"
           ],
           "platforms": [
             "web",
