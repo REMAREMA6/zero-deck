@@ -246,7 +246,7 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### C1. File access and capability adapters
 
-**Status: Partial — Web file selection and metadata-only state are implemented in `apps/web/app/file-analysis/page.tsx` and `apps/web/lib/file-selection.ts`; no content read/upload or scan is performed. Unit tests are awaiting full CI run [46147873294](https://github.com/REMAREMA6/zero-deck/actions/runs/46147873294). Android picker, permission-loss/unreadable handling and explicit backend/network-boundary proof remain.**
+**Status: Partial — Web file selection and metadata-only state are implemented in `apps/web/app/file-analysis/page.tsx` and `apps/web/lib/file-selection.ts`; no content read/upload or scan is performed. Unit tests are awaiting full CI run [46148090831](https://github.com/REMAREMA6/zero-deck/actions/runs/46148090831); the previous run caught a CSS formatting issue that has been corrected. Android picker, permission-loss/unreadable handling and explicit backend/network-boundary proof remain.**
 
 **Description:** Add explicit user-selected file access for Web and Android and truthfully handle revoked/unreadable/unsupported inputs.
 
