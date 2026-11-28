@@ -188,15 +188,19 @@ describe('MVP-03 independent URL-check authorization gates', () => {
     const started = new Promise<void>((resolve) => {
       providerStarted = resolve;
     });
-    const lookup = vi.fn(
-      ({ signal }: { url: string; signal: AbortSignal }) =>
-        new Promise<never>((_resolve, reject) => {
-          providerStarted?.();
-          signal.addEventListener('abort', () => reject(new Error('provider aborted')), {
-            once: true,
-          });
-        }),
-    );
+    const followOnProviderCall = vi.fn();
+    const lookup = vi.fn(async ({ signal }: { url: string; signal: AbortSignal }) => {
+      providerStarted?.();
+      await new Promise<void>((resolve) => {
+        signal.addEventListener('abort', resolve, { once: true });
+      });
+      if (signal.aborted) throw new Error('provider aborted');
+      followOnProviderCall();
+      return {
+        verdict: 'no_match',
+        explanation: 'No known match was returned.',
+      };
+    });
     const service = createUrlCheckService(pool, { lookup });
     const pending = service.check(accountId, 'https://example.com/path', true);
 
@@ -209,6 +213,7 @@ describe('MVP-03 independent URL-check authorization gates', () => {
     await expect(pending).resolves.toEqual({ status: 'cancelled' });
     expect(lookup).toHaveBeenCalledTimes(1);
     expect(lookup.mock.calls[0]?.[0].signal.aborted).toBe(true);
+    expect(followOnProviderCall).not.toHaveBeenCalled();
     const workRows = await pool.query<{ status: string }>(
       'SELECT status FROM protected_work_items WHERE account_id = $1',
       [accountId],
