@@ -1,0 +1,31 @@
+name: Inspect OpenSpec capability inventory
+
+on:
+  push:
+    branches: [automation/openspec-bootstrap]
+    paths: [.github/workflows/openspec-spec-inventory.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install OpenSpec CLI
+        run: |
+          npm install --global @fission-ai/openspec@latest
+          openspec --version
+      - name: Inspect existing specs
+        run: |
+          echo "===== EXISTING CAPABILITY SPECS ====="
+          openspec list --specs
+          echo "===== CHANGE METADATA ====="
+          cat openspec/changes/core-product-architecture/.openspec.yaml
