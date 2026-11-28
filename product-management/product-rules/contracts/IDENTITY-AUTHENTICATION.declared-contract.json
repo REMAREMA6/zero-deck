@@ -4,10 +4,10 @@
   "title": "ZeroDeck Identity and Authentication Product Requirements",
   "issuer": "ZeroDeck Product Management Agent",
   "artifact": {
-    "uri": "https://github.com/REMAREMA6/zero-deck/blob/9d92423cdf801df7d6d2ec3fabf0b86ee562965c/product-management/product-rules/contracts/IDENTITY-AUTHENTICATION.md",
-    "version": "0.2.0-draft",
-    "revision": "9d92423cdf801df7d6d2ec3fabf0b86ee562965c",
-    "digest": "sha256:94424bd0bf5fb8d2a4f7f923d64e8475a9a65c5f68292e9026681f77f916fd55",
+    "uri": "https://github.com/REMAREMA6/zero-deck/blob/4dc36c058a7d0f2a859b3b1ea5db3149f09864ad/product-management/product-rules/contracts/IDENTITY-AUTHENTICATION.md",
+    "version": "0.3.0-draft",
+    "revision": "4dc36c058a7d0f2a859b3b1ea5db3149f09864ad",
+    "digest": "sha256:631185dcf2af5420797cd9b8904ddf16506701ad2e732ab1b5c35a95b20c7cce",
     "mediaType": "text/markdown"
   },
   "scope": "Identity and account lifecycle requirements for ZeroDeck; supporting infrastructure for web and Android, not a fourth user-facing MVP capability.",
@@ -114,7 +114,7 @@
     },
     {
       "statementId": "ZD-AUTH-021",
-      "text": "When an authenticator is reset, replaced, or confirmed compromised through an authorized security process, the system MUST revoke all existing sessions after successful account recovery and MUST require fresh authentication before protected access resumes.",
+      "text": "When an authenticator is reset, replaced, or confirmed compromised through an authorized security process, the system MUST revoke all existing sessions after successful account recovery, MUST notify the account owner of successful recovery, and MUST require fresh authentication before protected access resumes.",
       "location": "#### Requirement ZD-AUTH-021 — Invalidate affected sessions after credential recovery or replacement"
     },
     {
@@ -189,14 +189,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-001-AC-01",
+              "criterionId": "ZD-AUTH-AC-01",
               "given": "a successful account creation",
               "when": "the account is retrieved through an authenticated session",
               "then": "the same stable principal is returned.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-001-AC-02",
+              "criterionId": "ZD-AUTH-AC-02",
               "given": "two distinct accounts",
               "when": "their principal references are compared",
               "then": "they are distinct.",
@@ -243,14 +243,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-002-AC-01",
+              "criterionId": "ZD-AUTH-AC-03",
               "given": "an existing account identifier",
               "when": "another account attempts to claim an identifier that canonicalizes to the same value",
               "then": "the second claim is rejected without changing the first account.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-002-AC-02",
+              "criterionId": "ZD-AUTH-AC-04",
               "given": "identifiers that differ only in forms the documented canonicalization treats as equivalent",
               "when": "submitted",
               "then": "the uniqueness check treats them consistently.",
@@ -292,7 +292,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-003-AC-01",
+              "criterionId": "ZD-AUTH-AC-05",
               "given": "an account with an existing principal",
               "when": "its supported authenticator is changed",
               "then": "the principal remains unchanged.",
@@ -333,14 +333,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-004-AC-01",
+              "criterionId": "ZD-AUTH-AC-06",
               "given": "an unauthenticated client",
               "when": "it submits fabricated client-side authentication state without valid server-verifiable proof",
               "then": "protected operations are denied.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-004-AC-02",
+              "criterionId": "ZD-AUTH-AC-07",
               "given": "valid credentials",
               "when": "the trusted verifier accepts them",
               "then": "an authenticated session may be established for the corresponding principal.",
@@ -382,14 +382,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-005-AC-01",
+              "criterionId": "ZD-AUTH-AC-08",
               "given": "a newly registered password",
               "when": "persisted records and application logs are inspected",
               "then": "the plaintext password is absent and only the approved verifier representation is present.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-005-AC-02",
+              "criterionId": "ZD-AUTH-AC-09",
               "given": "a credential verification request",
               "when": "the verifier checks the credential",
               "then": "it does not need to retrieve a plaintext password.",
@@ -440,35 +440,35 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-006-AC-01",
+              "criterionId": "ZD-AUTH-AC-10",
               "given": "password authentication is offered without MFA",
               "when": "a password shorter than 15 characters is submitted",
               "then": "it is rejected; when a password of at least 15 characters is submitted, it is eligible for further checks.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-006-AC-02",
+              "criterionId": "ZD-AUTH-AC-11",
               "given": "password authentication is offered only as one factor in MFA",
               "when": "a password shorter than 8 characters is submitted",
               "then": "it is rejected.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-006-AC-03",
+              "criterionId": "ZD-AUTH-AC-12",
               "given": "a password of at least 64 characters containing Unicode or whitespace",
               "when": "submitted within the product's documented input limit",
               "then": "it is accepted for evaluation and is not silently truncated.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-006-AC-04",
+              "criterionId": "ZD-AUTH-AC-13",
               "given": "a password on the blocklist",
               "when": "submitted for creation or change",
               "then": "it is rejected with an actionable reason.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-006-AC-05",
+              "criterionId": "ZD-AUTH-AC-14",
               "given": "no evidence of compromise",
               "when": "the account remains in good standing",
               "then": "the system does not force a periodic password change.",
@@ -513,21 +513,21 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-007-AC-01",
+              "criterionId": "ZD-AUTH-AC-15",
               "given": "repeated failed attempts against one account",
               "when": "the configured threshold is reached",
               "then": "further attempts are delayed or rejected according to the documented policy.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-007-AC-02",
+              "criterionId": "ZD-AUTH-AC-16",
               "given": "throttling is active",
               "when": "a legitimate user attempts authentication",
               "then": "the response communicates the restriction without revealing whether another person's account exists.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-007-AC-03",
+              "criterionId": "ZD-AUTH-AC-17",
               "given": "a distributed attempt pattern",
               "when": "requests originate from multiple clients",
               "then": "per-account protection remains effective.",
@@ -569,7 +569,7 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-008-AC-01",
+              "criterionId": "ZD-AUTH-AC-18",
               "given": "an identifier that exists and one that does not",
               "when": "equivalent unauthenticated sign-in or recovery requests are submitted",
               "then": "externally observable responses do not disclose account existence through message content or materially distinguishable response behaviour.",
@@ -610,14 +610,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-009-AC-01",
+              "criterionId": "ZD-AUTH-AC-19",
               "given": "successful authentication",
               "when": "the client accesses a protected operation with the issued session credential",
               "then": "the server resolves it to the authenticated principal.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-009-AC-02",
+              "criterionId": "ZD-AUTH-AC-20",
               "given": "a random or fabricated session credential",
               "when": "presented",
               "then": "it does not resolve to an authenticated principal.",
@@ -658,14 +658,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-010-AC-01",
+              "criterionId": "ZD-AUTH-AC-21",
               "given": "an unauthenticated session",
               "when": "authentication succeeds",
               "then": "the prior unauthenticated session credential cannot be used as the authenticated session.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-010-AC-02",
+              "criterionId": "ZD-AUTH-AC-22",
               "given": "a session is rotated",
               "when": "the superseded credential is replayed",
               "then": "it is rejected.",
@@ -713,28 +713,28 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-011-AC-01",
+              "criterionId": "ZD-AUTH-AC-23",
               "given": "a session exceeds its configured inactivity limit",
               "when": "its credential is presented",
               "then": "protected access is denied.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-011-AC-02",
+              "criterionId": "ZD-AUTH-AC-24",
               "given": "a session exceeds its configured absolute lifetime despite continued activity",
               "when": "its credential is presented",
               "then": "protected access is denied.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-011-AC-03",
+              "criterionId": "ZD-AUTH-AC-25",
               "given": "an authenticated session has had no qualifying activity for 7 days",
               "when": "its credential is presented",
               "then": "protected access is denied.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-011-AC-04",
+              "criterionId": "ZD-AUTH-AC-26",
               "given": "an authenticated session reaches 30 days from establishment",
               "when": "its credential is presented",
               "then": "protected access is denied even if it has remained active.",
@@ -786,28 +786,28 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-012-AC-01",
+              "criterionId": "ZD-AUTH-AC-27",
               "given": "a session is revoked",
               "when": "its credential is replayed",
               "then": "the request is denied.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-012-AC-02",
+              "criterionId": "ZD-AUTH-AC-28",
               "given": "all sessions for an account are revoked",
               "when": "any previously issued session credential for that account is replayed",
               "then": "each is denied.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-012-AC-03",
+              "criterionId": "ZD-AUTH-AC-29",
               "given": "an account holder selects logout all devices",
               "when": "the operation completes",
               "then": "every active session for that account is revoked.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-012-AC-04",
+              "criterionId": "ZD-AUTH-AC-30",
               "given": "the launch account interface is inspected",
               "when": "session-management capabilities are reviewed",
               "then": "current-session logout and logout-all-devices are available but a detailed device/session list is not required.",
@@ -858,14 +858,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-013-AC-01",
+              "criterionId": "ZD-AUTH-AC-31",
               "given": "an authenticated session",
               "when": "logout completes",
               "then": "replaying its former credential does not authorize a protected request.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-013-AC-02",
+              "criterionId": "ZD-AUTH-AC-32",
               "given": "logout is repeated or the session has already expired",
               "when": "the request is processed",
               "then": "the operation completes safely without restoring the session.",
@@ -908,14 +908,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-014-AC-01",
+              "criterionId": "ZD-AUTH-AC-33",
               "given": "a production web session",
               "when": "its cookie attributes are inspected",
               "then": "secure transport and script-access restrictions are applied and the cross-site policy is explicit.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-014-AC-02",
+              "criterionId": "ZD-AUTH-AC-34",
               "given": "a cross-site forged state-changing request without the required anti-CSRF proof",
               "when": "it reaches the service",
               "then": "it is rejected.",
@@ -958,21 +958,21 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-015-AC-01",
+              "criterionId": "ZD-AUTH-AC-35",
               "given": "an Android user has authenticated",
               "when": "the app persists the credential",
               "then": "it is stored using a protected mechanism appropriate to the supported Android versions.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-015-AC-02",
+              "criterionId": "ZD-AUTH-AC-36",
               "given": "ordinary application data or logs are inspected",
               "when": "the credential is at rest or after an error",
               "then": "the raw credential is not exposed there.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-015-AC-03",
+              "criterionId": "ZD-AUTH-AC-37",
               "given": "protected storage becomes unavailable or its key is invalidated",
               "when": "the app attempts to use the credential",
               "then": "it fails closed and requires a safe re-authentication or recovery path.",
@@ -1016,14 +1016,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-016-AC-01",
+              "criterionId": "ZD-AUTH-AC-38",
               "given": "a client alters a local role, Pro flag or activation flag",
               "when": "it requests a protected operation",
               "then": "the trusted service applies the server-side state and denies any unauthorized action.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-016-AC-02",
+              "criterionId": "ZD-AUTH-AC-39",
               "given": "a user's entitlement or permission is revoked",
               "when": "an existing session requests a protected operation",
               "then": "the latest applicable authorization state is enforced within the documented propagation bound.",
@@ -1063,14 +1063,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-017-AC-01",
+              "criterionId": "ZD-AUTH-AC-40",
               "given": "one account authenticates on both platforms",
               "when": "each session accesses account-scoped resources",
               "then": "both resolve to the same principal.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-017-AC-02",
+              "criterionId": "ZD-AUTH-AC-41",
               "given": "account-level authorization or entitlement changes",
               "when": "either platform next performs a protected operation",
               "then": "the same current policy is applied.",
@@ -1109,14 +1109,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-018-AC-01",
+              "criterionId": "ZD-AUTH-AC-42",
               "given": "the trusted authentication state cannot be verified",
               "when": "a protected request is processed",
               "then": "access is denied rather than granted from stale client state.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-018-AC-02",
+              "criterionId": "ZD-AUTH-AC-43",
               "given": "an authentication dependency fails",
               "when": "the user receives the result",
               "then": "it explains that authentication is temporarily unavailable and does not expose tokens, credentials or internal stack details.",
@@ -1158,14 +1158,14 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-019-AC-01",
+              "criterionId": "ZD-AUTH-AC-44",
               "given": "authentication and recovery flows are exercised with instrumented logs",
               "when": "records are inspected",
               "then": "credential and session secrets are absent.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-019-AC-02",
+              "criterionId": "ZD-AUTH-AC-45",
               "given": "a secret-bearing request is generated",
               "when": "its URL and diagnostic output are inspected",
               "then": "the secret is not included.",
@@ -1214,28 +1214,28 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-020-AC-01",
+              "criterionId": "ZD-AUTH-AC-46",
               "given": "a valid recovery challenge",
               "when": "it is successfully used",
               "then": "it cannot be used again.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-020-AC-02",
+              "criterionId": "ZD-AUTH-AC-47",
               "given": "an expired, invalid, already-used or altered recovery challenge",
               "when": "submitted",
               "then": "no authenticator or account security state is changed.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-020-AC-03",
+              "criterionId": "ZD-AUTH-AC-48",
               "given": "a recovery attempt for an identifier",
               "when": "the requester is unauthenticated",
               "then": "the response does not reveal whether the account exists.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-020-AC-04",
+              "criterionId": "ZD-AUTH-AC-49",
               "given": "an account has no verified email address",
               "when": "recovery is requested",
               "then": "the unverified address is not used as the recovery channel.",
@@ -1254,12 +1254,13 @@
           "requirementType": "security",
           "normativeKind": "required",
           "priority": "P0",
-          "decisionStatus": "pm-proposed",
+          "decisionStatus": "owner-approved",
           "facetRefs": [
             "identity-authentication",
             "security-controls",
             "errors-recovery",
-            "persistence"
+            "persistence",
+            "messaging"
           ],
           "platforms": [
             "web",
@@ -1286,21 +1287,21 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-021-AC-01",
+              "criterionId": "ZD-AUTH-AC-50",
               "given": "a password or authenticator is reset",
               "when": "the reset completes",
               "then": "sessions selected by the documented revocation policy no longer authorize protected operations.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-021-AC-02",
+              "criterionId": "ZD-AUTH-AC-51",
               "given": "The relevant prior state is established.",
               "when": "Given a former session is replayed after required revocation",
               "then": "access is denied.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-021-AC-03",
+              "criterionId": "ZD-AUTH-AC-52",
               "given": "account recovery succeeds",
               "when": "the recovery operation completes",
               "then": "all existing sessions for that account are revoked and a security notification is sent to the account owner.",
@@ -1311,7 +1312,8 @@
             "ZD-EV-CONTRACT-AUTH-001"
           ],
           "decisionRefs": [
-            "ZD-DEC-AUTH-2026-11-28"
+            "ZD-DEC-AUTH-2026-11-28",
+            "ZD-DEC-PHASE9-2026-11-28"
           ]
         },
         {
@@ -1343,28 +1345,28 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-025-AC-01",
+              "criterionId": "ZD-AUTH-AC-53",
               "given": "an authenticated session",
               "when": "the user attempts to change the password or a passkey",
               "then": "fresh authentication is required before the change is accepted.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-025-AC-02",
+              "criterionId": "ZD-AUTH-AC-54",
               "given": "an authenticated session",
               "when": "the user attempts to change the verified recovery email address",
               "then": "fresh authentication is required before the change is accepted.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-025-AC-03",
+              "criterionId": "ZD-AUTH-AC-55",
               "given": "an authenticated session",
               "when": "the user confirms account deletion",
               "then": "fresh authentication is required before deletion proceeds.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-025-AC-04",
+              "criterionId": "ZD-AUTH-AC-56",
               "given": "an authenticated session",
               "when": "the user performs ordinary account actions that are not designated sensitive",
               "then": "the system does not repeatedly require fresh authentication solely because the session is active.",
@@ -1408,21 +1410,21 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-026-AC-01",
+              "criterionId": "ZD-AUTH-AC-57",
               "given": "an authenticated account holder who completes required fresh authentication",
               "when": "account deletion is confirmed",
               "then": "all active sessions are revoked and account access is disabled immediately.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-026-AC-02",
+              "criterionId": "ZD-AUTH-AC-58",
               "given": "account deletion has been confirmed",
               "when": "the documented deletion schedule is applied",
               "then": "personal data is deleted according to that schedule.",
               "verificationMethod": "operational-test"
             },
             {
-              "criterionId": "ZD-AUTH-026-AC-03",
+              "criterionId": "ZD-AUTH-AC-59",
               "given": "a record must be retained for a legitimate requirement",
               "when": "deletion is processed",
               "then": "the record, retention reason and retention period are documented and access is restricted to the justified purpose.",
@@ -1465,21 +1467,21 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-027-AC-01",
+              "criterionId": "ZD-AUTH-AC-60",
               "given": "a person does not yet have a ZeroDeck account",
               "when": "they register with a valid email address and password",
               "then": "an account is created with a stable account principal.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-027-AC-02",
+              "criterionId": "ZD-AUTH-AC-61",
               "given": "an account has been created with an email address and password",
               "when": "the user submits valid credentials",
               "then": "the system authenticates the corresponding account.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-027-AC-03",
+              "criterionId": "ZD-AUTH-AC-62",
               "given": "a person is completing the launch registration or sign-in journey",
               "when": "the flow is used",
               "then": "a phone number or social-login account is not required to complete it.",
@@ -1523,28 +1525,28 @@
           ],
           "acceptanceCriteria": [
             {
-              "criterionId": "ZD-AUTH-028-AC-01",
+              "criterionId": "ZD-AUTH-AC-63",
               "given": "a person registers with a valid email address and password",
               "when": "account creation completes before email verification",
               "then": "the account is explicitly marked as having an unverified email address.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-028-AC-02",
+              "criterionId": "ZD-AUTH-AC-64",
               "given": "an account's email address is unverified",
               "when": "recovery or a security notification must be sent",
               "then": "the system does not rely on that unverified address as the trusted channel.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-028-AC-03",
+              "criterionId": "ZD-AUTH-AC-65",
               "given": "a feature or action has a documented verified-email precondition",
               "when": "an account with an unverified email attempts it",
               "then": "the precondition is not satisfied.",
               "verificationMethod": "automated-test"
             },
             {
-              "criterionId": "ZD-AUTH-028-AC-04",
+              "criterionId": "ZD-AUTH-AC-66",
               "given": "an account holder changes the primary email address",
               "when": "the new address has not completed verification",
               "then": "it is not treated as the verified primary address.",
@@ -1644,41 +1646,51 @@
           "questionId": "ZD-Q-AUTH-009",
           "question": "What exact email canonicalization and verification operational policy applies?",
           "impact": "Required for consistent identity matching, verification delivery and recovery operations.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Document normalization, verification challenge expiry/resend limits and notification policy."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Document normalization, verification challenge expiry/resend limits and notification policy.",
+          "resolution": "Email policy: trim surrounding whitespace, compare the domain case-insensitively, preserve local-part semantics, and do not strip plus tags/dots or apply provider-specific alias rules globally. Verification challenge expiry, resend limits and delivery operations remain to be specified with the chosen identity workflow.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-AUTH-010",
           "question": "What numeric authentication and recovery abuse thresholds apply?",
           "impact": "Required to configure and test rate limits, progressive delays and temporary restrictions.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Set thresholds through risk and usability review; avoid permanent lockout."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Set thresholds through risk and usability review; avoid permanent lockout.",
+          "resolution": "Apply rate limits, progressive delays and temporary restrictions; do not use permanent lockouts as the normal abuse control. Numeric thresholds require security and usability testing.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-AUTH-011",
           "question": "What exact session renewal cadence and edge-case policy applies?",
           "impact": "The approved lifetime limits do not fully specify renewal timing or all concurrent-session edge cases.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Specify renewal cadence and replay handling within the approved 7-day inactivity and 30-day absolute limits."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Specify renewal cadence and replay handling within the approved 7-day inactivity and 30-day absolute limits.",
+          "resolution": "Renewal credentials must rotate securely and replay must not restore a revoked session. Preserve the owner-approved 7-day inactivity and 30-day absolute limits. Exact cadence and edge cases require architecture design and testing.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-AUTH-012",
           "question": "What exact account-deletion schedule and legally required retention categories apply?",
           "impact": "Exact deletion and retention behaviour depends on launch jurisdiction and documented operational obligations.",
           "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Determine exact timelines, lawful retention categories and evidence of deletion before release."
+          "status": "deferred",
+          "pmRecommendation": "Determine exact timelines, lawful retention categories and evidence of deletion before release.",
+          "resolution": "User-initiated deletion immediately revokes sessions and disables account access. Personal data is deleted on a documented schedule; only justified records may be retained, with reason and period recorded. Exact schedules and statutory categories require legal review and architecture design.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         },
         {
           "questionId": "ZD-Q-AUTH-013",
           "question": "What authorization propagation bound applies to entitlement, permission and owner-controlled activation changes?",
           "impact": "Protected operations need a measurable bound for applying current trusted authorization state.",
-          "ownerDecisionRequired": true,
-          "status": "open",
-          "pmRecommendation": "Set and test a propagation bound in the cross-cutting authorization contract."
+          "ownerDecisionRequired": false,
+          "status": "deferred",
+          "pmRecommendation": "Set and test a propagation bound in the cross-cutting authorization contract.",
+          "resolution": "One shared invariant applies across web and Android: newly evaluated operations and queued/not-yet-dispatched provider work are denied after authoritative revocation; already-dispatched work is cancelled where supported and must not trigger follow-on calls. Exact propagation bounds require architecture and measured tests.",
+          "decisionRef": "ZD-DEC-PHASE9-2026-11-28"
         }
       ]
     }
