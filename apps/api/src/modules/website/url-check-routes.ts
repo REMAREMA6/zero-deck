@@ -78,6 +78,14 @@ export function registerUrlCheckRoutes(
           },
         });
       }
+      if (result.status === 'cancelled') {
+        return reply.code(409).send({
+          error: {
+            code: 'URL_CHECK_CANCELLED',
+            message: 'This check was cancelled because authorization changed.',
+          },
+        });
+      }
       if (result.status === 'unavailable') {
         return reply.code(503).send({
           error: {
