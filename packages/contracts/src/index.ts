@@ -29,6 +29,16 @@ export const SessionProfileSchema = z.object({
   email: z.string().email(),
   emailVerified: z.boolean(),
 });
+export const URLCheckInputSchema = z.object({
+  url: z.string().min(1),
+  consent: z.literal(true),
+});
+export const URLCheckProviderResultSchema = z.object({
+  verdict: z.enum(['known_threat', 'suspicious', 'no_match', 'inconclusive']),
+  explanation: z.string().min(1),
+});
+export type URLCheckInput = z.infer<typeof URLCheckInputSchema>;
+export type URLCheckProviderResult = z.infer<typeof URLCheckProviderResultSchema>;
 
 export type HealthResponse = z.infer<typeof HealthResponseSchema>;
 export type ApiError = z.infer<typeof ApiErrorSchema>;
