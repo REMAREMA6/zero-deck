@@ -1,9 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import {
-  clearSessionCookie,
-  getApiBaseUrl,
-  getSessionToken,
-} from '../../../../lib/session-proxy';
+import { clearSessionCookie, getApiBaseUrl, getSessionToken } from '../../../../lib/session-proxy';
 
 export async function POST(request: NextRequest) {
   const token = getSessionToken(request);

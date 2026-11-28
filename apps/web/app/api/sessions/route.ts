@@ -33,7 +33,9 @@ export async function POST(request: Request) {
 
     if (typeof data?.sessionToken !== 'string') {
       return NextResponse.json(
-        { error: { code: 'INVALID_UPSTREAM_RESPONSE', message: 'Sign-in could not be completed.' } },
+        {
+          error: { code: 'INVALID_UPSTREAM_RESPONSE', message: 'Sign-in could not be completed.' },
+        },
         { status: 502, headers: { 'cache-control': 'no-store' } },
       );
     }

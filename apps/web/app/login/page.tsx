@@ -45,7 +45,9 @@ export default function LoginPage() {
           <span className="wordmark-mark">Z</span>
           <span>zerodeck</span>
         </Link>
-        <Link className="topbar-action" href="/">Back to home</Link>
+        <Link className="topbar-action" href="/">
+          Back to home
+        </Link>
       </header>
       <section className="auth-card" aria-labelledby="login-title">
         <p className="eyebrow">ACCOUNT ACCESS</p>
@@ -73,13 +75,20 @@ export default function LoginPage() {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
-          {error ? <p className="form-message error" role="alert">{error}</p> : null}
+          {error ? (
+            <p className="form-message error" role="alert">
+              {error}
+            </p>
+          ) : null}
           <button className="auth-submit" type="submit" disabled={submitting}>
             {submitting ? 'Signing in…' : 'Sign in'}
           </button>
         </form>
         <p className="auth-footnote">
-          New to ZeroDeck? <Link className="auth-inline-link" href="/register">Create an account</Link>
+          New to ZeroDeck?{' '}
+          <Link className="auth-inline-link" href="/register">
+            Create an account
+          </Link>
         </p>
       </section>
     </main>

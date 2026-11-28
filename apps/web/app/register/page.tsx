@@ -60,8 +60,8 @@ export default function RegisterPage() {
 
         {state === 'accepted' ? (
           <div className="form-message success" role="status">
-            Your request was accepted. New account creation remains disabled until the owner-approved
-            password policy is configured.
+            Your request was accepted. New account creation remains disabled until the
+            owner-approved password policy is configured.
           </div>
         ) : (
           <form className="auth-form" onSubmit={handleSubmit}>
@@ -101,7 +101,10 @@ export default function RegisterPage() {
           Registration stays disabled until the owner-approved password policy is configured.
         </p>
         <p className="auth-footnote">
-          Already have an account? <Link className="auth-inline-link" href="/login">Sign in</Link>
+          Already have an account?{' '}
+          <Link className="auth-inline-link" href="/login">
+            Sign in
+          </Link>
         </p>
       </section>
     </main>

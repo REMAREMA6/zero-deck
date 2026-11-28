@@ -47,7 +47,10 @@ export default function AccountPage() {
     };
   }, [router]);
 
-  async function signOut(path: '/api/sessions/current' | '/api/sessions/logout-all', method: 'DELETE' | 'POST') {
+  async function signOut(
+    path: '/api/sessions/current' | '/api/sessions/logout-all',
+    method: 'DELETE' | 'POST',
+  ) {
     setBusy(true);
     setError(null);
     try {
@@ -89,16 +92,29 @@ export default function AccountPage() {
               {profile.emailVerified ? 'EMAIL VERIFIED' : 'EMAIL NOT VERIFIED'}
             </span>
             <div className="account-actions">
-              <button className="primary" type="button" disabled={busy} onClick={() => signOut('/api/sessions/current', 'DELETE')}>
+              <button
+                className="primary"
+                type="button"
+                disabled={busy}
+                onClick={() => signOut('/api/sessions/current', 'DELETE')}
+              >
                 {busy ? 'Signing out…' : 'Sign out'}
               </button>
-              <button type="button" disabled={busy} onClick={() => signOut('/api/sessions/logout-all', 'POST')}>
+              <button
+                type="button"
+                disabled={busy}
+                onClick={() => signOut('/api/sessions/logout-all', 'POST')}
+              >
                 Sign out all devices
               </button>
             </div>
           </>
         ) : null}
-        {error ? <p className="form-message error" role="alert">{error}</p> : null}
+        {error ? (
+          <p className="form-message error" role="alert">
+            {error}
+          </p>
+        ) : null}
         <p className="auth-footnote">
           Sessions expire after seven days of inactivity or thirty days from sign-in. The server
           enforces both limits.

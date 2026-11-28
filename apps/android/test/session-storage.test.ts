@@ -43,15 +43,11 @@ describe('secure session storage adapter', () => {
     fake.adapter.isAvailableAsync = vi.fn(async () => false);
     const storage = createSessionStorage(fake.adapter);
 
-    await expect(storage.read()).rejects.toBeInstanceOf(
-      SecureSessionStorageUnavailableError,
-    );
+    await expect(storage.read()).rejects.toBeInstanceOf(SecureSessionStorageUnavailableError);
     await expect(storage.write('opaque-session-token')).rejects.toBeInstanceOf(
       SecureSessionStorageUnavailableError,
     );
-    await expect(storage.clear()).rejects.toBeInstanceOf(
-      SecureSessionStorageUnavailableError,
-    );
+    await expect(storage.clear()).rejects.toBeInstanceOf(SecureSessionStorageUnavailableError);
   });
 
   it('propagates secure-store write failures', async () => {

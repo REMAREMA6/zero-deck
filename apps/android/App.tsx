@@ -110,7 +110,9 @@ export default function App() {
     const apiBase = getApiBaseUrl();
 
     if (!apiBase) {
-      setError('Account registration is unavailable because this build has no API address configured.');
+      setError(
+        'Account registration is unavailable because this build has no API address configured.',
+      );
       return;
     }
 
@@ -218,7 +220,9 @@ export default function App() {
       setProfile(null);
       setScreen('home');
       if (!revocationConfirmed) {
-        setError('The local session was cleared, but server-side revocation could not be confirmed.');
+        setError(
+          'The local session was cleared, but server-side revocation could not be confirmed.',
+        );
       }
     } catch {
       setError('Secure session storage could not be accessed. Sign-out is not confirmed.');
@@ -248,8 +252,8 @@ export default function App() {
           </View>
           {accepted ? (
             <Text accessibilityRole="alert" style={styles.successMessage}>
-              Your request was accepted. New account creation remains disabled until the owner-approved
-              password policy is configured.
+              Your request was accepted. New account creation remains disabled until the
+              owner-approved password policy is configured.
             </Text>
           ) : (
             <View style={styles.form}>
@@ -273,7 +277,11 @@ export default function App() {
                 onChangeText={setPassword}
                 style={styles.input}
               />
-              {error ? <Text accessibilityRole="alert" style={styles.errorMessage}>{error}</Text> : null}
+              {error ? (
+                <Text accessibilityRole="alert" style={styles.errorMessage}>
+                  {error}
+                </Text>
+              ) : null}
               <PrimaryButton
                 label="Create account"
                 submitting={submitting}
@@ -283,7 +291,9 @@ export default function App() {
           )}
           <Text style={styles.footnote}>
             Already have an account?{' '}
-            <Text style={styles.inlineLink} onPress={() => setScreen('login')}>Sign in</Text>
+            <Text style={styles.inlineLink} onPress={() => setScreen('login')}>
+              Sign in
+            </Text>
           </Text>
           <Text style={styles.footnote}>
             Registration stays disabled until the owner-approved password policy is configured.
@@ -330,12 +340,18 @@ export default function App() {
               onChangeText={setLoginPassword}
               style={styles.input}
             />
-            {error ? <Text accessibilityRole="alert" style={styles.errorMessage}>{error}</Text> : null}
+            {error ? (
+              <Text accessibilityRole="alert" style={styles.errorMessage}>
+                {error}
+              </Text>
+            ) : null}
             <PrimaryButton label="Sign in" submitting={submitting} onPress={handleLogin} />
           </View>
           <Text style={styles.footnote}>
             New to ZeroDeck?{' '}
-            <Text style={styles.inlineLink} onPress={() => setScreen('register')}>Create an account</Text>
+            <Text style={styles.inlineLink} onPress={() => setScreen('register')}>
+              Create an account
+            </Text>
           </Text>
         </ScrollView>
       </SafeAreaView>
@@ -359,7 +375,11 @@ export default function App() {
               {profile.emailVerified ? 'EMAIL VERIFIED' : 'EMAIL NOT VERIFIED'}
             </Text>
           </View>
-          {error ? <Text accessibilityRole="alert" style={styles.errorMessage}>{error}</Text> : null}
+          {error ? (
+            <Text accessibilityRole="alert" style={styles.errorMessage}>
+              {error}
+            </Text>
+          ) : null}
           <View style={styles.form}>
             <PrimaryButton
               label="Sign out"
@@ -421,7 +441,11 @@ export default function App() {
               <Text style={styles.secondaryButtonText}>Create account</Text>
             </Pressable>
           </View>
-          {error ? <Text accessibilityRole="alert" style={styles.errorMessage}>{error}</Text> : null}
+          {error ? (
+            <Text accessibilityRole="alert" style={styles.errorMessage}>
+              {error}
+            </Text>
+          ) : null}
         </View>
         <View style={styles.sectionHeading}>
           <Text style={styles.eyebrow}>YOUR TOOLS</Text>
