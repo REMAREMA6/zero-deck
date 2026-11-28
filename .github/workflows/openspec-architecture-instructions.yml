@@ -1,0 +1,32 @@
+name: Read OpenSpec architecture artifact instructions
+
+on:
+  push:
+    branches: [automation/openspec-bootstrap]
+    paths: [.github/workflows/openspec-architecture-instructions.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  instructions:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install OpenSpec CLI
+        run: |
+          npm install --global @fission-ai/openspec@latest
+          openspec --version
+      - name: Print authoritative artifact instructions
+        run: |
+          for artifact in proposal specs design tasks; do
+            echo "===== OPEN SPEC INSTRUCTIONS: $artifact ====="
+            openspec instructions "$artifact" --change "core-product-architecture" --json
+          done
