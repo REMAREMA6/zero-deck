@@ -235,7 +235,9 @@ describe('account recovery with PostgreSQL and fake delivery', () => {
       false,
     );
   });
-  it('keeps completed recovery successful when the security notification adapter fails', async () => {
+  it(
+    'keeps completed recovery successful when the security notification adapter fails',
+    async () => {
     if (!pool) throw new Error('PostgreSQL is unavailable.');
     const email = 'RecoverNoticeFailure-' + randomUUID() + '@example.test';
     await createAccountRegistrationService(pool, passwordPolicy).register({
