@@ -160,6 +160,16 @@ describe('policy-gated account deletion with PostgreSQL', () => {
         issued!.accountId,
       ]);
       expect(accountAfterDue.rowCount).toBe(0);
+      const credentialsAfterDue = await pool.query(
+        'SELECT 1 FROM account_credentials WHERE account_id = $1',
+        [issued!.accountId],
+      );
+      const sessionsAfterDue = await pool.query(
+        'SELECT 1 FROM sessions WHERE account_id = $1',
+        [issued!.accountId],
+      );
+      expect(credentialsAfterDue.rowCount).toBe(0);
+      expect(sessionsAfterDue.rowCount).toBe(0);
       const retainedAudit = await pool.query<{
         account_id: string | null;
         status: string;
