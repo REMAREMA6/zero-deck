@@ -3,7 +3,7 @@
 **Product:** ZeroDeck  
 **Author:** ZeroDeck Product Management Agent  
 **Profile:** [Product Requirements Contract Profile](PROFILE.md)  
-**Status:** PM contract profile and Phases 2–7 are complete. The owner approved and recorded eight authentication policy decisions. MVP-01 is a v0.1.0-draft contract with 28 PM-proposed requirements / 56 criteria / 9 open questions. MVP-02 is a v0.1.0-draft contract with 38 PM-proposed requirements / 68 criteria / 14 open questions. MVP-03 is drafted in v0.1.0-draft; Phase 7 cross-cutting system contract is complete as a PM-proposed draft (28 requirements / 28 criteria / 18 open questions).
+**Status:** PM contract profile and Phases 2–8 are complete as requirements authoring/review; Phase 9 owner review remains. The owner approved and recorded eight authentication policy decisions. MVP-01 is a v0.1.0-draft contract with 28 PM-proposed requirements / 56 criteria / 9 open questions. MVP-02 is a v0.1.0-draft contract with 38 PM-proposed requirements / 68 criteria / 14 open questions. MVP-03 is drafted in v0.1.0-draft; Phase 7 cross-cutting system contract is complete as a PM-proposed draft (28 requirements / 28 criteria / 18 open questions).
 
 ## Contracts
 
@@ -14,6 +14,10 @@
 | [Quarantine and file-disposition contract](contracts/QUARANTINE-FILE-DISPOSITION.md) | MVP-02 | Draft v0.1.0; 38 PM-proposed requirements / 68 criteria; 14 open questions; Phase 5 complete |
 | [Website and link-checking contract](contracts/WEBSITE-LINK-CHECKING.md) | MVP-03 | Draft v0.1.0; 41 requirements / 41 criteria; 4 owner-approved scope encodings / 37 PM-proposed; 18 open questions; Phase 6 complete |
 | [Cross-cutting system contract](contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.md) | Shared product/system requirements | Draft v0.1.0; 28 PM-proposed requirements / 28 criteria / 18 open questions; Phase 7 complete |
+
+## Phase 8 cross-contract review
+
+The Phase 8 review package is recorded in [cross-contract traceability](../2026-11-28/26-PHASE-8-CROSS-CONTRACT-TRACEABILITY.md), [15-facet completeness](../2026-11-28/27-PHASE-8-CROSS-FACET-COMPLETENESS.md), [findings register](../2026-11-28/28-PHASE-8-CROSS-CONTRACT-FINDINGS.md), [cross-feature lifecycle/failure matrix](../2026-11-28/29-PHASE-8-CROSS-FEATURE-LIFECYCLE-FAILURE-MATRIX.md), [projection/evidence audit](../2026-11-28/30-PHASE-8-PROJECTION-EVIDENCE-AUDIT.md), [validation](../2026-11-28/31-PHASE-8-VALIDATION.md), [CIRCLES review](../2026-11-28/32-PHASE-8-CIRCLES-CROSS-FACET-REVIEW.md) and [completion recommendation](../2026-11-28/33-PHASE-8-COMPLETION-RECOMMENDATION.md). The original Phase 3 authentication facet assessment has a [post-owner-decision reconciliation addendum](PHASE-3-AUTHENTICATION-POST-DECISION-RECONCILIATION.md).
 
 ## Authoring and validation
 
