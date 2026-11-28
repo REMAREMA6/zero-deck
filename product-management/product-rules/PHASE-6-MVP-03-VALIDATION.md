@@ -1,8 +1,8 @@
 # Phase 6 — MVP-03 Website and Link Checking: Validation Report
 
 **Contract:** `ZD-CONTRACT-WEBSITE-LINK-CHECKING` v0.1.0-draft  
-**Canonical Markdown revision:** `d162584f48d8682d0994ffc8681702df68d39231`  
-**Canonical Markdown SHA-256:** `sha256:95c70e5ff15021162cb5e91d97d2d7806687eeabe8fa0a2ef26e6317235567d2`  
+**Canonical Markdown revision:** `ba8010b0a7643465f19e0d95329ada02368ac75d`  
+**Canonical Markdown SHA-256:** `sha256:3304273e2468b7683ca0eadc8ed94fc0a47fa156317439786c66edcb13a0e0e9`  
 **Validation date:** 2026-11-28  
 **Status:** Targeted authoring-session checks passed; limitations remain explicit.
 
@@ -11,14 +11,14 @@
 | Item | Result |
 |---|---:|
 | Normative requirements | 39 |
-| Acceptance criteria | 38 |
+| Acceptance criteria | 39 |
 | Owner-approved requirements directly encoding `ZD-SCOPE-001` | 4 |
 | PM-proposed requirements | 35 |
 | Open product/owner questions | 18 |
 | Official Software Rules facets assessed | 15 |
 | Negative/failure/recovery scenarios | 75 |
 
-The four owner-approved statements are ZD-WEB-001–004: active Pro gate, independent owner activation gate, no-provider-call invariant, and Pro is not unlimited. The remaining 34 requirements are PM-proposed. None of the 18 questions was silently resolved.
+The four owner-approved statements are ZD-WEB-001–004: active Pro gate, independent owner activation gate, no-provider-call invariant, and Pro is not unlimited. The remaining 35 requirements are PM-proposed. None of the 18 questions was silently resolved.
 
 ## 2. Targeted structural and semantic checks
 
@@ -31,7 +31,7 @@ The four owner-approved statements are ZD-WEB-001–004: active Pro gate, indepe
 5. Every requirement has at least one Given/When/Then acceptance criterion.
 6. Every referenced facet is one of the 15 official facet IDs.
 7. Every requirement declares web and Android applicability.
-8. Decision-status split is exactly four owner-approved and 34 PM-proposed.
+8. Decision-status split is exactly four owner-approved and 35 PM-proposed.
 9. Every owner-approved requirement references `ZD-SCOPE-001`.
 10. All 18 open questions remain open.
 11. Evidence source URI and source revision match the structured artifact identity.
