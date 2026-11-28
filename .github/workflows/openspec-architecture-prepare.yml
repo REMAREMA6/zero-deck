@@ -1,4 +1,4 @@
-name: Prepare ZeroDeck core architecture change
+name: Validate ZeroDeck OpenSpec architecture
 
 on:
   push:
@@ -7,91 +7,56 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: openspec-architecture-prepare-${{ github.ref }}
+  group: openspec-architecture-validation-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  prepare:
+  validate:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out architecture branch
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}
 
-      - uses: actions/setup-node@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: '24'
+          cache: npm
 
       - name: Install OpenSpec CLI
         run: |
           npm install --global @fission-ai/openspec@latest
           openspec --version
 
-      - name: Inspect current OpenSpec state
+      - name: Validate all OpenSpec artifacts
         run: |
-          openspec list --json | tee /tmp/openspec-list.json
-          openspec context --json | tee /tmp/openspec-context.json
-          openspec doctor | tee /tmp/openspec-doctor.txt
+          set -o pipefail
+          openspec validate --all 2>&1 | tee openspec-validation.log
 
-      - name: Scaffold architecture change
+      - name: Verify change status
+        if: always()
         run: |
-          if [ -d openspec/changes/core-product-architecture ]; then
-            echo "The change already exists; refusing to overwrite it."
-            exit 1
-          fi
-          openspec new change "core-product-architecture"
-          openspec status --change "core-product-architecture" --json | tee /tmp/openspec-status.json
+          openspec status --change core-product-architecture --json | tee openspec-change-status.json
 
-      - name: Retrieve authoritative artifact instructions
+      - name: Check workspace health
+        if: always()
         run: |
-          mkdir -p /tmp/openspec-instructions
-          for artifact in proposal specs design tasks; do
-            openspec instructions "$artifact" --change "core-product-architecture" --json > "/tmp/openspec-instructions/$artifact.json"
-          done
-          {
-            echo "# OpenSpec architecture preparation"
-            echo
-            echo "## CLI"
-            openspec --version
-            echo
-            echo "## List"
-            cat /tmp/openspec-list.json
-            echo
-            echo "## Context"
-            cat /tmp/openspec-context.json
-            echo
-            echo "## Doctor"
-            cat /tmp/openspec-doctor.txt
-            echo
-            echo "## Change status"
-            cat /tmp/openspec-status.json
-            for artifact in proposal specs design tasks; do
-              echo
-              echo "## Instructions: $artifact"
-              cat "/tmp/openspec-instructions/$artifact.json"
-            done
-          } >> "$GITHUB_STEP_SUMMARY"
+          set -o pipefail
+          openspec doctor 2>&1 | tee openspec-doctor.log
 
-      - name: Commit change scaffold only
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add openspec/changes/core-product-architecture
-          git diff --cached --check
-          git commit -m "Scaffold core product architecture OpenSpec change"
-          git push origin "HEAD:${GITHUB_REF_NAME}"
-
-      - name: Upload OpenSpec command outputs
+      - name: Upload validation evidence
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: openspec-architecture-preparation
+          name: zerodeck-openspec-validation
+          if-no-files-found: warn
           path: |
-            /tmp/openspec-list.json
-            /tmp/openspec-context.json
-            /tmp/openspec-doctor.txt
-            /tmp/openspec-status.json
-            /tmp/openspec-instructions/
+            openspec-validation.log
+            openspec-change-status.json
+            openspec-doctor.log
