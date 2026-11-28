@@ -278,7 +278,7 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### C3. Local analysis orchestration
 
-**Status: Partial — `runLocalFileAnalysis` invokes the local engine in memory, fails closed on engine errors, passes `AbortSignal` only to engines that declare cancellation support, and distinguishes observed cancellation from interruption. Implementation is in `packages/domain/src/index.ts` (commit `c4f23972`); dedicated lifecycle tests, retry semantics, platform adapters and explicit network-boundary verification remain. CI run 46147277516 is pending.**
+**Status: Partial — `runLocalFileAnalysis` invokes the local engine in memory, fails closed on engine errors, passes `AbortSignal` only to engines that declare cancellation support, and distinguishes observed cancellation from interruption. Added tests for pre-start and engine-supported cancellation, interruption, independent retry invocation and no network calls. Verification is pending in CI run [46147320751](https://github.com/REMAREMA6/zero-deck/actions/runs/46147320751). Platform adapters, meaningful progress and explicit selected-bytes backend/network-boundary verification remain.**
 
 **Description:** Orchestrate analysis lifecycle, cancellation where supported, interruption, retry and local-only processing.
 
