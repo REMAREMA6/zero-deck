@@ -234,7 +234,7 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 
 ### B6.7. Shared revocation invariant for queued and dispatched work
 
-**Status: Implementation in place; full CI verification pending. Architect outcome 3.7.**
+**Status: Complete — Architect outcome 3.7 implemented and verified in [full CI run 46182003289](https://github.com/REMAREMA6/zero-deck/actions/runs/46182003289).**
 
 **Description:** Make protected work admission, queueing, dispatch and in-flight cancellation share the same server-authoritative permission/entitlement/activation gates. Revocation must prevent queued work from dispatching and signal dispatched work to cancel where its provider transport supports cancellation.
 
@@ -246,13 +246,13 @@ This is the Developer-owned executable breakdown of the Architect's outcome-leve
 - [x] Dispatched work receives an AbortSignal; URL-check provider adapters are contractually required to honor it before each outbound call and pass it to cancellable transports.
 - [x] A cancelled operation never returns a provider result to the caller; URL-check cancellation is exposed as an explicit conflict response.
 - [x] Provider adapter cancellation contract checks the AbortSignal before each outbound follow-on request; a deterministic fake-provider test proves revocation prevents the follow-on call.
-- [ ] Deterministic PostgreSQL integration tests and full GitHub Actions verification pass on main.
+- [x] Deterministic PostgreSQL integration tests and full GitHub Actions verification pass on main.
 
 **Verification**
 - [x] Deterministic race test revokes permission after queue admission but before dispatch; operation is never invoked and queued work is cancelled.
 - [x] Dispatched-provider test revokes permission, observes AbortSignal, rejects provider work, proves no result is returned and asserts the fake provider's follow-on call was never invoked.
 - [x] PostgreSQL trigger tests cover account disablement, permission revocation, Pro-entitlement revocation and owner-activation revocation for queued and dispatched work.
-- [ ] Full CI: formatting, typecheck, unit tests, PostgreSQL integration tests and API/Web/Android builds.
+- [x] Full CI: formatting, typecheck, unit tests, PostgreSQL integration tests and API/Web/Android builds passed in run 46182003289.
 
 **Dependencies:** B6.  
 **Files implemented:** `apps/api/migrations/0007_protected_work_revocation.sql`, `apps/api/src/modules/authorization/authorization.ts`, `apps/api/src/modules/authorization/protected-work.ts`, `apps/api/src/modules/website/url-checking.ts`, `apps/api/src/modules/website/url-check-routes.ts`, `apps/api/test/url-checking.integration.test.ts`.  
