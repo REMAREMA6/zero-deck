@@ -37,7 +37,7 @@ function validateSchedule(schedule: AccountDeletionSchedule, requestedAt: Date):
   if (
     !(deletionDueAt instanceof Date) ||
     !Number.isFinite(deletionDueAt.getTime()) ||
-    deletionDueAt <= requestedAt ||
+    deletionDueAt.getTime() <= requestedAt.getTime() ||
     !auditRetention ||
     typeof auditRetention.purpose !== 'string' ||
     !auditRetention.purpose.trim() ||
@@ -45,7 +45,7 @@ function validateSchedule(schedule: AccountDeletionSchedule, requestedAt: Date):
     !auditRetention.reason.trim() ||
     !(auditRetention.retainUntil instanceof Date) ||
     !Number.isFinite(auditRetention.retainUntil.getTime()) ||
-    auditRetention.retainUntil <= deletionDueAt
+    auditRetention.retainUntil.getTime() <= deletionDueAt.getTime()
   ) {
     throw new AccountDeletionUnavailableError();
   }
