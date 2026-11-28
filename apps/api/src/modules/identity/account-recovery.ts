@@ -106,12 +106,14 @@ export function createAccountRecoveryService(
       try {
         await delivery.sendRecoveryChallenge(verifiedEmail, token);
       } catch {
-        await database.query(
-          `UPDATE account_recovery_challenges
-           SET consumed_at = $2
-           WHERE token_hash = $1 AND consumed_at IS NULL`,
-          [tokenHash, clock()],
-        ).catch(() => undefined);
+        await database
+          .query(
+            `UPDATE account_recovery_challenges
+             SET consumed_at = $2
+             WHERE token_hash = $1 AND consumed_at IS NULL`,
+            [tokenHash, clock()],
+          )
+          .catch(() => undefined);
         // Keep the public request response identical for unknown and undeliverable accounts.
       }
     },
