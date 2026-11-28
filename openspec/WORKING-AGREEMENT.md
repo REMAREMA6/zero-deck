@@ -163,3 +163,40 @@ At the time this agreement is created:
 
 ---
 **Owner decision record:** This agreement captures the working model explicitly stated by the owner. It supersedes earlier assumptions where they conflict, especially the proposal for a separate agent to perform routine feature testing.
+
+
+## 14. Authoritative role boundary: Architect plans; Developer decomposes and executes
+
+This section makes the owner's explicit role correction authoritative wherever earlier wording could be read differently.
+
+### OpenSpec Architect Agent — architecture and outcome-level implementation plans only
+
+The Architect:
+- Designs and maintains the system architecture and architectural decisions.
+- Defines the intended system capabilities, boundaries, responsibilities, constraints, dependencies, risks and unresolved decisions.
+- Writes outcome-level implementation plans as OpenSpec tasks. Each plan states why the work is needed, the goal and scope, the intended outcome, observable behaviour, constraints, dependencies, and measurable acceptance criteria/checkpoints.
+- Ensures the plans describe what the Developer must achieve and the conditions that demonstrate success.
+- Reviews implementation feedback and updates architecture or outcome-level plans when evidence shows a genuine architectural or scope gap.
+
+The Architect does **not** perform the Developer's implementation task decomposition. It does not turn each outcome-level plan into small coding steps, file-by-file subtasks, session-sized tickets, or a prescribed execution sequence. The existing numbered entries in the architecture `tasks.md` are outcome-level implementation plans, not a pre-decomposed Developer work queue.
+
+### Developer Agent — decomposition, engineering plan and implementation
+
+For each authorized outcome-level implementation plan, the Developer:
+- Reads and understands the plan, architecture, applicable requirements and constraints.
+- Uses its installed **planning-and-task-breakdown** skill when decomposition is needed.
+- Inspects the actual repository and current project state before deciding how to proceed.
+- Creates its own implementation breakdown: small, verifiable tasks, dependency graph, execution order, checkpoints and engineering plan. It chooses the appropriate vertical slices and implementation sequence.
+- Chooses concrete technical methods within the approved architecture.
+- Implements the work and tests it continuously, completing the acceptance criteria and preserving verification evidence.
+- Reports completed outcomes, tests, evidence, blockers and any architectural questions.
+
+The Developer's breakdown is an execution aid owned and maintained by the Developer. It must not be mistaken for an Architect-authored architecture plan or used to transfer architectural authority to the Developer.
+
+### Handover rule
+
+The Architect hands the Developer an outcome-level plan with clear goals and acceptance criteria. The Developer then performs its own decomposition and execution planning before implementation. The Architect does not pre-empt that work by writing the Developer's step-by-step task list.
+
+If the outcome-level plan is not sufficiently clear to decompose safely, the Developer raises a focused clarification or architectural decision request. It does not silently reinterpret the goal.
+
+This role boundary supersedes any earlier wording in this agreement or other project planning records that could imply that the Architect owns detailed task breakdown.
