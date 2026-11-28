@@ -142,13 +142,13 @@ These are the first five of the 51 Architect-defined outcomes. The Architect's s
 
 ## Next execution queue
 
-1. Continue MVP-01 local-only orchestration by adding explicit progress/cancellation/interruption semantics only where supported, then prove file bytes never cross the backend/network boundary. Engine port and canonical result mapping (4.2) are now Done with full CI evidence in run `46146977405`.
-2. The domain package now has deterministic fake-engine tests for all four canonical outcomes, malformed/unsupported output, safe no-match wording and thrown engine failures. Verify these tests in green CI, then add explicit orchestration/network-boundary evidence before changing 4.2 or 4.4 status.
-3. Reconcile `todo.md` against the implemented session and URL-check code so it reflects actual verified work.
-4. Finish identity recovery, step-up authentication, credential rotation, cross-client session verification, general authorization and account closure.
-5. Complete URL-check UI consent, dispatch-time gate revalidation, cancellation/usage controls and adversarial tests while keeping the production provider disabled.
-6. Implement MVP-01 file-selection/access adapters and bounded local orchestration; do not claim real detection until a production engine is evaluated and approved.
-7. Continue quarantine feasibility only within owner-approved security boundaries.
+1. Complete 3.3 recovery-specific single-use, time-limited challenge lifecycle and fake security notification flow, composing the verified-email boundaries completed in 3.2. Do not introduce real email delivery or unapproved expiry/rate policy.
+2. Implement 3.5 fresh-authentication/step-up boundaries for sensitive security actions only after the relevant owner-approved policy is explicit.
+3. Complete 3.6 server-authoritative permission, entitlement and owner-activation gates, including revocation races and fail-closed truth-table tests.
+4. Continue MVP-01 by completing 4.3 evidence-led production-engine and threat-intelligence evaluation; do not select or activate a production engine without owner approval. Keep file analysis unavailable while no approved engine/support matrix exists.
+5. Implement safe parsing/resource isolation and bounded processing only after supported formats and resource budgets are established; preserve the current fail-closed behavior.
+6. Complete MVP-03 consent UI, dispatch-time gate revalidation, cancellation/usage controls, redaction evidence and adversarial tests while keeping the production provider disabled.
+7. Continue MVP-02 quarantine feasibility only within owner-approved security boundaries and verified platform capabilities.
 
 ## Maintenance rule
 
