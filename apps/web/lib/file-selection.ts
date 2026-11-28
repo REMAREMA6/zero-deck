@@ -2,6 +2,7 @@ export interface SelectedFileMetadata {
   name: string;
   sizeBytes: number;
   declaredType: string;
+  supportStatus: 'not_evaluated';
 }
 
 export interface WebFileHandle {
@@ -31,6 +32,7 @@ export function summarizeSelectedFile(
     name: file.name,
     sizeBytes: file.size,
     declaredType: file.type || 'Not reported by the browser',
+    supportStatus: 'not_evaluated',
   };
 }
 
