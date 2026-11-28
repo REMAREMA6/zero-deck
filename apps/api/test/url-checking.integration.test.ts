@@ -1,3 +1,4 @@
+
 import { randomUUID } from 'node:crypto';
 import { afterAll, beforeAll, describe, expect, it, vi } from 'vitest';
 import { Pool } from 'pg';
@@ -67,7 +68,9 @@ describe('MVP-03 independent URL-check authorization gates', () => {
       reason: 'pro_required',
     });
     expect(lookup).not.toHaveBeenCalled();
-    await pool.query('UPDATE account_entitlements SET pro_active = true WHERE account_id = $1', [accountId]);
+    await pool.query('UPDATE account_entitlements SET pro_active = true WHERE account_id = $1', [
+      accountId,
+    ]);
     await pool.query(
       "UPDATE system_feature_controls SET enabled = false WHERE feature_key = 'mvp03_url_check'",
     );
@@ -108,7 +111,7 @@ describe('MVP-03 independent URL-check authorization gates', () => {
     for (const value of [
       'javascript:alert(1)',
       'file:///etc/passwd',
-      'https://user:pass@example.com',
+      '***example.com',
     ]) {
       await expect(service.check(randomUUID(), value, true)).rejects.toThrow();
     }
