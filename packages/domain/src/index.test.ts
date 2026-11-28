@@ -52,6 +52,21 @@ describe('local analysis engine boundary', () => {
     });
   });
 
+  it('never presents no-known-threat as proof that the file is safe', () => {
+    const result = mapAnalysisEngineResult(
+      {
+        outcome: 'no_known_threat_found',
+        explanation: 'The file is safe.',
+      },
+      clock,
+    );
+
+    expect(result.outcome).toBe('no_known_threat_found');
+    expect(result.explanation).toBe(
+      'No known threat was found. This is not a guarantee that the file is safe.',
+    );
+  });
+
   it('does not invent engine identity when metadata is absent', () => {
     expect(
       mapAnalysisEngineResult(
