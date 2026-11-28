@@ -1,0 +1,36 @@
+name: Temporary authorization formatting diagnostic
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'apps/api/src/modules/website/url-check-routes.ts'
+      - 'apps/api/src/modules/website/url-checking.ts'
+      - 'apps/api/test/authorization.integration.test.ts'
+      - 'apps/api/test/url-checking.integration.test.ts'
+      - '.github/workflows/temporary-authorization-format.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  format:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 12.0.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Format the four files
+        run: pnpm exec prettier --write apps/api/src/modules/website/url-check-routes.ts apps/api/src/modules/website/url-checking.ts apps/api/test/authorization.integration.test.ts apps/api/test/url-checking.integration.test.ts
+      - name: Print formatted source
+        run: |
+          for file in apps/api/src/modules/website/url-check-routes.ts apps/api/src/modules/website/url-checking.ts apps/api/test/authorization.integration.test.ts apps/api/test/url-checking.integration.test.ts; do
+            echo "===== $file ====="
+            cat "$file"
+          done
