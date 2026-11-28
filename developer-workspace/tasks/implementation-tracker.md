@@ -23,9 +23,9 @@ These counts cover **all 51 numbered Architect outcomes (1.1–7.7)**. They are 
 | Status | Count |
 |---|---:|
 | Done | 4 |
-| Partial | 19 |
+| Partial | 20 |
 | Blocked | 2 |
-| Not started | 26 |
+| Not started | 25 |
 | **Total Architect outcomes tracked** | **51** |
 
 **Important:** Four outcomes currently meet the Done definition: 2.2, 2.4, 3.1 and 4.2. Partial items have some implementation and/or evidence, but do not yet satisfy the full acceptance contract. The 51 are all Architect-defined implementation outcomes; none are excluded from Developer tracking.
@@ -71,7 +71,7 @@ These are the first five of the 51 Architect-defined outcomes. The Architect's s
 
 | ID | Outcome | Status | Implementation / verification evidence and remaining work |
 |---|---|---|---|
-| 4.1 | Web/Android file-selection and access adapters | **Not started** | No verified user-selected file adapters, permission-loss handling or capability tests. |
+| 4.1 | Web/Android file-selection and access adapters | **Partial** | Added a Web file-selection surface at `apps/web/app/file-analysis/page.tsx` and metadata-only adapter `apps/web/lib/file-selection.ts`; it retains only name/size/browser-declared type, does not read bytes or upload, and clearly states no scan is performed without an approved local engine. Tests are in `apps/web/lib/file-selection.test.ts`; full CI verification is pending in [run 46147873294](https://github.com/REMAREMA6/zero-deck/actions/runs/46147873294). Android file picker/adapter, permission-loss and unreadable-file handling, and explicit backend/network-boundary proof remain. |
 | 4.2 | Analysis engine port and canonical result mapping | **Done** | `packages/domain/src/index.ts` defines `LocalAnalysisEnginePort` and canonical mapping for all four outcomes. `packages/domain/src/index.test.ts` uses a deterministic fake engine and verifies all four outcomes remain distinct, malformed/unsupported output and engine exceptions fail closed, metadata is not invented, and no-known-threat is never presented as proof of safety. Full CI passed formatting, typecheck, unit tests, PostgreSQL integration tests and API/Web/Android builds in [run 46146977405](https://github.com/REMAREMA6/zero-deck/actions/runs/46146977405). No production engine is selected or activated. Related implementation/test commits: `3f93b72d`, `950ac03a`, `20040887`, `41b2c932`. |
 | 4.3 | Evidence-led production engine/threat-intelligence evaluation | **Blocked** | No production engine/source is approved. Evaluation and owner approval are required before selection. |
 | 4.4 | Local-only analysis orchestration | **Partial** | Added `runLocalFileAnalysis` to invoke the local engine port with selected bytes in memory and convert engine exceptions into a failed `could_not_decide` result without exposing exception details. Latest source now also accepts an optional `AbortSignal`, passes it only to engines that declare cancellation support, returns `cancelled` only when that supported operation is cancelled, and maps an engine `AbortError` to `interrupted`; implementation commit `c4f23972`. Dedicated tests in `packages/domain/src/index.test.ts` cover pre-start cancellation, cancellation for an engine that opts in, interruption, independent retry invocation and no network calls. All passed full CI [run 46147584370](https://github.com/REMAREMA6/zero-deck/actions/runs/46147584370). Platform adapters, meaningful progress reporting and an explicit proof that selected bytes never cross the backend/network boundary remain. |
