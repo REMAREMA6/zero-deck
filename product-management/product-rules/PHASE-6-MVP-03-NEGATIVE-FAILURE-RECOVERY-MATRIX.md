@@ -25,7 +25,7 @@
 | W18 | Fallback provider is considered after a gate denial | No fallback call | WEB-003 |
 | W19 | Cache refresh/prefetch is attempted while either gate fails | No provider refresh or prefetch call | WEB-003 |
 | W20 | Batch path is attempted for a single-user request while gate fails | No batch provider call | WEB-003 |
-| W21 | Pro user exceeds configured allowance | Block before dispatch; communicate limit | WEB-004, 027 |
+| W21 | Pro user exceeds configured allowance | Block before dispatch; communicate limit | WEB-004, 027, 040 |
 | W22 | Service-level spend ceiling reached | Block before dispatch | WEB-027, 035 |
 | W23 | Concurrent duplicate submissions exceed request policy | Enforce account/service limits; no bypass | WEB-027, 028 |
 | W24 | Automated repeated submissions attempt to bypass controls | Rate/abuse controls apply server-side | WEB-028 |
@@ -67,7 +67,7 @@
 | W60 | Web and Android return different eligibility or verdict semantics for same conditions | Treat as conformance failure; align shared product semantics and explain capability differences | WEB-037 |
 | W61 | Provider accounting misses a retry or redirected dispatch | Record each actual dispatch; reconcile usage | WEB-035 |
 | W62 | Operational alert contains full URL/query | Redact before operator visibility | WEB-018, 036 |
-| W63 | Submitted URL causes page traversal or linked-resource crawling | Reject/stop; MVP-03 is not a crawler | WEB-006, 038 |
+| W63 | Submitted URL causes page traversal or linked-resource crawling | Reject/stop; MVP-03 is not a crawler | WEB-006, 038, 041 |
 | W64 | User submits an IP address to investigate or scan | Do not expose IP investigation/port scan behaviour; out of scope | WEB-038 |
 | W65 | Provider returns a valid result but the user-facing request lifecycle says failed | Reconcile status with actual terminal outcome; no contradictory completion state | WEB-032 |
 | W66 | App/platform loses connectivity during a check | Failed/inconclusive or cancelled as actually observed; never no-match | WEB-024, 026, 032 |
