@@ -3,8 +3,8 @@
   "evidenceClass": "declared-contract",
   "evidenceType": "product-requirements-contract",
   "origin": {
-    "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/8ad461896994f58632a570faee9b2c82c9945806/product-management/product-rules/contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.md",
-    "sourceRevision": "8ad461896994f58632a570faee9b2c82c9945806",
+    "sourceUri": "https://github.com/REMAREMA6/zero-deck/blob/4b4d32b939e627fe84b4120ab43df6b5c733d421/product-management/product-rules/contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.md",
+    "sourceRevision": "4b4d32b939e627fe84b4120ab43df6b5c733d421",
     "location": "product-management/product-rules/contracts/CROSS-CUTTING-SYSTEM-REQUIREMENTS.md"
   },
   "capturedAt": "2026-11-28T21:00:00+01:00",
