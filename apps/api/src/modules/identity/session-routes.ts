@@ -82,6 +82,26 @@ export function registerSessionRoutes(
     });
   });
 
+  app.post('/v1/sessions/current/rotate', async (request, reply) => {
+    if (!service) {
+      return reply.code(503).send({
+        error: { code: 'AUTHENTICATION_UNAVAILABLE', message: 'Session rotation is unavailable.' },
+      });
+    }
+    const token = bearerToken(request.headers.authorization);
+    if (!token) return unauthorized(reply);
+
+    const rotated = await service.rotateCurrent(token);
+    if (!rotated) return unauthorized(reply);
+
+    return reply.code(200).send({
+      sessionToken: rotated.sessionToken,
+      sessionId: rotated.sessionId,
+      accountId: rotated.accountId,
+      absoluteExpiresAt: rotated.absoluteExpiresAt.toISOString(),
+    });
+  });
+
   app.delete('/v1/sessions/current', async (request, reply) => {
     if (!service) {
       return reply.code(503).send({
