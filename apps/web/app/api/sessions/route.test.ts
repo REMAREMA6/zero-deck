@@ -19,11 +19,12 @@ describe('Web session cookie boundary', () => {
     vi.stubEnv('NODE_ENV', 'production');
     vi.stubGlobal(
       'fetch',
-      vi.fn(async () =>
-        new Response(JSON.stringify(issuedSession), {
-          status: 201,
-          headers: { 'content-type': 'application/json' },
-        }),
+      vi.fn(
+        async () =>
+          new Response(JSON.stringify(issuedSession), {
+            status: 201,
+            headers: { 'content-type': 'application/json' },
+          }),
       ),
     );
 
