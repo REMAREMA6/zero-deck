@@ -22,13 +22,13 @@ These counts cover **all 51 numbered Architect outcomes (1.1–7.7)**. They are 
 
 | Status | Count |
 |---|---:|
-| Done | 8 |
-| Partial | 16 |
+| Done | 9 |
+| Partial | 15 |
 | Blocked | 2 |
 | Not started | 25 |
 | **Total Architect outcomes tracked** | **51** |
 
-**Important:** Eight outcomes currently meet the Done definition: 2.2, 2.4, 3.1, 3.2, 3.4, 4.1, 4.2 and 4.4. Partial items have some implementation and/or evidence, but do not yet satisfy the full acceptance contract. The 51 are all Architect-defined implementation outcomes; none are excluded from Developer tracking.
+**Important:** Nine outcomes currently meet the Done definition: 2.2, 2.4, 3.1, 3.2, 3.3, 3.4, 4.1, 4.2 and 4.4. Partial items have some implementation and/or evidence, but do not yet satisfy the full acceptance contract. The 51 are all Architect-defined implementation outcomes; none are excluded from Developer tracking.
 
 ## Section 1 — Architecture baseline and requirement authority
 
@@ -59,7 +59,7 @@ These are the first five of the 51 Architect-defined outcomes. The Architect's s
 |---|---|---|---|
 | 3.1 | Stable account principal and email/password registration | **Done** | Account registration service/routes, PostgreSQL migration, Argon2id password hashing, Web and Android registration surfaces, duplicate/canonical-email and secret-storage tests. CI [46138520229](https://github.com/REMAREMA6/zero-deck/actions/runs/46138520229). Public registration remains gated by owner-approved policy. |
 | 3.2 | Password protection, verification state and verified-email change/recovery boundaries | **Done** | Argon2id credential hashing/verification and explicit unverified-account state remain in the identity service; unverified accounts are not blocked from ordinary sign-in. `EmailVerificationService.getVerifiedEmail(accountId)` is the authoritative verified-only lookup. Added `createVerifiedEmailSecurityNotifier` and `createVerifiedEmailRecoveryBoundary`; fake-delivery tests prove unverified addresses receive neither recovery challenges nor security notices, and only the lookup result is used for verified recipients. PostgreSQL integration test verifies an account's address becomes eligible only after its single-use verification challenge succeeds. No unapproved password policy or extra feature gate was inferred. Full clean CI passed [run 46150614089](https://github.com/REMAREMA6/zero-deck/actions/runs/46150614089). |
-| 3.3 | Single-use verified-email recovery challenges and fake security notification | **Partial** | Single-use verification challenges and fake delivery adapter are tested in [46139448216](https://github.com/REMAREMA6/zero-deck/actions/runs/46139448216). Account recovery, recovery-specific challenge lifecycle and security notification flow are not complete. |
+| 3.3 | Single-use verified-email recovery challenges and fake security notification | **Done** | `apps/api/src/modules/identity/account-recovery.ts`, `account-recovery-routes.ts`, `apps/api/migrations/0005_account_recovery.sql`, `packages/contracts/src/index.ts` and `apps/api/test/account-recovery.integration.test.ts`. Recovery requests return an enumeration-neutral response; only active accounts with verified email receive a challenge; random challenge secrets are stored only as SHA-256 hashes; configured lifetime is explicit (no production default invented); replacement challenges consume prior outstanding challenges; delivery failure consumes the undelivered challenge; recovery atomically consumes the challenge, changes the password and revokes every active session; notification resolves the verified address through the 3.2 lookup. PostgreSQL tests cover unverified recipient denial, token-hash-only persistence, expiry, replay/consumption, session revocation, fake recovery-delivery failure and verified-recipient notification. Full clean CI [46152754260](https://github.com/REMAREMA6/zero-deck/actions/runs/46152754260) passed formatting, typecheck, unit tests, PostgreSQL integration tests and API/Web/Android builds. Fresh-authentication/step-up remains 3.5; no real email provider is configured. |
 | 3.4 | Session expiry, rotation, logout and revocation across clients | **Done** | Server enforces seven-day inactivity and thirty-day absolute expiry. `SessionService.rotateCurrent` atomically replaces the token hash under a row lock, preserves session identity/absolute expiry, and rejects superseded-token replay and concurrent duplicate rotation. Web BFF replaces only the HttpOnly/Secure/SameSite=Lax cookie and never exposes the new token in JSON; Android persists the replacement in SecureStore and attempts server revocation if secure persistence fails. Current logout, logout-all and individual-session revocation are server-authoritative. Tests cover cross-client stable account principal, database/auth outage denial, rotation, concurrent replay, logout/revocation and client credential clearing. Full clean CI passed [run 46150614089](https://github.com/REMAREMA6/zero-deck/actions/runs/46150614089). |
 | 3.5 | Fresh-authentication for sensitive security actions | **Not started** | No verified implementation for password/passkey changes, recovery-email changes or account deletion step-up. |
 | 3.6 | Authoritative permission, entitlement and owner-activation evaluation | **Partial** | URL-check service independently reads Pro entitlement and owner activation from PostgreSQL and denies false/unknown states. General permission model, exhaustive state matrix and full authorization surface remain. |
@@ -139,11 +139,11 @@ These are the first five of the 51 Architect-defined outcomes. The Architect's s
 | 46146977405 | Success | Full core CI passed formatting, typecheck, unit tests, PostgreSQL integration tests and API/Web/Android builds. Verifies MVP-01 engine port and canonical result mapping. |
 | 46147584370 | Success | Full core CI passed after local analysis cancellation/interruption/retry tests and API exception-log redaction regression: formatting, typecheck, unit tests, PostgreSQL integration tests and API/Web/Android builds. |
 | 46150614089 | Success | Clean core CI on the restored least-privilege workflow: frozen dependency install, formatting, typecheck, unit tests, PostgreSQL integration tests and API/Web/Android builds all passed. Verifies completed outcomes 3.2, 3.4, 4.1 and 4.4. |
+| 46152754260 | Success | Full core CI passed for account recovery: formatting, typecheck, unit tests, PostgreSQL integration tests and API/Web/Android builds. Verifies 3.3 challenge issuance, verified-email boundary, expiry, replay/consumption, session revocation and fake delivery-failure paths. |
 
 ## Next execution queue
 
-1. Complete 3.3 recovery-specific single-use, time-limited challenge lifecycle and fake security notification flow, composing the verified-email boundaries completed in 3.2. Do not introduce real email delivery or unapproved expiry/rate policy.
-2. Implement 3.5 fresh-authentication/step-up boundaries for sensitive security actions only after the relevant owner-approved policy is explicit.
+1. Implement 3.5 fresh-authentication/step-up boundaries for sensitive security actions only after the relevant owner-approved policy is explicit.
 3. Complete 3.6 server-authoritative permission, entitlement and owner-activation gates, including revocation races and fail-closed truth-table tests.
 4. Continue MVP-01 by completing 4.3 evidence-led production-engine and threat-intelligence evaluation; do not select or activate a production engine without owner approval. Keep file analysis unavailable while no approved engine/support matrix exists.
 5. Implement safe parsing/resource isolation and bounded processing only after supported formats and resource budgets are established; preserve the current fail-closed behavior.
