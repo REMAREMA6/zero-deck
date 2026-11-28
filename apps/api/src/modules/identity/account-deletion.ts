@@ -132,11 +132,18 @@ export function createAccountDeletionService(
             );
             deletedAccounts += deleted.rowCount ?? 0;
           }
+          const completedAt = clock();
+          const minimumAuditRetainUntil = addUtcCalendarMonths(
+            completedAt,
+            ACCOUNT_DELETION_AUDIT_RETENTION_MONTHS,
+          );
           await client.query(
             `UPDATE account_deletion_requests
-             SET status = 'completed', completed_at = $2
+             SET status = 'completed',
+                 completed_at = $2,
+                 audit_retain_until = GREATEST(audit_retain_until, $3)
              WHERE deletion_request_id = $1 AND status = 'scheduled'`,
-            [request.deletion_request_id, clock()],
+            [request.deletion_request_id, completedAt, minimumAuditRetainUntil],
           );
         }
 
