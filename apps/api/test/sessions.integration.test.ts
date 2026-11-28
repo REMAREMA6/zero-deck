@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from 'node:crypto';
-import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
+import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { Pool } from 'pg';
 import { applyMigrations } from '../src/db/migrate.js';
 import { buildApp } from '../src/app.js';
@@ -113,6 +113,73 @@ describe('shared account sessions with PostgreSQL', () => {
       headers: { authorization: 'Bearer ' + issued.sessionToken },
     });
     expect(afterLogout.statusCode).toBe(401);
+  });
+
+  it('resolves Web and Android sign-ins to the same account principal', async () => {
+    if (!app || !pool) throw new Error('PostgreSQL test dependencies are unavailable.');
+
+    const email = 'CrossClient-' + randomUUID() + '@example.com';
+    await createAccount(email);
+    const webSignIn = await app.inject({
+      method: 'POST',
+      url: '/v1/sessions',
+      payload: { email, password: 'test-only-password' },
+    });
+    const androidSignIn = await app.inject({
+      method: 'POST',
+      url: '/v1/sessions',
+      payload: { email, password: 'test-only-password' },
+    });
+
+    expect(webSignIn.statusCode).toBe(201);
+    expect(androidSignIn.statusCode).toBe(201);
+    const webSession = webSignIn.json<{ accountId: string; sessionId: string }>();
+    const androidSession = androidSignIn.json<{ accountId: string; sessionId: string }>();
+    expect(webSession.accountId).toBe(androidSession.accountId);
+    expect(webSession.sessionId).not.toBe(androidSession.sessionId);
+
+    const principals = await pool.query<{ account_id: string; count: string }>(
+      `SELECT account_id, count(*)::text AS count
+       FROM sessions
+       WHERE account_id = $1
+       GROUP BY account_id`,
+      [webSession.accountId],
+    );
+    expect(principals.rows[0]?.count).toBe('2');
+  });
+
+  it('denies protected session access when the authentication database dependency fails', async () => {
+    const failingApp = buildApp({
+      database: {
+        query: vi.fn(async () => {
+          throw new Error('database unavailable');
+        }),
+      } as never,
+      sessionService: {
+        authenticate: vi.fn(),
+        authenticateToken: vi.fn(async () => {
+          throw new Error('authentication database unavailable');
+        }),
+        rotateCurrent: vi.fn(),
+        revokeCurrent: vi.fn(),
+        revokeAll: vi.fn(),
+        revokeSession: vi.fn(),
+      },
+    });
+
+    try {
+      const response = await failingApp.inject({
+        method: 'GET',
+        url: '/v1/session',
+        headers: { authorization: 'Bearer opaque-token' },
+      });
+      expect(response.statusCode).toBe(500);
+      expect(response.json()).toEqual({
+        error: { code: 'INTERNAL_ERROR', message: 'The request could not be completed.' },
+      });
+    } finally {
+      await failingApp.close();
+    }
   });
 
   it('enforces the seven-day inactivity and thirty-day absolute session limits', async () => {
